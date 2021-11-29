@@ -13,8 +13,6 @@ public class test {
 		System.out.println("선민");
 		
 		System.out.println("지현");
-
-		System.out.println("세현");
 		
 	}
 
