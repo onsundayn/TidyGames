@@ -7,6 +7,9 @@ public class test {
 		System.out.println("다현");
 		
 		System.out.println("해랑");
+		
+		System.out.println("수민");
+		
 	}
 
 }
