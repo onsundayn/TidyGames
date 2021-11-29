@@ -10,6 +10,8 @@ public class test {
 		
 		System.out.println("수민");
 		
+		System.out.println("선민");
+		
 	}
 
 }
