@@ -14,6 +14,8 @@ public class test {
 		
 		System.out.println("지현");
 		
+		System.out.println("test");
+		
 	}
 
 }
