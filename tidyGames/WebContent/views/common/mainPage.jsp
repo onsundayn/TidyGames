@@ -9,14 +9,13 @@
 	.outer{
 		width: 1200px;
 		height: 800px;
-		background-color: #0e332c;
 	}
 	#content>a{
 		color: white;
 	}
 </style>
 </head>
-<body>
+<body style="background-color: #0e332c;;">
 	<div class="outer">
 
 
