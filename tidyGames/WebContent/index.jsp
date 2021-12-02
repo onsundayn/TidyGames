@@ -9,6 +9,8 @@
 	.outer{
 		width: 1200px;
 		height: 800px;
+		margin: auto;
+		
 	}
 
 	#content>a{
@@ -22,18 +24,18 @@
 </style>
 </head>
 <body style="background-color: #0e332c;">
-	<div class="outer" align="center">
+	<div class="outer">
 
 
 
 
 
-	<div id="content" align="center">
-		<a href="">NEW</a>
-		<a href="">RANK</a>
-		<a href="">SALE</a>
-		<a href="">FREE</a>
-	</div>
+		<div id="content" align="center">
+			<a href="">NEW</a>
+			<a href="">RANK</a>
+			<a href="">SALE</a>
+			<a href="">FREE</a>
+		</div>
 
 	</div>
 </body>
