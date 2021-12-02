@@ -7,11 +7,12 @@
 <title>Insert title here</title>
 <style>
 
-    .header{height:20%;}
-
     .top-area{
+        height:100px;
         display:flex;
         justify-content: space-between;
+        padding:30px;
+        
     }
 
     .top-area div{
@@ -28,30 +29,38 @@
         color:orange;
     }
     #top1{
-        width:20%;
+        width:140px;
     }
-    #top2{width:60%;}
-    #top3{width:10%;}
+    #top1 a{
+        font-size:17px;
+        font-weight:bold;
+    }
+    #top3{width:60px;}
+
+    #top3 a{
+        text-align:right;
+    }
+    #usericon{padding-left: 15px;}
 
     .menu-area, .top-area{background:#0e332c}
     .menu{
         display:table-cell; 
         width:200px;
-        height:50px;
+        height:140px;
     }
     .menu a{
         text-decoration: none;
         color:white;
-        font-size:16px;
-        font-weight:bold;
+        font-size:19px;
         display:block;
         width:100%;
         height:100%;
-        line-height:50px;
+        line-height:140px;
     }
     .menu a:hover{
         text-decoration: none;
         color:orange;
+        font-weight:bold;
     }
 
     
@@ -74,7 +83,7 @@
 
 
         <div class="top-area">
-            <div id="top1">TIDY GAMES</div>
+            <div id="top1"><a href=""><img src="../../resources/image/tidyLogo.png"> TIDY GAMES</a></div>
             <div id="top2" align="center">
                 <form action="" id="search_form">
 
@@ -84,12 +93,11 @@
         
                     <div id="search_btn">
                         <input type="submit" value="검색">
-                        <!-- 숙제힌트 : <button><img src="반영시키고자하는이미지경로"></button> -->
                     </div>
             </div>
             <div id="top3">
-                <a href=""><i class="fas fa-shopping-bag"></i></a>
-                <a href=""><i class="fas fa-user"></i></a>
+                <a href=""><i class="fas fa-shopping-bag fa-lg"></i></a>
+                <a href="" id="usericon"><i class="fas fa-user fa-lg"></i></a>
             </div>
         </div>
     
