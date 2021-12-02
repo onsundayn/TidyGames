@@ -10,19 +10,25 @@
 		width: 1200px;
 		height: 800px;
 	}
+
 	#content>a{
 		color: white;
+		text-decoration: none;
+		font-size: 20px;
+		font-weight: 500;
+		margin: 10px;
+		
 	}
 </style>
 </head>
-<body style="background-color: #0e332c;;">
-	<div class="outer">
+<body style="background-color: #0e332c;">
+	<div class="outer" align="center">
 
 
 
 
 
-	<div id="content">
+	<div id="content" align="center">
 		<a href="">NOTICE</a>
 		<a href="">COMMUNITY</a>
 		<a href="">HELP</a>
