@@ -41,6 +41,12 @@
         width:500px;
         height:30px;
     }
+    #icon_btn{
+        background-color:#0e332c; 
+        color:white;
+        border:0;
+        outline:0;
+    }
     #search_form input{width:100%; height:100%;}
     #search_form div{margin-inline-end:5px;}
 
@@ -99,7 +105,7 @@
                     </div>
         
                     <div id="search_btn">
-                        <input type="submit" value="검색" class="btn btn-sm btn-secondary">
+                        <button type="submit" id="icon_btn"><i class="fas fa-search"></i></button>
                     </div>
                 </form>
             </div>
