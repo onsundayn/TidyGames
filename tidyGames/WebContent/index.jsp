@@ -14,7 +14,7 @@
 	#content>a{
 		color: white;
 		text-decoration: none;
-		font-size: 20px;
+		font-size: 15px;
 		font-weight: 500;
 		margin: 10px;
 		
@@ -29,9 +29,10 @@
 
 
 	<div id="content" align="center">
-		<a href="">NOTICE</a>
-		<a href="">COMMUNITY</a>
-		<a href="">HELP</a>
+		<a href="">NEW</a>
+		<a href="">RANK</a>
+		<a href="">SALE</a>
+		<a href="">FREE</a>
 	</div>
 
 	</div>
