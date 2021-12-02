@@ -30,6 +30,9 @@
 </style>
 </head>
 <body style="background-color: #0e332c;">
+	
+	<%@ include file="views/common/menubar.jsp" %>
+
 	<div class="outer">
 
 

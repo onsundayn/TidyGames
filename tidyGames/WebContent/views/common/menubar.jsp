@@ -7,12 +7,11 @@
 <title>Insert title here</title>
 <style>
 
+    
     .top-area{
         height:100px;
         display:flex;
-        justify-content: space-between;
-        padding:30px;
-        
+        justify-content:space-between;
     }
 
     .top-area div{
@@ -30,17 +29,27 @@
     }
     #top1{
         width:140px;
+        margin-left:30px;
+        margin-top:20px;
     }
     #top1 a{
         font-size:17px;
         font-weight:bold;
     }
-    #top3{width:60px;}
-
-    #top3 a{
-        text-align:right;
+    #top2{margin:auto;}
+    #search_box{
+        width:500px;
+        height:30px;
     }
-    #usericon{padding-left: 15px;}
+    #search_form input{width:100%; height:100%;}
+    #search_form div{margin-inline-end:5px;}
+
+    #top3{
+        width:60px;
+        margin-right:30px;
+        margin-top:20px;
+    }
+    #usericon{padding-left:15px;}
 
     .menu-area, .top-area{background:#0e332c}
     .menu{
@@ -62,8 +71,6 @@
         color:orange;
         font-weight:bold;
     }
-
-    
 
 </style>
 <!-- Latest compiled and minified CSS -->
@@ -87,13 +94,14 @@
             <div id="top2" align="center">
                 <form action="" id="search_form">
 
-                    <div id="search_text">
-                        <input type="text" name="keyword">
+                    <div id="search_box">
+                        <input type="text" name="keyword" placeholder="검색어를 입력하세요" style="border-radius: 5px;">
                     </div>
         
                     <div id="search_btn">
-                        <input type="submit" value="검색">
+                        <input type="submit" value="검색" class="btn btn-sm btn-secondary">
                     </div>
+                </form>
             </div>
             <div id="top3">
                 <a href=""><i class="fas fa-shopping-bag fa-lg"></i></a>
@@ -110,6 +118,10 @@
 
 
     </div>
+
+    <script>
+        const searchicon = <i class="fas fa-search fa-lg"></i>
+    </script>
 
 
 </body>
