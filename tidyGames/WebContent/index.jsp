@@ -8,7 +8,7 @@
 <style>
 	.outer{
 		width: 1200px;
-		height: 800px;
+		height: 1200px;
 		margin: auto;
 		
 	}
