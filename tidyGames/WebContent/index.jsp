@@ -8,18 +8,24 @@
 <style>
 	.outer{
 		width: 1200px;
-		height: 800px;
+		height: 1200px;
 		margin: auto;
-		
 	}
 
-	#content>a{
+	#content{
+		height: 40%;
+	}
+
+	#content_1>a{
 		color: white;
 		text-decoration: none;
-		font-size: 15px;
+		font-size: 18px;
 		font-weight: 500;
 		margin: 10px;
-		
+	}
+
+	#content_2>span{
+		margin: 10px;
 	}
 </style>
 </head>
@@ -27,14 +33,24 @@
 	<div class="outer">
 
 
-
-
-
 		<div id="content" align="center">
-			<a href="">NEW</a>
-			<a href="">RANK</a>
-			<a href="">SALE</a>
-			<a href="">FREE</a>
+			<div id="content_1">
+				<a href="">NEW</a>
+				<a href="">RANK</a>
+				<a href="">SALE</a>
+				<a href="">FREE</a>
+			</div>
+			<div id="content_2">
+				<span id="content_game_1">
+					<img src="" width="300px" height="150px">
+				</span>
+				<span id="content_game_2">
+					<img src="" width="300px" height="150px">
+				</span>
+				<span id="content_game_3">
+					<img src="" width="300px" height="150px">
+				</span>
+			</div>
 		</div>
 
 	</div>
