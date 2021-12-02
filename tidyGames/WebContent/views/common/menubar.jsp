@@ -5,15 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-
-    
+<style>   
     .top-area{
-        height:100px;
+        height:80px;
         display:flex;
         justify-content:space-between;
     }
-
     .top-area div{
         display:table-cell;
         color:white;
@@ -29,8 +26,8 @@
     }
     #top1{
         width:140px;
-        margin-left:30px;
-        margin-top:20px;
+        margin-left:20px;
+        margin-top:10px;
     }
     #top1 a{
         font-size:17px;
@@ -48,36 +45,33 @@
         outline:0;
     }
     #search_form input{width:100%; height:100%;}
-    #search_form div{margin-inline-end:5px;}
 
     #top3{
         width:60px;
-        margin-right:30px;
-        margin-top:20px;
+        margin-right:20px;
+        margin-top:10px;
     }
-    #usericon{padding-left:15px;}
-
+    #usericon{padding-left:10px;}
     .menu-area, .top-area{background:#0e332c}
     .menu{
         display:table-cell; 
         width:200px;
-        height:140px;
+        height:120px;
     }
     .menu a{
         text-decoration: none;
         color:white;
         font-size:19px;
+        font-weight:bold;
         display:block;
         width:100%;
         height:100%;
-        line-height:140px;
+        line-height:120px;
     }
     .menu a:hover{
         text-decoration: none;
         color:orange;
-        font-weight:bold;
     }
-
 </style>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -93,10 +87,9 @@
 <body>
 
     <div class="header">
-
-
+        
         <div class="top-area">
-            <div id="top1"><a href=""><img src="../../resources/image/tidyLogo.png"> TIDY GAMES</a></div>
+            <div id="top1"><a href=""><img src="../../resources/image/tidyLogo.png" width="20px" height="20"> TIDY GAMES</a></div>
             <div id="top2" align="center">
                 <form action="" id="search_form">
 
@@ -122,13 +115,6 @@
             <div class="menu"><a href="">HELP</a></div>
         </div>
 
-
     </div>
-
-    <script>
-        const searchicon = <i class="fas fa-search fa-lg"></i>
-    </script>
-
-
 </body>
 </html>
