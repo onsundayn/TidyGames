@@ -29,7 +29,7 @@
     }
     #top1{
         width:200px;
-        margin-left:20px;
+        margin-left:10px;
         margin-top:10px;
     }
     #top1 a{
@@ -38,7 +38,7 @@
     }
     #top2{margin:auto;}
     #search_box{
-        width:500px;
+        width:600px;
         height:30px;
     }
     #icon_btn{
@@ -47,14 +47,17 @@
         border:0;
         outline:0;
     }
+    #icon_btn:hover{
+        color:orange;
+    }
     #search_form input{width:100%; height:100%;}
 
     #top3{
         width:60px;
-        margin-right:20px;
+        margin-right:10px;
         margin-top:10px;
     }
-    #usericon{padding-left:10px;}
+    #usericon{padding-left:5px;}
     .menu-area, .top-area{background:#0e332c}
     .menu{
         display:table-cell; 
@@ -90,14 +93,14 @@
 <body>
 
     <div class="header">
-        
+
         <div class="top-area">
-            <div id="top1"><a href=""><img src="<%=contextPath%>/resources/image/tidyLogo.png" width="50px" height="40"> TIDY GAMES</a></div>
+            <div id="top1"><a href=""><img src="<%=contextPath%>/resources/image/tidyLogo.png" width="60px" height="40"> TIDY GAMES</a></div>
             <div id="top2" align="center">
                 <form action="" id="search_form">
 
                     <div id="search_box">
-                        <input type="text" name="keyword" placeholder="검색어를 입력하세요" style="border-radius: 5px;">
+                        <input type="text" name="keyword" style="border-radius: 5px;">
                     </div>
         
                     <div id="search_btn">
@@ -106,8 +109,8 @@
                 </form>
             </div>
             <div id="top3">
-                <a href=""><i class="fas fa-shopping-bag fa-lg"></i></a>
-                <a href="" id="usericon"><i class="fas fa-user fa-lg"></i></a>
+                <a href=""><i class="fas fa-shopping-cart fa-lg"></i></a>
+                <a href="" id="usericon"><i class="far fa-user fa-lg"></i></a>
             </div>
         </div>
     
@@ -117,6 +120,7 @@
             <div class="menu"><a href="">COMMUNITY</a></div>
             <div class="menu"><a href="">HELP</a></div>
         </div>
+            
 
     </div>
 </body>
