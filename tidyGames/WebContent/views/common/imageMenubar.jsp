@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	String contextPath = request.getContextPath();
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,7 +69,7 @@
                   <div class="carousel-item active">
                     <div class="slideImg" id="img1">
                         <a href="">
-                          <img src="<%=contextPath%>/resources/image/unnamed.jpg" class="d-block w-100">
+                          <img src="/resources/image/unnamed.jpg" class="d-block w-100">
                         </a>
                         
                     </div>
