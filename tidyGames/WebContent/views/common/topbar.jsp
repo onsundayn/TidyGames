@@ -79,7 +79,7 @@
             <form action="" id="search_form">
 
                 <div id="search_box">
-                    <input type="text" name="keyword" style="border-radius: 5px;">
+                    <input type="text" name="keyword" style="border-radius: 3px;">
                 </div>
     
                 <div id="search_btn">
