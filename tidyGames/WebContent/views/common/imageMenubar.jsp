@@ -8,20 +8,14 @@
  <style>
         .outer{
             width: 1200px;
-            height: 800px;
+            height: 400px;
         }
   
         .mainImg{
             background: #587570;  
             width: 1200px;
-            height: 250px;
+            height: 330px;
             margin-top:60px;
-        }
-        .mainImg>div{
-            display: inline-block;
-            width:220px;
-            height: 250px;
-            border: 1px solid black;
         }
         .mainImg>span{
             width:30px;
@@ -39,7 +33,7 @@
         .slideImg{
             display: inline-block;
             width:210px;
-            height:220px;
+            height:300px;
             margin:5px;
             border: 1px solid black;
         }
@@ -71,11 +65,11 @@
                   <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2" style="width:50px;background: rgb(47, 70, 50);"></button>
                   <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3" style="width:50px;background: rgb(47, 70, 50);;"></button>
                 </div>
-                <div class="carousel-inner">
+                <div class="carousel-inner" >
                   <div class="carousel-item active">
                     <div class="slideImg" id="img1">
                         <a href="">
-                          <img src="/WebContent/resources/image/unnamed.jpg" class="d-block w-100" alt="">
+                          <img src="<%=contextPath%>/resources/image/unnamed.jpg" class="d-block w-100">
                         </a>
                         
                     </div>
@@ -83,7 +77,7 @@
                       <a href="">
                         <img src="" class="d-block w-100" alt="">
                       </a>
-                        
+                       
                     </div>
                     <div class="slideImg" id="img3">
                       <a href="">
@@ -101,8 +95,8 @@
                       <a href="">
                         <img src="" class="d-block w-100" alt="">
                       </a>
-                        
                     </div>
+                    
 
                   </div>
                   <div class="carousel-item">
