@@ -15,6 +15,7 @@
             background: #587570;  
             width: 1200px;
             height: 250px;
+            margin-top:60px;
         }
         .mainImg>div{
             display: inline-block;
@@ -124,14 +125,3 @@
         </div>
    </div>
 
-
-
-    
-
-
-	
-
-	
-
-</body>
-</html>
