@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String contextPath = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +28,7 @@
         color:orange;
     }
     #top1{
-        width:140px;
+        width:200px;
         margin-left:20px;
         margin-top:10px;
     }
@@ -89,7 +92,7 @@
     <div class="header">
         
         <div class="top-area">
-            <div id="top1"><a href=""><img src="../../resources/image/tidyLogo.png" width="20px" height="20"> TIDY GAMES</a></div>
+            <div id="top1"><a href=""><img src="<%=contextPath%>/resources/image/tidyLogo.png" width="50px" height="40"> TIDY GAMES</a></div>
             <div id="top2" align="center">
                 <form action="" id="search_form">
 
