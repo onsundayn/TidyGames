@@ -8,9 +8,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>   
-    .top-area{
-        height:80px;
+<style>
+        .top-area{
+        height:100px;
         display:flex;
         justify-content:space-between;
     }
@@ -58,26 +58,7 @@
         margin-top:10px;
     }
     #usericon{padding-left:5px;}
-    .menu-area, .top-area{background:#0e332c}
-    .menu{
-        display:table-cell; 
-        width:200px;
-        height:120px;
-    }
-    .menu a{
-        text-decoration: none;
-        color:white;
-        font-size:19px;
-        font-weight:bold;
-        display:block;
-        width:100%;
-        height:100%;
-        line-height:120px;
-    }
-    .menu a:hover{
-        text-decoration: none;
-        color:orange;
-    }
+    .top-area{background:#0e332c}
 </style>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -92,36 +73,25 @@
 </head>
 <body>
 
-    <div class="header">
+    <div class="top-area">
+        <div id="top1"><a href=""><img src="<%=contextPath%>/resources/image/tidyLogo.png" width="60px" height="40"> TIDY GAMES</a></div>
+        <div id="top2" align="center">
+            <form action="" id="search_form">
 
-        <div class="top-area">
-            <div id="top1"><a href=""><img src="<%=contextPath%>/resources/image/tidyLogo.png" width="60px" height="40"> TIDY GAMES</a></div>
-            <div id="top2" align="center">
-                <form action="" id="search_form">
-
-                    <div id="search_box">
-                        <input type="text" name="keyword" style="border-radius: 5px;">
-                    </div>
-        
-                    <div id="search_btn">
-                        <button type="submit" id="icon_btn"><i class="fas fa-search"></i></button>
-                    </div>
-                </form>
-            </div>
-            <div id="top3">
-                <a href=""><i class="fas fa-shopping-cart fa-lg"></i></a>
-                <a href="" id="usericon"><i class="far fa-user fa-lg"></i></a>
-            </div>
-        </div>
+                <div id="search_box">
+                    <input type="text" name="keyword" style="border-radius: 5px;">
+                </div>
     
-        <div class="menu-area" align="center">
-            <div class="menu"><a href="">NOTICE</a></div>
-            <div class="menu"><a href="">LIBRARY</a></div>
-            <div class="menu"><a href="">COMMUNITY</a></div>
-            <div class="menu"><a href="">HELP</a></div>
+                <div id="search_btn">
+                    <button type="submit" id="icon_btn"><i class="fas fa-search"></i></button>
+                </div>
+            </form>
         </div>
-            
-
+        <div id="top3">
+            <a href=""><i class="fas fa-shopping-cart fa-lg"></i></a>
+            <a href="" id="usericon"><i class="far fa-user fa-lg"></i></a>
+        </div>
     </div>
+
 </body>
 </html>

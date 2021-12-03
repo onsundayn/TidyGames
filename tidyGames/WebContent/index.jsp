@@ -31,8 +31,9 @@
 </head>
 <body style="background-color: #0e332c;">
 	
-	<%@ include file="views/common/menubar.jsp" %>
+	<%@ include file="views/common/topbar.jsp" %>
 	<%@ include file="views/common/test2.jsp" %>
+	<%@ include file="views/common/navibar.jsp" %>
 
 	<div class="outer">
 
