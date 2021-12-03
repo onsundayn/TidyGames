@@ -67,56 +67,56 @@
             
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
-                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" style="width:50px;"></button>
-                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2" style="width:50px;"></button>
-                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3" style="width:50px;"></button>
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" style="width:50px; background: rgb(47, 70, 50);"></button>
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2" style="width:50px;background: rgb(47, 70, 50);"></button>
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3" style="width:50px;background: rgb(47, 70, 50);;"></button>
                 </div>
                 <div class="carousel-inner">
                   <div class="carousel-item active">
                     <div class="slideImg" id="img1">
                         <a href="">
-                          <img src="/WebContent/resources/image/unnamed.jpg" class="d-block w-100" alt="...">
+                          <img src="/WebContent/resources/image/unnamed.jpg" class="d-block w-100" alt="">
                         </a>
                         
                     </div>
                     <div class="slideImg" id="img2">
                       <a href="">
-                        <img src="..." class="d-block w-100" alt="...">
+                        <img src="" class="d-block w-100" alt="">
                       </a>
                         
                     </div>
                     <div class="slideImg" id="img3">
                       <a href="">
-                        <img src="..." class="d-block w-100" alt="...">
+                        <img src="" class="d-block w-100" alt="">
                       </a>
                         
                     </div>
                     <div class="slideImg" id="img4">
                       <a href="">
-                        <img src="..." class="d-block w-100" alt="...">
+                        <img src="" class="d-block w-100" alt="">
                       </a>
                         
                     </div>
                     <div class="slideImg" id="img5">
                       <a href="">
-                        <img src="..." class="d-block w-100" alt="...">
+                        <img src="" class="d-block w-100" alt="">
                       </a>
                         
                     </div>
 
                   </div>
                   <div class="carousel-item">
-                    <img src="..." class="d-block w-100" alt="...">
+                    <img src="" class="d-block w-100" alt="">
                   </div>
                   <div class="carousel-item">
-                    <img src="..." class="d-block w-100" alt="...">
+                    <img src="" class="d-block w-100" alt="">
                   </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev" style="width: 45px;">
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev" style="width: 45px;background: rgb(47, 70, 50);">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                   <span class="visually-hidden">Prev</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next" style="width: 45px;">
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next" style="width: 45px;background: rgb(47, 70, 50);">
                   <span class="carousel-control-next-icon" aria-hidden="true"></span>
                   <span class="visually-hidden">Next</span>
                 </button>
