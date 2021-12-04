@@ -48,7 +48,7 @@
     }
 </style>
 </head>
-<body>
+<body style="background-color: #0e332c;">
 	<%@ include file="topbar.jsp" %>
 	<div class="outer2" align="center">
 
