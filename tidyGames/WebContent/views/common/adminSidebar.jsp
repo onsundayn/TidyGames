@@ -8,15 +8,15 @@
 <style>
     #div{ box-sizing: border-box;}
     #sidebarOut{
+        width:210px;
         height:800px;
-        margin:auto;
 
     }
     #sideBox{
         background: rgba(0, 0, 0, 0.212);
         border:2px solid rgba(255, 255, 255, 0.333);
         border-top: none;
-        width:210px;
+        width:100%;
 
         
     }
@@ -60,14 +60,9 @@
 </style>
 </head>
 <body style="background:#0e332c;">
-		<%@ include file="topbar.jsp"%>
-        <%@ include file="navibar.jsp"%>
-        
-        
         
         <div id="sidebarOut">
             
-        <div id="line_1"></div>
         <div id="sideBox">
             <ul>
                 <!-- <li id="myPageBtn" style="font-size: 20px; font-weight: bolder; color:gray; margin-top:15px;">마이페이지</li> -->
