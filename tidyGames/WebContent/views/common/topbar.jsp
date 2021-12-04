@@ -38,7 +38,10 @@
         font-size:17px;
         font-weight:bold;
     }
-    #top2{margin:auto;}
+    #top2{
+    	margin-top:20px;
+    	margin-right:100px;
+    }
     #search_box{
         width:600px;
         height:30px;
@@ -57,7 +60,7 @@
     #top3{
         width:60px;
         margin-right:10px;
-        margin-top:10px;
+        margin-top:20px;
     }
     #usericon{padding-left:5px;}
     .top-area{background:#0e332c}
