@@ -9,8 +9,8 @@
         .outer{
         background-color: #0e332c;
         color:white;
-        width:800px;
-        height:600px;
+        width:1000px;
+        height:1000px;
         margin:auto;
         margin-top:200px;
         }
@@ -28,8 +28,6 @@
     </style>
 </head>
 <body>
-        <%@ include file="../common/topbar.jsp" %>
-        <%@ include file="../common/navibar.jsp" %>
 
 	    <div class="outer">
 
@@ -61,7 +59,7 @@
             <br><br><br>
             <div align="right" style="width:700px">
                 <button type="reset" >취소</button>
-                <button type="submit" class="btn btn-outline-primary">등록</button>
+                <button type="submit">등록</button>
             </div>
 
         </form>
