@@ -8,14 +8,10 @@
 <style>
 	.outer{
 		width: 1500px;
-		height: 1200px;
+		height: 800px;
 		margin: auto;
 	}
-
-	#content{
-		height: 40%;
-	}
-
+	
 	#content_text>span{
 		color: white;
 		text-decoration: none;
