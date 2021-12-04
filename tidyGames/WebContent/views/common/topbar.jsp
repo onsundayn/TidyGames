@@ -14,7 +14,7 @@
         display:flex;
         justify-content:space-between;
         margin:auto;
-        width:1200px;
+        width:1500px;
     }
     .top-area div{
         display:table-cell;
