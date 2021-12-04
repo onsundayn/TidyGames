@@ -8,14 +8,11 @@
 <style>
     #div{ box-sizing: border-box;}
     #sidebarOut{
-        width:1500px;
         height:800px;
         margin:auto;
-        /* border: 1px solid orange; */
 
     }
     #sideBox{
-        /* background: ; */
         background: rgba(0, 0, 0, 0.212);
         border:2px solid rgba(255, 255, 255, 0.333);
         border-top: none;
