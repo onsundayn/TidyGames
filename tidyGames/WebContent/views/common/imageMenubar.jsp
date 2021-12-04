@@ -6,14 +6,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
  <style>
-        .outer{
-            width: 1200px;
-            height: 400px;
+        .outer2{
+            width: 1500px;
+            height: 350px;
+            margin: auto;
         }
   
         .mainImg{
             background: #587570;  
-            width: 1200px;
+            width: 1500px;
             height: 330px;
             margin-top:60px;
         }
@@ -55,7 +56,7 @@
 </head>
 <body   style="background-color: #0e332c;">
 
-   <div class="outer" align="center">
+   <div class="outer2" align="center">
 
         <div class="mainImg">
             
