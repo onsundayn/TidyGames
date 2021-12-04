@@ -10,13 +10,13 @@
 <style>
 	.outer2{
        width: 1500px;
-       height: 350px;
+       height: 370px;
        margin: auto;
    }
 
    .mainImg{
        background: #587570;  
-       width: 1500px;
+       width: 1200px;
        height: 330px;
        margin-top:60px;
    }
@@ -40,6 +40,12 @@
        margin:5px;
        border: 1px solid black;
         }
+    .d-block{
+      width:210px;
+      height:320px;
+      object-fit:cover;
+      object-position: center;
+    }
 </style>
 </head>
 <body>
