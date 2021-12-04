@@ -13,6 +13,8 @@
         height:100px;
         display:flex;
         justify-content:space-between;
+        margin:auto;
+        width:1200px;
     }
     .top-area div{
         display:table-cell;
