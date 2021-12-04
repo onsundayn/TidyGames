@@ -9,14 +9,14 @@
     #div{ box-sizing: border-box;}
     #sidebarOut{
         height:800px;
+        width:210px;
     }
     #sideBox{
         background: rgba(0, 0, 0, 0.212);
         border:2px solid rgba(255, 255, 255, 0.333);
         border-top: none;
-        width:210px;
+        width:100%;
         height:600px;
-        
     }
     #line_1{
         width:100%;
@@ -58,12 +58,7 @@
 </style>
 </head>
 <body style="background:#0e332c;">
-		<%@ include file="topbar.jsp"%>
-        <%@ include file="navibar.jsp"%>
-        
-        
-        <div id="line_1"></div>
-        
+
         <div id="sidebarOut">
             
         <div id="sideBox">
