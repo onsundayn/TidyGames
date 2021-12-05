@@ -94,7 +94,7 @@
         </div>
         <div id="top3">
             <a href=""><i class="fas fa-shopping-cart fa-lg"></i></a>
-            <a href="" id="usericon"><i class="far fa-user fa-lg"></i></a>
+            <a href="<%= contextPath %>/myPage.me" id="usericon"><i class="far fa-user fa-lg"></i></a>
         </div>
     </div>
 
