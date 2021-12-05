@@ -21,6 +21,9 @@
 		width: 100%;
 		height: 10%;
 	}
+	#content_text>span:hover{
+		cursor: pointer;
+	}
 	#content_game{
 		width: 100%;
 		height: 90%;
