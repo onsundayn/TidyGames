@@ -33,10 +33,10 @@
 <body>
 
     <div class="navi-area" align="center">
-        <div class="menu"><a href="">NOTICE</a></div>
-        <div class="menu"><a href="">LIBRARY</a></div>
-        <div class="menu"><a href="">COMMUNITY</a></div>
-        <div class="menu"><a href="">HELP</a></div>
+        <div class="menu"><a href="" id="notice">NOTICE</a></div>
+        <div class="menu"><a href="" id="library">LIBRARY</a></div>
+        <div class="menu"><a href="" id="community">COMMUNITY</a></div>
+        <div class="menu"><a href="" id="help">HELP</a></div>
     </div>
 
 </body>

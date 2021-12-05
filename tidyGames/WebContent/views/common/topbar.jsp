@@ -79,7 +79,7 @@
 <body>
 
     <div class="top-area">
-        <div id="top1"><a href=""><img src="<%=contextPath%>/resources/image/tidyLogo.png" width="60px" height="40"> TIDY GAMES</a></div>
+        <div id="top1"><a href="<%=contextPath%>"><img src="<%=contextPath%>/resources/image/tidyLogo.png" width="60px" height="40"> TIDY GAMES</a></div>
         <div id="top2" align="center">
             <form action="" id="search_form">
 
