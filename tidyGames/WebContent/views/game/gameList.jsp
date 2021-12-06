@@ -95,6 +95,7 @@
                     <option value="">낮은가격순</option>
                     <option value="">리뷰많은순</option>
                     <option value="">별점높은순</option>
+                    <option value="">별점높은순</option>
                   </select>
 
                 </div>
