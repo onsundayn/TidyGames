@@ -9,10 +9,11 @@
 <body style="background-color: #0e332c;">
 	
 	<%@ include file="views/common/slideTest.jsp" %>
-	
 	<%@ include file="views/common/categorybar.jsp" %>
 	<%@ include file="views/common/navibar.jsp" %>
 	<%@ include file="views/common/content.jsp" %>
+	
+	<p>이것은테스트</p>
 	
 </body>
 </html>
