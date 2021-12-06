@@ -12,11 +12,6 @@
 	<%@ include file="views/common/categorybar.jsp" %>
 	<%@ include file="views/common/navibar.jsp" %>
 	
-<<<<<<< HEAD
-	<h1>뭐가다른가?</h1>
-=======
-	<p>이것은테스트</p>
-	
->>>>>>> sumin-master
+
 </body>
 </html>
