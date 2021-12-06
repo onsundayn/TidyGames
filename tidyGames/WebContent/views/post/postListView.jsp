@@ -32,11 +32,11 @@
         <br><br>
         <form action="">
 
-            <div id="deletebtn" align="right" style="width:1000px;">
+            <div id="deletebtn" align="right" style="width:1040px;">
                 <!--관리자계정에서만보이는 버튼-->
-                <button>삭제</button>
-                <a href="">추천순</a>
-                <a href="">조회순</a>
+                <a href="" class="btn btn-sm btn-outline-danger">삭제</a>
+                <!-- 로그인 시에만 보이는 버튼 -->
+                <a href="<%= contextPath %>/enrollForm.po" class="btn btn-sm btn-outline-info">글작성</a>
             </div>
 
             <br>
