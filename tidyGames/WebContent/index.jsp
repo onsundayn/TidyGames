@@ -13,7 +13,7 @@
 	<%@ include file="views/common/navibar.jsp" %>
 	<%@ include file="views/common/content.jsp" %>
 	
-	<p>이것은테스트</p>
+	<p>수민수민</p>
 	
 </body>
 </html>
