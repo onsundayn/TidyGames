@@ -61,7 +61,7 @@
             
         <div id="sideBox">
             <ul>
-                <!-- <li id="myPageBtn" style="font-size: 20px; font-weight: bolder; color:gray; margin-top:15px;">마이페이지</li> -->
+                
                 <li id="companyPageBtn" style="font-weight: bolder; ">게임사 페이지</li>
                 <li><a href="">내 정보 조회</a></li>
                
