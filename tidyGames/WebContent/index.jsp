@@ -12,5 +12,6 @@
 	<%@ include file="views/common/categorybar.jsp" %>
 	<%@ include file="views/common/navibar.jsp" %>
 	<%@ include file="views/common/content.jsp" %>
+	
 </body>
 </html>
