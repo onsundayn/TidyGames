@@ -12,7 +12,7 @@
 	
 	<%@ include file="views/common/categorybar.jsp" %>
 	<%@ include file="views/common/navibar.jsp" %>
-	<%@ include file="views/common/content.jsp" %>
 	
+	<h1>뭐가다른가?</h1>
 </body>
 </html>
