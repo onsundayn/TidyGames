@@ -121,7 +121,7 @@
               <div class="container">
                 <div class="title">
                   <select name="sort" id="sort" class="form-control">
-                    <option value="">-- 정렬순 선택 --</option>
+                    <option value="">-- 장르별 선택 --</option>
                     <option value="">출시일순</option>
                     <option value="">높은가격순</option>
                     <option value="">낮은가격순</option>
