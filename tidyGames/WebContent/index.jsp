@@ -14,5 +14,8 @@
 	<%@ include file="views/common/navibar.jsp" %>
 	<%@ include file="views/common/content.jsp" %>
 	
+	<h1>뭐가다른가?</h1>
+	<h2>merge 2번 하라구 하셧죠</h2>
+
 </body>
 </html>
