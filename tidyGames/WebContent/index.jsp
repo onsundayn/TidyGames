@@ -14,6 +14,6 @@
 	<%@ include file="views/common/navibar.jsp" %>
 	<%@ include file="views/common/content.jsp" %>
 	
-	dahyun test1
+
 </body>
 </html>
