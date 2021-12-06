@@ -12,49 +12,66 @@
         height:800px;
         display: flex;
         margin: auto;
+        border: 1px solid red;
+
     }
 
     .game-list{
-        width:800px;
-        height:170px;
+        width:1000px;
+        height:190px;
         border: 1px solid red;
         margin-top: 20px;
         margin-bottom: 30px ;
         float: right;
-        flex: 3;
+        flex: 2;
+        display:flex;
 
     }
 
     .game-list>div{
-        display:table-cell;
+        display:inline-block;
+        box-sizing: border-box;
     }
     .game-title-img{
-        width: 280px;
-        height:170px;
+        width: 300px;
+        height:190px;
         box-sizing: border-box;
+        flex:1;
+        
     }
     .game-name,.star-rating{
         width:180px;
         color: white;
         font-weight: bold;
+        flex: 1;
+        border: 1px solid red;
+        padding-top: 45px;
+
     }
     .heart,.cart{
         width:100px;
         height: 50px;
 
     }
+    .drop-group{
+        width:300px;
+        margin-top: 20px;
+    }
     .drop-group>div{
         display:inline-block;
         border: 1px solid red;
         width:200px;
-        height: 250px;
+        height: 120px;
         flex: 1;
     }
 
-    .emp{
-        width:250px;
-        height: 800px;
+    .game-list img{
+        width: 300px;
+        height:190px;
+        object-fit: cover;
+        box-sizing: border-box;
     }
+    
     
 </style>
 </head>
@@ -70,53 +87,51 @@
 
 
             <div class="container">
-                <div class="dropdown">
-                  <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
-                    정렬순 선택
-                  </button>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="gameList.jsp">출시일순</a>
-                    <a class="dropdown-item" href="#">높은가격순</a>
-                    <a class="dropdown-item" href="#">낮은가격순</a>
-                    <a class="dropdown-item" href="#">리뷰많은순</a>
-                    <a class="dropdown-item" href="#">별점높은순</a>
-                  </div>
+                <div class="title">
+                  <select name="sort" id="sort" class="form-control">
+                    <option value="">-- 정렬순 선택 --</option>
+                    <option value="">출시일순</option>
+                    <option value="">높은가격순</option>
+                    <option value="">낮은가격순</option>
+                    <option value="">리뷰많은순</option>
+                    <option value="">별점높은순</option>
+                  </select>
+
                 </div>
               </div>
     
               <br><br><br>
     
               <div class="container">
-                <div class="dropdown">
-                  <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
-                    정렬순 선택
-                  </button>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="gameList.jsp">출시일순</a>
-                    <a class="dropdown-item" href="#">높은가격순</a>
-                    <a class="dropdown-item" href="#">낮은가격순</a>
-                    <a class="dropdown-item" href="#">리뷰많은순</a>
-                    <a class="dropdown-item" href="#">별점높은순</a>
-                  </div>
+                <div class="title">
+                  <select name="sort" id="sort" class="form-control">
+                    <option value="">-- 정렬순 선택 --</option>
+                    <option value="">출시일순</option>
+                    <option value="">높은가격순</option>
+                    <option value="">낮은가격순</option>
+                    <option value="">리뷰많은순</option>
+                    <option value="">별점높은순</option>
+                  </select>
+
                 </div>
               </div>
     
               <br><br><br>
     
               <div class="container">
-                <div class="dropdown">
-                  <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
-                    정렬순 선택
-                  </button>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="gameList.jsp">출시일순</a>
-                    <a class="dropdown-item" href="#">높은가격순</a>
-                    <a class="dropdown-item" href="#">낮은가격순</a>
-                    <a class="dropdown-item" href="#">리뷰많은순</a>
-                    <a class="dropdown-item" href="#">별점높은순</a>
-                  </div>
+                <div class="title">
+                  <select name="sort" id="sort" class="form-control">
+                    <option value="">-- 정렬순 선택 --</option>
+                    <option value="">출시일순</option>
+                    <option value="">높은가격순</option>
+                    <option value="">낮은가격순</option>
+                    <option value="">리뷰많은순</option>
+                    <option value="">별점높은순</option>
+                  </select>
+
                 </div>
               </div>
+              
         </div>
 
         <div class="emp"></div>
@@ -124,11 +139,10 @@
         <div class="list-group">
 
             <div class="game-list">
-                <div class="game-title-img" >
-                    <img src="">
+                <div class="game-title-img">
+                    <img src="<%=contextPath%>/resources/image/Dead-Cells.jpg">
                 </div>
                 <div class="game-name" align="center">
-                    <br>
                     슬라임랜처<br>
                     Slime Rancher
                     <br><br>
