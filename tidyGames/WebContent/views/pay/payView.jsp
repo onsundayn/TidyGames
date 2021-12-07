@@ -78,7 +78,7 @@
     }
     /* 할인적용 */
     .area1{
-        background: ivory;
+        background: rgb(227, 220, 210);
         width: 300px;
         height: 50px;
         margin: auto;
@@ -110,7 +110,7 @@
     }
     /* 결제수단 */
     .area2{
-        background: ivory;
+        background: rgb(227, 220, 210);
         width: 300px;
         height: 60px;
         margin: auto;
@@ -120,7 +120,7 @@
     }
     /* 최종결제정보1 */
     .area3{
-        background: ivory;
+        background: rgb(227, 220, 210);
         width: 300px;
         height: 60px;
         margin: auto;
@@ -130,7 +130,7 @@
     }
     /* 최종결제금액2 */
     .area4{
-        background: ivory;
+        background: rgb(227, 220, 210);
         width: 300px;
         height: 60px;
         margin: auto;
@@ -170,7 +170,9 @@
 
         
             <div class="container">
-                <h2 style="color:white">구매/결제</h2>
+                <span style="color:white; font-size: 25px; font-weight: bold;">구매/결제</span>
+                <span style="color: grey; font-size: 18px;"> >결제완료</span>
+                
                 <br><br>
                 <div id="line1"></div><br>  
                 
