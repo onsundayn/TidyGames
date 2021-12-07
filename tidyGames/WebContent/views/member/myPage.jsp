@@ -17,7 +17,7 @@
         float:left;
     }
     #intro{
-        font-size: 30px;
+        font-size: 33px;
         font-weight: 900;
         color :white;
         margin: 30px 80px 0px 50px;
@@ -32,8 +32,10 @@
         height:3px;
         background: rgba(255, 255, 255, 0.555);
     }
+    /* 여기까지 공통 적용 */
+
     #profileBox{
-        border:1px solid black;
+        border:3px solid black;
         background: rgba(0, 0, 0, 0.300);
         width:700px;
         height:360px;
@@ -79,7 +81,7 @@
 
 </style>
 </head>
-<body>
+<body style="background:#0e332c;">
     
     <%@ include file="../common/topbar.jsp"%>
     <%@ include file="../common/navibar.jsp"%>
