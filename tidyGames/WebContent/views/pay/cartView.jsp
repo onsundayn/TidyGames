@@ -59,9 +59,9 @@
     }
 
     table.calculation2 {                    /*총 결제예정금액 테이블*/
-        border: solid 1px #0e332c;
+        border: solid 1px #e0e0eb;;
         border-collapse: collapse;
-        background: #0e332c;
+        background-color: #0e332c;
         width: 100%;
         font-size: 10pt;
     }
