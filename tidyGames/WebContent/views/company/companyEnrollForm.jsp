@@ -18,12 +18,8 @@
             font-weight:normal;
         }
         #enroll-com-form input{
-            width:600px;
+            width:550px;
             height:20px;
-        }
-        .comm{
-            display:inline-table; 
-            margin-left:23px;
         }
     </style>
 </head>
@@ -31,35 +27,37 @@
 
 	    <div class="outer">
 
-        <h1>게임사 등록</h1>
+        <h2>게임사 등록</h2>
         <br><br>
 
         <form action="" method="post" id="enroll-com-form">
 
             <table>
                 <tr>
-                    <th width="100"><h2>게임사</h2></th>
+                    <th width="100"><h3>게임사</h3></th>
                     <td><input type="text" name="companyName" required></td>
                 </tr>
                 <tr>
-                    <th><h2>아이디</h2></th>
+                    <th><h3>아이디</h3></th>
                     <td><input type="text" name="companyId" required></td>
                 </tr>
                 <tr>
-                    <th><h2>등록코드</h2></th>
+                    <th><h3>등록코드</h3></th>
                     <td><h3 style="color:lightgray;">등록코드는 등록시 자동으로 부여됩니다</h3></td>
                 </tr>
                 <tr>
-                    <th><h2>대표자</h2></th>
+                    <th><h3>대표자</h3></th>
                     <td><input type="text" name="companyHead" required></td>
                 </tr>
+                <tr>
+                    <th style="display: flow-root;"><h3>코멘트</h3></th>
+                    <td><textarea name="comment" cols="74" rows="10" style="resize:none"></textarea></td>
+                </tr>
             </table>
-            <h2 class="comm">코멘트</h2>
-            <textarea name="comment" cols="81" rows="10" class="comm" style="resize:none" required></textarea>
             <br><br><br>
             <div align="right" style="width:700px">
-                <button type="reset" >취소</button>
-                <button type="submit">등록</button>
+                <button type="reset" class="btn btn-sm btn-secondary">취소</button>
+                <button type="submit" class="btn btn-sm btn-info">등록</button>
             </div>
 
         </form>
