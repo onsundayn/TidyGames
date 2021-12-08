@@ -41,6 +41,11 @@
     }
     #wishList-array{
         border-radius: 3px;
+        border: 1px solid white;
+        background: #0e332c;
+        color: white;
+        height: 30px;
+
     }
 
     
@@ -50,14 +55,7 @@
         background: rgba(255, 255, 255, 0.555);
         margin-left: 50px;
     }
-    #wishList-array{
-        border: 1px solid white;
-        background: #0e332c;
-        color: white;
-        height: 30px;
 
-
-    }
 
     #dropdown-array{
         background: #0e332c;
