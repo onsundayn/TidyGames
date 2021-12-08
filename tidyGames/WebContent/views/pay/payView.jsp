@@ -168,7 +168,7 @@
     </div>
 
 
-        
+        <form action="" method="post">
             <div class="container">
                 <span style="color:white; font-size: 25px; font-weight: bold;">구매/결제</span>
                 <span style="color: grey; font-size: 18px;"> >결제완료</span>
@@ -299,6 +299,8 @@
                     <a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> 결제하기</a>
                     <a href="#" class="btn btn btn-secondary"> 장바구니로</a>
                 </div>
+            </form>
+                
 
 
 
