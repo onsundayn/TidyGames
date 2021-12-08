@@ -59,6 +59,10 @@
         margin-left: 70px;
     }
 
+    table table-borderless td{
+        
+    }
+
 </style>
 </head>
 <body>
@@ -119,7 +123,7 @@
              <div class="area3">
                 <div class="container" style="color:white;">
                     <h4 style="font-size: 15px; font-weight: bold;">&nbsp;&nbsp;주문날짜 2021-12-09</h4>
-                    <table class="table table-borderless" style="color:white; border:1px solid grey; background:rgb(20, 20, 20)">
+                    <table class="table table-borderless" style="color:white; border:1px solid grey; background:rgba(20, 20, 20, 0.87)">
                       <thead>
                         <tr>
                           <th colspan="5" style="font-size: 25px; font-weight: bold;">BattleGround</th>
@@ -133,9 +137,12 @@
                             <th colspan="5"><div style="width:1100px; height: 2px; background: grey;"></div></th>
                            
                         </tr>
-
                         <tr>
-                            <td colspan="2" rowspan="2" width="100px" height="200px">사진</td> <!-- 1,2열 합쳐서 한 열로, 1,2행 하나로 합쳐서 한행으로-->
+                            
+                            <td colspan="2" rowspan="2" width="200px" height="200px" style="text-align: center;">
+                                <img src="/../TidyGames/tidyGames/WebContent/resources/image/battlefield.JPG" width="150px" height="200px">
+
+                            </td> <!-- 1,2열 합쳐서 한 열로, 1,2행 하나로 합쳐서 한행으로-->
                             <td width ="700" height="40px">
                              
                             </td>
@@ -146,7 +153,7 @@
                         </tr>
 
                         <tr>
-                            <td>   
+                            <td style="font-weight: bold;">   
                                 <div>주문번호  <a href="">100000</a></div><br>
                                 <div>결제금액  <span>100000</span></div><br>
                                 <div>결제완료 or 환불중</div>
@@ -175,7 +182,7 @@
              <div class="area3">
                 <div class="container" style="color:white;">
                     <h4 style="font-size: 15px; font-weight: bold;">&nbsp;&nbsp;주문날짜 2021-12-09</h4>
-                    <table class="table table-borderless" style="color:white; border:1px solid grey; background:rgb(20, 20, 20)">
+                    <table class="table table-borderless" style="color:white; border:1px solid grey; background:rgba(20, 20, 20, 0.87);">
                       <thead>
                         <tr>
                           <th colspan="5" style="font-size: 25px; font-weight: bold;">BattleGround</th>
@@ -191,7 +198,11 @@
                         </tr>
 
                         <tr>
-                            <td colspan="2" rowspan="2" width="100px" height="200px">사진</td> <!-- 1,2열 합쳐서 한 열로, 1,2행 하나로 합쳐서 한행으로-->
+                            
+                            <td colspan="2" rowspan="2" width="200px" height="200px" style="text-align: center;">
+                                <img src="/../TidyGames/tidyGames/WebContent/resources/image/battlefield.JPG" width="150px" height="200px">
+
+                            </td> <!-- 1,2열 합쳐서 한 열로, 1,2행 하나로 합쳐서 한행으로-->
                             <td width ="700" height="40px">
                              
                             </td>
@@ -202,7 +213,7 @@
                         </tr>
 
                         <tr>
-                            <td>   
+                            <td style="font-weight: bold;">   
                                 <div>주문번호  <a href="">100000</a></div><br>
                                 <div>결제금액  <span>100000</span></div><br>
                                 <div>결제완료 or 환불중</div>
@@ -226,6 +237,13 @@
         
         
     </div>
+
+
+
+
+
+
+
     
         
 </body>
