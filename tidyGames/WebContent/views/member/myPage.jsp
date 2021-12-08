@@ -28,7 +28,7 @@
         background: rgba(255, 255, 255, 0.555);
     }
     #line_3{
-        width:200px;
+        width:145px;
         height:3px;
         background: rgba(255, 255, 255, 0.555);
     }
@@ -41,6 +41,7 @@
         height:360px;
         margin-top: 80px; 
         margin-left: 190px;
+        /*총 길이 : 1500, 센터 : (750 - box)/2 => margin-left*/
     }
     #profileBox>*{
         float: left;
