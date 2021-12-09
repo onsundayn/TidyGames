@@ -122,13 +122,9 @@
                 <div id="talbeTop">
                     <div id="leftTop">
                         <div>
-                            <span>회원수 21명</span>
+                            <span>상세 조회</span>
                         </div>
-                        <div>
-                            <a href="" class="btn btn-dark">상세 조회</a>
-                            <a href="" class="btn btn-dark">회원 수정</a>
-                            <a href="" class="btn btn-dark">회원 삭제</a>
-                        </div>
+                        
                     
                     </div>
                     <div id="rightTop">
