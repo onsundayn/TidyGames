@@ -50,6 +50,7 @@
         color: white;
         font-weight: bold;
         font-size: 15px;
+        margin-top: 200px;
     }
     .login_check>label{
         margin-right: 20px;
@@ -104,48 +105,18 @@
             <form action="" method="">
                 <div id="login_form">
 
-                    <span style="color: white; font-size: 30px; font-weight: bold;">HELLO!</span>
+                    <span style="color: white; font-size: 30px; font-weight: bold;">WELCOME!</span>
                     <br><br>
 
-                    <div class="form-group">
+                    <div align="center" style="color: white; font-weight: bold; margin-top:50px;">
+                        <span>회원님의 아이디는 </span>
+                        <span> 입니다.</span>
                         <br>
-                        <input type="text" name="userId" class="form-control" placeholder="아이디" id="id" required>
-                    </div> 
-
-                    <div class="form-group">
-                        <input type="password" name="userPwd" class="form-control" placeholder="비밀번호" id="pwd" required>
-                    </div>
-
-                    <div class="login_check">
-                        <label>
-                            <input type="checkbox"> 아이디 기억
-                        </label>
-                        <label>
-                            <input type="checkbox"> 자동 로그인
-                        </label>
-                        <label>
-                            <input type="checkbox"> 게임사 회원
-                        </label>
+                        <span>TIDY GAMES의 가족이 되어주셔서 감사합니다!</span>
                     </div>
 
                     <div class="login_btn">
                         <button type="submit">LOGIN</button>
-                    </div>
-
-                    <div class="find_login">
-                        <a href="">아이디 찾기</a> ㅣ
-                        <a href="">비밀번호 재설정</a> ㅣ
-                        <a href="">회원가입</a>
-                    </div>
-                    <hr>
-
-                    <div class="sns_login">
-                        <button type="button" style="background-color: #03C75A; color: white;">
-                            <img src="">네이버 아이디로 로그인
-                        </button>
-                        <button type="button" style="background-color: #FFE90A;">
-                            <img src="">카카오 아이디로 로그인
-                        </button>
                     </div>
 
                 </div>
