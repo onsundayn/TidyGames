@@ -41,10 +41,10 @@
         
     }
     #tableBox{
-        width:1100px;
-        height:auto;
+        width:1250px;
+        height:840px;
         /* margin-left:145px; */
-        margin: 30px 0px 100px 95px;
+        margin: 30px 0px 100px 35px;
         background-color: rgb(197, 197, 197);
         border: 10px solid rgba(255, 255, 255, 0.555);
     }
@@ -59,17 +59,17 @@
         /* margin-left:80px; */
     }
     #leftTop span{
-        font-size:23px;
+        font-size:30px;
         font-weight: bolder;
         color:black;
         margin: 0px 70px 0px 50px;
     }
     #rightTop{
-        margin: 55px 20px 20px 110px;
+        margin: 55px 20px 20px 300px;
     }
     #table{
         margin:auto;
-        width:1000px;
+        width:1200px;
         /* background-color: gray; */
     }
     #table *{
@@ -89,15 +89,20 @@
         height:20px;
         margin-top:3px;
     }
-    #pagebar{
-        height:50px;
-        margin-top:100px;
-    }
     #memberList{
         color:orange;
     }
     tbody a{
         color:gray;
+    }
+    #table td{padding:4px;}
+    #tableOut1{
+        width:100%;
+        height:95%;
+    }
+    #tableOut2{
+        width:100%;
+        height:5%;
     }
 
 </style>
@@ -124,8 +129,12 @@
                         <div>
                             <span>상세 조회</span>
                         </div>
-                        
-                    
+                        <div>
+                            <button disabled class="btn btn-outline-secondary">상세조회</button>
+                            <a href="" class="btn btn-dark">회원 수정</a>
+                            <a href="" class="btn btn-dark">회원 삭제</a>
+                        </div>
+                    <!-- 상세조회에서도 검색 가능하게 할지 고민중 -->
                     </div>
                     <div id="rightTop">
                         <div class="btn-group">
@@ -143,17 +152,23 @@
                         <button class="btn btn-sm btn-dark" onclick="" >조회</button>
                     </div>
                 </div>
+                <div id="tableOut1">
+
+             
                 <table id="table" class="table table-hover">
                     <thead>
                         <tr align="center">
                             <th width="30"> </th>
                             <th width="30">No.</th>
-                            <th width="170">아이디</th>
+                            <th width="150">아이디</th>
                             <th width="100">이름</th>
                             <th width="150">닉네임</th>
+                            <th width="80">성별</th>
                             <th width="150">이메일</th>
-                            <th width="100">전화번호</th>
-                            <th width="150">적립금</th>
+                            <th width="120">전화번호</th>
+                            <th width="150">주소</th>
+                            <th width="100">가입일</th>
+                            <th width="100">탈퇴여부</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -162,207 +177,42 @@
                         <tr align="center">
                             <td><input type="checkbox" id="checkBox"></td>
                             <td>1</td>
-                            <td><a href="">userId</a></td>
+                            <td>hobun</td>
                             <td>김이박</td>
                             <td>호빵</td>
-                            <td>hobun@mail.com</td>
+                            <td>여</td>
+                            <td>hobun@tidy.com</td>
                             <td>01012345678</td>
-                            <td>
-                                3000P
-                                <a href="" id="btn" class="btn btn-sm btn-dark">변경</a>
-                            </td>
+                            <td>서울 양천구 목동</td>
+                            <td>2021/12/10</td>
+                            <td>N</td>
+                          
                         </tr>
 <!-- 반복 예시 -->
+<tr align="center">
+    <td><input type="checkbox" id="checkBox"></td>
+    <td>1</td>
+    <td>longlongname</td>
+    <td>최길</td>
+    <td>목이길어서기린</td>
+    <td>여</td>
+    <td>longlong@tidy.com</td>
+    <td>010987654321</td>
+    <td>서울 은평구 한동</td>
+    <td>2021/12/10</td>
+    <td>N</td>
+  
+</tr>
 
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>userId</td>
-    <td>김이박</td>
-    <td>호빵</td>
-    <td>hobun@mail.com</td>
-    <td>01012345678</td>
-    <td>
-        3000P
-        <a href="" id="btn" class="btn btn-sm btn-dark">변경</a>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>userId</td>
-    <td>김이박</td>
-    <td>호빵</td>
-    <td>hobun@mail.com</td>
-    <td>01012345678</td>
-    <td>
-        3000P
-        <a href="" id="btn" class="btn btn-sm btn-dark">변경</a>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>userId</td>
-    <td>김이박</td>
-    <td>호빵</td>
-    <td>hobun@mail.com</td>
-    <td>01012345678</td>
-    <td>
-        3000P
-        <a href="" id="btn" class="btn btn-sm btn-dark">변경</a>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>userId</td>
-    <td>김이박</td>
-    <td>호빵</td>
-    <td>hobun@mail.com</td>
-    <td>01012345678</td>
-    <td>
-        3000P
-        <a href="" id="btn" class="btn btn-sm btn-dark">변경</a>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>userId</td>
-    <td>김이박</td>
-    <td>호빵</td>
-    <td>hobun@mail.com</td>
-    <td>01012345678</td>
-    <td>
-        3000P
-        <a href="" id="btn" class="btn btn-sm btn-dark">변경</a>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>userId</td>
-    <td>김이박</td>
-    <td>호빵</td>
-    <td>hobun@mail.com</td>
-    <td>01012345678</td>
-    <td>
-        3000P
-        <a href="" id="btn" class="btn btn-sm btn-dark">변경</a>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>userId</td>
-    <td>김이박</td>
-    <td>호빵</td>
-    <td>hobun@mail.com</td>
-    <td>01012345678</td>
-    <td>
-        3000P
-        <a href="" id="btn" class="btn btn-sm btn-dark">변경</a>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>userId</td>
-    <td>김이박</td>
-    <td>호빵</td>
-    <td>hobun@mail.com</td>
-    <td>01012345678</td>
-    <td>
-        3000P
-        <a href="" id="btn" class="btn btn-sm btn-dark">변경</a>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>userId</td>
-    <td>김이박</td>
-    <td>호빵</td>
-    <td>hobun@mail.com</td>
-    <td>01012345678</td>
-    <td>
-        3000P
-        <a href="" id="btn" class="btn btn-sm btn-dark">변경</a>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>userId</td>
-    <td>김이박</td>
-    <td>호빵</td>
-    <td>hobun@mail.com</td>
-    <td>01012345678</td>
-    <td>
-        3000P
-        <a href="" id="btn" class="btn btn-sm btn-dark">변경</a>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>userId</td>
-    <td>김이박</td>
-    <td>호빵</td>
-    <td>hobun@mail.com</td>
-    <td>01012345678</td>
-    <td>
-        3000P
-        <a href="" id="btn" class="btn btn-sm btn-dark">변경</a>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>userId</td>
-    <td>김이박</td>
-    <td>호빵</td>
-    <td>hobun@mail.com</td>
-    <td>01012345678</td>
-    <td>
-        3000P
-        <a href="" id="btn" class="btn btn-sm btn-dark">변경</a>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>userId</td>
-    <td>김이박</td>
-    <td>호빵</td>
-    <td>hobun@mail.com</td>
-    <td>01012345678</td>
-    <td>
-        3000P
-        <a href="" id="btn" class="btn btn-sm btn-dark">변경</a>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>userId</td>
-    <td>김이박</td>
-    <td>호빵</td>
-    <td>hobun@mail.com</td>
-    <td>01012345678</td>
-    <td>
-        3000P
-        <a href="" id="btn" class="btn btn-sm btn-dark">변경</a>
-    </td>
-</tr>
 <!-- 반복 예시 끝-->
                                 
 
                     </tbody>
                   </table>
-
-                  <div id="pagebar" align="center">
+                </div>
+                
+                <div id="tableOut2">
+                    <div id="pagebar" align="center">
                         <button>&lt;</button>   
                         <button>1</button>
                         <button>2</button>
@@ -375,8 +225,9 @@
                         <button>9</button>
                         <button>10</button>
                         <button>&gt;</button>
-                  </div>
-      
+                    </div>
+                </div>
+                    
                 </div>
                 
             </div>

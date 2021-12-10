@@ -42,7 +42,7 @@
     }
     #tableBox{
         width:1100px;
-        height:auto;
+        height:840px;
         /* margin-left:145px; */
         margin: 30px 0px 100px 95px;
         background-color: rgb(197, 197, 197);
@@ -59,7 +59,7 @@
         /* margin-left:80px; */
     }
     #leftTop span{
-        font-size:23px;
+        font-size:30px;
         font-weight: bolder;
         color:black;
         margin: 0px 70px 0px 50px;
@@ -89,15 +89,20 @@
         height:20px;
         margin-top:3px;
     }
-    #pagebar{
-        height:50px;
-        margin-top:100px;
-    }
     #memberList{
         color:orange;
     }
     tbody a{
         color:gray;
+    }
+    #table td{padding:4px;}
+    #tableOut1{
+        width:100%;
+        height:95%;
+    }
+    #tableOut2{
+        width:100%;
+        height:5%;
     }
 
 </style>
@@ -147,6 +152,7 @@
                         <button class="btn btn-sm btn-dark" onclick="" >조회</button>
                     </div>
                 </div>
+                <div id="tableOut1">
                 <table id="table" class="table table-hover">
                     <thead>
                         <tr align="center">
@@ -365,7 +371,9 @@
 
                     </tbody>
                   </table>
+                </div>
 
+                <div id="tableOut2">
                   <div id="pagebar" align="center">
                         <button>&lt;</button>   
                         <button>1</button>
@@ -380,7 +388,7 @@
                         <button>10</button>
                         <button>&gt;</button>
                   </div>
-      
+                </div>
                 </div>
                 
             </div>
@@ -389,7 +397,7 @@
 
 
         <footer>
-            <div style="height:200px">
+            <div style="height:100px">
     
             </div>
         </footer>
