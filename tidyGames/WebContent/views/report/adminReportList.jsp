@@ -29,7 +29,7 @@
         margin: 25px 80px 0px 95px;
     }
     #line_3{
-        width:145px;
+        width:165px;
         height:3px;
         background: rgba(255, 255, 255, 0.555);
         margin: 8px 0px 0px 95px;
@@ -41,10 +41,10 @@
         
     }
     #tableBox{
-        width:1250px;
+        width:1100px;
         height:840px;
         /* margin-left:145px; */
-        margin: 30px 0px 100px 35px;
+        margin: 30px 0px 100px 95px;
         background-color: rgb(197, 197, 197);
         border: 10px solid rgba(255, 255, 255, 0.555);
     }
@@ -54,25 +54,24 @@
         /* border:1px solid white; */
     }
     #leftTop{   
+        width:70%;
         margin:20px;
-        margin: 50px 20px 20px 20px;
-        text-align:center;
+        margin:50px 20px 20px 20px;
+       /* margin-left:80px; */
     }
-    #leftTop1{
-        text-align: center;
+    #rightTop{
+        margin: 55px 20px 0px 110px;
     }
     #leftTop span{
         font-size:30px;
         font-weight: bolder;
         color:black;
-        margin: 0px 70px 0px 50px;
-    }
-    #rightTop{
-        margin: 55px 20px 20px 300px;
+        margin: 0px 50px 0px 40px;
     }
     #table{
         margin:auto;
-        width:1200px;
+        width:1000px;
+        /* background-color: gray; */
     }
     #table *{
         height:15px;
@@ -91,7 +90,7 @@
         height:20px;
         margin-top:3px;
     }
-    #memberList{
+    #blacklist{
         color:orange;
     }
     tbody a{
@@ -121,58 +120,38 @@
         </div>
         
         <div id="box">
-            <div id="intro">회원 관리</div>
+            <div id="intro">신고 내역</div>
             <div id="line_3"></div>
             
       
     	    <div id="tableBox">
                 <div id="talbeTop">
                     <div id="leftTop">
-                        <div id="leftTop1">
-                            <!-- 혹은 <검색어>-->
-                            <span>상세 조회</span>
-
+                        <div>
+                            <span>신고 처리 대기 목록</span>
                         </div>
-                        <div id="leftTop2">
-                            <button disabled class="btn btn-outline-secondary">상세조회</button>
-                            <a href="" class="btn btn-dark">회원 수정</a>
-                            <a href="" class="btn btn-dark">회원 삭제</a>
+                        <div>
+                         
                         </div>
-                    <!-- 상세조회에서도 검색 가능하게 할지 고민중 -->
+                    
                     </div>
                     <div id="rightTop">
-                        <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-dark" disabled>회원 ID</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
-                                <span class="caret"></span>
-                                </button>
-                                <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">닉네임</a>
-                                <a class="dropdown-item" href="#">이 름</a>
-                                </div>
-                        </div>
-
-                        <input type="text" id="selectKeyword" name="keyword" placeholder="조회를 위한 입력">
-                        <button class="btn btn-sm btn-dark" onclick="" >조회</button>
+                     
+                        <a href="" class="btn btn-dark">삭제</a>
+                        <!-- 회원 조회 페이지로 이동함 -->
+                        <a href="" class="btn btn-dark">확인</a>
                     </div>
                 </div>
                 <div id="tableOut1">
-
-             
                 <table id="table" class="table table-hover">
                     <thead>
                         <tr align="center">
                             <th width="30"> </th>
                             <th width="30">No.</th>
-                            <th width="150">아이디</th>
-                            <th width="100">이름</th>
-                            <th width="150">닉네임</th>
-                            <th width="80">성별</th>
-                            <th width="150">이메일</th>
-                            <th width="120">전화번호</th>
-                            <th width="150">주소</th>
-                            <th width="100">가입일</th>
-                            <th width="100">탈퇴여부</th>
+                            <th width="130">아이디</th>
+                            <th width="130">닉네임</th>
+                            <th width="170">제한 사유</th>
+                            <th width="100">등록일</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -182,55 +161,53 @@
                             <td><input type="checkbox" id="checkBox"></td>
                             <td>1</td>
                             <td>hobun</td>
-                            <td>김이박</td>
                             <td>호빵</td>
-                            <td>여</td>
-                            <td>hobun@tidy.com</td>
-                            <td>01012345678</td>
-                            <td>서울 양천구 목동</td>
-                            <td>2021/12/10</td>
-                            <td>N</td>
+                            <td>욕설, 비방</td>
+                            <td>2021/12/11</td>
                         </tr>
 <!-- 반복 예시 -->
 <tr align="center">
     <td><input type="checkbox" id="checkBox"></td>
     <td>1</td>
-    <td>longlongname</td>
-    <td>최길</td>
-    <td>목이길어서기린</td>
-    <td>여</td>
-    <td>longlong@tidy.com</td>
-    <td>010987654321</td>
-    <td>서울 은평구 한동</td>
-    <td>2021/12/10</td>
-    <td>Y</td>
-  
+    <td>hobun</td>
+    <td>호빵</td>
+    <td>욕설, 비방</td>
+    <td>2021/12/11</td>
 </tr>
-
+<tr align="center">
+    <td><input type="checkbox" id="checkBox"></td>
+    <td>1</td>
+    <td>hobun</td>
+    <td>호빵</td>
+    <td>욕설, 비방</td>
+    <td>2021/12/11</td>
+</tr>
+<tr align="center">
+    <td><input type="checkbox" id="checkBox"></td>
+    <td>1</td>
+    <td>hobun</td>
+    <td>호빵</td>
+    <td>욕설, 비방</td>
+    <td>2021/12/11</td>
+</tr>
 <!-- 반복 예시 끝-->
                                 
 
                     </tbody>
                   </table>
                 </div>
-                
+
                 <div id="tableOut2">
-                    <div id="pagebar" align="center">
+                  <div id="pagebar" align="center">
                         <button>&lt;</button>   
                         <button>1</button>
                         <button>2</button>
                         <button>3</button>
                         <button>4</button>
                         <button>5</button>
-                        <button>6</button>
-                        <button>7</button>
-                        <button>8</button>
-                        <button>9</button>
-                        <button>10</button>
                         <button>&gt;</button>
-                    </div>
+                  </div>
                 </div>
-                    
                 </div>
                 
             </div>
@@ -239,7 +216,7 @@
 
 
         <footer>
-            <div style="height:200px">
+            <div style="height:100px">
     
             </div>
         </footer>
