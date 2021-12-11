@@ -8,6 +8,9 @@
 <meta charset="UTF-8">
 <title>ForSaleList</title>
 <style>
+#listga{
+color: orange;
+}
 #parent {
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
