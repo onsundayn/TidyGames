@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	#listco{color:orange;}
+	#enrollco{color:orange;}
     .outer{
 	    background-color: #0e332c;
 	    color:white;
@@ -16,14 +16,9 @@
 	    margin-top:50px;
 	    margin-left:400px;
     }
-    h2{
-    	font-weight:normal;
-    }
+    h2{font-weight:normal;}
     .navi{border-bottom:2px solid rgba(255, 255, 255, 0.333);}
-    .bar{
-       float:left;
-       margin-left:5px;
-    }
+    .bar{float:left;}
     #enroll-com-form input{
         width:600px;
         height:30px;
@@ -45,7 +40,7 @@
 	    <div class="outer">
 	    
 
-        <h2>게임사 상세 조회</h2>
+        <h2>게임사 등록</h2>
         <br><br><br>
 
         <form action="" method="post" id="enroll-com-form">
@@ -53,27 +48,27 @@
             <table>
                 <tr>
                     <th width="100"><h4>게임사</h4></th>
-                    <td><h5>보람게임즈</h5></td>
+                    <td><input type="text" name="companyName" required></td>
                 </tr>
                 <tr><td colspan=2 height="30"></td></tr>
                 <tr>
                     <th><h4>아이디</h4></th>
-                    <td><h5>BoramGames</h5></td>
+                    <td><input type="text" name="companyId" required></td>
                 </tr>
                 <tr><td colspan=2 height="30"></td></tr>
                 <tr>
                     <th><h4>등록코드</h4></th>
-                    <td><h5>vkEnsKl</h5></td>
+                    <td><h6 style="color:lightgray;">&nbsp;&nbsp;등록코드는 등록시 자동으로 부여됩니다</h6></td>
                 </tr>
                 <tr><td colspan=2 height="30"></td></tr>
                 <tr>
                     <th><h4>대표자</h4></th>
-                    <td><h5>보람강</h5></td>
+                    <td><input type="text" name="companyHead" required></td>
                 </tr>
                 <tr><td colspan=2 height="30"></td></tr>
                 <tr>
                     <th style="display: flow-root;"><h4>코멘트</h4></th>
-                    <td><p>기대되는 신생 게임 회사</p></td>
+                    <td><textarea name="comment" cols="79" rows="5" style="resize:none"></textarea></td>
                 </tr>
                 <tr><td colspan=2 height="30"></td></tr>
             </table>

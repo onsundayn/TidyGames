@@ -8,10 +8,7 @@
 <style>
 	#listco{color:orange;}
 	.navi{border-bottom:2px solid rgba(255, 255, 255, 0.333);}
-    .bar{
-       float:left;
-       margin-left:5px;
-    }
+    .bar{float:left;}
     .outer{
 	    background-color: #0e332c;
 	    color:white;
@@ -29,6 +26,12 @@
 	}
 	table {text-align:center;}
 	#table{color:white;}
+	#table>tbody>tr:hover{
+        background:lightgrey;
+    	color:black;
+    	opacity:0.9;
+    }
+	#searchbtn{color:white; background:#0e332c; border:none;}
 </style>
 </head>
 <body style="background-color: #0e332c;">
@@ -39,21 +42,15 @@
 
 	<div class="outer">
 	    <h2>게임사 목록 조회</h2>
-	    <br>
+	    <br><br><br>
 	    <form action="">
-	        <div align="right" style="width:950px">
-	            <a href="" class="btn btn-sm btn-danger">삭제</a>
-	        </div>
-			<br>	
-            <table align="center" class="table-bordered table-sm" id="table">
+            <table align="center" class="table table-sm table-bordered" id="table">
                 <thead>
-                    <!--체크박스 ; 관리자만 보이게-->
-                    <th><input type="checkbox"></th>
-                    <th width="100">아이디</th>
-                    <th width="200">등록코드</th>
-                    <th width="500">게임사</th>
-                    <th width="100">제공게임목록</th>
-                    <th width="100">등록일자</th>
+                    <th>게임사</th>
+                    <th>아이디</th>
+                    <th>등록코드</th>
+                    <th>상세조회 및 제공게임</th>
+                    <th>등록일자</th>
                 </thead>
                 <tbody>
                     <!--게시물이 없을 경우-->
@@ -62,83 +59,73 @@
                     </tr>
                     <!--게시물 있을 경우-->
                     <tr>
-                        <td><input type="checkbox"></td>
+                        <td>보람게임즈</td>
                         <td>BoramGames</td>
                         <td>vkEnsKl</td>
-                        <td>보람게임즈</td>
                         <td><a href="<%= contextPath %>/detail.co" class="btn btn-sm btn-info">조회</a></td>
                         <td>2021-12-07</td>
                     </tr>
                     <tr>
-                        <td><input type="checkbox"></td>
+                        <td>보람게임즈</td>
                         <td>BoramGames</td>
                         <td>vkEnsKl</td>
-                        <td>보람게임즈</td>
-                        <td><a class="btn btn-sm btn-info">조회</a></td>
+                        <td><a href="<%= contextPath %>/detail.co" class="btn btn-sm btn-info">조회</a></td>
                         <td>2021-12-07</td>
                     </tr>
                     <tr>
-                        <td><input type="checkbox"></td>
+                        <td>보람게임즈</td>
                         <td>BoramGames</td>
                         <td>vkEnsKl</td>
-                        <td>보람게임즈</td>
-                        <td><a class="btn btn-sm btn-info">조회</a></td>
+                        <td><a href="<%= contextPath %>/detail.co" class="btn btn-sm btn-info">조회</a></td>
                         <td>2021-12-07</td>
                     </tr>
                     <tr>
-                        <td><input type="checkbox"></td>
+                        <td>보람게임즈</td>
                         <td>BoramGames</td>
                         <td>vkEnsKl</td>
-                        <td>보람게임즈</td>
-                        <td><a class="btn btn-sm btn-info">조회</a></td>
+                        <td><a href="<%= contextPath %>/detail.co" class="btn btn-sm btn-info">조회</a></td>
                         <td>2021-12-07</td>
                     </tr>
                     <tr>
-                        <td><input type="checkbox"></td>
+                        <td>보람게임즈</td>
                         <td>BoramGames</td>
                         <td>vkEnsKl</td>
-                        <td>보람게임즈</td>
-                        <td><a class="btn btn-sm btn-info">조회</a></td>
+                        <td><a href="<%= contextPath %>/detail.co" class="btn btn-sm btn-info">조회</a></td>
                         <td>2021-12-07</td>
                     </tr>
                     <tr>
-                        <td><input type="checkbox"></td>
+                        <td>보람게임즈</td>
                         <td>BoramGames</td>
                         <td>vkEnsKl</td>
-                        <td>보람게임즈</td>
-                        <td><a class="btn btn-sm btn-info">조회</a></td>
+                        <td><a href="<%= contextPath %>/detail.co" class="btn btn-sm btn-info">조회</a></td>
                         <td>2021-12-07</td>
                     </tr>
                     <tr>
-                        <td><input type="checkbox"></td>
+                        <td>보람게임즈</td>
                         <td>BoramGames</td>
                         <td>vkEnsKl</td>
-                        <td>보람게임즈</td>
-                        <td><a class="btn btn-sm btn-info">조회</a></td>
+                        <td><a href="<%= contextPath %>/detail.co" class="btn btn-sm btn-info">조회</a></td>
                         <td>2021-12-07</td>
                     </tr>
                     <tr>
-                        <td><input type="checkbox"></td>
+                        <td>보람게임즈</td>
                         <td>BoramGames</td>
                         <td>vkEnsKl</td>
-                        <td>보람게임즈</td>
-                        <td><a class="btn btn-sm btn-info">조회</a></td>
+                        <td><a href="<%= contextPath %>/detail.co" class="btn btn-sm btn-info">조회</a></td>
                         <td>2021-12-07</td>
                     </tr>
                     <tr>
-                        <td><input type="checkbox"></td>
+                        <td>보람게임즈</td>
                         <td>BoramGames</td>
                         <td>vkEnsKl</td>
-                        <td>보람게임즈</td>
-                        <td><a class="btn btn-sm btn-info">조회</a></td>
+                        <td><a href="<%= contextPath %>/detail.co" class="btn btn-sm btn-info">조회</a></td>
                         <td>2021-12-07</td>
                     </tr>
                     <tr>
-                        <td><input type="checkbox"></td>
+                        <td>보람게임즈</td>
                         <td>BoramGames</td>
                         <td>vkEnsKl</td>
-                        <td>보람게임즈</td>
-                        <td><a class="btn btn-sm btn-info">조회</a></td>
+                        <td><a href="<%= contextPath %>/detail.co" class="btn btn-sm btn-info">조회</a></td>
                         <td>2021-12-07</td>
                     </tr>
                 </tbody>
@@ -168,10 +155,15 @@
 	    <br><br>
 	    
 		<div class="search-area" align="center">
-			<input type="text" style="width:500px; height:30px;" placeholder="게임사 검색">
-		    <input type="submit" value="검색">		
+			<form>
+				<input type="text" style="width:500px; height:30px;" placeholder="게임사 검색">
+			    <button type="submit" id="searchbtn"><i class="fas fa-search"></i></button>			
+			</form>
 		</div>
 
 	</div>
+	
+	
+	
 </body>
 </html>
