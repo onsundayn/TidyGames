@@ -8,9 +8,10 @@
 <meta charset="UTF-8">
 <title>GameUploadList</title>
 <style>
-#uplistga{
-	color:orange;
+#uplistga {
+	color: orange;
 }
+
 #parent {
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
@@ -25,7 +26,6 @@
 	grid-area: 1/2/5/5;
 	margin-top: 20px;
 }
-
 
 #selectOption {
 	margin-bottom: 20px;
@@ -62,43 +62,40 @@
 
 	<%@ include file="../common/topbar.jsp"%>
 	<%@ include file="../common/navibar.jsp"%>
-	
+
 	<div id="parent">
-	
-	<%@ include file="../common/adminSidebar.jsp" %>
-	
+
+		<%@ include file="../common/adminSidebar.jsp"%>
+
 		<div id="div1">
 			<h1>게임 업로드 요청 목록</h1>
-		
 
-		
 
-			<div id="selectOption" align="right" style="margin-top:30px">
-			<form>
-				<table>
-					<tbody>
-						<tr>
-							<td>
-							<select class="form-control" name="searchField">
-									<option>아이디</option>
-									<option>게임</option>
-									<option>등록일</option>
-									<option>승인</option>
-									<option>미승인</option>
-							</select></td>
-							<td>
-								
-									<td><input type="text" class="form-control"
-							placeholder="검색어 입력" name="searchText" maxlength="50">								
-							</td>
-							<td>
-								<button type="submit" class="btn btn-secondary">
-									조회</button>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</form>
+
+
+			<div id="selectOption" align="right" style="margin-top: 30px">
+				<form>
+					<table>
+						<tbody>
+							<tr>
+								<td><select class="form-control" name="searchField">
+										<option>아이디</option>
+										<option>게임</option>
+										<option>등록일</option>
+										<option>승인</option>
+										<option>미승인</option>
+								</select></td>
+								<td>
+								<td><input type="text" class="form-control"
+									placeholder="검색어 입력" name="searchText" maxlength="50">
+								</td>
+								<td>
+									<button type="submit" class="btn btn-secondary">조회</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
 			</div>
 
 			<div>
@@ -114,9 +111,9 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td colspan="5">조회된 게시글이 없습니다.</td>							
+							<td colspan="5">조회된 게시글이 없습니다.</td>
 						</tr>
-						
+
 						<tr>
 							<td>1</td>
 							<td>Rockstar_Games</td>
@@ -213,10 +210,10 @@
 				</nav>
 			</div>
 		</div>
-	
-</div>
 
-	
+	</div>
+
+
 
 
 </body>

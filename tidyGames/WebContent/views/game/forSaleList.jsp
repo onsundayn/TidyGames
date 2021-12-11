@@ -8,9 +8,10 @@
 <meta charset="UTF-8">
 <title>ForSaleList</title>
 <style>
-#listga{
-color: orange;
+#listga {
+	color: orange;
 }
+
 #parent {
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
@@ -25,9 +26,6 @@ color: orange;
 	grid-area: 1/2/5/5;
 	margin-top: 20px;
 }
-
-
-
 
 #selectOption {
 	margin-bottom: 20px;
@@ -64,44 +62,41 @@ color: orange;
 
 	<%@ include file="../common/topbar.jsp"%>
 	<%@ include file="../common/navibar.jsp"%>
-	
+
 	<div id="parent">
-	
-	<%@ include file="../common/adminSidebar.jsp" %>
+
+		<%@ include file="../common/adminSidebar.jsp"%>
 		<div id="div1">
 			<h1>판매 중인 게임 목록</h1>
-		
 
-		
 
-			<div id="selectOption" align="right" style="margin-top:30px">
-			<form>
-				<table>
-					<tbody>
-						<tr>
-							<td>
-							<select class="form-control" name="searchField">
-									<option>아이디</option>
-									<option>게임</option>
-									<option>등록일</option>
-							</select></td>
-							<td>
-								
-									<td><input type="text" class="form-control"
-							placeholder="검색어 입력" name="searchText" maxlength="50">								
-							</td>
-							<td>
-								<button type="submit" class="btn btn-secondary">
-									조회</button>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</form>
+
+
+			<div id="selectOption" align="right" style="margin-top: 30px">
+				<form>
+					<table>
+						<tbody>
+							<tr>
+								<td><select class="form-control" name="searchField">
+										<option>아이디</option>
+										<option>게임</option>
+										<option>등록일</option>
+								</select></td>
+								<td>
+								<td><input type="text" class="form-control"
+									placeholder="검색어 입력" name="searchText" maxlength="50">
+								</td>
+								<td>
+									<button type="submit" class="btn btn-secondary">조회</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
 			</div>
 
 			<div id="list-table">
-				
+
 				<table class="table table-hover" id=list-area>
 					<thead>
 						<tr>
@@ -109,19 +104,19 @@ color: orange;
 							<th width="170px">아이디</th>
 							<th width="300px">게임</th>
 							<th width="110px">등록일</th>
-							
+
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td colspan="4">조회된 게시글이 없습니다.</td>							
+							<td colspan="4">조회된 게시글이 없습니다.</td>
 						</tr>
 						<tr>
 							<td>1</td>
 							<td>Rockstar_Games</td>
 							<td>Red Dead Redemption 2</td>
 							<td>2019-12-06</td>
-							
+
 						</tr>
 						<tr>
 							<td>2</td>
@@ -206,7 +201,7 @@ color: orange;
 
 	</div>
 
-	
+
 
 
 </body>
