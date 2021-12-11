@@ -82,7 +82,7 @@
             <div id="line_2"></div>
             <ul>
                 <li id="myPageBtn" style="font-weight: bolder">게임 관리</li>
-                <li><a href="">카테고리 관리</a></li>
+                <li><a href="<%=contextPath%>/catelist.ga" id="catelistga">카테고리 관리</a></li>
                 <li><a href="<%=contextPath%>/uplist.ga" id="uplistga">게임 업로드 요청 목록</a></li>
                 <li><a href="<%=contextPath%>/list.ga" id="listga">판매중인 게임 목록</a></li>
             </ul>
