@@ -19,13 +19,12 @@
 }
 
 #div1 {
-	grid-area: 1/2/2/4;
-	margin-top: 100px;
+	grid-area: 1/2/5/5;
+	margin-top: 20px;
 }
 
-#div2 {
-	grid-area: 2/2/5/5;
-}
+
+
 
 #selectOption {
 	margin-bottom: 20px;
@@ -35,13 +34,13 @@
 	text-align: center;
 }
 
-#table2 th {
+#list-table th {
 	background: lightgray;
 	color: black;
 	border: 2px solid white;
 }
 
-#table2 td {
+#list-table td {
 	border: 2px solid white;
 	color: white;
 }
@@ -59,42 +58,47 @@
 
 </head>
 <body style="background: #0e332c;">
+
 	<%@ include file="../common/topbar.jsp"%>
 	<%@ include file="../common/navibar.jsp"%>
-
-
+	
 	<div id="parent">
+	
+	<%@ include file="../common/adminSidebar.jsp" %>
 		<div id="div1">
 			<h1>판매 중인 게임 목록</h1>
-		</div>
+		
 
-		<div id="div2">
+		
 
-			<div id="selectOption" align="right">
+			<div id="selectOption" align="right" style="margin-top:30px">
+			<form>
 				<table>
 					<tbody>
 						<tr>
-							<td><select style="height: 30px">
+							<td>
+							<select class="form-control" name="searchField">
 									<option>아이디</option>
 									<option>게임</option>
 									<option>등록일</option>
 							</select></td>
 							<td>
-								<form>
-									<input type="text" name="etc">
-								</form>
+								
+									<td><input type="text" class="form-control"
+							placeholder="검색어 입력" name="searchText" maxlength="50">								
 							</td>
 							<td>
-								<button type="button" class="btn btn-sm btn-secondary">
+								<button type="submit" class="btn btn-secondary">
 									조회</button>
 							</td>
 						</tr>
 					</tbody>
 				</table>
+			</form>
 			</div>
 
-			<div id="table2">
-
+			<div id="list-table">
+				
 				<table class="table table-hover" id=list-area>
 					<thead>
 						<tr>
@@ -106,6 +110,9 @@
 						</tr>
 					</thead>
 					<tbody>
+						<tr>
+							<td colspan="4">조회된 게시글이 없습니다.</td>							
+						</tr>
 						<tr>
 							<td>1</td>
 							<td>Rockstar_Games</td>
@@ -194,9 +201,9 @@
 			</div>
 		</div>
 
-
-
 	</div>
+
+	
 
 
 </body>
