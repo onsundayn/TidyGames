@@ -161,7 +161,92 @@
 									</div>
 								</div>
 							</div>
-							
+<!-- 반복 시작 -->
+<div id="games">
+	<div class="game">
+		<div id="gameImg">
+			<img src="<%= contextPath %>/resources/image/Dead-Cells.jpg">
+		</div>
+		<div id="gameText">
+			<p>
+				Dead-Cells
+			</p>
+		</div>
+		<div id="advice">
+			<div id="ad1">
+				<a href="">게임 문의</a>
+			</div>
+			<!-- if 리뷰작성|별점 -->
+			<div id="ad2">
+				<a href="">리뷰 작성</a>
+				<!-- else { 별점 } -->
+			</div>
+		</div>
+	</div>
+	<div id="games">
+		<div class="game">
+			<div id="gameImg">
+				<img src="<%= contextPath %>/resources/image/Dead-Cells.jpg">
+			</div>
+			<div id="gameText">
+				<p>
+					Dead-Cells
+				</p>
+			</div>
+			<div id="advice">
+				<div id="ad1">
+					<a href="">게임 문의</a>
+				</div>
+				<!-- if 리뷰작성|별점 -->
+				<div id="ad2">
+					<a href="">리뷰 작성</a>
+					<!-- else { 별점 } -->
+				</div>
+			</div>
+		</div>
+		<div id="games">
+			<div class="game">
+				<div id="gameImg">
+					<img src="<%= contextPath %>/resources/image/Dead-Cells.jpg">
+				</div>
+				<div id="gameText">
+					<p>
+						Dead-Cells
+					</p>
+				</div>
+				<div id="advice">
+					<div id="ad1">
+						<a href="">게임 문의</a>
+					</div>
+					<!-- if 리뷰작성|별점 -->
+					<div id="ad2">
+						<a href="">리뷰 작성</a>
+						<!-- else { 별점 } -->
+					</div>
+				</div>
+			</div>
+			<div id="games">
+				<div class="game">
+					<div id="gameImg">
+						<img src="<%= contextPath %>/resources/image/Dead-Cells.jpg">
+					</div>
+					<div id="gameText">
+						<p>
+							Dead-Cells
+						</p>
+					</div>
+					<div id="advice">
+						<div id="ad1">
+							<a href="">게임 문의</a>
+						</div>
+						<!-- if 리뷰작성|별점 -->
+						<div id="ad2">
+							<a href="">리뷰 작성</a>
+							<!-- else { 별점 } -->
+						</div>
+					</div>
+				</div>
+<!-- 반복 끝 -->
 							
 
 						</div>

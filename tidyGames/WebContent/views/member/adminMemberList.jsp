@@ -41,10 +41,10 @@
         
     }
     #tableBox{
-        width:1100px;
+        width:1250px;
         height:840px;
         /* margin-left:145px; */
-        margin: 30px 0px 100px 95px;
+        margin: 50px 0px 100px 35px;
         background-color: rgb(197, 197, 197);
         border: 10px solid rgba(255, 255, 255, 0.555);
     }
@@ -54,9 +54,17 @@
         /* border:1px solid white; */
     }
     #leftTop{   
-        margin:20px;
+        width:30%;
+        /* margin:20px; */
         margin: 50px 20px 20px 20px;
         /* margin-left:80px; */
+    }
+    #midTop{
+        width:25%;
+        margin: 55px 20px 20px 20px;
+    }
+    #rightTop{
+        margin: 55px 20px 20px 80px;
     }
     #leftTop span{
         font-size:30px;
@@ -64,12 +72,9 @@
         color:black;
         margin: 0px 70px 0px 50px;
     }
-    #rightTop{
-        margin: 55px 20px 20px 110px;
-    }
     #table{
         margin:auto;
-        width:1000px;
+        width:1200px;
         /* background-color: gray; */
     }
     #table *{
@@ -118,9 +123,9 @@
             <%@ include file="../common/adminSidebar.jsp" %>
         </div>
         
-        <div id="box">
+        <!-- <div id="box">
             <div id="intro">회원 관리</div>
-            <div id="line_3"></div>
+            <div id="line_3"></div> -->
             
       
     	    <div id="tableBox">
@@ -129,12 +134,14 @@
                         <div>
                             <span>회원수 21명</span>
                         </div>
-                        <div>
-                            <a href="" class="btn btn-dark">상세 조회</a>
-                            <a href="" class="btn btn-dark">회원 수정</a>
-                            <a href="" class="btn btn-dark">회원 삭제</a>
-                        </div>
+                    </div>
                     
+                    <div id="midTop">
+                        <div>
+                            <a href="" class="btn btn-sm btn-dark">상세 조회</a>
+                            <a href="" class="btn btn-sm btn-dark">회원 수정</a>
+                            <a href="" class="btn btn-sm btn-dark">회원 삭제</a>
+                        </div>
                     </div>
                     <div id="rightTop">
                         <div class="btn-group">

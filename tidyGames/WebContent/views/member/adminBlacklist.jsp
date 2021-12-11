@@ -119,8 +119,8 @@
         </div>
         
         <div id="box">
-            <div id="intro">블랙리스트</div>
-            <div id="line_3"></div>
+            <!-- <div id="intro">블랙리스트</div>
+            <div id="line_3"></div> -->
             
       
     	    <div id="tableBox">

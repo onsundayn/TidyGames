@@ -44,7 +44,7 @@
         width:1250px;
         height:840px;
         /* margin-left:145px; */
-        margin: 30px 0px 100px 35px;
+        margin: 50px 0px 100px 35px;
         background-color: rgb(197, 197, 197);
         border: 10px solid rgba(255, 255, 255, 0.555);
     }
@@ -121,8 +121,8 @@
         </div>
         
         <div id="box">
-            <div id="intro">회원 관리</div>
-            <div id="line_3"></div>
+            <!-- <div id="intro">회원 관리</div>
+            <div id="line_3"></div> -->
             
       
     	    <div id="tableBox">
