@@ -29,7 +29,7 @@
         margin: 25px 80px 0px 95px;
     }
     #line_3{
-        width:165px;
+        width:145px;
         height:3px;
         background: rgba(255, 255, 255, 0.555);
         margin: 8px 0px 0px 95px;
@@ -41,10 +41,10 @@
         
     }
     #tableBox{
-        width:1100px;
+        width:1250px;
         height:840px;
         /* margin-left:145px; */
-        margin: 30px 0px 100px 95px;
+        margin: 50px 0px 100px 35px;
         background-color: rgb(197, 197, 197);
         border: 10px solid rgba(255, 255, 255, 0.555);
     }
@@ -60,7 +60,7 @@
        /* margin-left:80px; */
     }
     #rightTop{
-        margin: 55px 20px 0px 110px;
+        margin: 60px 0px 10px 165px;
     }
     #leftTop span{
         font-size:30px;
@@ -70,19 +70,16 @@
     }
     #table{
         margin:auto;
-        width:1000px;
+        width:1200px;
         /* background-color: gray; */
-    }
-    #table *{
-        height:15px;
     }
     #table th{
         font-size:18px;
     }
     #btn{
         padding:0px;
-        width:46px;
-        height:24px;
+        /* width:46px;
+        height:24px; */
         margin-left:3px;
     }
     #checkBox{
@@ -99,11 +96,15 @@
     #table td{padding:4px;}
     #tableOut1{
         width:100%;
-        height:95%;
+        height:93%;
     }
     #tableOut2{
         width:100%;
-        height:5%;
+        height:7%;
+    }
+    #access{
+        border-radius:5px;
+        background:rgba(255, 255, 255, 0.555);
     }
 
 </style>
@@ -120,27 +121,24 @@
         </div>
         
         <div id="box">
-            <div id="intro">신고 내역</div>
-            <div id="line_3"></div>
+            <!-- <div id="intro">신고 내역</div>
+            <div id="line_3"></div> -->
             
       
+            <form action="">
     	    <div id="tableBox">
                 <div id="talbeTop">
                     <div id="leftTop">
                         <div>
                             <span>신고 처리 대기 목록</span>
                         </div>
-                        <div>
-                         
-                        </div>
-                    
                     </div>
-                    <div id="rightTop">
-                     
-                        <a href="" class="btn btn-dark">삭제</a>
-                        <!-- 회원 조회 페이지로 이동함 -->
+                    <div>
+                        <div id="rightTop">
+                        <a href="" class="btn btn-secondary">삭제</a>
                         <a href="" class="btn btn-dark">확인</a>
-                    </div>
+                    </div>  
+                </div>
                 </div>
                 <div id="tableOut1">
                 <table id="table" class="table table-hover">
@@ -148,10 +146,13 @@
                         <tr align="center">
                             <th width="30"> </th>
                             <th width="30">No.</th>
-                            <th width="130">아이디</th>
-                            <th width="130">닉네임</th>
-                            <th width="170">제한 사유</th>
-                            <th width="100">등록일</th>
+                            <th width="100">닉네임</th>
+                            <th width="180">신고한 글</th>
+                            <th width="130">신고 사유</th>
+                            <th width="100">신고자</th>
+                            <th width="130">신고 시간</th>
+                            <th width="80">타입</th>
+                            <th width="130">접근 권한</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -160,42 +161,196 @@
                         <tr align="center">
                             <td><input type="checkbox" id="checkBox"></td>
                             <td>1</td>
-                            <td>hobun</td>
-                            <td>호빵</td>
+                            <td>김길동이</td>
+                            <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
                             <td>욕설, 비방</td>
-                            <td>2021/12/11</td>
+                            <td>호빵</td>
+                            <td>2021/11/11 19:21</td>
+                            <td>댓글</td>
+                            <!-- ajax -->
+                            <td>
+                                <select name="access" id="access">
+                                    <option value="BLOCK">BLOCK</option>
+                                    <option value="UNBLOCK">UNBLOCK</option>
+                                </select>
+                            </div>
+                            </td>
                         </tr>
 <!-- 반복 예시 -->
 <tr align="center">
     <td><input type="checkbox" id="checkBox"></td>
     <td>1</td>
-    <td>hobun</td>
-    <td>호빵</td>
+    <td>김길동이</td>
+    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
     <td>욕설, 비방</td>
-    <td>2021/12/11</td>
+    <td>호빵</td>
+    <td>2021/11/11 19:21</td>
+    <td>댓글</td>
+    <!-- ajax -->
+    <td>
+        <select name="access" id="access">
+            <option value="BLOCK">BLOCK</option>
+            <option value="UNBLOCK">UNBLOCK</option>
+        </select>
+    </div>
+    </td>
 </tr>
 <tr align="center">
     <td><input type="checkbox" id="checkBox"></td>
     <td>1</td>
-    <td>hobun</td>
-    <td>호빵</td>
+    <td>김길동이</td>
+    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
     <td>욕설, 비방</td>
-    <td>2021/12/11</td>
+    <td>호빵</td>
+    <td>2021/11/11 19:21</td>
+    <td>댓글</td>
+    <!-- ajax -->
+    <td>
+        <select name="access" id="access">
+            <option value="BLOCK">BLOCK</option>
+            <option value="UNBLOCK">UNBLOCK</option>
+        </select>
+    </div>
+    </td>
 </tr>
 <tr align="center">
     <td><input type="checkbox" id="checkBox"></td>
     <td>1</td>
-    <td>hobun</td>
-    <td>호빵</td>
+    <td>김길동이</td>
+    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
     <td>욕설, 비방</td>
-    <td>2021/12/11</td>
+    <td>호빵</td>
+    <td>2021/11/11 19:21</td>
+    <td>댓글</td>
+    <!-- ajax -->
+    <td>
+        <select name="access" id="access">
+            <option value="BLOCK">BLOCK</option>
+            <option value="UNBLOCK">UNBLOCK</option>
+        </select>
+    </div>
+    </td>
+</tr>
+<tr align="center">
+    <td><input type="checkbox" id="checkBox"></td>
+    <td>1</td>
+    <td>김길동이</td>
+    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
+    <td>욕설, 비방</td>
+    <td>호빵</td>
+    <td>2021/11/11 19:21</td>
+    <td>댓글</td>
+    <!-- ajax -->
+    <td>
+        <select name="access" id="access">
+            <option value="BLOCK">BLOCK</option>
+            <option value="UNBLOCK">UNBLOCK</option>
+        </select>
+    </div>
+    </td>
+</tr>
+<tr align="center">
+    <td><input type="checkbox" id="checkBox"></td>
+    <td>1</td>
+    <td>김길동이</td>
+    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
+    <td>욕설, 비방</td>
+    <td>호빵</td>
+    <td>2021/11/11 19:21</td>
+    <td>댓글</td>
+    <!-- ajax -->
+    <td>
+        <select name="access" id="access">
+            <option value="BLOCK">BLOCK</option>
+            <option value="UNBLOCK">UNBLOCK</option>
+        </select>
+    </div>
+    </td>
+</tr>
+<tr align="center">
+    <td><input type="checkbox" id="checkBox"></td>
+    <td>1</td>
+    <td>김길동이</td>
+    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
+    <td>욕설, 비방</td>
+    <td>호빵</td>
+    <td>2021/11/11 19:21</td>
+    <td>댓글</td>
+    <!-- ajax -->
+    <td>
+        <select name="access" id="access">
+            <option value="BLOCK">BLOCK</option>
+            <option value="UNBLOCK">UNBLOCK</option>
+        </select>
+    </div>
+    </td>
+</tr>
+<tr align="center">
+    <td><input type="checkbox" id="checkBox"></td>
+    <td>1</td>
+    <td>김길동이</td>
+    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
+    <td>욕설, 비방</td>
+    <td>호빵</td>
+    <td>2021/11/11 19:21</td>
+    <td>댓글</td>
+    <!-- ajax -->
+    <td>
+        <select name="access" id="access">
+            <option value="BLOCK">BLOCK</option>
+            <option value="UNBLOCK">UNBLOCK</option>
+        </select>
+    </div>
+    </td>
+</tr>
+<tr align="center">
+    <td><input type="checkbox" id="checkBox"></td>
+    <td>1</td>
+    <td>김길동이</td>
+    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
+    <td>욕설, 비방</td>
+    <td>호빵</td>
+    <td>2021/11/11 19:21</td>
+    <td>댓글</td>
+    <!-- ajax -->
+    <td>
+        <select name="access" id="access">
+            <option value="BLOCK">BLOCK</option>
+            <option value="UNBLOCK">UNBLOCK</option>
+        </select>
+    </div>
+    </td>
+</tr>
+<tr align="center">
+    <td><input type="checkbox" id="checkBox"></td>
+    <td>1</td>
+    <td>김길동이</td>
+    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
+    <td>욕설, 비방</td>
+    <td>호빵</td>
+    <td>2021/11/11 19:21</td>
+    <td>댓글</td>
+    <!-- ajax -->
+    <td>
+        <select name="access" id="access">
+            <option value="BLOCK">BLOCK</option>
+            <option value="UNBLOCK">UNBLOCK</option>
+        </select>
+    </div>
+    </td>
 </tr>
 <!-- 반복 예시 끝-->
                                 
 
                     </tbody>
-                  </table>
+                    </table>
+                  
+                    <!-- <div id="rightTop">
+                      <a href="" class="btn btn-dark">삭제</a>
+                      <a href="" class="btn btn-dark">확인</a>
+                    </div> -->
                 </div>
+            </from>
 
                 <div id="tableOut2">
                   <div id="pagebar" align="center">
