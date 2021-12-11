@@ -18,10 +18,7 @@
     }
     h2{font-weight:normal;}
     .navi{border-bottom:2px solid rgba(255, 255, 255, 0.333);}
-    .bar{
-       float:left;
-       margin-left:5px;
-    }
+    .bar{float:left;}
     #enroll-com-form input{
         width:600px;
         height:30px;
@@ -61,7 +58,7 @@
                 <tr><td colspan=2 height="30"></td></tr>
                 <tr>
                     <th><h4>등록코드</h4></th>
-                    <td><h6 style="color:lightgray;">&nbsp;&nbsp;등록코드는 등록시 자동으로 부여됩니다</h6></td>
+                    <td><p><h5>vkEnsKl</h5></p></td>
                 </tr>
                 <tr><td colspan=2 height="30"></td></tr>
                 <tr>
@@ -78,7 +75,7 @@
 
             <div align="right" style="width:700px">
                 <button type="reset" class="btn btn-secondary">취소</button>
-                <button type="submit" class="btn btn-info">등록</button>
+                <button type="submit" class="btn btn-info">수정</button>
             </div>
 
         </form>
