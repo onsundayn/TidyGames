@@ -116,11 +116,16 @@
                     </div>
 
                     <div class="login_btn">
-                        <button type="submit">LOGIN</button>
+                        <button type="button" onclick="loginPage();">LOGIN</button>
                     </div>
 
                 </div>
             </form>
+            <script>
+                function loginPage(){
+                    location.href = "login.jsp";
+                }
+            </script>
         </div>
     </content>
 

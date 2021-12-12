@@ -96,7 +96,7 @@
 
         <content>
             <div id="content" align="center">
-                <form action="" method="">
+                <form action="updatePwdFinish.jsp" method="">
                     <div id="search_id_form">
                         <span style="color: white; font-size: 20px; font-weight: bold; ">비밀번호 재설정</span>
                         <br><br><hr>
