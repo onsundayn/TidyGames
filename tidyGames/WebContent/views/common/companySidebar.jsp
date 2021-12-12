@@ -10,14 +10,15 @@
     #sidebarOut{
         width:210px;
         height:800px;
-        float: left;
-        margin-top: 50px;
+
     }
     #sideBox{
         background: rgba(0, 0, 0, 0.212);
         border:2px solid rgba(255, 255, 255, 0.333);
         border-top: none;
         width:100%;
+
+        
     }
     #line{
         width:100%;
@@ -55,14 +56,12 @@
 </style>
 </head>
 <body style="background:#0e332c;">
-      
-   
         
-    <div id="sidebarOut">
-
+        <div id="sidebarOut">
+            
         <div id="sideBox">
             <ul>
-            
+                
                 <li id="companyPageBtn" style="font-weight: bolder; ">게임사 페이지</li>
                 <li><a href="">내 정보 조회</a></li>
                
@@ -77,7 +76,7 @@
             <div id="line"></div>
             <ul>
                 
-                <li><a href="">게임 문의 내역</a></li>
+                <li><a href="<%=contextPath%>/qnalist.co" id="qnalistco">게임 문의 내역</a></li>
 
             </ul>
             <div id="line_2"></div>

@@ -6,11 +6,18 @@
 <head>
 
 <meta charset="UTF-8">
-<title>GameUploadList</title>
+<title>GameCompanyQnaList</title>
 <style>
-#uplistga {
+#qnalistco {
 	color: orange;
 }
+
+#line_1{
+		margin:0 auto;
+        width:1500px;
+        height:2px;
+        background: rgba(255, 255, 255, 0.555);
+    } 
 
 #parent {
 	display: grid;
@@ -21,16 +28,9 @@
 	height: 900px;
 	margin: auto;
 }
-#line1{
-		margin:0 auto;
-        width:1500px;
-        height:2px;
-        background: rgba(255, 255, 255, 0.555);
-    } 
-
 
 #div1 {
-	grid-area: 1/2/5/5;
+	grid-area: 1/2/6/6;
 	margin-top: 20px;
 }
 
@@ -69,14 +69,16 @@
 
 	<%@ include file="../common/topbar.jsp"%>
 	<%@ include file="../common/navibar.jsp"%>
-	
-	<div id="line1"></div>
-	<div id="parent">
 
-		<%@ include file="../common/adminSidebar.jsp"%>
+	<div id="line_1"></div>
+	<div id="parent">
+	
+        
+
+		<%@ include file="../common/companySidebar.jsp"%>
 
 		<div id="div1">
-			<h1>게임 업로드 요청 목록</h1>
+			<h1>게임 문의 내역</h1>
 
 
 
@@ -87,11 +89,13 @@
 						<tbody>
 							<tr>
 								<td><select class="form-control" name="searchField">
-										<option>아이디</option>
 										<option>게임</option>
+										<option>아이디</option>
+										<option>닉네임</option>
+										<option>제목</option>
 										<option>등록일</option>
-										<option>승인</option>
-										<option>미승인</option>
+										<option>답변완료</option>
+										<option>미답변</option>
 								</select></td>
 								<td>
 								<td><input type="text" class="form-control"
@@ -110,87 +114,109 @@
 				<table class="table table-hover" id=list-area>
 					<thead>
 						<tr>
-							<th width="70px">번호</th>
-							<th width="170px">아이디</th>
-							<th width="300px">게임</th>
-							<th width="110px">등록일</th>
-							<th width="100px">승인상태</th>
+							<th width="60px">번호</th>
+							<th width="230px">게임</th>
+							<th width="130px">아이디</th>
+							<th width="130px">닉네임</th>
+							<th width="400px">문의글</th>
+							<th width="120px">등록일</th>
+							<th width="100px">답변여부</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td colspan="5">조회된 게시글이 없습니다.</td>
+							<td colspan="7">조회된 게시글이 없습니다.</td>
 						</tr>
 
 						<tr>
 							<td>1</td>
-							<td>Rockstar_Games</td>
 							<td>Red Dead Redemption 2</td>
-							<td>2019-12-06</td>
-							<td><span class="badge bg-secondary" id="bdg">미승인</span></td>
+							<td>user01</td>
+							<td>한남동불주먹</td>
+							<td>게임 실행이 안 되네요ㅡㅡ 환불해주세요</td>
+							<td>2021-12-12</td>
+							<td><span class="badge bg-secondary" id="bdg">미답변</span></td>
 						</tr>
 						<tr>
 							<td>2</td>
 							<td></td>
 							<td></td>
 							<td></td>
-							<td><span class="badge bg-info" id="bdg">승인</span></td>
+							<td></td>
+							<td></td>
+							<td><span class="badge bg-info" id="bdg">답변완료</span></td>
 						</tr>
 						<tr>
 							<td>3</td>
 							<td></td>
 							<td></td>
 							<td></td>
-							<td><span class="badge bg-info" id="bdg">승인</span></td>
+							<td></td>
+							<td></td>
+							<td><span class="badge bg-info" id="bdg">답변완료</span></td>
 						</tr>
 						<tr>
 							<td>4</td>
 							<td></td>
 							<td></td>
 							<td></td>
-							<td><span class="badge bg-info" id="bdg">승인</span></td>
+							<td></td>
+							<td></td>
+							<td><span class="badge bg-info" id="bdg">답변완료</span></td>
 						</tr>
 						<tr>
 							<td>5</td>
 							<td></td>
 							<td></td>
 							<td></td>
-							<td><span class="badge bg-info" id="bdg">승인</span></td>
+							<td></td>
+							<td></td>
+							<td><span class="badge bg-info" id="bdg">답변완료</span></td>
 						</tr>
 						<tr>
 							<td>6</td>
 							<td></td>
 							<td></td>
 							<td></td>
-							<td><span class="badge bg-info" id="bdg">승인</span></td>
+							<td></td>
+							<td></td>
+							<td><span class="badge bg-info" id="bdg">답변완료</span></td>
 						</tr>
 						<tr>
 							<td>7</td>
 							<td></td>
 							<td></td>
 							<td></td>
-							<td><span class="badge bg-info" id="bdg">승인</span></td>
+							<td></td>
+							<td></td>
+							<td><span class="badge bg-info" id="bdg">답변완료</span></td>
 						</tr>
 						<tr>
 							<td>8</td>
 							<td></td>
 							<td></td>
 							<td></td>
-							<td><span class="badge bg-info" id="bdg">승인</span></td>
+							<td></td>
+							<td></td>
+							<td><span class="badge bg-info" id="bdg">답변완료</span></td>
 						</tr>
 						<tr>
 							<td>9</td>
 							<td></td>
 							<td></td>
 							<td></td>
-							<td><span class="badge bg-info" id="bdg">승인</span></td>
+							<td></td>
+							<td></td>
+							<td><span class="badge bg-info" id="bdg">답변완료</span></td>
 						</tr>
 						<tr>
 							<td>10</td>
 							<td></td>
 							<td></td>
 							<td></td>
-							<td><span class="badge bg-info" id="bdg">승인</span></td>
+							<td></td>
+							<td></td>
+							<td><span class="badge bg-info" id="bdg">답변완료</span></td>
 					</tbody>
 				</table>
 			</div>
