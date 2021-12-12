@@ -12,6 +12,13 @@
 	color: orange;
 }
 
+#line1{
+		margin:0 auto;
+        width:1500px;
+        height:2px;
+        background: rgba(255, 255, 255, 0.555);
+} 
+
 #parent {
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
@@ -21,6 +28,8 @@
 	height: 900px;
 	margin: auto;
 }
+
+
 
 #div1 {
 	grid-area: 1/2/5/5;
@@ -69,7 +78,8 @@
 
 	<%@ include file="../common/topbar.jsp"%>
 	<%@ include file="../common/navibar.jsp"%>
-
+	
+	<div id="line1"></div>
 	<div id="parent">
 
 		<%@ include file="../common/adminSidebar.jsp"%>
