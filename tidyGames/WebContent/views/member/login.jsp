@@ -129,13 +129,13 @@
                     </div>
 
                     <div class="login_btn">
-                        <button type="submit">LOGIN</button>
+                        <button type="submit" onclick="login();">LOGIN</button>
                     </div>
 
                     <div class="find_login">
-                        <a href="">아이디 찾기</a> ㅣ
-                        <a href="">비밀번호 재설정</a> ㅣ
-                        <a href="">회원가입</a>
+                        <a href="searchId.jsp">아이디 찾기</a> ㅣ
+                        <a href="searchPwd.jsp">비밀번호 재설정</a> ㅣ
+                        <a href="enrollForm.jsp">회원가입</a>
                     </div>
                     <hr>
 
@@ -150,6 +150,11 @@
 
                 </div>
             </form>
+            <script>
+                function login(){
+
+                }
+            </script>
         </div>
     </content>
 

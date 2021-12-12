@@ -119,12 +119,15 @@
                         </div>
                         <br><br><br>
 
-                        <button type="submit" class="next_btn">다음</button>
+                        <button type="submit" class="next_btn" onclick="numCheck();">다음</button>
 
                     </div>
                 </form>
                 <script>
                     function code_btn(){
+                        
+                    }
+                    function numCheck(){
                         
                     }
                 </script>

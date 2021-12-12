@@ -114,14 +114,22 @@
                             <br>
                             <div>인증번호</div>
                             <input type="number" name="verificationCode" placeholder="6자리 숫자 입력" maxlength="6" disabled style="width: 50%;" required>
-                            <button class="code_btn">인증번호 받기</button>
+                            <button class="code_btn" onclick="code_btn();">인증번호 받기</button>
                         </div>
                         <br><br><br>
 
-                        <button type="submit" class="next_btn">다음</button>
+                        <button type="submit" class="next_btn" onclick="numCheck();">다음</button>
 
                     </div>
                 </form>
+                <script>
+                    function code_btn(){
+                        
+                    }
+                    function numCheck(){
+                        
+                    }
+                </script>
             </div>
         </content>
     </div>

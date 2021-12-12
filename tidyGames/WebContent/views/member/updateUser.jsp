@@ -234,7 +234,7 @@
                         </div>
 
                         <button type="submit" class="btn_st btn_center" align="center">수정</button>
-                        <div align="right" onclick="deleteUser();" style="color: gray; cursor: pointer; margin-top: 150px;">회원 탈퇴</div>
+                        <div align="right" onclick="/*탈퇴할거냐는 alert 출력 후*/location.href='deleteUserFinish.jsp'" style="color: gray; cursor: pointer; margin-top: 150px;">회원 탈퇴</div>
                     </div>
                 </form>
                 <script>
@@ -271,10 +271,6 @@
                             document.getElementById(elId+"_btn").style.background = "white";
                             document.getElementById(elId+"_btn").style.color = "#0e332c";
                         }
-                    }
-
-                    function deleteUser(){
-
                     }
                 </script>
             </div>

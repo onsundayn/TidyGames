@@ -91,7 +91,7 @@
 
         <content>
             <div id="content" align="center">
-                <form action="" method="">
+                <form action="updatePwd.jsp" method="">
                     <div id="search_id_form">
                         <span style="color: white; font-size: 20px; font-weight: bold; ">아이디 찾기</span>
                         <br><br><hr>
@@ -101,22 +101,18 @@
                                 ● 고객님의 정보와 일치하는 아이디입니다.<br><br>
                             </span>
                             <div style="color: white; font-size: 15px;">
-                                아이디 : 
+                                아이디 : <div name="userId"></div>
                             </div>
                         </div>
                         
-                        <button class="next_btn" onclick="loginPage();" style="margin-top: 200px;">로그인하기</button>
-                        <button class="next_btn" onclick="searchPwdPage();">비밀번호 재설정</button>
+                        <button type="button" class="next_btn" onclick="loginPage();" style="margin-top: 200px;">로그인하기</button>
+                        <button type="submit" class="next_btn">비밀번호 재설정</button>
 
                     </div>
                 </form>
                 <script>
                     function loginPage(){
-
-                    }
-
-                    function searchPwdPage(){
-                        
+                        location.href = "login.jsp";
                     }
                 </script>
             </div>
