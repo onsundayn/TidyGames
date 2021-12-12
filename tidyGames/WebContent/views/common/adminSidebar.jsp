@@ -53,7 +53,16 @@
         text-decoration: none;
         color: rgba(255, 166, 0, 0.777); 
     }
-
+    #empty{
+        /* 사이드바 하단 영역의 여백 조절 */
+        height:160px;
+    }
+    #tidy{
+        font-size:20px;
+        color:white;
+        /* background: rgba(82, 48, 34, 0.438); */
+    }
+    
 
     
 
@@ -64,11 +73,13 @@
         <div id="sidebarOut">
             
         <div id="sideBox">
+            <ul id="tidy">Tidy Games</ul>
+            <div id="line_2"></div>
             <ul>
                 <!-- <li id="myPageBtn" style="font-size: 20px; font-weight: bolder; color:gray; margin-top:15px;">마이페이지</li> -->
                 <li id="myPageBtn" style="font-weight: bolder; ">회원관리</li>
-                <li><a href="">회원 목록</a></li>
-                <li><a href="">블랙리스트</a></li>
+                <li><a href="" id="memberList">회원 목록</a></li>
+                <li><a href="" id="blacklist">블랙리스트</a></li>
                 <li><a href="">신고 내역</a></li>
                 <li><a href="">신고 내역 조회</a></li>
             
@@ -94,6 +105,13 @@
                 <li><a href="">포인트 내역</a></li>
             </ul>
             <div id="line_2"></div>
+            <ul>
+                <li id="myPageBtn" style="font-weight: bolder">고객센터</li>
+                <li><a href="">1:1 문의</a></li>
+            </ul>
+
+            <!-- <div id="line_2"></div> -->
+            <div id="empty"></div>
         </div>
 
     </div>
