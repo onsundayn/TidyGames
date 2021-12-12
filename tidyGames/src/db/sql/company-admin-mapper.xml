@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	
+	<entry key="insertCompany">
+		INSERT
+		  INTO COMPANY
+		  (
+		    COMPANY_NO
+		  , COMPANY_NAME
+		  , COMPANY_PWD
+		  , COMPANY_HEAD
+		  , COMPANY_COMMENT
+		  , COMPANY_ENROLL
+		  , COMPANY_STATUS
+		  , COMPANY_ID
+		  )
+		  VALUES
+		  (
+		    SEQ_CNO.NEXTVAL
+		  , ?
+		  , DBMS_RANDOM.STRING('A',7)
+		  , ?
+		  , ?
+		  , SYSDATE
+		  , 'Y'
+		  , ?
+		  )
+	</entry>
+	
+	<entry key="selectCompanyList">
+		SELECT 
+		       COMPANY_NO
+		     , COMPANY_NAME
+		     , COMPANY_ID
+		     , COMPANY_PWD
+		     , COMPANY_ENROLL
+		  FROM COMPANY
+		 WHERE COMPANY_STATUS = 'Y'
+		 ORDER
+		    BY COMPANY_NO DESC
+	</entry>
+
+</properties>

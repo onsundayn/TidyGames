@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.TidyGames.company.model.vo.Company" %>
+<%
+	ArrayList<Company> list = (ArrayList<Company>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,81 +57,21 @@
                     <th>등록일자</th>
                 </thead>
                 <tbody>
-                    <!--게시물이 없을 경우-->
-                    <tr>    
-                        <td colspan="6">조회된 게시글이 없습니다.</td>
-                    </tr>
-                    <!--게시물 있을 경우-->
-                    <tr>
-                        <td>보람게임즈</td>
-                        <td>BoramGames</td>
-                        <td>vkEnsKl</td>
-                        <td><a href="<%= contextPath %>/detail.co" class="btn btn-sm btn-info">조회</a></td>
-                        <td>2021-12-07</td>
-                    </tr>
-                    <tr>
-                        <td>보람게임즈</td>
-                        <td>BoramGames</td>
-                        <td>vkEnsKl</td>
-                        <td><a href="<%= contextPath %>/detail.co" class="btn btn-sm btn-info">조회</a></td>
-                        <td>2021-12-07</td>
-                    </tr>
-                    <tr>
-                        <td>보람게임즈</td>
-                        <td>BoramGames</td>
-                        <td>vkEnsKl</td>
-                        <td><a href="<%= contextPath %>/detail.co" class="btn btn-sm btn-info">조회</a></td>
-                        <td>2021-12-07</td>
-                    </tr>
-                    <tr>
-                        <td>보람게임즈</td>
-                        <td>BoramGames</td>
-                        <td>vkEnsKl</td>
-                        <td><a href="<%= contextPath %>/detail.co" class="btn btn-sm btn-info">조회</a></td>
-                        <td>2021-12-07</td>
-                    </tr>
-                    <tr>
-                        <td>보람게임즈</td>
-                        <td>BoramGames</td>
-                        <td>vkEnsKl</td>
-                        <td><a href="<%= contextPath %>/detail.co" class="btn btn-sm btn-info">조회</a></td>
-                        <td>2021-12-07</td>
-                    </tr>
-                    <tr>
-                        <td>보람게임즈</td>
-                        <td>BoramGames</td>
-                        <td>vkEnsKl</td>
-                        <td><a href="<%= contextPath %>/detail.co" class="btn btn-sm btn-info">조회</a></td>
-                        <td>2021-12-07</td>
-                    </tr>
-                    <tr>
-                        <td>보람게임즈</td>
-                        <td>BoramGames</td>
-                        <td>vkEnsKl</td>
-                        <td><a href="<%= contextPath %>/detail.co" class="btn btn-sm btn-info">조회</a></td>
-                        <td>2021-12-07</td>
-                    </tr>
-                    <tr>
-                        <td>보람게임즈</td>
-                        <td>BoramGames</td>
-                        <td>vkEnsKl</td>
-                        <td><a href="<%= contextPath %>/detail.co" class="btn btn-sm btn-info">조회</a></td>
-                        <td>2021-12-07</td>
-                    </tr>
-                    <tr>
-                        <td>보람게임즈</td>
-                        <td>BoramGames</td>
-                        <td>vkEnsKl</td>
-                        <td><a href="<%= contextPath %>/detail.co" class="btn btn-sm btn-info">조회</a></td>
-                        <td>2021-12-07</td>
-                    </tr>
-                    <tr>
-                        <td>보람게임즈</td>
-                        <td>BoramGames</td>
-                        <td>vkEnsKl</td>
-                        <td><a href="<%= contextPath %>/detail.co" class="btn btn-sm btn-info">조회</a></td>
-                        <td>2021-12-07</td>
-                    </tr>
+                	<% if(list.isEmpty()) { %>
+	                    <tr>    
+	                        <td colspan="5">조회된 게시글이 없습니다.</td>
+	                    </tr>
+                    <% }else { %>
+                    	<% for(Company c : list) { %>
+		                    <tr>
+		                        <td><%=c.getCompanyName()%></td>
+		                        <td><%=c.getCompanyId()%></td>
+		                        <td><%=c.getCompanyPwd()%></td>
+		                        <td><a href="<%= contextPath %>/detail.co" class="btn btn-sm btn-info">조회</a></td>
+		                        <td><%=c.getCompanyEnroll()%></td>
+		                    </tr>
+                    	<% } %>
+                    <% } %>
                 </tbody>
             </table>
 	
