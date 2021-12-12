@@ -1,37 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.Date"%>
-<%
-	String contextPath = request.getContextPath();
-%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-    div, input, span{
+    div{
         box-sizing: border-box;
     }
-    .outer{
-        width: 1500px;
+    #outer{
+        width:1500px;
         height: 2100px;
-        background-color: #0e332c;
-        margin: auto;
-        margin-top: 50px;
+        margin:auto;
     }
-    #logo>*:hover{
-        text-decoration: none;
+    #outer>div{
+        float:left;
     }
-    #content{
-        width: 800px;
-        height: 1900px;
-        background-color: rgba(255, 255, 255, 0.5);
-        margin: auto;
-        margin-top: 50px;
-        border-radius: 100px;
+    #intro{
+        font-size: 30px;
+        font-weight: 900;
+        color :white;
+        margin: 30px 80px 0px 50px;
+    }
+    #line_1{
+        width:100%;
+        height:2px;
+        background: rgba(255, 255, 255, 0.555);
+    }
+    #line_3{
+        width:200px;
+        height:3px;
+        background: rgba(255, 255, 255, 0.555);
+    }
+    #profileBox{
+        border:1px solid black;
+        background: rgba(0, 0, 0, 0.300);
+        width:1000px;
+        height: 1850px;
+        margin-top: 50px; 
+        margin-left: 50px;
         position: relative;
     }
-    #enroll_form{
+    #update_user{
         width: 80%;
         height: 90%;
         position: absolute;
@@ -39,7 +50,11 @@
         top: 0px;
         bottom: 0px;
         left: 0px;
-        right: 0px;        
+        right: 0px;  
+    }
+    #updateUser{
+        color: orange;
+        font-weight: bold;
     }
     .sign_up>*{
         margin-top: 20px;
@@ -73,41 +88,48 @@
         background-color:white;
         color: #0e332c; 
         border: none; 
-        font-weight: bold;"
+        font-weight: bold;
     }
-    #agree>span{
-        color:white;
-        margin-left: 10px;
-    }
-    #agree>input{
-        width: 15px;
-        height: 15px;
+    .btn_center{
+        /*
+        position: absolute;
+        margin: auto;
+        top: 1550px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        */
+        width: 70px; 
+        height: 35px; 
+        margin-top: 150px;
+        margin-left: 350px;
+        background-color: gray;
+        float: left;
     }
 </style>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
-<body style="background-color: #0e332c;">
-    <div class="outer">
-        <header>
-            <div id="logo" align="center">
-                <a href="<%= contextPath %>">
-                    <img src="../../resources/image/tidyLogo.png" style="width:80px; height: 50px;"> <br>
-                    <span style="color: white; font-size: 25px; font-weight: bold;">TIDY GAMES</span>
-                </a>
-            </div>
-        </header>
+<body>
+    
+    <%@ include file="../common/topbar.jsp"%>
+    <%@ include file="../common/navibar.jsp"%>
+   
+    
+    <div id="outer">
+        <div id="line_1"></div>
+        <div>
+            <%@ include file="../common/memberSidebar.jsp" %>
+        </div>
+        
+        <div>
+            <div id="intro">내 정보 수정</div>
+            <div id="line_3" style="margin:10px 50px;"></div>
 
-        <content>
-            <div id="content" align="center">
+            <div id="profileBox">
                 <form action="" method="">
-                    <div id="enroll_form">
-                        <div style="color: white; font-size: 22px; font-weight: bold;">SIGN UP</div>
+                    <div id="update_user">
 
                         <div align="left">
-                            <div style="color: white; font-size: 17px; font-weight: bold; margin-top: 40px;">
+                            <div style="color: white; font-size: 17px; font-weight: bold;">
                                 >> 필수 입력 사항<br>
                             </div>
                         </div>
@@ -115,9 +137,7 @@
 
                         <div align="left" class="sign_up">
                             <div class="sign_up_main">● 아이디</div>
-                            <input type="text" name="userId" id="user_id" style="width: 40%;" required>
-                            <button class="btn_st" style="width: 19%; height: 30px;">중복확인</button>
-                            <div class="sign_up_etc" style="margin-top:5px;">4~10자의 영문 대소문자, 숫자, 특수문자(_) 사용 가능합니다.</div>
+                            <input type="text" name="userId" id="user_id" style="width: 40%; background-color: gray;" value="userId" readonly>
 
                             <div class="sign_up_main">● 비밀번호</div>
                             <input type="password" name="userPwd" id="user_pwd" style ="width: 70%;" required>
@@ -172,6 +192,10 @@
                         <br>
 
                         <div align="left" class="sign_up">
+                            <div class="sign_up_main">● 프로필사진</div>
+                            <img src="" width="100" height="100"><br>
+                            <input type="file" name="userPic" style="color: white; margin-bottom: 10px;">
+
                             <div class="sign_up_main">● 성별</div>
                             <input type="radio" name="gender" id="M" value="M">
                             <label for="M" style="color: white; margin-right: 10px;">남자</label>
@@ -207,28 +231,10 @@
                                 <input type="checkbox" id="card" name="card" onclick="btnStyle('card');">
                                 <label id="card_btn" class="btn" for="card">카드</label>
                             </div>
-                            <br><br>
-
-                            <div id="agree">
-                                <input type="checkbox" name="allAgree"> <span>모두 동의합니다.</span> <br>
-                                <input type="checkbox" name="agree1"> <span>(필수) 이용약관과 개인정보 수집 및 이용에 동의합니다.</span> <br>
-                                <input type="checkbox" name="agree2"> 
-                                <span>
-                                    (필수) 만 14세 이상입니다.<br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;만 19세 미만의 미성년자가 결제 시 법정대리인이 거래를 취소할 수 있습니다.
-                                </span> <br>
-                                <input type="checkbox" name="agree3"> 
-                                <span>
-                                    (선택) 이메일 및 SMS 마케팅 정보 수신에 동의합니다. <br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;회원은 언제든지 회원 정보에서 수신 거부로 변경할 수 있습니다.
-                                </span>
-                            </div>
-
                         </div>
-                        <br><br><br>
 
-                        <button type="submit" class="btn_st" style="width: 70px; height: 35px;">다음</button>
-                        <!-- 휴대폰번호에 숫자가 아닌 값이 들어가면 오류 ajax 뜨게해야함 -->
+                        <button type="submit" class="btn_st btn_center" align="center">수정</button>
+                        <div align="right" onclick="deleteUser();" style="color: gray; cursor: pointer; margin-top: 150px;">회원 탈퇴</div>
                     </div>
                 </form>
                 <script>
@@ -266,9 +272,15 @@
                             document.getElementById(elId+"_btn").style.color = "#0e332c";
                         }
                     }
+
+                    function deleteUser(){
+
+                    }
                 </script>
             </div>
-        </content>
+
+        </div>
+
     </div>
 </body>
 </html>

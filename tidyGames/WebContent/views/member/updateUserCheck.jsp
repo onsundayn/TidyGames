@@ -51,7 +51,7 @@
         left: 0px;
         right: 0px;  
     }
-    #text_area>*{
+    #text_area>div, #text_area>input{
         float: left;
     }
     #updateUser{
@@ -64,7 +64,7 @@
         font-weight: bold;
     }
     #checkPwd{
-        margin-top:120px;
+        /*margin-top:120px;*/
         background: gray;
         border-radius: 100px;
         color: white;
@@ -73,6 +73,12 @@
         font-size: 15px;
         height: 35px;
         width: 70px;
+        position: absolute;
+        margin: auto;
+        top: 250px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;  
     }
 </style>
 </head>
