@@ -36,17 +36,15 @@
         margin: 8px 0px 0px 110px;
     }
     #box{
-    	width:1290px;	
+    	/* width:1290px;	 */
     	/* border:1px solid rgba(255, 255, 255, 0.222); */
         /* height: */
         
     }
-    #tableBox{
+    .tableBox{
         width:800px;
-        height:650px;
-        /* margin-left:145px; */
-        margin: 20px 0px 100px 105px;
-        /* margin:auto; */
+        height:480px;
+        margin: 20px 0px 10px 105px;
         background-color: rgb(197, 197, 197);
         border: 10px solid rgba(255, 255, 255, 0.555);
     }
@@ -68,20 +66,19 @@
         margin: 0px 50px 0px 40px;
     }
     #tableOut1{
-        padding-top:20px;
+        padding-top:50px;
         width:100%;
-        height:60%;
+        height:100%;
     }
     #tableOut2{
         width:100%;
-        height:34%;
-        /* padding:50px; */
-        padding:0px 40px;
-        /* background:rgba(128, 128, 128, 0.705); */
-
+        height:100%;
+        margin:0px;
+        padding:0px;
     }
     #table{
         margin:auto;
+        margin-top:30px;
         width:700px;
         background:none;
         color:black;
@@ -89,9 +86,9 @@
    /* 여기까지 */
     .table *{
         font-size:14px;
-        padding:20px;
+        /* padding:21px; */
     }
-    #blacklist{
+    #myReview{
         color:orange;
     }
     #table input{
@@ -106,6 +103,7 @@
         width:100%;
         background:none;
         border:none;
+        font-size:16px;
     }
     #answerTable{
         background:none;
@@ -117,10 +115,10 @@
     #top a{
         font-size:18px;
         color:rgba(255, 255, 255, 0.666);
-        margin:5px;
+
     }
     #pTag{
-        margin:50px 0px 0px 20px;
+        margin:70px 0px 0px 370px;
     }
     #empty{
         height:400px;
@@ -129,13 +127,19 @@
         text-decoration: none;
         color:rgba(255, 166, 0, 0.808);
     }
-
+    #gameList{
+        height:200px;
+    }
+    #pagebar{
+        margin: 10px 10px 10px 110px;
+    }
 
 </style>
 </head>
 <body style="background:#0e332c;">
 
-	<%@ include file="../common/includebar.jsp"%>
+    <%@ include file="../common/topbar.jsp"%>
+    <%@ include file="../common/navibar.jsp"%>
     
     
     <div id="outer">
@@ -151,58 +155,63 @@
                 <div id="line_3"></div>
             </div>
             <div id="pTag">
-                <p><a href="">내가 작성한 리뷰 2개</a></p>
+                <a href="" style="font-size:20px; font-weight: bold;">내가 작성한 리뷰 2개</a>
             </div>
         </div>
         
-        <div id="box">
-            <div></div>
-            <div id="tableBox">
-            <div id="tableOut1">
+            <div class="tableBox">
                 <table id="table" class="table table-dark" align="center">
                     <tr>
-                        <th width="60">제목</th>
-                        <td width="300" style="padding-left:0px">
-                            <input type="text" value="?" readonly>
+                        <td rowspan="3" width="200">
+                            <img src="">
                         </td>
-                        <th width="70">작성자</th>
-                        <td style="padding-left:0px">호빵</td>
-                        <td align=right>작성일시 | 21-11-18</td>
-                        <!-- <td width="50px"></td> -->
+                        <td style="font-size:20px; font-weight:bold; padding:0px; padding-top:20px;">스타듀밸리</td>
                     </tr>
                     <tr>
-                        <td colspan="5">
-                            <textarea name="content" class="content" cols="10" rows="8" style="resize:none" readonly></textarea>
+                        <td style="border:none; padding:0px;">☆☆☆</td>
+                    </tr>
+                    <tr >
+                        <td colspan="2"  style="border:none" align=right>작성일시 | 21-11-18</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <textarea name="content" class="content" cols="10" rows="8" style="resize:none" readonly>정말 재미있어요 완전 추천합니다아</textarea>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="4">
-                            <!-- <a download="" href="" style="color:black;">upload 파일명.png</a> -->
-                        </td>
-
+                        <td colspan="2" align=right width="70">추천 16</td>
                     </tr>
                 </table>
             </div>
-            <div id="tableOut2">
-           
-            </div>
-            
-            <div id="pagebar" align="center">
-                <button class="btn btn-sm btn-outline-secondary">&lt;</button>   
-                <button class="btn btn-sm btn-outline-secondary">1</button>
-                <button class="btn btn-sm btn-outline-secondary">2</button>
-                <button class="btn btn-sm btn-outline-secondary">3</button>
-                <button class="btn btn-sm btn-outline-secondary">4</button>
-                <button class="btn btn-sm btn-outline-secondary">5</button>
-                <button class="btn btn-sm btn-outline-secondary">&gt;</button>
-            </div>  
-        </div>
+
+            <div>
+                <div id="gameList" class="tableBox" style="margin-bottom: 20px;">
+                    <table id="table" class="table table-dark" align="center">
+                    <tr align="center">
+                        <th><a style="font-size:15px;">game list name</a></th>
+                    </tr>
+                    <tr align="center">
+                        <th><a style="font-size:15px;">game list name</a></th>
+                    </tr>
+                    <tr align="center">
+                        <th><a style="font-size:15px;">game list name</a></th>
+                    </tr>
+                    
+                </table>
                 
-        </div>
-        
-        <footer>
-            <div style="height:100px"></div>
-        </footer>
+            </div>
+            <div>
+                <div id="pagebar" align="center">
+                    <button class="btn btn-sm btn-outline-secondary">&lt;</button>   
+                    <button class="btn btn-sm btn-outline-secondary">1</button>
+                    <button class="btn btn-sm btn-outline-secondary">2</button>
+                    <button class="btn btn-sm btn-outline-secondary">3</button>
+                    <button class="btn btn-sm btn-outline-secondary">4</button>
+                    <button class="btn btn-sm btn-outline-secondary">5</button>
+                    <button class="btn btn-sm btn-outline-secondary">&gt;</button>
+                </div>  
+                </div>
+            </div>
     </div>
 
 

@@ -19,12 +19,19 @@
         font-size: 33px;
         font-weight: 900;
         color :white;
-        margin: 100px 80px 20px 50px;
+        margin: 50px 80px 0px 110px;
     }
     #line_1{
         width:100%;
         height:2px;
         background: rgba(255, 255, 255, 0.555);
+
+    }
+	#line_3{
+        width:210px;
+        height:3px;
+        background: rgba(255, 255, 255, 0.555);
+		margin:5px 0px 30px 105px;
     }
 	#box{
 		width:900px; 
@@ -33,13 +40,13 @@
 	#lbBox{
 		border: 2px solid rgba(255, 255, 255, 0.555);
 		background: rgba(0, 0, 0, 0.150);
-		width:800px; 
+		width:700px; 
 		margin:auto;
 		padding:0px 10px 100px 0px;
 	}
 	#sortLb{
 		width:100%;
-		height:150px;
+		height:100px;
 		/* border: 2px solid rgba(255, 255, 255, 0.555); */
 
 	}
@@ -62,8 +69,8 @@
 	}
 
 	.game{
-		width:600px;
-		height:160px;
+		width:570px;
+		height:120px;
 		background: rgba(0, 0, 0, 0.333);
 		margin:auto;
 		margin-bottom: 10px;
@@ -90,12 +97,13 @@
 		padding:10px;
 		float:right;
 	}
+	#ad1{height:65%}
 	#ad1>a{
 		text-decoration: none;
 		color:rgba(255, 255, 255, 0.222)
 	}
 	#ad2{
-		margin-top:70px;
+		height:10%;
 	}
 	#ad2>a{
 		color:rgba(255, 255, 255, 0.600)
@@ -103,6 +111,9 @@
 	#ad2>a:hover{
 		text-decoration: none;
 		color: rgba(255, 166, 0, 0.777); 
+	}
+	#library{
+		color:orange;
 	}
 	
 
@@ -119,6 +130,7 @@
 			<div id="line_1"></div>
 			<div id="box">
 				<div id="intro">라이브러리</div>
+				<div id="line_3"></div>
 					<div id="lbBox">
 						<div id="sortLb">
 					<div>

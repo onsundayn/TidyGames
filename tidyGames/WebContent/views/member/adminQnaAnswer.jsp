@@ -87,7 +87,7 @@
         height:20px;
         margin-top:3px;
     }
-    #blacklist{
+    #qnaList{
         color:orange;
     }
     tbody a{
@@ -129,7 +129,8 @@
 </head>
 <body style="background:#0e332c;">
 
-	<%@ include file="../common/includebar.jsp"%>
+    <%@ include file="../common/topbar.jsp"%>
+    <%@ include file="../common/navibar.jsp"%>
     
     
     <div id="outer">

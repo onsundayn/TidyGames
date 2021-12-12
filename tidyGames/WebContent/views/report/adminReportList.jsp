@@ -26,7 +26,7 @@
         font-size: 33px;
         font-weight: 900;
         color :white;
-        margin: 25px 80px 0px 55px;
+        margin: 25px 80px 0px 45px;
     }
     #line_3{
         width:145px;
@@ -87,7 +87,7 @@
         height:20px;
         margin-top:3px;
     }
-    #blacklist{
+    #reportList{
         color:orange;
     }
     tbody a{
@@ -111,7 +111,8 @@
 </head>
 <body style="background:#0e332c;">
 
-	<%@ include file="../common/includebar.jsp"%>
+    <%@ include file="../common/topbar.jsp"%>
+    <%@ include file="../common/navibar.jsp"%>
     
     
     <div id="outer">
@@ -121,7 +122,7 @@
         </div>
         
         <div id="box">
-            <div id="intro">신고</div>
+            <div id="intro">신고 내역</div>
             <div id="line_3"></div>
             
       
@@ -130,7 +131,7 @@
                 <div id="tableTop">
                     <div id="leftTop">
                         <div>
-                            <span>신고 내역</span>
+                            <span>신고 내역 조회</span>
                         </div>
                     </div>
                     <div>

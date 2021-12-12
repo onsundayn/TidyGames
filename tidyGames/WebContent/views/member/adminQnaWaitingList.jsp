@@ -81,9 +81,9 @@
         height:20px;
         margin-top:3px;
     }
-    /* #blacklist{
+    #qnaList{
         color:orange;
-    } */
+    }
     tbody a{
         color:gray;
     }
@@ -105,7 +105,8 @@
 </head>
 <body style="background:#0e332c;">
 
-	<%@ include file="../common/includebar.jsp"%>
+    <%@ include file="../common/topbar.jsp"%>
+    <%@ include file="../common/navibar.jsp"%>
     
     
     <div id="outer">
@@ -115,7 +116,7 @@
         </div>
         
         <div id="box">
-            <div id="intro">신고 내역</div>
+            <div id="intro">QNA</div>
             <div id="line_3"></div>
             
       
