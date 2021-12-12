@@ -26,13 +26,13 @@
         font-size: 33px;
         font-weight: 900;
         color :white;
-        margin: 25px 80px 0px 95px;
+        margin: 25px 80px 0px 55px;
     }
     #line_3{
         width:145px;
         height:3px;
         background: rgba(255, 255, 255, 0.555);
-        margin: 8px 0px 0px 95px;
+        margin: 8px 0px 0px 55px;
     }
     #box{
     	width:1290px;	
@@ -44,11 +44,11 @@
         width:1250px;
         height:840px;
         /* margin-left:145px; */
-        margin: 50px 0px 100px 35px;
+        margin: 30px 0px 100px 35px;
         background-color: rgb(197, 197, 197);
         border: 10px solid rgba(255, 255, 255, 0.555);
     }
-    #talbeTop div{
+    #tableTop div{
         float:left;
         /* width:400px; */
         /* border:1px solid white; */
@@ -121,12 +121,12 @@
         </div>
         
         <div id="box">
-            <!-- <div id="intro">회원 관리</div>
-            <div id="line_3"></div> -->
+            <div id="intro">회원 관리</div>
+            <div id="line_3"></div>
             
       
     	    <div id="tableBox">
-                <div id="talbeTop">
+                <div id="tableTop">
                     <div id="leftTop">
                         <div id="leftTop1">
                             <!-- 혹은 <검색어>-->
@@ -152,7 +152,9 @@
                                 </div>
                         </div>
 
-                        <input type="text" id="selectKeyword" name="keyword" placeholder="조회를 위한 입력">
+                        <div>
+                            <input type="text" id="selectKeyword" name="keyword" placeholder="조회를 위한 입력">
+                        </div>
                         <button class="btn btn-sm btn-dark" onclick="" >조회</button>
                     </div>
                 </div>

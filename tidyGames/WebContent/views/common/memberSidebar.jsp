@@ -69,7 +69,6 @@
             <ul id="tidy">Tidy Games</ul>
             <div id="line_2"></div>
             <ul>
-                <!-- <li id="myPageBtn" style="font-size: 20px; font-weight: bolder; color:gray; margin-top:15px;">마이페이지</li> -->
                 <li id="myPageBtn" style="font-weight: bolder; margin-top:15px;">마이페이지</li>
                 <li><a href="">내 정보 수정</a></li>
                 <li><a href="">장바구니</a></li>
@@ -89,6 +88,7 @@
             <!-- <div id="line_2"></div> -->
         </div>
 
+        <!-- request.getContextPath -->
     </div>
 </body>
 </html>

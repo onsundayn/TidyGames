@@ -48,7 +48,7 @@
         background-color: rgb(197, 197, 197);
         border: 10px solid rgba(255, 255, 255, 0.555);
     }
-    #talbeTop div{
+    #tableTop div{
         float:left;
         /* width:400px; */
         /* border:1px solid white; */
@@ -119,12 +119,12 @@
         </div>
         
         <div id="box">
-            <!-- <div id="intro">블랙리스트</div>
-            <div id="line_3"></div> -->
+            <div id="intro">블랙리스트</div>
+            <div id="line_3"></div>
             
       
     	    <div id="tableBox">
-                <div id="talbeTop">
+                <div id="tableTop">
                     <div id="leftTop">
                         <div>
                             <span>블랙리스트 목록</span>
@@ -148,7 +148,9 @@
                                 </div>
                         </div>
 
-                        <input type="text" id="selectKeyword" name="keyword" placeholder="조회를 위한 입력">
+                        <div>
+                            <input type="text" id="selectKeyword" name="keyword" placeholder="조회를 위한 입력">
+                        </div>
                         <button class="btn btn-sm btn-dark" onclick="" >조회</button>
                     </div>
                 </div>
