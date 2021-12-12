@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,8 +83,8 @@
             </ul>
             <div id="line_2"></div>
             <ul>
-                <li><a href="">나의 문의 내역</a></li>
-                <li><a href="" >내 리뷰 조회</a></li>
+                <li><a href="<%= request.getContextPath() %>/myQna.me" id="myQna">나의 문의 내역</a></li>
+                <li><a href="<%= request.getContextPath() %>/myReview.me" id="myReview">내 리뷰 조회</a></li>
             </ul>
             <!-- <div id="line_2"></div> -->
         </div>

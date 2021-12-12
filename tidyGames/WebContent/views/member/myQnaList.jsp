@@ -91,7 +91,7 @@
         font-size:14px;
         padding:20px;
     }
-    #blacklist{
+    #myQna{
         color:orange;
     }
     #table input{
@@ -135,7 +135,8 @@
 </head>
 <body style="background:#0e332c;">
 
-	<%@ include file="../common/includebar.jsp"%>
+    <%@ include file="../common/topbar.jsp"%>
+    <%@ include file="../common/navibar.jsp"%>
     
     
     <div id="outer">
@@ -151,9 +152,9 @@
                 <div id="line_3"></div>
             </div>
             <div id="pTag">
-                <p><a href="">게임관련 문의</a></p>
-                <p>|</p>
-                <p><a href="" style="font-weight:bolder; color:rgba(255, 166, 0, 0.700)">1:1문의</a></p>
+                <p><a href="<%= contextPath %>/mygQna.me">게임관련 문의</a></p>
+                <p style="margin:0px 5px;">|</p>
+                <p><a style="font-weight:bolder; color:rgba(255, 166, 0, 0.700)">1:1문의내역</a></p>
             </div>
         </div>
         

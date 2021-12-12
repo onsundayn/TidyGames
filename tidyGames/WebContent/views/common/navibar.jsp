@@ -34,7 +34,7 @@
 
     <div class="navi-area" align="center">
         <div class="menu"><a href="" id="notice">NOTICE</a></div>
-        <div class="menu"><a href="" id="library">LIBRARY</a></div>
+        <div class="menu"><a href="<%= contextPath %>/library.me" id="library">LIBRARY</a></div>
         <div class="menu"><a href="<%= contextPath %>/list.po" id="community">COMMUNITY</a></div>
         <div class="menu"><a href="" id="help">HELP</a></div>
     </div>

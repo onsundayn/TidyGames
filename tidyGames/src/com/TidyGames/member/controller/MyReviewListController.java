@@ -8,31 +8,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class myPageController
+ * Servlet implementation class myReviewListController
  */
-@WebServlet("/myPage.me")
-public class myPageController extends HttpServlet {
+@WebServlet("/myReview.me")
+public class MyReviewListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public myPageController() {
+    public MyReviewListController() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	/**
-	 * 다현
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-		// 연결만 시켜놨어요
-		request.getRequestDispatcher("views/member/myPage.jsp").forward(request, response);
-		
-		
+		request.getRequestDispatcher("views/member/myReviewList.jsp").forward(request, response);
 	}
 
 	/**
