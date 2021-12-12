@@ -70,7 +70,7 @@
             <div id="line_2"></div>
             <ul>
                 <li id="myPageBtn" style="font-weight: bolder; margin-top:15px;">마이페이지</li>
-                <li><a href="updateUserCheck.jsp" id="updateUser">내 정보 수정</a></li>
+                <li><a href="views/member/updateUserCheck.jsp" id="updateUser">내 정보 수정</a></li>
                 <li><a href="">장바구니</a></li>
             
             </ul>

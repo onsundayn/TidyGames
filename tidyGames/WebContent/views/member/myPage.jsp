@@ -111,7 +111,7 @@
                     <label id="nick">NickName</label> <br>
                     <label id="id">userId</label>
                     <div id="edit">
-                        <a href="">>> edit profile</a>
+                        <a href="views/member/updateUserCheck.jsp">>> edit profile</a>
                     </div>
                     
                 </div>
