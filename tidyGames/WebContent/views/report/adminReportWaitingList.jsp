@@ -173,9 +173,9 @@
                                     <option value="BLOCK">BLOCK</option>
                                     <option value="UNBLOCK">UNBLOCK</option>
                                 </select>
-                            </div>
                             </td>
                         </tr>
+                    </div>
 <!-- 반복 예시 -->
 <tr align="center">
     <td><input type="checkbox" id="checkBox"></td>

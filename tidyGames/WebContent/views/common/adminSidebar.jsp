@@ -54,7 +54,8 @@
         color: rgba(255, 166, 0, 0.777); 
     }
     #empty{
-        height:300px;
+        /* 사이드바 하단 영역의 여백 조절 */
+        height:160px;
     }
     #tidy{
         font-size:20px;
@@ -103,6 +104,12 @@
                 <li><a href="">환불 요청 목록</a></li>
                 <li><a href="">포인트 내역</a></li>
             </ul>
+            <div id="line_2"></div>
+            <ul>
+                <li id="myPageBtn" style="font-weight: bolder">고객센터</li>
+                <li><a href="">1:1 문의</a></li>
+            </ul>
+
             <!-- <div id="line_2"></div> -->
             <div id="empty"></div>
         </div>
