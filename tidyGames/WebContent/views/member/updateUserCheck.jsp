@@ -39,44 +39,41 @@
         height:360px;
         margin-top: 80px; 
         margin-left: 190px;
+        position: relative;
     }
-    #profileBox>*{
+    #text_area{
+        width: 80%;
+        height: 80%;
+        position: absolute;
+        margin: auto;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;  
+    }
+    #text_area>*{
         float: left;
-        width: 50%;
     }
-    #profileImg>img{
-        width:100%;
-        height:100%;
+    #updateUser{
+        color: orange;
+        font-weight: bold;
     }
-    #nick{
-        font-size:32px;
-        font-weight: bolder;
-        color:rgba(255, 255, 255, 0.794);
-        margin-top:90px;
-        margin-bottom: 0px;
+    .sign_up_main{
+        color: white;
+        font-size: 15px;
+        font-weight: bold;
     }
-    #id{
-        font-size:24px;
-        font-weight: bolder;
-        color:rgba(0, 0, 0, 0.666);
+    #checkPwd{
+        margin-top:120px;
+        background: gray;
+        border-radius: 100px;
+        color: white;
+        font-weight: bold;
+        border: none;
+        font-size: 15px;
+        height: 35px;
+        width: 70px;
     }
-    #profileImg{
-        width:200px;
-        height:200px;
-        margin: 80px 60px;
-    }
-    #edit{
-        margin: 50px 0px 0px 0px;
-        text-decoration: none;
-    }
-    #edit>a:hover{
-        text-decoration: none;
-        color: rgba(255, 166, 0, 0.777); 
-    }
-    
-
-
-
 </style>
 </head>
 <body>
@@ -92,26 +89,27 @@
         </div>
         
         <div>
-            <div id="intro">프로필</div>
+            <div id="intro">내 정보 수정</div>
             <div id="line_3" style="margin:10px 50px;"></div>
 
             <div id="profileBox">
-                <div id="box1">
-                    <div id="profileImg">
-                        <!-- case1. 프로필을 설정하지 않았을 때 -->
-                        <img src="<%= contextPath %>/resources/image/profile.png">
-                        <!-- case2. 프로필을 설정했을 때 -->
-                        <!-- <img> -->
+                <form action="" method="">
+                    <div id="text_area">
+                        <div class="sign_up_main">● 아이디</div><br>
+                        <input type="text" name="userId" id="user_id" value="userId" style="width: 50%; background-color: gray;" readonly><br><br><br>
+        
+                        <div class="sign_up_main">● 비밀번호</div><br>
+                        <input type="password" name="userPwd" id="user_pwd" style ="width: 50%;" required>
+
+                        <button type="submit" id="checkPwd" onclick="checkPwd();">확인</button>
                     </div>
-                </div>
-                <div id="box2">
-                    <label id="nick">NickName</label> <br>
-                    <label id="id">userId</label>
-                    <div id="edit">
-                        <a href="">>> edit profile</a>
-                    </div>
-                    
-                </div>
+                </form>
+
+                <script>
+                    function checkPwd(){
+
+                    }
+                </script>
             </div>
 
         </div>
