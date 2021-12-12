@@ -102,7 +102,7 @@
 
         <content>
             <div id="content" align="center">
-                <form action="" method="">
+                <form action="enrollFormFinish.jsp" method="">
                     <div id="enroll_form">
                         <div style="color: white; font-size: 22px; font-weight: bold;">SIGN UP</div>
 

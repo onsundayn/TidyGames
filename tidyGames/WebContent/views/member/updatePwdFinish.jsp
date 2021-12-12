@@ -104,13 +104,13 @@
 
                         </div>
                         
-                        <button class="next_btn" onclick="loginPage();" style="margin-top: 220px;">로그인하기</button>
+                        <button type="button" class="next_btn" onclick="loginPage();" style="margin-top: 220px;">로그인하기</button>
 
                     </div>
                 </form>
                 <script>
                     function loginPage(){
-
+                        location.href = "login.jsp";
                     }
                 </script>
             </div>

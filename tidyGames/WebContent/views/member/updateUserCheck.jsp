@@ -113,7 +113,7 @@
 
                 <script>
                     function checkPwd(){
-
+                        //아이디 비밀번호 맞으면 링크 넘기기
                     }
                 </script>
             </div>
