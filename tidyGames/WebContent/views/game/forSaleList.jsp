@@ -22,6 +22,13 @@
 	margin: auto;
 }
 
+#line1{
+		margin:0 auto;
+        width:1500px;
+        height:2px;
+        background: rgba(255, 255, 255, 0.555);
+    } 
+
 #div1 {
 	grid-area: 1/2/5/5;
 	margin-top: 20px;
@@ -62,7 +69,8 @@
 
 	<%@ include file="../common/topbar.jsp"%>
 	<%@ include file="../common/navibar.jsp"%>
-
+	
+	<div id="line1"></div>
 	<div id="parent">
 
 		<%@ include file="../common/adminSidebar.jsp"%>
