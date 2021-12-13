@@ -11,7 +11,9 @@
     }
     #outer{
         width:1500px;
+        height: 1000px;
         margin:auto;
+        border: 1px solid orange;
     }
     #outer>div{
         float:left;
@@ -77,15 +79,15 @@
         background: gray;
         font-weight:bolder;
     }
-
+    /* 게임 목록 조회 1개 감싸는 div */
     #center{
-        
-        height: 1500px;
         width: 1000px;
-        margin:auto;
+        margin-left: 60px;
+        margin-bottom: 50px;
     }
-
+    /* 검정테두리 감싸는 div */
     .wrap{
+        
         background: black;
         width: 950px;
         height: 200px;
@@ -182,6 +184,25 @@
         background: rgb(16, 92, 144);
         color:white;
     }
+    .paging-area{
+       width: 1000px;
+       height: 200px;
+       border: 1px solid red;
+       margin-left: 70px;
+    }
+    .paging-area>button {
+        border-radius: 5px;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 20px;
+       
+        
+    }
+    .paging-area>button:hover {
+        cursor:pointer;
+        color:orange
+    }
 </style>
 </head>
 <body>
@@ -191,15 +212,13 @@
         <div id="line_1"></div>
         <div>
             <%@ include file="../common/memberSidebar.jsp" %>
-
-
         </div>
         <!-- 닉네임 불러와지게 -->
         <div id="intro"><h1>닉네임 님의 찜 목록</h1></div>
         <br><br><br><br><br>
 
             
-        <div class="search-game">
+        <div class="search-game" style="border: 1px solid orange;">
             
             <form action="" id="wishList-search">
 
@@ -227,18 +246,6 @@
 
             </form>
 
-                <div class="dropdown">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" id="dropdown-array">
-                      정렬기준
-                    </button>
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item" href="#">출시날짜</a>
-                      <a class="dropdown-item" href="#">이름</a>
-                      <a class="dropdown-item" href="#">할인중</a>
-                      <a class="dropdown-item" href="#">가격순:오름차순</a>
-                      <a class="dropdown-item" href="#">가격순:내림차순</a>
-                    </div>
-                  </div>    
         </div>
         <br>
        
@@ -248,6 +255,34 @@
         <button id="allDelete_btn">전체삭제</button>
         <br><br>
 
+
+            <div id="center" style="border: 1px solid orange;">
+                <div class="wrap">
+                    <div class="game_area1">게임사진</div>
+                    <div class="game_area2">
+
+                        <div class="game_area3">
+                            <div id="name" class="area3">게임명</div>
+                            <div id="x_btn" class="area3"><button id="delete_btn">X</button></div>
+                        </div>
+                        
+                        <div id="line2" style="border: 1px solid grey;"></div>
+                        <div class="game_area4">
+
+                            <div class="game_area5">게임내용</div>
+                            
+                            <div class="game_area6">
+                                
+                                <!-- 할인게임은 어떻게 표시할건지? -->
+                                <div id="price" class="area6">20000원</div><br><br>
+                                <button id="cart_btn" class="area6">+ 장바구니추가</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
 
             <div id="center">
                 <div class="wrap">
@@ -270,22 +305,28 @@
                                 <div id="price" class="area6">20000원</div><br><br>
                                 <button id="cart_btn" class="area6">+ 장바구니추가</button>
                             </div>
-
                         </div>
-
-
                     </div>
-
-
                 </div>
-               
-                
-
-
-
-
-                
             </div>
+            <div class="paging-area" align="center">
+
+                <button> &lt; </button>
+                <button>1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>4</button>
+                <button>5</button>
+                <button>6</button>
+                <button>7</button>
+                <button>8</button>
+                <button>9</button>
+                <button>10</button>
+                <button> &gt; </button>
+        
+            </div>
+            <br><br><br>
+          
     </div>
 
 

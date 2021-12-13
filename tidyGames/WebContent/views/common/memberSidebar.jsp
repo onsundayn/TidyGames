@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,7 +52,11 @@
         text-decoration: none;
         color: rgba(255, 166, 0, 0.777); 
     }
-
+    #tidy{
+        font-size:20px;
+        color:white;
+        /* background: rgba(82, 48, 34, 0.438); */
+    }
 
     
 
@@ -62,10 +67,11 @@
         <div id="sidebarOut">
             
         <div id="sideBox">
+            <ul id="tidy">Tidy Games</ul>
+            <div id="line_2"></div>
             <ul>
-                <!-- <li id="myPageBtn" style="font-size: 20px; font-weight: bolder; color:gray; margin-top:15px;">마이페이지</li> -->
                 <li id="myPageBtn" style="font-weight: bolder; margin-top:15px;">마이페이지</li>
-                <li><a href="">내 정보 수정</a></li>
+                <li><a href="views/member/updateUserCheck.jsp" id="updateUser">내 정보 수정</a></li>
                 <li><a href="">장바구니</a></li>
             
             </ul>
@@ -77,12 +83,13 @@
             </ul>
             <div id="line_2"></div>
             <ul>
-                <li><a href="">나의 문의 내역</a></li>
-                <li><a href="" >내 리뷰 조회</a></li>
+                <li><a href="<%= request.getContextPath() %>/myQna.me" id="myQna">나의 문의 내역</a></li>
+                <li><a href="<%= request.getContextPath() %>/myReview.me" id="myReview">내 리뷰 조회</a></li>
             </ul>
-            <div id="line_2"></div>
+            <!-- <div id="line_2"></div> -->
         </div>
 
+        <!-- request.getContextPath -->
     </div>
 </body>
 </html>

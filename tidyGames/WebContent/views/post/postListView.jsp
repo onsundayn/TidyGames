@@ -24,6 +24,9 @@
     	cursor:pointer;
     	opacity:0.9;
     }
+    #title:hover{
+    	text-decoration:underline;
+    }
     #submitbtn{color:white; background:#0e332c; border:none;}
 </style>
 </head>
@@ -69,7 +72,7 @@
                         <td><input type="checkbox"></td>
                         <td>15</td>
                         <td>라랄라라라</td>
-                        <td>제목 제목 이것은 제목입니다</td>
+                        <td id="title">제목 제목 이것은 제목입니다</td>
                         <td>1</td>
                         <td>0</td>
                         <td>2021-12-05</td>
@@ -251,6 +254,11 @@
 	            }else {
 	                $(":checkbox", $("table")).prop("checked", false);
 	            }
+	        })
+	        
+	        $("#title").click(function(){
+	        	location.href = '<%=contextPath%>/detail.po';
+	        	// 나중에덧붙이기: ?bno=' + $(this).children().eq(0).text();
 	        })
     	})
     </script>

@@ -9,6 +9,7 @@
     /* 전체div */
     #outer{
         width:1500px;
+        height: 1000px;
         margin:auto;
     }
     #outer>div{
@@ -59,8 +60,18 @@
         margin-left: 70px;
     }
 
-    table table-borderless td{
+    .paging-area>button {
+        border-radius: 5px;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 20px;
+       
         
+    }
+    .paging-area>button:hover {
+        cursor:pointer;
+        color:orange
     }
 
 </style>
@@ -77,7 +88,7 @@
         </div>
 
         <!-- 닉네임 불러와지게 -->
-        <div class="area1"><span>닉네임</span> 의주문내역</div>
+        <div class="area1"><span>닉네임</span>님의 주문내역</div>
         <br><br><br><br><br>
         
 
@@ -118,7 +129,7 @@
 
              </div>
              <div id="line1" style="width: 1150px; height: 2px; background: rgba(255, 255, 255, 0.555); margin-left: 50px;"></div>
-        <br><br><br><br>
+                <br><br><br><br>
 
              <div class="area3">
                 <div class="container" style="color:white;">
@@ -140,7 +151,7 @@
                         <tr>
                             
                             <td colspan="2" rowspan="2" width="200px" height="200px" style="text-align: center;">
-                                <img src="/../TidyGames/tidyGames/WebContent/resources/image/battlefield.JPG" width="150px" height="200px">
+                                <img src="<%=contextPath%>/resources/image/battlefield.JPG" width="150px" height="200px">
 
                             </td> <!-- 1,2열 합쳐서 한 열로, 1,2행 하나로 합쳐서 한행으로-->
                             <td width ="700" height="40px">
@@ -154,8 +165,8 @@
 
                         <tr>
                             <td style="font-weight: bold;">   
-                                <div>주문번호  <a href="">100000</a></div><br>
-                                <div>결제금액  <span>100000</span></div><br>
+                                <div>주문번호 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <a href="">100000</a></div><br>
+                                <div>결제금액 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <span>100000</span></div><br>
                                 <div>결제완료 or 환불중</div>
                             </td>
                            
@@ -200,7 +211,7 @@
                         <tr>
                             
                             <td colspan="2" rowspan="2" width="200px" height="200px" style="text-align: center;">
-                                <img src="/../TidyGames/tidyGames/WebContent/resources/image/battlefield.JPG" width="150px" height="200px">
+                                <img src="<%=contextPath%>/resources/image/battlefield.JPG" width="150px" height="200px">
 
                             </td> <!-- 1,2열 합쳐서 한 열로, 1,2행 하나로 합쳐서 한행으로-->
                             <td width ="700" height="40px">
@@ -214,8 +225,8 @@
 
                         <tr>
                             <td style="font-weight: bold;">   
-                                <div>주문번호  <a href="">100000</a></div><br>
-                                <div>결제금액  <span>100000</span></div><br>
+                                <div>주문번호 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="">100000</a></div><br>
+                                <div>결제금액 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <span>100000</span></div><br>
                                 <div>결제완료 or 환불중</div>
                             </td>
                            
@@ -231,12 +242,33 @@
                     </table>
                 </div>
 
+                <br><br>
+             <div class="paging-area" align="center">
+	
+                <button> &lt; </button>
+                <button>1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>4</button>
+                <button>5</button>
+                <button>6</button>
+                <button>7</button>
+                <button>8</button>
+                <button>9</button>
+                <button>10</button>
+                <button> &gt; </button>
+        
+            </div>
+
              </div>
+
 
 
         
         
     </div>
+
+    
 
 
 

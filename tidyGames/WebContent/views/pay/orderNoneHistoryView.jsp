@@ -20,12 +20,60 @@
         height:2px;
         background: rgba(255, 255, 255, 0.555);
     }
+ /* 닉네임의주문내역 */
+ .area1{
+       border: 1px solid red;
+       font-size: 30px;
+        font-weight: 900;
+        color :white;
+        margin: 30px 80px 0px 50px;
+    }
+    /* 검색영역 */
+    .area2{
+        border: 1px solid blue;
+        width: 1200px;
+        height:80px;
+        margin-left: 70px;
+        
+        
+        
+    }
+
+     /* 검색바 */
+     .searchname div{
+        display:inline;
+        
+    }
+    /* select */
+    .searchbar{
+        margin-top : 60px;
+        margin-left: 100px;
+    }
+
+    .dateSearch .searchname{
+        display: inline;
+    }
   /* 주문내역 게임 1개 영역 */
   .area3{
         width: 1200px;
         height: 350px;
         border: 1px solid violet;
         margin-left: 70px;
+    }
+
+    .area4{
+        background: none;
+        text-align: center;
+        border: 1px solid blue;
+        width: 1000px;
+        height: 400px;
+        margin-top: 50px;
+        margin-left: 100px;
+        color:white;
+       
+    }
+    .area4>h4 {
+        font-size: 18px;
     }
 </style>
 </head>
@@ -41,7 +89,7 @@
         </div>
 
         <!-- 닉네임 불러와지게 -->
-        <div class="area1"><span>닉네임</span> 의주문내역</div>
+        <div class="area1"><span>닉네임</span>님의 주문내역</div>
         <br><br><br><br><br>
         
 
@@ -86,11 +134,11 @@
 
              <div class="area4">
                  <br><br>
-                <img src="/../TidyGames/tidyGames/WebContent/resources/image/warning.png" width="100px" height="100px"><br>
+                <img src="<%=contextPath%>/resources/image/warning.png" width="100px" height="100px"><br>
                 <br>
                 <h2>검색결과가 없습니다.</h2>
-                <h4>설정한 조건에 해당하는 검색결과가 없습니다.</h4>
-                <h4>상세조건을 다시 설정해주세요.</h4>
+                <h4 style="color:gray">설정한 조건에 해당하는 검색결과가 없습니다.</h4>
+                <h4 style="color:gray">상세조건을 다시 설정해주세요.</h4>
 
              </div>
 

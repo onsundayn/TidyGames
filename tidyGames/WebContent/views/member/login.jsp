@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String contextPath = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +18,9 @@
         background-color: #0e332c;
         margin: auto;
         margin-top: 50px;
+    }
+    #logo>*:hover{
+        text-decoration: none;
     }
     #content{
         width: 600px;
@@ -85,9 +91,11 @@
 <body style="background-color: #0e332c;">
     <div class="outer">
     <header>
-        <div align="center">
-            <a href=""><img src="../../resources/image/tidyLogo.png" style="width:80px; height: 50px;"></a> <br>
-            <span style="color: white; font-size: 25px; font-weight: bold;">TIDY GAMES</span>
+        <div id="logo" align="center">
+            <a href="<%= contextPath %>">
+                <img src="../../resources/image/tidyLogo.png" style="width:80px; height: 50px;"> <br>
+                <span style="color: white; font-size: 25px; font-weight: bold;">TIDY GAMES</span>
+            </a>
         </div>
     </header>
 
@@ -101,11 +109,11 @@
 
                     <div class="form-group">
                         <br>
-                        <input type="text" name="userId" class="form-control" placeholder="아이디" id="id">
+                        <input type="text" name="userId" class="form-control" placeholder="아이디" id="id" required>
                     </div> 
 
                     <div class="form-group">
-                        <input type="password" name="userPwd" class="form-control" placeholder="비밀번호" id="pwd">
+                        <input type="password" name="userPwd" class="form-control" placeholder="비밀번호" id="pwd" required>
                     </div>
 
                     <div class="login_check">
@@ -121,13 +129,13 @@
                     </div>
 
                     <div class="login_btn">
-                        <button type="submit">LOGIN</button>
+                        <button type="submit" onclick="login();">LOGIN</button>
                     </div>
 
                     <div class="find_login">
-                        <a href="">아이디 찾기</a> ㅣ
-                        <a href="">비밀번호 재설정</a> ㅣ
-                        <a href="">회원가입</a>
+                        <a href="searchId.jsp">아이디 찾기</a> ㅣ
+                        <a href="searchPwd.jsp">비밀번호 재설정</a> ㅣ
+                        <a href="enrollForm.jsp">회원가입</a>
                     </div>
                     <hr>
 
@@ -142,6 +150,11 @@
 
                 </div>
             </form>
+            <script>
+                function login(){
+
+                }
+            </script>
         </div>
     </content>
 

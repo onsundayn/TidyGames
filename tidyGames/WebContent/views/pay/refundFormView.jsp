@@ -135,13 +135,13 @@
                                     
                                     <td width="200px" height="160px" style="text-align: center;">
 
-                                        <img src="/../TidyGames/tidyGames/WebContent/resources/image/battlefield.JPG" width="120px" height="150px">
+                                        <img src="<%=contextPath%>/resources/image/battlefield.JPG" width="120px" height="150px">
                                     </td> 
                                     <td width ="300" style="font-weight: bold;">
                                         <div><br></div>
-                                        <div>주문번호  <span>10000</span></div><br>
-                                        <div>주문날짜 <span>2021-12-09</span></div><br>
-                                        <div>결제금액  <span>27500</span></div><br>
+                                        <div>주문번호 :   <span>10000</span></div><br>
+                                        <div>주문날짜 : <span>2021-12-09</span></div><br>
+                                        <div>결제금액 : <span>27500</span></div><br>
                                         
 
                                     </td>
