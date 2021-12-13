@@ -152,7 +152,7 @@
                     <br>
                     ★★★★★
                     <br><br><br>
-                    <button>이 게임의 리뷰</button>
+                    <a href="reviewListView.jsp" class="btn btn-sm btn-secondary">이 게임의 리뷰</a>
                 </div>
                 <div class="heart" align="center">
                     <br><br><br>
@@ -180,7 +180,7 @@
                     <br>
                     ★★★★★
                     <br><br><br>
-                    <button>이 게임의 리뷰</button>
+                    <a href="reviewListView.jsp" class="btn btn-sm btn-secondary">이 게임의 리뷰</a>
                 </div>
                 <div class="heart" align="center">
                     <br><br><br>
@@ -208,7 +208,7 @@
                     <br>
                     ★★★★★
                     <br><br><br>
-                    <button>이 게임의 리뷰</button>
+                    <a href="reviewListView.jsp" class="btn btn-sm btn-secondary">이 게임의 리뷰</a>
                 </div>
                 <div class="heart" align="center">
                     <br><br><br>
@@ -236,7 +236,7 @@
                     <br>
                     ★★★★★
                     <br><br><br>
-                    <button>이 게임의 리뷰</button>
+                    <a href="reviewListView.jsp" class="btn btn-sm btn-secondary">이 게임의 리뷰</a>
                 </div>
                 <div class="heart" align="center">
                     <br><br><br>

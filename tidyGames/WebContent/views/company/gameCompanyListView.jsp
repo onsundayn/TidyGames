@@ -72,15 +72,15 @@
                 <td>ElectronicArts</td>
                 <td>Battlefield2042</td>
                 <td>2021-11-15</td>
-                <td><button class="btn btn-sm btn-primary">승인</button></td>
-                <td><button class="btn btn-sm btn-primary">업데이트</button></td>
+                <td><a href="gameCompanyEnrollForm.jsp" class="btn btn-sm btn-primary">승인</a></td>
+                <td><a href="gameCompanyUpdateForm.jsp" class="btn btn-sm btn-primary">업데이트</a></td>
             </tr>
             <tr>
                 <td>3</td>
                 <td>ElectronicArts</td>
                 <td>Battlefield2042</td>
                 <td>2021-11-15</td>
-                <td><button class="btn btn-sm btn-danger">반려</button></td>
+                <td><a href="gameCompanyEnrollForm.jsp" class="btn btn-sm btn-danger">반려</a></td>
                 <td></td>
             </tr>
             <tr>
@@ -88,7 +88,7 @@
                 <td>ElectronicArts</td>
                 <td>Battlefield2042</td>
                 <td>2021-11-15</td>
-                <td><button class="btn btn-sm btn-primary">승인</button></td>
+                <td><a href="gameCompanyEnrollForm.jsp" class="btn btn-sm btn-primary">승인</a></td>
                 <td></td>
             </tr>
             <tr>
@@ -96,8 +96,8 @@
                 <td>ElectronicArts</td>
                 <td>Battlefield2042</td>
                 <td>2021-11-15</td>
-                <td><button class="btn btn-sm btn-primary">승인</button></td>
-                <td><button class="btn btn-sm btn-primary">업데이트</button></td>
+                <td><a href="gameCompanyEnrollForm.jsp" class="btn btn-sm btn-primary">승인</a></td>
+                <td><a href="gameCompanyUpdateForm.jsp" class="btn btn-sm btn-primary">업데이트</a></td>
             </tr>
 
         </table>
