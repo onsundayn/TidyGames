@@ -45,7 +45,9 @@
         height:100%;
     }
     #btngo{
-        float:right;
+        width:300px;
+        margin-left: 500px;
+        padding-top: 50px;
     }
     #dropdown{
         float: left;
@@ -140,7 +142,9 @@
                 </select>
             </div>
             <div id="btngo">
-                <button type="hidden" id="btn" style="margin-right: 80px;">리뷰작성하기</button>
+                <div align="right" style="width:100px;">
+                    <a href="reviewEnrollForm.jsp" class="btn btn-sm btn-secondary">리뷰작성</a>
+                </div>
             </div>
         </div>
         <div class="buttom-area">

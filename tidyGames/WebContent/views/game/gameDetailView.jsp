@@ -147,7 +147,7 @@
                 </div>
                 <div id="tag">
                     관련태그&nbsp;&nbsp;&nbsp; 
-                            <a href="" class="category-btn">싱글플레이어</a>
+                            <a href="gameList.jsp" class="category-btn">싱글플레이어</a>
                             <a href="" class="category-btn">어드벤처</a>
                             <a href="" class="category-btn">탐험</a>
                 </div>
@@ -165,7 +165,7 @@
                     <img src="<%=contextPath%>/resources/image/rating (1).png" width="140px" height="80px">
                 </div>
                 <div id="go-review">
-                    <a href="">게임리뷰 보러가기</a>
+                    <a href="<%=contextPath%>/views/game/reviewListView.jsp">게임리뷰 보러가기</a>
                 </div>
             </div>
 

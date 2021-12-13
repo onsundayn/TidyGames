@@ -63,15 +63,16 @@
         height: 60%;
         float: left;
         margin:6px;
-        margin-top: 25px;
-        border: 1px solid red;
+        margin-top: 30px;
+        margin-left: 15px;
     }
     #user-name{
-        width:55%;
+        width:45%;
         height: 80%;
         float: left;
         margin: 6px;
         margin-top: 7px;
+        margin-left: 20px;
     }
     .content{
         width:70%;
@@ -93,7 +94,14 @@
         height: 80px;
         background:rgba(211, 211, 211, 0.281);
         width:80%;
-
+    }
+    #golist{
+        text-decoration: none;
+        background: lightgray;
+        border: 1px solid lightgray;
+        color: black;
+        border-radius: 3px;
+        padding: 4px;
     }
 
 </style>
@@ -130,11 +138,11 @@
                 <div class="review-list">
                     <div class="user-info">
                         <div id="profile-img">
-                            <img src="" alt="사용자프로필">
+                            <img src="<%=contextPath%>/resources/image/user.png" width="70px" height="75px">
                         </div>
                         <div id="user-name">
                             <br><br>
-                            <button>닉네임</button>
+                            사용자닉네임
                         </div>
                     </div>
                     <div class="content">
@@ -147,7 +155,7 @@
                     <br>
                     <button type="submit">리뷰작성완료</button>
                     <button type="reset">초기화</button>
-                    <button type="button">목록으로</button>
+                    <button type="button" onclick="history.back()">뒤로가기</button>
                 </div>
             </div>
         </form>
