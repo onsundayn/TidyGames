@@ -6,7 +6,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-     #outer{
+
+#outer{
         width:1500px;
         margin:auto;
     }
@@ -77,37 +78,25 @@
     select>option{
         font-weight: bold;
     }
-    /* 포인트조회내역 영역 */
-    .area3{
-        width: 1000px;
-        margin-left: 100px;
-        border: 1px solid red;
 
-    }
-
-    .table table-bordered tr{
-        background: white;
-    }
-
-    #pointcontent{
-        color:white;
-        text-align: center;
-
-    }
-    /* 조회 버튼 영역 */
     .area4{
-        width: 1000px;
-        height: 40px;
+        background: none;
+        text-align: center;
         border: 1px solid blue;
-        margin:0px 0px 20px 100px;
+        width: 1000px;
+        height: 400px;
+        margin-top: 50px;
+        margin-left: 100px;
+        color:white;
+       
     }
-
-    .area4>select{
-        float: right;
+    .area4>h4 {
+        font-size: 18px;
     }
 </style>
 </head>
 <body>
+
     <%@ include file="../common/topbar.jsp"%>
     <%@ include file="../common/navibar.jsp"%>
     <div id="outer">
@@ -163,67 +152,25 @@
             <div style="color:grey; margin:10px 0px 0px 70px">적립된 당일로부터 POINT는 5년동안 유지됩니다.</div>
         </div>
 
-     
-        
-
-
         <br><br>
-        <div style="width: 1000px; height: 2px; background: gray; margin:30px 0px 20px 100px;" ></div>
+        <div style="width: 1000px; height: 2px; background: gray; margin:30px 0px 30px 100px;"></div>
         <br><br>
 
+        <div class="area4">
+            <br><br>
+           <img src="<%=contextPath%>/resources/image/warning.png" width="100px" height="100px"><br>
+           <br>
+           <h2>검색결과가 없습니다.</h2>
+           <h4 style="color:gray">설정한 조건에 해당하는 검색결과가 없습니다.</h4>
+           <h4 style="color:gray">상세조건을 다시 설정해주세요.</h4>
 
-    
-     
-            <div class="area4">
-                <select class="btn btn-outline-secondary" style="color: white;"">
-                    <option selected value="uptodate">최신순</option>
-                    <option value="olddae" >오래된순</option>
-    
-                </select>
-             </div>
-
-        
-
-        <div class="area3">
-
-            <table class="table table-bordered" id="pointcontent">
-                <thead>
-                  <tr style="background: white; color:black;">
-                    <th>날짜</th>
-                    <th>적립/사용내용</th>
-                    <th>POINT</th>
-                    <th>적립/사용</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    <!-- 적립시 tr -->
-                  <tr>
-                    <td>2021.10.01</td>
-                   
-                    <td>회원 가입 축하 POINT</td>
-                    <td style="color:rgb(57, 57, 216);">+ 5000</td>
-                    <td style="color:rgb(57, 57, 216);">적립</td>
-                  </tr>
-
-                  <!-- 사용시 tr -->
-                  <tr class="usecol">
-                    <td>2021.11.10</td>
-                    <td>결제시 사용</td>
-                    <td style="color:red;">- 3000</td>
-                    <td style="color:red;">사용</td>
-                  </tr>
-                  <tr>
-                    <td>2021.11.10</td>
-                    <td>구매 적립 POINT</td>
-                    <td>+ 7525</td>
-                    <td>적립</td>
-                  </tr>
-                </tbody>
-              </table>
         </div>
 
 
-    
+
+
+
+
 
 
 
@@ -231,15 +178,6 @@
 
 
     </div>
-
-
-
-
-
-
-
-   
-
 
 </body>
 </html>

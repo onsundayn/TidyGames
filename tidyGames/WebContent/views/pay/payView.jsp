@@ -159,6 +159,11 @@
         height: 50px;
         margin: auto;
     }
+
+    .table-striped td>h4{
+        font-size: 18px;
+        margin-top: 30px;
+    }
 </style>
 </head>
 <body style="background:#0e332c;">
@@ -181,22 +186,32 @@
                     <thead>
                         <tr>
                     
-                            <th width="300px">게임사진</th>
-                            <th>게임명</th>
+                            <th width="200px"></th>
+                            <th width="300px">게임명</th>
                             <th>게임가격</th>
+                            <th>할인가격</th>
+                            <th>결제금액</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td height="150px">게임사진</td>
-                            <td>배틀그라운드</td>
-                            <td>$40000</td>
+                            <td height="120px" style="text-align: right;"><img src="<%=contextPath%>/resources/image/battlefield.JPG" Width="80px" height="100px" ></td>
+                            <td ><h3 style=" margin-top: 30px;">battlefield</h3></td>
+                            <td><h4>40000원</h4></td>
+                            <td><h4>-10000원</h4></td>
+                            <td><h4>30000원</h4></td>
                         </tr>
 
                         <tr>
-                            <td height="150px">게임사진</td>
-                            <td>배틀그라운드</td>
-                            <td>$40000</td>
+                            <td height="120px" style="text-align: right;"><img src="<%=contextPath%>/resources/image/battlefield.JPG" Width="80px" height="100px" ></td>
+                            <td ><h3 style=" margin-top: 30px;">battlefield</h3></td>
+                            <td><h4>40000원</h4></td>
+                            <td><h4>-10000원</h4></td>
+                            <td><h4>30000원</h4></td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="5" style="text-align: right; height: 70px;"><h4>총 결제금액 : 60000원</h4></td>
                         </tr>
                     
                         
@@ -229,24 +244,24 @@
                             <h3>결제수단</h3>
                             <div class="area2">
                                 <input type ="radio" name="payment" value="credit">
-                                <img src="C:\TidyGames\tidyGames\WebContent\resources\image\카드.JPG">
+                                <img src="<%=contextPath%>/resources/image/creditcard.png" width="50px" height="40px">
                                 Credit Card
                             </div>
                             <div class="area2">
                                 <input type="radio" name="payment" value="kakaopay">
-                                <img src="C:\TidyGames\tidyGames\WebContent\resources\image\카카오페이.png">
+                                <img src="<%=contextPath%>/resources/image/kakao.png" width="70px" height="40px">
                                 KaokoPay
                             </div>
                             <div class="area2">
-                                <input type="radio" name="payment" value="naverpay">
-                                <img src="C:\TidyGames\tidyGames\WebContent\resources\image\네이버페이.jpg">
-                                NaverPay
+                                <input type="radio" name="payment" value="naverpay">&nbsp;
+                                <img src="<%=contextPath%>/resources/image/naverpay.png" width="50px" height="30px">
+                                &nbsp;&nbsp;NaverPay
 
                             </div>
                             <div class="area2">
-                                <input type="radio" name="payment" value="toss">
-                                <img src="C:\TidyGames\tidyGames\WebContent\resources\image\toss.png">
-                                Toss
+                                <input type="radio" name="payment" value="toss">&nbsp;&nbsp;
+                                <img src="<%=contextPath%>/resources/image/toss.png" width="50px" height="30px">
+                                &nbsp;Toss
                             </div>
                         </div>
 

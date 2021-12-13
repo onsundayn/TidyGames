@@ -77,7 +77,7 @@
     select>option{
         font-weight: bold;
     }
-    /* 포인트조회내역 영역 */
+
     .area3{
         width: 1000px;
         margin-left: 100px;
@@ -94,7 +94,6 @@
         text-align: center;
 
     }
-    /* 조회 버튼 영역 */
     .area4{
         width: 1000px;
         height: 40px;
