@@ -10,6 +10,8 @@
     #sidebarOut{
         width:210px;
         height:800px;
+        float: left;
+        margin-top: 50px;
 
     }
     #sideBox{
