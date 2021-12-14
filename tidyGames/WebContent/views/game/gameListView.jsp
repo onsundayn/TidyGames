@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.game.model.vo.Game"%>
+<%
+	ArrayList<Game> list = (ArrayList<Game>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,32 +15,29 @@
         height:1000px;
         display: flex;
         margin: auto;
-        margin-top: 60px;
-        
+        margin-top: 70px;
 
     }
 
     .game-list{
         background: rgb(43, 65, 60);
         width:1000px;
-        height:180px;
-        margin-top: 20px;
-        margin-bottom: 30px ;
-        float: right;
-        flex: 2;
+        height:240px;
+        margin-bottom: 50px;
         display:flex;
-
+        border:1px solid red;
+        
     }
 
-    .game-list>div{
-        display:inline-block;
+    .game-list>div {
         box-sizing: border-box;
     }
     .game-title-img{
-        width: 300px;
-        height:200px;
         box-sizing: border-box;
-        flex:1;
+        width: 300px;
+        height:205px;
+        float: left;
+        object-fit: cover;
     }
     .game-name,.star-rating{
         width:180px;
@@ -45,8 +45,8 @@
         font-weight: bold;
         flex: 1;
         padding-top: 45px;
-
     }
+
     .heart,.cart{
         width:100px;
         height: 50px;
@@ -62,12 +62,10 @@
         height: 120px;
         flex: 1;
     }
-
-    .game-list img{
-        width: 310px;
-        height:200px;
-        object-fit: fill;
+    .game-title-img img {
         box-sizing: border-box;
+        width:100%;
+        height: 100%;
     }
     
     
@@ -136,17 +134,24 @@
         <div class="emp"></div>
 
         <div class="list-group">
-
+			<% if(list.isEmpty()) { %>
+			<!-- 키워드와 일치하는 게임이 없을 경우 -->
+				<h3 align="center" style="color:white"> 일치하는 게임이 없습니다.</h3>
+			<% }else {%>
+			<!--  일치하는 게임이 있을 경우 -->
+				<% for(Game g : list) { %>
             <div class="game-list">
                 <div class="game-title-img">
-                    <img src="<%=contextPath%>/resources/image/Dead-Cells.jpg">
+                    <img src="<%=contextPath%>/<%=g.getGameImg()%>">
                 </div>
                 <div class="game-name" align="center">
-                    슬라임랜처<br>
-                    Slime Rancher
+                    <%=g.getKorName()%><br>
+                    <%=g.getEngName()%>
                     <br><br>
-                    출시일<br>
-                    2016년 2월 27일
+                    <h4 style="color: lightgrey; font-size: 14px;">
+                        출시일<br>
+                    <%=g.getReleaseDate()%>
+                    </h4>
                 </div>
                 <div class="star-rating" align="center">
                     <br>
@@ -163,7 +168,8 @@
                     <button>cart</button>
                 </div>
             </div>
-    
+	           	<% } %>
+	   		<% } %>
             <div class="game-list">
                 <div class="game-title-img" >
                     <img src="">
@@ -188,7 +194,7 @@
                 </div>
                 <div class="cart" align="center">
                     <br><br><br>
-                    <button>cart</button>
+                    <a href=""><button>cart</button></a>
                 </div>
             </div>
     
@@ -201,8 +207,9 @@
                     슬라임랜처<br>
                     Slime Rancher
                     <br><br>
-                    출시일<br>
-                    2016년 2월 27일
+                    <h4 style="color: lightgrey; font-size: 14px;">출시일<br>
+                    2016년 2월 27일</h4>
+                    
                 </div>
                 <div class="star-rating" align="center">
                     <br>

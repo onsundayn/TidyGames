@@ -1,39 +1,53 @@
 package com.TidyGames.game.model.vo;
 
-import java.sql.Date;
-
 public class Game {
 	
 	private int gameNo;
 	private int companyNo;
 	private String korName;
 	private String engName;
-	private Date releaswDate;
+	private String releaseDate;
 	private int price;
 	private String gameIntro;
 	private String confirm;
 	private String update;
-	private Date uploadDate; 
+	private String uploadDate; 
 	private double point;
 	private String gameStatus;
 	private String gameImg;
 	
 	public Game () {}
 
-	public Game(int gameNo, int companyNo, String korName, String engName, Date releaswDate, int price,
-			String gameIntro, String confirm, String update, Date uploadDate, double point, String gameStatus,
+	public Game(int gameNo, int companyNo, String korName, String engName, String releaseDate, int price,
+			String gameIntro, String confirm, String update, String uploadDate, double point, String gameStatus,
 			String gameImg) {
 		super();
 		this.gameNo = gameNo;
 		this.companyNo = companyNo;
 		this.korName = korName;
 		this.engName = engName;
-		this.releaswDate = releaswDate;
+		this.releaseDate = releaseDate;
 		this.price = price;
 		this.gameIntro = gameIntro;
 		this.confirm = confirm;
 		this.update = update;
 		this.uploadDate = uploadDate;
+		this.point = point;
+		this.gameStatus = gameStatus;
+		this.gameImg = gameImg;
+	}
+	
+	
+
+	public Game(int gameNo, int companyNo, String korName, String engName, String releaseDate, int price, double point,
+			String gameStatus, String gameImg) {
+		super();
+		this.gameNo = gameNo;
+		this.companyNo = companyNo;
+		this.korName = korName;
+		this.engName = engName;
+		this.releaseDate = releaseDate;
+		this.price = price;
 		this.point = point;
 		this.gameStatus = gameStatus;
 		this.gameImg = gameImg;
@@ -71,12 +85,12 @@ public class Game {
 		this.engName = engName;
 	}
 
-	public Date getReleaswDate() {
-		return releaswDate;
+	public String getReleaseDate() {
+		return releaseDate;
 	}
 
-	public void setReleaswDate(Date releaswDate) {
-		this.releaswDate = releaswDate;
+	public void setReleaseDate(String releaseDate) {
+		this.releaseDate = releaseDate;
 	}
 
 	public int getPrice() {
@@ -111,11 +125,11 @@ public class Game {
 		this.update = update;
 	}
 
-	public Date getUploadDate() {
+	public String getUploadDate() {
 		return uploadDate;
 	}
 
-	public void setUploadDate(Date uploadDate) {
+	public void setUploadDate(String uploadDate) {
 		this.uploadDate = uploadDate;
 	}
 
@@ -146,7 +160,7 @@ public class Game {
 	@Override
 	public String toString() {
 		return "Game [gameNo=" + gameNo + ", companyNo=" + companyNo + ", korName=" + korName + ", engName=" + engName
-				+ ", releaswDate=" + releaswDate + ", price=" + price + ", gameIntro=" + gameIntro + ", confirm="
+				+ ", releaswDate=" + releaseDate + ", price=" + price + ", gameIntro=" + gameIntro + ", confirm="
 				+ confirm + ", update=" + update + ", uploadDate=" + uploadDate + ", point=" + point + ", gameStatus="
 				+ gameStatus + ", gameImg=" + gameImg + "]";
 	}
