@@ -166,7 +166,9 @@ body {
     border-color: #4466f2 !important
 }
 
-
+#cartbar{
+    color:orange;
+}
 
 
 

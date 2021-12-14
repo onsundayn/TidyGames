@@ -99,6 +99,10 @@
 
     }
 
+    #orderList{
+        color:orange;
+    }
+
 </style>
 </head>
 <body>
@@ -192,7 +196,7 @@
                         <td>2021-11-10</td>
                         <td>27500원</td>
                         <td>환불완료</td>
-                        <td><button class="btn btn-success btn-sm">상세보기</button></td>
+                        <td><a href="<%= request.getContextPath() %>/adOrderDetail.pa" class="btn btn-success btn-sm">상세보기</a></td>
                       </tr>
                       <tr>
                         <td>2</td>
