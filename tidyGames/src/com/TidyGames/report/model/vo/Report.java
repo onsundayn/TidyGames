@@ -13,6 +13,10 @@ public class Report {
 	private Date reportDate;
 	private String done;
 	
+	// DB 외 필드
+	private String reportedId;
+	private String reportedName;
+	
 	public Report() {}
 
 	public Report(int reportNo, int reportedMemNo, int reportingMemNo, int refPno, int refRNo, String reportSort,
@@ -26,6 +30,17 @@ public class Report {
 		this.reportSort = reportSort;
 		this.reportDate = reportDate;
 		this.done = done;
+	}
+	
+	
+
+	public Report(int reportNo, String reportedId, String reportedName, String reportSort, Date reportDate) {
+		super();
+		this.reportNo = reportNo;
+		this.reportedId = reportedId;
+		this.reportedName = reportedName;
+		this.reportSort = reportSort;
+		this.reportDate = reportDate;
 	}
 
 	public int getReportNo() {
@@ -90,6 +105,22 @@ public class Report {
 
 	public void setDone(String done) {
 		this.done = done;
+	}
+	
+	public String getReportedId() {
+		return reportedId;
+	}
+
+	public void setReportedId(String reportedId) {
+		this.reportedId = reportedId;
+	}
+
+	public String getReportedName() {
+		return reportedName;
+	}
+
+	public void setReportedName(String reportedName) {
+		this.reportedName = reportedName;
 	}
 
 	@Override

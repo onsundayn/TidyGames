@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.report.model.vo.Report"%>
 <!DOCTYPE html>
+
+<%
+	ArrayList<Report> list = (ArrayList<Report>)request.getAttribute("list");
+%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -42,7 +46,7 @@
     }
     #tableBox{
         width:1100px;
-        height:840px;
+        height:700px;
         /* margin-left:145px; */
         margin: 30px 0px 100px 95px;
         background-color: rgb(197, 197, 197);
@@ -65,24 +69,23 @@
         margin: 0px 50px 0px 40px;
     }
     #rightTop{
-        margin: 55px 20px 20px 110px;
+        margin: 55px 20px 20px 380px;
     }
     #table{
         margin:auto;
-        width:1000px;
+        width:930px;
         /* background-color: gray; */
     }
     #table *{
         height:15px;
     }
-    #table th{
-        font-size:18px;
-    }
+    #table th{font-size:18px;}
+    #table td{padding:5px;}
     #btn{
         padding:0px;
-        width:46px;
-        height:24px;
-        margin-left:3px;
+        margin:0px;
+        width:93px;
+        height:30px;
     }
     #checkBox{
         width:20px;
@@ -92,17 +95,16 @@
     #blacklist{
         color:orange;
     }
-    tbody a{
-        color:gray;
+    #table a{
+        color:black;
     }
-    #table td{padding:4px;}
     #tableOut1{
         width:100%;
-        height:95%;
+        height:92%;
     }
     #tableOut2{
         width:100%;
-        height:5%;
+        height:8%;
     }
 
 </style>
@@ -130,12 +132,6 @@
                         <div>
                             <span>블랙리스트 목록</span>
                         </div>
-                        <div>
-                            <a href="" class="btn btn-dark">상세 조회</a>
-                            <!-- 회원 조회 페이지로 이동함 -->
-                            <a href="" class="btn btn-dark">차단 해제</a>
-                        </div>
-                    
                     </div>
                     <div id="rightTop">
                         <div class="btn-group">
@@ -159,52 +155,127 @@
                 <table id="table" class="table table-hover">
                     <thead>
                         <tr align="center">
-                            <th width="30"> </th>
                             <th width="30">No.</th>
-                            <th width="130">아이디</th>
-                            <th width="130">닉네임</th>
+                            <th width="100">아이디</th>
+                            <th width="150">닉네임</th>
                             <th width="170">제한 사유</th>
-                            <th width="100">등록일</th>
+                            <th width="130">등록일</th>
+                            <th width="100">권한</th>
                         </tr>
                     </thead>
                     <tbody>
                         
+                        <% for(Report r : list) { %>
+                        	
+	                        <tr align="center">
+	                            <td width="30"><%= r.getReportNo() %></td>
+	                            <td><%= r.getReportedName() %></td>
+	                            <td><a href=""><%= r.getReportedId() %></a></td>
+	                            <td><%= r.getReportSort() %></td>
+	                            <td><%= r.getReportDate() %></td>
+	                            <td style="padding:4px">
+	                              <button id="btn" class="btn btn-outline-dark">차단 해제</button>
+	                            </td>
+	                        </tr>
+                        
+                        <% } %>
+                        
+                        
                         <!-- if() {} -->
                         <tr align="center">
-                            <td><input type="checkbox" id="checkBox"></td>
-                            <td>1</td>
-                            <td>hobun</td>
-                            <td>호빵</td>
+                            <td width="30">1</td>
+                            <td>userId</td>
+                            <td><a href="">회원 상세조회</a></td>
                             <td>욕설, 비방</td>
                             <td>2021/12/11</td>
+                            <td style="padding:4px">
+                              <button id="btn" class="btn btn-outline-dark">차단 해제</button>
+                            </td>
                         </tr>
-<!-- 반복 예시 -->
+                        
+                        <!-- 복사 -->
 <tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>hobun</td>
-    <td>호빵</td>
-    <td>욕설, 비방</td>
-    <td>2021/12/11</td>
-</tr>
+	<td width="30">1</td>
+	<td>userId</td>
+	<td><a href="">회원 상세조회</a></td>
+	<td>욕설, 비방</td>
+	<td>2021/12/11</td>
+	<td style="padding:4px">
+	      <button id="btn" class="btn btn-outline-dark">차단 해제</button>
+    </td>
+</tr>	
 <tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>hobun</td>
-    <td>호빵</td>
-    <td>욕설, 비방</td>
-    <td>2021/12/11</td>
-</tr>
+	<td width="30">1</td>
+	<td>userId</td>
+	<td><a href="">회원 상세조회</a></td>
+	<td>욕설, 비방</td>
+	<td>2021/12/11</td>
+	<td style="padding:4px">
+	      <button id="btn" class="btn btn-outline-dark">차단 해제</button>
+    </td>
+</tr>	
 <tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>hobun</td>
-    <td>호빵</td>
-    <td>욕설, 비방</td>
-    <td>2021/12/11</td>
-</tr>
-<!-- 반복 예시 끝-->
-                                
+	<td width="30">1</td>
+	<td>userId</td>
+	<td><a href="">회원 상세조회</a></td>
+	<td>욕설, 비방</td>
+	<td>2021/12/11</td>
+	<td style="padding:4px">
+	      <button id="btn" class="btn btn-outline-dark">차단 해제</button>
+    </td>
+</tr>	
+<tr align="center">
+	<td width="30">1</td>
+	<td>userId</td>
+	<td><a href="">회원 상세조회</a></td>
+	<td>욕설, 비방</td>
+	<td>2021/12/11</td>
+	<td style="padding:4px">
+	      <button id="btn" class="btn btn-outline-dark">차단 해제</button>
+    </td>
+</tr>	
+<tr align="center">
+	<td width="30">1</td>
+	<td>userId</td>
+	<td><a href="">회원 상세조회</a></td>
+	<td>욕설, 비방</td>
+	<td>2021/12/11</td>
+	<td style="padding:4px">
+	      <button id="btn" class="btn btn-outline-dark">차단 해제</button>
+    </td>
+</tr>	
+<tr align="center">
+	<td width="30">1</td>
+	<td>userId</td>
+	<td><a href="">회원 상세조회</a></td>
+	<td>욕설, 비방</td>
+	<td>2021/12/11</td>
+	<td style="padding:4px">
+	      <button id="btn" class="btn btn-outline-dark">차단 해제</button>
+    </td>
+</tr>	
+<tr align="center">
+	<td width="30">1</td>
+	<td>userId</td>
+	<td><a href="">회원 상세조회</a></td>
+	<td>욕설, 비방</td>
+	<td>2021/12/11</td>
+	<td style="padding:4px">
+	      <button id="btn" class="btn btn-outline-dark">차단 해제</button>
+    </td>
+</tr>	
+<tr align="center">
+	<td width="30">1</td>
+	<td>userId</td>
+	<td><a href="">회원 상세조회</a></td>
+	<td>욕설, 비방</td>
+	<td>2021/12/11</td>
+	<td style="padding:4px">
+	      <button id="btn" class="btn btn-outline-dark">차단 해제</button>
+    </td>
+</tr>	
+                        <!-- 샘플 끝 -->
+                    
 
                     </tbody>
                   </table>
