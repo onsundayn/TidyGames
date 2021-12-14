@@ -1,9 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.report.model.vo.Report"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.report.model.vo.Report, com.TidyGames.common.model.vo.*"%>
 <!DOCTYPE html>
 
 <%
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<Report> list = (ArrayList<Report>)request.getAttribute("list");
+
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+	
 %>
 <html>
 <head>
@@ -156,8 +163,8 @@
                     <thead>
                         <tr align="center">
                             <th width="30">No.</th>
-                            <th width="100">아이디</th>
-                            <th width="150">닉네임</th>
+                            <th width="100">닉네임</th>
+                            <th width="130">아이디</th>
                             <th width="170">제한 사유</th>
                             <th width="130">등록일</th>
                             <th width="100">권한</th>
@@ -193,105 +200,37 @@
                             </td>
                         </tr>
                         
-                        <!-- 복사 -->
-<tr align="center">
-	<td width="30">1</td>
-	<td>userId</td>
-	<td><a href="">회원 상세조회</a></td>
-	<td>욕설, 비방</td>
-	<td>2021/12/11</td>
-	<td style="padding:4px">
-	      <button id="btn" class="btn btn-outline-dark">차단 해제</button>
-    </td>
-</tr>	
-<tr align="center">
-	<td width="30">1</td>
-	<td>userId</td>
-	<td><a href="">회원 상세조회</a></td>
-	<td>욕설, 비방</td>
-	<td>2021/12/11</td>
-	<td style="padding:4px">
-	      <button id="btn" class="btn btn-outline-dark">차단 해제</button>
-    </td>
-</tr>	
-<tr align="center">
-	<td width="30">1</td>
-	<td>userId</td>
-	<td><a href="">회원 상세조회</a></td>
-	<td>욕설, 비방</td>
-	<td>2021/12/11</td>
-	<td style="padding:4px">
-	      <button id="btn" class="btn btn-outline-dark">차단 해제</button>
-    </td>
-</tr>	
-<tr align="center">
-	<td width="30">1</td>
-	<td>userId</td>
-	<td><a href="">회원 상세조회</a></td>
-	<td>욕설, 비방</td>
-	<td>2021/12/11</td>
-	<td style="padding:4px">
-	      <button id="btn" class="btn btn-outline-dark">차단 해제</button>
-    </td>
-</tr>	
-<tr align="center">
-	<td width="30">1</td>
-	<td>userId</td>
-	<td><a href="">회원 상세조회</a></td>
-	<td>욕설, 비방</td>
-	<td>2021/12/11</td>
-	<td style="padding:4px">
-	      <button id="btn" class="btn btn-outline-dark">차단 해제</button>
-    </td>
-</tr>	
-<tr align="center">
-	<td width="30">1</td>
-	<td>userId</td>
-	<td><a href="">회원 상세조회</a></td>
-	<td>욕설, 비방</td>
-	<td>2021/12/11</td>
-	<td style="padding:4px">
-	      <button id="btn" class="btn btn-outline-dark">차단 해제</button>
-    </td>
-</tr>	
-<tr align="center">
-	<td width="30">1</td>
-	<td>userId</td>
-	<td><a href="">회원 상세조회</a></td>
-	<td>욕설, 비방</td>
-	<td>2021/12/11</td>
-	<td style="padding:4px">
-	      <button id="btn" class="btn btn-outline-dark">차단 해제</button>
-    </td>
-</tr>	
-<tr align="center">
-	<td width="30">1</td>
-	<td>userId</td>
-	<td><a href="">회원 상세조회</a></td>
-	<td>욕설, 비방</td>
-	<td>2021/12/11</td>
-	<td style="padding:4px">
-	      <button id="btn" class="btn btn-outline-dark">차단 해제</button>
-    </td>
-</tr>	
-                        <!-- 샘플 끝 -->
-                    
 
                     </tbody>
                   </table>
                 </div>
 
                 <div id="tableOut2">
-                  <div id="pagebar" align="center">
-                        <button>&lt;</button>   
-                        <button>1</button>
-                        <button>2</button>
-                        <button>3</button>
-                        <button>4</button>
-                        <button>5</button>
-                        <button>&gt;</button>
-                  </div>
+                    
+                    <div class="paging-area" align="center">
+                        <!-- 첫 페이지에서는 이전으로 비활성화 -->
+ 						<% if(currentPage != 1) { %>
+            				<button onclick="location.href='<%=contextPath%>/blacklist.me?cpage=<%=currentPage-1%>';"> &lt; </button>
+           				 <% } %>
+                        
+                        <% for(int p=startPage; p<=endPage; p++) { %>
+                        <!-- 페이징 버튼 활성화 조건 게시물수에 따른 버튼 활성화  -->
+                            <% if(p == currentPage) { %>
+                                <button disabled><%= p %></button>
+                            <% }else { %>
+                                <button onclick="location.href='<%= contextPath %>/blacklist.me?cpage=<%= p %>';"><%= p %></button>
+                            <% } %>
+                        <% } %>
+                        
+                        <% if(currentPage != maxPage) { %>
+                            <button onclick="loaction.href='<%= contextPath %>/blacklist.me?cpage<%=currentPage+1%>';"> &gt; </button>
+                            <!-- 현재 페이지가 마지막 페이지일 땐 다음으로 버튼 비활성화 -->
+                        <% } %>
+                    
+                    </div>
+
                 </div>
+                
                 </div>
                 
             </div>
