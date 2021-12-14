@@ -81,7 +81,7 @@
     <div class="top-area">
         <div id="top1"><a href="<%=contextPath%>"><img src="<%=contextPath%>/resources/image/tidyLogo.png" width="60px" height="40"> TIDY GAMES</a></div>
         <div id="top2" align="center">
-            <form action="" id="search_form">
+            <form action="<%=contextPath%>/gameList.ga" id="search_form">
 
                 <div id="search_box">
                     <input type="text" name="keyword" style="border-radius: 3px;">
