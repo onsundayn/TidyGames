@@ -100,9 +100,9 @@
             <div id="line_2"></div>
             <ul>
                 <li id="myPageBtn" style="font-weight: bolder">결제 내역 조회</li>
-                <li><a href="<%=contextPath%>/adorderHistory.pa" id="orderList">주문 관리</a></li>
-                <li><a href="<%=contextPath%>/adrefund.pa" id="refundList">환불 요청 목록</a></li> 
-                <li><a href="<%=contextPath%>/adPoint.me" id="pointbar">포인트 내역</a></li>
+                <li><a href="<%=request.getContextPath()%>/adorderHistory.pa" id="orderList">주문 관리</a></li>
+                <li><a href="<%=request.getContextPath()%>/adrefund.pa" id="refundList">환불 요청 목록</a></li> 
+                <li><a href="<%=request.getContextPath()%>/adPoint.me" id="pointbar">포인트 내역</a></li>
             </ul>
             <div id="line_2"></div>
             <ul>

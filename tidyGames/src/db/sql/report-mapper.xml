@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="blacklist">
+		SELECT 
+		       ROWNUM, B.*
+		  FROM
+			    (SELECT 
+			           MEM_ID
+			         , MEM_NICK
+			         , RCATEGORY_NAME
+			         , BLOCK_DATE
+			      FROM REPORT
+			      JOIN REPORT_CATEGORY ON (REPORT_SORT = RCATEGORY_NO)
+			      JOIN MEMBER  ON (REPORTED_MEM_NO = MEM_NO) 
+			     WHERE MEM_ACCESS = 'BLOCK'
+			     ORDER BY BLOCK_DATE) B
+		 ORDER 
+		    BY ROWNUM DESC
+	</entry>
+</properties>
