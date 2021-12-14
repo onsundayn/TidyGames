@@ -1,22 +1,23 @@
-package com.TidyGames.report.model.dao;
+package com.TidyGames.member.model.dao;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class ReportDao {
-	
+public class MemberDao {
+
 	private Properties prop = new Properties();
 	
-	public ReportDao() {
+	public MemberDao() {
 		
 		try {
-			prop.loadFromXML(new FileInputStream(ReportDao.class.getResource("/db/sql/report-mapper.xml").getPath()));
+			prop.loadFromXML(new FileInputStream(MemberDao.class.getResource("/db/sql/member-mapper.xml").getPath()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
 	}
 	
-
+	
+	
 }
