@@ -22,13 +22,7 @@ h3 {
 .text-navy {
     color: #1ab394;
 }
-.cart-product-imitation {
-  text-align: center;
-  padding-top: 30px;
-  height: 80px;
-  width: 80px;
-  background-color: #f8f8f9;
-}
+
 .product-imitation.xl {
   padding: 120px 0;
 }
@@ -190,30 +184,33 @@ body {
                 <div class="wrapper wrapper-content animated fadeInRight">
                     <div class="row">
                         <div class="col-md-9" >
-                            <div class="ibox" style="background: black;" >
-                                <div class="ibox-title">
+                            <div class="ibox" style="padding-left: 40px;" >
+                                <div class="ibox-title" style="background: none;">
                                 
-                                    <h5 style="font-weight: bold;">장바구니</h5>
+                                    <h5 style="font-weight: bold; color:white">장바구니</h5>
                                 </div>
                                 
-                                <div class="ibox-content">
-                                    <div class="table-responsive">
-                                        <table class="table shoping-cart-table">
+                                <div class="ibox-content" style="background: rgba(0, 0, 0, 0.445);">
+                                    <div class="table-responsive" >
+
+                                            <!-- 게임1개  -->
+                                        <table class="table shoping-cart-table" >
                                             <tbody>
                                                     <tr>
-                                                        <td width="90">
-                                                            <div class="cart-product-imitation">이미지
+                                                        <td width="100">
+                                                            <div >
+                                                                <img src="<%=contextPath%>/resources/image/battlefield.JPG" width="110px" height="140px">
                                                             </div>
                                                         </td>
 
-                                                        <!-- 게임1개  -->
+                                                    
                                                         <td class="desc">
                                                             <h3>
                                                             <a href="#" class="text-navy">
                                                                 BattleGround
                                                             </a>
                                                             </h3>
-                                                            <p class="small">
+                                                            <p class="small" style="color:white;">
                                                                 PUBG: BATTLEGROUNDS는 배틀로얄 게임으로, 외딴 섬에서 총 100명의 플레이어가 다양한 무기와 전략을 이용하여 마지막 1명이 살아남는 순간까지 전투를 하게 됩니다
                                                             </p>
                                         
@@ -224,15 +221,15 @@ body {
                                                         </td>
                         
                                                         <!-- 할인가격이면 이렇게 표시 -->
-                                                        <td>
+                                                        <td style="color:white">
                                                             $180,00
                                                             <s class="small text-muted">$230,00</s>
                                                         </td>
                                                         <td width="65">
-                                                            <input type="text" class="form-control" placeholder="1">
+                                                            <input type="text" class="form-control" placeholder="1" style="background: none;">
                                                         </td>
                                                         <td>
-                                                            <h4>
+                                                            <h4 style="color:white">
                                                                 $180,00
                                                             </h4>
                                                         </td>
@@ -244,13 +241,14 @@ body {
                                 </div>
 
 
-                                <div class="ibox-content">
+                                <div class="ibox-content" style="background: rgba(0, 0, 0, 0.445);">
                                     <div class="table-responsive">
                                             <table class="table shoping-cart-table">
                                             <tbody>
                                                     <tr>
-                                                        <td width="90">
-                                                            <div class="cart-product-imitation">
+                                                        <td width="100">
+                                                            <div >
+                                                                <img src="<%=contextPath%>/resources/image/battlefield.JPG" width="110px" height="140px">
                                                             </div>
                                                         </td>
                                                         <td class="desc">
@@ -259,7 +257,7 @@ body {
                                                                 BattleGround
                                                             </a>
                                                             </h3>
-                                                            <p class="small">
+                                                            <p class="small" style="color:white;">
                                                                 PUBG: BATTLEGROUNDS는 배틀로얄 게임으로, 외딴 섬에서 총 100명의 플레이어가 다양한 무기와 전략을 이용하여 마지막 1명이 살아남는 순간까지 전투를 하게 됩니다
                                                             </p>
                                         
@@ -269,14 +267,14 @@ body {
                                                             </div>
                                                         </td>
                         
-                                                        <td>
+                                                        <td style="color:white">
                                                             $700,00
                                                         </td>
                                                         <td width="65">
-                                                            <input type="text" class="form-control" placeholder="1">
+                                                            <input type="text" class="form-control" placeholder="1" style="background: none;">
                                                         </td>
                                                         <td>
-                                                            <h4>
+                                                            <h4 style="color:white">
                                                                 $180,00
                                                             </h4>
                                                         </td>
@@ -292,10 +290,10 @@ body {
                         </div>
                         <div class="col-md-3">
                             <div class="ibox">
-                                <div class="ibox-title">
+                                <div class="ibox-title"  style="border-radius: 5px;" >
                                     <h5>결제예정금액</h5>
                                 </div>
-                                <div class="ibox-content">
+                                <div class="ibox-content"  style="border-radius: 5px;">
                                     <span>
                                         Total
                                     </span>
@@ -307,18 +305,18 @@ body {
                                     
                                     <div class="m-t-sm">
                                         <div class="btn-group">
-                                        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-shopping-cart"></i> 주문하기</a>
-                                        <a href="#" class="btn btn-white btn-sm"> 쇼핑계속하기</a>
+                                        <a href="#" class="btn btn-primary btn-sm" style="margin-right: 10px;"><i class="fa fa-shopping-cart"></i> 주문하기</a>
+                                        <a href="#"class="btn btn-secondary btn-sm" > 쇼핑계속하기</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                 
-                            <div class="ibox">
-                                <div class="ibox-title">
+                            <div class="ibox" style="padding-top: 30px;">
+                                <div class="ibox-title" style="border-radius: 5px;">
                                     <h5>Support</h5>
                                 </div>
-                                <div class="ibox-content text-center">
+                                <div class="ibox-content text-center" style="border-radius: 5px;">
                                     <h3><i class="fa fa-phone"></i> TidyGames</h3>
                                     <span class="small">
                                         Please contact with us if you have any questions. We are avalible 24h.
@@ -340,14 +338,12 @@ body {
             <div class="container-fluid mt-100">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5>장바구니</h5>
-                            </div>
-                            <div class="card-body cart">
+                        <div class="card" style="background: rgba(0, 0, 0, 0.445);">
+                            
+                            <div class="card-body cart" style="background: rgba(0, 0, 0, 0.445);">
                                 <div class="col-sm-12 empty-cart-cls text-center"> <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3">
-                                    <h3><strongy> your Cart is Empty</strongy></h3>
-                                    <h4>Add something to make me happy :)</h4> <a href="#" class="btn btn-primary cart-btn-transform m-3" data-abc="true">쇼핑계속하기</a>
+                                    <h3 style="color:white"><strongy> 장바구니가 비어있습니다.</strongy></h3>
+                                     <a href="#" class="btn btn-primary cart-btn-transform m-3" data-abc="true">쇼핑계속하기</a>
                                 </div>
                             </div>
                         </div>
