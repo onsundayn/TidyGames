@@ -6,6 +6,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+	#community{color:orange;}
+	.include-area{
+		width:1500px;
+		margin:auto;
+		align:center;
+		border-bottom:2px solid rgba(255, 255, 255, 0.555);
+	}
 	.outer{
 		size:auto;
 		background-color: #0e332c;
@@ -14,7 +21,6 @@
 		margin:auto;
 		margin-top:50px;
 	}
-	.navi{border-bottom:2px solid rgba(255, 255, 255, 0.333);}
 	.underline{border-bottom:2px solid rgba(83, 79, 79, 0.333);}
 	.view-form{
 		size:auto;
@@ -37,8 +43,10 @@
 </head>
 <body style="background-color: #0e332c;">
 
-	<%@ include file="../common/topbar.jsp" %>
-	<div class="navi"><%@ include file="../common/navibar.jsp" %></div>
+	<div class="include-area">
+		<%@ include file="../common/topbar.jsp" %>
+		<%@ include file="../common/navibar.jsp" %>	
+	</div>
 
     <div class="outer">
 
@@ -116,7 +124,7 @@
         </div>
     </div>
 	<br>
-	<div align="right" style="width:1350px">
+	<div align="center">
 		<a href="" class="btn btn-sm btn-secondary">이전글</a>
 		<a href="" class="btn btn-sm btn-secondary">목록</a>
 		<a href="" class="btn btn-sm btn-secondary">다음글</a>

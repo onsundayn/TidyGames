@@ -7,7 +7,12 @@
 <title>Insert title here</title>
 <style>
 	#community{color:orange;}
-	.navi{border-bottom:2px solid rgba(255, 255, 255, 0.333);}
+	.include-area{
+		width:1500px;
+		margin:auto;
+		align:center;
+		border-bottom:2px solid rgba(255, 255, 255, 0.555);
+	}
 	.outer{
 		background-color: #0e332c;
 		color:white;
@@ -27,13 +32,18 @@
     #title:hover{
     	text-decoration:underline;
     }
+    .paging-area button{
+    	border:none;
+    }
     #submitbtn{color:white; background:#0e332c; border:none;}
 </style>
 </head>
 <body style="background-color: #0e332c;">
 
-	<%@ include file="../common/topbar.jsp" %>
-	<div class="navi"><%@ include file="../common/navibar.jsp" %></div>
+	<div class="include-area">
+		<%@ include file="../common/topbar.jsp" %>
+		<%@ include file="../common/navibar.jsp" %>
+	</div>
     
     <div class="outer">
 
@@ -230,6 +240,7 @@
             <div class="search-area" align="center">
 				<form>
 	                <select name="" id="" style="height:30px;">
+	                	<option value="">최신순</option>
 	                    <option value="">조회순</option>
 	                    <option value="">추천순</option>
 	                    <option value="">닉네임</option>

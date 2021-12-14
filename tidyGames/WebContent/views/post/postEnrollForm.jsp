@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+	#community{color:orange;}
 	.outer{
 		background-color: #0e332c;
 		color:white;
@@ -14,7 +15,12 @@
 		margin:auto;
 		margin-top:50px;
 	}
-	.navi{border-bottom:2px solid rgba(255, 255, 255, 0.333);}
+	.include-area{
+		width:1500px;
+		margin:auto;
+		align:center;
+		border-bottom:2px solid rgba(255, 255, 255, 0.555);
+	}
 	.write-form{
 	    background-color: lightgray;
 	    width:1100px;
@@ -34,8 +40,10 @@
 </head>
 <body style="background-color: #0e332c;">
 
-	<%@ include file="../common/topbar.jsp" %>
-	<div class="navi"><%@ include file="../common/navibar.jsp" %></div>
+	<div class="include-area">
+		<%@ include file="../common/topbar.jsp" %>
+		<%@ include file="../common/navibar.jsp" %>
+	 </div>
 
     <div class="outer">
 

@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class AdminEnrollFormController
+ * Servlet implementation class AdminCompanyEnrollFormController
  */
 @WebServlet("/enroll.co")
-public class AdminEnrollFormController extends HttpServlet {
+public class AdminCompanyEnrollFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminEnrollFormController() {
+    public AdminCompanyEnrollFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,8 +27,8 @@ public class AdminEnrollFormController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.getRequestDispatcher("views/company/adminEnrollForm.jsp").forward(request, response);
-		
+		request.getRequestDispatcher("views/company/adminCompanyEnrollForm.jsp").forward(request, response);
+
 	}
 
 	/**
