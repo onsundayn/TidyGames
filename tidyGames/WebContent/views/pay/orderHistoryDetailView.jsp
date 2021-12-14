@@ -70,6 +70,10 @@
         text-align: center;
         margin-left: 310px;
     }
+
+    #orderbar{
+        color:orange;
+    }
     
 </style>
 </head>
@@ -79,12 +83,12 @@
     <div id="outer">
         <div id="line_1"></div>
         <div>
-            <%@ include file="../common/adminSidebar.jsp" %>
+            <%@ include file="../common/memberSidebar.jsp" %>
         </div>
 
         <div class="area1">
-            <span style="color: grey; font-size: 18px;"> 회원주문관리 </span>
-            <span style="color:white; font-size: 25px; font-weight: bold;"> >회원주문상세내역</span>
+            <span style="color: grey; font-size: 18px;"> 주문내역조회 </span>
+            <span style="color:white; font-size: 25px; font-weight: bold;"> >주문상세내역</span>
             <div style="background: grey; width: 1000px; height: 2px;"></div>
         </div>
         <br><br><br>
