@@ -189,93 +189,98 @@ body {
             <div class="container">
                 <div class="wrapper wrapper-content animated fadeInRight">
                     <div class="row">
-                        <div class="col-md-9">
-                            <div class="ibox">
+                        <div class="col-md-9" >
+                            <div class="ibox" style="background: black;" >
                                 <div class="ibox-title">
                                 
                                     <h5 style="font-weight: bold;">장바구니</h5>
                                 </div>
+                                
                                 <div class="ibox-content">
                                     <div class="table-responsive">
                                         <table class="table shoping-cart-table">
                                             <tbody>
-                                            <tr>
-                                                <td width="90">
-                                                    <div class="cart-product-imitation">
-                                                    </div>
-                                                </td>
-                                                <td class="desc">
-                                                    <h3>
-                                                    <a href="#" class="text-navy">
-                                                        BattleGround
-                                                    </a>
-                                                    </h3>
-                                                    <p class="small">
-                                                        PUBG: BATTLEGROUNDS는 배틀로얄 게임으로, 외딴 섬에서 총 100명의 플레이어가 다양한 무기와 전략을 이용하여 마지막 1명이 살아남는 순간까지 전투를 하게 됩니다
-                                                    </p>
-                                
-                
-                                                    <div class="m-t-sm"></div>
-                                                        <a href="#" class="text-muted"><i class="fa fa-trash"></i> Remove item</a>
-                                                    </div>
-                                                </td>
-                
-                                                <!-- 할인가격이면 이렇게 표시 -->
-                                                <td>
-                                                    $180,00
-                                                    <s class="small text-muted">$230,00</s>
-                                                </td>
-                                                <td width="65">
-                                                    <input type="text" class="form-control" placeholder="1">
-                                                </td>
-                                                <td>
-                                                    <h4>
-                                                        $180,00
-                                                    </h4>
-                                                </td>
-                                            </tr>
+                                                    <tr>
+                                                        <td width="90">
+                                                            <div class="cart-product-imitation">이미지
+                                                            </div>
+                                                        </td>
+
+                                                        <!-- 게임1개  -->
+                                                        <td class="desc">
+                                                            <h3>
+                                                            <a href="#" class="text-navy">
+                                                                BattleGround
+                                                            </a>
+                                                            </h3>
+                                                            <p class="small">
+                                                                PUBG: BATTLEGROUNDS는 배틀로얄 게임으로, 외딴 섬에서 총 100명의 플레이어가 다양한 무기와 전략을 이용하여 마지막 1명이 살아남는 순간까지 전투를 하게 됩니다
+                                                            </p>
+                                        
+                        
+                                                            <div class="m-t-sm"></div>
+                                                                <a href="#" class="text-muted"><i class="fa fa-trash"></i> Remove item</a>
+                                                            </div>
+                                                        </td>
+                        
+                                                        <!-- 할인가격이면 이렇게 표시 -->
+                                                        <td>
+                                                            $180,00
+                                                            <s class="small text-muted">$230,00</s>
+                                                        </td>
+                                                        <td width="65">
+                                                            <input type="text" class="form-control" placeholder="1">
+                                                        </td>
+                                                        <td>
+                                                            <h4>
+                                                                $180,00
+                                                            </h4>
+                                                        </td>
+                                                    </tr>
                                             </tbody>
                                         </table>
                                     </div>
                 
                                 </div>
+
+
                                 <div class="ibox-content">
                                     <div class="table-responsive">
                                             <table class="table shoping-cart-table">
                                             <tbody>
-                                            <tr>
-                                                <td width="90">
-                                                    <div class="cart-product-imitation">
-                                                    </div>
-                                                </td>
-                                                <td class="desc">
-                                                    <h3>
-                                                    <a href="#" class="text-navy">
-                                                        BattleGround
-                                                    </a>
-                                                    </h3>
-                                                    <p class="small">
-                                                        PUBG: BATTLEGROUNDS는 배틀로얄 게임으로, 외딴 섬에서 총 100명의 플레이어가 다양한 무기와 전략을 이용하여 마지막 1명이 살아남는 순간까지 전투를 하게 됩니다
-                                                    </p>
-                                
-                
-                                                    <div class="m-t-sm"></div>
-                                                        <a href="#" class="text-muted"><i class="fa fa-trash"></i> Remove item</a>
-                                                    </div>
-                                                </td>
-                
-                                                <td>
-                                                    $700,00
-                                                </td>
-                                                <td width="65">
-                                                    <input type="text" class="form-control" placeholder="1">
-                                                </td>
-                                                <td>
-                                                    <h4>
-                                                        $180,00
-                                                    </h4>
-                                                </td>
-                                            </tr>
+                                                    <tr>
+                                                        <td width="90">
+                                                            <div class="cart-product-imitation">
+                                                            </div>
+                                                        </td>
+                                                        <td class="desc">
+                                                            <h3>
+                                                            <a href="#" class="text-navy">
+                                                                BattleGround
+                                                            </a>
+                                                            </h3>
+                                                            <p class="small">
+                                                                PUBG: BATTLEGROUNDS는 배틀로얄 게임으로, 외딴 섬에서 총 100명의 플레이어가 다양한 무기와 전략을 이용하여 마지막 1명이 살아남는 순간까지 전투를 하게 됩니다
+                                                            </p>
+                                        
+                        
+                                                            <div class="m-t-sm"></div>
+                                                                <a href="#" class="text-muted"><i class="fa fa-trash"></i> Remove item</a>
+                                                            </div>
+                                                        </td>
+                        
+                                                        <td>
+                                                            $700,00
+                                                        </td>
+                                                        <td width="65">
+                                                            <input type="text" class="form-control" placeholder="1">
+                                                        </td>
+                                                        <td>
+                                                            <h4>
+                                                                $180,00
+                                                            </h4>
+                                                        </td>
+                                                    </tr>
                                             </tbody>
                                         </table>
                                     </div>
