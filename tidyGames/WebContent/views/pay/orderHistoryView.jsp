@@ -73,6 +73,9 @@
         cursor:pointer;
         color:orange
     }
+    #orderbar{
+        color:orange;
+    }
 
 </style>
 </head>
@@ -171,7 +174,7 @@
                             </td>
                            
                             <td>
-                                <div><button class="btn btn-primary">환불요청</button></div> <br>
+                                <div><a href="<%= request.getContextPath() %>/refund.pa" class="btn btn-primary">환불요청</a></div> <br>
                                 <div><button class="btn btn-secondary">상세보기</button></div>
                             </td>
                         </tr>

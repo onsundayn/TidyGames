@@ -203,6 +203,10 @@
         cursor:pointer;
         color:orange
     }
+
+    #wishListbar{
+        color:orange;
+    }
 </style>
 </head>
 <body>

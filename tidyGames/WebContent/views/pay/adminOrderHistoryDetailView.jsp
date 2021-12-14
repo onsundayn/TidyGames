@@ -38,6 +38,10 @@
         margin-left: 100px;
     }
   
+    #orderList{
+        color:orange;
+    }
+
 
 </style>
 </head>
@@ -60,7 +64,7 @@
     
         <div class="area2">
 
-            <table class="table table-borderless" style="width="1000px"color:white; border:1px solid grey; background:rgba(20, 20, 20, 0.87)">
+            <table class="table table-borderless" style="width: 1000px; color:white; border:1px solid grey; background:rgba(20, 20, 20, 0.87)">
                 <thead>
                   <tr>
                     <th colspan="5" style="font-size: 25px; font-weight: bold;">BattleGround</th>

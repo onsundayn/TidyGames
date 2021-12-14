@@ -104,6 +104,10 @@
     .area4>select{
         float: right;
     }
+
+    #pointbar{
+        color:orange;
+    }
 </style>
 </head>
 <body>

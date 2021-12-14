@@ -99,6 +99,9 @@
 
     }
 
+    #refundList{
+        color:orange;
+    }
 </style>
 </head>
 <body>
@@ -195,7 +198,7 @@
                         <td>27500원</td>
                         <td>2021-11-11 19:22</td>
                         <td style="color:rgb(42, 42, 248);">처리</td>
-                        <td><button class="btn btn-success btn-sm">상세보기</button></td>
+                        <td><a href="<%= request.getContextPath()%>/adRefundHandle.pa"class="btn btn-success btn-sm">상세보기</a></td>
                       </tr>
                       <tr>
                         <td>2</td>
