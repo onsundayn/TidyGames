@@ -87,15 +87,15 @@
             <div id="line_2"></div>
             <ul>
                 <li id="myPageBtn" style="font-weight: bolder">게임사 관리</li>
-                <li><a href="<%=contextPath%>/enroll.co" id="enrollco">게임사 등록</a></li>
-                <li><a href="<%=contextPath%>/list.co" id="listco">게임사별 목록 조회</a></li>
+                <li><a href="<%=request.getContextPath()%>/enroll.co" id="enrollco">게임사 등록</a></li>
+                <li><a href="<%=request.getContextPath()%>/list.co" id="listco">게임사별 목록 조회</a></li>
             </ul>
             <div id="line_2"></div>
             <ul>
                 <li id="myPageBtn" style="font-weight: bolder">게임 관리</li>
-                <li><a href="<%=contextPath%>/catelist.ga" id="catelistga">카테고리 관리</a></li>
-                <li><a href="<%=contextPath%>/uplist.ga" id="uplistga">게임 업로드 요청 목록</a></li>
-                <li><a href="<%=contextPath%>/list.ga" id="listga">판매중인 게임 목록</a></li>
+                <li><a href="<%=request.getContextPath()%>/catelist.ga" id="catelistga">카테고리 관리</a></li>
+                <li><a href="<%=request.getContextPath()%>/uplist.ga" id="uplistga">게임 업로드 요청 목록</a></li>
+                <li><a href="<%=request.getContextPath()%>/list.ga" id="listga">판매중인 게임 목록</a></li>
             </ul>
             <div id="line_2"></div>
             <ul>
