@@ -72,13 +72,15 @@
         margin: 50px 0px 0px 0px;
         text-decoration: none;
     }
-    #edit>a:hover{
+    #edit>a:hover, #edit>span:hover{
         text-decoration: none;
         color: rgba(255, 166, 0, 0.777); 
     }
-    
-
-
+    #edit>span{
+        text-decoration: none;
+        color: rgba(255, 255, 255, 0.589);
+        cursor: pointer;
+    }
 
 </style>
 </head>
@@ -87,7 +89,6 @@
     <%@ include file="../common/topbar.jsp"%>
     <%@ include file="../common/navibar.jsp"%>
    
-    
     <div id="outer">
         <div id="line_1"></div>
         <div>
@@ -111,13 +112,22 @@
                     <label id="nick">NickName</label> <br>
                     <label id="id">userId</label>
                     <div id="edit">
-                        <a href="views/member/updateUserCheck.jsp">>> edit profile</a>
+                        <a href="views/member/updateUserCheck.jsp">>> 내 정보 수정</a> <br>
+                        <!--<a href="<%= contextPath %>/logout.me">>> 로그아웃</a>-->
+                        <span onclick="logout();">>> 로그아웃</span>
                     </div>
                     
                 </div>
             </div>
 
         </div>
+        <script>
+            function logout(){
+            	if(confirm("로그아웃 하시겠습니까?")) {
+           	 		location.href = "<%= contextPath%>/logout.me";
+            	} 
+            }
+        </script>
 
     </div>
 </body>

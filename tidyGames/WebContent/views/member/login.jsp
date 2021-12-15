@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%
 	String contextPath = request.getContextPath();
+	String alertMsg = (String)session.getAttribute("alertMsg");
 %>
 <!DOCTYPE html>
 <html>
@@ -89,11 +90,18 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body style="background-color: #0e332c;">
+	<% if(alertMsg != null){  %>
+		<script>
+			alert("<%= alertMsg %>");
+		</script>
+		<% session.removeAttribute("alertMsg"); %>
+	<% } %>
+
     <div class="outer">
     <header>
         <div id="logo" align="center">
             <a href="<%= contextPath %>">
-                <img src="../../resources/image/tidyLogo.png" style="width:80px; height: 50px;"> <br>
+                <img src="<%=contextPath%>/resources/image/tidyLogo.png" style="width:80px; height: 50px;"> <br>
                 <span style="color: white; font-size: 25px; font-weight: bold;">TIDY GAMES</span>
             </a>
         </div>
@@ -101,7 +109,7 @@
 
     <content>
         <div id="content" align="center">
-            <form action="<%= contextPath %>/login.me" method="post">
+            <form action="<%= contextPath %>/memberLogin.me" method="post">
                 <div id="login_form">
 
                     <span style="color: white; font-size: 30px; font-weight: bold;">HELLO!</span>
@@ -129,7 +137,7 @@
                     </div>
 
                     <div class="login_btn">
-                        <button type="submit" onclick="login();">LOGIN</button>
+                        <button type="submit">LOGIN</button>
                     </div>
 
                     <div class="find_login">
@@ -150,11 +158,7 @@
 
                 </div>
             </form>
-            <script>
-                function login(){
 
-                }
-            </script>
         </div>
     </content>
 

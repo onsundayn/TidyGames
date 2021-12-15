@@ -92,7 +92,7 @@
             <form action="<%=contextPath%>/gameList.ga" id="search_form">
 
                 <div id="search_box">
-                    <input type="text" name="keyword" style="border-radius: 3px;">
+                    <input type="text" name="keyword" style="border-radius: 	px;">
                 </div>
     
                 <div id="search_btn">
@@ -102,9 +102,15 @@
         </div>
         <div id="top3">
             <a href="<%= request.getContextPath()%>/cart.pa"><i class="fas fa-shopping-cart fa-lg"></i></a>
-            <a href="<%= contextPath %>/myPage.me" id="usericon"><i class="far fa-user fa-lg"></i></a>
+            <% if(loginUser != null ) { %>
+            	<a href="<%= contextPath %>/myPage.me" id="usericon"><i class="far fa-user fa-lg"></i></a>
+            <% } else { %>
+                <a href="<%= contextPath %>/login.me" id="usericon"><i class="far fa-user fa-lg"></i></a>
+            <% } %>
         </div>
     </div>
+
+
 
 </body>
 </html>
