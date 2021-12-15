@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="com.TidyGames.company.model.vo.Company"%>
+	pageEncoding="UTF-8"%>
+<%@
+	page import = "com.TidyGames.company.model.vo.Company, 
+	               com.TidyGames.game.model.vo.Game, java.util.ArrayList"
+%>
 <%
 	Company c = (Company)request.getAttribute("company");
+	ArrayList<Game> list = (ArrayList<Game>)request.getAttribute("gameList");
 %>
 <!DOCTYPE html>
 <html>
@@ -12,6 +17,7 @@
 #listco {
 	color: orange;
 }
+
 div {
 	box-sizing: border-box;
 }
@@ -67,7 +73,7 @@ div {
 			<div align="right" style="width: 1000px">
 				<button type="button" onclick="history.back();" class="btn btn-sm btn-secondary">뒤로가기</button>
 				<a href="<%= contextPath %>/updateForm.co?num=<%= c.getCompanyNo() %>" class="btn btn-sm btn-success">수정</a> 
-				<a href="<%= contextPath %>/delete.co?num=<%= c.getCompanyNo() %>"class="btn btn-sm btn-danger">삭제</a>
+				<a href="<%= contextPath %>/delete.co?num=<%= c.getCompanyNo() %>" class="btn btn-sm btn-danger">삭제</a>
 			</div>
 			<br>
 			<table>
@@ -116,74 +122,35 @@ div {
 					<th><h4>제공게임</h4></th>
 					<td></td>
 				</tr>
+				<tr>
+					<td colspan=2><h6>* 클릭시 게임상세 페이지로 이동합니다</h6></td>
 			</table>
 			<br>
 			<div class="gametb" style="size: auto">
 				<table class="table table-sm" id="gametable">
 					<thead style="background: rgb(80, 88, 83)">
-						<th width="100">게임</th>
-						<th width="100">출시일</th>
-						<th width="100">장르</th>
-						<th width="150">게임상세페이지</th>
+						<th width="50">게임넘버</th>
+						<th width="100">한글명</th>
+						<th width="100">원문명</th>
+						<th width="50">출시일</th>
+						<th width="50">등록일</th>
 					</thead>
 					<tbody>
-						<tr>
-							<td colspan="4">등록된 게임이 없습니다</td>
-						</tr>
-						<tr>
-							<td>A게임</td>
-							<td>2021-12-08</td>
-							<td>공포</td>
-							<td><a href="" class="btn btn-sm btn-info">조회</a></td>
-						</tr>
-						<tr>
-							<td>A게임</td>
-							<td>2021-12-08</td>
-							<td>공포</td>
-							<td><a href="" class="btn btn-sm btn-info">조회</a></td>
-						</tr>
-						<tr>
-							<td>A게임</td>
-							<td>2021-12-08</td>
-							<td>공포</td>
-							<td><a href="" class="btn btn-sm btn-info">조회</a></td>
-						</tr>
-						<tr>
-							<td>A게임</td>
-							<td>2021-12-08</td>
-							<td>공포</td>
-							<td><a href="" class="btn btn-sm btn-info">조회</a></td>
-						</tr>
-						<tr>
-							<td>A게임</td>
-							<td>2021-12-08</td>
-							<td>공포</td>
-							<td><a href="" class="btn btn-sm btn-info">조회</a></td>
-						</tr>
-						<tr>
-							<td>A게임</td>
-							<td>2021-12-08</td>
-							<td>공포</td>
-							<td><a href="" class="btn btn-sm btn-info">조회</a></td>
-						</tr>
-						<tr>
-							<td>A게임</td>
-							<td>2021-12-08</td>
-							<td>공포</td>
-							<td><a href="" class="btn btn-sm btn-info">조회</a></td>
-						</tr>
-						<tr>
-							<td>A게임</td>
-							<td>2021-12-08</td>
-							<td>공포</td>
-							<td><a href="" class="btn btn-sm btn-info">조회</a></td>
-						</tr>
-						<tr>
-							<td>A게임</td>
-							<td>2021-12-08</td>
-							<td>공포</td>
-							<td><a href="" class="btn btn-sm btn-info">조회</a></td>
-						</tr>
+						<% if(list.isEmpty()) { %>
+							<tr>
+								<td colspan="5">등록된 게임이 없습니다</td>
+							</tr>
+						<% } else { %>
+							<% for(Game g : list) { %>
+								<tr>
+									<td><%=g.getGameNo()%></td>
+									<td><%=g.getKorName()%></td>
+									<td text-overflow="ellipsis" white-space="nowrap"><%=g.getEngName()%></td>
+									<td><%=g.getReleaseDate()%></td>
+									<td><%=g.getUploadDate()%></td>
+								</tr>
+							<% } %>
+						<% } %>
 					</tbody>
 				</table>
 			</div>

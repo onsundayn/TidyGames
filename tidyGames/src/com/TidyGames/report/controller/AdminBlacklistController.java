@@ -9,13 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.TidyGames.common.model.vo.PageInfo;
 import com.TidyGames.report.model.service.ReportService;
 import com.TidyGames.report.model.vo.Report;
 
 /**
  * Servlet implementation class adminBlacklistController
  */
-@WebServlet("/blacklist.me")
+@WebServlet("/blacklist.re")
 public class AdminBlacklistController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -32,10 +33,34 @@ public class AdminBlacklistController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		int listCount;
+		int currentPage;
+		int pageLimit;
+		int boardLimit;
+		int maxPage;
+		int startPage;
+		int endPage;
 		
-		ArrayList<Report> list = new ReportService().blacklist();
+		listCount = new ReportService().selectBlockCount();
+		// 현재 총 게시물이 몇 개인지 알아올 메소드
+		currentPage = Integer.parseInt(request.getParameter("cpage"));
+		pageLimit = 10;
+		boardLimit = 10;
+		
+		maxPage = (int)Math.ceil((double)listCount / boardLimit);
+		startPage = (currentPage-1) / pageLimit * pageLimit + 1;
+		endPage = startPage + pageLimit - 1;
+		
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
 		
 		
+		ArrayList<Report> list = new ReportService().blacklist(pi);
+		
+		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/report/adminBlacklist.jsp").forward(request, response);
 	}

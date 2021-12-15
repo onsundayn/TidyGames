@@ -1,13 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.TidyGames.common.model.vo.PageInfo, java.util.ArrayList, com.TidyGames.company.model.vo.Company" %>
+<%@ page import="java.util.ArrayList, com.TidyGames.company.model.vo.Company" %>
 <%
-	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	ArrayList<Company> list = (ArrayList<Company>)request.getAttribute("list");
-	int currentPage = pi.getCurrentPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
-	int maxPage = pi.getMaxPage();
 %>
 <!DOCTYPE html>
 <html>
@@ -20,7 +15,7 @@
         box-sizing: border-box;
     }
     #outer{
-        width:1500px;
+        width:auto;
         margin:auto;
         color:white;
     }
@@ -98,30 +93,7 @@
 	            </table>
 		
 		    </form>
-		
-		    <br><br><br>
-		
-		    <div class="paging-area" align="center">
-
-        	<% if(currentPage != 1) { %>
-            	<button style="border-radius:3px;" onclick="location.href='<%=contextPath%>/list.co?cpage=<%=currentPage-1%>';"> &lt; </button>
-            <% } %>
-            
-            <% for(int p=startPage; p<=endPage; p++){ %>
-            	
-            	<% if(p == currentPage) { %>
-            		<button disabled style="border-radius:3px; background:orange; color:white;"><%= p %></button>
-            	<% }else { %>
-            		<button style="border-radius:3px;" onclick="location.href='<%=contextPath%>/list.co?cpage=<%= p %>';"><%= p %></button>
-            	<% } %>
-            	
-            <% } %>
-            
-            <% if(currentPage != maxPage) { %>
-            	<button onclick="location.href='<%=contextPath%>/list.co?cpage=<%=currentPage+1%>';"> &gt; </button>
-            <% } %>
-            	
-        </div>
+	
 		    
 		    <br><br>
 		    

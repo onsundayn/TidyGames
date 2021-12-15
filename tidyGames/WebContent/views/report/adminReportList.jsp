@@ -162,7 +162,6 @@
                 <table id="table" class="table table-hover">
                     <thead>
                         <tr align="center">
-                            <th width="30"> </th>
                             <th width="30">No.</th>
                             <th width="100">닉네임</th>
                             <th width="180">신고한 글</th>
@@ -176,7 +175,6 @@
                         
                         <!-- if() {} -->
                         <tr align="center">
-                            <td><input type="checkbox" id="checkBox"></td>
                             <td>1</td>
                             <td>김길동이</td>
                             <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
@@ -189,7 +187,6 @@
                             
 <!-- 반복 예시 -->
 <tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
     <td>1</td>
     <td>김길동이</td>
     <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
@@ -199,7 +196,6 @@
     <td>댓글</td>
 </tr>
 <tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
     <td>1</td>
     <td>김길동이</td>
     <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
@@ -209,7 +205,6 @@
     <td>댓글</td>
 </tr>
 <tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
     <td>1</td>
     <td>김길동이</td>
     <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
@@ -219,7 +214,6 @@
     <td>댓글</td>
 </tr>
 <tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
     <td>1</td>
     <td>김길동이</td>
     <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
@@ -229,7 +223,6 @@
     <td>댓글</td>
 </tr>
 <tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
     <td>1</td>
     <td>김길동이</td>
     <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
@@ -239,7 +232,6 @@
     <td>댓글</td>
 </tr>
 <tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
     <td>1</td>
     <td>김길동이</td>
     <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
@@ -249,7 +241,6 @@
     <td>댓글</td>
 </tr>
 <tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
     <td>1</td>
     <td>김길동이</td>
     <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
@@ -259,7 +250,6 @@
     <td>댓글</td>
 </tr>
 <tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
     <td>1</td>
     <td>김길동이</td>
     <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
@@ -269,7 +259,6 @@
     <td>댓글</td>
 </tr>
 <tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
     <td>1</td>
     <td>김길동이</td>
     <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>

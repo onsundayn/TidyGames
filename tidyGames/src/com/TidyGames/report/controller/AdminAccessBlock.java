@@ -1,29 +1,23 @@
-package com.TidyGames.company.controller;
+package com.TidyGames.report.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.TidyGames.company.model.service.AdminCompanyService;
-import com.TidyGames.company.model.vo.Company;
-import com.TidyGames.game.model.vo.Game;
-
 /**
- * Servlet implementation class AdminCompanyDetailController
+ * Servlet implementation class AdminAccessBlock
  */
-@WebServlet("/detail.co")
-public class AdminCompanyDetailController extends HttpServlet {
+@WebServlet("/block.re")
+public class AdminAccessBlock extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminCompanyDetailController() {
+    public AdminAccessBlock() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,16 +27,9 @@ public class AdminCompanyDetailController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int companyNo = Integer.parseInt(request.getParameter("num"));
-		
-		Company c = new AdminCompanyService().selectCompanyDetail(companyNo);
-		ArrayList<Game> gameList = new AdminCompanyService().selectGameList(companyNo);
+			String access = request.getParameter("access");
 			
-		request.setAttribute("company", c);
-		request.setAttribute("gameList", gameList);
-		request.getRequestDispatcher("views/company/adminCompanyDetailView.jsp").forward(request,response);
 			
-
 		
 	}
 

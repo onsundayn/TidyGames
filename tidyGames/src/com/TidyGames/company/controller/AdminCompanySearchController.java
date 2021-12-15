@@ -9,21 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.TidyGames.common.model.vo.PageInfo;
 import com.TidyGames.company.model.service.AdminCompanyService;
 import com.TidyGames.company.model.vo.Company;
 
 /**
- * Servlet implementation class AdminCompanyListController
+ * Servlet implementation class AdminCompanySearchController
  */
-@WebServlet("/list.co")
-public class AdminCompanyListController extends HttpServlet {
+@WebServlet("/search.co")
+public class AdminCompanySearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminCompanyListController() {
+    public AdminCompanySearchController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,33 +32,11 @@ public class AdminCompanyListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int listCount;		
-		int currentPage; 	
-		int pageLimit; 		
-		int viewLimit;	
-		int maxPage;		
-		int startPage;		
-		int endPage;	
-		
-		listCount = new AdminCompanyService().selectListCount();	
-		currentPage = Integer.parseInt(request.getParameter("cpage"));
-		pageLimit = 5;
-		viewLimit = 10;
-		maxPage = (int)Math.ceil((double)listCount / viewLimit);
-		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
-		endPage = startPage + pageLimit - 1;
-		
-		if(endPage > maxPage) {
-			endPage = maxPage;
-		}
-		
-		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, viewLimit, maxPage, startPage, endPage);
-		ArrayList<Company> list = new AdminCompanyService().selectCompanyList(pi);
-		
-		request.setAttribute("pi", pi);
+		request.setCharacterEncoding("utf-8");
+		String companyName = request.getParameter("companyName");
+		ArrayList<Company> list = new AdminCompanyService().searchCompany(companyName);
 		request.setAttribute("list", list);
-		
-		request.getRequestDispatcher("views/company/adminCompanyListView.jsp").forward(request, response);
+		request.getRequestDispatcher("views/company/adminCompanySearchListView.jsp").forward(request, response);
 		
 	}
 
