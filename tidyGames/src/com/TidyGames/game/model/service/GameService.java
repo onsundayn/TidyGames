@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.TidyGames.game.model.dao.GameDao;
+import com.TidyGames.game.model.vo.Category;
 import com.TidyGames.game.model.vo.Game;
 
 public class GameService {
@@ -18,6 +19,13 @@ public class GameService {
 		
 		close(conn);
 		
+		return list;
+	}
+	
+	public ArrayList<Category> selectCategoryList(){
+		Connection conn = getConnection();
+		ArrayList<Category> list = new GameDao().selectCategoryList(conn);
+		close(conn);
 		return list;
 	}
 

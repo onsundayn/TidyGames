@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ page import="java.util.ArrayList, com.TidyGames.game.model.vo.Category" %>
+<% ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("list"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,12 +13,12 @@
 	color: orange;
 }
 
-#line1{
-		margin:0 auto;
-        width:1500px;
-        height:2px;
-        background: rgba(255, 255, 255, 0.555);
-} 
+#line1 {
+	margin: 0 auto;
+	width: 1500px;
+	height: 2px;
+	background: rgba(255, 255, 255, 0.555);
+}
 
 #parent {
 	display: grid;
@@ -28,8 +29,6 @@
 	height: 900px;
 	margin: auto;
 }
-
-
 
 #div1 {
 	grid-area: 1/2/5/5;
@@ -42,6 +41,10 @@
 
 #content {
 	margin: 50px;
+}
+
+#content button {
+	margin: 10px;
 }
 
 .enform {
@@ -91,19 +94,16 @@
 			<div id="enbtn" align="right">
 				<button type="button" class="btn btn-secondary" id="add_category">추가</button>
 			</div>
+			
 			<div id="content">
-				<button type="button" class="btn btn-light" id="action">액션</button>
-				<button type="button" class="btn btn-light" id="rollplaying">롤플레잉</button>
-				<button type="button" class="btn btn-light">레이싱</button>
-				<button type="button" class="btn btn-light">시뮬레이션</button>
-				<button type="button" class="btn btn-light">전략</button>
-				<button type="button" class="btn btn-light">스포츠</button>
-				<button type="button" class="btn btn-light">인디</button>
-				<button type="button" class="btn btn-light">캐주얼</button>
-				<button type="button" class="btn btn-light">공포</button>
-				<button type="button" class="btn btn-light">멀티플레이</button>
-				<button type="button" class="btn btn-light">카드</button>
-			</div>
+		 <% for(Category c : list) { %>
+				<button type="button" class="btn btn-light"><%= c.getCategoryName() %></button>
+			<%} %>
+				
+			</div> 
+			
+			
+			
 
 			<div class="enform">
 				<form>
