@@ -113,5 +113,43 @@ public class ReportDao {
 		return result;
 		
 	}
+	
+	public ArrayList<Report> reportWaiting(Connection conn) {
+		
+		ArrayList<Report> list = new ArrayList<Report>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("reportWaiting");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Report(rset.getInt("report_no")
+								  , rset.getString("reported")
+								  , rset.getString("reporting")
+								  , rset.getString("post_name")
+								  , rset.getString("reply_content")
+								  , rset.getString("rcategory_name")
+								  , rset.getString("etc")
+								  , rset.getDate("report_date")));
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		 
+		
+		
+		
+	
+	}
 		
 }

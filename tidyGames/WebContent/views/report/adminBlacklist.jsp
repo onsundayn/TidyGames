@@ -10,6 +10,7 @@
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
 	int maxPage = pi.getMaxPage();
+	int listCount = pi.getListCount();
 	
 %>
 <html>
@@ -193,26 +194,29 @@
 
                 <div id="tableOut2">
                     
-                    <div class="paging-area" align="center">
-                        <!-- 첫 페이지에서는 이전으로 비활성화 -->
- 						<% if(currentPage != 1) { %>
-            				<button onclick="location.href='<%=contextPath%>/blacklist.re?cpage=<%=currentPage-1%>';"> &lt; </button>
-           				 <% } %>
-                        
-                        <% for(int p=startPage; p<=endPage; p++) { %>
-                        <!-- 페이징 버튼 활성화 조건 게시물수에 따른 버튼 활성화  -->
-                            <% if(p == currentPage) { %>
-                                <button disabled><%= p %></button>
-                            <% }else { %>
-                                <button onclick="location.href='<%= contextPath %>/blacklist.re?cpage=<%= p %>';"><%= p %></button>
-                            <% } %>
-                        <% } %>
-                        
-                        <% if(currentPage != maxPage) { %>
-                            <button onclick="loaction.href='<%= contextPath %>/blacklist.re?cpage<%=currentPage+1%>';"> &gt; </button>
-                            <!-- 현재 페이지가 마지막 페이지일 땐 다음으로 버튼 비활성화 -->
-                        <% } %>
-                    
+                	<!--  만약 리스트에 아무것도 없다면 버튼도 활성화되어서는 안 된다는 전제 -->
+	                <% if(listCount == 0) { %>
+	                
+	                    <div class="paging-area" align="center">
+	                        <!-- 첫 페이지에서는 이전으로 비활성화 -->
+	 						<% if(currentPage != 1) { %>
+	            				<button onclick="location.href='<%=contextPath%>/blacklist.re?cpage=<%=currentPage-1%>';"> &lt; </button>
+	           				 <% } %>
+	                        
+	                        <% for(int p=startPage; p<=endPage; p++) { %>
+	                        <!-- 페이징 버튼 활성화 조건 게시물수에 따른 버튼 활성화  -->
+	                            <% if(p == currentPage) { %>
+	                                <button disabled><%= p %></button>
+	                            <% }else { %>
+	                                <button onclick="location.href='<%= contextPath %>/blacklist.re?cpage=<%= p %>';"><%= p %></button>
+	                            <% } %>
+	                        <% } %>
+	                        
+	                        <% if(currentPage != maxPage) { %>
+	                            <button onclick="loaction.href='<%= contextPath %>/blacklist.re?cpage<%=currentPage+1%>';"> &gt; </button>
+	                            <!-- 현재 페이지가 마지막 페이지일 땐 다음으로 버튼 비활성화 -->
+	                        <% } %>
+	                    <% } %>
                     </div>
 
                 </div>

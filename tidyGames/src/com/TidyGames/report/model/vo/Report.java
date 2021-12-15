@@ -5,11 +5,12 @@ import java.sql.Date;
 public class Report {
 	
 	private int reportNo;
-	private int reportedMemNo;
-	private int reportingMemNo;
-	private int refPno;
-	private int refRNo;
+	private String reported;
+	private String reporting;
+	private String post;
+	private String reply;
 	private String reportSort;
+	private String etc;
 	private Date reportDate;
 	private String done;
 	
@@ -19,20 +20,22 @@ public class Report {
 	
 	public Report() {}
 
-	public Report(int reportNo, int reportedMemNo, int reportingMemNo, int refPno, int refRNo, String reportSort,
-			Date reportDate, String done) {
+
+	public Report(int reportNo, String reported, String reporting, String post, String reply, String reportSort,
+			String etc, Date reportDate, String done, String reportedId, String reportedName) {
 		super();
 		this.reportNo = reportNo;
-		this.reportedMemNo = reportedMemNo;
-		this.reportingMemNo = reportingMemNo;
-		this.refPno = refPno;
-		this.refRNo = refRNo;
+		this.reported = reported;
+		this.reporting = reporting;
+		this.post = post;
+		this.reply = reply;
 		this.reportSort = reportSort;
+		this.etc = etc;
 		this.reportDate = reportDate;
 		this.done = done;
+		this.reportedId = reportedId;
+		this.reportedName = reportedName;
 	}
-	
-	
 
 	public Report(int reportNo, String reportedId, String reportedName, String reportSort, Date reportDate) {
 		super();
@@ -42,92 +45,137 @@ public class Report {
 		this.reportSort = reportSort;
 		this.reportDate = reportDate;
 	}
+	
+	
+	public Report(int reportNo, String reported, String reporting, String post, String reply, String reportSort,
+			String etc, Date reportDate) {
+		super();
+		this.reportNo = reportNo;
+		this.reported = reported;
+		this.reporting = reporting;
+		this.post = post;
+		this.reply = reply;
+		this.reportSort = reportSort;
+		this.etc = etc;
+		this.reportDate = reportDate;
+	}
+
 
 	public int getReportNo() {
 		return reportNo;
 	}
 
+
 	public void setReportNo(int reportNo) {
 		this.reportNo = reportNo;
 	}
 
-	public int getReportedMemNo() {
-		return reportedMemNo;
+
+	public String getReported() {
+		return reported;
 	}
 
-	public void setReportedMemNo(int reportedMemNo) {
-		this.reportedMemNo = reportedMemNo;
+
+	public void setReported(String reported) {
+		this.reported = reported;
 	}
 
-	public int getReportingMemNo() {
-		return reportingMemNo;
+
+	public String getReporting() {
+		return reporting;
 	}
 
-	public void setReportingMemNo(int reportingMemNo) {
-		this.reportingMemNo = reportingMemNo;
+
+	public void setReporting(String reporting) {
+		this.reporting = reporting;
 	}
 
-	public int getRefPno() {
-		return refPno;
+
+	public String getPost() {
+		return post;
 	}
 
-	public void setRefPno(int refPno) {
-		this.refPno = refPno;
+
+	public void setPost(String post) {
+		this.post = post;
 	}
 
-	public int getRefRNo() {
-		return refRNo;
+
+	public String getReply() {
+		return reply;
 	}
 
-	public void setRefRNo(int refRNo) {
-		this.refRNo = refRNo;
+
+	public void setReply(String reply) {
+		this.reply = reply;
 	}
+
 
 	public String getReportSort() {
 		return reportSort;
 	}
 
+
 	public void setReportSort(String reportSort) {
 		this.reportSort = reportSort;
 	}
+
+
+	public String getEtc() {
+		return etc;
+	}
+
+
+	public void setEtc(String etc) {
+		this.etc = etc;
+	}
+
 
 	public Date getReportDate() {
 		return reportDate;
 	}
 
+
 	public void setReportDate(Date reportDate) {
 		this.reportDate = reportDate;
 	}
+
 
 	public String getDone() {
 		return done;
 	}
 
+
 	public void setDone(String done) {
 		this.done = done;
 	}
-	
+
+
 	public String getReportedId() {
 		return reportedId;
 	}
+
 
 	public void setReportedId(String reportedId) {
 		this.reportedId = reportedId;
 	}
 
+
 	public String getReportedName() {
 		return reportedName;
 	}
+
 
 	public void setReportedName(String reportedName) {
 		this.reportedName = reportedName;
 	}
 
+
 	@Override
 	public String toString() {
-		return "Report [reportNo=" + reportNo + ", reportedMemNo=" + reportedMemNo + ", reportingMemNo="
-				+ reportingMemNo + ", refPno=" + refPno + ", refRNo=" + refRNo + ", reportSort=" + reportSort
-				+ ", reportDate=" + reportDate + ", done=" + done + "]";
+		return "Report [reportNo=" + reportNo + ", reported=" + reported + ", reporting=" + reporting + ", post=" + post
+				+ ", reply=" + reply + ", reportSort=" + reportSort + ", etc=" + etc + ", reportDate=" + reportDate
+				+ ", done=" + done + ", reportedId=" + reportedId + ", reportedName=" + reportedName + "]";
 	}
-	
+
 }

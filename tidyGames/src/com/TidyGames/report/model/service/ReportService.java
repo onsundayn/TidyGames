@@ -58,5 +58,13 @@ public class ReportService {
 	}
 	
 	
+	public ArrayList<Report> reportWaiting() {
+		Connection conn = getConnection();
+		
+		ArrayList<Report> list = new ReportDao().reportWaiting(conn);
+		
+		close(conn);
+		return list;
+	}
 
 }
