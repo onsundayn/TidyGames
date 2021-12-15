@@ -1,11 +1,14 @@
 package com.TidyGames.report.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.TidyGames.report.model.service.ReportService;
 
 /**
  * Servlet implementation class AdminAccessBlock
@@ -27,9 +30,17 @@ public class AdminAccessBlock extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-			String access = request.getParameter("access");
+			String[] user = request.getParameterValues("user");
 			
 			
+			int result = new ReportService().accessBlock(user);
+			
+			if(result > 0) {
+				
+				request.getSession().setAttribute("alertMsg", result + "명의 회원을 차단했습니다.");
+				response.sendRedirect(request.getContextPath() + "/reportWait.re");
+				
+			}
 		
 	}
 

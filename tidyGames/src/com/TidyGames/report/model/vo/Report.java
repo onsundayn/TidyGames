@@ -9,14 +9,13 @@ public class Report {
 	private String reported;
 	private String reportedName;
 	private String reporting;
+	private int postNo;
 	private String post;
 	private String reply;
 	private String reportSort;
 	private String etc;
 	private Date reportDate;
 	private String done;
-	
-	// DB 외 필드
 	
 	public Report() {}
 
@@ -43,6 +42,22 @@ public class Report {
 		this.reportedNo = reportedNo;
 		this.reported = reported;
 		this.reportedName = reportedName;
+		this.reportSort = reportSort;
+		this.etc = etc;
+		this.reportDate = reportDate;
+	}
+
+	
+	public Report(int reportNo, int reportedNo, String reported, String reporting, int postNo, String post,
+			String reply, String reportSort, String etc, Date reportDate) {
+		super();
+		this.reportNo = reportNo;
+		this.reportedNo = reportedNo;
+		this.reported = reported;
+		this.reporting = reporting;
+		this.postNo = postNo;
+		this.post = post;
+		this.reply = reply;
 		this.reportSort = reportSort;
 		this.etc = etc;
 		this.reportDate = reportDate;
@@ -134,6 +149,14 @@ public class Report {
 
 	public void setDone(String done) {
 		this.done = done;
+	}
+
+	public int getPostNo() {
+		return postNo;
+	}
+
+	public void setPostNo(int postNo) {
+		this.postNo = postNo;
 	}
 
 	@Override

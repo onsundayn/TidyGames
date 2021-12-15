@@ -39,8 +39,10 @@
 	<entry key="reportWaiting">
 		SELECT 
 		       REPORT_NO
+		     , A.MEM_NO
 		     , A.MEM_NICK "REPORTED"
 		     , POST_NAME
+		     , REF_PNO
 		     , REPLY_CONTENT
 		     , C.RCATEGORY_NAME
 		     , R.ETC
@@ -53,5 +55,12 @@
 		LEFT JOIN REPLY RP ON (R.REF_RNO = RP.REPLY_NO)
 		JOIN REPORT_CATEGORY C ON (R.REPORT_SORT = C.RCATEGORY_NO)
 		WHERE DONE = 'N'
+	</entry>
+	<entry key="accessBlock">
+		UPDATE 
+		       MEMBER 
+		   SET MEM_ACCESS = 'BLOCK'
+		     , BLOCK_DATE = SYSDATE
+		 WHERE MEM_NO = ?
 	</entry>
 </properties>

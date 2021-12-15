@@ -168,8 +168,7 @@
                             <td><input type="checkbox" id="checkBox"></td>
                             <td><%= r.getReportNo() %></td>
                             <td><%= r.getReported() %></td>
-                            <td><a href=""><%= r.getPost() %></a></td>
-                            <!-- 게시글 번호도 조회해와야 해당 링크로 이동할 수 있음! -->
+                            <td><a href="<%= contextPath %>/detail.po?pno=<%= r.getPostNo() %>"><%= r.getPost() %></a></td>
                             <td>
                             	<% if(r.getEtc() != null) { %>
                             		<%= r.getEtc() %>
@@ -187,9 +186,9 @@
                             	<% } %>
                             </td>
                             <td>
-                                <select name="access" id="access">
-                                    <option value="BLOCK">BLOCK</option>
-                                    <option value="UNBLOCK">UNBLOCK</option>
+                                <select name="user" id="access">
+                                    <option value="">UNBLOCK</option>
+                                    <option value="<%= r.getReportedNo() %>">BLOCK</option>
                                 </select>
                             </td>
                         </tr>
@@ -197,11 +196,6 @@
                         
                     </tbody>
                     </table>
-                  
-                    <!-- <div id="rightTop">
-                      <a href="" class="btn btn-dark">삭제</a>
-                      <a href="" class="btn btn-dark">확인</a>
-                    </div> -->
                 </div>
             </from>
 
