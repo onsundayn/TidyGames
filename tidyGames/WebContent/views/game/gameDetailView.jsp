@@ -157,8 +157,20 @@
                     <a href=""><img src="<%=contextPath%>/resources/image/heart.png" width="40px" height="40px"></a>
                 </div>
                 
-                <div id="cart">
+                
+                <div id="cart"  onclick="cartPage();">
                     <a href=""><img src="<%=contextPath%>/resources/image/cart.png" width="50px" height="50px"></a>
+                
+                <script>
+					function cartPage() {
+			    		var check = confirm("상품이 장바구니에 담겼습니다. 확인하시겠습니까?");
+			    		if(check) {
+			    		location.href = "<%=contextPath%>/cart.pa";
+			    		}
+			    	}
+				</script>
+                
+                
                 </div>
                 <br>
                 <div id="rating">
@@ -167,12 +179,18 @@
                 <div id="go-review">
                     <a href="<%=contextPath%>/views/game/reviewListView.jsp">게임리뷰 보러가기</a>
                 </div>
-            </div>
+
+
+
+				
+			</div>
 
         </div>
 
 
     </div>
+    
+    
     
     
     

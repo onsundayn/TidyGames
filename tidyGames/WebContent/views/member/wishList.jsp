@@ -256,7 +256,17 @@
         <div id="line1"></div>
         <br>
         <br><br>
-        <button id="allDelete_btn">전체삭제</button>
+        <button id="allDelete_btn" onclick="fnClear();">전체삭제</button>
+        	 <script>
+	        	 function fnClear() {
+			    		var check = confirm("찜목록을 비우시겠습니까?");
+			    		if(check) {
+			    		location.href = "<%=contextPath %>/cartClear.pa";
+			    		}
+			    	}
+        	</script>
+        
+       
         <br><br>
 
 
@@ -279,7 +289,20 @@
                                 
                                 <!-- 할인게임은 어떻게 표시할건지? -->
                                 <div id="price" class="area6">20000원</div><br><br>
-                                <button id="cart_btn" class="area6">+ 장바구니추가</button>
+                                <button id="cart_btn" class="area6"  onclick="cartPage();">+ 장바구니추가</button>
+                                
+                                
+                                    <script>
+								    	function cartPage() {
+								    		var check = confirm("상품이 장바구니에 담겼습니다. 확인하시겠습니까?");
+								    		if(check) {
+								    		location.href = "<%=contextPath %>/cart.pa";
+								    		}
+								    	}
+								    
+							 		</script>
+                            
+                                
                             </div>
                         </div>
                     </div>
@@ -307,7 +330,34 @@
                                 
                                 <!-- 할인게임은 어떻게 표시할건지? -->
                                 <div id="price" class="area6">20000원</div><br><br>
-                                <button id="cart_btn" class="area6">+ 장바구니추가</button>
+                                
+                                <form name="form1" method="post" action="<%= contextPath %>/cartInsert.pa">
+                                
+                                 
+                                	<!-- 게임조회 객체에서 뽑아올거임 -->
+                                	<input type="hidden" name="gameNo" value="">
+                                	
+                                	<!-- Member loginUser = new MemberService().loginMember(userId, userPwd); -->
+                                	<input type="hidden" name="memNo" value="">
+                                	 
+                              
+                                	<button type="submit" id="cart_btn" class="area6" onclick="cartPage();" >+ 장바구니추가</button>
+                            	</form>
+                            	
+                            	
+                             <script>
+							    	function cartPage() {
+							    		var check = confirm("상품이 장바구니에 담겼습니다. 확인하시겠습니까?");
+							    		if(check) {
+							    		location.href = "<%=contextPath %>/cart.pa";
+							    		}
+							    	}
+							    
+							  </script>
+                            
+                            
+                            
+                            
                             </div>
                         </div>
                     </div>
@@ -332,6 +382,8 @@
             <br><br><br>
           
     </div>
+    
+   
 
 
 
