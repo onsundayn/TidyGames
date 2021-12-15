@@ -26,7 +26,7 @@ public class CartController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("views/pay/cartView4.jsp").forward(request, response);
+		request.getRequestDispatcher("views/pay/cartView.jsp").forward(request, response);
 	
 	}
 
