@@ -28,12 +28,12 @@ private Properties prop = new Properties();
 		}
 	}
 	
-	public ArrayList<Game> selectGame(Connection conn, String keyword) {
+	public ArrayList<Game> selectList(Connection conn, String keyword) {
 		
 		ArrayList <Game> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("selectGame");
+		String sql = prop.getProperty("selectList");
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, keyword);
@@ -60,9 +60,45 @@ private Properties prop = new Properties();
 		}
 		
 		return list;
+	}
+	
+	public Game selectGame(Connection conn, int gameNo) {
 		
+		Game g = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectGame");
 		
-		
+		try {
+			pstmt = conn.prepareStatement(sql);//미완성
+			pstmt.setInt(1, gameNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				g = new Game(rset.getInt("game_no"),
+							 rset.getInt("company_no"),
+							 rset.getString("kor_name"),
+							 rset.getString("eng_name"),
+							 rset.getString("release_date"),
+							 rset.getInt("price"),
+							 rset.getString("game_intro"),
+							 rset.getString("confirm"),
+							 rset.getString("upgame"),
+							 rset.getString("upload_date"),
+							 rset.getDouble("point"),
+							 rset.getString("game_status"),
+							 rset.getString("game_img"));
+							 
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return g;
 		
 	}
 	

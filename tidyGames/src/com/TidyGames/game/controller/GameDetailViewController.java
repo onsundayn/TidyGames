@@ -1,8 +1,6 @@
 package com.TidyGames.game.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,16 +11,16 @@ import com.TidyGames.game.model.service.GameService;
 import com.TidyGames.game.model.vo.Game;
 
 /**
- * Servlet implementation class GameSearchController
+ * Servlet implementation class GameDetailViewController
  */
-@WebServlet("/gameList.ga")
-public class GameListController extends HttpServlet {
+@WebServlet("/detail.ga")
+public class GameDetailViewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GameListController() {
+    public GameDetailViewController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,13 +30,15 @@ public class GameListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String keyword = request.getParameter("keyword");
+		int gameNo = Integer.parseInt(request.getParameter("gno"));
 		
-		ArrayList<Game> list = new GameService().selectList(keyword);
+		System.out.println(gameNo);
 		
-		request.setAttribute("list", list);
+		GameService gService = new GameService();
 		
-		request.getRequestDispatcher("views/game/gameListView.jsp").forward(request, response);
+		Game g = gService.selectGame(gameNo);
+		request.setAttribute("g", g);		
+		request.getRequestDispatcher("views/game/gameDetailView.jsp").forward(request, response);
 		
 		
 	}

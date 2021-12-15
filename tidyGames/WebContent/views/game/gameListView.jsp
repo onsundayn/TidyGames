@@ -142,8 +142,9 @@
         </div>
 
         <div class="emp"></div>
-
+		
         <div class="list-group">
+        
 			<% if(list.isEmpty()) { %>
 			<!-- 키워드와 일치하는 게임이 없을 경우 -->
 				<h3 align="center" style="color:white"> 일치하는 게임이 없습니다.</h3>
@@ -152,6 +153,7 @@
 				<% for(Game g : list) { %>
             <div class="game-list">
                 <div class="game-title-img">
+            		<input type="hidden" value="<%=g.getGameNo()%>">
                     <a href=""><img src="<%=contextPath%>/<%=g.getGameImg()%>"></a>
                 </div>
                 <div class="game-name" align="center">
@@ -180,9 +182,9 @@
                     <br><br><br>
                     <a href=""><i class="far fa-heart fa-2x"></i></a>
                 </div>
-                <div class="cart" align="center">
+                <div onclick="cartConfirm();" class="cart" align="center">
                     <br><br><br>
-                    <a href="" ><i onclick="cartConfirm();" class="fas fa-shopping-cart fa-2x"></i></a>
+                    <a href="" ><i  class="fas fa-shopping-cart fa-2x"></i></a>
                 </div>
             </div>
 	           	<% } %>
@@ -193,6 +195,7 @@
     </div>
     
     <script>
+    	
     		function cartConfirm(){
     			if(confirm("게임을 장바구니에 담았습니다.장바구니로 이동하시겠습니까?") == true) {
     				location.href = '<%=contextPath%>/cart.pa';
@@ -200,9 +203,29 @@
    					return;
    				}
    			};
-    			
+   			
+   	       $(function(){ 
+   	          $(".game-title-img").click(function(){ 
+   	        	 
+   	             location.href = '<%=contextPath%>/detail.ga?gno=' + $(this).children("input").val(); 
+   	             
+   	          })
+   	       })
+   	       
+   	       $('a').click(function(e) {
+  				e.preventDefault();
+			});
+   	       
+   	       
+   			
     </script>
-    
-
+    	
+    	<!-- 	$(function(){
+   				$(".game-title-img>a").click(function(){
+   					console.log("00");
+   					location.href = "/detail.ga?gno=" + $(this).children("input").val();
+   				})
+   			}) -->
+   		
 </body>
 </html>
