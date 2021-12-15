@@ -88,7 +88,7 @@
             <ul>
                 <li id="myPageBtn" style="font-weight: bolder">게임사 관리</li>
                 <li><a href="<%=request.getContextPath()%>/enroll.co" id="enrollco">게임사 등록</a></li>
-                <li><a href="<%=request.getContextPath()%>/list.co" id="listco">게임사별 목록 조회</a></li>
+                <li><a href="<%=request.getContextPath()%>/list.co?cpage=1" id="listco">게임사별 목록 조회</a></li>
             </ul>
             <div id="line_2"></div>
             <ul>

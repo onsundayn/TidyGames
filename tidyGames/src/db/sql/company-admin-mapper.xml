@@ -2,7 +2,6 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	
-	<!-- 게임사 등록 -->
 	<entry key="insertCompany">
 		INSERT
 		  INTO COMPANY
@@ -24,9 +23,35 @@
 		  , ?
 		  )
 	</entry>
-	
-	<!-- 게임사 목록 조회 -->
+
+	<entry key="selectListCount">
+		SELECT
+		       COUNT(*) COUNT
+		  FROM COMPANY
+		 WHERE COMPANY_STATUS = 'Y'
+	</entry>	
+
 	<entry key="selectCompanyList">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                SELECT 
+						       COMPANY_NO
+						     , COMPANY_NAME
+						     , COMPANY_ID
+						     , COMPANY_PWD
+						     , COMPANY_ENROLL
+						  FROM COMPANY
+						 WHERE COMPANY_STATUS = 'Y'
+						 ORDER
+						    BY COMPANY_NO DESC
+		                ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+
+	<entry key="searchCompany">
 		SELECT 
 		       COMPANY_NO
 		     , COMPANY_NAME
@@ -35,11 +60,11 @@
 		     , COMPANY_ENROLL
 		  FROM COMPANY
 		 WHERE COMPANY_STATUS = 'Y'
+		   AND UPPER(COMPANY_NAME) LIKE UPPER('%' || ? || '%')
 		 ORDER
 		    BY COMPANY_NO DESC
 	</entry>
-	
-	<!-- 게임사 상세 조회 -->
+
 	<entry key="selectCompanyDetail">
 		SELECT
 		       COMPANY_NO
@@ -51,7 +76,7 @@
 		  FROM COMPANY
 		 WHERE COMPANY_NO = ?
 	</entry>
-	
+
 	<entry key="updateCompany">
 		UPDATE
 		       COMPANY
@@ -70,14 +95,19 @@
 	</entry>
 
 
-
-
-
-
-
-
-
-
+	<entry key="selectGameList">
+		SELECT
+		       GAME_NO
+		     , KOR_NAME
+		     , ENG_NAME
+		     , TO_CHAR(RELEASE_DATE, 'YY/MM/DD') "RELEASE_DATE"
+		     , TO_CHAR(UPLOAD_DATE, 'YY/MM/DD') "UPLOAD_DATE"
+		  FROM GAME
+		 WHERE GAME_STATUS = 'Y'
+		   AND COMPANY_NO = ?
+		 ORDER
+		    BY GAME_NO DESC
+	</entry>
 
 
 </properties>
