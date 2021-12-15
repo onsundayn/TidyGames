@@ -27,4 +27,11 @@
 				    BY ROWNUM DESC)
 		  WHERE ROWNUM BETWEEN ? AND ?
 	</entry>
+	<entry key="unblock">
+		UPDATE 
+		       MEMBER 
+		   SET MEM_ACCESS = 'UNBLOCK'
+		     , BLOCK_DATE = '' 
+		 WHERE MEM_ID = ?
+	</entry>
 </properties>

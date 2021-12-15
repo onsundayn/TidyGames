@@ -16,7 +16,7 @@ import com.TidyGames.report.model.vo.Report;
 /**
  * Servlet implementation class adminBlacklistController
  */
-@WebServlet("/blacklist.me")
+@WebServlet("/blacklist.re")
 public class AdminBlacklistController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

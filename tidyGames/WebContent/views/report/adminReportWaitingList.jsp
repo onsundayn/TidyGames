@@ -163,12 +163,11 @@
                             <td><input type="checkbox" id="checkBox"></td>
                             <td>1</td>
                             <td>김길동이</td>
-                            <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
+                            <td><a href=""></a></td>
                             <td>욕설, 비방</td>
                             <td>호빵</td>
                             <td>2021/11/11 19:21</td>
                             <td>댓글</td>
-                            <!-- ajax -->
                             <td>
                                 <select name="access" id="access">
                                     <option value="BLOCK">BLOCK</option>
@@ -177,170 +176,6 @@
                             </td>
                         </tr>
                     </div>
-<!-- 반복 예시 -->
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>김길동이</td>
-    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-    <td>욕설, 비방</td>
-    <td>호빵</td>
-    <td>2021/11/11 19:21</td>
-    <td>댓글</td>
-    <!-- ajax -->
-    <td>
-        <select name="access" id="access">
-            <option value="BLOCK">BLOCK</option>
-            <option value="UNBLOCK">UNBLOCK</option>
-        </select>
-    </div>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>김길동이</td>
-    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-    <td>욕설, 비방</td>
-    <td>호빵</td>
-    <td>2021/11/11 19:21</td>
-    <td>댓글</td>
-    <!-- ajax -->
-    <td>
-        <select name="access" id="access">
-            <option value="BLOCK">BLOCK</option>
-            <option value="UNBLOCK">UNBLOCK</option>
-        </select>
-    </div>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>김길동이</td>
-    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-    <td>욕설, 비방</td>
-    <td>호빵</td>
-    <td>2021/11/11 19:21</td>
-    <td>댓글</td>
-    <!-- ajax -->
-    <td>
-        <select name="access" id="access">
-            <option value="BLOCK">BLOCK</option>
-            <option value="UNBLOCK">UNBLOCK</option>
-        </select>
-    </div>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>김길동이</td>
-    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-    <td>욕설, 비방</td>
-    <td>호빵</td>
-    <td>2021/11/11 19:21</td>
-    <td>댓글</td>
-    <!-- ajax -->
-    <td>
-        <select name="access" id="access">
-            <option value="BLOCK">BLOCK</option>
-            <option value="UNBLOCK">UNBLOCK</option>
-        </select>
-    </div>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>김길동이</td>
-    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-    <td>욕설, 비방</td>
-    <td>호빵</td>
-    <td>2021/11/11 19:21</td>
-    <td>댓글</td>
-    <!-- ajax -->
-    <td>
-        <select name="access" id="access">
-            <option value="BLOCK">BLOCK</option>
-            <option value="UNBLOCK">UNBLOCK</option>
-        </select>
-    </div>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>김길동이</td>
-    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-    <td>욕설, 비방</td>
-    <td>호빵</td>
-    <td>2021/11/11 19:21</td>
-    <td>댓글</td>
-    <!-- ajax -->
-    <td>
-        <select name="access" id="access">
-            <option value="BLOCK">BLOCK</option>
-            <option value="UNBLOCK">UNBLOCK</option>
-        </select>
-    </div>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>김길동이</td>
-    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-    <td>욕설, 비방</td>
-    <td>호빵</td>
-    <td>2021/11/11 19:21</td>
-    <td>댓글</td>
-    <!-- ajax -->
-    <td>
-        <select name="access" id="access">
-            <option value="BLOCK">BLOCK</option>
-            <option value="UNBLOCK">UNBLOCK</option>
-        </select>
-    </div>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>김길동이</td>
-    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-    <td>욕설, 비방</td>
-    <td>호빵</td>
-    <td>2021/11/11 19:21</td>
-    <td>댓글</td>
-    <!-- ajax -->
-    <td>
-        <select name="access" id="access">
-            <option value="BLOCK">BLOCK</option>
-            <option value="UNBLOCK">UNBLOCK</option>
-        </select>
-    </div>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>김길동이</td>
-    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-    <td>욕설, 비방</td>
-    <td>호빵</td>
-    <td>2021/11/11 19:21</td>
-    <td>댓글</td>
-    <!-- ajax -->
-    <td>
-        <select name="access" id="access">
-            <option value="BLOCK">BLOCK</option>
-            <option value="UNBLOCK">UNBLOCK</option>
-        </select>
-    </div>
-    </td>
-</tr>
-<!-- 반복 예시 끝-->
                                 
 
                     </tbody>

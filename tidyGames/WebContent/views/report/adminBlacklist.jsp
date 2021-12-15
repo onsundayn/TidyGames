@@ -89,10 +89,11 @@
     #table th{font-size:18px;}
     #table td{padding:5px;}
     #btn{
-        padding:0px;
-        margin:0px;
-        width:93px;
-        height:30px;
+    padding: 0px;
+    margin: 0px;
+    width: 78px;
+    height: 30px;
+    font-size: 14px;
     }
     #checkBox{
         width:20px;
@@ -148,7 +149,6 @@
                                 </button>
                                 <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">닉네임</a>
-                                <a class="dropdown-item" href="#">이 름</a>
                                 </div>
                         </div>
 
@@ -181,25 +181,11 @@
 	                            <td><%= r.getReportSort() %></td>
 	                            <td><%= r.getReportDate() %></td>
 	                            <td style="padding:4px">
-	                              <button id="btn" class="btn btn-outline-dark">차단 해제</button>
+	                              <button onclick="unblock();" id="btn" class="btn btn-outline-dark">차단 해제</button>
 	                            </td>
 	                        </tr>
                         
                         <% } %>
-                        
-                        
-                        <!-- if() {} -->
-                        <tr align="center">
-                            <td width="30">1</td>
-                            <td>userId</td>
-                            <td><a href="">회원 상세조회</a></td>
-                            <td>욕설, 비방</td>
-                            <td>2021/12/11</td>
-                            <td style="padding:4px">
-                              <button id="btn" class="btn btn-outline-dark">차단 해제</button>
-                            </td>
-                        </tr>
-                        
 
                     </tbody>
                   </table>
@@ -210,7 +196,7 @@
                     <div class="paging-area" align="center">
                         <!-- 첫 페이지에서는 이전으로 비활성화 -->
  						<% if(currentPage != 1) { %>
-            				<button onclick="location.href='<%=contextPath%>/blacklist.me?cpage=<%=currentPage-1%>';"> &lt; </button>
+            				<button onclick="location.href='<%=contextPath%>/blacklist.re?cpage=<%=currentPage-1%>';"> &lt; </button>
            				 <% } %>
                         
                         <% for(int p=startPage; p<=endPage; p++) { %>
@@ -218,12 +204,12 @@
                             <% if(p == currentPage) { %>
                                 <button disabled><%= p %></button>
                             <% }else { %>
-                                <button onclick="location.href='<%= contextPath %>/blacklist.me?cpage=<%= p %>';"><%= p %></button>
+                                <button onclick="location.href='<%= contextPath %>/blacklist.re?cpage=<%= p %>';"><%= p %></button>
                             <% } %>
                         <% } %>
                         
                         <% if(currentPage != maxPage) { %>
-                            <button onclick="loaction.href='<%= contextPath %>/blacklist.me?cpage<%=currentPage+1%>';"> &gt; </button>
+                            <button onclick="loaction.href='<%= contextPath %>/blacklist.re?cpage<%=currentPage+1%>';"> &gt; </button>
                             <!-- 현재 페이지가 마지막 페이지일 땐 다음으로 버튼 비활성화 -->
                         <% } %>
                     
@@ -234,8 +220,6 @@
                 </div>
                 
             </div>
-      
-      
 
 
         <footer>
@@ -246,6 +230,19 @@
     
     </div>
 
+	<script>
+        function unblock(){
+            if(confirm("해당 회원의 차단을 해제하시겠습니까?")) {
+                
+            	$("#table>tbody>tr").click(function(){
+	            	
+    	          location.href='<%= contextPath %>/unblock.re?user=' + $(this).children().eq(2).text();
+            	})
+                		
+            }
+        }
+
+	</script>
 
 
 </body>
