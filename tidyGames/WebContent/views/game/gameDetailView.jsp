@@ -161,15 +161,7 @@
                 <div id="cart"  onclick="cartPage();">
                     <a href=""><img src="<%=contextPath%>/resources/image/cart.png" width="50px" height="50px"></a>
                 
-                <script>
-					function cartPage() {
-			    		var check = confirm("상품이 장바구니에 담겼습니다. 확인하시겠습니까?");
-			    		if(check) {
-			    		location.href = "<%=contextPath%>/cart.pa";
-			    		}
-			    	}
-				</script>
-                
+         
                 
                 </div>
                 <br>
