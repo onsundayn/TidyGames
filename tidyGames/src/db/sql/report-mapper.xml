@@ -1,21 +1,55 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	<entry key="blacklist">
+	<entry key="selectBlockCount">
 		SELECT 
-		       ROWNUM, B.*
-		  FROM
-			    (SELECT 
-			           MEM_ID
-			         , MEM_NICK
-			         , RCATEGORY_NAME
-			         , BLOCK_DATE
-			      FROM REPORT
-			      JOIN REPORT_CATEGORY ON (REPORT_SORT = RCATEGORY_NO)
-			      JOIN MEMBER  ON (REPORTED_MEM_NO = MEM_NO) 
-			     WHERE MEM_ACCESS = 'BLOCK'
-			     ORDER BY BLOCK_DATE) B
-		 ORDER 
-		    BY ROWNUM DESC
+		       COUNT(*) COUNT
+  		  FROM MEMBER
+         WHERE MEM_ACCESS = 'BLOCK'
+	</entry>
+	<entry key="blacklist">
+		 SELECT *
+		   FROM
+				(SELECT 
+				       ROWNUM, B.*
+				  FROM
+					   (SELECT 
+					           MEM_ID
+					         , MEM_NICK
+					         , RCATEGORY_NAME
+					         , BLOCK_DATE
+					      FROM REPORT
+					      JOIN REPORT_CATEGORY ON (REPORT_SORT = RCATEGORY_NO)
+					      JOIN MEMBER  ON (REPORTED_MEM_NO = MEM_NO) 
+					     WHERE MEM_ACCESS = 'BLOCK'
+					     ORDER BY BLOCK_DATE) B
+				 ORDER 
+				    BY ROWNUM DESC)
+		  WHERE ROWNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="unblock">
+		UPDATE 
+		       MEMBER 
+		   SET MEM_ACCESS = 'UNBLOCK'
+		     , BLOCK_DATE = '' 
+		 WHERE MEM_ID = ?
+	</entry>
+	<entry key="reportWaiting">
+		SELECT 
+		       REPORT_NO
+		     , A.MEM_NICK "REPORTED"
+		     , POST_NAME
+		     , REPLY_CONTENT
+		     , C.RCATEGORY_NAME
+		     , R.ETC
+		     , B.MEM_NICK "REPORTING"
+		     , REPORT_DATE
+		FROM REPORT R
+		JOIN MEMBER A ON (R.REPORTED_MEM_NO = A.MEM_NO)
+		JOIN MEMBER B ON (R.REPORTING_MEM_NO = B.MEM_NO)
+		JOIN POST P ON (R.REF_PNO = P.POST_NO)
+		LEFT JOIN REPLY RP ON (R.REF_RNO = RP.REPLY_NO)
+		JOIN REPORT_CATEGORY C ON (R.REPORT_SORT = C.RCATEGORY_NO)
+		WHERE DONE = 'N'
 	</entry>
 </properties>
