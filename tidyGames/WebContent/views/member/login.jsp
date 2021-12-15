@@ -101,7 +101,7 @@
 
     <content>
         <div id="content" align="center">
-            <form action="" method="">
+            <form action="<%= contextPath %>/login.me" method="post">
                 <div id="login_form">
 
                     <span style="color: white; font-size: 30px; font-weight: bold;">HELLO!</span>
@@ -117,14 +117,14 @@
                     </div>
 
                     <div class="login_check">
-                        <label>
-                            <input type="checkbox"> 아이디 기억
+                        <label for="rememberId">
+                            <input type="checkbox" name="rememberId" id="rememberId"> 아이디 기억
                         </label>
-                        <label>
-                            <input type="checkbox"> 자동 로그인
+                        <label for="rememberMe">
+                            <input type="checkbox" name="rememberMe" id="rememberMe"> 자동 로그인
                         </label>
-                        <label>
-                            <input type="checkbox"> 게임사 회원
+                        <label for="companyCheck">
+                            <input type="checkbox" name="companyCheck" id="companyCheck"> 게임사 회원
                         </label>
                     </div>
 
