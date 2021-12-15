@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.report.model.vo.Report"%>
+    
+<%
+	ArrayList<Report> list = (ArrayList<Report>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,8 +94,8 @@
     #reportSelect{
         color:orange;
     }
-    tbody a{
-        color:gray;
+    #table a{
+        color:black;
     }
     #table td{padding:4px;}
     #tableOut1{
@@ -126,7 +130,7 @@
             <div id="line_3"></div>
             
       
-            <form action="">
+            <form action="<%= contextPath %>/block.re">
     	    <div id="tableBox">
                 <div id="tableTop">
                     <div id="leftTop">
@@ -137,7 +141,7 @@
                     <div>
                         <div id="rightTop">
                         <a href="" class="btn btn-secondary">삭제</a>
-                        <a href="" class="btn btn-dark">확인</a>
+                        <button type="submit" class="btn btn-dark">확인</button>
                     </div>  
                 </div>
                 </div>
@@ -158,17 +162,30 @@
                     </thead>
                     <tbody>
                         
-                        <!-- if() {} -->
+                        
+                        <% for(Report r : list) { %>
                         <tr align="center">
                             <td><input type="checkbox" id="checkBox"></td>
-                            <td>1</td>
-                            <td>김길동이</td>
-                            <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-                            <td>욕설, 비방</td>
-                            <td>호빵</td>
-                            <td>2021/11/11 19:21</td>
-                            <td>댓글</td>
-                            <!-- ajax -->
+                            <td><%= r.getReportNo() %></td>
+                            <td><%= r.getReported() %></td>
+                            <td><a href=""><%= r.getPost() %></a></td>
+                            <!-- 게시글 번호도 조회해와야 해당 링크로 이동할 수 있음! -->
+                            <td>
+                            	<% if(r.getEtc() != null) { %>
+                            		<%= r.getEtc() %>
+                            	<% }else { %>
+                            		<%= r.getReportSort() %>
+                            	<% } %>
+                            </td>
+                            <td><%= r.getReporting() %></td>
+                            <td><%= r.getReportDate() %></td>
+                            <td>
+                            	<% if(r.getReply() == null) { %>
+                            			게시글
+                            	<% }else { %>
+                            			댓글
+                            	<% } %>
+                            </td>
                             <td>
                                 <select name="access" id="access">
                                     <option value="BLOCK">BLOCK</option>
@@ -176,173 +193,8 @@
                                 </select>
                             </td>
                         </tr>
-                    </div>
-<!-- 반복 예시 -->
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>김길동이</td>
-    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-    <td>욕설, 비방</td>
-    <td>호빵</td>
-    <td>2021/11/11 19:21</td>
-    <td>댓글</td>
-    <!-- ajax -->
-    <td>
-        <select name="access" id="access">
-            <option value="BLOCK">BLOCK</option>
-            <option value="UNBLOCK">UNBLOCK</option>
-        </select>
-    </div>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>김길동이</td>
-    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-    <td>욕설, 비방</td>
-    <td>호빵</td>
-    <td>2021/11/11 19:21</td>
-    <td>댓글</td>
-    <!-- ajax -->
-    <td>
-        <select name="access" id="access">
-            <option value="BLOCK">BLOCK</option>
-            <option value="UNBLOCK">UNBLOCK</option>
-        </select>
-    </div>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>김길동이</td>
-    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-    <td>욕설, 비방</td>
-    <td>호빵</td>
-    <td>2021/11/11 19:21</td>
-    <td>댓글</td>
-    <!-- ajax -->
-    <td>
-        <select name="access" id="access">
-            <option value="BLOCK">BLOCK</option>
-            <option value="UNBLOCK">UNBLOCK</option>
-        </select>
-    </div>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>김길동이</td>
-    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-    <td>욕설, 비방</td>
-    <td>호빵</td>
-    <td>2021/11/11 19:21</td>
-    <td>댓글</td>
-    <!-- ajax -->
-    <td>
-        <select name="access" id="access">
-            <option value="BLOCK">BLOCK</option>
-            <option value="UNBLOCK">UNBLOCK</option>
-        </select>
-    </div>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>김길동이</td>
-    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-    <td>욕설, 비방</td>
-    <td>호빵</td>
-    <td>2021/11/11 19:21</td>
-    <td>댓글</td>
-    <!-- ajax -->
-    <td>
-        <select name="access" id="access">
-            <option value="BLOCK">BLOCK</option>
-            <option value="UNBLOCK">UNBLOCK</option>
-        </select>
-    </div>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>김길동이</td>
-    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-    <td>욕설, 비방</td>
-    <td>호빵</td>
-    <td>2021/11/11 19:21</td>
-    <td>댓글</td>
-    <!-- ajax -->
-    <td>
-        <select name="access" id="access">
-            <option value="BLOCK">BLOCK</option>
-            <option value="UNBLOCK">UNBLOCK</option>
-        </select>
-    </div>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>김길동이</td>
-    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-    <td>욕설, 비방</td>
-    <td>호빵</td>
-    <td>2021/11/11 19:21</td>
-    <td>댓글</td>
-    <!-- ajax -->
-    <td>
-        <select name="access" id="access">
-            <option value="BLOCK">BLOCK</option>
-            <option value="UNBLOCK">UNBLOCK</option>
-        </select>
-    </div>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>김길동이</td>
-    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-    <td>욕설, 비방</td>
-    <td>호빵</td>
-    <td>2021/11/11 19:21</td>
-    <td>댓글</td>
-    <!-- ajax -->
-    <td>
-        <select name="access" id="access">
-            <option value="BLOCK">BLOCK</option>
-            <option value="UNBLOCK">UNBLOCK</option>
-        </select>
-    </div>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>김길동이</td>
-    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-    <td>욕설, 비방</td>
-    <td>호빵</td>
-    <td>2021/11/11 19:21</td>
-    <td>댓글</td>
-    <!-- ajax -->
-    <td>
-        <select name="access" id="access">
-            <option value="BLOCK">BLOCK</option>
-            <option value="UNBLOCK">UNBLOCK</option>
-        </select>
-    </div>
-    </td>
-</tr>
-<!-- 반복 예시 끝-->
-                                
-
+                        <% } %>
+                        
                     </tbody>
                     </table>
                   
