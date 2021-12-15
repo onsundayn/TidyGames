@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import ="java.util.ArrayList, com.TidyGames.game.model.vo.Game"%>
+    
+    
+<%
+ArrayList <Game> list = (ArrayList<Game>)request.getAttribute("list"); 
+Game g = new Game();
+
+%>    
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -212,6 +220,7 @@
 <body>
     <%@ include file="../common/topbar.jsp"%>
     <%@ include file="../common/navibar.jsp"%>
+    
     <div id="outer">
         <div id="line_1"></div>
         <div>
@@ -268,8 +277,8 @@
         
        
         <br><br>
-
-
+ 
+ 			
             <div id="center" style="border: 1px solid orange;">
                 <div class="wrap">
                     <div class="game_area1">게임사진</div>
@@ -310,7 +319,7 @@
 
             </div>
             
-
+			
             <div id="center">
                 <div class="wrap">
                     <div class="game_area1">게임사진</div>
@@ -335,10 +344,10 @@
                                 
                                  
                                 	<!-- 게임조회 객체에서 뽑아올거임 -->
-                                	<input type="hidden" name="gameNo" value="">
+                                	<input type="hidden" name="gameNo" value="<%=g.getGameNo()%>">
                                 	
                                 	<!-- Member loginUser = new MemberService().loginMember(userId, userPwd); -->
-                                	<input type="hidden" name="memNo" value="">
+                                	<input type="hidden" name="memNo" value="<%=loginUser.getMemNo()%>">
                                 	 
                               
                                 	<button type="submit" id="cart_btn" class="area6" onclick="cartPage();" >+ 장바구니추가</button>
@@ -355,7 +364,7 @@
 							    
 							  </script>
                             
-                            
+                         
                             
                             
                             </div>

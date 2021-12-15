@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import ="java.util.ArrayList, com.TidyGames.pay.model.vo.Cart"%>
+    
+ <% ArrayList<Cart> cart = (ArrayList<Cart>)request.getAttribute("cart"); %>
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -185,7 +188,7 @@ body {
           
             <div class="container">
 
-                <form name="form1" id="form1" method="post" action="<%= contextPath %>/cartInsert.pa">
+                <form name="form1" id="form1" method="post" action="<%= contextPath %>/cart.pa">
                 
                 
                 <div class="wrapper wrapper-content animated fadeInRight">

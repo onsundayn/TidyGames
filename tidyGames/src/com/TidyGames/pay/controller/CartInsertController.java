@@ -48,17 +48,12 @@ public class CartInsertController extends HttpServlet {
 			
 			int result = new PayService().insertCart(ca);
 			
-			if(result > 0) {
-				
-			}
-			
-			
 			
 		}else {
 			
 //			장바구니에 이미 존재합니다. alert
 			HttpSession session = request.getSession();
-			session.setAttribute("alertMsg","장바구니에 이미 존재합니다.");
+			//session.setAttribute("alertMsg","장바구니에 이미 존재합니다.");
 //			게임상세페이지 장바구니 버튼시 게임상세페이지로,,,
 			response.sendRedirect(request.getContextPath()+"/wishList.me");
 

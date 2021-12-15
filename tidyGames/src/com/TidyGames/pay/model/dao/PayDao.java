@@ -1,13 +1,15 @@
 package com.TidyGames.pay.model.dao;
 
+import static com.TidyGames.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
-import static com.TidyGames.common.JDBCTemplate.*;
 
 import com.TidyGames.pay.model.vo.Cart;
 
@@ -85,5 +87,58 @@ public class PayDao {
 		}
 		return result;
 	}
+	
+	public ArrayList<Cart> selectCart(Connection conn, int memNo, int gameNo) {
+		
+		// select문 => ResultSet (한행) => Attachment객체
+		 ArrayList<Cart> cart = new  ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectCart");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memNo);
+			pstmt.setInt(2, gameNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				cart.add(new Cart(
+								  rset.getInt("mem_no"),	
+								  rset.getInt("game_no"),  
+								  rset.getString("game_img"),
+								  rset.getString("kor_name"),
+								  rset.getString("eng_name"),
+								  rset.getString("game_intro"),
+								  rset.getInt("price"),
+								  rset.getInt("point"),
+								  rset.getString("mem_nick")));
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return cart;
+	
+	
+	
+	
+	
+	
+	
+	}
+	
+	
+	
+	
+	
 	
 }
