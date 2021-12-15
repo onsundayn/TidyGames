@@ -173,19 +173,25 @@
                     </thead>
                     <tbody>
                         
+                        	<!-- if -->
                         <% for(Report r : list) { %>
-                        	
 	                        <tr align="center">
 	                            <td width="30"><%= r.getReportNo() %></td>
 	                            <td><%= r.getReportedName() %></td>
-	                            <td><a href=""><%= r.getReportedId() %></a></td>
-	                            <td><%= r.getReportSort() %></td>
+	                            <!-- 아이디 클릭 시 회원의 상세보기로 넘어가야 함 (아직 구현 전) -->
+	                            <td><a href="<%= contextPath %>/memberSelect.me?mno=<%= r.getReportedNo() %>"><%= r.getReported() %></a></td>
+	                            <td>
+	                            	<% if(r.getEtc() != null) { %>
+	                            		<%= r.getEtc() %>
+	                            	<% }else { %>
+	                            		<%= r.getReportSort() %>
+	                            	<% } %>
+	                            </td>
 	                            <td><%= r.getReportDate() %></td>
 	                            <td style="padding:4px">
 	                              <button onclick="unblock();" id="btn" class="btn btn-outline-dark">차단 해제</button>
 	                            </td>
 	                        </tr>
-                        
                         <% } %>
 
                     </tbody>
@@ -194,9 +200,7 @@
 
                 <div id="tableOut2">
                     
-                	<!--  만약 리스트에 아무것도 없다면 버튼도 활성화되어서는 안 된다는 전제 -->
-	                <% if(listCount == 0) { %>
-	                
+	                <% if(!list.isEmpty()) { %>
 	                    <div class="paging-area" align="center">
 	                        <!-- 첫 페이지에서는 이전으로 비활성화 -->
 	 						<% if(currentPage != 1) { %>
@@ -239,10 +243,8 @@
             if(confirm("해당 회원의 차단을 해제하시겠습니까?")) {
                 
             	$("#table>tbody>tr").click(function(){
-	            	
     	          location.href='<%= contextPath %>/unblock.re?user=' + $(this).children().eq(2).text();
             	})
-                		
             }
         }
 

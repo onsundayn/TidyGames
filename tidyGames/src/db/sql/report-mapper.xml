@@ -14,9 +14,11 @@
 				       ROWNUM, B.*
 				  FROM
 					   (SELECT 
-					           MEM_ID
+					   		   MEM_NO
+					         , MEM_ID
 					         , MEM_NICK
 					         , RCATEGORY_NAME
+					         , ETC
 					         , BLOCK_DATE
 					      FROM REPORT
 					      JOIN REPORT_CATEGORY ON (REPORT_SORT = RCATEGORY_NO)
