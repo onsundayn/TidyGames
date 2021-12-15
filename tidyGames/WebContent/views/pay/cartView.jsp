@@ -179,8 +179,15 @@ body {
             <%@ include file="../common/memberSidebar.jsp" %>
          </div>
             <!-- 장바구니에있을때 -->
-            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+           <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+           
+           <!-- count가 0일때 장바구니 비었음 , 아닐때 표시, 게임은 반복문으로 표시-->
+          
             <div class="container">
+
+                <form name="form1" id="form1" method="post" action="<%= contextPath %>/cartInsert.pa">
+                
+                
                 <div class="wrapper wrapper-content animated fadeInRight">
                     <div class="row">
                         <div class="col-md-9" >
@@ -305,12 +312,15 @@ body {
                                     
                                     <div class="m-t-sm">
                                         <div class="btn-group">
-                                        <a href="#" class="btn btn-primary btn-sm" style="margin-right: 10px;"><i class="fa fa-shopping-cart"></i> 주문하기</a>
-                                        <a href="#"class="btn btn-secondary btn-sm" > 쇼핑계속하기</a>
+                                        <a href="<%=contextPath%>/order.pa" class="btn btn-primary btn-sm" style="margin-right: 10px;"><i class="fa fa-shopping-cart"></i> 주문하기</a>
+                                        <a href="<%=contextPath%>"class="btn btn-secondary btn-sm" > 쇼핑계속하기</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+              
+                
+                
                 
                             <div class="ibox" style="padding-top: 30px;">
                                 <div class="ibox-title" style="border-radius: 5px;">
@@ -326,52 +336,34 @@ body {
                 
                 
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                        
+                        
 
-        <!-- 장바구니에 아무것도없을때 -->
-
-        <br><br><br>
-        <div class="nocart">
-            <div class="container-fluid mt-100">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card" style="background: rgba(0, 0, 0, 0.445);">
+                        <div style=" width:840px; height:100px; text-align: right;">
                             
-                            <div class="card-body cart" style="background: rgba(0, 0, 0, 0.445);">
-                                <div class="col-sm-12 empty-cart-cls text-center"> <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3">
-                                    <h3 style="color:white"><strongy> 장바구니가 비어있습니다.</strongy></h3>
-                                     <a href="#" class="btn btn-primary cart-btn-transform m-3" data-abc="true">쇼핑계속하기</a>
-                                </div>
-                            </div>
+                            <button class="btn btn-secondary" onclick="fnClear();">전체삭제</button>
+                            
+                            	 <script>
+						        	 function fnClear() {
+							    		var check = confirm("장바구니를 비우시겠습니까?");
+							    		if(check) {
+							    		location.href = "<%=contextPath %>/cartClear.pa";
+							    		}
+							    	}
+					        	</script>
                         </div>
                     </div>
+                    
                 </div>
-            </div>
-        </div>
+            </form>
+                
+          </div>
+      
+			
+       	
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        <br><br><br>
+      
 
 
 
