@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.TidyGames.game.model.vo.*"%>
+<%
+	Game g = (Game)request.getAttribute("g");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,6 +92,20 @@
         padding:5px;
         border-radius: 5px;
     }
+    .cart a, .heart a, .star-rating a{
+        text-decoration:none;
+        color:lightgrey;
+    }
+    .cart a:hover, .heart a:hover, .star-rating a:hover{
+        text-decoration: none;
+        color:orange;
+    }
+    #review-btn{
+    	color:black;
+    }
+    #review-btn:hover{
+    	background-color:orange;
+    }
 </style>
 </head>
 <body style="background-color: #0e332c;">
@@ -100,13 +117,13 @@
         <div class="left-area">
             <div class="title">
                 <p>
-                    슬라임랜처 <br>
-                    Slime Rancher
+                    <%=g.getKorName() %> <br>
+                    <%=g.getEngName() %>
                 </p>
             </div>
             
             <div  class="img11" id="big">
-                <img src="<%=contextPath%>/resources/image/동영상캡쳐.PNG">
+                <img src="<%=contextPath%>/<%=g.getGameImg()%>">
             </div>
             
             <div class="img11" id="small" align="center">
@@ -129,18 +146,18 @@
         <div class="right-area">
             <div class="info-area">
                 <div id="t-img">
-                    <img src="<%=contextPath%>/resources/image/header_alt_assets_3.jpg">
+                    <img src="<%=contextPath%>/<%=g.getGameImg()%>">
                 </div>
 
                 <div id="price">
-                    <span>판매가 : 21000원</span>
+                    <span>판매가 : <%=g.getPrice() %>원</span>
                 </div>
                 <div id="content">
-                    <span>슬라임랜처는 소개글 어쩌구저쩌구 </span>
+                    <span><%=g.getGameIntro() %> </span>
                 </div>
                 <div id="release-date">
                     <p>
-                        출시일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-08-02 <br>
+                        출시일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=g.getReleaseDate() %> <br>
                         장르 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 액션게임<br>
                         플레이어 &nbsp;&nbsp;&nbsp; 싱글플레이어<br>
                     </p>
@@ -154,15 +171,12 @@
             </div>
             <div class="btn-area">
                 <div id="heart">
-                    <a href=""><img src="<%=contextPath%>/resources/image/heart.png" width="40px" height="40px"></a>
+                    <a href=""><i class="far fa-heart fa-2x"></i></a>
                 </div>
                 
-                
-                <div id="cart"  onclick="cartPage();">
-                    <a href=""><img src="<%=contextPath%>/resources/image/cart.png" width="50px" height="50px"></a>
-                
-         
-                
+                <div id="cart">
+                    <a href="" ><i class="fas fa-shopping-cart fa-2x"></i></a>
+
                 </div>
                 <br>
                 <div id="rating">
@@ -178,8 +192,6 @@
 			</div>
 
         </div>
-
-
     </div>
     
     

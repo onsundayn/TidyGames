@@ -1,7 +1,7 @@
 package com.TidyGames.game.model.vo;
 
 public class Game {
-	
+
 	private int gameNo;
 	private int companyNo;
 	private String korName;
@@ -10,16 +10,16 @@ public class Game {
 	private int price;
 	private String gameIntro;
 	private String confirm;
-	private String update;
+	private String upgame;
 	private String uploadDate; 
 	private double point;
 	private String gameStatus;
 	private String gameImg;
 	
-	public Game () {}
+	public Game() {}
 
 	public Game(int gameNo, int companyNo, String korName, String engName, String releaseDate, int price,
-			String gameIntro, String confirm, String update, String uploadDate, double point, String gameStatus,
+			String gameIntro, String confirm, String upgame, String uploadDate, double point, String gameStatus,
 			String gameImg) {
 		super();
 		this.gameNo = gameNo;
@@ -30,7 +30,7 @@ public class Game {
 		this.price = price;
 		this.gameIntro = gameIntro;
 		this.confirm = confirm;
-		this.update = update;
+		this.upgame = upgame;
 		this.uploadDate = uploadDate;
 		this.point = point;
 		this.gameStatus = gameStatus;
@@ -38,6 +38,25 @@ public class Game {
 	}
 	
 	
+	
+	
+
+	public Game(int companyNo, String korName, String engName, String releaseDate, int price, String gameIntro,
+			String confirm, String upgame, String uploadDate, double point, String gameStatus, String gameImg) {
+		super();
+		this.companyNo = companyNo;
+		this.korName = korName;
+		this.engName = engName;
+		this.releaseDate = releaseDate;
+		this.price = price;
+		this.gameIntro = gameIntro;
+		this.confirm = confirm;
+		this.upgame = upgame;
+		this.uploadDate = uploadDate;
+		this.point = point;
+		this.gameStatus = gameStatus;
+		this.gameImg = gameImg;
+	}
 
 	public Game(int gameNo, int companyNo, String korName, String engName, String releaseDate, int price, double point,
 			String gameStatus, String gameImg) {
@@ -117,12 +136,12 @@ public class Game {
 		this.confirm = confirm;
 	}
 
-	public String getUpdate() {
-		return update;
+	public String getUpgame() {
+		return upgame;
 	}
 
-	public void setUpdate(String update) {
-		this.update = update;
+	public void setUpgame(String upgame) {
+		this.upgame = upgame;
 	}
 
 	public String getUploadDate() {
@@ -160,11 +179,13 @@ public class Game {
 	@Override
 	public String toString() {
 		return "Game [gameNo=" + gameNo + ", companyNo=" + companyNo + ", korName=" + korName + ", engName=" + engName
-				+ ", releaswDate=" + releaseDate + ", price=" + price + ", gameIntro=" + gameIntro + ", confirm="
-				+ confirm + ", update=" + update + ", uploadDate=" + uploadDate + ", point=" + point + ", gameStatus="
+				+ ", releaseDate=" + releaseDate + ", price=" + price + ", gameIntro=" + gameIntro + ", confirm="
+				+ confirm + ", upgame=" + upgame + ", uploadDate=" + uploadDate + ", point=" + point + ", gameStatus="
 				+ gameStatus + ", gameImg=" + gameImg + "]";
 	}
 	
+	
+
 	
 
 }
