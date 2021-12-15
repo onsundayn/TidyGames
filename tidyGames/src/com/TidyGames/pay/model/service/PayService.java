@@ -1,8 +1,12 @@
 package com.TidyGames.pay.model.service;
 
-import static com.TidyGames.common.JDBCTemplate.*;
+import static com.TidyGames.common.JDBCTemplate.close;
+import static com.TidyGames.common.JDBCTemplate.commit;
+import static com.TidyGames.common.JDBCTemplate.getConnection;
+import static com.TidyGames.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.TidyGames.pay.model.dao.PayDao;
 import com.TidyGames.pay.model.vo.Cart;
@@ -38,4 +42,17 @@ public class PayService {
 		return result;
 	}
 
+	
+	public ArrayList<Cart> selectCart(int memNo, int gameNo) {
+		
+		
+		Connection conn = getConnection();
+		
+		 ArrayList<Cart> cart = new PayDao().selectCart(conn, memNo, gameNo);
+		 
+		 close(conn);
+		 
+		return cart;
+		 
+	}
 }
