@@ -35,14 +35,16 @@ public class CartInsertController extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		
-		int memNo = (int)request.getAttribute("memNo");
-		int gameNo = (int)request.getAttribute("gameNo");
+		int memNo = Integer.parseInt(request.getParameter("memNo"));
+		int gameNo =  Integer.parseInt(request.getParameter("gameNo"));
 		
 		Cart ca = new Cart();
 		
 		ca.setMemNo(memNo);
 		ca.setGameNo(gameNo);
 		
+		
+	
 		int count = new PayService().countCart(ca);
 		
 		if(count == 0) {
@@ -50,6 +52,7 @@ public class CartInsertController extends HttpServlet {
 			int result = new PayService().insertCart(ca);
 		
 			if(result > 0) {
+				
 				response.getWriter().print(result);
 			}
 			
