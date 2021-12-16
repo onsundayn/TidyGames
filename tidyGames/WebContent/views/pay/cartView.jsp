@@ -5,6 +5,7 @@
  
  ArrayList<Cart> cart = (ArrayList<Cart>)request.getAttribute("cart");
  Game g = (Game)session.getAttribute("g");
+ 
  %>
  
 <!DOCTYPE html>
@@ -193,7 +194,7 @@ body {
          	<% }else {%>
             <!-- 장바구니에있을때 -->
             
-            	
+            	<% for(Cart c : cart) { %>
            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
            
          
@@ -216,7 +217,7 @@ body {
                                     <div class="table-responsive" >
                                     
                                     
-							<% for(Cart c : cart) { %>
+							
                                             <!-- 게임1개  -->
                                         <table class="table shoping-cart-table" >
                                             <tbody>

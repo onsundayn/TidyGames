@@ -39,7 +39,7 @@
 					    
 				  FROM CART
 				  JOIN GAME USING(GAME_NO)
-				  JOIN MEMBER USING(MEMBER)
+				  JOIN MEMBER USING(MEM_NO)
 				 WHERE MEM_NO = ?
 				   AND GAME_STATUS = 'Y'
 			
