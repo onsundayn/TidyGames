@@ -103,5 +103,14 @@ public class ReportService {
 		return result;
 		
 	}
+	
+	public ArrayList<Report> selectReportList(PageInfo pi) {
+		Connection conn = getConnection();
+		
+		ArrayList<Report> list = new ReportDao().selectReportList(conn, pi);
+		
+		close(conn);
+		return list;
+	}
 
 }
