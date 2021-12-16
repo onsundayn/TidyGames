@@ -11,6 +11,8 @@ import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
 import com.TidyGames.company.model.vo.Company;
+import com.TidyGames.member.model.vo.Member;
+
 import static com.TidyGames.common.JDBCTemplate.*;
 
 public class LoginCompanyDao {
@@ -54,7 +56,8 @@ public class LoginCompanyDao {
 								rset.getString("company_comment"),
 								rset.getDate("company_enroll"),
 								rset.getString("company_status"),
-								rset.getString("company_id"));
+								rset.getString("company_id"),
+								rset.getString("company_cookie"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -64,6 +67,63 @@ public class LoginCompanyDao {
 		}
 		
 		return c;
+	}
+	
+	public int cookieUpdateCom(Connection conn, String userId, String sessionId) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("cookieUpdateCom");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, sessionId);
+			pstmt.setString(2, userId);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public Company loginComByCookie(Connection conn, String sessionId) {
+		
+		Company c = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("loginComByCookie");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, sessionId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				c = new Company(rset.getInt("company_no"),
+								rset.getString("company_name"),
+								rset.getString("company_pwd"),
+								rset.getString("company_head"),
+								rset.getString("company_comment"),
+								rset.getDate("company_enroll"),
+								rset.getString("company_status"),
+								rset.getString("company_id"),
+								rset.getString("company_cookie"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return c;
+		
 	}
 	
 }

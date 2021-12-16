@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,30 +38,38 @@ public class MemberLoginController extends HttpServlet {
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
 		String company = request.getParameter("companyCheck");
+		String remember = request.getParameter("rememberMe");
 		
 		Member loginUser = new MemberService().loginMember(userId, userPwd);
 		Company loginCompany = new LoginCompanyService().loginCompany(userId, userPwd);
-		// 사용자가 입력한 userId, userPwd가 일치하면 loginUser에 select한 Member객체의 값이 담겨있고,
-		// 일치하지 않으면 loginUser에 null이 담겨있다.
-		//System.out.println(loginUser);
-		//System.out.println(company);
 		
 		if(company == null) { // 회원
-			
 			if(loginUser == null) {
-				// "아이디 비번 확인" 알람창 띄운 뒤 로그인창 재 로딩
 				HttpSession session = request.getSession();
 				session.setAttribute("alertMsg", "아이디 혹은 비밀번호를 확인해주세요.");
 				request.getRequestDispatcher("views/member/login.jsp").forward(request, response);
 			} else {
-				// 로그인한 회원정보(loginuUser)를 session에 담기(여기저기서 가져다 쓸 수 있도록)
 				HttpSession session = request.getSession();
-				session.setAttribute("loginUser", loginUser);
+				session.setAttribute("loginUser", loginUser); // 세션에 회원데이터 저장
+				if(remember != null) {
+					String sessionId = session.getId();
+					// Member 테이블의 mem_cookie 컬럼에 값 업데이트
+					int result = new MemberService().cookieUpdateMem(userId, sessionId);
+					
+					// 로그인시 자동 로그인 체크했다면 쿠키에 고유한 세션ID 저장! (서버 켜질때마다 다름)
+					if(result > 0) { // mem_cookie컬럼에 값넣기 성공했을때
+						Cookie MemSessionId = new Cookie("MemSessionId", session.getId());
+						MemSessionId.setPath("/");
+						int limitTime = 60*60*24*90;
+						MemSessionId.setMaxAge(limitTime);
+						
+						response.addCookie(MemSessionId);
+					} 
+				}
+				
 				response.sendRedirect(request.getContextPath());
 			}
-			
 		} else { // 게임사
-			
 			if(loginCompany == null) {
 				HttpSession session = request.getSession();
 				session.setAttribute("alertMsg", "아이디 혹은 등록코드를 확인해주세요.");
@@ -68,14 +77,23 @@ public class MemberLoginController extends HttpServlet {
 			} else {
 				HttpSession session = request.getSession();
 				session.setAttribute("loginCompany", loginCompany);
+				
+				if(remember != null) {
+					String sessionId = session.getId();
+					int result = new LoginCompanyService().cookieUpdateCom(userId, sessionId);
+					
+					if(result > 0) { 
+						Cookie ComSessionId = new Cookie("ComSessionId", session.getId());
+						ComSessionId.setPath("/");
+						int limitTime = 60*60*24*90;
+						ComSessionId.setMaxAge(limitTime);
+						
+						response.addCookie(ComSessionId);
+					} 
+				}
 				response.sendRedirect(request.getContextPath());
 			}
-			
 		}
-		
-		
-
-	
 	}
 
 	/**
