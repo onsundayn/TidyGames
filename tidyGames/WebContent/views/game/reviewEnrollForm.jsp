@@ -127,7 +127,7 @@
                 </div>
             </div>
             <div class="title-img">
-                <img align="center" src="<%=contextPath%>/resources/image/Dead-Cells.jpg" alt="타이틀이미지">
+                <img src="<%=contextPath%>/resources/image/Dead-Cells.jpg" alt="타이틀이미지">
             </div>
         </div>
         <div class="middle-area">
@@ -148,7 +148,7 @@
                     <div class="content">
                         <span id="user-star">★★★★★</span>
                         <br><br>
-                        <textarea name="review-content" id="review-content" placeholder="리뷰를 작성해주세요"></textarea>
+                        <textarea name="contents" id="review-content" placeholder="리뷰를 작성해주세요"></textarea>
                     </div>
                 </div>
                 <div class="btn-3">

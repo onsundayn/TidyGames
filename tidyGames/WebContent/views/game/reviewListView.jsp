@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.TidyGames.game.model.vo.*"%>
+<%
+	Game g = (Game)request.getAttribute("g");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -119,8 +122,8 @@
             <div class="left-area">
                 <div class="title">
                     <br>
-                    <span>데드셀</span>
-                    <span style="font-size:20px;">DeadCells</span>
+                    <span><%=g.getKorName()%></span>
+                    <span style="font-size:20px;"><%=g.getEngName()%></span>
                     <br><br>
                 </div>
                 <div class="star-rating">
@@ -128,7 +131,7 @@
                 </div>
             </div>
             <div class="title-img">
-                <img align="center" src="<%=contextPath%>/resources/image/Dead-Cells.jpg" alt="타이틀이미지">
+                <img src="<%=contextPath%>/<%=g.getGameImg()%>">
             </div>
         </div>
         <div class="middle-area">
@@ -148,6 +151,7 @@
             </div>
         </div>
         <div class="buttom-area">
+        	
             <div class="review-list">
                 <div class="user-info">
                     <div id="profile-img">

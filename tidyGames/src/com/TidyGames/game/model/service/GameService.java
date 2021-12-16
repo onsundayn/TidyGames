@@ -35,5 +35,12 @@ public class GameService {
 	close(conn);
 	return list;
 	}
+	
+	public Game selectReview(int gameNo) {
+		Connection conn = getConnection();
+		Game g = new GameDao().selectReview(conn, gameNo);
+		close(conn);
+		return g;
+	}
 
 }
