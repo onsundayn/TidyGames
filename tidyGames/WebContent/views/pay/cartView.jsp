@@ -261,7 +261,7 @@ body {
                                                         <!-- 할인가격이면 이렇게 표시 -->
                                                         <td style="color:white"> 
                                                             18000
-                                                            <s class="small text-muted"> <span> <%=c.getPrice() %>원</span></s>
+                                                            <s class="small text-muted"> <span> <%=c.getPrice()%>원</span></s>
                                                         </td>
                                                         
                                                         <td width="65">
@@ -270,8 +270,31 @@ body {
                                                         
                                                         <td>
                                                             <h4 style="color:white; font-size:19px" >
+                                                            
                                                                 <span> <%=c.getPrice() %>원</span>
+                                                             
                                                             </h4>
+                                                            
+                                                            
+                               								 <button id="cart_btn" onclick="cartPage();">+ 장바구니추가</button>
+                                
+                                
+							                                    <script>
+															    	function cartPage() {
+															    		var check = confirm("상품이 장바구니에 담겼습니다. 확인하시겠습니까?");
+															    		if(check) {
+															    		location.href = "<%=contextPath %>/cart.pa";
+															    		}
+															    	}
+															    
+														 		</script>
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
                                                         </td>
                                                         
                                                     </tr>
@@ -339,7 +362,15 @@ body {
                                         Total
                                     </span>
                                     <h2 class="font-bold">
-                                        $390,00
+                          				<%
+                          				int total = 0;
+                          				for(int i=0; i<cart.size(); i++) {
+                          					total += cart.get(i).getPrice();	
+                          				}
+                          
+                          				%>
+                          				<%=total %>
+                                      		원
                                     </h2>
                 
                                     <hr>

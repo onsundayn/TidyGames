@@ -41,7 +41,7 @@ public class CartListController extends HttpServlet {
 		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
 		//int memNo = Integer.parseInt(request.getParameter("memNo"));
 		
-		System.out.println(memNo);
+		
 		
 		ArrayList<Cart> cart = new PayService().selectCart(memNo);  
 		
@@ -51,6 +51,7 @@ public class CartListController extends HttpServlet {
 		
 		
 		request.setAttribute("cart", cart);
+		
 		
 		
 		request.getRequestDispatcher("views/pay/cartView.jsp").forward(request, response);
