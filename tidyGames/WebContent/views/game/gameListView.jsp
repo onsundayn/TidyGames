@@ -153,7 +153,7 @@
 			<!--  일치하는 게임이 있을 경우 -->
 				<% for(Game g : list) { %>
             <div class="game-list">
-                <div class="game-title-img">ㅋ
+                <div class="game-title-img">
             		<input type="hidden" value="<%=g.getGameNo()%>" id="gameNo">
 
                     <a href="<%=contextPath%>/detail.ga?gno=<%=g.getGameNo()%>"><img src="<%=contextPath%>/<%=g.getGameImg()%>"></a>
@@ -231,11 +231,12 @@
     		data : {
     			
     			gameNo:$("#gameNo").val()
-    	
     		},
     		type:"post",
     		succes:function(result) {
+    			
     			if(result > 0) {
+ 
     				if(!confirm("장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?")){
     		    		return false;
     		    	}

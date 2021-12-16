@@ -29,7 +29,7 @@ public class PayService {
 		
 		Connection conn = getConnection();
 		
-		int result = new PayDao().countCart(conn, ca);
+		int result = new PayDao().insertCart(conn, ca);
 		
 		if(result >0 ) {
 			commit(conn);

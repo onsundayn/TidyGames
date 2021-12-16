@@ -4,10 +4,9 @@
  <% 
  
  ArrayList<Cart> cart = (ArrayList<Cart>)request.getAttribute("cart");
- Game g = (Game)session.getAttribute("g");
+
  
  %>
- 
 <!DOCTYPE html>
 <html>
 <head>
@@ -186,24 +185,34 @@ body {
          <div>
             <%@ include file="../common/memberSidebar.jsp" %>
          </div>
-         
-         
-         	<% if(cart.isEmpty()) { %>
-			<!-- 장바구니가 비어있을때-->
-         		<h3 align="center" style="color:white"> 장바구니가 비어있습니다.</h3>
-         	<% }else {%>
+			<% if(cart.isEmpty()) { %>
+			<!-- 장바구니 비어있을때 -->
+				
+			 <div class="container-fluid mt-100">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card" style="background: rgba(0, 0, 0, 0.445);">
+                            
+                            <div class="card-body cart" style="background: rgba(0, 0, 0, 0.445);">
+                                <div class="col-sm-12 empty-cart-cls text-center"> <img src="https://i.imgur.com/dCdflKN.png" width="200" height="130" class="img-fluid mb-4 mr-3">
+                                    <h3 style="color:white"><strongy> 장바구니가 비어있습니다.</strongy></h3>
+                                     <a href="#" class="btn btn-primary cart-btn-transform m-3" data-abc="true">쇼핑계속하기</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			
+			
+			
+			
+			
+			
+			<%}else { %>
             <!-- 장바구니에있을때 -->
-            
-            	<% for(Cart c : cart) { %>
-           <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-           
-         
-          
+            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
             <div class="container">
-
-                <form name="form1" id="form1" method="post" action=""> <!-- 결제하기 폼으로 -->
-                
-                
                 <div class="wrapper wrapper-content animated fadeInRight">
                     <div class="row">
                         <div class="col-md-9" >
@@ -213,8 +222,11 @@ body {
                                     <h5 style="font-weight: bold; color:white">장바구니</h5>
                                 </div>
                                 
+                                
+                                <%for(Cart c : cart){ %>
                                 <div class="ibox-content" style="background: rgba(0, 0, 0, 0.445);">
                                     <div class="table-responsive" >
+                                    
                                     
                                     
 							
@@ -222,22 +234,22 @@ body {
                                         <table class="table shoping-cart-table" >
                                             <tbody>
                                                     <tr>
-                                                        <td width="100">
+                                                        <td width="150">
                                                             <div >
-                                                                <img src="<%=contextPath%>/<%=c.getGameImg()%>" width="110px" height="140px">
+                                                                <img src="<%=contextPath%>/<%=c.getGameImg()%>" width="150px" height="140px">
                                                             </div>
                                                         </td>
 
                                                     
-                                                        <td class="desc">
+                                                        <td class="desc" >
                                                             <h3>
-                                                            <a href="<%=contextPath%>/detail.ga?gno=<%=g.getGameNo()%>" class="text-navy">
-                                                               <%=c.getKorName()%><br>
-       											               <%=c.getEngName()%>
-                                                            </a>
+                                                            <a href="#" class="text-navy" style="font-size:19px">
+               	                                                 <%=c.getKorName() %> <br>
+                   												 <%=c.getEngName() %>
+                  			                                          </a>
                                                             </h3>
                                                             <p class="small" style="color:white;">
-                                                                	   <span><%=c.getGameIntro() %> </span>
+                                                              <span><%=c.getGameIntro() %> </span>
                                                             </p>
                                         
                         
@@ -247,16 +259,64 @@ body {
                                                         </td>
                         
                                                         <!-- 할인가격이면 이렇게 표시 -->
+                                                        <td style="color:white"> 
+                                                            18000
+                                                            <s class="small text-muted"> <span> <%=c.getPrice() %>원</span></s>
+                                                        </td>
+                                                        
+                                                        <td width="65">
+                                                            <input type="text" class="form-control" placeholder="1" style="background: none;">
+                                                        </td>
+                                                        
+                                                        <td>
+                                                            <h4 style="color:white; font-size:19px" >
+                                                                <span> <%=c.getPrice() %>원</span>
+                                                            </h4>
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                
+                                </div>
+							<% } %>
+					<% }%>
+                                <div class="ibox-content" style="background: rgba(0, 0, 0, 0.445);">
+                                    <div class="table-responsive">
+                                            <table class="table shoping-cart-table">
+                                            <tbody>
+                                                    <tr>
+                                                        <td width="100">
+                                                            <div >
+                                                                <img src="<%=contextPath%>/resources/image/battlefield.JPG" width="110px" height="140px">
+                                                            </div>
+                                                        </td>
+                                                        <td class="desc">
+                                                            <h3>
+                                                            <a href="#" class="text-navy">
+                                                                BattleGround
+                                                            </a>
+                                                            </h3>
+                                                            <p class="small" style="color:white;">
+                                                                PUBG: BATTLEGROUNDS는 배틀로얄 게임으로, 외딴 섬에서 총 100명의 플레이어가 다양한 무기와 전략을 이용하여 마지막 1명이 살아남는 순간까지 전투를 하게 됩니다
+                                                            </p>
+                                        
+                        
+                                                            <div class="m-t-sm"></div>
+                                                                <a href="#" class="text-muted"><i class="fa fa-trash"></i> Remove item</a>
+                                                            </div>
+                                                        </td>
+                        
                                                         <td style="color:white">
-                                                            $180,00
-                                                            <s class="small text-muted"><span>판매가 : <%=g.getPrice() %>원</span></s>
+                                                            $700,00
                                                         </td>
                                                         <td width="65">
                                                             <input type="text" class="form-control" placeholder="1" style="background: none;">
                                                         </td>
                                                         <td>
                                                             <h4 style="color:white">
-                                                                $180,00총결제금액
+                                                                $180,00
                                                             </h4>
                                                         </td>
                                                     </tr>
@@ -265,10 +325,6 @@ body {
                                     </div>
                 
                                 </div>
-
-						 	<% } %>
-	   		<% } %>
-                        
                         
                             </div>
                 
@@ -290,15 +346,12 @@ body {
                                     
                                     <div class="m-t-sm">
                                         <div class="btn-group">
-                                        <a href="<%=contextPath%>/order.pa" class="btn btn-primary btn-sm" style="margin-right: 10px;"><i class="fa fa-shopping-cart"></i> 주문하기</a>
-                                        <a href="<%=contextPath%>"class="btn btn-secondary btn-sm" > 쇼핑계속하기</a>
+                                        <a href="#" class="btn btn-primary btn-sm" style="margin-right: 10px;"><i class="fa fa-shopping-cart"></i> 주문하기</a>
+                                        <a href="#"class="btn btn-secondary btn-sm" > 쇼핑계속하기</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-              
-                
-                
                 
                             <div class="ibox" style="padding-top: 30px;">
                                 <div class="ibox-title" style="border-radius: 5px;">
@@ -314,37 +367,15 @@ body {
                 
                 
                         </div>
-                        
-                        
-
-                        <div style=" width:840px; height:100px; text-align: right;">
-                            
-                            <button class="btn btn-secondary" onclick="fnClear();">전체삭제</button>
-                            
-                            	 <script>
-						        	 function fnClear() {
-							    		var check = confirm("장바구니를 비우시겠습니까?");
-							    		if(check) {
-							    		location.href = "<%=contextPath %>/cartClear.pa";
-							    		}
-							    	}
-					        	</script>
-                        </div>
                     </div>
-                    
                 </div>
-            </form>
-                
-          </div>
-      
-			
-       	
+            </div>
+        </div>
+
+        <!-- 장바구니에 아무것도없을때 -->
 
         <br><br><br>
-      
-
-
-
+    
 
 </body>
 </html>

@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.TidyGames.member.model.vo.Member;
 import com.TidyGames.pay.model.service.PayService;
 import com.TidyGames.pay.model.vo.Cart;
 import com.google.gson.Gson;
@@ -36,17 +38,26 @@ public class CartListController extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		int memNo = Integer.parseInt(request.getParameter("memNo"));
+		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
+		//int memNo = Integer.parseInt(request.getParameter("memNo"));
 		
+		System.out.println(memNo);
 		
 		ArrayList<Cart> cart = new PayService().selectCart(memNo);  
 		
-		response.setContentType("application/json; charset=utf-8");
-		new Gson().toJson(cart, response.getWriter());
+		
+		//response.setContentType("application/json; charset=utf-8");
+		//new Gson().toJson(cart, response.getWriter());
+		
 		
 		request.setAttribute("cart", cart);
 		
+		
 		request.getRequestDispatcher("views/pay/cartView.jsp").forward(request, response);
+		
+		HttpSession session = request.getSession();
+		
+	
 	
 	}
 

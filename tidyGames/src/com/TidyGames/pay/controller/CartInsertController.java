@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.TidyGames.member.model.vo.Member;
 import com.TidyGames.pay.model.service.PayService;
 import com.TidyGames.pay.model.vo.Cart;
 
@@ -35,7 +36,8 @@ public class CartInsertController extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		
-		int memNo = Integer.parseInt(request.getParameter("memNo"));
+		//int memNo = Integer.parseInt(request.getParameter("memNo"));
+		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
 		int gameNo =  Integer.parseInt(request.getParameter("gameNo"));
 		
 		Cart ca = new Cart();
@@ -43,7 +45,7 @@ public class CartInsertController extends HttpServlet {
 		ca.setMemNo(memNo);
 		ca.setGameNo(gameNo);
 		
-		
+		System.out.println(ca);
 	
 		int count = new PayService().countCart(ca);
 		
