@@ -112,6 +112,7 @@
 
     <div class="outer">
         <div class="left-area">
+        <input type="hidden" value="<%=g.getGameNo()%>">
             <div class="title">
                 <p>
                     <%=g.getKorName() %> <br>

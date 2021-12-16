@@ -1,7 +1,7 @@
 package com.TidyGames.game.model.service;
 
 import static com.TidyGames.common.JDBCTemplate.close;
-import static com.TidyGames.common.JDBCTemplate.getConnection;
+import static com.TidyGames.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import com.TidyGames.game.model.dao.GameDao;
 import com.TidyGames.game.model.vo.Category;
 import com.TidyGames.game.model.vo.Game;
+import com.TidyGames.game.model.vo.Review;
 
 public class GameService {
 	
@@ -30,17 +31,32 @@ public class GameService {
 	}
 	
 	public ArrayList<Category> selectCategoryList(){
-	Connection conn = getConnection();
-	ArrayList<Category> list = new GameDao().selectCategoryList(conn);
-	close(conn);
-	return list;
+		Connection conn = getConnection();
+		ArrayList<Category> list = new GameDao().selectCategoryList(conn);
+		close(conn);
+		return list;
 	}
 	
-	public Game selectReview(int gameNo) {
+	public ArrayList<Review> selectReview(int gameNo){
 		Connection conn = getConnection();
-		Game g = new GameDao().selectReview(conn, gameNo);
+		ArrayList<Review> list = new GameDao().selectReview(conn, gameNo);
 		close(conn);
-		return g;
+		return list;
+	}
+	
+	public int insertReview(Review r) {
+		Connection conn =  getConnection();
+		int result = new GameDao().insertReview(conn, r);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
 	}
 
 }

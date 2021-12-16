@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.game.model.vo.*"%>
+<%
+	Game g = (Game)request.getAttribute("g");
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +26,9 @@
         height:100%;
         float: left;
         color: white;
-        font-size: 30px;
+    }
+    .title{
+        font-size: 25px;
     }
     .title-img{
         width:50%;
@@ -103,6 +109,15 @@
         border-radius: 3px;
         padding: 4px;
     }
+    .star-rating a{
+        text-decoration:none;
+        color:white;
+        mouse-cursor:pointer;
+    }
+    .star-rating a:hover{
+        text-decoration: none;
+        color:orange;
+    }
 
 </style>
 </head>
@@ -116,33 +131,42 @@
         
         <div class="top-line">
             <div class="left-area">
+            <input type="hidden" name="game" value="<%=g.getGameNo()%>">
                 <div class="title">
                     <br>
-                    <span>데드셀</span>
-                    <span style="font-size:20px;">DeadCells</span>
+                    <%=g.getKorName()%><br>
+                    <%=g.getEngName()%>
                     <br><br>
                 </div>
                 <div class="star-rating">
-                    ★★★★★
+                    <a href="">
+                    	<!-- 별점 띄워줄때 반복문 돌려볼까?-->
+                    	<i class="fas fa-star fa-lg"></i>
+                    	<i class="fas fa-star fa-lg"></i>
+                    	<i class="fas fa-star fa-lg"></i>
+                    	<i class="fas fa-star fa-lg"></i>
+                    	<i class="fas fa-star fa-lg"></i>
+                    </a>
                 </div>
             </div>
             <div class="title-img">
-                <img src="<%=contextPath%>/resources/image/Dead-Cells.jpg" alt="타이틀이미지">
+                <img src="<%=contextPath%>/<%=g.getGameImg()%>">
             </div>
         </div>
         <div class="middle-area">
             <p style="color: white; font-size: 20px;"><br><br><br>리뷰작성</p>
         </div>
-        <form action="">
+        <form action="<%=contextPath%>/insert.ga?gno=<%=g.getGameNo()%>" id="enroll-form" method="post">
+            <input type="hidden" name="mem" value="<%=loginUser.getMemNo()%>">
             <div class="buttom-area">
                 <div class="review-list">
                     <div class="user-info">
                         <div id="profile-img">
-                            <img src="<%=contextPath%>/resources/image/user.png" width="70px" height="75px">
+                            <img src="<%=contextPath%>/<%=loginUser.getMemPic()%>" width="70px" height="75px">
                         </div>
                         <div id="user-name">
                             <br><br>
-                            사용자닉네임
+                            <%=loginUser.getMemNick()%>
                         </div>
                     </div>
                     <div class="content">

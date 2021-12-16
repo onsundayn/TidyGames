@@ -154,7 +154,7 @@
 				<% for(Game g : list) { %>
             <div class="game-list">
                 <div class="game-title-img">
-            		<input type="hidden" value="<%=g.getGameNo()%>">
+            		<input type="hidden" value="<%=g.getGameNo()%>" name="gno">
                     <a href="<%=contextPath%>/detail.ga?gno=<%=g.getGameNo()%>"><img src="<%=contextPath%>/<%=g.getGameImg()%>"></a>
                 </div>
                 <div class="game-name" align="center">
@@ -220,6 +220,8 @@
     		return false;
     	}
     }
+    
+    
    	       
    			
     </script>
