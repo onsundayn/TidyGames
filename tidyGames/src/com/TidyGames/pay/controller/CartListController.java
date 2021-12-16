@@ -44,9 +44,9 @@ public class CartListController extends HttpServlet {
 		response.setContentType("application/json; charset=utf-8");
 		new Gson().toJson(cart, response.getWriter());
 		
-		//request.setAttribute("cart", cart);
+		request.setAttribute("cart", cart);
 		
-		//request.getRequestDispatcher("views/pay/cartView.jsp").forward(request, response);
+		request.getRequestDispatcher("views/pay/cartView.jsp").forward(request, response);
 	
 	}
 
