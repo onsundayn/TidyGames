@@ -75,7 +75,7 @@
                 <li>
                 
                 <a href="<%= request.getContextPath() %>/cart.pa" id="cartbar">장바구니</a>
-                
+               		  
                 </li>
             
             </ul>

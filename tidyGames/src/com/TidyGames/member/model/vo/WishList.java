@@ -2,36 +2,42 @@ package com.TidyGames.member.model.vo;
 
 public class WishList {
 
-	private int gameNo;
 	private int memNo;
+	private int gameNo;
+	private String gameImg;
 	private String korName;
-	private String releaseDate;
+	private String engName;
+	private String gameIntro;
 	private int price;
+	private int point;
+	private String memNick;
 	
 	
 	private WishList() {}
 	
 	
 	
-	public WishList(int gameNo, int memNo, String korName, String releaseDate, int price) {
+	public WishList(int gameNo, int memNo) {
 		super();
 		this.gameNo = gameNo;
 		this.memNo = memNo;
-		this.korName = korName;
-		this.releaseDate = releaseDate;
-		this.price = price;
+	
 	}
 
 
 
-	public int getGameNo() {
-		return gameNo;
-	}
-
-
-
-	public void setGameNo(int gameNo) {
+	public WishList(int memNo, int gameNo, String gameImg, String korName, String engName, String gameIntro, int price,
+			int point, String memNick) {
+		super();
+		this.memNo = memNo;
 		this.gameNo = gameNo;
+		this.gameImg = gameImg;
+		this.korName = korName;
+		this.engName = engName;
+		this.gameIntro = gameIntro;
+		this.price = price;
+		this.point = point;
+		this.memNick = memNick;
 	}
 
 
@@ -48,6 +54,30 @@ public class WishList {
 
 
 
+	public int getGameNo() {
+		return gameNo;
+	}
+
+
+
+	public void setGameNo(int gameNo) {
+		this.gameNo = gameNo;
+	}
+
+
+
+	public String getGameImg() {
+		return gameImg;
+	}
+
+
+
+	public void setGameImg(String gameImg) {
+		this.gameImg = gameImg;
+	}
+
+
+
 	public String getKorName() {
 		return korName;
 	}
@@ -60,14 +90,26 @@ public class WishList {
 
 
 
-	public String getReleaseDate() {
-		return releaseDate;
+	public String getEngName() {
+		return engName;
 	}
 
 
 
-	public void setReleaseDate(String releaseDate) {
-		this.releaseDate = releaseDate;
+	public void setEngName(String engName) {
+		this.engName = engName;
+	}
+
+
+
+	public String getGameIntro() {
+		return gameIntro;
+	}
+
+
+
+	public void setGameIntro(String gameIntro) {
+		this.gameIntro = gameIntro;
 	}
 
 
@@ -84,14 +126,42 @@ public class WishList {
 
 
 
+	public int getPoint() {
+		return point;
+	}
+
+
+
+	public void setPoint(int point) {
+		this.point = point;
+	}
+
+
+
+	public String getMemNick() {
+		return memNick;
+	}
+
+
+
+	public void setMemNick(String memNick) {
+		this.memNick = memNick;
+	}
+
+
+
 	@Override
 	public String toString() {
-		return "WishList [gameNo=" + gameNo + ", memNo=" + memNo + ", korName=" + korName + ", releaseDate="
-				+ releaseDate + ", price=" + price + "]";
+		return "WishList [memNo=" + memNo + ", gameNo=" + gameNo + ", gameImg=" + gameImg + ", korName=" + korName
+				+ ", engName=" + engName + ", gameIntro=" + gameIntro + ", price=" + price + ", point=" + point
+				+ ", memNick=" + memNick + "]";
 	}
+
 	
 	
-	
+
+
+
 	
 	
 	
