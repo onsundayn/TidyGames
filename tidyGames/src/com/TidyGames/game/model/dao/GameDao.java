@@ -129,4 +129,23 @@ private Properties prop = new Properties();
 		
 	}
 	
+	public Game selectReview(Connection conn, int gameNo) {
+		//한행 조회
+		Game g = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectReview");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return g;
+		
+	}
+	
 }
