@@ -66,6 +66,7 @@
     .cart a, .heart a, .star-rating a{
         text-decoration:none;
         color:lightgrey;
+        mouse-cursor:pointer;
     }
     .cart a:hover, .heart a:hover, .star-rating a:hover{
         text-decoration: none;
@@ -142,8 +143,9 @@
         </div>
 
         <div class="emp"></div>
-
+		
         <div class="list-group">
+        
 			<% if(list.isEmpty()) { %>
 			<!-- 키워드와 일치하는 게임이 없을 경우 -->
 				<h3 align="center" style="color:white"> 일치하는 게임이 없습니다.</h3>
@@ -152,7 +154,8 @@
 				<% for(Game g : list) { %>
             <div class="game-list">
                 <div class="game-title-img">
-                    <a href=""><img src="<%=contextPath%>/<%=g.getGameImg()%>"></a>
+            		<input type="hidden" value="<%=g.getGameNo()%>">
+                    <a href="<%=contextPath%>/detail.ga?gno=<%=g.getGameNo()%>"><img src="<%=contextPath%>/<%=g.getGameImg()%>"></a>
                 </div>
                 <div class="game-name" align="center">
                     <%=g.getKorName()%><br>
@@ -174,16 +177,27 @@
                     	<i class="fas fa-star fa-lg"></i>
                     </a>
                     <br><br><br>
-                    <a href="<%=contextPath%>/views/game/reviewListView.jsp" class="btn btn-sm btn-light" id="review-btn" name="reviewList">이 게임의 리뷰</a>
+                    <a href="<%=contextPath%>/reviewList.ga?gno=<%=g.getGameNo()%>" class="btn btn-sm btn-light" id="review-btn">이 게임의 리뷰</a>
                 </div>
+                <% if(loginUser == null) { %>
+                <div class="heart" align="center">
+                    <br><br><br>
+                    <a href=""><i class="far fa-heart fa-2x"></i></a>
+                </div>
+                <div  class="cart" align="center">
+                    <br><br><br>
+                    <a href="<%=contextPath%>/login.me" onclick="return loginMsg();"><i class="fas fa-shopping-cart fa-2x"></i></a>
+                </div>
+                <% } else {%>
                 <div class="heart" align="center">
                     <br><br><br>
                     <a href=""><i class="far fa-heart fa-2x"></i></a>
                 </div>
                 <div class="cart" align="center">
                     <br><br><br>
-                    <a href="" ><i onclick="cartConfirm();" class="fas fa-shopping-cart fa-2x"></i></a>
+                    <a href="<%=contextPath%>/cart.pa" onclick="return cartConfirm();"><i class="fas fa-shopping-cart fa-2x"></i></a>
                 </div>
+                <% } %>
             </div>
 	           	<% } %>
 	   		<% } %>
@@ -192,17 +206,22 @@
         </div>
     </div>
     
-    <script>
-    		function cartConfirm(){
-    			if(confirm("게임을 장바구니에 담았습니다.장바구니로 이동하시겠습니까?") == true) {
-    				location.href = '<%=contextPath%>/cart.pa';
-   				}else{
-   					return;
-   				}
-   			};
-    			
-    </script>
     
-
+    <script>
+    
+    function loginMsg(){
+    	if(!confirm("로그인이 필요합니다. 로그인하시겠습니까?")){
+    		return false; 
+    	}
+    }
+    
+    function cartConfirm(){
+    	if(!confirm("장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?")){
+    		return false;
+    	}
+    }
+   	       
+   			
+    </script>
 </body>
 </html>

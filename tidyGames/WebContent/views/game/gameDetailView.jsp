@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.TidyGames.game.model.vo.*"%>
+<%
+	Game g = (Game)request.getAttribute("g");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,12 +85,23 @@
         margin-left: 50px;
         margin-right: 30px;
     }
-    #go-review a{
-        background:rgb(240, 156, 40);
+    #review-btn{
+        background:lightgrey;
         text-decoration: none;
         color:black;
         padding:5px;
         border-radius: 5px;
+    }
+    #cart a, #heart a, #rating a{
+        text-decoration:none;
+        color:lightgrey;
+    }
+    #cart a:hover, #heart a:hover, #rating a:hover{
+        text-decoration: none;
+        color:orange;
+    }
+    #review-btn:hover{
+    	background-color:orange;
     }
 </style>
 </head>
@@ -100,13 +114,13 @@
         <div class="left-area">
             <div class="title">
                 <p>
-                    슬라임랜처 <br>
-                    Slime Rancher
+                    <%=g.getKorName() %> <br>
+                    <%=g.getEngName() %>
                 </p>
             </div>
             
             <div  class="img11" id="big">
-                <img src="<%=contextPath%>/resources/image/동영상캡쳐.PNG">
+                <img src="<%=contextPath%>/<%=g.getGameImg()%>">
             </div>
             
             <div class="img11" id="small" align="center">
@@ -129,18 +143,18 @@
         <div class="right-area">
             <div class="info-area">
                 <div id="t-img">
-                    <img src="<%=contextPath%>/resources/image/header_alt_assets_3.jpg">
+                    <img src="<%=contextPath%>/<%=g.getGameImg()%>">
                 </div>
 
                 <div id="price">
-                    <span>판매가 : 21000원</span>
+                    <span>판매가 : <%=g.getPrice() %>원</span>
                 </div>
                 <div id="content">
-                    <span>슬라임랜처는 소개글 어쩌구저쩌구 </span>
+                    <span><%=g.getGameIntro() %> </span>
                 </div>
                 <div id="release-date">
                     <p>
-                        출시일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2017-08-02 <br>
+                        출시일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=g.getReleaseDate() %> <br>
                         장르 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 액션게임<br>
                         플레이어 &nbsp;&nbsp;&nbsp; 싱글플레이어<br>
                     </p>
@@ -153,26 +167,59 @@
                 </div>
             </div>
             <div class="btn-area">
+            <% if(loginUser == null) { %>
                 <div id="heart">
-                    <a href=""><img src="<%=contextPath%>/resources/image/heart.png" width="40px" height="40px"></a>
+                    <a href=""><i class="far fa-heart fa-2x"></i></a>
                 </div>
-                
                 <div id="cart">
-                    <a href=""><img src="<%=contextPath%>/resources/image/cart.png" width="50px" height="50px"></a>
+                    <a href="<%=contextPath%>/login.me" onclick="return loginMsg();"><i class="fas fa-shopping-cart fa-2x"></i></a>
                 </div>
+             <% } else { %>
+             	<div id="heart">
+                    <a href=""><i class="far fa-heart fa-2x"></i></a>
+                </div>
+                <div id="cart">
+                    <a href="<%=contextPath%>/cart.pa" onclick="return cartConfirm();"><i class="fas fa-shopping-cart fa-2x"></i></a>
+             	</div>
+             <% } %>		
                 <br>
+                <br><br>
                 <div id="rating">
-                    <img src="<%=contextPath%>/resources/image/rating (1).png" width="140px" height="80px">
+                   <a href="">
+                    	<!-- 별점 띄워줄때 반복문 돌려볼까?-->
+                    	<i class="fas fa-star fa-lg"></i>
+                    	<i class="fas fa-star fa-lg"></i>
+                    	<i class="fas fa-star fa-lg"></i>
+                    	<i class="fas fa-star fa-lg"></i>
+                    	<i class="fas fa-star fa-lg"></i>
+                    </a>
                 </div>
                 <div id="go-review">
-                    <a href="<%=contextPath%>/views/game/reviewListView.jsp">게임리뷰 보러가기</a>
+                    <a href="<%=contextPath%>/reviewList.ga?gno=<%=g.getGameNo()%>" id="review-btn">게임리뷰 보러가기</a>
                 </div>
             </div>
 
         </div>
-
-
     </div>
+    
+    <script>
+    
+    function loginMsg(){
+    	if(!confirm("로그인이 필요합니다. 로그인하시겠습니까?")){
+    		return false; 
+    	}
+    }
+    
+    function cartConfirm(){
+    	if(!confirm("장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?")){
+    		return false;
+    	}
+    }
+    
+	    
+    </script>
+    
+    
     
     
     

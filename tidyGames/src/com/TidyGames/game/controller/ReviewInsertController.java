@@ -1,28 +1,28 @@
 package com.TidyGames.game.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.TidyGames.game.model.service.GameService;
-import com.TidyGames.game.model.vo.Game;
+import com.TidyGames.game.model.vo.Review;
+import com.TidyGames.member.model.vo.Member;
 
 /**
- * Servlet implementation class GameSearchController
+ * Servlet implementation class ReviewInsertController
  */
-@WebServlet("/gameList.ga")
-public class GameListController extends HttpServlet {
+@WebServlet("/insert.ga")
+public class ReviewInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GameListController() {
+    public ReviewInsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,13 +32,20 @@ public class GameListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String keyword = request.getParameter("keyword");
+		request.setCharacterEncoding("UTF-8");
 		
-		ArrayList<Game> list = new GameService().selectList(keyword);
+		String contents = request.getParameter("contents");
 		
-		request.setAttribute("list", list);
+		// 로그인한 회원정보 얻어내는 방법 
+		// 1. input type="hidden"
+		// 2. session영역에 담겨있는 회원객체로부터 뽑기
+		HttpSession session = request.getSession();
+		int memNo = ((Member)session.getAttribute("loginUser")).getMemNo();
 		
-		request.getRequestDispatcher("views/game/gameListView.jsp").forward(request, response);
+		Review r = new Review();
+		
+		
+		
 		
 		
 	}
