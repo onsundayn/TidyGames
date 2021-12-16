@@ -162,7 +162,7 @@ public class ReportDao {
 		try {
 			for(int i=0; i<user.length; i++) {
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, user[i]);
+				pstmt.setInt(1, Integer.parseInt(user[i]));
 				
 				result += pstmt.executeUpdate();
 			}
@@ -174,9 +174,27 @@ public class ReportDao {
 		
 		return result;
 	}
-		
-		
-		
 	
+	public int accessDone(Connection conn, String[] reportNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("accessDone");
+		
+		try {
+			for(int i=0; i<reportNo.length; i++) {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, Integer.parseInt(reportNo[i]));
+				result = pstmt.executeUpdate();
+			}		
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return result;
+		
+	}
 		
 }

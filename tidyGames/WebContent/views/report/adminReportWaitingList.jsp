@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.report.model.vo.Report"%>
     
 <%
-	ArrayList<Report> list = (ArrayList<Report>)request.getAttribute("list");
+	ArrayList<Report> list = (ArrayList<Report>)request.getSession().getAttribute("list");
 %>
 <!DOCTYPE html>
 <html>
@@ -128,9 +128,7 @@
         <div id="box">
             <div id="intro">신고 내역</div>
             <div id="line_3"></div>
-            
       
-            <form action="<%= contextPath %>/block.re">
     	    <div id="tableBox">
                 <div id="tableTop">
                     <div id="leftTop">
@@ -140,8 +138,9 @@
                     </div>
                     <div>
                         <div id="rightTop">
-                        <a href="" class="btn btn-secondary">삭제</a>
-                        <button type="submit" class="btn btn-dark">확인</button>
+                        <button onclick="done();" class="btn btn-secondary">삭제</button>
+                        <!-- 리스트카운트가 0이면 확인도 disabled되게 만들기! -->
+                        <button type="button" onclick="block();" class="btn btn-dark">확인</button>
                     </div>  
                 </div>
                 </div>
@@ -165,7 +164,8 @@
                         
                         <% for(Report r : list) { %>
                         <tr align="center">
-                            <td><input type="checkbox" id="checkBox"></td>
+                       
+                            <td><input type="checkbox" id="checkBox" name="rno" value="<%= r.getReportNo() %>, <%= r.getPostNo()%>"></td>
                             <td><%= r.getReportNo() %></td>
                             <td><%= r.getReported() %></td>
                             <td><a href="<%= contextPath %>/detail.po?pno=<%= r.getPostNo() %>"><%= r.getPost() %></a></td>
@@ -187,8 +187,8 @@
                             </td>
                             <td>
                                 <select name="user" id="access">
-                                    <option value="">UNBLOCK</option>
-                                    <option value="<%= r.getReportedNo() %>">BLOCK</option>
+                                <option value="">UNBLOCK</option>
+                                <option id="block" value="<%= r.getReportedNo() %>">BLOCK</option>
                                 </select>
                             </td>
                         </tr>
@@ -197,7 +197,6 @@
                     </tbody>
                     </table>
                 </div>
-            </from>
 
                 <div id="tableOut2">
                   <div id="pagebar" align="center">
@@ -224,6 +223,9 @@
         </footer>
     
     </div>
+	
+	<script>
+	</script>
 
 
 

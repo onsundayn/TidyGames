@@ -1,6 +1,9 @@
 package com.TidyGames.report.model.service;
 
-import static com.TidyGames.common.JDBCTemplate.*;
+import static com.TidyGames.common.JDBCTemplate.close;
+import static com.TidyGames.common.JDBCTemplate.commit;
+import static com.TidyGames.common.JDBCTemplate.getConnection;
+import static com.TidyGames.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -67,10 +70,13 @@ public class ReportService {
 		return list;
 	}
 	
-	public int accessBlock(String[] user) {
+	public int accessBlock(String[] user, String[] reportNo) {
 		Connection conn = getConnection();
 		
-		int result = new ReportDao().accessBlock(conn, user);
+		int result1 = new ReportDao().accessBlock(conn, user);
+		int result2 = new ReportDao().accessDone(conn, reportNo);
+		
+		int result = result1 * result2;
 		
 		if(result > 0) {
 			commit(conn);
@@ -81,6 +87,21 @@ public class ReportService {
 			
 		return result;
 			
+	}
+	public int accessDone(String[] reportNo) {
+		
+		Connection conn = getConnection();
+		int result = new ReportDao().accessDone(conn, reportNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		} 
+			close(conn);
+			
+		return result;
+		
 	}
 
 }

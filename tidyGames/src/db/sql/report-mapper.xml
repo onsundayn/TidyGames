@@ -63,4 +63,10 @@
 		     , BLOCK_DATE = SYSDATE
 		 WHERE MEM_NO = ?
 	</entry>
+	<entry key="accessDone">
+		UPDATE 
+			   REPORT 
+		   SET DONE = 'Y' 
+		 WHERE REPORT_NO = ?
+	</entry>
 </properties>
