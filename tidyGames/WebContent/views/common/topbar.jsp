@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.TidyGames.member.model.vo.Member"%>
+    pageEncoding="UTF-8" import="com.TidyGames.member.model.vo.Member, com.TidyGames.company.model.vo.Company" %>
 <%
 	String contextPath = request.getContextPath();
 
 	Member loginUser = (Member)session.getAttribute("loginUser");
+	Company loginCompany = (Company)session.getAttribute("loginCompany");
 
 	String alertMsg = (String)session.getAttribute("alertMsg");
 %>
@@ -108,9 +109,12 @@
         </div>
         <div id="top3">
             <a href="<%= request.getContextPath()%>/cart.pa"><i class="fas fa-shopping-cart fa-lg"></i></a>
+            
             <% if(loginUser != null ) { %>
             	<a href="<%= contextPath %>/myPage.me" id="usericon"><i class="far fa-user fa-lg"></i></a>
-            <% } else { %>
+            <% } else if(loginCompany != null) { %>
+                <a href="<%= contextPath %>/myPage.gc" id="usericon"><i class="far fa-user fa-lg"></i></a>
+            <% } else {%>
                 <a href="<%= contextPath %>/login.me" id="usericon"><i class="far fa-user fa-lg"></i></a>
             <% } %>
         </div>

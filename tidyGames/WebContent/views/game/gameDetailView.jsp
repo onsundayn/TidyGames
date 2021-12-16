@@ -85,23 +85,20 @@
         margin-left: 50px;
         margin-right: 30px;
     }
-    #go-review a{
-        background:rgb(240, 156, 40);
+    #review-btn{
+        background:lightgrey;
         text-decoration: none;
         color:black;
         padding:5px;
         border-radius: 5px;
     }
-    .cart a, .heart a, .star-rating a{
+    #cart a, #heart a, #rating a{
         text-decoration:none;
         color:lightgrey;
     }
-    .cart a:hover, .heart a:hover, .star-rating a:hover{
+    #cart a:hover, #heart a:hover, #rating a:hover{
         text-decoration: none;
         color:orange;
-    }
-    #review-btn{
-    	color:black;
     }
     #review-btn:hover{
     	background-color:orange;
@@ -170,20 +167,37 @@
                 </div>
             </div>
             <div class="btn-area">
+            <% if(loginUser == null) { %>
                 <div id="heart">
                     <a href=""><i class="far fa-heart fa-2x"></i></a>
                 </div>
-                
                 <div id="cart">
-                    <a href="" ><i class="fas fa-shopping-cart fa-2x"></i></a>
+
+                    <a href="<%=contextPath%>/login.me" onclick="return loginMsg();"><i class="fas fa-shopping-cart fa-2x"></i></a>
 
                 </div>
+             <% } else { %>
+             	<div id="heart">
+                    <a href=""><i class="far fa-heart fa-2x"></i></a>
+                </div>
+                <div id="cart">
+                    <a href="<%=contextPath%>/cart.pa" onclick="return cartConfirm();"><i class="fas fa-shopping-cart fa-2x"></i></a>
+             	</div>
+             <% } %>		
                 <br>
+                <br><br>
                 <div id="rating">
-                    <img src="<%=contextPath%>/resources/image/rating (1).png" width="140px" height="80px">
+                   <a href="">
+                    	<!-- 별점 띄워줄때 반복문 돌려볼까?-->
+                    	<i class="fas fa-star fa-lg"></i>
+                    	<i class="fas fa-star fa-lg"></i>
+                    	<i class="fas fa-star fa-lg"></i>
+                    	<i class="fas fa-star fa-lg"></i>
+                    	<i class="fas fa-star fa-lg"></i>
+                    </a>
                 </div>
                 <div id="go-review">
-                    <a href="<%=contextPath%>/views/game/reviewListView.jsp">게임리뷰 보러가기</a>
+                    <a href="<%=contextPath%>/reviewList.ga?gno=<%=g.getGameNo()%>" id="review-btn">게임리뷰 보러가기</a>
                 </div>
 
 
@@ -193,6 +207,23 @@
 
         </div>
     </div>
+    
+    <script>
+    
+    function loginMsg(){
+    	if(!confirm("로그인이 필요합니다. 로그인하시겠습니까?")){
+    		return false; 
+    	}
+    }
+    
+    function cartConfirm(){
+    	if(!confirm("장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?")){
+    		return false;
+    	}
+    }
+    
+	    
+    </script>
     
     
     

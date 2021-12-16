@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="loginCompany">
+		SELECT 
+		       COMPANY_NO
+		     , COMPANY_NAME
+		     , COMPANY_PWD
+		     , COMPANY_HEAD
+		     , COMPANY_COMMENT
+		     , COMPANY_ENROLL
+		     , COMPANY_STATUS
+		     , COMPANY_ID
+		  FROM COMPANY
+		 WHERE COMPANY_ID = ?
+		   AND COMPANY_PWD = ?
+		   AND COMPANY_STATUS = 'Y'
+	</entry>
+</properties>
