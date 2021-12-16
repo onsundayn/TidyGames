@@ -12,11 +12,12 @@ public class Company {
 	private Date companyEnroll;
 	private String companyStatus;
 	private String companyId;
+	private String companyCookie;
 	
 	public Company() {}
-
+	
 	public Company(int companyNo, String companyName, String companyPwd, String companyHead, String companyComment,
-			Date companyEnroll, String companyStatus, String companyId) {
+			Date companyEnroll, String companyStatus, String companyId, String companyCookie) {
 		super();
 		this.companyNo = companyNo;
 		this.companyName = companyName;
@@ -26,8 +27,9 @@ public class Company {
 		this.companyEnroll = companyEnroll;
 		this.companyStatus = companyStatus;
 		this.companyId = companyId;
+		this.companyCookie = companyCookie;
 	}
-	
+
 	// 게임사 목록 조회용 매개변수 생성자
 	public Company(int companyNo, String companyName, String companyId, String companyPwd, Date companyEnroll) {
 		super();
@@ -102,13 +104,23 @@ public class Company {
 		this.companyId = companyId;
 	}
 
+	public String getCompanyCookie() {
+		return companyCookie;
+	}
+
+	public void setCompanyCookie(String companyCookie) {
+		this.companyCookie = companyCookie;
+	}
+
 	@Override
 	public String toString() {
 		return "Company [companyNo=" + companyNo + ", companyName=" + companyName + ", companyPwd=" + companyPwd
 				+ ", companyHead=" + companyHead + ", companyComment=" + companyComment + ", companyEnroll="
-				+ companyEnroll + ", companyStatus=" + companyStatus + ", companyId=" + companyId + "]";
+				+ companyEnroll + ", companyStatus=" + companyStatus + ", companyId=" + companyId + ", companyCookie="
+				+ companyCookie + "]";
 	}
-
+	
+	
 	
 	
 }

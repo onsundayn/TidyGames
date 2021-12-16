@@ -20,4 +20,32 @@ public class MemberService {
 		
 	}
 	
+	public int cookieUpdateMem(String userId, String sessionId) {
+		
+		Connection conn = getConnection();
+		int result = new MemberDao().cookieUpdateMem(conn, userId, sessionId);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	public Member loginMemByCookie(String sessionId) {
+		
+		Connection conn = getConnection();
+		Member m = new MemberDao().loginMemByCookie(conn, sessionId);
+		
+		close(conn);
+		
+		return m;
+	}
+	
+	
+	
 }
