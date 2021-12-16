@@ -81,7 +81,7 @@
                 <li><a href="<%= request.getContextPath() %>/memberList.me" id="memberList">회원 목록</a></li>
                 <li><a href="<%= request.getContextPath() %>/blacklist.re?cpage=1" id="blacklist">블랙리스트</a></li>
                 <li><a href="<%= request.getContextPath() %>/reportWait.re" id="reportSelect">신고 내역</a></li>
-                <li><a href="<%= request.getContextPath() %>/reportList.re" id="reportList">신고 내역 조회</a></li>
+                <li><a href="<%= request.getContextPath() %>/reportList.re?cpage=1" id="reportList">신고 내역 조회</a></li>
             
             </ul>
             <div id="line_2"></div>

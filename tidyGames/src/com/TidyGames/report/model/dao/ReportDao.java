@@ -194,5 +194,46 @@ public class ReportDao {
 		return result;
 		
 	}
+	
+	public ArrayList<Report> selectReportList(Connection conn, PageInfo pi) {
+		
+		ArrayList<Report> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectReportList");
+		
+		int startRow = (pi.getCurrentPage() - 1) * (pi.getViewLimit()) + 1;
+		int endRow = startRow + pi.getViewLimit() - 1;
+		
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2,  endRow);
+				rset = pstmt.executeQuery();
+				
+				while(rset.next()) {
+					list.add(new Report(rset.getInt("report_no")
+									  , rset.getInt("mem_no")
+									  , rset.getString("reported")
+									  , rset.getString("reporting")
+									  , rset.getInt("ref_pno")
+									  , rset.getString("post_name")
+									  , rset.getString("reply_content")
+									  , rset.getString("rcategory_name")
+									  , rset.getString("etc")
+									  , rset.getDate("report_date")));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
+			}
+			
+			return list;
+			
+		
+		
+	}
 		
 }

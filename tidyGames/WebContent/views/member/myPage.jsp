@@ -109,8 +109,8 @@
                     </div>
                 </div>
                 <div id="box2">
-                    <label id="nick">NickName</label> <br>
-                    <label id="id">userId</label>
+                    <label id="nick"><%= loginUser.getMemName() %></label> <br>
+                    <label id="id"><%= loginUser.getMemId() %></label>
                     <div id="edit">
                         <a href="views/member/updateUserCheck.jsp">>> 내 정보 수정</a> <br>
                         <!--<a href="<%= contextPath %>/logout.me">>> 로그아웃</a>-->
