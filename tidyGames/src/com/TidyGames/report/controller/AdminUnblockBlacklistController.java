@@ -31,9 +31,9 @@ public class AdminUnblockBlacklistController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 			String userId = request.getParameter("user"); 
+			System.out.println(userId);
 				
 			int result = new ReportService().unblock(userId);
-			
 			
 			request.getSession().setAttribute("alertMsg", "차단이 해제되었습니다.");
 			response.sendRedirect(request.getContextPath() + "/blacklist.re?cpage=1");

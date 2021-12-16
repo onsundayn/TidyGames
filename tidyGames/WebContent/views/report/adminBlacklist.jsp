@@ -38,13 +38,13 @@
         font-size: 33px;
         font-weight: 900;
         color :white;
-        margin: 25px 80px 0px 95px;
+        margin: 25px 80px 0px 45px;
     }
     #line_3{
         width:165px;
         height:3px;
         background: rgba(255, 255, 255, 0.555);
-        margin: 8px 0px 0px 95px;
+        margin: 8px 0px 0px 45px;
     }
     #box{
     	width:1290px;	
@@ -53,11 +53,11 @@
         
     }
     #tableBox{
-        width:1100px;
+        width:1250px;
         height:700px;
         /* margin-left:145px; */
-        margin: 30px 0px 100px 95px;
-        background-color: rgb(197, 197, 197);
+        margin: 30px 0px 100px 45px;
+        background-color: rgb(197, 197, 197); 
         border: 10px solid rgba(255, 255, 255, 0.555);
     }
     #tableTop div{
@@ -77,11 +77,11 @@
         margin: 0px 50px 0px 40px;
     }
     #rightTop{
-        margin: 55px 20px 20px 380px;
+        margin: 55px 20px 20px 500px;
     }
     #table{
         margin:auto;
-        width:930px;
+        width:1100px;
         /* background-color: gray; */
     }
     #table *{
@@ -173,19 +173,25 @@
                     </thead>
                     <tbody>
                         
+                        	<!-- if -->
                         <% for(Report r : list) { %>
-                        	
 	                        <tr align="center">
 	                            <td width="30"><%= r.getReportNo() %></td>
 	                            <td><%= r.getReportedName() %></td>
-	                            <td><a href=""><%= r.getReportedId() %></a></td>
-	                            <td><%= r.getReportSort() %></td>
+	                            <!-- 아이디 클릭 시 회원의 상세보기로 넘어가야 함 (아직 구현 전) -->
+	                            <td><a href="<%= contextPath %>/memberSelect.me?mno=<%= r.getReportedNo() %>"><%= r.getReported() %></a></td>
+	                            <td>
+	                            	<% if(r.getEtc() != null) { %>
+	                            		<%= r.getEtc() %>
+	                            	<% }else { %>
+	                            		<%= r.getReportSort() %>
+	                            	<% } %>
+	                            </td>
 	                            <td><%= r.getReportDate() %></td>
 	                            <td style="padding:4px">
 	                              <button onclick="unblock();" id="btn" class="btn btn-outline-dark">차단 해제</button>
 	                            </td>
 	                        </tr>
-                        
                         <% } %>
 
                     </tbody>
@@ -194,9 +200,7 @@
 
                 <div id="tableOut2">
                     
-                	<!--  만약 리스트에 아무것도 없다면 버튼도 활성화되어서는 안 된다는 전제 -->
-	                <% if(listCount == 0) { %>
-	                
+	                <% if(!list.isEmpty()) { %>
 	                    <div class="paging-area" align="center">
 	                        <!-- 첫 페이지에서는 이전으로 비활성화 -->
 	 						<% if(currentPage != 1) { %>
@@ -239,10 +243,8 @@
             if(confirm("해당 회원의 차단을 해제하시겠습니까?")) {
                 
             	$("#table>tbody>tr").click(function(){
-	            	
     	          location.href='<%= contextPath %>/unblock.re?user=' + $(this).children().eq(2).text();
             	})
-                		
             }
         }
 

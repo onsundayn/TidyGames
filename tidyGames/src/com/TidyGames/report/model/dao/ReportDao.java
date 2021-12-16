@@ -64,8 +64,8 @@ public class ReportDao {
 		ResultSet rset = null;
 		String sql = prop.getProperty("blacklist");
 		
-		int startRow = (pi.getCurrentPage() - 1) * (pi.getBoardLimit()) + 1;
-		int endRow = startRow + pi.getBoardLimit() - 1;
+		int startRow = (pi.getCurrentPage() - 1) * (pi.getViewLimit()) + 1;
+		int endRow = startRow + pi.getViewLimit() - 1;
 		
 			try {
 				pstmt = conn.prepareStatement(sql);
@@ -76,11 +76,14 @@ public class ReportDao {
 				
 				while(rset.next()) {
 					list.add(new Report(rset.getInt("rownum")
+									  , rset.getInt("mem_no")
 									  ,	rset.getString("mem_id")
 									  , rset.getString("mem_nick")
 									  , rset.getString("rcategory_name")
+									  , rset.getString("etc")
 									  , rset.getDate("block_date")));
 					}
+				
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -127,8 +130,10 @@ public class ReportDao {
 			
 			while(rset.next()) {
 				list.add(new Report(rset.getInt("report_no")
+								  , rset.getInt("mem_no")
 								  , rset.getString("reported")
 								  , rset.getString("reporting")
+								  , rset.getInt("ref_pno")
 								  , rset.getString("post_name")
 								  , rset.getString("reply_content")
 								  , rset.getString("rcategory_name")
@@ -146,10 +151,48 @@ public class ReportDao {
 		
 		return list;
 		 
-		
-		
-		
+	}
 	
+	public int accessBlock(Connection conn, String user) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("accessBlock");
+			
+		
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, user);
+				
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			return result;
+	}
+	
+	public int accessDone(Connection conn, int reportNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("accessDone");
+		
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, reportNo);
+				
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+		
+		return result;
+		
 	}
 		
 }

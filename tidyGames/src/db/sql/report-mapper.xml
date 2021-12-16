@@ -14,9 +14,11 @@
 				       ROWNUM, B.*
 				  FROM
 					   (SELECT 
-					           MEM_ID
+					   		   MEM_NO
+					         , MEM_ID
 					         , MEM_NICK
 					         , RCATEGORY_NAME
+					         , ETC
 					         , BLOCK_DATE
 					      FROM REPORT
 					      JOIN REPORT_CATEGORY ON (REPORT_SORT = RCATEGORY_NO)
@@ -37,12 +39,14 @@
 	<entry key="reportWaiting">
 		SELECT 
 		       REPORT_NO
-		     , A.MEM_NICK "REPORTED"
+		     , A.MEM_NO
+		     , A.MEM_ID "REPORTED"
 		     , POST_NAME
+		     , REF_PNO
 		     , REPLY_CONTENT
 		     , C.RCATEGORY_NAME
 		     , R.ETC
-		     , B.MEM_NICK "REPORTING"
+		     , B.MEM_ID "REPORTING"
 		     , REPORT_DATE
 		FROM REPORT R
 		JOIN MEMBER A ON (R.REPORTED_MEM_NO = A.MEM_NO)
@@ -51,5 +55,20 @@
 		LEFT JOIN REPLY RP ON (R.REF_RNO = RP.REPLY_NO)
 		JOIN REPORT_CATEGORY C ON (R.REPORT_SORT = C.RCATEGORY_NO)
 		WHERE DONE = 'N'
+	    ORDER
+	       BY REPORT_NO
+	</entry>
+	<entry key="accessBlock">
+		UPDATE 
+		       MEMBER 
+		   SET MEM_ACCESS = 'BLOCK'
+		     , BLOCK_DATE = SYSDATE
+		 WHERE MEM_ID = ?
+	</entry>
+	<entry key="accessDone">
+		UPDATE 
+			   REPORT 
+		   SET DONE = 'Y' 
+		 WHERE REPORT_NO = ?
 	</entry>
 </properties>
