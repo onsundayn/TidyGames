@@ -27,7 +27,6 @@
 		   AND MEM_STATUS = 'Y'
 	</entry>
 	
-	
 	<entry key ="selectWish">
 		SELECT    
 				  MEM_NO	
