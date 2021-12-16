@@ -43,12 +43,12 @@ public class PayService {
 	}
 
 	
-	public ArrayList<Cart> selectCart(int memNo, int gameNo) {
+	public ArrayList<Cart> selectCart(int memNo) {
 		
 		
 		Connection conn = getConnection();
 		
-		 ArrayList<Cart> cart = new PayDao().selectCart(conn, memNo, gameNo);
+		 ArrayList<Cart> cart = new PayDao().selectCart(conn, memNo);
 		 
 		 close(conn);
 		 

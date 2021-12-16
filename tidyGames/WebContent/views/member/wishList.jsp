@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import ="java.util.ArrayList, com.TidyGames.game.model.vo.Game"%>
+    pageEncoding="UTF-8" import ="java.util.ArrayList, com.TidyGames.game.model.vo.*"%>
     
     
 <%
-ArrayList <Game> list = (ArrayList<Game>)request.getAttribute("list"); 
-Game g = new Game();
 
+Game g = (Game)session.getAttribute("g");
 %>    
  
 <!DOCTYPE html>
@@ -220,7 +219,6 @@ Game g = new Game();
 <body>
     <%@ include file="../common/topbar.jsp"%>
     <%@ include file="../common/navibar.jsp"%>
-    
     <div id="outer">
         <div id="line_1"></div>
         <div>
@@ -244,7 +242,7 @@ Game g = new Game();
                 </div>
             </form>
 
-            <!-- 두가지 방법중 어느걸로?? -->
+           
             <form action="">
                 
                 <select name ="wishList-array" id="wishList-array">
@@ -277,8 +275,8 @@ Game g = new Game();
         
        
         <br><br>
- 
- 			
+
+                
             <div id="center" style="border: 1px solid orange;">
                 <div class="wrap">
                     <div class="game_area1">게임사진</div>
@@ -319,7 +317,7 @@ Game g = new Game();
 
             </div>
             
-			
+
             <div id="center">
                 <div class="wrap">
                     <div class="game_area1">게임사진</div>
@@ -344,7 +342,7 @@ Game g = new Game();
                                 
                                  
                                 	<!-- 게임조회 객체에서 뽑아올거임 -->
-                                	<input type="hidden" name="gameNo" value="<%=g.getGameNo()%>">
+                                	<input type="hidden" name="gameNo" value="">
                                 	
                                 	<!-- Member loginUser = new MemberService().loginMember(userId, userPwd); -->
                                 	<input type="hidden" name="memNo" value="<%=loginUser.getMemNo()%>">
@@ -358,13 +356,13 @@ Game g = new Game();
 							    	function cartPage() {
 							    		var check = confirm("상품이 장바구니에 담겼습니다. 확인하시겠습니까?");
 							    		if(check) {
-							    		location.href = "<%=contextPath %>/cart.pa";
+							    		location.href = "<%=contextPath %>/cart.pa?memNo=<%=loginUser.getMemNo()%>&gameNo=";
 							    		}
 							    	}
 							    
 							  </script>
                             
-                         
+                            
                             
                             
                             </div>

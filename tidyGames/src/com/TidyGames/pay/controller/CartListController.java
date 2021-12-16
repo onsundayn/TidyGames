@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.TidyGames.pay.model.service.PayService;
 import com.TidyGames.pay.model.vo.Cart;
+import com.google.gson.Gson;
 
 /** 
  * Servlet implementation class CartController
@@ -30,18 +31,22 @@ public class CartListController extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		int memNo = (int)request.getAttribute("memNo");
-		int gameNo = (int)request.getAttribute("gameNo");
+		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		
-		ArrayList<Cart> cart = new PayService().selectCart(memNo, gameNo);  
-
-		request.setAttribute("cart", cart);
 		
-		request.getRequestDispatcher("views/pay/cartView.jsp").forward(request, response);
+		ArrayList<Cart> cart = new PayService().selectCart(memNo);  
+		
+		response.setContentType("application/json; charset=utf-8");
+		new Gson().toJson(cart, response.getWriter());
+		
+		//request.setAttribute("cart", cart);
+		
+		//request.getRequestDispatcher("views/pay/cartView.jsp").forward(request, response);
 	
 	}
 

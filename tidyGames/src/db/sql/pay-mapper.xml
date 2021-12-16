@@ -37,11 +37,10 @@
 					    , POINT
 					    , MEM_NICK
 					    
-				  FORM CART
+				  FROM CART
 				  JOIN GAME USING(GAME_NO)
-				   AND MEMBER USING(MEMBER)
+				  JOIN MEMBER USING(MEMBER)
 				 WHERE MEM_NO = ?
-				   AND GAME_NO = ?
 				   AND GAME_STATUS = 'Y'
 			
 	

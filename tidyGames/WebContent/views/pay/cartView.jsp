@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import ="java.util.ArrayList, com.TidyGames.pay.model.vo.Cart"%>
+    pageEncoding="UTF-8" import ="java.util.ArrayList, com.TidyGames.pay.model.vo.*, com.TidyGames.game.model.vo.*"%>
     
- <% ArrayList<Cart> cart = (ArrayList<Cart>)request.getAttribute("cart"); %>
+ <% 
+ 
+ ArrayList<Cart> cart = (ArrayList<Cart>)request.getAttribute("cart");
+ Game g = (Game)session.getAttribute("g");
+ %>
  
 <!DOCTYPE html>
 <html>
@@ -181,14 +185,22 @@ body {
          <div>
             <%@ include file="../common/memberSidebar.jsp" %>
          </div>
+         
+         
+         	<% if(cart.isEmpty()) { %>
+			<!-- 장바구니가 비어있을때-->
+         		<h3 align="center" style="color:white"> 장바구니가 비어있습니다.</h3>
+         	<% }else {%>
             <!-- 장바구니에있을때 -->
+            
+            	
            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
            
-           <!-- count가 0일때 장바구니 비었음 , 아닐때 표시, 게임은 반복문으로 표시-->
+         
           
             <div class="container">
 
-                <form name="form1" id="form1" method="post" action="<%= contextPath %>/cart.pa">
+                <form name="form1" id="form1" method="post" action=""> <!-- 결제하기 폼으로 -->
                 
                 
                 <div class="wrapper wrapper-content animated fadeInRight">
@@ -202,26 +214,29 @@ body {
                                 
                                 <div class="ibox-content" style="background: rgba(0, 0, 0, 0.445);">
                                     <div class="table-responsive" >
-
+                                    
+                                    
+							<% for(Cart c : cart) { %>
                                             <!-- 게임1개  -->
                                         <table class="table shoping-cart-table" >
                                             <tbody>
                                                     <tr>
                                                         <td width="100">
                                                             <div >
-                                                                <img src="<%=contextPath%>/resources/image/battlefield.JPG" width="110px" height="140px">
+                                                                <img src="<%=contextPath%>/<%=c.getGameImg()%>" width="110px" height="140px">
                                                             </div>
                                                         </td>
 
                                                     
                                                         <td class="desc">
                                                             <h3>
-                                                            <a href="#" class="text-navy">
-                                                                BattleGround
+                                                            <a href="<%=contextPath%>/detail.ga?gno=<%=g.getGameNo()%>" class="text-navy">
+                                                               <%=c.getKorName()%><br>
+       											               <%=c.getEngName()%>
                                                             </a>
                                                             </h3>
                                                             <p class="small" style="color:white;">
-                                                                PUBG: BATTLEGROUNDS는 배틀로얄 게임으로, 외딴 섬에서 총 100명의 플레이어가 다양한 무기와 전략을 이용하여 마지막 1명이 살아남는 순간까지 전투를 하게 됩니다
+                                                                	   <span><%=c.getGameIntro() %> </span>
                                                             </p>
                                         
                         
@@ -233,14 +248,14 @@ body {
                                                         <!-- 할인가격이면 이렇게 표시 -->
                                                         <td style="color:white">
                                                             $180,00
-                                                            <s class="small text-muted">$230,00</s>
+                                                            <s class="small text-muted"><span>판매가 : <%=g.getPrice() %>원</span></s>
                                                         </td>
                                                         <td width="65">
                                                             <input type="text" class="form-control" placeholder="1" style="background: none;">
                                                         </td>
                                                         <td>
                                                             <h4 style="color:white">
-                                                                $180,00
+                                                                $180,00총결제금액
                                                             </h4>
                                                         </td>
                                                     </tr>
@@ -250,50 +265,9 @@ body {
                 
                                 </div>
 
-
-                                <div class="ibox-content" style="background: rgba(0, 0, 0, 0.445);">
-                                    <div class="table-responsive">
-                                            <table class="table shoping-cart-table">
-                                            <tbody>
-                                                    <tr>
-                                                        <td width="100">
-                                                            <div >
-                                                                <img src="<%=contextPath%>/resources/image/battlefield.JPG" width="110px" height="140px">
-                                                            </div>
-                                                        </td>
-                                                        <td class="desc">
-                                                            <h3>
-                                                            <a href="#" class="text-navy">
-                                                                BattleGround
-                                                            </a>
-                                                            </h3>
-                                                            <p class="small" style="color:white;">
-                                                                PUBG: BATTLEGROUNDS는 배틀로얄 게임으로, 외딴 섬에서 총 100명의 플레이어가 다양한 무기와 전략을 이용하여 마지막 1명이 살아남는 순간까지 전투를 하게 됩니다
-                                                            </p>
-                                        
+						 	<% } %>
+	   		<% } %>
                         
-                                                            <div class="m-t-sm"></div>
-                                                                <a href="#" class="text-muted"><i class="fa fa-trash"></i> Remove item</a>
-                                                            </div>
-                                                        </td>
-                        
-                                                        <td style="color:white">
-                                                            $700,00
-                                                        </td>
-                                                        <td width="65">
-                                                            <input type="text" class="form-control" placeholder="1" style="background: none;">
-                                                        </td>
-                                                        <td>
-                                                            <h4 style="color:white">
-                                                                $180,00
-                                                            </h4>
-                                                        </td>
-                                                    </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                
-                                </div>
                         
                             </div>
                 
