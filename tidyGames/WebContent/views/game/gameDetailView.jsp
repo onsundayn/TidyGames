@@ -199,11 +199,7 @@
                 <div id="go-review">
                     <a href="<%=contextPath%>/reviewList.ga?gno=<%=g.getGameNo()%>" id="review-btn">게임리뷰 보러가기</a>
                 </div>
-
-
-
-				
-			</div>
+            </div>
 
         </div>
     </div>

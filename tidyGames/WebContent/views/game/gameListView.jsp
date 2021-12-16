@@ -153,8 +153,9 @@
 			<!--  일치하는 게임이 있을 경우 -->
 				<% for(Game g : list) { %>
             <div class="game-list">
-                <div class="game-title-img">
-            		<input type="hidden" value="<%=g.getGameNo()%>">
+                <div class="game-title-img">ㅋ
+            		<input type="hidden" value="<%=g.getGameNo()%>" id="gameNo">
+
                     <a href="<%=contextPath%>/detail.ga?gno=<%=g.getGameNo()%>"><img src="<%=contextPath%>/<%=g.getGameImg()%>"></a>
                 </div>
                 <div class="game-name" align="center">
@@ -180,28 +181,34 @@
                     <a href="<%=contextPath%>/reviewList.ga?gno=<%=g.getGameNo()%>" class="btn btn-sm btn-light" id="review-btn">이 게임의 리뷰</a>
                 </div>
                 <% if(loginUser == null) { %>
-                <div class="heart" align="center">
-                    <br><br><br>
-                    <a href=""><i class="far fa-heart fa-2x"></i></a>
-                </div>
-                <div  class="cart" align="center">
-                    <br><br><br>
-                    <a href="<%=contextPath%>/login.me" onclick="return loginMsg();"><i class="fas fa-shopping-cart fa-2x"></i></a>
-                </div>
+
+	                <div class="heart" align="center">
+	                    <br><br><br>
+	                    <a href=""><i class="far fa-heart fa-2x"></i></a>
+	                </div>
+	                <div  class="cart" align="center">
+	                    <br><br><br>
+	                    <a href="<%=contextPath%>/login.me" onclick="return loginMsg();"><i class="fas fa-shopping-cart fa-2x"></i></a>
+	                </div>
                 <% } else {%>
+
                 <div class="heart" align="center">
                     <br><br><br>
                     <a href=""><i class="far fa-heart fa-2x"></i></a>
                 </div>
+
                 <div class="cart" align="center">
                     <br><br><br>
-                    <a href="<%=contextPath%>/cart.pa" onclick="return cartConfirm();"><i class="fas fa-shopping-cart fa-2x"></i></a>
+                    
+                    
+                    <a href="<%=contextPath%>/cart.pa?memNo=<%=loginUser.getMemNo()%>" onclick="return cartConfirm();"><i class="fas fa-shopping-cart fa-2x"></i></a>
                 </div>
+
                 <% } %>
             </div>
-	           	<% } %>
-	   		<% } %>
-            
+	        
+            <% } %>
+		<% } %>   
 
         </div>
     </div>
@@ -214,14 +221,37 @@
     		return false; 
     	}
     }
+
+   
     
     function cartConfirm(){
-    	if(!confirm("장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?")){
-    		return false;
-    	}
+    	
+    	$.ajax({
+    		url : "insertCart.pa",
+    		data : {
+    			
+    			gameNo:$("#gameNo").val()
+    	
+    		},
+    		type:"post",
+    		succes:function(result) {
+    			if(result > 0) {
+    				if(!confirm("장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?")){
+    		    		return false;
+    		    	}
+    			}
+    		},error:function() {
+    			console.log("장바구니 담기 실패!")
+    		}
+    	
+ 
+    		
+    	})
+   	
     }
-   	       
+     
    			
     </script>
+
 </body>
 </html>

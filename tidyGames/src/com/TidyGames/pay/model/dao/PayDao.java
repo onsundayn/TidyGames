@@ -88,10 +88,10 @@ public class PayDao {
 		return result;
 	}
 	
-	public ArrayList<Cart> selectCart(Connection conn, int memNo, int gameNo) {
+	public ArrayList<Cart> selectCart(Connection conn, int memNo) {
 		
 		// select문 => ResultSet (한행) => Attachment객체
-		 ArrayList<Cart> cart = new  ArrayList<>();
+		ArrayList<Cart> cart = new  ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectCart");
@@ -101,7 +101,7 @@ public class PayDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, memNo);
-			pstmt.setInt(2, gameNo);
+		
 			
 			rset = pstmt.executeQuery();
 			

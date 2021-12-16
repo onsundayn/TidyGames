@@ -1,6 +1,7 @@
 package com.TidyGames.pay.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,15 +48,18 @@ public class CartInsertController extends HttpServlet {
 		if(count == 0) {
 			
 			int result = new PayService().insertCart(ca);
-			
+		
+			if(result > 0) {
+				response.getWriter().print(result);
+			}
 			
 		}else {
 			
 //			장바구니에 이미 존재합니다. alert
 			HttpSession session = request.getSession();
-			//session.setAttribute("alertMsg","장바구니에 이미 존재합니다.");
+			session.setAttribute("alertMsg","장바구니에 이미 존재합니다.");
 //			게임상세페이지 장바구니 버튼시 게임상세페이지로,,,
-			response.sendRedirect(request.getContextPath()+"/wishList.me");
+			
 
 		}
 		
