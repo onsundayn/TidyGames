@@ -153,45 +153,43 @@ public class ReportDao {
 		 
 	}
 	
-	public int accessBlock(Connection conn, String[] user) {
+	public int accessBlock(Connection conn, String user) {
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("accessBlock");
+			
 		
-		try {
-			for(int i=0; i<user.length; i++) {
+			try {
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, Integer.parseInt(user[i]));
+				pstmt.setString(1, user);
 				
-				result += pstmt.executeUpdate();
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		return result;
+			
+			return result;
 	}
 	
-	public int accessDone(Connection conn, String[] reportNo) {
+	public int accessDone(Connection conn, int reportNo) {
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("accessDone");
 		
-		try {
-			for(int i=0; i<reportNo.length; i++) {
+			try {
 				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, Integer.parseInt(reportNo[i]));
+				pstmt.setInt(1, reportNo);
+				
 				result = pstmt.executeUpdate();
-			}		
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
 		
 		return result;
 		

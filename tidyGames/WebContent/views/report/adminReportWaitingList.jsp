@@ -64,7 +64,7 @@
        /* margin-left:80px; */
     }
     #rightTop{
-        margin: 60px 0px 10px 165px;
+        margin: 60px 0px 10px 200px;
     }
     #leftTop span{
         font-size:30px;
@@ -74,17 +74,17 @@
     }
     #table{
         margin:auto;
-        width:1200px;
+        width:1150px;
         /* background-color: gray; */
     }
-    #table th{
-        font-size:18px;
-    }
+	#table th{font-size:18px;}
+    #table td{padding:5px;}
     #btn{
-        padding:0px;
-        /* width:46px;
-        height:24px; */
-        margin-left:3px;
+    padding: 0px;
+    margin: 0px;
+    width: 78px;
+    height: 30px;
+    font-size: 14px;
     }
     #checkBox{
         width:20px;
@@ -137,26 +137,21 @@
                         </div>
                     </div>
                     <div>
-                        <div id="rightTop">
-                        <button onclick="done();" class="btn btn-secondary">삭제</button>
-                        <!-- 리스트카운트가 0이면 확인도 disabled되게 만들기! -->
-                        <button type="button" onclick="block();" class="btn btn-dark">확인</button>
-                    </div>  
                 </div>
                 </div>
                 <div id="tableOut1">
                 <table id="table" class="table table-hover">
                     <thead>
                         <tr align="center">
-                            <th width="30"> </th>
                             <th width="30">No.</th>
-                            <th width="100">닉네임</th>
-                            <th width="180">신고한 글</th>
+                            <th width="100">신고된 유저</th>
+                            <th width="200">신고한 글</th>
                             <th width="130">신고 사유</th>
                             <th width="100">신고자</th>
                             <th width="130">신고 시간</th>
                             <th width="80">타입</th>
-                            <th width="130">접근 권한</th>
+                            <th width="100">접근 권한</th>
+                            <th width="30"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -164,8 +159,6 @@
                         
                         <% for(Report r : list) { %>
                         <tr align="center">
-                       
-                            <td><input type="checkbox" id="checkBox" name="rno" value="<%= r.getReportNo() %>, <%= r.getPostNo()%>"></td>
                             <td><%= r.getReportNo() %></td>
                             <td><%= r.getReported() %></td>
                             <td><a href="<%= contextPath %>/detail.po?pno=<%= r.getPostNo() %>"><%= r.getPost() %></a></td>
@@ -185,12 +178,12 @@
                             			댓글
                             	<% } %>
                             </td>
-                            <td>
-                                <select name="user" id="access">
-                                <option value="">UNBLOCK</option>
-                                <option id="block" value="<%= r.getReportedNo() %>">BLOCK</option>
-                                </select>
-                            </td>
+                            <td style="padding:4px">
+	                              <button onclick="block();" id="btn" class="btn btn-outline-dark">BLOCK</button>
+	                        </td>
+	                        <td>
+	                        	<button onclick="done();" class="btn btn-sm btn-basic" style="color:black">X</button>
+	                        </td>
                         </tr>
                         <% } %>
                         
@@ -225,6 +218,25 @@
     </div>
 	
 	<script>
+		function block(){
+			 if(confirm("해당 회원을 차단할까요?")) {
+	            	$("#table>tbody>tr").click(function(){
+	    	          location.href='<%= contextPath %>/block.re?user=' 
+	    	        		  	   + $(this).children().eq(1).text() 
+	    	      				   + '&rno=' + $(this).children().eq(0).text();
+			 })
+		 }
+	}
+		
+		function done(){
+			 if(confirm("신고내역을 삭제할까요?")) {
+	            	$("#table>tbody>tr").click(function(){
+	    	          location.href='<%= contextPath %>/done.re?rno=' 
+	    	      				  	+ $(this).children().eq(0).text();
+			 	})
+			 }
+		}
+		
 	</script>
 
 

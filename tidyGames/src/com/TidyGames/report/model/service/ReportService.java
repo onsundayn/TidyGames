@@ -70,7 +70,7 @@ public class ReportService {
 		return list;
 	}
 	
-	public int accessBlock(String[] user, String[] reportNo) {
+	public int accessBlock(String user, int reportNo) {
 		Connection conn = getConnection();
 		
 		int result1 = new ReportDao().accessBlock(conn, user);
@@ -88,7 +88,7 @@ public class ReportService {
 		return result;
 			
 	}
-	public int accessDone(String[] reportNo) {
+	public int accessDone(int reportNo) {
 		
 		Connection conn = getConnection();
 		int result = new ReportDao().accessDone(conn, reportNo);

@@ -30,11 +30,15 @@ public class AccessDone extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String[] reportNo = request.getParameterValues("rno");
+		int reportNo = Integer.parseInt(request.getParameter("rno"));
 		
-		
-		
-//		int result = new ReportService().accessDone(reportNo);
+			int result = new ReportService().accessDone(reportNo);
+			
+			if(result > 0) {
+
+				request.getSession().setAttribute("alertMsg", "처리되었습니다.");
+				response.sendRedirect(request.getContextPath() + "/reportWait.re");
+			}
 		
 	}	
 

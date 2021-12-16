@@ -32,20 +32,13 @@ public class AdminAccessBlock extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-			String[] reportNo = request.getParameterValues("hno");
-			String[] user = request.getParameterValues("user");
-			
-//			System.out.println(String.join(",", user));
-			
-//			ArrayList<Report> list = (ArrayList<Report>)request.getSession().getAttribute("list");
+			String user = request.getParameter("user");
+			int reportNo = Integer.parseInt(request.getParameter("rno"));	
 			
 			int result = new ReportService().accessBlock(user, reportNo);
 			
-			
-			
 			if(result > 0) {
-				request.getSession().setAttribute("alertMsg", result + "명의 회원을 차단했습니다.");
+				request.getSession().setAttribute("alertMsg", user + "를 차단했습니다.");
 				response.sendRedirect(request.getContextPath() + "/reportWait.re");
 				
 			}else {
