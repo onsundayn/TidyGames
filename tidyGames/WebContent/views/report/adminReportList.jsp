@@ -1,10 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.TidyGames.report.model.vo.Report, com.TidyGames.common.model.vo.PageInfo" %>
+    
+<%
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ArrayList<Report> list = (ArrayList<Report>)request.getAttribute("list");
+	
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+	int listCount = pi.getListCount();
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Tidy Games</title>
 <style>
     div{
 		box-sizing: border-box;
@@ -60,7 +73,7 @@
        /* margin-left:80px; */
     }
     #rightTop{
-        margin: 60px 0px 10px 55px;
+        margin: 60px 0px 10px 195px;
     }
     #leftTop span{
         font-size:30px;
@@ -90,8 +103,8 @@
     #reportList{
         color:orange;
     }
-    tbody a{
-        color:gray;
+ 	#a{
+        color:black;
     }
     #table td{padding:4px;}
     #tableOut1{
@@ -126,7 +139,6 @@
             <div id="line_3"></div>
             
       
-            <form action="">
     	    <div id="tableBox">
                 <div id="tableTop">
                     <div id="leftTop">
@@ -135,10 +147,6 @@
                         </div>
                     </div>
                     <div>
-                        <div id="rightTop">
-                        <!-- <a href="" class="btn btn-secondary">삭제</a>
-                        <a href="" class="btn btn-dark">확인</a> -->
-                    </div>  
                 </div>
                         <div id="rightTop">
                             <div class="btn-group">
@@ -163,141 +171,71 @@
                     <thead>
                         <tr align="center">
                             <th width="30">No.</th>
-                            <th width="100">닉네임</th>
-                            <th width="180">신고한 글</th>
+                            <th width="100">신고된 유저</th>
+                            <th width="200">신고한 글</th>
                             <th width="130">신고 사유</th>
                             <th width="100">신고자</th>
                             <th width="130">신고 시간</th>
                             <th width="80">타입</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        
-                        <!-- if() {} -->
+                   <tbody>
+                        <% for(Report r : list) { %>
                         <tr align="center">
-                            <td>1</td>
-                            <td>김길동이</td>
-                            <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-                            <td>욕설, 비방</td>
-                            <td>호빵</td>
-                            <td>2021/11/11 19:21</td>
-                            <td>댓글</td>
+                            <td><%= r.getReportNo() %></td>
+                            <td><%= r.getReported() %></td>
+                            <td><a id="a" href="<%= contextPath %>/detail.po?pno=<%= r.getPostNo() %>"><%= r.getPost() %></a></td>
+                            <td>
+                            	<% if(r.getEtc() != null) { %>
+                            		<%= r.getEtc() %>
+                            	<% }else { %>
+                            		<%= r.getReportSort() %>
+                            	<% } %>
+                            </td>
+                            <td><%= r.getReporting() %></td>
+                            <td><%= r.getReportDate() %></td>
+                            <td>
+                            	<% if(r.getReply() == null) { %>
+                            			게시글
+                            	<% }else { %>
+                            			댓글
+                            	<% } %>
+                            </td>
                         </tr>
-
-                            
-<!-- 반복 예시 -->
-<tr align="center">
-    <td>1</td>
-    <td>김길동이</td>
-    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-    <td>욕설, 비방</td>
-    <td>호빵</td>
-    <td>2021/11/11 19:21</td>
-    <td>댓글</td>
-</tr>
-<tr align="center">
-    <td>1</td>
-    <td>김길동이</td>
-    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-    <td>욕설, 비방</td>
-    <td>호빵</td>
-    <td>2021/11/11 19:21</td>
-    <td>댓글</td>
-</tr>
-<tr align="center">
-    <td>1</td>
-    <td>김길동이</td>
-    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-    <td>욕설, 비방</td>
-    <td>호빵</td>
-    <td>2021/11/11 19:21</td>
-    <td>댓글</td>
-</tr>
-<tr align="center">
-    <td>1</td>
-    <td>김길동이</td>
-    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-    <td>욕설, 비방</td>
-    <td>호빵</td>
-    <td>2021/11/11 19:21</td>
-    <td>댓글</td>
-</tr>
-<tr align="center">
-    <td>1</td>
-    <td>김길동이</td>
-    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-    <td>욕설, 비방</td>
-    <td>호빵</td>
-    <td>2021/11/11 19:21</td>
-    <td>댓글</td>
-</tr>
-<tr align="center">
-    <td>1</td>
-    <td>김길동이</td>
-    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-    <td>욕설, 비방</td>
-    <td>호빵</td>
-    <td>2021/11/11 19:21</td>
-    <td>댓글</td>
-</tr>
-<tr align="center">
-    <td>1</td>
-    <td>김길동이</td>
-    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-    <td>욕설, 비방</td>
-    <td>호빵</td>
-    <td>2021/11/11 19:21</td>
-    <td>댓글</td>
-</tr>
-<tr align="center">
-    <td>1</td>
-    <td>김길동이</td>
-    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-    <td>욕설, 비방</td>
-    <td>호빵</td>
-    <td>2021/11/11 19:21</td>
-    <td>댓글</td>
-</tr>
-<tr align="center">
-    <td>1</td>
-    <td>김길동이</td>
-    <td>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-    <td>욕설, 비방</td>
-    <td>호빵</td>
-    <td>2021/11/11 19:21</td>
-    <td>댓글</td>
-</tr>
-
-<!-- 반복 예시 끝-->
-                                
-
+                        <% } %>
                     </tbody>
                     </table>
-                  
-                    <!-- <div id="rightTop">
-                      <a href="" class="btn btn-dark">삭제</a>
-                      <a href="" class="btn btn-dark">확인</a>
-                    </div> -->
                 </div>
-            </from>
+                    
+                   <div id="tableOut2">
+	                <% if(!list.isEmpty()) { %>
+	                    <div class="paging-area" align="center">
+	                        <!-- 첫 페이지에서는 이전으로 비활성화 -->
+	 						<% if(currentPage != 1) { %>
+	            				<button onclick="location.href='<%=contextPath%>/blacklist.re?cpage=<%=currentPage-1%>';"> &lt; </button>
+	           				 <% } %>
+	                        
+	                        <% for(int p=startPage; p<=endPage; p++) { %>
+	                        <!-- 페이징 버튼 활성화 조건 게시물수에 따른 버튼 활성화  -->
+	                            <% if(p == currentPage) { %>
+	                                <button disabled><%= p %></button>
+	                            <% }else { %>
+	                                <button onclick="location.href='<%= contextPath %>/blacklist.re?cpage=<%= p %>';"><%= p %></button>
+	                            <% } %>
+	                        <% } %>
+	                        
+	                        <% if(currentPage != maxPage) { %>
+	                            <button onclick="loaction.href='<%= contextPath %>/blacklist.re?cpage<%=currentPage+1%>';"> &gt; </button>
+	                            <!-- 현재 페이지가 마지막 페이지일 땐 다음으로 버튼 비활성화 -->
+	                        <% } %>
+	                    <% } %>
+                    </div>
 
-                <div id="tableOut2">
-                  <div id="pagebar" align="center">
-                        <button>&lt;</button>   
-                        <button>1</button>
-                        <button>2</button>
-                        <button>3</button>
-                        <button>4</button>
-                        <button>5</button>
-                        <button>&gt;</button>
-                  </div>
                 </div>
+                
                 </div>
                 
             </div>
-      
-      
-
 
         <footer>
             <div style="height:100px">

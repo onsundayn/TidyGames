@@ -1,12 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.TidyGames.member.model.vo.Member, com.TidyGames.company.model.vo.Company" %>
+    pageEncoding="UTF-8" %>
+<%@ page import = 
+	"com.TidyGames.member.model.vo.Member,
+	 com.TidyGames.company.model.vo.Company,
+	 com.TidyGames.member.model.service.MemberService,
+	 com.TidyGames.member.model.dao.MemberDao,
+	 com.TidyGames.company.model.service.LoginCompanyService,
+	 com.TidyGames.company.model.dao.LoginCompanyDao" %>
 <%
 	String contextPath = request.getContextPath();
-
+	String alertMsg = (String)session.getAttribute("alertMsg");
 	Member loginUser = (Member)session.getAttribute("loginUser");
 	Company loginCompany = (Company)session.getAttribute("loginCompany");
-
-	String alertMsg = (String)session.getAttribute("alertMsg");
 %>
 
 <!DOCTYPE html>
@@ -83,7 +88,24 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 </head>
 <body>
-    
+	<%
+	Cookie[] cookies = request.getCookies();
+	
+	if(loginUser == null && loginCompany == null && cookies != null){ // 멤버 세션에 값이 없고 쿠키에 값이 있을때 
+	    for(Cookie c : cookies){
+	        if(c.getName().equals("MemSessionId")){ // 쿠키에 저장된 Mem객체 sessionId가 있다면?
+	        	String sessionId = c.getValue();
+	        	loginUser = new MemberService().loginMemByCookie(sessionId);
+	        	session.setAttribute("loginUser" ,loginUser);
+	        } else if(c.getName().equals("ComSessionId")) {
+	        	String sessionId = c.getValue();
+	        	loginCompany = new LoginCompanyService().loginComByCookie(sessionId);
+	        	session.setAttribute("loginCompany" ,loginCompany);
+	        }
+	    }
+	} 
+	%>	
+
 	<% if(alertMsg != null){  %>
 		<script>
 			alert("<%=alertMsg%>");
@@ -91,8 +113,6 @@
 		<% session.removeAttribute("alertMsg"); %>
 	<% } %>
 	
-
-
     <div class="top-area">
         <div id="top1"><a href="<%=contextPath%>"><img src="<%=contextPath%>/resources/image/tidyLogo.png" width="60px" height="40"> TIDY GAMES</a></div>
         <div id="top2" align="center">
