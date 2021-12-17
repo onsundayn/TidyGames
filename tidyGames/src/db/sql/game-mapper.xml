@@ -33,14 +33,16 @@
 		  FROM GAME
 		 WHERE GAME_NO = ?
 	</entry>
+	
 	<entry key="selectCategoryList">
 		SELECT
 		       CATEGORY_NO
 		     , CATEGORY_NAME
-		     , CATEGORY_STATUS
+		     , CATEGORY_STATUS		    
 		  FROM CATEGORY
 	</entry>
 	
+
 	<entry key="insertReview">
 		INSERT
 		  INTO REVIEW
@@ -57,6 +59,7 @@
 		    , ?
 		    )
 	</entry>
+	
 	<entry key="selectReview">
 		SELECT
 			   REVIEW_NO 
@@ -71,6 +74,34 @@
 		  FROM REVIEW
 		  LEFT JOIN MEMBER USING (MEM_NO)
 		 WHERE GAME_NO = ?
+</entry>
+	<entry key="selectGameList">
+	SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		SELECT
+		       G.GAME_NO "GAME_NO"
+		     , C.COMPANY_NAME "COMPANY_NAME"
+		     , G.ENG_NAME "ENG_NAME"
+		     , TO_CHAR(G.UPLOAD_DATE, '""YYYY"-"MM"-"DD""') "UPLOAD_DATE"
+		  FROM GAME G
+		  INNER JOIN COMPANY C
+		  ON G.COMPANY_NO = C.COMPANY_NO
+		  WHERE G.GAME_STATUS = 'Y'
+						 ORDER
+						    BY G.GAME_NO DESC
+		                ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="selectListCount">
+		SELECT
+		       COUNT(*) COUNT
+		  FROM GAME
+		 WHERE GAME_STATUS = 'Y'
+
 	</entry>
 
 </properties>
