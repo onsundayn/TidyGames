@@ -196,6 +196,8 @@
                 <div class="heart" align="center">
                     <br><br><br>
                     <a href=""><i class="far fa-heart fa-2x"></i></a>
+                    
+                    <a href=""><i class="fas fa-heart fa-2x"></i></a>
                 </div>
 
                 <div class="cart" align="center">
@@ -236,22 +238,22 @@
     		type:"post",
     		success:function(result) {
     			
-    			console.log(result);
     			
-    			
-    			if(result > 0) {
- 
+    			if(result == 1) {
     				if(confirm("장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?")){
     		    		location.href='<%=contextPath%>/cart.pa?memNo=<%=loginUser.getMemNo()%>';
     		    	}
+    				
+    			}else if(result == 2 ) {
+    				alert("장바구니가 이미 존재합니다.")
     			}
     			
     		},error:function() {
     			console.log("장바구니 담기 실패!")
     		}
     	})
-    	
     	return false;
+    	
    	
     }
    			

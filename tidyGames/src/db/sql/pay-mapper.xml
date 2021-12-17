@@ -36,7 +36,7 @@
 					    , PRICE
 					    , POINT
 					    , MEM_NICK
-					    
+					    , PRICE - PRICE*POINT  "DISCOUNTPRICE"
 				  FROM CART
 				  JOIN GAME USING(GAME_NO)
 				  JOIN MEMBER USING(MEM_NO)

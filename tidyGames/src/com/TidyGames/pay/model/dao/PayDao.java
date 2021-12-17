@@ -115,7 +115,8 @@ public class PayDao {
 								  rset.getString("game_intro"),
 								  rset.getInt("price"),
 								  rset.getInt("point"),
-								  rset.getString("mem_nick")));
+								  rset.getString("mem_nick"),
+							      rset.getInt("DISCOUNTPRICE")));
 			}
 			
 			

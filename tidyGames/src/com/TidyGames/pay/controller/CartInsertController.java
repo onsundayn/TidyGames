@@ -40,8 +40,6 @@ public class CartInsertController extends HttpServlet {
 		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
 		int gameNo =  Integer.parseInt(request.getParameter("gameNo"));
 		
-		System.out.println(memNo);
-		System.out.println(gameNo);
 		
 		Cart ca = new Cart();
 		
@@ -49,16 +47,16 @@ public class CartInsertController extends HttpServlet {
 		ca.setMemNo(memNo);
 		ca.setGameNo(gameNo);
 		
-		System.out.println(ca);
+		
 	
 		int count = new PayService().countCart(ca);
 		
-		System.out.println(count);
+		System.out.println();
 		if(count == 0) {
 			
 			int result = new PayService().insertCart(ca);
 		
-			if(result > 0) {
+			if(result > 0 ) {
 				
 				response.getWriter().print(result);
 				
@@ -66,12 +64,11 @@ public class CartInsertController extends HttpServlet {
 			
 		}else {
 			
-//			장바구니에 이미 존재합니다. alert
-			HttpSession session = request.getSession();
-			session.setAttribute("alertMsg","장바구니에 이미 존재합니다.");
-//			게임상세페이지 장바구니 버튼시 게임상세페이지로,,,
+			response.getWriter().print(2);
+				
 			
-
+			
+			
 		}
 		
 		
