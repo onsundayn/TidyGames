@@ -178,12 +178,27 @@
 
                 </div>
              <% } else { %>
+             
+             
+             
              	<div id="heart">
                     <a href=""><i class="far fa-heart fa-2x"></i></a>
+                    
+                     <a href=""><i class="fas fa-heart fa-2x"></i></a>
                 </div>
-                <div id="cart">
-                    <a href="<%=contextPath%>/cart.pa" onclick="return cartConfirm();"><i class="fas fa-shopping-cart fa-2x"></i></a>
-             	</div>
+                
+                
+               
+                
+                <div class="cart" align="center">
+
+                    <a href="" onclick="return cartConfirm(<%=g.getGameNo()%>);"><i class="fas fa-shopping-cart fa-2x"></i></a>
+                </div>
+
+
+
+
+
              <% } %>		
                 <br>
                 <br><br>
@@ -213,12 +228,36 @@
     	}
     }
     
-    function cartConfirm(){
-    	if(!confirm("장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?")){
-    		return false;
-    	}
+  function cartConfirm(gameNo){
+    	
+    	$.ajax({
+    		url : "cartInsert.pa",
+    		data : {
+    			
+    			gameNo:gameNo
+    		},
+    		type:"post",
+    		success:function(result) {
+    			
+    			
+    			if(result == 1) {
+ 
+    				if(confirm("장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?")){
+    		    		location.href='<%=contextPath%>/cart.pa?memNo=<%=loginUser.getMemNo()%>';
+    		    	}
+    				
+    			}else if(result == 2 ) {
+    				alert("장바구니가 이미 존재합니다.")
+    			}
+    			
+    		},error:function() {
+    			console.log("장바구니 담기 실패!")
+    		}
+    	})
+    	return false;
+    	
+   	
     }
-    
 	    
     </script>
     
