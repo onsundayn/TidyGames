@@ -32,6 +32,16 @@
         margin-top: 50px;
         margin-left:90px;
     }
+    .table{
+        width:520px;
+        height:350px;
+        border-spacing: 20px;
+        text-align: center;
+    }
+    table>tbody>tr>td{
+        border-radius: 10px;
+        background-color: rgb(153, 151, 151);
+    }
 </style>
 </head>
 <body style="background-color: #0e332c;">
@@ -46,11 +56,28 @@
         </div>
 
         <div class="info">
-            <br><br>
-            아이디  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" value="moraguhae" readonly><br><br>
-            일련번호  &nbsp;&nbsp;&nbsp;&nbsp;<input type="password" value="123456" readonly><br><br>
-            대표자정보  <input type="text" value="도지현" readonly><br><br>
-            게임사  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" value="SemiOfLegend" readonly><br><br>
+            <table class="table">
+                <tr>
+                    <th>게임사</th>
+                    <td colspan="4">ddddddddd</td>
+                </tr>
+                <tr>
+                    <th>아이디</th>
+                    <td colspan="4"></td>
+                </tr>
+                <tr>
+                    <th>등록코드</th>
+                    <td colspan="4"></td>
+                </tr>
+                <tr>
+                    <th>대표자</th>
+                    <td colspan="4"></td>
+                </tr>
+                <tr>
+                    <th>등록일자</th>
+                    <td colspan="4"></td>
+                </tr>
+            </table>
         </div>
     </div>
 
