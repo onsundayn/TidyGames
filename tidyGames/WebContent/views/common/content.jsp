@@ -10,6 +10,7 @@
 		width: 1500px;
 		height: 800px;
 		margin: auto;
+		margin-top: 20px;
 	}
 	
 	#content_text>span{
@@ -37,6 +38,7 @@
 		height: 100%;
 		float: left;
 		margin: 10px;
+		margin-left: 30px;
 	}
 	#content_rank, #content_sale, #content_free{
 		display: none;
@@ -59,7 +61,7 @@
 
 		<div id="content" align="center">
 
-			<div id="content_text">
+			<div id="content_text" style="margin-bottom: 50px;">
 				<span id="text_new" onclick="changeGame('new');" style="color:orange">NEW</span>
 				<span id="text_rank" onclick="changeGame('rank');">RANK</span>
 				<span id="text_sale" onclick="changeGame('sale');">SALE</span>

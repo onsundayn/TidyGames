@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.TidyGames.member.model.vo.Member" %>
 <%
 	String contextPath = request.getContextPath();
+	Member searchId = (Member)session.getAttribute("searchId");
 %>
 <!DOCTYPE html>
 <html>
@@ -83,7 +84,7 @@
         <header>
             <div id="logo" align="center">
                 <a href="<%= contextPath %>">
-                    <img src="../../resources/image/tidyLogo.png" style="width:80px; height: 50px;"> <br>
+                    <img src="<%=contextPath%>/resources/image/tidyLogo.png" style="width:80px; height: 50px;"> <br>
                     <span style="color: white; font-size: 25px; font-weight: bold;">TIDY GAMES</span>
                 </a>
             </div>
@@ -91,7 +92,6 @@
 
         <content>
             <div id="content" align="center">
-                <form action="updatePwd.jsp" method="">
                     <div id="search_id_form">
                         <span style="color: white; font-size: 20px; font-weight: bold; ">아이디 찾기</span>
                         <br><br><hr>
@@ -101,18 +101,21 @@
                                 ● 고객님의 정보와 일치하는 아이디입니다.<br><br>
                             </span>
                             <div style="color: white; font-size: 15px;">
-                                아이디 : <div name="userId"></div>
+                                아이디 : <div name="userId" style="display: inline-block;"><%= searchId.getMemId() %></div>
                             </div>
                         </div>
                         
                         <button type="button" class="next_btn" onclick="loginPage();" style="margin-top: 200px;">로그인하기</button>
-                        <button type="submit" class="next_btn">비밀번호 재설정</button>
+                        <button type="button" class="next_btn" onclick="PwdPage();">비밀번호 재설정</button>
 
                     </div>
-                </form>
                 <script>
                     function loginPage(){
-                        location.href = "login.jsp";
+                    	location.href="<%= contextPath %>/login.me";	
+                    }
+                    
+                    function PwdPage(){
+                    	location.href="<%= contextPath %>/inputSearchPwd.me";
                     }
                 </script>
             </div>

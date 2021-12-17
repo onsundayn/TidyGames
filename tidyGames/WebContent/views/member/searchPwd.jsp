@@ -82,7 +82,7 @@
         <header>
             <div id="logo" align="center">
                 <a href="<%= contextPath %>">
-                    <img src="../../resources/image/tidyLogo.png" style="width:80px; height: 50px;"> <br>
+                    <img src="<%=contextPath%>/resources/image/tidyLogo.png" style="width:80px; height: 50px;"> <br>
                     <span style="color: white; font-size: 25px; font-weight: bold;">TIDY GAMES</span>
                 </a>
             </div>
@@ -100,7 +100,9 @@
                                 ● 본인확인 이메일 인증<br>
                             </span>
                             <span style="color: lightgray; font-size: 15px;">
-                                본인확인 이메일 주소와 입력한 이메일 주소가 같아야 합니다.
+                                입력하신 이메일로 전송된 인증번호를 입력해주세요. <br>
+                                가입하신 이메일 주소와 입력한 이메일 주소가 같아야, <br>
+                                인증번호를 받을 수 있습니다.
                             </span>
                         </div>
                         <br><br>

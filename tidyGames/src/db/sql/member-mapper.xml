@@ -81,4 +81,14 @@
 	
 
 	</entry>
+	
+	<entry key="searchUserId">
+		SELECT
+		       MEM_NO,
+		       MEM_ID
+		  FROM MEMBER
+		 WHERE MEM_NAME = ?
+		   AND MEM_EMAIL = ?
+		   AND MEM_STATUS = 'Y'
+	</entry>
 </properties>
