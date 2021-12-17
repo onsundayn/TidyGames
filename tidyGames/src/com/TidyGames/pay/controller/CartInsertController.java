@@ -40,7 +40,11 @@ public class CartInsertController extends HttpServlet {
 		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
 		int gameNo =  Integer.parseInt(request.getParameter("gameNo"));
 		
+		System.out.println(memNo);
+		System.out.println(gameNo);
+		
 		Cart ca = new Cart();
+		
 		
 		ca.setMemNo(memNo);
 		ca.setGameNo(gameNo);
@@ -49,6 +53,7 @@ public class CartInsertController extends HttpServlet {
 	
 		int count = new PayService().countCart(ca);
 		
+		System.out.println(count);
 		if(count == 0) {
 			
 			int result = new PayService().insertCart(ca);
@@ -56,6 +61,7 @@ public class CartInsertController extends HttpServlet {
 			if(result > 0) {
 				
 				response.getWriter().print(result);
+				
 			}
 			
 		}else {

@@ -201,7 +201,7 @@
                     <br><br><br>
                     
                     
-                    <a href="<%=contextPath%>/cart.pa?memNo=<%=loginUser.getMemNo()%>" onclick="return cartConfirm();"><i class="fas fa-shopping-cart fa-2x"></i></a>
+                    <a href="" onclick="return cartConfirm(<%=g.getGameNo()%>);"><i class="fas fa-shopping-cart fa-2x"></i></a>
                 </div>
 
                 <% } %>
@@ -224,30 +224,33 @@
 
    
     
-    function cartConfirm(){
+    function cartConfirm(gameNo){
     	
     	$.ajax({
-    		url : "insertCart.pa",
+    		url : "cartInsert.pa",
     		data : {
     			
-    			gameNo:$("#gameNo").val()
+    			gameNo:gameNo
     		},
     		type:"post",
-    		succes:function(result) {
+    		success:function(result) {
+    			
+    			console.log(result);
+    			
     			
     			if(result > 0) {
  
-    				if(!confirm("장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?")){
-    		    		return false;
+    				if(confirm("장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?")){
+    		    		location.href='<%=contextPath%>/cart.pa?memNo=<%=loginUser.getMemNo()%>';
     		    	}
     			}
+    			
     		},error:function() {
     			console.log("장바구니 담기 실패!")
     		}
-    	
- 
-    		
     	})
+    	
+    	return false;
    	
     }
      
