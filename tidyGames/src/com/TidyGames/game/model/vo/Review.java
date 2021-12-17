@@ -6,15 +6,17 @@ public class Review {
 	private int gameNo;
 	private int memNo;
 	private String contents;
-	private String recommend;
+	private int recommend;
 	private String uploadDate;
 	private int starNo;
 	private String reviewStatus;
+	private String memNick;
+	private String memPic;
 
 	public Review () {}
 
-	public Review(int reviewNo, int gameNo, int memNo, String contents, String recommend, String uploadDate, int starNo,
-			String reviewStatus) {
+	public Review(int reviewNo, int gameNo, int memNo, String contents, int recommend, String uploadDate, int starNo,
+			String reviewStatus, String memNick, String memPic) {
 		super();
 		this.reviewNo = reviewNo;
 		this.gameNo = gameNo;
@@ -24,6 +26,24 @@ public class Review {
 		this.uploadDate = uploadDate;
 		this.starNo = starNo;
 		this.reviewStatus = reviewStatus;
+		this.memNick = memNick;
+		this.memPic = memPic;
+	}
+	
+	
+
+	public Review(int reviewNo, int gameNo, int memNo, String contents, int recommend, String uploadDate, int starNo,
+			String memNick, String memPic) {
+		super();
+		this.reviewNo = reviewNo;
+		this.gameNo = gameNo;
+		this.memNo = memNo;
+		this.contents = contents;
+		this.recommend = recommend;
+		this.uploadDate = uploadDate;
+		this.starNo = starNo;
+		this.memNick = memNick;
+		this.memPic = memPic;
 	}
 
 	public int getReviewNo() {
@@ -58,11 +78,11 @@ public class Review {
 		this.contents = contents;
 	}
 
-	public String getRecommend() {
+	public int getRecommend() {
 		return recommend;
 	}
 
-	public void setRecommend(String recommend) {
+	public void setRecommend(int recommend) {
 		this.recommend = recommend;
 	}
 
@@ -90,12 +110,31 @@ public class Review {
 		this.reviewStatus = reviewStatus;
 	}
 
+	public String getMemNick() {
+		return memNick;
+	}
+
+	public void setMemNick(String memNick) {
+		this.memNick = memNick;
+	}
+
+	public String getMemPic() {
+		return memPic;
+	}
+
+	public void setMemPic(String memPic) {
+		this.memPic = memPic;
+	}
+
 	@Override
 	public String toString() {
 		return "Review [reviewNo=" + reviewNo + ", gameNo=" + gameNo + ", memNo=" + memNo + ", contents=" + contents
 				+ ", recommend=" + recommend + ", uploadDate=" + uploadDate + ", starNo=" + starNo + ", reviewStatus="
-				+ reviewStatus + "]";
+				+ reviewStatus + ", memNick=" + memNick + ", memPic=" + memPic + "]";
 	}
-	
+
+
+
+
 	
 }

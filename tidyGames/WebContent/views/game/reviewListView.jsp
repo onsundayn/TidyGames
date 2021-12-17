@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.TidyGames.game.model.vo.*"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.game.model.vo.*"%>
 <%
 	Game g = (Game)request.getAttribute("g");
+	ArrayList<Review> list = (ArrayList<Review>)request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html>
@@ -25,7 +26,9 @@
         height:100%;
         float: left;
         color: white;
-        font-size: 30px;
+    }
+    .title{
+        font-size: 25px;
     }
     .title-img{
         width:50%;
@@ -108,6 +111,15 @@
         font-size: 21px;
         color: white;
     }
+    .star-rating a{
+        text-decoration:none;
+        color:white;
+        mouse-cursor:pointer;
+    }
+    .star-rating a:hover{
+        text-decoration: none;
+        color:orange;
+    }
 
 </style>
 </head>
@@ -120,14 +132,23 @@
     <div class="outer" align="center">
         <div class="top-line">
             <div class="left-area">
+        		<input type="hidden" value="<%=g.getGameNo()%>" name="gno">
                 <div class="title">
                     <br>
-                    <span><%=g.getKorName()%></span>
-                    <span style="font-size:20px;"><%=g.getEngName()%></span>
+                    <%=g.getKorName()%>
+                    <br>
+                    <%=g.getEngName()%>
                     <br><br>
                 </div>
                 <div class="star-rating">
-                    ★★★★★
+                   <a href="">
+                    	<!-- 별점 띄워줄때 반복문 돌려볼까?-->
+                    	<i class="fas fa-star fa-lg"></i>
+                    	<i class="fas fa-star fa-lg"></i>
+                    	<i class="fas fa-star fa-lg"></i>
+                    	<i class="fas fa-star fa-lg"></i>
+                    	<i class="fas fa-star fa-lg"></i>
+                    </a>
                 </div>
             </div>
             <div class="title-img">
@@ -144,42 +165,43 @@
                     <option value="">추천많은순</option>
                 </select>
             </div>
+            <% if(loginUser != null) { %>
             <div id="btngo">
                 <div align="right" style="width:100px;">
-                    <a href="reviewEnrollForm.jsp" class="btn btn-sm btn-secondary">리뷰작성</a>
+                    <a href="<%=contextPath %>/enrollForm.ga?gno=<%=g.getGameNo()%>" class="btn btn-sm btn-secondary">리뷰작성</a>
                 </div>
             </div>
+     		<% } %>
         </div>
         <div class="buttom-area">
-        	
-            <div class="review-list">
-                <div class="user-info">
-                    <div id="profile-img">
-                        <img src="" alt="사용자프로필">
-                    </div>
-                    <div id="user-name">
-                        <br>
-                        <button>닉네임</button>
-                        <br><br>
-                        <span>작성일</span>
-                    </div>
-
-                        
-                </div>
-                <div class="content">
-                    <span id="user-star">★★★★★</span>
-                    
-                    <button style="float: right;">추천</button>
-                    <br>
-                    <textarea name="" id="review-content" readonly>
-                        리뷰내용
-                    </textarea>
-                </div>
-            </div>
-
-            <div class="review-list"></div>
-            <div class="review-list"></div>
-            <div class="review-list"></div>
+        	<% if(list.isEmpty()) { %>
+        		<h3 align="center" style="color:white"> 아직 리뷰가 없습니다.</h3>
+        	<% }else{ %>
+        		<% for(Review r : list) { %>
+	            <div class="review-list">
+	                <div class="user-info">
+	                    <div id="profile-img">
+	                        <img src="<%=contextPath%>/<%=r.getMemPic()%>">
+	                    </div>
+	                    <div id="user-name">
+	                        <br>
+	                        <%=r.getMemNick()%>
+	                        <br><br>
+	                       <%=r.getUploadDate() %>
+	                    </div>
+	                </div>
+	                <div class="content">
+	                    <span id="user-star">★★★★★</span>
+	                    
+	                    <a href=""><i class="far fa-thumbs-up fa-2x" style="float:right;"></i></a>
+	                    <br>
+	                    <textarea name="" id="review-content" readonly>
+	                        <%=r.getContents()%>
+	                    </textarea>
+	                </div>
+	            </div>
+	            <% } %>
+	          <% } %>
         </div>
 
 
