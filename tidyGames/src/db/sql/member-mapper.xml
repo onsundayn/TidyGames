@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	<entry key="loginMember">
+<entry key="loginMember">
 		SELECT
 		       MEM_NO,
 		       MEM_ID,
@@ -27,7 +27,7 @@
 		   AND MEM_PWD = ?
 		   AND MEM_STATUS = 'Y'
 	</entry>
-
+	
 	<entry key="cookieUpdateMem">
 		UPDATE MEMBER
 		   SET MEM_COOKIE = ?
@@ -60,7 +60,6 @@
 		 WHERE MEM_COOKIE = ?
 		   AND MEM_STATUS = 'Y'
 	</entry>
-
 
 	<entry key ="selectWish">
 		SELECT    
