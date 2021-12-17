@@ -6,6 +6,7 @@ import static com.TidyGames.common.JDBCTemplate.getConnection;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.TidyGames.common.model.vo.PageInfo;
 import com.TidyGames.game.model.dao.GameDao;
 import com.TidyGames.game.model.vo.Category;
 import com.TidyGames.game.model.vo.Game;
@@ -34,6 +35,20 @@ public class GameService {
 	ArrayList<Category> list = new GameDao().selectCategoryList(conn);
 	close(conn);
 	return list;
+	}
+	
+	public ArrayList<Game> selectGameList(PageInfo pi){
+		Connection conn = getConnection();
+		ArrayList<Game> list = new GameDao().selectGameList(conn, pi);
+		close(conn);
+		return list;
+	}
+	
+	public int selectListCount() {
+		Connection conn = getConnection();
+		int listCount = new GameDao().selectListCount(conn);
+		close(conn);
+		return listCount;
 	}
 
 }
