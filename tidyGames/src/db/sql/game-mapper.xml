@@ -40,5 +40,37 @@
 		     , CATEGORY_STATUS
 		  FROM CATEGORY
 	</entry>
+	
+	<entry key="insertReview">
+		INSERT
+		  INTO REVIEW
+		    (
+		      REVIEW_NO
+		    , GAME_NO
+		    , MEM_NO
+		    , CONTENTS
+		    ) 
+		    VALUES
+		    ( SEQ_REVIEW_NO.NEXTVAL
+		    , ?
+		    , ?
+		    , ?
+		    )
+	</entry>
+	<entry key="selectReview">
+		SELECT
+			   REVIEW_NO 
+		     , GAME_NO
+		     , MEM_NO
+		     , CONTENTS
+		     , RECOMMEND
+		     , TO_CHAR(UPLOAD_DATE, '""YYYY"년 "MM"월 "DD"일"') "UPLOAD_DATE"
+		     , STAR_NO
+		     , MEM_NICK
+		     , MEM_PIC
+		  FROM REVIEW
+		  LEFT JOIN MEMBER USING (MEM_NO)
+		 WHERE GAME_NO = ?
+	</entry>
 
 </properties>

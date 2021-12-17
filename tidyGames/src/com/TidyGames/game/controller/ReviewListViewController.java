@@ -1,6 +1,7 @@
 package com.TidyGames.game.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.TidyGames.game.model.service.GameService;
 import com.TidyGames.game.model.vo.Game;
+import com.TidyGames.game.model.vo.Review;
 
 /**
  * Servlet implementation class ReviewListViewController
@@ -30,16 +32,14 @@ public class ReviewListViewController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		int gameNo = Integer.parseInt(request.getParameter("gno"));
+		Game g = new GameService().selectGame(gameNo);
+		ArrayList<Review> list = new GameService().selectReview(gameNo);
 		
-		Game g = new GameService().selectReview(gameNo);
-		
+		request.setAttribute("list", list);
 		request.setAttribute("g", g);
-		request.getRequestDispatcher("views/game/reviewListView.jsp").forward(request, response);
-		
-		
-		
-		
+		request.getRequestDispatcher("views/game/reviewListView.jsp").forward(request, response);;
 	}
 
 	/**
