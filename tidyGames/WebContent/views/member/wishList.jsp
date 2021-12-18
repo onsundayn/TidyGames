@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import ="java.util.ArrayList, com.TidyGames.game.model.vo.*, com.TidyGames.member.model.vo.*"%>
+    
+    
+<%
+ArrayList<WishList> wish = (ArrayList<WishList>)request.getAttribute("wish");
+Game g = (Game)session.getAttribute("g");
+%>    
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +18,7 @@
     }
     #outer{
         width:1500px;
-        height: 1000px;
+        height: 1300px;
         margin:auto;
         border: 1px solid orange;
     }
@@ -30,10 +37,10 @@
         margin: 30px 80px 0px 50px;
     }
     .search-game {
-        width: 1200px;
+        width: 1000px;
         height: 70px;
       
-        margin-left: 60px;
+        margin-left: 140px;
     }
     .search-game div{
         display:inline;
@@ -59,74 +66,13 @@
     }
 
 
-    #dropdown-array{
-        background: #0e332c;
-        border: 1px solid white;
-        height: 30px;
-       
-    }
- 
-    .dropdown-menu dropdown-item{
-        background: #0e332c;
-        border: none;
-    }
-
-   
     
     #allDelete_btn{
-        margin-left: 50px;
+        margin-left: 150px;
         border-radius: 3px;
         background: gray;
         font-weight:bolder;
     }
-    /* 게임 목록 조회 1개 감싸는 div */
-    #center{
-        width: 1000px;
-        margin-left: 60px;
-        margin-bottom: 50px;
-    }
-    /* 검정테두리 감싸는 div */
-    .wrap{
-        
-        background: black;
-        width: 950px;
-        height: 200px;
-        margin: auto;
-        float: right;
-    }
-
-
-    .game_area1, .game_area2{
-        border:1px solid blue;
-        box-sizing:border-box;
-        height: 100%;
-        float: left;
-    }
-
-    .game_area1{
-        width: 150px;
-        border: 5px solid blue;
-    }
-    .game_area2{
-        width: 800px;
-        border: 5px solid blue;
-    }
-
-    .game_area3, .game_area4{
-        width: 100%;
-        border: 5px solid orange;
-        
-    }
-    .game_area3{
-        height: 30%;
-    }
-    .area3{
-        border:4px solid greenyellow;
-        box-sizing:border-box;
-        height: 100%;
-        float: left;
-    }
-
 
     #name{
         width: 80%;
@@ -146,27 +92,7 @@
         height: 25px;
         width: 25px;
     }
-    .game_area4{
-        height: 70%;
-    }
 
-    .game_area5, .game_area6{
-        border:3px solid blueviolet;
-        box-sizing:border-box;
-        height: 100%;
-        float: left;
-    }
-
-    .game_area5{
-        width: 60%;
-    }
-    .game_area6{
-        width: 40%;
-        
-    }    
-    .area6{
-        float: right;
-    }
 
     #price{
         color: white;
@@ -176,19 +102,16 @@
       
     }
 
-    #cart_btn{
-        margin: 20px 10px 0px 0px;
-        height: 30px;
-        border: none;
-        border-radius: 3px;
-        background: rgb(16, 92, 144);
-        color:white;
+    .cart{
+        
+        margin-top: 100px;
+        width: 80px;
     }
     .paging-area{
+    
        width: 1000px;
        height: 200px;
-       border: 1px solid red;
-       margin-left: 70px;
+       margin-top: 50px;
     }
     .paging-area>button {
         border-radius: 5px;
@@ -207,6 +130,44 @@
     #wishListbar{
         color:orange;
     }
+	    table.shoping-cart-table tr td.desc,
+	table.shoping-cart-table tr td:first-child {
+	  text-align: left;
+	}
+	    table.shoping-cart-table {
+	  margin-bottom: 0;
+	}
+	table.shoping-cart-table tr td {
+	  border: none;
+	  text-align: right;
+	}
+	table.shoping-cart-table tr td.desc,
+	table.shoping-cart-table tr td:first-child {
+	  text-align: left;
+	}
+	table.shoping-cart-table tr td:last-child {
+	  width: 80px;
+	}
+	.ibox.collapsed .ibox-content {
+	  display: none;
+	}
+	.ibox-content {
+	  background-color: #ffffff;
+	  color: inherit;
+	  padding: 15px 20px 20px 20px;
+	  border-color: #e7eaec;
+	  border-image: none;
+	  border-style: solid solid none;
+	  border-width: 1px 0;
+	}
+    .area1{
+        width: 1000px;
+        height: 400px;
+       
+        background: rgba(0, 0, 0, 0.445);
+        
+    }
+
 </style>
 </head>
 <body>
@@ -221,8 +182,18 @@
         <div id="intro"><h1>닉네임 님의 찜 목록</h1></div>
         <br><br><br><br><br>
 
-            
-        <div class="search-game" style="border: 1px solid orange;">
+        <% if(wish.isEmpty()) { %>
+
+        
+            <div class="area1" style="float: right; margin-right: 150px;">
+                <div class="col-sm-12 empty-cart-cls text-center"> <img src="https://i.imgur.com/dCdflKN.png" width="200" height="130" class="img-fluid mb-4 mr-3" style="margin-top: 50px;">
+                <h3 style="color:white"><strongy> 찜목록이 비어있습니다.</strongy></h3>
+                <a href="<%=contextPath%>" class="btn btn-primary cart-btn-transform m-3" data-abc="true">쇼핑계속하기</a>
+            </div>
+          
+            <%}else { %>   
+
+        <div class="search-game">
             
             <form action="" id="wishList-search">
 
@@ -235,7 +206,7 @@
                 </div>
             </form>
 
-            <!-- 두가지 방법중 어느걸로?? -->
+           
             <form action="">
                 
                 <select name ="wishList-array" id="wishList-array">
@@ -256,64 +227,93 @@
         <div id="line1"></div>
         <br>
         <br><br>
-        <button id="allDelete_btn">전체삭제</button>
+
+     
+       
+        <button id="allDelete_btn" onclick="fnClear();">전체삭제</button>
+        	 <script>
+	        	 function fnClear() {
+			    		var check = confirm("찜목록을 비우시겠습니까?");
+			    		if(check) {
+			    		location.href = "<%=contextPath %>/cartClear.pa";
+			    		}
+			    	}
+        	</script>
+        
+       
+       
+           
         <br><br>
+		   <%for(WishList w : wish){ %>
+        <div class="ibox-content" style="background: rgba(0, 0, 0, 0.445);  width: 1000px; height: 240px; margin-right: 150px; float: right;">
+             <div class="table-responsive" >  
+                        <table class="table shoping-cart-table" >
+                            <tbody>
+                                    <tr>
+                                        <td width="150">
+                                            <div >
+                       							<img src="<%=contextPath%>/<%=w.getGameImg()%>" width="200px" height="150px">
+                                            </div>
+                                        </td>
 
-
-            <div id="center" style="border: 1px solid orange;">
-                <div class="wrap">
-                    <div class="game_area1">게임사진</div>
-                    <div class="game_area2">
-
-                        <div class="game_area3">
-                            <div id="name" class="area3">게임명</div>
-                            <div id="x_btn" class="area3"><button id="delete_btn">X</button></div>
-                        </div>
+                                    
+                                        <td class="desc" width="330">
+                                            <h3>
+                                            <a href="#" class="text-navy" style="font-size:18px">
+                                                   <%=w.getKorName() %> <br>
+                   									<%=w.getEngName() %>
+                  			                 </a>
+                                                       
+                                            </h3>
+                                            <p class="small" style="color:white;">
+                                            <%=w.getGameIntro() %>
+                                            </p>
                         
-                        <div id="line2" style="border: 1px solid grey;"></div>
-                        <div class="game_area4">
 
-                            <div class="game_area5">게임내용</div>
-                            
-                            <div class="game_area6">
-                                
-                                <!-- 할인게임은 어떻게 표시할건지? -->
-                                <div id="price" class="area6">20000원</div><br><br>
-                                <button id="cart_btn" class="area6">+ 장바구니추가</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                            <div class="m-t-sm"></div>
+                                                <a href="#" class="text-muted"><i class="fa fa-trash"></i> Remove item</a>
+                                            </div>
+                                        </td>
 
-            </div>
+                                        <!-- 할인가격이면 이렇게 표시 -->
+                                        <td style="color:white" width="100"> 
+                                            <span> <%=w.getPrice()%>원</span>
+                                            <s class="small text-muted"> <span>1000000원</span></s>
+                                        </td>
+                                        
+                                        <td width="50">
+                                            <input type="text" class="form-control" placeholder="1" style="background: none;">
+                                        </td>
+                                        
+                                        <td width="200">
+                                            <h4 style="color:white; font-size:19px" >
+                                            
+                                                <span> <span> <%=w.getPrice()%>원</span></span>
+                                                
+                                                
+                                                  <div class="cart" align="center">
+
+								                      <a href="" onclick="return cartConfirm(<%=w.getGameNo()%>);"><i class="fas fa-cart-plus fa-2x"></i></a>
+								                  </div>
+                                                
+                                                
+                                               
+                                            </h4>
+                                        </td>
+                                        
+                                    </tr>
+                            </tbody>
+                        </table>
             
-
-            <div id="center">
-                <div class="wrap">
-                    <div class="game_area1">게임사진</div>
-                    <div class="game_area2">
-
-                        <div class="game_area3">
-                            <div id="name" class="area3">게임명</div>
-                            <div id="x_btn" class="area3"><button id="delete_btn">X</button></div>
-                        </div>
-                        
-                        <div id="line2" style="border: 1px solid grey;"></div>
-                        <div class="game_area4">
-
-                            <div class="game_area5">게임내용</div>
-                            
-                            <div class="game_area6">
-                                
-                                <!-- 할인게임은 어떻게 표시할건지? -->
-                                <div id="price" class="area6">20000원</div><br><br>
-                                <button id="cart_btn" class="area6">+ 장바구니추가</button>
-                            </div>
-                        </div>
+            
                     </div>
                 </div>
-            </div>
-            <div class="paging-area" align="center">
+        
+            <% } %>
+		<% } %>
+
+        <% if(!wish.isEmpty()) { %>
+            <div class="paging-area" style="float: right; margin-top: 100px; margin-right: 150px; text-align: center;">
 
                 <button> &lt; </button>
                 <button>1</button>
@@ -330,8 +330,51 @@
         
             </div>
             <br><br><br>
-          
+          <% } %>
     </div>
+    
+    
+        <script>
+    
+    function loginMsg(){
+    	if(!confirm("로그인이 필요합니다. 로그인하시겠습니까?")){
+    		return false; 
+    	}
+    }
+    
+  function cartConfirm(gameNo){
+    	
+    	$.ajax({
+    		url : "cartInsert.pa",
+    		data : {
+    			
+    			gameNo:gameNo
+    		},
+    		type:"post",
+    		success:function(result) {
+    			
+    			
+    			if(result == 1) {
+ 
+    				if(confirm("장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?")){
+    		    		location.href='<%=contextPath%>/cart.pa?memNo=<%=loginUser.getMemNo()%>';
+    		    	}
+    				
+    			}else if(result == 2 ) {
+    				alert("장바구니가 이미 존재합니다.")
+    			}
+    			
+    		},error:function() {
+    			console.log("장바구니 담기 실패!")
+    		}
+    	})
+    	return false;
+    	
+   	
+    }
+	    
+    </script>
+   
 
 
 

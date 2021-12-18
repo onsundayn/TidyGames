@@ -90,6 +90,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body style="background-color: #0e332c;">
+
 	<% if(alertMsg != null){  %>
 		<script>
 			alert("<%= alertMsg %>");
@@ -125,14 +126,16 @@
                     </div>
 
                     <div class="login_check">
+                        <!--
                         <label for="rememberId">
                             <input type="checkbox" name="rememberId" id="rememberId"> 아이디 기억
                         </label>
+                        -->
                         <label for="rememberMe">
-                            <input type="checkbox" name="rememberMe" id="rememberMe"> 자동 로그인
+                            <input type="checkbox" name="rememberMe" id="rememberMe" value="rememberMe"> 자동 로그인
                         </label>
                         <label for="companyCheck">
-                            <input type="checkbox" name="companyCheck" id="companyCheck"> 게임사 회원
+                            <input type="checkbox" name="companyCheck" id="companyCheck" value="companyCheck"> 게임사 회원
                         </label>
                     </div>
 

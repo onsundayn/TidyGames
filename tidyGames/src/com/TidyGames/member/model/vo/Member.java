@@ -22,12 +22,14 @@ public class Member {
 	private String roleId;
 	private String memAccess;
 	private Date blockDate;
+	private String memCookie;
 	
 	public Member() {}
 
 	public Member(int memNo, String memId, String memPwd, String memNick, String memName, String memBirth,
 			String memPhone, String memEmail, String memGender, String memAddress, Date indate, String memAgr,
-			String memPic, String memStatus, Date memOutdate, String roleId, String memAccess, Date blockDate) {
+			String memPic, String memStatus, Date memOutdate, String roleId, String memAccess, Date blockDate,
+			String memCookie) {
 		super();
 		this.memNo = memNo;
 		this.memId = memId;
@@ -47,6 +49,7 @@ public class Member {
 		this.roleId = roleId;
 		this.memAccess = memAccess;
 		this.blockDate = blockDate;
+		this.memCookie = memCookie;
 	}
 
 	public int getMemNo() {
@@ -193,15 +196,24 @@ public class Member {
 		this.blockDate = blockDate;
 	}
 
-	
+	public String getMemCookie() {
+		return memCookie;
+	}
+
+	public void setMemCookie(String memCookie) {
+		this.memCookie = memCookie;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [memNo=" + memNo + ", memId=" + memId + ", memPwd=" + memPwd + ", memNick=" + memNick
 				+ ", memName=" + memName + ", memBirth=" + memBirth + ", memPhone=" + memPhone + ", memEmail="
 				+ memEmail + ", memGender=" + memGender + ", memAddress=" + memAddress + ", indate=" + indate
 				+ ", memAgr=" + memAgr + ", memPic=" + memPic + ", memStatus=" + memStatus + ", memOutdate="
-				+ memOutdate + ", roleId=" + roleId + ", memAccess=" + memAccess + ", blockDate=" + blockDate + "]";
+				+ memOutdate + ", roleId=" + roleId + ", memAccess=" + memAccess + ", blockDate=" + blockDate
+				+ ", memCookie=" + memCookie + "]";
 	}
+
 	
 
 }

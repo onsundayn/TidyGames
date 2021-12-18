@@ -2,18 +2,25 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	<entry key="selectList">
-		SELECT GAME_NO
-		     , COMPANY_NO
-		     , KOR_NAME
-		     , ENG_NAME
-		     , TO_CHAR(RELEASE_DATE, '""YYYY"년 "MM"월 "DD"일"') "RELEASE_DATE"
-		     , PRICE
-		     , POINT
-		     , GAME_STATUS
-		     , GAME_IMG 
-		  FROM GAME
-		 WHERE KOR_NAME || ENG_NAME LIKE '%' || ? || '%'
+		    
+      SELECT GAME_NO
+           , COMPANY_NO
+           , KOR_NAME
+           , ENG_NAME
+           , TO_CHAR(RELEASE_DATE, '""YYYY"년 "MM"월 "DD"일"') "RELEASE_DATE"
+           , PRICE
+           , POINT
+           , GAME_STATUS
+           , GAME_IMG 
+           , (SELECT COUNT(*) FROM WISHLIST W WHERE W.MEM_NO= ? AND G.GAME_NO =W.GAME_NO ) AS count
+         FROM GAME G
+		 WHERE UPPER(KOR_NAME || ENG_NAME) LIKE UPPER('%' || ? || '%') 
 	</entry>
+	
+	
+	
+	
+	
 	
 	<entry key="selectGame">
 		SELECT
@@ -34,6 +41,7 @@
 		 WHERE GAME_NO = ?
 	</entry>
 	
+
 	<entry key="selectCategoryList">
 		SELECT
 		       CATEGORY_NO
@@ -42,6 +50,39 @@
 		  FROM CATEGORY
 	</entry>
 	
+
+	<entry key="insertReview">
+		INSERT
+		  INTO REVIEW
+		    (
+		      REVIEW_NO
+		    , GAME_NO
+		    , MEM_NO
+		    , CONTENTS
+		    ) 
+		    VALUES
+		    ( SEQ_REVIEW_NO.NEXTVAL
+		    , ?
+		    , ?
+		    , ?
+		    )
+	</entry>
+	
+	<entry key="selectReview">
+		SELECT
+			   REVIEW_NO 
+		     , GAME_NO
+		     , MEM_NO
+		     , CONTENTS
+		     , RECOMMEND
+		     , TO_CHAR(UPLOAD_DATE, '""YYYY"년 "MM"월 "DD"일"') "UPLOAD_DATE"
+		     , STAR_NO
+		     , MEM_NICK
+		     , MEM_PIC
+		  FROM REVIEW
+		  LEFT JOIN MEMBER USING (MEM_NO)
+		 WHERE GAME_NO = ?
+</entry>
 	<entry key="selectGameList">
 	SELECT *
 		  FROM (
@@ -68,6 +109,7 @@
 		       COUNT(*) COUNT
 		  FROM GAME
 		 WHERE GAME_STATUS = 'Y'
+
 	</entry>
 
 </properties>

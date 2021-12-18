@@ -1,5 +1,7 @@
 package com.TidyGames.game.model.dao;
 
+import static com.TidyGames.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -9,11 +11,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+
 import static com.TidyGames.common.JDBCTemplate.*;
 
 import com.TidyGames.common.model.vo.PageInfo;
+
 import com.TidyGames.game.model.vo.Category;
 import com.TidyGames.game.model.vo.Game;
+import com.TidyGames.game.model.vo.Review;
+import com.TidyGames.member.model.vo.*;
 
 public class GameDao {
 
@@ -29,7 +35,7 @@ private Properties prop = new Properties();
 		}
 	}
 	
-	public ArrayList<Game> selectList(Connection conn, String keyword) {
+	public ArrayList<Game> selectList(Connection conn, String keyword, int memNo) {
 		
 		ArrayList <Game> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -37,7 +43,8 @@ private Properties prop = new Properties();
 		String sql = prop.getProperty("selectList");
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, keyword);
+			pstmt.setInt(1, memNo);
+			pstmt.setString(2, keyword);
 			
 			rset = pstmt.executeQuery();
 			
@@ -50,7 +57,8 @@ private Properties prop = new Properties();
 								  rset.getInt("price"),
 								  rset.getDouble("point"),
 								  rset.getString("game_status"),
-								  rset.getString("game_img")));
+								  rset.getString("game_img"),
+								  rset.getInt("count")));
 			}
 			
 		} catch (SQLException e) {
@@ -169,6 +177,64 @@ private Properties prop = new Properties();
 		
 	}
 	
+
+	public ArrayList<Review> selectReview(Connection conn, int gameNo) {
+		//여러행조회
+		ArrayList<Review> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectReview");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, gameNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Review( rset.getInt("review_no"),
+									 rset.getInt("game_no"),
+									 rset.getInt("mem_no"),
+									 rset.getString("contents"),
+									 rset.getInt("recommend"),
+									 rset.getString("upload_date"),
+									 rset.getInt("star_no"),
+									 rset.getString("mem_nick"),
+									 rset.getString("mem_pic")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+	}
+	
+	public int insertReview(Connection conn, Review r) {
+		//insert문 => 처리된행수 => 트랜잭션
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertReview");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, r.getGameNo());
+			pstmt.setInt(2, r.getMemNo());
+			pstmt.setString(3, r.getContents());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
+
 	public int selectListCount(Connection conn) {
 		int listCount = 0;
 		PreparedStatement pstmt = null;
@@ -190,6 +256,8 @@ private Properties prop = new Properties();
 			close(pstmt);
 		}
 		return listCount;
+
 	}
+	
 	
 }

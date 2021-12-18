@@ -36,7 +36,7 @@ public class AdminBlacklistController extends HttpServlet {
 		int listCount;
 		int currentPage;
 		int pageLimit;
-		int boardLimit;
+		int viewLimit;
 		int maxPage;
 		int startPage;
 		int endPage;
@@ -45,9 +45,9 @@ public class AdminBlacklistController extends HttpServlet {
 		// 현재 총 게시물이 몇 개인지 알아올 메소드
 		currentPage = Integer.parseInt(request.getParameter("cpage"));
 		pageLimit = 10;
-		boardLimit = 10;
+		viewLimit = 10;
 		
-		maxPage = (int)Math.ceil((double)listCount / boardLimit);
+		maxPage = (int)Math.ceil((double)listCount / viewLimit);
 		startPage = (currentPage-1) / pageLimit * pageLimit + 1;
 		endPage = startPage + pageLimit - 1;
 		
@@ -55,7 +55,7 @@ public class AdminBlacklistController extends HttpServlet {
 			endPage = maxPage;
 		}
 		
-		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, viewLimit, maxPage, startPage, endPage);
 		
 		
 		ArrayList<Report> list = new ReportService().blacklist(pi);

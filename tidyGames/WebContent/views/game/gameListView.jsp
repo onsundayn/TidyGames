@@ -66,6 +66,7 @@
     .cart a, .heart a, .star-rating a{
         text-decoration:none;
         color:lightgrey;
+        mouse-cursor:pointer;
     }
     .cart a:hover, .heart a:hover, .star-rating a:hover{
         text-decoration: none;
@@ -153,8 +154,11 @@
 				<% for(Game g : list) { %>
             <div class="game-list">
                 <div class="game-title-img">
-            		<input type="hidden" value="<%=g.getGameNo()%>">
-                    <a href=""><img src="<%=contextPath%>/<%=g.getGameImg()%>"></a>
+
+            		<input type="hidden" value="<%=g.getGameNo()%>" name="gno">
+
+                    <a href="<%=contextPath%>/detail.ga?gno=<%=g.getGameNo()%>"><img src="<%=contextPath%>/<%=g.getGameImg()%>"></a>
+                
                 </div>
                 <div class="game-name" align="center">
                     <%=g.getKorName()%><br>
@@ -176,56 +180,119 @@
                     	<i class="fas fa-star fa-lg"></i>
                     </a>
                     <br><br><br>
-                    <a href="<%=contextPath%>/views/game/reviewListView.jsp" class="btn btn-sm btn-light" id="review-btn" name="reviewList">이 게임의 리뷰</a>
+                    <a href="<%=contextPath%>/reviewList.ga?gno=<%=g.getGameNo()%>" class="btn btn-sm btn-light" id="review-btn">이 게임의 리뷰</a>
                 </div>
+                <% if(loginUser == null) { %>
+
+	                <div class="heart" align="center">
+	                    <br><br><br>
+	                    <a href=""><i class="far fa-heart fa-2x"></i></a>
+	                </div>
+	                <div  class="cart" align="center">
+	                    <br><br><br>
+	                    <a href="<%=contextPath%>/login.me" onclick="return loginMsg();"><i class="fas fa-shopping-cart fa-2x"></i></a>
+	                </div>
+                <% } else {%>
+
                 <div class="heart" align="center">
                     <br><br><br>
-                    <a href=""><i class="far fa-heart fa-2x"></i></a>
+                    
+                    <% if(g.getCount() == 0)  {%>
+                     	<a href="" onclick="return wishConfirm(<%=g.getGameNo()%>)"><i class="far fa-heart fa-2x"></i></a>
+                    <% }else  {%>
+                   <a href=""><i class="fas fa-heart fa-2x"></i></a>
+                  	<%} %> 
+                  	
                 </div>
-                <div onclick="cartConfirm();" class="cart" align="center">
+
+                <div class="cart" align="center">
                     <br><br><br>
-                    <a href="" ><i  class="fas fa-shopping-cart fa-2x"></i></a>
+                    
+                    
+                    <a href="" onclick="return cartConfirm(<%=g.getGameNo()%>);"><i class="fas fa-shopping-cart fa-2x"></i></a>
                 </div>
+
+                <% } %>
             </div>
-	           	<% } %>
-	   		<% } %>
-            
+	        
+            <% } %>
+		<% } %>   
 
         </div>
     </div>
     
+    
     <script>
+    
+    function loginMsg(){
+    	if(!confirm("로그인이 필요합니다. 로그인하시겠습니까?")){
+    		return false; 
+    	}
+    }
+
+   
+    
+    function cartConfirm(gameNo){
     	
-    		function cartConfirm(){
-    			if(confirm("게임을 장바구니에 담았습니다.장바구니로 이동하시겠습니까?") == true) {
-    				location.href = '<%=contextPath%>/cart.pa';
-   				}else{
-   					return;
-   				}
-   			};
-   			
-   	       $(function(){ 
-   	          $(".game-title-img").click(function(){ 
-   	        	 
-   	             location.href = '<%=contextPath%>/detail.ga?gno=' + $(this).children("input").val(); 
-   	             
-   	          })
-   	       })
-   	       
-   	       $('a').click(function(e) {
-  				e.preventDefault();
-			});
-   	       
-   	       
+    	$.ajax({
+    		url : "cartInsert.pa",
+    		data : {
+    			
+    			gameNo:gameNo
+    		},
+    		type:"post",
+    		success:function(result) {
+    			
+    			
+    			if(result == 1) {
+    				if(confirm("장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?")){
+    		    		location.href='<%=contextPath%>/cart.pa?memNo=<%=loginUser.getMemNo()%>';
+    		    	}
+    				
+    			}else if(result == 2 ) {
+    				alert("장바구니가 이미 존재합니다.")
+    			}
+    			
+    		},error:function() {
+    			console.log("장바구니 담기 실패!")
+    		}
+    	})
+    	return false;
+    	
+   	
+    }
+    
+function wishConfirm(gameNo){
+    	
+    	$.ajax({
+    		url : "wishInsert.me",
+    		data : {
+    			
+    			gameNo:gameNo
+    		},
+    		type:"post",
+    		success:function(result) {
+    		
+    			
+    			if(result == 1) {
+ 
+    				if(confirm("찜목록에 담겼습니다. 찜목록페이지로 이동하시겠습니까?")){
+    					
+    					location.href='<%=contextPath%>/wishList.me?memNo=<%=loginUser.getMemNo()%>';
+    		    	}
+    			
+    			}
+    			
+    		},error:function() {
+    			console.log("찜목록 담기 실패!")
+    		}
+    	})
+    	return false;
+    	
+   	
+    }
    			
     </script>
-    	
-    	<!-- 	$(function(){
-   				$(".game-title-img>a").click(function(){
-   					console.log("00");
-   					location.href = "/detail.ga?gno=" + $(this).children("input").val();
-   				})
-   			}) -->
-   		
+
 </body>
 </html>

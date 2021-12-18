@@ -1,5 +1,7 @@
 package com.TidyGames.member.model.dao;
 
+import static com.TidyGames.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -8,9 +10,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
-import static com.TidyGames.common.JDBCTemplate.*;
 
 import com.TidyGames.member.model.vo.Member;
+import com.TidyGames.member.model.vo.WishList;
 
 public class MemberDao {
 
@@ -59,11 +61,11 @@ public class MemberDao {
 							   rset.getDate("mem_outdate"),
 							   rset.getString("role_id"),
 							   rset.getString("mem_access"),
-							   rset.getDate("block_date"));
+							   rset.getDate("block_date"),
+							   rset.getString("mem_cookie"));
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(rset);
@@ -72,6 +74,80 @@ public class MemberDao {
 		
 		return m;
 	}
+	
+	public int cookieUpdateMem(Connection conn, String userId, String sessionId) {
 		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("cookieUpdateMem");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, sessionId);
+			pstmt.setString(2, userId);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public Member loginMemByCookie(Connection conn, String sessionId) {
+		
+		Member m = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("loginMemByCookie");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, sessionId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				m = new Member(rset.getInt("mem_no"),
+							   rset.getString("mem_id"),
+							   rset.getString("mem_pwd"),
+							   rset.getString("mem_nick"),
+							   rset.getString("mem_name"),
+							   rset.getString("mem_birth"),
+							   rset.getString("mem_phone"),
+							   rset.getString("mem_email"),
+							   rset.getString("mem_gender"),
+							   rset.getString("mem_address"),
+							   rset.getDate("mem_indate"),
+							   rset.getString("mem_agr"),
+							   rset.getString("mem_pic"),
+							   rset.getString("mem_status"),
+							   rset.getDate("mem_outdate"),
+							   rset.getString("role_id"),
+							   rset.getString("mem_access"),
+							   rset.getDate("block_date"),
+							   rset.getString("mem_cookie"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return m;
+		
+	}
+		
+	
+	
+	
+	
+	
+	
+	
 	
 }

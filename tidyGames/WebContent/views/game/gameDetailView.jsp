@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.TidyGames.game.model.vo.*"%>
+    pageEncoding="UTF-8" import="com.TidyGames.game.model.vo.*, com.TidyGames.member.model.vo.*"%>
 <%
 	Game g = (Game)request.getAttribute("g");
+	int countWish = (Integer)request.getAttribute("cw");
+	//WishList countWish = (WishList)request.getAttribute("cw");
 %>
 <!DOCTYPE html>
 <html>
@@ -85,23 +87,20 @@
         margin-left: 50px;
         margin-right: 30px;
     }
-    #go-review a{
-        background:rgb(240, 156, 40);
+    #review-btn{
+        background:lightgrey;
         text-decoration: none;
         color:black;
         padding:5px;
         border-radius: 5px;
     }
-    .cart a, .heart a, .star-rating a{
+    #cart a, #heart a, #rating a{
         text-decoration:none;
         color:lightgrey;
     }
-    .cart a:hover, .heart a:hover, .star-rating a:hover{
+    #cart a:hover, #heart a:hover, #rating a:hover{
         text-decoration: none;
         color:orange;
-    }
-    #review-btn{
-    	color:black;
     }
     #review-btn:hover{
     	background-color:orange;
@@ -115,6 +114,7 @@
 
     <div class="outer">
         <div class="left-area">
+        <input type="hidden" value="<%=g.getGameNo()%>">
             <div class="title">
                 <p>
                     <%=g.getKorName() %> <br>
@@ -170,24 +170,131 @@
                 </div>
             </div>
             <div class="btn-area">
+            <% if(loginUser == null) { %>
                 <div id="heart">
-                    <a href=""><i class="far fa-heart fa-2x"></i></a>
+                    <a href="<%=contextPath%>/login.me" onclick="return loginMsg();"><i class="far fa-heart fa-2x"></i></a>
                 </div>
-                
                 <div id="cart">
-                    <a href="" ><i class="fas fa-shopping-cart fa-2x"></i></a>
+
+                    <a href="<%=contextPath%>/login.me" onclick="return loginMsg();"><i class="fas fa-shopping-cart fa-2x"></i></a>
+
                 </div>
+             <% } else { %>
+             
+             
+	          	
+	             	<div id="heart">
+	                     <a href="" onclick="return wishConfirm(<%=g.getGameNo()%>)"><i class="far fa-heart fa-2x"></i></a>
+	                 </div>  
+	            	
+	                 <!-- 
+	                 <div id="heart">  
+	                     <a href=""><i class="fas fa-heart fa-2x"></i></a>
+	                </div>
+	               -->
+                	
+               
+                
+                <div class="cart" align="center">
+
+                    <a href="" onclick="return cartConfirm(<%=g.getGameNo()%>);"><i class="fas fa-shopping-cart fa-2x"></i></a>
+                </div>
+
+
+
+
+
+             <% } %>		
                 <br>
+                <br><br>
                 <div id="rating">
-                    <img src="<%=contextPath%>/resources/image/rating (1).png" width="140px" height="80px">
+                   <a href="">
+                    	<!-- 별점 띄워줄때 반복문 돌려볼까?-->
+                    	<i class="fas fa-star fa-lg"></i>
+                    	<i class="fas fa-star fa-lg"></i>
+                    	<i class="fas fa-star fa-lg"></i>
+                    	<i class="fas fa-star fa-lg"></i>
+                    	<i class="fas fa-star fa-lg"></i>
+                    </a>
                 </div>
                 <div id="go-review">
-                    <a href="<%=contextPath%>/views/game/reviewListView.jsp">게임리뷰 보러가기</a>
+                    <a href="<%=contextPath%>/reviewList.ga?gno=<%=g.getGameNo()%>" id="review-btn">게임리뷰 보러가기</a>
                 </div>
             </div>
 
         </div>
     </div>
+    
+    <script>
+   
+    function loginMsg(){
+    	if(!confirm("로그인이 필요합니다. 로그인하시겠습니까?")){
+    		return false; 
+    	}
+    }
+    
+  	function cartConfirm(gameNo){
+    	
+    	$.ajax({
+    		url : "cartInsert.pa",
+    		data : {
+    			
+    			gameNo:gameNo
+    		},
+    		type:"post",
+    		success:function(result) {
+    			
+    			
+    			if(result == 1) {
+ 
+    				if(confirm("장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?")){
+    		    		location.href='<%=contextPath%>/cart.pa?memNo=<%=loginUser.getMemNo()%>';
+    		    	}
+    				
+    			}else if(result == 2 ) {
+    				alert("장바구니가 이미 존재합니다.")
+    			}
+    			
+    		},error:function() {
+    			console.log("장바구니 담기 실패!")
+    		}
+    	})
+    	return false;
+    	
+   	
+    }
+	
+  	
+function wishConfirm(gameNo){
+    	
+    	$.ajax({
+    		url : "wishInsert.me",
+    		data : {
+    			
+    			gameNo:gameNo
+    		},
+    		type:"post",
+    		success:function(result) {
+    		
+    			
+    			if(result == 1) {
+ 
+    				if(confirm("찜목록에 담겼습니다. 찜목록페이지로 이동하시겠습니까?")){
+    					
+    					location.href='<%=contextPath%>/wishList.me?memNo=<%=loginUser.getMemNo()%>';
+    		    	}
+    			
+    			}
+    			
+    		},error:function() {
+    			console.log("찜목록 담기 실패!")
+    		}
+    	})
+    	return false;
+    	
+   	
+    }
+    </script>
     
     
     

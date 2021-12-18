@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.TidyGames.game.model.service.GameService;
 import com.TidyGames.game.model.vo.Game;
@@ -40,6 +41,8 @@ public class GameDetailViewController extends HttpServlet {
 		request.setAttribute("g", g);		
 		request.getRequestDispatcher("views/game/gameDetailView.jsp").forward(request, response);
 		
+		HttpSession session = request.getSession();
+		session.setAttribute("g", g);
 		
 	}
 

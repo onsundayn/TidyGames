@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.TidyGames.common.model.vo.PageInfo, java.util.ArrayList, com.TidyGames.post.model.vo.Post" %>
+<%
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ArrayList<Post> list = (ArrayList<Post>)request.getAttribute("list");
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,22 +58,25 @@
 
         <h2>TIDY COMMUNITY  <i class="far fa-comments"></i></h2>
         <br><br>
-        <form action="">
+        
 
             <div id="deletebtn" align="right" style="width:1200px;">
-                <!--관리자계정에서만보이는 버튼-->
-                <a href="" class="btn btn-sm btn-danger">삭제</a>
-                <!-- 로그인 시에만 보이는 버튼 -->
-                <a href="<%= contextPath %>/enroll.po" class="btn btn-sm btn-info">글작성</a>
+                <% if(loginUser != null && loginUser.getMemId().equals("admin")) { %>
+                	<a href="" class="btn btn-sm btn-danger">삭제</a>
+                <% } %>
+                <% if(loginUser != null) { %> <!-- 블락된 회원은 못 보게 -->
+                	<a href="<%= contextPath %>/enroll.po" class="btn btn-sm btn-info">글작성</a>
+            	<% } %>
             </div>
 
             <br>
 
             <table align="center" style="font-size: 12pt" class="table table-sm" id="table">
 
-                <thead>
-                    <!--체크박스 ; 관리자만 보이게-->
-                    <th><input type="checkbox" id="check1"></th>
+                <thead style="background:rgb(80, 88, 83)">
+                    <% if(loginUser != null && loginUser.getMemId().equals("admin")) { %>
+                    	<th><input type="checkbox" id="check1"></th>
+                    <% } %>
                     <th width="100">글번호</th>
                     <th width="200">작성자</th>
                     <th width="500">제목</th>
@@ -73,168 +85,52 @@
                     <th width="150">작성일</th>
                 </thead>
                 <tbody>
-                    <!--게시물이 없을 경우-->
-                    <tr>    
-                        <td colspan="7">조회된 게시글이 없습니다.</td>
-                    </tr>
-                    <!--게시물 있을 경우-->
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>15</td>
-                        <td>라랄라라라</td>
-                        <td id="title">제목 제목 이것은 제목입니다</td>
-                        <td>1</td>
-                        <td>0</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>12423534</td>
-                        <td>라랄라라라</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>235239432</td>
-                        <td>12849102</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>12423534</td>
-                        <td>라랄라라라</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>235239432</td>
-                        <td>12849102</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>12423534</td>
-                        <td>라랄라라라</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>235239432</td>
-                        <td>12849102</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>12423534</td>
-                        <td>라랄라라라</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>235239432</td>
-                        <td>12849102</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>12423534</td>
-                        <td>라랄라라라</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>235239432</td>
-                        <td>12849102</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>12423534</td>
-                        <td>라랄라라라</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>235239432</td>
-                        <td>12849102</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>12423534</td>
-                        <td>라랄라라라</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>235239432</td>
-                        <td>12849102</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>12423534</td>
-                        <td>라랄라라라</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>235239432</td>
-                        <td>12849102</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>12423534</td>
-                        <td>라랄라라라</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>235239432</td>
-                        <td>12849102</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>12423534</td>
-                        <td>라랄라라라</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>235239432</td>
-                        <td>12849102</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>12423534</td>
-                        <td>라랄라라라</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>235239432</td>
-                        <td>12849102</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>12423534</td>
-                        <td>라랄라라라</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>235239432</td>
-                        <td>12849102</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>12423534</td>
-                        <td>라랄라라라</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>235239432</td>
-                        <td>12849102</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>12423534</td>
-                        <td>라랄라라라</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>235239432</td>
-                        <td>12849102</td>
-                        <td>2021-12-05</td>
-                    </tr>
+                	<% if(list.isEmpty()) { %>
+	                    <tr>    
+	                        <td colspan="7">조회된 게시글이 없습니다.</td>
+	                    </tr>
+	                <% }else { %>
+	                    <tr>
+	                        <% for(Post p : list) { %>
+			                    <tr>
+			                    	<% if(loginUser != null && loginUser.getMemId().equals("admin")) { %>
+	                       				<td><input type="checkbox"></td>
+	                       			 <% } %>
+			                    	<td id="postNo"><%=p.getPostNo()%></td>
+			                        <td><%=p.getPostWriter()%></td>
+			                        <td id="title"><%=p.getPostName()%></td>
+			                        <td><%=p.getPostView()%></td>
+			                        <td><%=p.getPostLike()%></td>
+			                        <td><%=p.getPostModify() %></td>
+			                    </tr>
+	                    	<% } %>
+	                    </tr>
+                    <% } %>
                 </tbody>
             </table>
 
             <br><br>
 
             <div class="paging-area" align="center">
-
-                <button> &lt; </button>
-                <button>1</button>
-                <button>2</button>
-                <button>3</button>
-                <button>4</button>
-                <button>5</button>
-                <button>6</button>
-                <button>7</button>
-                <button>8</button>
-                <button>9</button>
-                <button>10</button>
-                <button> &gt; </button>
-    
-            </div>
-
+            
+	        	<% if(currentPage != 1) { %>
+	            	<button style="border-radius:3px;" onclick="location.href='<%=contextPath%>/list.po?cpage=<%=currentPage-1%>';"> &lt; </button>
+	            <% } %>
+	            
+	            <% for(int p=startPage; p<=endPage; p++){ %>
+	            	
+	            	<% if(p == currentPage) { %>
+	            		<button disabled style="border-radius:3px; background:orange; color:white;"><%= p %></button>
+	            	<% }else { %>
+	            		<button style="border-radius:3px;" onclick="location.href='<%=contextPath%>/list.po?cpage=<%= p %>';"><%= p %></button>
+	            	<% } %>
+	            	
+	            <% } %>
+	            
+	            <% if(currentPage != maxPage) { %>
+	            	<button onclick="location.href='<%=contextPath%>/list.po?cpage=<%=currentPage+1%>';"> &gt; </button>
+	            <% } %>
+        	</div>
             <br><br>
 
             <div class="search-area" align="center">
@@ -252,27 +148,45 @@
 
             </div>
 
-        </form>
+        
 
     </div>
-
-
-    <script>
-    	$(function(){
-	        $("#check1").click(function(){
-	            if($(this).is(":checked")){
-	                $(":checkbox", $("table")).prop("checked", true);
-	            }else {
-	                $(":checkbox", $("table")).prop("checked", false);
-	            }
-	        })
-	        
-	        $("#title").click(function(){
-	        	location.href = '<%=contextPath%>/detail.po';
-	        	// 나중에덧붙이기: ?bno=' + $(this).children().eq(0).text();
-	        })
-    	})
-    </script>
+    
+    <% if(loginUser != null && loginUser.getMemId().equals("admin")) { %>
+		
+		<script>
+			$(function(){
+				$("#table>tbody>tr").click(function(){
+					location.href = '<%=contextPath%>/detail.po?num=' + $(this).children().eq(1).text();
+				});
+				
+			
+				$("#check1").click(function(){
+		            if($(this).is(":checked")){
+		                $(":checkbox", $("table")).prop("checked", true);
+		            }else {
+		                $(":checkbox", $("table")).prop("checked", false);
+		            }
+		        })	
+				
+			})
+		</script>
+	
+	<% } else { %>
+	
+		<script>
+			$(function(){
+				$("#table>tbody>tr").click(function(){							
+					location.href = '<%=contextPath%>/detail.po?num=' + $(this).children().eq(0).text();
+				});
+				
+				
+			})
+		</script>
+	
+	<% } %>
+	
+	
 
 </body>
 </html>
