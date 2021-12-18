@@ -6,7 +6,6 @@
 <html>
 <head>
 
-
 <meta charset="UTF-8">
 <title>CategoryList</title>
 <style>
@@ -85,7 +84,6 @@
 </style>
 
 
-
 </head>
 <body style="background: #0e332c;">
 
@@ -109,7 +107,7 @@
 				<%
 					for (Category c : list) {
 				%>
-				<button type="button" class="btn btn-light"><%=c.getCategoryName()%></button>
+				<button type="button" class="btn btn-light" id="catename"><%=c.getCategoryName()%></button>
 				<%
 					}
 				%>
@@ -141,11 +139,11 @@
 				<form>
 					<table style="margin: 10px">
 						<tr>
-							<td colspan="2"><input type="text"></td>
+							<td colspan="2"><input type="text" name="upCateName"></td>
 						</tr>
 						<tr align="center" height="50px">
 							<td>
-								<button type="button" class="btn btn-primary">수정</button>
+								<button type="button" class="btn btn-primary" onclick="up();">수정</button>
 							</td>
 							<td>
 								<button type="button" class="btn btn-danger" id="up_close">취소</button>
@@ -162,6 +160,7 @@
 	</div>
 
 	<script type="text/javascript">
+			var $inInput;
 		$(function() {
 			$("#add_category").click(function() {
 				$(".enform").css("display", "block");
@@ -171,18 +170,43 @@
 				$(".enform").css("display", "");
 				$(".enform input").val("");
 			});
-
 			$("#content button").click(function() {
 				$(".upform").css("display", "block");
-				$(".upform input").val(event.target.textContent);
+				$(".upform input").val(event.target.textContent);	
+				$inInput = $(".upform input").val();
 			});
 
 			$("#up_close").click(function() {
 				$(".upform").css("display", "");
 				$(".upform input").val("");
 			});
+			
+			
 
 		})
+		
+		function up(){
+			
+			const $upInput = $(".upform input[name=upCateName]");
+			
+			
+			$.ajax({
+				url:"updateCategory.ga",
+				data:{upCate:$upInput.val(),inCate:$inInput},
+				type:"get",
+				success:function(){
+					console.log("업데이트카테고리 ajax 통신성공!!!");
+					alert("수정이 완료되었습니다.");
+	                location.href="<%=request.getContextPath()%>/catelist.ga";
+
+
+
+				},
+				error:function(){
+					console.log("업데이트카테고리 ajax 통신실패");
+				}
+			});
+		}
 	</script>
 
 

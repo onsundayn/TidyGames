@@ -112,4 +112,13 @@
 
 	</entry>
 
+	<entry key="updateCategory">
+		UPDATE CATEGORY
+		SET
+		CATEGORY_NAME = ?
+		WHERE
+		CATEGORY_NAME = ?
+
+	</entry>
+
 </properties>
