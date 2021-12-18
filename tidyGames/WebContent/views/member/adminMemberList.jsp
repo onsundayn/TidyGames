@@ -1,5 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.member.model.vo.Member, com.TidyGames.common.model.vo.PageInfo"%>
+    
+<%
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("list");
+
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+	int listCount = pi.getListCount();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -103,12 +114,13 @@
     #table td{padding:4px;}
     #tableOut1{
         width:100%;
-        height:95%;
+        height:94%;
     }
     #tableOut2{
         width:100%;
-        height:5%;
+        height:6%;
     }
+    #aColor{color:black;}
 
 </style>
 </head>
@@ -128,20 +140,22 @@
             <div id="intro">회원 관리</div>
             <div id="line_3"></div>
             
-      
+      		
+      		
     	    <div id="tableBox">
                 <div id="tableTop">
                     <div id="leftTop">
                         <div>
-                            <span>회원수 21명</span>
+                            <span>회원수 <%= listCount %>명</span>
                         </div>
                     </div>
                     
+      			<form action="<%= contextPath %>/memberSelect.me?num=">
                     <div id="midTop">
                         <div>
-                            <a href="" class="btn btn-sm btn-dark">상세 조회</a>
+                            <button type="sumbit" class="btn btn-sm btn-dark">상세 조회</button>
                             <a href="" class="btn btn-sm btn-dark">회원 수정</a>
-                            <a href="" class="btn btn-sm btn-dark">회원 삭제</a>
+<!--                              <a href="" class="btn btn-sm btn-dark">회원 삭제</a> -->
                         </div>
                     </div>
                     <div id="rightTop">
@@ -165,214 +179,63 @@
                 <table id="table" class="table table-hover">
                     <thead>
                         <tr align="center">
-                            <th width="30"> </th>
+                            <th width="30"><button type="button" onclick="allCheck();" id="btn" class="btn btn-sm btn-secondary" style="width:24px">V</button></th>
                             <th width="30">No.</th>
-                            <th width="170">아이디</th>
+                            <th width="130">아이디</th>
                             <th width="100">이름</th>
                             <th width="150">닉네임</th>
                             <th width="150">이메일</th>
                             <th width="100">전화번호</th>
-                            <th width="150">적립금</th>
+                            <th width="100">적립금</th>
+                            <th width="30"> </tr>
                         </tr>
                     </thead>
                     <tbody>
-                        
-                        <!-- if() {} -->
+                    
+                    <% for(Member m : list) {%>
                         <tr align="center">
-                            <td><input type="checkbox" id="checkBox"></td>
-                            <td>1</td>
-                            <td><a href="">userId</a></td>
-                            <td>김이박</td>
-                            <td>호빵</td>
-                            <td>hobun@mail.com</td>
-                            <td>01012345678</td>
+                            <td><input type="checkbox" id="checkBox" name="checkBox" value="<%= m.getMemNo() %>" ></td>
+                            <td><%= m.getMemNo() %></td>
+                            <td><a href="<%= contextPath %>/memberSelect.me?mno=<%=m.getMemNo()%>" id="aColor"><%= m.getMemId() %></a></td>
+                            <td><%= m.getMemName() %></td>
+                            <td><%= m.getMemNick() %></td>
+                            <td><%= m.getMemEmail() %></td>
+                            <td><%= m.getMemPhone() %></td>
                             <td>
-                                3000P
+                            	<!-- contextPath로 point의 현재보유포인트를 불러올 자리 -->
                                 <a href="" id="btn" class="btn btn-sm btn-dark">변경</a>
                             </td>
+                            <td>
+	                        	<button type="button" onclick="done();" class="btn btn-sm btn-basic" style="color:black">X</button>
+	                        </td>
                         </tr>
-<!-- 반복 예시 -->
-
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>userId</td>
-    <td>김이박</td>
-    <td>호빵</td>
-    <td>hobun@mail.com</td>
-    <td>01012345678</td>
-    <td>
-        3000P
-        <a href="" id="btn" class="btn btn-sm btn-dark">변경</a>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>userId</td>
-    <td>김이박</td>
-    <td>호빵</td>
-    <td>hobun@mail.com</td>
-    <td>01012345678</td>
-    <td>
-        3000P
-        <a href="" id="btn" class="btn btn-sm btn-dark">변경</a>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>userId</td>
-    <td>김이박</td>
-    <td>호빵</td>
-    <td>hobun@mail.com</td>
-    <td>01012345678</td>
-    <td>
-        3000P
-        <a href="" id="btn" class="btn btn-sm btn-dark">변경</a>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>userId</td>
-    <td>김이박</td>
-    <td>호빵</td>
-    <td>hobun@mail.com</td>
-    <td>01012345678</td>
-    <td>
-        3000P
-        <a href="" id="btn" class="btn btn-sm btn-dark">변경</a>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>userId</td>
-    <td>김이박</td>
-    <td>호빵</td>
-    <td>hobun@mail.com</td>
-    <td>01012345678</td>
-    <td>
-        3000P
-        <a href="" id="btn" class="btn btn-sm btn-dark">변경</a>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>userId</td>
-    <td>김이박</td>
-    <td>호빵</td>
-    <td>hobun@mail.com</td>
-    <td>01012345678</td>
-    <td>
-        3000P
-        <a href="" id="btn" class="btn btn-sm btn-dark">변경</a>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>userId</td>
-    <td>김이박</td>
-    <td>호빵</td>
-    <td>hobun@mail.com</td>
-    <td>01012345678</td>
-    <td>
-        3000P
-        <a href="" id="btn" class="btn btn-sm btn-dark">변경</a>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>userId</td>
-    <td>김이박</td>
-    <td>호빵</td>
-    <td>hobun@mail.com</td>
-    <td>01012345678</td>
-    <td>
-        3000P
-        <a href="" id="btn" class="btn btn-sm btn-dark">변경</a>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>userId</td>
-    <td>김이박</td>
-    <td>호빵</td>
-    <td>hobun@mail.com</td>
-    <td>01012345678</td>
-    <td>
-        3000P
-        <a href="" id="btn" class="btn btn-sm btn-dark">변경</a>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>userId</td>
-    <td>김이박</td>
-    <td>호빵</td>
-    <td>hobun@mail.com</td>
-    <td>01012345678</td>
-    <td>
-        3000P
-        <a href="" id="btn" class="btn btn-sm btn-dark">변경</a>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>userId</td>
-    <td>김이박</td>
-    <td>호빵</td>
-    <td>hobun@mail.com</td>
-    <td>01012345678</td>
-    <td>
-        3000P
-        <a href="" id="btn" class="btn btn-sm btn-dark">변경</a>
-    </td>
-</tr>
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>userId</td>
-    <td>김이박</td>
-    <td>호빵</td>
-    <td>hobun@mail.com</td>
-    <td>01012345678</td>
-    <td>
-        3000P
-        <a href="" id="btn" class="btn btn-sm btn-dark">변경</a>
-    </td>
-</tr>
-
-<!-- 반복 예시 끝-->
-                                
-
+                        <% } %>
                     </tbody>
                   </table>
                 </div>
+               </form>
 
-                <div id="tableOut2">
-                  <div id="pagebar" align="center">
-                        <button>&lt;</button>   
-                        <button>1</button>
-                        <button>2</button>
-                        <button>3</button>
-                        <button>4</button>
-                        <button>5</button>
-                        <button>6</button>
-                        <button>7</button>
-                        <button>8</button>
-                        <button>9</button>
-                        <button>10</button>
-                        <button>&gt;</button>
-                  </div>
-                </div>
+                  <div id="tableOut2">
+	                    <div class="paging-area" align="center">
+	                        <!-- 첫 페이지에서는 이전으로 비활성화 -->
+	 						<% if(currentPage != 1) { %>
+	            				<button onclick="location.href='<%=contextPath%>/memberList.me?cpage=<%=currentPage-1%>';"> &lt; </button>
+	           				 <% } %>
+	                        
+	                        <% for(int p=startPage; p<=endPage; p++) { %>
+	                        <!-- 페이징 버튼 활성화 조건 게시물수에 따른 버튼 활성화  -->
+	                            <% if(p == currentPage) { %>
+	                                <button disabled><%= p %></button>
+	                            <% }else { %>
+	                                <button onclick="location.href='<%= contextPath %>/memberList.me?cpage=<%= p %>';"><%= p %></button>
+	                            <% } %>
+	                        <% } %>
+	                        
+	                        <% if(currentPage != maxPage) { %>
+	                            <button onclick="loaction.href='<%= contextPath %>/memberList.me?cpage<%=currentPage+1%>';"> &gt; </button>
+	                            <!-- 현재 페이지가 마지막 페이지일 땐 다음으로 버튼 비활성화 -->
+	                        <% } %>
+                    </div>
                 </div>
                 
             </div>
@@ -387,6 +250,26 @@
         </footer>
     
     </div>
+    
+    <script>
+		
+    	function allCheck(){
+			if($(":checkbox").prop("checked")) {
+	   			$(":checkbox").prop("checked", false);    			
+			}else{
+				$(":checkbox").prop("checked", true);    			
+		}
+   	}
+    	
+    	function done(){
+			 if(confirm("회원을 탈퇴시키겠습니까?")) {
+	            	$("#table>tbody>tr").click(function(){
+	    	         location.href ='<%= contextPath %>/delete.me?mno=' 	    	      	
+	    	     			  	+ $(this).children().eq(1).text();
+	            	})
+			 }
+		}
+    </script>
 
 
 

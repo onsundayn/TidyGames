@@ -52,8 +52,8 @@
         font-weight:bold;
     }
     #top2{
-    	margin-top:20px;
-    	margin-right:100px;
+       margin-top:20px;
+       margin-right:100px;
     }
     #search_box{
         width:600px;
@@ -90,38 +90,38 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 </head>
 <body>
-	<%
-	Cookie[] cookies = request.getCookies();
-	
-	if(loginUser == null && loginCompany == null && cookies != null){ // 멤버 세션에 값이 없고 쿠키에 값이 있을때 
-	    for(Cookie c : cookies){
-	        if(c.getName().equals("MemSessionId")){ // 쿠키에 저장된 Mem객체 sessionId가 있다면?
-	        	String sessionId = c.getValue();
-	        	loginUser = new MemberService().loginMemByCookie(sessionId);
-	        	session.setAttribute("loginUser" ,loginUser);
-	        } else if(c.getName().equals("ComSessionId")) {
-	        	String sessionId = c.getValue();
-	        	loginCompany = new LoginCompanyService().loginComByCookie(sessionId);
-	        	session.setAttribute("loginCompany" ,loginCompany);
-	        }
-	    }
-	} 
-	%>	
+   <%
+   Cookie[] cookies = request.getCookies();
+   
+   if(loginUser == null && loginCompany == null && cookies != null){ // 멤버 세션에 값이 없고 쿠키에 값이 있을때 
+       for(Cookie c : cookies){
+           if(c.getName().equals("MemSessionId")){ // 쿠키에 저장된 Mem객체 sessionId가 있다면?
+              String sessionId = c.getValue();
+              loginUser = new MemberService().loginMemByCookie(sessionId);
+              session.setAttribute("loginUser" ,loginUser);
+           } else if(c.getName().equals("ComSessionId")) {
+              String sessionId = c.getValue();
+              loginCompany = new LoginCompanyService().loginComByCookie(sessionId);
+              session.setAttribute("loginCompany" ,loginCompany);
+           }
+       }
+   } 
+   %>   
 
-	<% if(alertMsg != null){  %>
-		<script>
-			alert("<%=alertMsg%>");
-		</script>
-		<% session.removeAttribute("alertMsg"); %>
-	<% } %>
-	
+   <% if(alertMsg != null){  %>
+      <script>
+         alert("<%=alertMsg%>");
+      </script>
+      <% session.removeAttribute("alertMsg"); %>
+   <% } %>
+   
     <div class="top-area">
         <div id="top1"><a href="<%=contextPath%>"><img src="<%=contextPath%>/resources/image/tidyLogo.png" width="60px" height="40"> TIDY GAMES</a></div>
         <div id="top2" align="center">
             <form action="<%=contextPath%>/gameList.ga" id="search_form">
-				
+
                 <div id="search_box">
-                    <input type="text" name="keyword" style="border-radius: 	px;">
+                    <input type="text" name="keyword" style="border-radius:    px;">
                 </div>
     
                 <div id="search_btn">
@@ -131,10 +131,10 @@
         </div>
         <div id="top3">
         
-        	
-        	 <% if(loginUser != null ) { %>
+           
+            <% if(loginUser != null ) { %>
             <a href="<%= request.getContextPath()%>/cart.pa?memNo=<%=loginUser.getMemNo()%>"><i class="fas fa-shopping-cart fa-lg"></i></a>
-            	
+               
             <% } else { %>
              <a href="<%= request.getContextPath()%>/login.me"><i class="fas fa-shopping-cart fa-lg"></i></a>
             

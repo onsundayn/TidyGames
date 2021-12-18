@@ -51,6 +51,23 @@ public class Member {
 		this.blockDate = blockDate;
 		this.memCookie = memCookie;
 	}
+	
+	
+	
+	public Member(int memNo, String memId, String memNick, String memName, String memPhone, String memEmail,
+			String memGender, String memAddress, Date indate, String memStatus) {
+		super();
+		this.memNo = memNo;
+		this.memId = memId;
+		this.memNick = memNick;
+		this.memName = memName;
+		this.memPhone = memPhone;
+		this.memEmail = memEmail;
+		this.memGender = memGender;
+		this.memAddress = memAddress;
+		this.indate = indate;
+		this.memStatus = memStatus;
+	}
 
 	public int getMemNo() {
 		return memNo;
