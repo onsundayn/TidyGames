@@ -261,5 +261,30 @@ private Properties prop = new Properties();
 
 	}
 	
+	public int updateCategory(Connection conn, Category c) {
+
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateCategory");
+		
+		try {
+			pstmt = conn.prepareStatement(sql); 
+			
+			pstmt.setString(1, c.getCategoryName());
+			pstmt.setString(2, c.getCheckCategoryName());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+	
 	
 }
