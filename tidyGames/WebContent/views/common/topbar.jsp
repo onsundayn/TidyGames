@@ -142,11 +142,11 @@
             
             
             <% if(loginUser != null ) { %>
-            	<a href="<%= contextPath %>/myPage.me" id="usericon"><i class="far fa-user fa-lg"></i></a>
+            	<a href="<%=request.getContextPath()%>/myPage.me" id="usericon"><i class="far fa-user fa-lg"></i></a>
             <% } else if(loginCompany != null) { %>
-                <a href="<%= contextPath %>/myPage.gc" id="usericon"><i class="far fa-user fa-lg"></i></a>
+                <a href="<%=request.getContextPath()%>/myPage.gc" id="usericon"><i class="far fa-user fa-lg"></i></a>
             <% } else {%>
-                <a href="<%= contextPath %>/login.me" id="usericon"><i class="far fa-user fa-lg"></i></a>
+                <a href="<%=request.getContextPath()%>/login.me" id="usericon"><i class="far fa-user fa-lg"></i></a>
             <% } %>
         </div>
     </div>

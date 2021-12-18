@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	<entry key="countWish">
-		SELECT COUNT(*) count
-		  FROM WISHLIST
-		 WHERE MEM_NO = ?
-		   AND GAME_NO = ?
-  
-	</entry>
+	
 
 	<entry key ="selectWish">
 		SELECT    
@@ -45,6 +39,18 @@
 		  )
 	
 	</entry>
+	
+		<entry key ="deleteWish">
+	
+		DELETE
+		  FROM WISHLIST
+		 WHERE MEM_NO = ?
+		   AND GAME_NO = ?
+		
+	
+	</entry>
+	
+	
 	
 
 </properties>

@@ -2,8 +2,7 @@
     pageEncoding="UTF-8" import="com.TidyGames.game.model.vo.*, com.TidyGames.member.model.vo.*"%>
 <%
 	Game g = (Game)request.getAttribute("g");
-	int countWish = (Integer)request.getAttribute("cw");
-	//WishList countWish = (WishList)request.getAttribute("cw");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -182,17 +181,17 @@
              <% } else { %>
              
              
-	          	
 	             	<div id="heart">
+	          	<% if(g.getCount() == 0) { %>
 	                     <a href="" onclick="return wishConfirm(<%=g.getGameNo()%>)"><i class="far fa-heart fa-2x"></i></a>
-	                 </div>  
-	            	
-	                 <!-- 
-	                 <div id="heart">  
-	                     <a href=""><i class="fas fa-heart fa-2x"></i></a>
+	                 
+	            	<% }else { %>
+	                 
+	                    <a href="" onclick="return wishDelete(<%=g.getGameNo()%>)"><i class="fas fa-heart fa-2x"></i></a>
+	              	<% } %>
 	                </div>
-	               -->
-                	
+
+                
                
                 
                 <div class="cart" align="center">
@@ -265,35 +264,61 @@
     }
 	
   	
-function wishConfirm(gameNo){
-    	
-    	$.ajax({
-    		url : "wishInsert.me",
-    		data : {
-    			
-    			gameNo:gameNo
-    		},
-    		type:"post",
-    		success:function(result) {
-    		
-    			
-    			if(result == 1) {
- 
-    				if(confirm("찜목록에 담겼습니다. 찜목록페이지로 이동하시겠습니까?")){
-    					
-    					location.href='<%=contextPath%>/wishList.me?memNo=<%=loginUser.getMemNo()%>';
-    		    	}
-    			
-    			}
-    			
-    		},error:function() {
-    			console.log("찜목록 담기 실패!")
-    		}
-    	})
-    	return false;
-    	
-   	
-    }
+		function wishConfirm(gameNo){
+		    	
+		    	$.ajax({
+		    		url : "wishInsert.me",
+		    		data : {
+		    			
+		    			gameNo:gameNo
+		    		},
+		    		type:"post",
+		    		success:function(result) {
+		    			
+		    			
+		    			if(result == 1) {
+		 
+		    				if(confirm("찜목록에 담겼습니다. 찜목록페이지로 이동하시겠습니까?")){
+		    					
+		    					location.href='<%=contextPath%>/wishList.me?memNo=<%=loginUser.getMemNo()%>';
+		    		    	}
+		    			
+		    			}
+		    			
+		    		},error:function() {
+		    			console.log("찜목록 담기 실패!")
+		    		}
+		    	})
+		    	return false;
+		    	
+		   	
+		    }
+    
+    
+		function wishDelete(gameNo){
+		
+		$.ajax({
+			url : "wishDe.me",
+			data : {
+				
+				gameNo:gameNo
+			},
+			type:"post",
+			success:function(result) {
+			
+				
+				if(result > 0 ) {
+	
+					alert("찜목록에서 삭제되었습니다.")
+				
+				}
+				
+			},error:function() {
+				console.log("찜목록 삭제 실패!")
+			}
+		})
+
+	}
     </script>
     
     

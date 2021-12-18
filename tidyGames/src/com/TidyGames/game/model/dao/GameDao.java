@@ -71,7 +71,7 @@ private Properties prop = new Properties();
 		return list;
 	}
 	
-	public Game selectGame(Connection conn, int gameNo) {
+	public Game selectGame(Connection conn,int memNo,  int gameNo) {
 		
 		Game g = null;
 		PreparedStatement pstmt = null;
@@ -80,7 +80,8 @@ private Properties prop = new Properties();
 		
 		try {
 			pstmt = conn.prepareStatement(sql);//미완성
-			pstmt.setInt(1, gameNo);
+			pstmt.setInt(1, memNo);
+			pstmt.setInt(2, gameNo);
 			
 			rset = pstmt.executeQuery();
 			
@@ -97,7 +98,8 @@ private Properties prop = new Properties();
 							 rset.getString("upload_date"),
 							 rset.getDouble("point"),
 							 rset.getString("game_status"),
-							 rset.getString("game_img"));
+							 rset.getString("game_img"),
+							 rset.getInt("count"));
 							 
 			}
 			
