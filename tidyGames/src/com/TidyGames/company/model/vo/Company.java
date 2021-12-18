@@ -39,6 +39,19 @@ public class Company {
 		this.companyPwd = companyPwd;
 		this.companyEnroll = companyEnroll;
 	}
+	
+	
+
+	public Company(int companyNo, String companyName, String companyPwd, String companyHead, Date companyEnroll,
+			String companyId) {
+		super();
+		this.companyNo = companyNo;
+		this.companyName = companyName;
+		this.companyPwd = companyPwd;
+		this.companyHead = companyHead;
+		this.companyEnroll = companyEnroll;
+		this.companyId = companyId;
+	}
 
 	public int getCompanyNo() {
 		return companyNo;

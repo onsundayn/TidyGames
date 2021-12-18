@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.report.model.vo.Report"%>
     
 <%
-	ArrayList<Report> list = (ArrayList<Report>)request.getSession().getAttribute("list");
+	ArrayList<Report> list = (ArrayList<Report>)request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html>
@@ -156,12 +156,11 @@
                     </thead>
                     <tbody>
                         
-                        
                         <% for(Report r : list) { %>
                         <tr align="center">
                             <td><%= r.getReportNo() %></td>
                             <td><%= r.getReported() %></td>
-                            <td><a href="<%= contextPath %>/detail.po?pno=<%= r.getPostNo() %>"><%= r.getPost() %></a></td>
+                            <td><a href="<%= contextPath %>/detail.po?num=<%= r.getPostNo() %>"><%= r.getPost() %></a></td>
                             <td>
                             	<% if(r.getEtc() != null) { %>
                             		<%= r.getEtc() %>
@@ -218,6 +217,8 @@
     </div>
 	
 	<script>
+		
+	
 		function block(){
 			 if(confirm("해당 회원을 차단할까요?")) {
 	            	$("#table>tbody>tr").click(function(){
@@ -238,8 +239,6 @@
 		}
 		
 	</script>
-
-
 
 </body>
 </html>

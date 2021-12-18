@@ -71,6 +71,14 @@ public class Game {
 		this.gameStatus = gameStatus;
 		this.gameImg = gameImg;
 	}
+	
+	public Game(int gameNo, String korName, String engName, String uploadDate) {
+		super();
+		this.gameNo = gameNo;
+		this.korName = korName;
+		this.engName = engName;
+		this.uploadDate = uploadDate;
+	}
 
 	public int getGameNo() {
 		return gameNo;

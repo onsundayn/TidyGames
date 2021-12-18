@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.TidyGames.company.model.vo.Company"%>
+<%
+	Company c = (Company)request.getAttribute("c");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,17 +16,12 @@
     }
     .info{
         background: #d1d3d3e8;
-        width: 600px;
+        width: 700px;
         height: 400px;
         font-weight: bold;
         border-radius: 7px;
-        padding-top: 40px;
-        margin-top: 110px;
-    }
-    .info input{
-        background: #a0a1a1;
-        width:300px;
-        margin-left: 30px;
+        margin-top: 100px;
+        padding-top: 30px;
     }
     .menu-name{
         color: rgba(255, 255, 255, 0.712);
@@ -32,15 +30,20 @@
         margin-top: 50px;
         margin-left:90px;
     }
-    .table{
-        width:520px;
-        height:350px;
-        border-spacing: 20px;
+    .tbl{
+        width:100%;
+        height:90%;
         text-align: center;
+        margin: auto;
+        border-collapse:separate;
+        border-spacing: 25px;
     }
     table>tbody>tr>td{
         border-radius: 10px;
         background-color: rgb(153, 151, 151);
+    }
+    table>tbody>tr>th{
+        width: 140px;
     }
 </style>
 </head>
@@ -56,26 +59,27 @@
         </div>
 
         <div class="info">
-            <table class="table">
+            	<input type="hidden" name="cno" value="<%=loginCompany.getCompanyNo()%>">
+            <table class="tbl">
                 <tr>
                     <th>게임사</th>
-                    <td colspan="4">ddddddddd</td>
+                    <td colspan="4"><%=c.getCompanyName()%></td>
                 </tr>
                 <tr>
                     <th>아이디</th>
-                    <td colspan="4"></td>
+                    <td colspan="4"><%=c.getCompanyId()%></td>
                 </tr>
                 <tr>
                     <th>등록코드</th>
-                    <td colspan="4"></td>
+                    <td colspan="4"><%=c.getCompanyPwd()%></td>
                 </tr>
                 <tr>
                     <th>대표자</th>
-                    <td colspan="4"></td>
+                    <td colspan="4"><%=c.getCompanyHead()%></td>
                 </tr>
                 <tr>
                     <th>등록일자</th>
-                    <td colspan="4"></td>
+                    <td colspan="4"><%=c.getCompanyEnroll()%></td>
                 </tr>
             </table>
         </div>

@@ -6,9 +6,14 @@
 <html>
 <head>
 
+
 <meta charset="UTF-8">
 <title>CategoryList</title>
 <style>
+@import
+	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap')
+	;
+
 #catelistga {
 	color: orange;
 }
@@ -28,6 +33,11 @@
 	width: 1500px;
 	height: 900px;
 	margin: auto;
+}
+
+#parent button {
+	font-weight: bold;
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
 #div1 {

@@ -232,8 +232,32 @@ public class ReportDao {
 			
 			return list;
 			
+		}	
+	
+	public int reportAtCommunity(Connection conn, Report r) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("reportAtCommunity");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(r.getReported()));
+			pstmt.setInt(2, Integer.parseInt(r.getReporting()));
+			pstmt.setInt(3, r.getPostNo());
+			pstmt.setString(4, r.getReportSort());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+		
 		
 		
 	}
+		
 		
 }

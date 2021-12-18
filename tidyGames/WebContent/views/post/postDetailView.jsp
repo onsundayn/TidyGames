@@ -137,7 +137,7 @@ table {
 						<tr>
 							<td></td>
 							<th style="display: flow-root" width="70">닉네임</th>
-							<td><p width="500" size="auto">댓글 내용 자리...</p></td>
+							<td ><p width="500" size="auto">댓글 내용 자리...</p></td>
 							<td><a>수정</a></td>
 							<td><a>삭제</a></td>
 							<td><button type="button" class="btn btn-sm btn-warning"
@@ -169,16 +169,13 @@ table {
 				</div>
 				<div class="modal-body">
 					<div>
-						<input type="radio" id="r1" name="report" value="1" checked><label
-							for="r1">욕설, 비방, 혐오</label>
+						<input type="radio" id="r1" name="report" value="1" checked><label for="r1">욕설, 비방, 혐오</label>
 					</div>
 					<div>
-						<input type="radio" id="r2" name="report" value="2"><label
-							for="r2">부적절한 홍보</label>
+						<input type="radio" id="r2" name="report" value="2"><label for="r2">부적절한 홍보</label>
 					</div>
 					<div>
-						<input type="radio" id="r3" name="report" value="3"><label
-							for="r3">루머 유포</label>
+						<input type="radio" id="r3" name="report" value="3"><label for="r3">루머 유포</label>
 					</div>
 					<div>
 						<input type="radio" id="r4" name="report" value="4"><label for="r4">음란, 청소년 유해</label>
@@ -194,13 +191,13 @@ table {
 					</div>
 					<br>
 					<div>
-						<label for="r7"><textarea cols="60" rows="4"
+						<label for="r7"><textarea id="etc" cols="60" rows="4"
 								style="resize: none" placeholder="신고 사유 입력 (최대 160자 이내)"></textarea>
 					</div>
 					<div class="modal-footer">
 						<input type="hidden" id="reportNo" value="<%=p.getPostNo()%>">
 						<input type="hidden" name="reportedMemNo" value="<%=p.getMemNo()%>">
-						<button id="postReport" class="btn btn-info">신고완료</button>
+						<button type ="submit" id="postReport" class="btn btn-info">신고완료</button>
 						<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
 					</div>
 				</div>
@@ -210,14 +207,34 @@ table {
 		<script>
 			$(function(){
 				$("#postReport").click(function(){
-					const reportNo = $(".modal-footer").children().eq(0).val();
-					console.log(reportNo);
-					const reportedMemNo = $(".modal-footer").children().eq(1).val();
-					console.log(reportedMemNo);
-					
-					
-				})
-			})
+					if(false) {
+						alert("로그인 후 사용 가능합니다.");
+						
+					}else{
+						$.ajax({
+							url:"report.re",
+							data:{
+								pno:$(".modal-footer").children().eq(0).val(),
+								mno:$(".modal-footer").children().eq(1).val(),
+								cno:$("input[name='report']:checked").val(),
+								etc:$("#etc").val(),
+								/* rno:$(댓글완성되면댓글번호가져올게요) */	
+							},
+							type:"post",
+							success:function(result){
+								if(result > 0) {
+									alert("신고되었습니다.");
+									$(".modal").modal("hide");
+								}else{
+									alert("다시 입력해주세요.")
+								}
+							}, error:function(){
+								alert("오류가 발생했습니다. 다시 시도해주세요.")
+							}
+						});
+				}
+		})
+	})
 		</script>
 </body>
 </html>

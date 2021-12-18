@@ -49,11 +49,11 @@
 		     , B.MEM_ID "REPORTING"
 		     , REPORT_DATE
 		FROM REPORT R
-		JOIN MEMBER A ON (R.REPORTED_MEM_NO = A.MEM_NO)
+		JOIN REPORT_CATEGORY C ON (R.REPORT_SORT = C.RCATEGORY_NO)
+   LEFT JOIN MEMBER A ON (R.REPORTED_MEM_NO = A.MEM_NO)
 		JOIN MEMBER B ON (R.REPORTING_MEM_NO = B.MEM_NO)
 		JOIN POST P ON (R.REF_PNO = P.POST_NO)
-		LEFT JOIN REPLY RP ON (R.REF_RNO = RP.REPLY_NO)
-		JOIN REPORT_CATEGORY C ON (R.REPORT_SORT = C.RCATEGORY_NO)
+   LEFT JOIN REPLY RP ON (R.REF_RNO = RP.REPLY_NO)
 		WHERE DONE = 'N'
 	    ORDER
 	       BY REPORT_NO
@@ -93,9 +93,37 @@
 		                JOIN POST P ON (R.REF_PNO = P.POST_NO)
 		                LEFT JOIN REPLY RP ON (R.REF_RNO = RP.REPLY_NO)
 		                JOIN REPORT_CATEGORY C ON (R.REPORT_SORT = C.RCATEGORY_NO)
+		               WHERE DONE = 'Y'
 		                ORDER
 		                   BY REPORT_NO DESC) A
 		                   )
 		         WHERE ROWNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="reportAtCommunity">
+		INSERT 
+		  INTO REPORT
+		  ( 
+		    REPORT_NO
+		  , REPORTED_MEM_NO
+		  , REPORTING_MEM_NO
+		  , REF_PNO
+		  , REF_RNO
+		  , REPORT_SORT
+		  , REPORT_DATE
+		  , DONE
+		  , ETC
+		  )
+		  VALUES 
+		  (
+		  SEQ_RNO_K.NEXTVAL
+		  , ?
+		  , ?
+		  , ?
+		  , NULL
+		  , ?
+		  , DEFAULT
+		  , DEFAULT
+		  , NULL
+		  )
 	</entry>
 </properties>

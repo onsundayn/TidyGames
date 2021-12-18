@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="selectCompany">
+		SELECT
+		      COMPANY_NO
+		    , COMPANY_NAME
+		    , COMPANY_PWD
+		    , COMPANY_HEAD
+		    , TO_CHAR(COMPANY_ENROLL, 'YYYY-MM-DD') COMPANY_ENROLL
+		    , COMPANY_ID
+		  FROM COMPANY
+		 WHERE COMPANY_NO = ?
+	</entry>
+
+</properties>

@@ -1,7 +1,6 @@
-package com.TidyGames.report.controller;
+package com.TidyGames.company.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,20 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.TidyGames.report.model.service.ReportService;
-import com.TidyGames.report.model.vo.Report;
+import com.TidyGames.company.model.service.CompanyService;
+import com.TidyGames.company.model.vo.Company;
 
 /**
- * Servlet implementation class AdminReportWaitingController
+ * Servlet implementation class CompanyListController
  */
-@WebServlet("/reportWait.re")
-public class AdminReportWaitingController extends HttpServlet {
+@WebServlet("/myPage.gc")
+public class CompanyListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminReportWaitingController() {
+    public CompanyListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,11 +31,13 @@ public class AdminReportWaitingController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<Report> list = new ReportService().reportWaiting();
+		int comNo = Integer.parseInt(request.getParameter("cno"));
+		System.out.println("cno");
 		
+		Company c = new CompanyService().selectCompany(comNo);
 		
-		request.setAttribute("list", list);
-		request.getRequestDispatcher("views/report/adminReportWaitingList.jsp").forward(request, response);
+		request.setAttribute("c", c);
+		request.getRequestDispatcher("views/company/gameCompanyDetailView.jsp").forward(request, response);
 	}
 
 	/**
