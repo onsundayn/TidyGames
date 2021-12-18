@@ -37,7 +37,8 @@
 		     , POINT
 		     , GAME_STATUS
 		     , GAME_IMG
-		  FROM GAME
+		     , (SELECT COUNT(*) FROM WISHLIST W WHERE W.MEM_NO= ? AND G.GAME_NO =W.GAME_NO ) AS count
+		  FROM GAME G
 		 WHERE GAME_NO = ?
 	</entry>
 	

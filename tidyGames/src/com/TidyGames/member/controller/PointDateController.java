@@ -1,28 +1,30 @@
-package com.TidyGames.game.controller;
+package com.TidyGames.member.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.TidyGames.game.model.service.GameService;
-import com.TidyGames.game.model.vo.Game;
+import com.TidyGames.member.model.service.PointService;
 import com.TidyGames.member.model.vo.Member;
+import com.TidyGames.member.model.vo.Point;
 
 /**
- * Servlet implementation class GameDetailViewController
+ * Servlet implementation class PointDateController
  */
-@WebServlet("/detail.ga")
-public class GameDetailViewController extends HttpServlet {
+@WebServlet("/pointDate.me")
+public class PointDateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GameDetailViewController() {
+    public PointDateController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,21 +33,22 @@ public class GameDetailViewController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		request.setCharacterEncoding("UTF-8");
 		
 		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
-		int gameNo = Integer.parseInt(request.getParameter("gno"));
+		String start = request.getParameter("startDate");
+		String end = request.getParameter("endDate");
 		
-
-		GameService gService = new GameService();
+		System.out.println(start);
+		System.out.println(end);
 		
-		Game g = gService.selectGame(memNo, gameNo);
-		request.setAttribute("g", g);		
-		request.getRequestDispatcher("views/game/gameDetailView.jsp").forward(request, response);
+		ArrayList<Point> point = new PointService().selectDate(memNo, start,end);  
 		
-		HttpSession session = request.getSession();
-		session.setAttribute("g", g);
-		
+		System.out.println(point);
+		request.setAttribute("point", point);
+	
+		request.getRequestDispatcher("views/member/pointHistoryView.jsp").forward(request, response);
 	}
 
 	/**

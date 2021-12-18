@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import com.TidyGames.member.model.dao.WishListDao;
 import com.TidyGames.member.model.vo.WishList;
 import com.TidyGames.pay.model.dao.PayDao;
+import com.TidyGames.pay.model.vo.Cart;
 
 public class WishListService {
 
@@ -30,16 +31,7 @@ public class WishListService {
 
 	}
 	
-	public int countWish(WishList wish) {
-		
-		Connection conn = getConnection();
-		
-		int countWish = new WishListDao().countWish(conn, wish);
-		
-		close(conn);
-		
-		return countWish;
-	}
+
 	
 	public int insertWish(WishList wish) {
 		Connection conn = getConnection();
@@ -56,6 +48,24 @@ public class WishListService {
 		
 		return result;
 	}
+	
+		public int deleteWish(WishList d) {
+		
+		Connection conn = getConnection();
+		
+		int result = new WishListDao().deleteWish(conn, d);
+		
+		if(result >0 ) {
+			commit(conn);
+		}else {
+			rollback(conn);
+			
+		}
+		close(conn);
+		
+		return result;
+	}
+
 
 	
 }

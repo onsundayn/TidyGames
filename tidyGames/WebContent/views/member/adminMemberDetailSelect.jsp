@@ -194,25 +194,6 @@
                             <td>2021/12/10</td>
                             <td>N</td>
                         </tr>
-<!-- 반복 예시 -->
-<tr align="center">
-    <td><input type="checkbox" id="checkBox"></td>
-    <td>1</td>
-    <td>longlongname</td>
-    <td>최길</td>
-    <td>목이길어서기린</td>
-    <td>여</td>
-    <td>longlong@tidy.com</td>
-    <td>010987654321</td>
-    <td>서울 은평구 한동</td>
-    <td>2021/12/10</td>
-    <td>Y</td>
-  
-</tr>
-
-<!-- 반복 예시 끝-->
-                                
-
                     </tbody>
                   </table>
                 </div>

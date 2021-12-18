@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	
+	
+	<entry key="selectPoint">
+	    SELECT
+              MEM_NO
+            , POINT_AMOUNT
+            , TO_CHAR(POINT_DATE, 'YYYY-MM-DD') "POINT_DATE"
+            , POINT_CONTENT
+            , ORDER_NO
+       FROM POINT
+      WHERE MEM_NO = ?
+	
+	</entry>
+
+	
+	<entry key="selectDate">
+	
+		     SELECT
+              MEM_NO
+            , POINT_AMOUNT
+            , TO_CHAR(POINT_DATE, 'YYYY-MM-DD') "POINT_DATE"
+            , POINT_CONTENT
+            , ORDER_NO
+       FROM POINT
+      WHERE MEM_NO = ?
+        AND "POINT_DATE" BETWEEN TO_DATE(?)
+                             AND TO_DATE(?)
+	</entry>
+
+</properties>

@@ -271,7 +271,7 @@ Game g = (Game)session.getAttribute("g");
                         
 
                                             <div class="m-t-sm"></div>
-                                                <a href="#" class="text-muted"><i class="fa fa-trash"></i> Remove item</a>
+                                                      <a href="" onclick="return wishDelete(<%=w.getGameNo()%>);" class="text-muted"><i class="fa fa-trash"></i> Remove item</a>
                                             </div>
                                         </td>
 
@@ -372,6 +372,30 @@ Game g = (Game)session.getAttribute("g");
     	
    	
     }
+  
+  
+  function wishDelete(gameNo){
+  	
+  	$.ajax({
+  		url : "wishDe.me",
+  		data : {
+  			
+  			gameNo:gameNo
+  		},
+  		type:"post",
+  		success:function(result) {
+  			
+  			if(result > 0) {
+  			alert("성공적으로 삭제되었습니다.")
+  			}
+  		},error:function() {
+  			console.log("삭제 실패!")
+  		}
+  	})
+  		
+  	
+ 	
+  }
 	    
     </script>
    

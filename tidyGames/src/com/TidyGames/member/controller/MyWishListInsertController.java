@@ -39,32 +39,14 @@ public class MyWishListInsertController extends HttpServlet {
 		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
 		int gameNo =  Integer.parseInt(request.getParameter("gameNo"));
 	
-		System.out.println(memNo);
-		System.out.println(gameNo);
+		
 		
 		WishList wish = new WishList();
 		
 		wish.setMemNo(memNo);
 		wish.setGameNo(gameNo);
 		
-		System.out.println(wish);
 		
-		int countWish = new WishListService().countWish(wish);
-		
-		System.out.println(countWish);
-		
-		//response.getWriter().print(countWsih);
-		
-		request.setAttribute("cw", new Integer(countWish));
-		
-		//WishList cw = new WishList(countWish);
-		
-		//request.setAttribute("cw", cw);
-		//ajax라 넘겨주면안되나?
-		//request.getRequestDispatcher("views/board/gameDetailView.jsp").forward(request, response);
-		
-		if(countWish == 0) {
-			// insert
 			int result = new WishListService().insertWish(wish);
 			
 			
@@ -72,12 +54,7 @@ public class MyWishListInsertController extends HttpServlet {
 				
 				response.getWriter().print(result);
 			
-			
 			}
-			
-		}else {
-			//delete => 문구없이 하트가 비워짐
-		}
 		
 	}
 

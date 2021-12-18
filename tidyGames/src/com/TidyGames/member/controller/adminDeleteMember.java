@@ -1,28 +1,26 @@
-package com.TidyGames.game.controller;
+package com.TidyGames.member.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.TidyGames.game.model.service.GameService;
-import com.TidyGames.game.model.vo.Game;
-import com.TidyGames.member.model.vo.Member;
+import com.TidyGames.member.model.service.MemberService;
 
 /**
- * Servlet implementation class GameDetailViewController
+ * Servlet implementation class adminDeleteMember
  */
-@WebServlet("/detail.ga")
-public class GameDetailViewController extends HttpServlet {
+@WebServlet("/delete.me")
+public class adminDeleteMember extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GameDetailViewController() {
+    public adminDeleteMember() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,22 +29,19 @@ public class GameDetailViewController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		
-		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
-		int gameNo = Integer.parseInt(request.getParameter("gno"));
-		
-
-		GameService gService = new GameService();
-		
-		Game g = gService.selectGame(memNo, gameNo);
-		request.setAttribute("g", g);		
-		request.getRequestDispatcher("views/game/gameDetailView.jsp").forward(request, response);
-		
-		HttpSession session = request.getSession();
-		session.setAttribute("g", g);
-		
+			
+		int memNo = Integer.parseInt(request.getParameter("mno"));
+		int result = new MemberService().deleteMember(memNo);
+		if(result > 0) {
+			request.getSession().setAttribute("alertMsg", "회원탈퇴 되었습니다.");
+			response.sendRedirect(request.getContextPath() + "/memberList.me?cpage=1");
+		}else {
+			request.getSession().setAttribute("alertMsg", "회원탈퇴 중 오류가 발생했습니다.");
+			response.sendRedirect(request.getContextPath() + "/memberList.me?cpage=1");
+		}
+			
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
