@@ -51,19 +51,7 @@ public class MemberService {
 		return m;
 	}
 	
-	public  ArrayList<WishList> selectWish(int memNo) {
-		
-		
-		Connection conn = getConnection();
-		
-		ArrayList<WishList> wish = new MemberDao().selectWish(conn, memNo);
-		 
-		 close(conn);
-		 
-		return wish;
-		 
-
-	}
+	
 
 	
 }

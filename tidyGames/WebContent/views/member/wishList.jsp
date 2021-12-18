@@ -18,7 +18,7 @@ Game g = (Game)session.getAttribute("g");
     }
     #outer{
         width:1500px;
-        height: 1000px;
+        height: 1300px;
         margin:auto;
         border: 1px solid orange;
     }
@@ -102,22 +102,15 @@ Game g = (Game)session.getAttribute("g");
       
     }
 
-    #cart_btn{
-        font-weight: bold;
-        height: 30px;
-        border: none;
-        border-radius: 3px;
-        background: rgb(16, 92, 144);
-        color:white;
-        font-size: 10px;
+    .cart{
+        
         margin-top: 100px;
         width: 80px;
     }
     .paging-area{
+    
        width: 1000px;
        height: 200px;
-       
-       margin-left: 150px;
        margin-top: 50px;
     }
     .paging-area>button {
@@ -167,6 +160,14 @@ Game g = (Game)session.getAttribute("g");
 	  border-style: solid solid none;
 	  border-width: 1px 0;
 	}
+    .area1{
+        width: 1000px;
+        height: 400px;
+       
+        background: rgba(0, 0, 0, 0.445);
+        
+    }
+
 </style>
 </head>
 <body>
@@ -181,7 +182,17 @@ Game g = (Game)session.getAttribute("g");
         <div id="intro"><h1>닉네임 님의 찜 목록</h1></div>
         <br><br><br><br><br>
 
-            
+        <% if(wish.isEmpty()) { %>
+
+        
+            <div class="area1" style="float: right; margin-right: 150px;">
+                <div class="col-sm-12 empty-cart-cls text-center"> <img src="https://i.imgur.com/dCdflKN.png" width="200" height="130" class="img-fluid mb-4 mr-3" style="margin-top: 50px;">
+                <h3 style="color:white"><strongy> 찜목록이 비어있습니다.</strongy></h3>
+                <a href="<%=contextPath%>" class="btn btn-primary cart-btn-transform m-3" data-abc="true">쇼핑계속하기</a>
+            </div>
+          
+            <%}else { %>   
+
         <div class="search-game">
             
             <form action="" id="wishList-search">
@@ -216,7 +227,9 @@ Game g = (Game)session.getAttribute("g");
         <div id="line1"></div>
         <br>
         <br><br>
-        
+
+     
+       
         <button id="allDelete_btn" onclick="fnClear();">전체삭제</button>
         	 <script>
 	        	 function fnClear() {
@@ -229,12 +242,10 @@ Game g = (Game)session.getAttribute("g");
         
        
        
-      
-       
-      
+           
         <br><br>
 		   <%for(WishList w : wish){ %>
-        <div class="ibox-content" style="background: rgba(0, 0, 0, 0.445);  width: 1000px; height: 240px; margin-left: 150px;">
+        <div class="ibox-content" style="background: rgba(0, 0, 0, 0.445);  width: 1000px; height: 240px; margin-right: 150px; float: right;">
              <div class="table-responsive" >  
                         <table class="table shoping-cart-table" >
                             <tbody>
@@ -278,7 +289,15 @@ Game g = (Game)session.getAttribute("g");
                                             <h4 style="color:white; font-size:19px" >
                                             
                                                 <span> <span> <%=w.getPrice()%>원</span></span>
-                                                <button id="cart_btn" style="font-size: 15px;">+ Cart</button>
+                                                
+                                                
+                                                  <div class="cart" align="center">
+
+								                      <a href="" onclick="return cartConfirm(<%=w.getGameNo()%>);"><i class="fas fa-cart-plus fa-2x"></i></a>
+								                  </div>
+                                                
+                                                
+                                               
                                             </h4>
                                         </td>
                                         
@@ -291,8 +310,10 @@ Game g = (Game)session.getAttribute("g");
                 </div>
         
             <% } %>
-		
-            <div class="paging-area" align="center">
+		<% } %>
+
+        <% if(!wish.isEmpty()) { %>
+            <div class="paging-area" style="float: right; margin-top: 100px; margin-right: 150px; text-align: center;">
 
                 <button> &lt; </button>
                 <button>1</button>
@@ -309,9 +330,50 @@ Game g = (Game)session.getAttribute("g");
         
             </div>
             <br><br><br>
-          
+          <% } %>
     </div>
     
+    
+        <script>
+    
+    function loginMsg(){
+    	if(!confirm("로그인이 필요합니다. 로그인하시겠습니까?")){
+    		return false; 
+    	}
+    }
+    
+  function cartConfirm(gameNo){
+    	
+    	$.ajax({
+    		url : "cartInsert.pa",
+    		data : {
+    			
+    			gameNo:gameNo
+    		},
+    		type:"post",
+    		success:function(result) {
+    			
+    			
+    			if(result == 1) {
+ 
+    				if(confirm("장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?")){
+    		    		location.href='<%=contextPath%>/cart.pa?memNo=<%=loginUser.getMemNo()%>';
+    		    	}
+    				
+    			}else if(result == 2 ) {
+    				alert("장바구니가 이미 존재합니다.")
+    			}
+    			
+    		},error:function() {
+    			console.log("장바구니 담기 실패!")
+    		}
+    	})
+    	return false;
+    	
+   	
+    }
+	    
+    </script>
    
 
 

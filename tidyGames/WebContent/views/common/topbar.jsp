@@ -6,12 +6,14 @@
 	 com.TidyGames.member.model.service.MemberService,
 	 com.TidyGames.member.model.dao.MemberDao,
 	 com.TidyGames.company.model.service.LoginCompanyService,
-	 com.TidyGames.company.model.dao.LoginCompanyDao" %>
+	 com.TidyGames.company.model.dao.LoginCompanyDao" 
+%>
 <%
 	String contextPath = request.getContextPath();
 	String alertMsg = (String)session.getAttribute("alertMsg");
 	Member loginUser = (Member)session.getAttribute("loginUser");
 	Company loginCompany = (Company)session.getAttribute("loginCompany");
+	
 %>
 
 <!DOCTYPE html>
@@ -117,7 +119,7 @@
         <div id="top1"><a href="<%=contextPath%>"><img src="<%=contextPath%>/resources/image/tidyLogo.png" width="60px" height="40"> TIDY GAMES</a></div>
         <div id="top2" align="center">
             <form action="<%=contextPath%>/gameList.ga" id="search_form">
-
+				
                 <div id="search_box">
                     <input type="text" name="keyword" style="border-radius: 	px;">
                 </div>

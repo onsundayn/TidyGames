@@ -129,16 +129,34 @@ public class PayDao {
 		
 		return cart;
 	
-	
-	
-	
-	
-	
-	
 	}
 	
 	
 	
+	public int deleteCart(Connection conn , Cart d) {
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteCart");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, d.getMemNo());
+			pstmt.setInt(2, d.getGameNo());
+			
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	
 	

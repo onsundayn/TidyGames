@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.TidyGames.game.model.vo.*"%>
+    pageEncoding="UTF-8" import="com.TidyGames.game.model.vo.*, com.TidyGames.member.model.vo.*"%>
 <%
 	Game g = (Game)request.getAttribute("g");
+	int countWish = (Integer)request.getAttribute("cw");
+	//WishList countWish = (WishList)request.getAttribute("cw");
 %>
 <!DOCTYPE html>
 <html>
@@ -170,7 +172,7 @@
             <div class="btn-area">
             <% if(loginUser == null) { %>
                 <div id="heart">
-                    <a href=""><i class="far fa-heart fa-2x"></i></a>
+                    <a href="<%=contextPath%>/login.me" onclick="return loginMsg();"><i class="far fa-heart fa-2x"></i></a>
                 </div>
                 <div id="cart">
 
@@ -180,14 +182,17 @@
              <% } else { %>
              
              
-             
-             	<div id="heart">
-                    <a href=""><i class="far fa-heart fa-2x"></i></a>
-                    
-                     <a href=""><i class="fas fa-heart fa-2x"></i></a>
-                </div>
-                
-                
+	          	
+	             	<div id="heart">
+	                     <a href="" onclick="return wishConfirm(<%=g.getGameNo()%>)"><i class="far fa-heart fa-2x"></i></a>
+	                 </div>  
+	            	
+	                 <!-- 
+	                 <div id="heart">  
+	                     <a href=""><i class="fas fa-heart fa-2x"></i></a>
+	                </div>
+	               -->
+                	
                
                 
                 <div class="cart" align="center">
@@ -221,14 +226,14 @@
     </div>
     
     <script>
-    
+   
     function loginMsg(){
     	if(!confirm("로그인이 필요합니다. 로그인하시겠습니까?")){
     		return false; 
     	}
     }
     
-  function cartConfirm(gameNo){
+  	function cartConfirm(gameNo){
     	
     	$.ajax({
     		url : "cartInsert.pa",
@@ -258,7 +263,37 @@
     	
    	
     }
-	    
+	
+  	
+function wishConfirm(gameNo){
+    	
+    	$.ajax({
+    		url : "wishInsert.me",
+    		data : {
+    			
+    			gameNo:gameNo
+    		},
+    		type:"post",
+    		success:function(result) {
+    		
+    			
+    			if(result == 1) {
+ 
+    				if(confirm("찜목록에 담겼습니다. 찜목록페이지로 이동하시겠습니까?")){
+    					
+    					location.href='<%=contextPath%>/wishList.me?memNo=<%=loginUser.getMemNo()%>';
+    		    	}
+    			
+    			}
+    			
+    		},error:function() {
+    			console.log("찜목록 담기 실패!")
+    		}
+    	})
+    	return false;
+    	
+   	
+    }
     </script>
     
     

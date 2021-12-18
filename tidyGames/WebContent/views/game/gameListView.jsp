@@ -158,6 +158,7 @@
             		<input type="hidden" value="<%=g.getGameNo()%>" name="gno">
 
                     <a href="<%=contextPath%>/detail.ga?gno=<%=g.getGameNo()%>"><img src="<%=contextPath%>/<%=g.getGameImg()%>"></a>
+                
                 </div>
                 <div class="game-name" align="center">
                     <%=g.getKorName()%><br>
@@ -195,9 +196,13 @@
 
                 <div class="heart" align="center">
                     <br><br><br>
-                    <a href=""><i class="far fa-heart fa-2x"></i></a>
                     
-                    <a href=""><i class="fas fa-heart fa-2x"></i></a>
+                    <% if(g.getCount() == 0)  {%>
+                     	<a href="" onclick="return wishConfirm(<%=g.getGameNo()%>)"><i class="far fa-heart fa-2x"></i></a>
+                    <% }else  {%>
+                   <a href=""><i class="fas fa-heart fa-2x"></i></a>
+                  	<%} %> 
+                  	
                 </div>
 
                 <div class="cart" align="center">
@@ -250,6 +255,36 @@
     			
     		},error:function() {
     			console.log("장바구니 담기 실패!")
+    		}
+    	})
+    	return false;
+    	
+   	
+    }
+    
+function wishConfirm(gameNo){
+    	
+    	$.ajax({
+    		url : "wishInsert.me",
+    		data : {
+    			
+    			gameNo:gameNo
+    		},
+    		type:"post",
+    		success:function(result) {
+    		
+    			
+    			if(result == 1) {
+ 
+    				if(confirm("찜목록에 담겼습니다. 찜목록페이지로 이동하시겠습니까?")){
+    					
+    					location.href='<%=contextPath%>/wishList.me?memNo=<%=loginUser.getMemNo()%>';
+    		    	}
+    			
+    			}
+    			
+    		},error:function() {
+    			console.log("찜목록 담기 실패!")
     		}
     	})
     	return false;

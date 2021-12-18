@@ -2,18 +2,25 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	<entry key="selectList">
-		SELECT GAME_NO
-		     , COMPANY_NO
-		     , KOR_NAME
-		     , ENG_NAME
-		     , TO_CHAR(RELEASE_DATE, '""YYYY"년 "MM"월 "DD"일"') "RELEASE_DATE"
-		     , PRICE
-		     , POINT
-		     , GAME_STATUS
-		     , GAME_IMG 
-		  FROM GAME
+		    
+      SELECT GAME_NO
+           , COMPANY_NO
+           , KOR_NAME
+           , ENG_NAME
+           , TO_CHAR(RELEASE_DATE, '""YYYY"년 "MM"월 "DD"일"') "RELEASE_DATE"
+           , PRICE
+           , POINT
+           , GAME_STATUS
+           , GAME_IMG 
+           , (SELECT COUNT(*) FROM WISHLIST W WHERE W.MEM_NO= ? AND G.GAME_NO =W.GAME_NO ) AS count
+         FROM GAME G
 		 WHERE UPPER(KOR_NAME || ENG_NAME) LIKE UPPER('%' || ? || '%') 
 	</entry>
+	
+	
+	
+	
+	
 	
 	<entry key="selectGame">
 		SELECT
@@ -34,6 +41,7 @@
 		 WHERE GAME_NO = ?
 	</entry>
 	
+
 	<entry key="selectCategoryList">
 		SELECT
 		       CATEGORY_NO

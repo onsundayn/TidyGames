@@ -14,6 +14,18 @@ public class Cart {
 	private int discountPrice;
 	
 	public Cart() {}
+	
+	
+	
+
+	public Cart(int memNo, int gameNo) {
+		super();
+		this.memNo = memNo;
+		this.gameNo = gameNo;
+	}
+
+
+
 
 	public Cart(int memNo, int gameNo, String gameImg, String korName, String engName, String gameIntro, int price,
 			int point, String memNick, int discountPrice) {
