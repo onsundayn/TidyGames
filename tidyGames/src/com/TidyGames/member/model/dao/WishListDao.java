@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import com.TidyGames.member.model.vo.Member;
 import com.TidyGames.member.model.vo.WishList;
+import com.TidyGames.pay.model.vo.Cart;
 
 public class WishListDao {
 
@@ -72,40 +73,7 @@ public class WishListDao {
 	}
 	
 	
-		public int countWish(Connection conn, WishList wish) {
-			
-			int countWish = 0;
-			PreparedStatement pstmt = null;
-			ResultSet rset = null;
-			String sql = prop.getProperty("countWish");
-			
-			try {
-				pstmt = conn.prepareStatement(sql);
-				
-				pstmt.setInt(1, wish.getMemNo());
-				pstmt.setInt(2, wish.getGameNo());
-				
-				rset = pstmt.executeQuery();
-				
-				if(rset.next()) {
-					// count(*) 컬럼의 별칭인 count임
-					countWish = rset.getInt("count");
-				}
-				
-				
-				
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}finally {
-				close(rset);
-				close(pstmt);
-			}
-			return countWish;
-			
-			
-			
-		}
+	
 		
 		public int insertWish(Connection conn, WishList wish) {
 			
@@ -134,6 +102,31 @@ public class WishListDao {
 		}
 			
 			
+		public int deleteWish(Connection conn , WishList d) {
+
+			int result = 0;
+			PreparedStatement pstmt = null;
+			String sql = prop.getProperty("deleteWish");
+			
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, d.getMemNo());
+				pstmt.setInt(2, d.getGameNo());
+				
+				
+				result = pstmt.executeUpdate();
+				
+				
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+			return result;
+		}
+		
 
 		
 }

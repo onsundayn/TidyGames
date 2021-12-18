@@ -24,9 +24,9 @@ public class GameService {
 		return list;
 	}
 
-	public Game selectGame(int gameNo) {
+	public Game selectGame(int memNo, int gameNo) {
 		Connection conn = getConnection();
-		Game g = new GameDao().selectGame(conn, gameNo);
+		Game g = new GameDao().selectGame(conn, memNo, gameNo);
 		close(conn);
 		return g;
 	}
