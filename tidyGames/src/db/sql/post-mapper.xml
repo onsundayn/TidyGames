@@ -40,13 +40,6 @@
 		   AND POST_STATUS = 'Y'
 	</entry>
 	
-	<entry key="confirmMember">
-		SELECT
-			   MEM_ACCESS
-		  FROM MEMBER
-		 WHERE MEM_ID = ?
-	</entry>
-	
 	<entry key="selectPostDetail">
 		SELECT
 		       POST_NO
@@ -60,46 +53,6 @@
 		  FROM POST
 		  JOIN MEMBER ON (POST_WRITER = MEM_NO)
 		 WHERE POST_NO = ?
-	</entry>
-	
-	<entry key="insertPost">
-		INSERT
-		  INTO POST
-		  (
-		  	POST_NO
-		  , POST_WRITER
-		  , POST_NAME
-		  , POST_CONTENT
-		  , POST_NOTICE
-		  )
-		  VALUES
-		  (
-		  	SEQ_PNO.NEXTVAL
-		  , ?
-		  , ?
-		  , ?
-		  , ?
-		  )
-	</entry>
-	
-	<entry key="insertFile">
-		INSERT
-		  INTO POST_FILE
-		  (
-		  	FILE_NO
-		  , REF_POST
-		  , FILE_ORIGIN
-		  , FILE_CHANGE
-		  , FILE_PATH
-		  )
-		  VALUES
-		  (
-		  	SEQ_FNO.NEXTVAL
-		  , SEQ_PNO.CURRVAL
-		  , ?
-		  , ?
-		  , ?
-		  )
 	</entry>
 
 

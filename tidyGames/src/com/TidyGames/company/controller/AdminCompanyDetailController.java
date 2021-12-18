@@ -35,10 +35,10 @@ public class AdminCompanyDetailController extends HttpServlet {
 		
 		int companyNo = Integer.parseInt(request.getParameter("num"));
 		
-		Company company = new AdminCompanyService().selectCompanyDetail(companyNo);
+		Company c = new AdminCompanyService().selectCompanyDetail(companyNo);
 		ArrayList<Game> gameList = new AdminCompanyService().selectGameList(companyNo);
 			
-		request.setAttribute("company", company);
+		request.setAttribute("company", c);
 		request.setAttribute("gameList", gameList);
 		request.getRequestDispatcher("views/company/adminCompanyDetailView.jsp").forward(request,response);
 			
