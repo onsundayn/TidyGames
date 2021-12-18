@@ -78,7 +78,41 @@
 		  JOIN MEMBER USING(MEM_NO)
 		 WHERE MEM_NO = ?
 		   AND GAME_STATUS = 'Y'	
-	
-
 	</entry>
+	
+		<entry key="selectMember">
+			SELECT *
+			  FROM (
+			        SELECT ROWNUM RNUM, A.*
+			          FROM ( 
+	                        SELECT
+	                               MEM_NO
+	                             , MEM_ID
+	                             , MEM_NAME
+	                             , MEM_NICK
+	                             , MEM_GENDER
+	                             , MEM_EMAIL
+	                             , MEM_PHONE
+	                             , MEM_ADDRESS
+	                             , MEM_INDATE
+	                             , MEM_STATUS
+	                             FROM MEMBER
+	                            WHERE MEM_STATUS = 'Y'
+	                             ) A
+	                   )                
+			  WHERE RNUM BETWEEN ? AND ? 
+		</entry>	
+		<entry key="selectMemberCount">
+			SELECT 
+				   COUNT(*) "COUNT"
+			  FROM MEMBER
+		</entry>
+		<entry key="deleteMember">
+			UPDATE 
+				   MEMBER 
+		       SET MEM_STATUS = 'N'
+		         , MEM_OUTDATE = SYSDATE 
+		     WHERE MEM_NO = ?
+		</entry>
+		
 </properties>

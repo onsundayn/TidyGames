@@ -8,6 +8,7 @@ import static com.TidyGames.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.TidyGames.common.model.vo.PageInfo;
 import com.TidyGames.member.model.dao.MemberDao;
 import com.TidyGames.member.model.vo.Member;
 import com.TidyGames.member.model.vo.WishList;
@@ -51,7 +52,7 @@ public class MemberService {
 		return m;
 	}
 	
-	public  ArrayList<WishList> selectWish(int memNo) {
+	public ArrayList<WishList> selectWish(int memNo) {
 		
 		
 		Connection conn = getConnection();
@@ -62,7 +63,42 @@ public class MemberService {
 		 
 		return wish;
 		 
-
+	}
+	
+	
+	public ArrayList<Member> selectMember(PageInfo pi) {
+		Connection conn = getConnection();
+		
+		ArrayList<Member> list = new MemberDao().selectMember(conn, pi);
+		
+		close(conn);
+		
+		return list;
+	}
+	
+	public int selectMemberCount() {
+		Connection conn = getConnection();
+		
+		int listCount = new MemberDao().selectMemberCount(conn);
+		
+		close(conn);
+		
+		return listCount;
+	}
+	
+	public int deleteMember(int memNo) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().deleteMember(conn, memNo);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
 	}
 
 	
