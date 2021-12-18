@@ -43,7 +43,7 @@ public class ForSaleListController extends HttpServlet {
 		
 		listCount = new GameService().selectListCount();	
 		currentPage = Integer.parseInt(request.getParameter("cpage"));
-		pageLimit = 5;
+		pageLimit = 10;
 		viewLimit = 10;
 		maxPage = (int)Math.ceil((double)listCount / viewLimit);
 		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;

@@ -91,7 +91,7 @@
 
 	<%@ include file="../common/topbar.jsp"%>
 	<%@ include file="../common/navibar.jsp"%>
-	
+
 	<div id="line1"></div>
 	<div id="parent">
 
@@ -104,16 +104,20 @@
 			<div id="enbtn" align="right">
 				<button type="button" class="btn btn-secondary" id="add_category">추가</button>
 			</div>
-			
+
 			<div id="content">
-		 <% for(Category c : list) { %>
-				<button type="button" class="btn btn-light"><%= c.getCategoryName() %></button>
-			<%} %>
-				
-			</div> 
-			
-			
-			
+				<%
+					for (Category c : list) {
+				%>
+				<button type="button" class="btn btn-light"><%=c.getCategoryName()%></button>
+				<%
+					}
+				%>
+
+			</div>
+
+
+
 
 			<div class="enform">
 				<form>
@@ -154,7 +158,7 @@
 
 
 		</div>
-		
+
 	</div>
 
 	<script type="text/javascript">
