@@ -1,30 +1,30 @@
-package com.TidyGames.pay.controller;
+package com.TidyGames.member.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import com.TidyGames.member.model.service.WishListService;
 import com.TidyGames.member.model.vo.Member;
+import com.TidyGames.member.model.vo.WishList;
 import com.TidyGames.pay.model.service.PayService;
 import com.TidyGames.pay.model.vo.Cart;
 
 /**
- * Servlet implementation class CartInsertController
+ * Servlet implementation class MyWishListInsertController
  */
-@WebServlet("/cartInsert.pa")
-public class CartInsertController extends HttpServlet {
+@WebServlet("/wishInsert.me")
+public class MyWishListInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CartInsertController() {
+    public MyWishListInsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,50 +33,52 @@ public class CartInsertController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+	
 		request.setCharacterEncoding("UTF-8");
 		
-		//int memNo = Integer.parseInt(request.getParameter("memNo"));
 		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
 		int gameNo =  Integer.parseInt(request.getParameter("gameNo"));
-		
-		
-		Cart ca = new Cart();
-		
-		
-		ca.setMemNo(memNo);
-		ca.setGameNo(gameNo);
-		
-		
 	
-		int count = new PayService().countCart(ca);
+		System.out.println(memNo);
+		System.out.println(gameNo);
 		
+		WishList wish = new WishList();
 		
-		if(count == 0) {
+		wish.setMemNo(memNo);
+		wish.setGameNo(gameNo);
+		
+		System.out.println(wish);
+		
+		int countWish = new WishListService().countWish(wish);
+		
+		System.out.println(countWish);
+		
+		//response.getWriter().print(countWsih);
+		
+		request.setAttribute("cw", new Integer(countWish));
+		
+		//WishList cw = new WishList(countWish);
+		
+		//request.setAttribute("cw", cw);
+		//ajax라 넘겨주면안되나?
+		//request.getRequestDispatcher("views/board/gameDetailView.jsp").forward(request, response);
+		
+		if(countWish == 0) {
+			// insert
+			int result = new WishListService().insertWish(wish);
 			
-			int result = new PayService().insertCart(ca);
-		
-			if(result > 0 ) {
+			
+			if(result > 0) {
 				
 				response.getWriter().print(result);
-				
+			
+			
 			}
 			
 		}else {
-			
-			response.getWriter().print(2);
-				
-			
-			
-			
+			//delete => 문구없이 하트가 비워짐
 		}
 		
-		
-	
-	
-	
-	
-	
 	}
 
 	/**

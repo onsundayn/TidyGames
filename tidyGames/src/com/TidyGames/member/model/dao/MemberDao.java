@@ -143,46 +143,11 @@ public class MemberDao {
 	}
 		
 	
-	public ArrayList<WishList> selectWish(Connection conn, int memNo) {
-		
-		// select문 => ResultSet (여러행) => WishList
-		ArrayList<WishList> wish = new  ArrayList<>();
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String sql = prop.getProperty("selectWish");
-		
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setInt(1, memNo);
-		
-			
-			rset = pstmt.executeQuery();
-
-			while(rset.next()) {
-				wish.add(new WishList(
-								  rset.getInt("mem_no"),	
-								  rset.getInt("game_no"),  
-								  rset.getString("game_img"),
-								  rset.getString("kor_name"),
-								  rset.getString("eng_name"),
-								  rset.getString("game_intro"),
-								  rset.getInt("price"),
-								  rset.getInt("point"),
-								  rset.getString("mem_nick")));
-			}
-			
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		return wish;
 	
 	
-	}
+	
+	
+	
+	
+	
 }

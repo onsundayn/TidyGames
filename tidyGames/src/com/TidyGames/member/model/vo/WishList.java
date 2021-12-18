@@ -11,12 +11,47 @@ public class WishList {
 	private int price;
 	private int point;
 	private String memNick;
+	private int countWish;
+	
+	public WishList() {}
 	
 	
-	private WishList() {}
 	
-	
-	
+
+
+
+
+	public int getCountWish() {
+		return countWish;
+	}
+
+
+
+
+
+
+
+	public void setCountWish(int countWish) {
+		this.countWish = countWish;
+	}
+
+
+
+
+
+
+
+	public WishList(int countWish) {
+		super();
+		this.countWish = countWish;
+	}
+
+
+
+
+
+
+
 	public WishList(int gameNo, int memNo) {
 		super();
 		this.gameNo = gameNo;

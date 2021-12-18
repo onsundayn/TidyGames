@@ -48,4 +48,16 @@
 	</entry>
 
 
+	<entry key ="deleteCart">
+	
+		DELETE
+		  FROM CART
+		 WHERE MEM_NO = ?
+		   AND GAME_NO = ?
+		
+	
+	
+	
+	</entry>
+
 </properties>

@@ -15,8 +15,35 @@ public class Game {
 	private double point;
 	private String gameStatus;
 	private String gameImg;
+	private int count;
+	
 	
 	public Game() {}
+	
+	
+
+
+	public Game(int gameNo, int companyNo, String korName, String engName, String releaseDate, int price,
+			String gameIntro, String confirm, String upgame, String uploadDate, double point, String gameStatus,
+			String gameImg, int count) {
+		super();
+		this.gameNo = gameNo;
+		this.companyNo = companyNo;
+		this.korName = korName;
+		this.engName = engName;
+		this.releaseDate = releaseDate;
+		this.price = price;
+		this.gameIntro = gameIntro;
+		this.confirm = confirm;
+		this.upgame = upgame;
+		this.uploadDate = uploadDate;
+		this.point = point;
+		this.gameStatus = gameStatus;
+		this.gameImg = gameImg;
+		this.count = count;
+	}
+
+
 
 	public Game(int gameNo, int companyNo, String korName, String engName, String releaseDate, int price,
 			String gameIntro, String confirm, String upgame, String uploadDate, double point, String gameStatus,
@@ -59,7 +86,7 @@ public class Game {
 	}
 
 	public Game(int gameNo, int companyNo, String korName, String engName, String releaseDate, int price, double point,
-			String gameStatus, String gameImg) {
+			String gameStatus, String gameImg, int count) {
 		super();
 		this.gameNo = gameNo;
 		this.companyNo = companyNo;
@@ -70,8 +97,10 @@ public class Game {
 		this.point = point;
 		this.gameStatus = gameStatus;
 		this.gameImg = gameImg;
+		this.count = count;
 	}
 
+	
 	public int getGameNo() {
 		return gameNo;
 	}
@@ -176,6 +205,13 @@ public class Game {
 		this.gameImg = gameImg;
 	}
 
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
 	@Override
 	public String toString() {
 		return "Game [gameNo=" + gameNo + ", companyNo=" + companyNo + ", korName=" + korName + ", engName=" + engName

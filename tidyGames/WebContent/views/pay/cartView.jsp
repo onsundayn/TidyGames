@@ -254,7 +254,7 @@ body {
                                         
                         
                                                             <div class="m-t-sm"></div>
-                                                                <a href="#" class="text-muted"><i class="fa fa-trash"></i> Remove item</a>
+                                                                <a href="" onclick="return cartDelete(<%=c.getGameNo()%>);" class="text-muted"><i class="fa fa-trash"></i> Remove item</a>
                                                             </div>
                                                         </td>
                         							
@@ -357,9 +357,39 @@ body {
             </div>
         </div>
 				<% } %>
-        <!-- 장바구니에 아무것도없을때 -->
+      
 
         <br><br><br>
+        
+        
+        <script>
+         function cartDelete(gameNo){
+    	
+    	$.ajax({
+    		url : "cartDe.pa",
+    		data : {
+    			
+    			gameNo:gameNo
+    		},
+    		type:"post",
+    		success:function(result) {
+    			
+    			if(result > 0) {
+    			alert("성공적으로 삭제되었습니다.")
+    			}
+    		},error:function() {
+    			console.log("삭제 실패!")
+    		}
+    	})
+    		
+    	
+   	
+    }
+	    
+    </script>
+        
+        
+        
       
 
 </body>

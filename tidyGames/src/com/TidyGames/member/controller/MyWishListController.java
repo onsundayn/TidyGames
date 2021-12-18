@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.TidyGames.member.model.service.MemberService;
+import com.TidyGames.member.model.service.WishListService;
 import com.TidyGames.member.model.vo.Member;
 import com.TidyGames.member.model.vo.WishList;
 
@@ -37,8 +37,7 @@ public class MyWishListController extends HttpServlet {
 		
 		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
 		
-		System.out.println(memNo);
-		ArrayList<WishList> wish = new MemberService().selectWish(memNo);  
+		ArrayList<WishList> wish = new WishListService().selectWish(memNo);  
 		
 		
 		

@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.TidyGames.game.model.service.GameService;
 import com.TidyGames.game.model.vo.Game;
+import com.TidyGames.member.model.vo.Member;
+import com.TidyGames.member.model.vo.WishList;
 
 /**
  * Servlet implementation class GameSearchController
@@ -32,9 +34,15 @@ public class GameListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		request.setCharacterEncoding("UTF-8");
+		
+		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
+		
 		String keyword = request.getParameter("keyword");
 		
-		ArrayList<Game> list = new GameService().selectList(keyword);
+		
+		
+		ArrayList<Game> list = new GameService().selectList(keyword, memNo);
 		
 		request.setAttribute("list", list);
 		

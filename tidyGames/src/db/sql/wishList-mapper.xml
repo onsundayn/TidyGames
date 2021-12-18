@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="countWish">
+		SELECT COUNT(*) count
+		  FROM WISHLIST
+		 WHERE MEM_NO = ?
+		   AND GAME_NO = ?
+  
+	</entry>
+
+	<entry key ="selectWish">
+		SELECT    
+				  MEM_NO	
+			    , GAME_NO
+			    , GAME_IMG
+			    , KOR_NAME
+			    , ENG_NAME
+			    , GAME_INTRO
+			    , PRICE
+			    , POINT
+			    , MEM_NICK
+			    
+		  FROM WISHLIST
+		  JOIN GAME USING(GAME_NO)
+		  JOIN MEMBER USING(MEM_NO)
+		 WHERE MEM_NO = ?
+		   AND GAME_STATUS = 'Y'	
+	
+
+	</entry>
+	
+	<entry key="insertWish">
+	
+			INSERT 
+	      INTO WISHLIST
+	       (
+	      MEM_NO
+	    , GAME_NO
+	       )
+	      VALUES
+		  (
+		      ?
+		    , ?
+		  )
+	
+	</entry>
+	
+
+</properties>

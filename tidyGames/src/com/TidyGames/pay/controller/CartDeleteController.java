@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.TidyGames.member.model.vo.Member;
+import com.TidyGames.pay.model.service.PayService;
+import com.TidyGames.pay.model.vo.Cart;
+
 /**
  * Servlet implementation class CartDeleteController
  */
@@ -26,8 +30,29 @@ public class CartDeleteController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
+		int gameNo =  Integer.parseInt(request.getParameter("gameNo"));
+		
+	
+		
+		Cart d = new Cart();
+		d.setMemNo(memNo);
+		d.setGameNo(gameNo);
+		
+		
+		
+		int result = new PayService().deleteCart(d);
+		
+		
+		
+		if(result > 0) {
+			
+			response.getWriter().print(result);
+			
+		
+		}
+		
 	}
 
 	/**

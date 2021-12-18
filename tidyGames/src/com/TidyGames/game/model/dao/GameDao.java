@@ -30,7 +30,7 @@ private Properties prop = new Properties();
 		}
 	}
 	
-	public ArrayList<Game> selectList(Connection conn, String keyword) {
+	public ArrayList<Game> selectList(Connection conn, String keyword, int memNo) {
 		
 		ArrayList <Game> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -38,7 +38,8 @@ private Properties prop = new Properties();
 		String sql = prop.getProperty("selectList");
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, keyword);
+			pstmt.setInt(1, memNo);
+			pstmt.setString(2, keyword);
 			
 			rset = pstmt.executeQuery();
 			
@@ -51,7 +52,8 @@ private Properties prop = new Properties();
 								  rset.getInt("price"),
 								  rset.getDouble("point"),
 								  rset.getString("game_status"),
-								  rset.getString("game_img")));
+								  rset.getString("game_img"),
+								  rset.getInt("count")));
 			}
 			
 		} catch (SQLException e) {
