@@ -13,24 +13,14 @@ import com.TidyGames.game.model.vo.Game;
 import com.TidyGames.game.model.vo.Review;
 
 public class GameService {
-
-	/*
-	 * public ArrayList<Game> selectList(String keyword) {
-	 * 
-	 * Connection conn = getConnection(); ArrayList<Game> list = new
-	 * GameDao().selectList(conn, keyword);
-	 */
-
-
 	
 	public ArrayList<Game> selectList(String keyword, int memNo) {
 		
 		Connection conn  = getConnection();
 		ArrayList<Game> list = new GameDao().selectList(conn, keyword, memNo);
 		
-
 		close(conn);
-
+		
 		return list;
 	}
 
@@ -40,14 +30,12 @@ public class GameService {
 		close(conn);
 		return g;
 	}
-
+	
 	public ArrayList<Category> selectCategoryList(){
 		Connection conn = getConnection();
 		ArrayList<Category> list = new GameDao().selectCategoryList(conn);
 		close(conn);
 		return list;
-
-
 	}
 	
 	public ArrayList<Review> selectReview(int gameNo){
@@ -70,16 +58,15 @@ public class GameService {
 		close(conn);
 		
 		return result;
-
 	}
-
+	
 	public ArrayList<Game> selectGameList(PageInfo pi){
 		Connection conn = getConnection();
 		ArrayList<Game> list = new GameDao().selectGameList(conn, pi);
 		close(conn);
 		return list;
 	}
-
+	
 	public int selectListCount() {
 		Connection conn = getConnection();
 		int listCount = new GameDao().selectListCount(conn);
