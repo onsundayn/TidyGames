@@ -8,7 +8,6 @@
 </head>
 <body>
 
-	<%@ include file="menubar.jsp" %>
 	
 	<br><br>
 	

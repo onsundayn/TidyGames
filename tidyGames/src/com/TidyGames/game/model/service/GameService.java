@@ -14,10 +14,12 @@ import com.TidyGames.game.model.vo.Review;
 
 public class GameService {
 
-	public ArrayList<Game> selectList(String keyword) {
-
-		Connection conn  = getConnection();
-		ArrayList<Game> list = new GameDao().selectList(conn, keyword);
+	/*
+	 * public ArrayList<Game> selectList(String keyword) {
+	 * 
+	 * Connection conn = getConnection(); ArrayList<Game> list = new
+	 * GameDao().selectList(conn, keyword);
+	 */
 
 
 	
