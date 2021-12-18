@@ -5,7 +5,7 @@
 	               com.TidyGames.game.model.vo.Game, java.util.ArrayList"
 %>
 <%
-	Company c = (Company)request.getAttribute("company");
+	Company company = (Company)request.getAttribute("company");
 	ArrayList<Game> list = (ArrayList<Game>)request.getAttribute("gameList");
 %>
 <!DOCTYPE html>
@@ -72,35 +72,35 @@ div {
 			<br>
 			<div align="right" style="width: 1000px">
 				<button type="button" onclick="history.back();" class="btn btn-sm btn-secondary">뒤로가기</button>
-				<a href="<%= contextPath %>/updateForm.co?num=<%= c.getCompanyNo() %>" class="btn btn-sm btn-success">수정</a> 
-				<a href="<%= contextPath %>/delete.co?num=<%= c.getCompanyNo() %>" class="btn btn-sm btn-danger">삭제</a>
+				<a href="<%= contextPath %>/updateForm.co?num=<%= company.getCompanyNo() %>" class="btn btn-sm btn-success">수정</a> 
+				<a href="<%= contextPath %>/delete.co?num=<%= company.getCompanyNo() %>" class="btn btn-sm btn-danger">삭제</a>
 			</div>
 			<br>
 			<table>
 				<tr>
 					<th width="100"><h4>게임사</h4></th>
-					<td><h5><%=c.getCompanyName()%></h5></td>
+					<td><h5><%=company.getCompanyName()%></h5></td>
 				</tr>
 				<tr>
 					<td colspan=2 height="20"></td>
 				</tr>
 				<tr>
 					<th><h4>아이디</h4></th>
-					<td><h5><%=c.getCompanyId()%></h5></td>
+					<td><h5><%=company.getCompanyId()%></h5></td>
 				</tr>
 				<tr>
 					<td colspan=2 height="20"></td>
 				</tr>
 				<tr>
 					<th><h4>등록코드</h4></th>
-					<td><h5><%=c.getCompanyPwd()%></h5></td>
+					<td><h5><%=company.getCompanyPwd()%></h5></td>
 				</tr>
 				<tr>
 					<td colspan=2 height="20"></td>
 				</tr>
 				<tr>
 					<th><h4>대표자</h4></th>
-					<td><h5><%=c.getCompanyHead()%></h5></td>
+					<td><h5><%=company.getCompanyHead()%></h5></td>
 				</tr>
 				<tr>
 					<td colspan=2 height="20"></td>
@@ -108,8 +108,8 @@ div {
 				<tr>
 					<th style="display: flow-root;"><h4>코멘트</h4></th>
 					<td>
-						<% if(c.getCompanyComment() != null) {%>
-							<p><%=c.getCompanyComment()%></p> <% 
+						<% if(company.getCompanyComment() != null) {%>
+							<p><%=company.getCompanyComment()%></p> <% 
 						} else { %>
 							<p>등록된 코멘트가 없습니다</p> 
 						<% } %>
