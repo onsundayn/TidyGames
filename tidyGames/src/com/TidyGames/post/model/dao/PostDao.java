@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.TidyGames.common.model.vo.PageInfo;
+import com.TidyGames.member.model.vo.Member;
 import com.TidyGames.post.model.vo.Post;
+import com.TidyGames.post.model.vo.PostFile;
 
 public class PostDao {
 	
@@ -124,6 +126,29 @@ public class PostDao {
 		return result;
 	}
 	
+	public Member confirmMember(Connection conn, String memId) {
+		Member m = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("confirmMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memId);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				m = new Member();
+				m.setMemAccess(rset.getString("mem_access"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return m;
+	}
+	
 	/**
 	 * 글 상세 조회
 	 * @param conn
@@ -159,6 +184,63 @@ public class PostDao {
 		}
 		return p;
 	}
+	
+	/**
+	 * 글 등록
+	 * @param conn
+	 * @param p
+	 * @return
+	 */
+	public int insertPost(Connection conn, Post p) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertPost");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(p.getPostWriter()));
+			pstmt.setString(2, p.getPostName());
+			pstmt.setString(3, p.getPostContent());
+			pstmt.setString(4, p.getPostNotice());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	/**
+	 * 첨부파일 INSERT
+	 * @param conn
+	 * @param list
+	 * @return
+	 */
+	public int insertFile(Connection conn, ArrayList<PostFile> list) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertFile");
+		
+		try {
+			
+			for(PostFile f : list) {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, f.getFileOrigin());
+				pstmt.setString(2, f.getFileChange());
+				pstmt.setString(3, f.getFilePath());
+				result = pstmt.executeUpdate();
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 		
 	
 
