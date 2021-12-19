@@ -31,12 +31,6 @@ public class GameService {
 		return g;
 	}
 	
-	public ArrayList<Category> selectCategoryList(){
-		Connection conn = getConnection();
-		ArrayList<Category> list = new GameDao().selectCategoryList(conn);
-		close(conn);
-		return list;
-	}
 	
 	public ArrayList<Review> selectReview(int gameNo){
 		Connection conn = getConnection();
@@ -74,22 +68,6 @@ public class GameService {
 		return listCount;
 	}
 	
-	public int updateCategory(Category c) {
-		
-		Connection conn = getConnection();
-		int result = new GameDao().updateCategory(conn, c);
-		
-		if(result > 0) { 
-			commit(conn);
-		}else { 
-			rollback(conn);
-		}
-		
-		close(conn);
-		
-		
-		return result;
-	}
 	
 	
 

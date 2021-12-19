@@ -113,36 +113,6 @@ private Properties prop = new Properties();
 		
 	}
 	
-	public ArrayList<Category> selectCategoryList(Connection conn){
-		ArrayList<Category> list = new ArrayList<>();
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String sql = prop.getProperty("selectCategoryList");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			rset = pstmt.executeQuery();
-			
-			while(rset.next()) {
-				list.add(new Category(rset.getInt("category_no"),
-									  rset.getString("category_name"),
-									  rset.getString("category_status")));
-				}
-				
-				
-				
-			
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		return list;
-		
-	}
 	
 	public ArrayList<Game> selectGameList(Connection conn, PageInfo pi) {
 		
@@ -261,30 +231,6 @@ private Properties prop = new Properties();
 
 	}
 	
-	public int updateCategory(Connection conn, Category c) {
-
-		int result = 0;
-		
-		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("updateCategory");
-		
-		try {
-			pstmt = conn.prepareStatement(sql); 
-			
-			pstmt.setString(1, c.getCategoryName());
-			pstmt.setString(2, c.getCheckCategoryName());
-			
-			result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		return result;
-		
-	}
 	
 	
 }

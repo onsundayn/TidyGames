@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.TidyGames.game.model.service.GameService;
+import com.TidyGames.game.model.service.CategoryService;
 import com.TidyGames.game.model.vo.Category;
 
 
@@ -33,7 +33,7 @@ public class CategoryListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<Category> list = new GameService().selectCategoryList();
+		ArrayList<Category> list = new CategoryService().selectCategoryList();
 		
 		request.setAttribute("list", list);
 		
