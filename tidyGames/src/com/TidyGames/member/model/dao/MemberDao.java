@@ -143,7 +143,7 @@ public class MemberDao {
 		
 	}
 		
-	}
+	
 	
 		public ArrayList<Member> selectMember(Connection conn, PageInfo pi) {
 			
