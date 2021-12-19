@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.TidyGames.game.model.service.GameService;
+import com.TidyGames.game.model.service.CategoryService;
 import com.TidyGames.game.model.vo.Category;
 
 /**
@@ -38,7 +38,7 @@ public class UpdateCategoryController extends HttpServlet {
 		c.setCategoryName(upCate);
 		c.setCheckCategoryName(inCate);
 		
-		int result = new GameService().updateCategory(c);
+		int result = new CategoryService().updateCategory(c);
 		
 		if(result > 0) {
 			
