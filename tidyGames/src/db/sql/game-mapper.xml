@@ -43,14 +43,6 @@
 	</entry>
 	
 
-	<entry key="selectCategoryList">
-		SELECT
-		       CATEGORY_NO
-		     , CATEGORY_NAME
-		     , CATEGORY_STATUS		    
-		  FROM CATEGORY
-	</entry>
-	
 
 	<entry key="insertReview">
 		INSERT
@@ -113,13 +105,5 @@
 
 	</entry>
 
-	<entry key="updateCategory">
-		UPDATE CATEGORY
-		SET
-		CATEGORY_NAME = ?
-		WHERE
-		CATEGORY_NAME = ?
-
-	</entry>
 
 </properties>
