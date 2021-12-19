@@ -1,4 +1,4 @@
-package com.TidyGames.member.controller;
+package com.TidyGames.notice.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class adminQnaAnswerController
+ * Servlet implementation class adminQnaWaitingListController
  */
-@WebServlet("/qnaAnswer.me")
-public class AdminQnaAnswerController extends HttpServlet {
+@WebServlet("/qnaList.me")
+public class AdminQnaWaitingListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminQnaAnswerController() {
+    public AdminQnaWaitingListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +27,7 @@ public class AdminQnaAnswerController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		request.getRequestDispatcher("views/member/adminQnaAnswer.jsp").forward(request, response);
+		request.getRequestDispatcher("views/member/adminQnaWaitingList.jsp").forward(request, response);
 	}
 
 	/**

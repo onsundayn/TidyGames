@@ -4,16 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Tidy Games</title>
 <style>
     div{
 		box-sizing: border-box;
-		color:white;
-		/* border: 1px solid rgba(255, 255, 255, 0.555); */
 	}
 	#outer{
         width:1500px;
-        /* height:1500px; */
         margin:auto;
     }
     #outer>div{float:left;}
@@ -34,12 +31,7 @@
         background: rgba(255, 255, 255, 0.555);
         margin: 8px 0px 0px 355px;
     }
-    #box{
-    	width:1500px;	
-    	/* border:1px solid rgba(255, 255, 255, 0.222); */
-        /* height: */
-        
-    }
+    #box{width:1500px;}
     #tableBox{
         width:800px;
         height:700px;
@@ -48,9 +40,6 @@
         margin-bottom: 100px;
         background-color: rgb(197, 197, 197);
         border: 10px solid rgba(255, 255, 255, 0.555);
-    }
-    #tableTop div{
-        float:left;
     }
     #leftTop{   
         width:100%;
@@ -74,7 +63,6 @@
         background:none;
         color:black;
     }
-   /* 여기까지 */
     .table *{
         font-size:14px;
         padding:20px;
@@ -116,6 +104,7 @@
     textarea:focus, input:focus{
         outline:none;
     }
+    #table th {font-size:19px;}
 
 
 </style>
@@ -143,24 +132,22 @@
                 </div>
             </div>
             
-            <div id="tableOut1">
                 
-            <form action="">
+        <!-- 로그인을 안 한 사용자는 현재 페이지로 접근할 수 없음! -->
+        
+            <div id="tableOut1">
+            <form action="<%= contextPath %>/insertQna.me" method="post">
+            <!--  enctype="multpart/form-data" -->
+				<input type="hidden" name="user" value="<%= loginUser.getMemNo() %>">
                 <table id="table" class="table table-dark" align="center">
                     <tr>
-                        <th width="75">제목</th>
-                        <td style="padding-left:0px">
-                            <input id="textInput" type="text" value="">
+                        <td width="100%" align="center">
+                            <input id="textInput" type="text" name="title" placeholder="제목을 입력하세요." style="padding-left:10px">
                         </td>
-                        <td width="300"></td>
-                        <!-- <th width="70">작성자</th> -->
-                        <!-- <td style="padding-left:0px">호빵</td> -->
-                        <!-- <td align=right>작성일시 | 21-11-18</td> -->
-                        <!-- <td width="50px"></td> -->
                     </tr>
                     <tr>
-                        <td colspan="3" padding:0px>
-                            <textarea name="content" class="content" cols="10" rows="6" style="resize:none"></textarea>
+                        <td colspan="3">
+                            <textarea class="content" name="content" cols="10" rows="6" style="resize:none; padding:10px"></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -176,26 +163,13 @@
                     </tr>
                 </table>
             </form>
-
             </div> 
 
 
-
-                
-
-     
-                
             </div>        
-            </from>
                 
         </div>
-            
-                
-      
-
-
-
-
+        
 
 
         <footer>

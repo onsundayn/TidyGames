@@ -240,6 +240,7 @@
 
 	<script>
         function unblock(){
+        	
             if(confirm("해당 회원의 차단을 해제하시겠습니까?")) {
                 
             	$("#table>tbody>tr").click(function(){

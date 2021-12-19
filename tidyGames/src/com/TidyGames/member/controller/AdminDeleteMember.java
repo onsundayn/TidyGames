@@ -14,13 +14,13 @@ import com.TidyGames.member.model.service.MemberService;
  * Servlet implementation class adminDeleteMember
  */
 @WebServlet("/delete.me")
-public class adminDeleteMember extends HttpServlet {
+public class AdminDeleteMember extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public adminDeleteMember() {
+    public AdminDeleteMember() {
         super();
         // TODO Auto-generated constructor stub
     }
