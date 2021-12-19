@@ -207,7 +207,7 @@ table {
 		<script>
 			$(function(){
 				$("#postReport").click(function(){
-					if(true) {
+					if(<%= loginUser %> != null) {
 
 						$.ajax({
 							url:"report.re",

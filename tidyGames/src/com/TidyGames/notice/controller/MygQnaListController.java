@@ -1,4 +1,4 @@
-package com.TidyGames.member.controller;
+package com.TidyGames.notice.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

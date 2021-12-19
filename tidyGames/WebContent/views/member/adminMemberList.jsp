@@ -65,19 +65,19 @@
         /* border:1px solid white; */
     }
     #leftTop{   
-        width:30%;
+        width:1%;
         /* margin:20px; */
         margin: 50px 20px 20px 20px;
         /* margin-left:80px; */
     }
     #midTop{
-        width:25%;
-        margin: 55px 20px 20px 20px;
+        width:57%;
+        margin: 50px 20px 20px 0px;
     }
     #rightTop{
         margin: 55px 20px 20px 80px;
     }
-    #leftTop span{
+    #midTop span{
         font-size:30px;
         font-weight: bolder;
         color:black;
@@ -108,9 +108,6 @@
     #memberList{
         color:orange;
     }
-    tbody a{
-        color:gray;
-    }
     #table td{padding:4px;}
     #tableOut1{
         width:100%;
@@ -120,8 +117,6 @@
         width:100%;
         height:6%;
     }
-    #aColor{color:black;}
-
 </style>
 </head>
 <body style="background:#0e332c;">
@@ -145,17 +140,15 @@
     	    <div id="tableBox">
                 <div id="tableTop">
                     <div id="leftTop">
-                        <div>
-                            <span>회원수 <%= listCount %>명</span>
-                        </div>
+                        
+                         <div id="btnDiv">
+		                     <button type="sumbit" class="btn btn-sm btn-secondary" style="width:52px">상세 조회</button>
+	                    </div>
                     </div>
                     
-      			<form action="<%= contextPath %>/memberSelect.me?num=">
                     <div id="midTop">
                         <div>
-                            <button type="sumbit" class="btn btn-sm btn-dark">상세 조회</button>
-                            <a href="" class="btn btn-sm btn-dark">회원 수정</a>
-<!--                              <a href="" class="btn btn-sm btn-dark">회원 삭제</a> -->
+                            <span>전체 회원 <label style="color:black"><%= listCount %></label></span>
                         </div>
                     </div>
                     <div id="rightTop">
@@ -179,7 +172,7 @@
                 <table id="table" class="table table-hover">
                     <thead>
                         <tr align="center">
-                            <th width="30"><button type="button" onclick="allCheck();" id="btn" class="btn btn-sm btn-secondary" style="width:24px">V</button></th>
+                            <th width="30"><button type="button" onclick="allCheck();" id="btn" class="btn btn-sm btn-outline-secondary" style="width:24px">V</button></th>
                             <th width="30">No.</th>
                             <th width="130">아이디</th>
                             <th width="100">이름</th>
@@ -196,7 +189,7 @@
                         <tr align="center">
                             <td><input type="checkbox" id="checkBox" name="checkBox" value="<%= m.getMemNo() %>" ></td>
                             <td><%= m.getMemNo() %></td>
-                            <td><a href="<%= contextPath %>/memberSelect.me?mno=<%=m.getMemNo()%>" id="aColor"><%= m.getMemId() %></a></td>
+                            <td><a href="<%= contextPath %>/memberSelect.me?mno=<%=m.getMemNo()%>" style="color:black"><%= m.getMemId() %></a></td>
                             <td><%= m.getMemName() %></td>
                             <td><%= m.getMemNick() %></td>
                             <td><%= m.getMemEmail() %></td>
@@ -206,15 +199,15 @@
                                 <a href="" id="btn" class="btn btn-sm btn-outline-dark">변경</a>
                             </td>
                             <td>
-                            	<a href="" id="btn" onclick="done();" class="btn btn-sm btn-outline-info">수정</a>
-                            	<a href="" id="btn" onclick="done();" class="btn btn-sm btn-outline-dark">탈퇴</a>
+                            	<a href="" id="btn" onclick="" class="btn btn-sm btn-info">수정</a>
+                            	<a href="" id="btn" onclick="done();" class="btn btn-sm btn-dark">탈퇴</a>
 	                        </td>
                         </tr>
                         <% } %>
                     </tbody>
                   </table>
+	           
                 </div>
-               </form>
 
                   <div id="tableOut2">
 	                    <div class="paging-area" align="center">
