@@ -10,29 +10,53 @@ import com.TidyGames.member.model.dao.PointDao;
 import com.TidyGames.member.model.vo.Point;
 
 public class PointService {
-	
+
 	public ArrayList<Point> selectPoint(int memNo) {
-		
+
 		Connection conn = getConnection();
-		
+
 		ArrayList<Point> point = new PointDao().selectPoint(conn, memNo);
-		
+
 		close(conn);
-		
+
 		return point;
-		
+
+	}
+
+	public ArrayList<Point> selectSave(int memNo, String start, String end) {
+
+		Connection conn = getConnection();
+
+		ArrayList<Point> point = new PointDao().selectSave(conn, memNo, start, end);
+
+		close(conn);
+
+		return point;
+
+	}
+
+	public ArrayList<Point> selectUse(int memNo, String start, String end) {
+
+		Connection conn = getConnection();
+
+		ArrayList<Point> point = new PointDao().selectUse(conn, memNo, start, end);
+
+		close(conn);
+
+		return point;
 	}
 
 	
-	public ArrayList<Point> selectDate(int memNo, String start, String end) {
-		
+	public ArrayList<Point> selectOlddate(int memNo) {
+
 		Connection conn = getConnection();
-		
-		ArrayList<Point> point = new PointDao().selectDate(conn, memNo, start, end);
-		
+
+		ArrayList<Point> point = new PointDao().selectOlddate(conn, memNo);
+
 		close(conn);
-		
+
 		return point;
-		
+
 	}
+
 }

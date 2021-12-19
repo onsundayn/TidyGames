@@ -167,10 +167,10 @@
              
                 <div class="pointstatus">
 
-                    <select>
-                        <option selected>전체상태</option>
-                        <option name="save">적립</option>
-                        <option name="use">사용</option>
+                    <select name="select">
+                        <option name= "all"  value="all" selected>전체상태</option>
+                        <option name="save" value="save">적립</option>
+                        <option name="use" value="use">사용</option>
 
                     </select>
                 </div>
@@ -192,11 +192,11 @@
 
 
     
-     
+     	
             <div class="area4">
                 <select class="btn btn-outline-secondary" style="color: white;"">
                     <option selected value="uptodate">최신순</option>
-                    <option value="olddae" >오래된순</option>
+                    <option class="olddate" ><button onclick="olddate();">오래된순</button></option>
     
                 </select>
              </div>
@@ -237,17 +237,31 @@
         </div>
 
 
-    
-
-
-
-
-
-
     </div>
 
 
+		<script>
+		   
 
+			function olddate() {
+				$.ajax({
+					url : "oldDate.me",
+					type : "post",
+					data : ""
+					success : function(point) {
+
+						location.href = "";
+
+					},
+					error : function() {
+						console.log("찜목록 삭제 실패!")
+					}
+				});
+				
+			}
+
+		</script>
+	
 
 
 

@@ -12,11 +12,11 @@
             , ORDER_NO
        FROM POINT
       WHERE MEM_NO = ?
-	
+	  
 	</entry>
 
 	
-	<entry key="selectDate">
+	<entry key="selectSave">
 	
 		     SELECT
               MEM_NO
@@ -28,6 +28,39 @@
       WHERE MEM_NO = ?
         AND "POINT_DATE" BETWEEN TO_DATE(?)
                              AND TO_DATE(?)
+        AND POINT_AMOUNT > 0
 	</entry>
+	
+	<entry key="selectUse">
+	
+		     SELECT
+              MEM_NO
+            , POINT_AMOUNT
+            , TO_CHAR(POINT_DATE, 'YYYY-MM-DD') "POINT_DATE"
+            , POINT_CONTENT
+            , ORDER_NO
+       FROM POINT
+      WHERE MEM_NO = ?
+        AND POINT_AMOUNT <![CDATA[ < ]]> 0
+        AND "POINT_DATE" BETWEEN TO_DATE(?)
+                             AND TO_DATE(?)
+                             
+                             
+        
+	</entry>
+	
+	<entry key="selectOlddate">
+	    SELECT
+              MEM_NO
+            , POINT_AMOUNT
+            , TO_CHAR(POINT_DATE, 'YYYY-MM-DD') "POINT_DATE"
+            , POINT_CONTENT
+            , ORDER_NO
+       FROM POINT
+      WHERE MEM_NO = ?
+      ORDER BY POINT_DATE ASC
+	  
+	</entry>
+	
 
 </properties>
