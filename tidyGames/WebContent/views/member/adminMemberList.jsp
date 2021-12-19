@@ -187,7 +187,7 @@
                             <th width="150">이메일</th>
                             <th width="100">전화번호</th>
                             <th width="100">적립금</th>
-                            <th width="30"> </tr>
+                            <th width="100"> </tr>
                         </tr>
                     </thead>
                     <tbody>
@@ -203,10 +203,11 @@
                             <td><%= m.getMemPhone() %></td>
                             <td>
                             	<!-- contextPath로 point의 현재보유포인트를 불러올 자리 -->
-                                <a href="" id="btn" class="btn btn-sm btn-dark">변경</a>
+                                <a href="" id="btn" class="btn btn-sm btn-outline-dark">변경</a>
                             </td>
                             <td>
-	                        	<button type="button" onclick="done();" class="btn btn-sm btn-basic" style="color:black">X</button>
+                            	<a href="" id="btn" onclick="done();" class="btn btn-sm btn-outline-info">수정</a>
+                            	<a href="" id="btn" onclick="done();" class="btn btn-sm btn-outline-dark">탈퇴</a>
 	                        </td>
                         </tr>
                         <% } %>
