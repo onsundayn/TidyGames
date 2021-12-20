@@ -56,7 +56,7 @@
 	margin: 10px;
 }
 
-.enform {
+.addform {
 	position: absolute;
 	background: lightgrey;
 	z-index: 999;
@@ -117,7 +117,7 @@
 
 
 
-			<div class="enform">
+			<div class="addform">
 				<form>
 					<table style="margin: 10px">
 						<tr>
@@ -163,12 +163,12 @@
 			var $inInput;
 		$(function() {
 			$("#add_category").click(function() {
-				$(".enform").css("display", "block");
+				$(".addform").css("display", "block");
 			});
 
 			$("#add_close").click(function() {
-				$(".enform").css("display", "");
-				$(".enform input").val("");
+				$(".addform").css("display", "");
+				$(".addform input").val("");
 			});
 			$("#content button").click(function() {
 				$(".upform").css("display", "block");
@@ -209,15 +209,15 @@
 		
 		function add(){
 			
-			const $upInput = $(".enform input");
+			const $addInput = $(".addform input");
 			
 			
 			$.ajax({
-				url:"updateCategory.ga",
-				data:{upCate:$upInput.val(),inCate:$inInput},
+				url:"addCategory.ga",
+				data:{addCate:$addInput.val()},
 				success:function(){
 					console.log("업데이트카테고리 ajax 통신성공!!!");
-					alert("수정이 완료되었습니다.");
+					alert("추가가 완료되었습니다.");
 	                location.href="<%=request.getContextPath()%>/catelist.ga";
 
 
