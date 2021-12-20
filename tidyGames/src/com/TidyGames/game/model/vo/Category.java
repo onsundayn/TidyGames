@@ -18,13 +18,16 @@ public class Category {
 		this.categoryStatus = categoryStatus;
 	}
 	
-	
-
 
 	public Category(String categoryName, String checkCategoryName) {
 		super();
 		this.categoryName = categoryName;
 		this.checkCategoryName = checkCategoryName;
+	}
+
+	public Category(String categoryName) {
+		super();
+		this.categoryName = categoryName;
 	}
 
 

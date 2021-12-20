@@ -1,4 +1,4 @@
-package com.TidyGames.game.controller;
+package com.TidyGames.company.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,22 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.TidyGames.company.model.vo.Company;
 import com.TidyGames.game.model.service.GameService;
-import com.TidyGames.game.model.vo.Category;
 import com.TidyGames.game.model.vo.Game;
-import com.TidyGames.member.model.vo.Member;
 
 /**
- * Servlet implementation class GameDetailViewController
+ * Servlet implementation class CompanyGameListController
  */
-@WebServlet("/detail.ga")
-public class GameDetailViewController extends HttpServlet {
+@WebServlet("/gameList.gc")
+public class CompanyGameListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GameDetailViewController() {
+    public CompanyGameListController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,23 +33,14 @@ public class GameDetailViewController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		
-		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
-		int gameNo = Integer.parseInt(request.getParameter("gno"));
-		
-		GameService gService = new GameService();
-		
-		Game g = gService.selectGame(memNo, gameNo);
-		ArrayList<Category> gcList = gService.selectGameCategory(gameNo);
-		
-		request.setAttribute("gcList", gcList);
-		
-		request.setAttribute("g", g);		
-		request.getRequestDispatcher("views/game/gameDetailView.jsp").forward(request, response);
 		
 		HttpSession session = request.getSession();
-		session.setAttribute("g", g);
+		int comNo = ((Company)session.getAttribute("loginCompany")).getCompanyNo();
+		
+		ArrayList<Game> list = new GameService().selectGameListGC(comNo);
+		
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("views/company/gameCompanyListView.jsp").forward(request, response);
 		
 	}
 

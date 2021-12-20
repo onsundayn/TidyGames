@@ -1,13 +1,16 @@
 package com.TidyGames.game.model.service;
 
 import static com.TidyGames.common.JDBCTemplate.close;
-import static com.TidyGames.common.JDBCTemplate.*;
+import static com.TidyGames.common.JDBCTemplate.commit;
+import static com.TidyGames.common.JDBCTemplate.getConnection;
+import static com.TidyGames.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.TidyGames.common.model.vo.PageInfo;
 import com.TidyGames.game.model.dao.GameDao;
+import com.TidyGames.game.model.vo.Attachment3;
 import com.TidyGames.game.model.vo.Category;
 import com.TidyGames.game.model.vo.Game;
 import com.TidyGames.game.model.vo.Review;
@@ -68,7 +71,39 @@ public class GameService {
 		return listCount;
 	}
 	
+	public ArrayList<Category> selectGameCategory(int gameNo){
+		Connection conn = getConnection();
+		ArrayList<Category> gcList = new GameDao().selectGameCategory(conn, gameNo);
+		close(conn);
+		return gcList;
+	}
 	
+	public ArrayList<Game> selectGameListGC(int comNo) {
+		
+		Connection conn = getConnection();
+		ArrayList<Game> list = new GameDao().selectGameListGC(conn, comNo);
+		close(conn);
+		return list;
+	}
 	
+	public int insertGame(Game ga, Attachment3 at, int companyNo) {
+		Connection conn = getConnection();
+		
+		int result1 = new GameDao().insertGame(conn, ga, companyNo);
+		int result2 = 1;
+		if(at != null) {
+			result2 = new GameDao().insertAttachment(conn, at);
+		}
+		
+		if(result1 > 0 && result2 >0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result1 * result2;
+	}
 
 }
