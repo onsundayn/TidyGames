@@ -31,7 +31,7 @@
         border-radius: 100px;
         position: relative;
     }
-    #search_id_form{
+    #find_id_form{
         width: 80%;
         height: 70%;
         position: absolute;
@@ -52,7 +52,7 @@
         font-weight: bold;
     }
     .next_btn{
-        width: 120px;
+        width: 130px;
         height: 35px;
         border-radius: 10px;
         background-color: #0e332c;
@@ -60,11 +60,11 @@
         color: white;
         font-weight: bold;
         font-size: 14px;
-        margin-top: 120px;
+        margin-top: 110px;
     }
     .code_btn{
         width: 29%; 
-        height: 25px;
+        height: 30px;
         border-radius: 5px;
         background-color: #0e332c;
         border: none;
@@ -72,11 +72,6 @@
         font-weight: bold;
         font-size: 14px;
     }
-    .updatePwd>input{
-        width: 60%;
-        margin-bottom: 5px;
-    }
-
 </style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -88,7 +83,7 @@
         <header>
             <div id="logo" align="center">
                 <a href="<%= contextPath %>">
-                    <img src="../../resources/image/tidyLogo.png" style="width:80px; height: 50px;"> <br>
+                    <img src="<%=contextPath%>/resources/image/tidyLogo.png" style="width:80px; height: 50px;"> <br>
                     <span style="color: white; font-size: 25px; font-weight: bold;">TIDY GAMES</span>
                 </a>
             </div>
@@ -96,35 +91,41 @@
 
         <content>
             <div id="content" align="center">
-                <form action="updatePwdFinish.jsp" method="">
-                    <div id="search_id_form">
-                        <span style="color: white; font-size: 20px; font-weight: bold; ">비밀번호 재설정</span>
+                <form action="<%= contextPath %>/UpdatePwd.me" method="post">
+                    <div id="find_id_form">
+                        <span style="color: white; font-size: 20px; font-weight: bold;">비밀번호 재설정</span>
                         <br><br><hr>
 
                         <div align="left">
                             <span style="color: white; font-size: 15px; font-weight: bold;">
-                                ● 변경할 비밀번호를 입력해주세요.
+                                ● 본인확인 이메일 인증<br>
                             </span>
-                            <br><br>
-
-                            <div class="updatePwd">
-                                <input type="password" name="updatePwd" placeholder="새 비밀번호 입력" style="float: left; margin-right: 10px;">
-
-                                <input type="password" placeholder="새 비밀번호 확인" style="float: left; margin-right: 10px;"><br>
-                                <br><br>
-                                <span style="color: lightgray; font-size: 14px;">
-                                    8~16자의 영문 대소문자, 숫자, 특수문자(!,@,#,$,%,^,&,*) 사용 가능합니다.
-                                </span>
-                            </div>
-
+                            <span style="color: lightgray; font-size: 15px;">
+                                입력하신 이메일로 전송된 인증번호(6자리 숫자)를 입력해주세요. <br>
+                            </span>
                         </div>
-                        
-                        <button type="submit" class="next_btn">확인</button>
+                        <br><br>
+
+                        <div align="left" class="search_user">
+                            <div>인증번호</div>
+                            <input type="number" name="numCk" style="width: 80%;" maxlength="6" required>
+                            <br>
+                        </div>
+                        <br><br><br>
+
+                        <!--
+                        <button type="button" class="next_btn" onclick="page();">이전페이지로</button>
+                        -->
+                        <button type="submit" class="next_btn">인증번호 확인</button>
 
                     </div>
                 </form>
                 <script>
+                	function page(){
+                		
+                        location.href ="<%= contextPath %>/inputSearchPwd.me";
 
+                	}
                 </script>
             </div>
         </content>

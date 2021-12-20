@@ -10,6 +10,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
+import java.io.UnsupportedEncodingException;
+import java.util.Date;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpSession;
 
 import com.TidyGames.common.model.vo.PageInfo;
 import com.TidyGames.member.model.vo.Member;
@@ -257,5 +270,80 @@ public class MemberDao {
 		return m;
 		
 	}
+	
+	public Member searchUserPwd(Connection conn, String searchId, String searchEmail) {
+			
+			Member m = null;
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			String sql = prop.getProperty("searchUserPwd");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, searchId);
+				pstmt.setString(2, searchEmail);
+				
+				rset = pstmt.executeQuery();
+				
+				if(rset.next()) {
+					m = new Member(rset.getInt("mem_no"),
+								   rset.getString("mem_id"),
+								   rset.getString("mem_pwd"));	
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			return m;
+			
+		}
+	
+	public int checkNum(String searchEmail) {
+		
+		int num = (int)(Math.random() * 999999 + 100000);
+		String user = "qng582@gmail.com";
+		String password = "iwtbemjusxzzcfbl";
+		
+		Properties propNum = new Properties();
+		propNum.put("mail.smtp.host", "smtp.gmail.com");
+		propNum.put("mail.smtp.port", 465);
+		propNum.put("mail.smtp.auth", "true");
+		propNum.put("mail.smtp.ssl.enable", "true");
+		propNum.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+		
+		Session session = Session.getDefaultInstance(propNum, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(user, password);
+            }
+        });
+		
+		try {
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(user));
+
+            //수신자메일주소
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(searchEmail)); 
+
+            // Subject
+            message.setSubject("TIDY GAMES 비밀번호 재설정 인증번호입니다."); //메일 제목을 입력
+
+            // Text
+            message.setText("인증번호: " + num);    //메일 내용을 입력
+
+            // send the message
+            Transport.send(message); ////전송
+            System.out.println("메일 발송 성공!");
+        } catch (AddressException e) {
+            e.printStackTrace();
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+
+		return num;
+	}
+	
 	
 }

@@ -75,6 +75,14 @@ public class Member {
 		this.memNo = memNo;
 		this.memId = memId;
 	}
+	
+	// searchUserPwd용
+	public Member(int memNo, String memId, String memPwd) {
+		super();
+		this.memNo = memNo;
+		this.memId = memId;
+		this.memPwd = memPwd;
+	}
 
 	public int getMemNo() {
 		return memNo;

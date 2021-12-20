@@ -101,6 +101,25 @@ public class MemberService {
 		
 	}
 	
+	public Member searchUserPwd(String searchId, String searchEmail) {
+		
+		Connection conn = getConnection();
+		
+		Member m = new MemberDao().searchUserPwd(conn, searchId, searchEmail);
+		
+		close(conn);
+		
+		return m;
+		
+	}
+	
+	public int checkNum(String searchEmail) {
+		
+		int num = new MemberDao().checkNum(searchEmail);
+		
+		return num;
+		
+	}
 
 
 	
