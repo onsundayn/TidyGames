@@ -51,29 +51,40 @@
 
         <div class="write-form">
 			<br><br>
-            <form action="" id="enroll-form" method="post">
+            <form action="<%=request.getContextPath()%>/insert.po" enctype="multipart/form-data" id="enroll-form" method="post">
+				<input type="hidden" name="memNo" value="<%=loginUser.getMemNo()%>">
 				
                 <table>
                     <tr>
-                        <th width="100"><h5>제목</h5></th>
-                        <td width="800" heigt="30" colspan="4"><input type="text" name="title" required></td>
+                        <th width="70"><h5>제목</h5></th>
+                        <td width="830" heigt="30" colspan="3"><input type="text" name="title" required></td>
                     </tr>
-                    <tr><td colspan="5" height="20"></td></tr>
+                    <tr><td colspan="4" height="20"></td></tr>
                     <tr>
-                        <td colspan="5" style="background:white">
-                            <textarea rows="30" name="content" required style="resize:none"></textarea>
+                        <td colspan="4" style="background:white">
+                            <textarea rows="20" name="content" required style="resize:none"></textarea>
                         </td>
                     </tr>
-                    <tr><td colspan="5" height="20"></td></tr>
                     <tr>
-                    <th>첨부파일</th>
-                    <td width="50"><input type="file" name="file1"></td>
-                    <td width="50"><input type="file" name="file2"></td>
-                    <td width="50"><input type="file" name="file3"></td>
-                    <td width="50"><input type="file" name="file4"></td>
-                	</tr>
+						<td colspan="4" height="20"></td>
+					</tr>
+					<tr>
+						<th>첨부파일</th>
+						<td><img id="view1" width="250" height="200" onclick="clickF(1);"></td>
+						<td><img id="view2" width="250" height="200" onclick="clickF(2);"></td>
+						<td><img id="view3" width="250" height="200" onclick="clickF(3);"></td>
+					</tr>
+					<tr>
+						<td colspan="4" height="20"></td>
+					</tr>
                 </table>
-                <br>
+
+				<div style="display:none">
+					<input type="file" id="file1" name="file1" onchange="loadFile(this, 1);">
+					<input type="file" id="file2" name="file2" onchange="loadFile(this, 2);">
+					<input type="file" id="file3" name="file3" onchange="loadFile(this, 3);">
+				</div>
+
                 <div align="right" style="width:1000px">
                     <button type="button" onclick="history.back();" class="btn btn-sm btn-secondary">뒤로가기</button>
                     <button type="reset" class="btn btn-sm btn-info">취소</button>
@@ -83,9 +94,38 @@
 
             </form>
 
+			<script>
+				function clickF(num) {
+                    $("#file" + num).click();
+                }
+
+				function loadFile(inputFile, num) {
+
+					if(inputFile.files.length == 1) {
+						const reader = new FileReader();
+						reader.readAsDataURL(inputFile.files[0]);
+						reader.onload = function(e) {
+							switch(num) {
+								case 1 : $("#view1").attr("src", e.target.result); break;
+								case 2 : $("#view2").attr("src", e.target.result); break;
+								case 3 : $("#view3").attr("src", e.target.result); break;
+							}
+						}
+					}else {
+						switch(num) {
+								case 1 : $("#view1").attr("src", null); break;
+								case 2 : $("#view2").attr("src", null); break;
+								case 3 : $("#view3").attr("src", null); break;
+						}
+					}
+				}
+			</script>
+
         </div>
         
     </div>
+    
+
 
 </body>
 </html>

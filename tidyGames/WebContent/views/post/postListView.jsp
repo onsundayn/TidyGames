@@ -45,6 +45,7 @@
     	border:none;
     }
     #submitbtn{color:white; background:#0e332c; border:none;}
+    #submitbtn:hover{cursor:pointer; color:orange;}
 </style>
 </head>
 <body style="background-color: #0e332c;">
@@ -59,13 +60,16 @@
         <h2>TIDY COMMUNITY  <i class="far fa-comments"></i></h2>
         <br><br>
         
-
+        <form role="form" method="post">  
+        	<input type="hidden" name="currentPage" value="<%=currentPage%>">
+		</form>
+		
             <div id="deletebtn" align="right" style="width:1200px;">
                 <% if(loginUser != null && loginUser.getMemId().equals("admin")) { %>
                 	<a href="" class="btn btn-sm btn-danger">삭제</a>
                 <% } %>
-                <% if(loginUser != null) { %> <!-- 블락된 회원은 못 보게 -->
-                	<a href="<%= contextPath %>/enroll.po" class="btn btn-sm btn-info">글작성</a>
+                <% if(loginUser != null) { %> <!-- 블락된 회원은 못 보게..어떻게 하지? -->
+                	<a href="<%= contextPath %>/enroll.po?memId=<%= loginUser.getMemId() %>" class="btn btn-sm btn-info">글작성</a>
             	<% } %>
             </div>
 
@@ -134,14 +138,14 @@
             <br><br>
 
             <div class="search-area" align="center">
-				<form>
-	                <select name="" id="" style="height:30px;">
-	                	<option value="">최신순</option>
-	                    <option value="">조회순</option>
-	                    <option value="">추천순</option>
-	                    <option value="">닉네임</option>
+				<form action="search.po">
+	                <select name="search" style="height:30px;">
+	                	<option value="r">최신순</option>
+	                    <option value="v">조회순</option>
+	                    <option value="l">추천순</option>
+	                    <option value="n"}>닉네임</option>
 	                </select>
-	                <input type="text" style="width:500px; height:30px;">
+	                <input type="text" name="word" style="width:500px; height:30px;">
 	                <button type="submit" id="submitbtn"><i class="fas fa-search"></i></button>		
 				</form>
 
@@ -157,7 +161,7 @@
 		<script>
 			$(function(){
 				$("#table>tbody>tr").click(function(){
-					location.href = '<%=contextPath%>/detail.po?num=' + $(this).children().eq(1).text();
+					location.href = '<%=contextPath%>/detail.po?cpage=<%=currentPage%>&num=' + $(this).children().eq(1).text();
 				});
 				
 			
@@ -176,11 +180,10 @@
 	
 		<script>
 			$(function(){
-				$("#table>tbody>tr").click(function(){							
-					location.href = '<%=contextPath%>/detail.po?num=' + $(this).children().eq(0).text();
+				$("#table>tbody>tr").click(function(){
+					location.href = '<%=contextPath%>/detail.po?cpage=<%=currentPage%>&num=' + $(this).children().eq(0).text();
 				});
-				
-				
+
 			})
 		</script>
 	
