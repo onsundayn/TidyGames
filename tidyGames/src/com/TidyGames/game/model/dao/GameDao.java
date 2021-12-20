@@ -135,7 +135,8 @@ private Properties prop = new Properties();
 				list.add(new Game(rset.getInt("game_no"),
 						  		  rset.getString("company_name"),
 						  		  rset.getString("eng_name"),
-						  		  rset.getString("upload_date")));				  	
+						  		  rset.getString("upload_date"),
+						  		  rset.getString("game_status")));				  	
 			}
 			
 		} catch (SQLException e) {
