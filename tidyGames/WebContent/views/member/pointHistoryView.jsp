@@ -4,6 +4,8 @@
     
  <% 
  ArrayList<Point> point = (ArrayList<Point>)request.getAttribute("point");
+ Point sum = (Point)request.getAttribute("sum");
+ 
  %>
 <!DOCTYPE html>
 <html>
@@ -122,6 +124,21 @@
     #pointbar{
         color:orange;
     }
+    
+    .area5{
+        background: none;
+        text-align: center;
+        border: 1px solid blue;
+        width: 1000px;
+        height: 400px;
+        margin-top: 50px;
+        margin-left: 100px;
+        color:white;
+       
+    }
+    .area4>h4 {
+        font-size: 18px;
+    }
 </style>
 </head>
 <body>
@@ -140,12 +157,14 @@
             <div style="background: grey; width: 1000px; height: 2px;"></div>
         </div>
         <br><br><br>
-
+		
+	
+		
         <div class="area2">
             <div style="color:black; font-size:18px; font-weight: bold; margin: 10px 0px 0px 70px;">보유 TIDY POINT</div>
             <span style="margin-left: 60px;"><img src="<%=contextPath%>/resources/image/point.png" width="70px" height="70px"></span>
             <!-- 보유포인트 조회 -->
-            <span style="font-size: 30px; color:black;">9525 POINT</span>
+            <span style="font-size: 30px; color:black;"><%=sum.getSum()%> POINT</span>
 
             <span class="selectForm">
            <form action="<%=contextPath%>/pointDate.me" method="post">
@@ -190,9 +209,6 @@
         <div style="width: 1000px; height: 2px; background: gray; margin:30px 0px 20px 100px;" ></div>
         <br><br>
 
-
-    
-     	
             <div class="area4">
                 <select class="btn btn-outline-secondary" style="color: white;"">
                     <option selected value="uptodate">최신순</option>
@@ -235,7 +251,7 @@
                  	<% } %>
               </table>
         </div>
-
+	
 
     </div>
 

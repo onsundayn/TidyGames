@@ -36,8 +36,10 @@ public class GameListController extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
-		
+		int memNo = 0;
+		if(request.getSession().getAttribute("loginUser") != null) {
+			memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
+		}
 		String keyword = request.getParameter("keyword");
 		
 		

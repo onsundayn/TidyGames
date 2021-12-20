@@ -39,25 +39,18 @@ public class CartListController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
-		//int memNo = Integer.parseInt(request.getParameter("memNo"));
-		
-		
+	
 		
 		ArrayList<Cart> cart = new PayService().selectCart(memNo);  
 		
 		
-		//response.setContentType("application/json; charset=utf-8");
-		//new Gson().toJson(cart, response.getWriter());
-		
-		
 		request.setAttribute("cart", cart);
-		
-		
-		
+	
 		request.getRequestDispatcher("views/pay/cartView.jsp").forward(request, response);
 		
-		HttpSession session = request.getSession();
 		
+		HttpSession session = request.getSession();
+		//session.setAttribute("cart", cart);
 	
 	
 	}

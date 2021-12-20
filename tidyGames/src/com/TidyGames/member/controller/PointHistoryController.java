@@ -36,13 +36,19 @@ public class PointHistoryController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
-		System.out.println(memNo);
 		
 		ArrayList<Point> point = new PointService().selectPoint(memNo);  
 		
-		System.out.println(point);
+		
 		request.setAttribute("point", point);
 	
+		Point sum = new PointService().sumPoint(memNo);
+		
+		request.setAttribute("sum", sum);
+		
+		
+		
+		
 		request.getRequestDispatcher("views/member/pointHistoryView.jsp").forward(request, response);
 	}
 
