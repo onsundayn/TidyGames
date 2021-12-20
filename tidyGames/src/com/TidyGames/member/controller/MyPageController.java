@@ -29,10 +29,9 @@ public class MyPageController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		// 연결만 시켜놨어요
+		
 		request.getRequestDispatcher("views/member/myPage.jsp").forward(request, response);
-		
-		
+	
 	}
 
 	/**
