@@ -264,6 +264,7 @@ public class MemberDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			close(rset);
 			close(pstmt);
 		}
 		
@@ -294,6 +295,7 @@ public class MemberDao {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {
+				close(rset);
 				close(pstmt);
 			}
 			
@@ -343,6 +345,28 @@ public class MemberDao {
         }
 
 		return num;
+	}
+	
+	public int updatePwd(Connection conn, String userId, String updatePwd) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updatePwd");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, updatePwd);
+			pstmt.setString(2, userId);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
 	}
 	
 	

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.TidyGames.member.model.vo.Member" %>
 <%
 	String contextPath = request.getContextPath();
+	Member searchUser = (Member)session.getAttribute("searchUser");
 %>
 <!DOCTYPE html>
 <html>
@@ -88,7 +89,7 @@
         <header>
             <div id="logo" align="center">
                 <a href="<%= contextPath %>">
-                    <img src="../../resources/image/tidyLogo.png" style="width:80px; height: 50px;"> <br>
+                    <img src="<%=contextPath%>/resources/image/tidyLogo.png" style="width:80px; height: 50px;"> <br>
                     <span style="color: white; font-size: 25px; font-weight: bold;">TIDY GAMES</span>
                 </a>
             </div>
@@ -96,7 +97,7 @@
 
         <content>
             <div id="content" align="center">
-                <form action="<%= contextPath %>/" method="post" onsubmit="return check();">
+                <form action="<%= contextPath %>/updatePwd.me" method="post" onsubmit="return check();">
                     <div id="search_id_form">
                         <span style="color: white; font-size: 20px; font-weight: bold;">비밀번호 재설정</span>
                         <br><br><hr>
@@ -115,6 +116,7 @@
                                 <span style="color: lightgray; font-size: 14px;">
                                     8~16자의 영문 대소문자, 숫자, 특수문자(!,@,#,$,%,^,&,*) 사용 가능합니다.
                                 </span>
+                                <input type="hidden" name="userId" value="<%= searchUser.getMemId() %>">
                             </div>
 
                         </div>

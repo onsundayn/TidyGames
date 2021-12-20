@@ -120,7 +120,22 @@ public class MemberService {
 		return num;
 		
 	}
-
-
 	
+	public int updatePwd(String userId, String updatePwd) {
+		
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().updatePwd(conn, userId, updatePwd);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
 }

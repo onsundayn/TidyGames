@@ -92,7 +92,7 @@
 
         <content>
             <div id="content" align="center">
-                <form action="<%= contextPath %>/updatePwd.me" method="post" onsubmit="return check();">
+                <form action="<%= contextPath %>/checkNum.me" method="post" onsubmit="return check();">
                     <div id="find_id_form">
                         <span style="color: white; font-size: 20px; font-weight: bold;">비밀번호 재설정</span>
                         <br><br><hr>
