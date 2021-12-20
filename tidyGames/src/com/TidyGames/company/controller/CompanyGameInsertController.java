@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
-import com.TidyGames.common.model.vo.*;
+import com.TidyGames.common.MyFileRenamePolicy;
 import com.TidyGames.game.model.service.GameService;
 import com.TidyGames.game.model.vo.Attachment3;
 import com.TidyGames.game.model.vo.Game;
