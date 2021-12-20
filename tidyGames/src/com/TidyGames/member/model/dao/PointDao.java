@@ -164,5 +164,38 @@ public class PointDao {
 
 		return point;
 	}
+	
+	
+	public Point sumPoint(Connection conn, int memNo) {
+		
+		Point sum = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("sumPoint");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				sum = new Point(rset.getInt("mem_no"),
+							  rset.getInt("sum"));
+						
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return sum;
+		
+	}
 
 }

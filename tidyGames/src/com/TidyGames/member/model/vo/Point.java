@@ -9,9 +9,20 @@ public class Point {
 	private String pointDate;
 	private String pointCotent;
 	private int orderNo;
-	
+	private int sum;
+
+
 	public Point() {}
 
+	
+	
+	public Point(int memNo, int sum) {
+		super();
+		this.memNo = memNo;
+		this.sum = sum;
+	}
+	
+	
 	public Point(int memNo, int pointAmount, String pointDate, String pointCotent, int orderNo) {
 		super();
 		this.memNo = memNo;
@@ -20,6 +31,18 @@ public class Point {
 		this.pointCotent = pointCotent;
 		this.orderNo = orderNo;
 	}
+	
+	public int getSum() {
+		return sum;
+	}
+
+
+
+	public void setSum(int sum) {
+		this.sum = sum;
+	}
+
+
 
 	public int getMemNo() {
 		return memNo;

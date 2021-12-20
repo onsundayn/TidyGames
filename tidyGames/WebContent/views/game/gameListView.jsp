@@ -186,7 +186,7 @@
 
 	                <div class="heart" align="center">
 	                    <br><br><br>
-	                    <a href=""><i class="far fa-heart fa-2x"></i></a>
+	                    <a href="<%=contextPath%>/login.me" onclick="return loginMsg();"><i class="far fa-heart fa-2x"></i></a>
 	                </div>
 	                <div  class="cart" align="center">
 	                    <br><br><br>
@@ -199,10 +199,10 @@
                     
                     <% if(g.getCount() == 0)  {%>
                     
-                     	<a href="" onclick="return wishConfirm(<%=g.getGameNo()%>)"><i class="far fa-heart fa-2x"></i></a>
+                     	<a href="" onclick="return wishConfirm(<%=g.getGameNo()%>, this)"><i class="far fa-heart fa-2x"></i></a>
                     <% }else  {%>
                     
-                   		<a href="" onclick="return wishDelete(<%=g.getGameNo()%>)"><i class="fas fa-heart fa-2x"></i></a>
+                   		<a href="" onclick="return wishDelete(<%=g.getGameNo()%>, this)"><i class="fas fa-heart fa-2x"></i></a>
                    
                   	<%} %> 
                   	
@@ -249,7 +249,7 @@
     			
     			if(result == 1) {
     				if(confirm("장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?")){
-    		    		location.href='<%=contextPath%>/cart.pa?memNo=<%=loginUser.getMemNo()%>';
+    		    		location.href='<%=contextPath%>/cart.pa';
     		    	}
     				
     			}else if(result == 2 ) {
@@ -265,7 +265,7 @@
    	
     }
     
-function wishConfirm(gameNo){
+function wishConfirm(gameNo, aEl){
     	
     	$.ajax({
     		url : "wishInsert.me",
@@ -281,9 +281,15 @@ function wishConfirm(gameNo){
  
     				if(confirm("찜목록에 담겼습니다. 찜목록페이지로 이동하시겠습니까?")){
     					
-    					location.href='<%=contextPath%>/wishList.me?memNo=<%=loginUser.getMemNo()%>';
+    					location.href='<%=contextPath%>/wishList.me';
+    					
     		    	}else {
-    		    		
+    		    		// 채워진 하트로 바꿔줘야됨 
+    		    		$(aEl).children().removeClass("far");
+    		    		$(aEl).children().addClass("fas");
+    		    		$(aEl).click(function(){
+    		    			return wishDelete(gameNo);
+    		    		})
     		    	}
     		    		
     			
@@ -293,12 +299,12 @@ function wishConfirm(gameNo){
     			console.log("찜목록 담기 실패!")
     		}
     	})
-    	return false;
+    	
     	
     }
     
     
-	function wishDelete(gameNo){
+	function wishDelete(gameNo, aE2){
 	
 	$.ajax({
 		url : "wishDe.me",
@@ -309,12 +315,24 @@ function wishConfirm(gameNo){
 		type:"post",
 		success:function(result) {
 		
+				if(result > 0 ) {
+					 
+    				if(alert("찜목록이 해제되었습니다.")){
+    					
+    		    		// 빈하트로 채워줘야함
+    		    		$(aE2).children().removeClass("fas");
+    		    		$(aE2).children().addClass("far");
+    		    		$(aE2).click(function(){
+    		    			return wishDelete(gameNo);
+    		    		})
+    		    		
+    			}
 			
-			if(result > 0 ) {
-
-				alert("찜목록에서 삭제되었습니다.")
+				//alert("찜목록에서 삭제되었습니다.")
+				
 			
-			}
+				}
+			
 			
 		},error:function() {
 			console.log("찜목록 삭제 실패!")
@@ -322,6 +340,8 @@ function wishConfirm(gameNo){
 	})
 
 	
+	
+		        	
 	
 }
    			

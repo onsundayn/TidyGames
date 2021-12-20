@@ -58,5 +58,17 @@ public class PointService {
 		return point;
 
 	}
-
+	public Point sumPoint(int memNo) {
+		Connection conn = getConnection();
+		
+		Point sum = new PointDao().sumPoint(conn, memNo);
+		
+		close(conn);
+		
+		return sum;
+		
+		
+		
+		
+	}
 }
