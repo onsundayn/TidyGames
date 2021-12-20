@@ -1,30 +1,23 @@
-package com.TidyGames.game.controller;
+package com.TidyGames.company.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import com.TidyGames.game.model.service.GameService;
-import com.TidyGames.game.model.vo.Category;
-import com.TidyGames.game.model.vo.Game;
 
 /**
- * Servlet implementation class GameDetailViewController
+ * Servlet implementation class CompanyEnrollFormController
  */
-@WebServlet("/detail.ga")
-public class GameDetailViewController extends HttpServlet {
+@WebServlet("/enrollForm.gc")
+public class CompanyEnrollFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GameDetailViewController() {
+    public CompanyEnrollFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,21 +26,8 @@ public class GameDetailViewController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		int gameNo = Integer.parseInt(request.getParameter("gno"));
-		
-		GameService gService = new GameService();
-		
-		Game g = gService.selectGame(gameNo);
-		ArrayList<Category> gcList = gService.selectGameCategory(gameNo);
-		
-		request.setAttribute("gcList", gcList);
-		request.setAttribute("g", g);		
-		request.getRequestDispatcher("views/game/gameDetailView.jsp").forward(request, response);
-		
-		HttpSession session = request.getSession();
-		session.setAttribute("g", g);
-		
+
+		request.getRequestDispatcher("views/company/gameCompanyEnrollForm.jsp").forward(request, response);
 	}
 
 	/**

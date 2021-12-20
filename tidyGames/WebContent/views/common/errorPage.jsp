@@ -8,7 +8,8 @@
 </head>
 <body>
 
-	<%@ include file="menubar.jsp" %>
+	<%@ include file="../common/topbar.jsp"%>
+    <%@ include file="../common/navibar.jsp"%>
 	
 	<br><br>
 	

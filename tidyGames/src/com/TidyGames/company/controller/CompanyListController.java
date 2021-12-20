@@ -31,12 +31,7 @@ public class CompanyListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int comNo = Integer.parseInt(request.getParameter("cno"));
-		System.out.println("cno");
 		
-		Company c = new CompanyService().selectCompany(comNo);
-		
-		request.setAttribute("c", c);
 		request.getRequestDispatcher("views/company/gameCompanyDetailView.jsp").forward(request, response);
 	}
 

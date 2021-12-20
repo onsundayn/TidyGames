@@ -41,6 +41,16 @@ public class Game {
 	
 	
 
+	public Game(String korName, String engName, int price, String confirm, String upgame, String uploadDate) {
+		super();
+		this.korName = korName;
+		this.engName = engName;
+		this.price = price;
+		this.confirm = confirm;
+		this.upgame = upgame;
+		this.uploadDate = uploadDate;
+	}
+
 	public Game(int companyNo, String korName, String engName, String releaseDate, int price, String gameIntro,
 			String confirm, String upgame, String uploadDate, double point, String gameStatus, String gameImg) {
 		super();

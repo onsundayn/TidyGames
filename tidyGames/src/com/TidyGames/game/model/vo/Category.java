@@ -16,6 +16,14 @@ public class Category {
 		this.categoryName = categoryName;
 		this.categoryStatus = categoryStatus;
 	}
+	
+	
+
+
+	public Category(String categoryName) {
+		super();
+		this.categoryName = categoryName;
+	}
 
 
 	public int getCategoryNo() {

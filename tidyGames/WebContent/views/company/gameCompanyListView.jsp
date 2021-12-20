@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.game.model.vo.Game"%>
+<%
+	ArrayList<Game> list = (ArrayList<Game>)request.getAttribute("list");
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +17,6 @@
     }
     table {
         width:1010px;
-        height:400px;
         border: 1px solid grey;
         border-collapse:collapse;
         margin: auto;
@@ -45,6 +48,7 @@
     <%@ include file="../common/companySidebar.jsp"%>
     
     <div class="outer">
+
         <div class="menu-name">
             <h2>업로드 게임 목록</h2>
         </div>
@@ -53,52 +57,34 @@
 
             <tr>
                 <th>번호</th>
-                <th>아이디</th>
-                <th>게임</th>
+                <th>게임명</th>
+                <th>가격</th>
                 <th>등록일</th>
                 <th>승인상태</th>
                 <th>업데이트</th>
             </tr>
-            <tr>
-                <td>5</td>
-                <td>ElectronicArts</td>
-                <td>Battlefield2042</td>
-                <td>2021-11-15</td>
-                <td><button class="btn btn-sm btn-secondary">미승인</button></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>ElectronicArts</td>
-                <td>Battlefield2042</td>
-                <td>2021-11-15</td>
-                <td><a href="gameCompanyEnrollForm.jsp" class="btn btn-sm btn-primary">승인</a></td>
-                <td><a href="gameCompanyUpdateForm.jsp" class="btn btn-sm btn-primary">업데이트</a></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>ElectronicArts</td>
-                <td>Battlefield2042</td>
-                <td>2021-11-15</td>
-                <td><a href="gameCompanyEnrollForm.jsp" class="btn btn-sm btn-danger">반려</a></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>ElectronicArts</td>
-                <td>Battlefield2042</td>
-                <td>2021-11-15</td>
-                <td><a href="gameCompanyEnrollForm.jsp" class="btn btn-sm btn-primary">승인</a></td>
-                <td></td>
-            </tr>
+            <% for(Game g : list) { %>
             <tr>
                 <td>1</td>
-                <td>ElectronicArts</td>
-                <td>Battlefield2042</td>
-                <td>2021-11-15</td>
+                <td><%=g.getKorName()%>(<%=g.getEngName()%>)</td>
+                <td><%=g.getPrice()%></td>
+                <td><%=g.getUploadDate()%></td>
+                	<% if((g.getConfirm()).equals("Y")) { %>
                 <td><a href="gameCompanyEnrollForm.jsp" class="btn btn-sm btn-primary">승인</a></td>
+                	<% }else if((g.getConfirm()).equals("N")){ %>
+                <td><a href="gameCompanyEnrollForm.jsp" class="btn btn-sm btn-primary">반려</a></td>	
+                	<% }else if((g.getConfirm()).equals("A")) { %>
+                <td><a href="gameCompanyEnrollForm.jsp" class="btn btn-sm btn-primary">미승인</a></td>
+                	<% } %>
+                	
+                	<% if ((g.getUpgame()).equals("Y")) { %>
                 <td><a href="gameCompanyUpdateForm.jsp" class="btn btn-sm btn-primary">업데이트</a></td>
+               		<% } else { %>
+               	<td></td>
+               	<% } %>
             </tr>
+            <% } %>
+      
 
         </table>
 

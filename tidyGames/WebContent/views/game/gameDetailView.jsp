@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.TidyGames.game.model.vo.*"%>
+    pageEncoding="UTF-8" import="com.TidyGames.game.model.vo.*, java.util.ArrayList"%>
 <%
 	Game g = (Game)request.getAttribute("g");
+	ArrayList<Category> gcList = (ArrayList <Category>)request.getAttribute("gcList");
 %>
 <!DOCTYPE html>
 <html>
@@ -156,15 +157,15 @@
                 <div id="release-date">
                     <p>
                         출시일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=g.getReleaseDate() %> <br>
-                        장르 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 액션게임<br>
-                        플레이어 &nbsp;&nbsp;&nbsp; 싱글플레이어<br>
+                        장르 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=gcList.get(0).getCategoryName()%><br>
+                        플레이어 &nbsp;&nbsp;&nbsp; <%=gcList.get(1).getCategoryName()%><br>
                     </p>
                 </div>
                 <div id="tag">
                     관련태그&nbsp;&nbsp;&nbsp; 
-                            <a href="gameList.jsp" class="category-btn">싱글플레이어</a>
-                            <a href="" class="category-btn">어드벤처</a>
-                            <a href="" class="category-btn">탐험</a>
+                    		<% for(int i=0; i<gcList.size(); i++) {%>
+                            <a href="" class="category-btn"><%=gcList.get(i).getCategoryName()%></a>
+                            <% } %>
                 </div>
             </div>
             <div class="btn-area">

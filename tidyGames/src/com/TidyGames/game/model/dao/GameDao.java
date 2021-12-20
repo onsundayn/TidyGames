@@ -11,15 +11,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-
-import static com.TidyGames.common.JDBCTemplate.*;
-
 import com.TidyGames.common.model.vo.PageInfo;
-
+import com.TidyGames.game.model.vo.Attachment3;
 import com.TidyGames.game.model.vo.Category;
 import com.TidyGames.game.model.vo.Game;
 import com.TidyGames.game.model.vo.Review;
-import com.TidyGames.member.model.vo.*;
 
 public class GameDao {
 
@@ -257,5 +253,113 @@ private Properties prop = new Properties();
 
 	}
 	
+	
+	public ArrayList<Category> selectGameCategory(Connection conn, int gameNo){
+		
+		ArrayList<Category> gcList = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectGameCategory");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, gameNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				gcList.add(new Category(rset.getString("category_name")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return gcList;
+	}
+	
+	public ArrayList<Game> selectGameListGC(Connection conn, int comNo) {
+		ArrayList<Game> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectGameListGC");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, comNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Game(rset.getString("kor_name"),
+								  rset.getString("eng_name"),
+							      rset.getInt("price"),
+								  rset.getString("confirm"),
+							  	  rset.getString("upgame"),
+								  rset.getString("upload_date")));
+									 
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	
+	public int insertGame(Connection conn, Game ga, int companyNo) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertGame");
+		System.out.println(ga.getKorName());
+		System.out.println(ga.getEngName());
+		System.out.println(ga.getGameImg());
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, companyNo);
+			pstmt.setString(2, ga.getKorName());
+			pstmt.setString(3, ga.getEngName());
+			pstmt.setString(4, ga.getReleaseDate());
+			pstmt.setInt(5, ga.getPrice());
+			pstmt.setString(6, ga.getGameIntro());
+			pstmt.setString(7, ga.getGameImg());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int insertAttachment(Connection conn, Attachment3 at) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertAttachment");
+		System.out.println(at.getOriginName());
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, at.getOriginName());
+			pstmt.setString(2, at.getChangeName());
+			pstmt.setString(3, at.getFilePath());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 }

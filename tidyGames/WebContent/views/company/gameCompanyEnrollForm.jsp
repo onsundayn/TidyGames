@@ -124,12 +124,12 @@
     </div>
 
     <div class="outer">
-        <form action="" class="form-area">
-
+        <form action="<%=contextPath%>/insert.gc" class="form-area" method="post" enctype="multipart/form-data" >
+			<input type="hidden" value="<%=loginCompany.getCompanyNo()%>" name="cno">
             <div class="left-area">
                 <div class="title">
-                    <input type="text" placeholder="한글게임명"><br>
-                    <input type="text" placeholder="영문게임명">
+                    <input type="text" placeholder="한글게임명" name="korName"><br>
+                    <input type="text" placeholder="영문게임명" name="engName">
                 </div>
                 
                 <div  class="img11" id="big">
@@ -157,21 +157,22 @@
             <div class="right-area">
                 <div class="info-area">
                     <div id="t-img">
-                        <img src="<%=contextPath%>/resources/image/header_alt_assets_3.jpg">
+                        <input type="file" name="titleFile">
                     </div>
                     
                     <div id="price">
-                        <span>판매가 : <input type="text"></span>
+                        <span>판매가 : <input type="text" name="price"></span>
                     </div>
                     <br>
                     <div id="content">
-                        <textarea name="" id="" cols="55" rows="6" placeholder="게임 소개 및 내용 작성"></textarea>
+                        <textarea name="" id="" cols="55" rows="6" placeholder="게임 소개 및 내용 작성" name="content"></textarea>
                     </div>
                     <br><br><br>
                     <div id="release-date">
                         <p>
-                            출시일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" placeholder="예상출시일"> <br>
-                            장르 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" placeholder="게임장르"><br>
+                            출시일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" placeholder="예상출시일(숫자만입력)" name="releaseDate"> <br>
+                            장르 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                            <input type="text" placeholder="게임장르" name="category"><br>
                             플레이어 &nbsp;&nbsp;&nbsp; 싱글플레이어<br> <!-- 장르랑 플레이어 dropdown 선택하는 형식으로-->
                         </p>
                     </div>
@@ -193,7 +194,7 @@
                         <input type="file" name="minimum">
                         <br><br>
                         <button class="btn btn-sm btn-primary">저장</button>
-                        <button class="btn btn-sm btn-success">게임 승인 요청</button>
+                        <button type="submit" class="btn btn-sm btn-success">게임 승인 요청</button>
                     </div>
 
         </form>
