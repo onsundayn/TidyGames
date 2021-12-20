@@ -104,6 +104,78 @@
 		 WHERE GAME_STATUS = 'Y'
 
 	</entry>
+	
+	<entry key="selectGameCategory">
+		SELECT C.CATEGORY_NAME
+		  FROM CATEGORY C ,GAME_CATEGORY GC
+		 WHERE GC.CATEGORY_NO = C.CATEGORY_NO AND GC.GAME_NO = ?
+	</entry>
+	
+	<entry key="selectGameListGC">
+		SELECT
+		      KOR_NAME
+		    , ENG_NAME
+		    , PRICE
+		    , UPLOAD_DATE
+		    , CONFIRM
+		    , UPGAME
+		  FROM GAME
+		 WHERE COMPANY_NO = ?
+	</entry>
+	
+	<entry key="insertGame">
+  		INSERT
+			  INTO GAME
+			  (
+			    GAME_NO 
+			  , COMPANY_NO
+			  , KOR_NAME
+			  , ENG_NAME
+			  , RELEASE_DATE
+			  , PRICE
+			  , GAME_INTRO
+			  , UPLOAD_DATE
+	          , GAME_IMG
+			  )
+			  VALUES
+			  (
+			    SEQ_GAME_NO.NEXTVAL
+			  , ?
+			  , ?
+			  , ?
+			  , TO_CHAR(TO_DATE(?), 'YYYY-MM-DD')
+			  , ?
+			  , ?
+			  , SYSDATE
+	          , ?
+			  )
+	</entry>
+	
+	<entry key="insertAttachment">
+		INSERT
+			  INTO UPLOAD_FILE
+			  (
+			    FILE_NO
+			  , GAME_NO
+			  , REF_BNO
+			  , ORIGIN_NAME
+			  , CHANGE_NAME
+			  , UPLOAD_DATE
+			  , FILE_PATH
+			  , FILE_TYPE
+			  )
+			  VALUES
+			  (
+			    SEQ_UP_NO.NEXTVAL
+			  , SEQ_GAME_NO.CURRVAL
+			  , SEQ_GAME_NO.CURRVAL
+			  , ?
+			  , ?
+			  , SYSDATE
+			  , ?
+			  , 2
+			  )
+	</entry>
 
 
 </properties>

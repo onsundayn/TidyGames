@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	<entry key="selectCompany">
+	<entry key="selectGameList">
 		SELECT
-		      COMPANY_NO
-		    , COMPANY_NAME
-		    , COMPANY_PWD
-		    , COMPANY_HEAD
-		    , TO_CHAR(COMPANY_ENROLL, 'YYYY-MM-DD') COMPANY_ENROLL
-		    , COMPANY_ID
-		  FROM COMPANY
+		      ROWNUM
+		    , KOR_NAME
+		    , ENG_NAME
+		    , PRICE
+		    , UPLOAD_DATE
+		    , CONFIRM
+		    , UPGAME
+		  FROM GAME
 		 WHERE COMPANY_NO = ?
 	</entry>
 

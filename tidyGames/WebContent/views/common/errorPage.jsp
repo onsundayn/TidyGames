@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body style="background: #0e332c;">
 
     <%@ include file="../common/topbar.jsp"%>
     <%@ include file="../common/navibar.jsp"%>

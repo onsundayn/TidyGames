@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.TidyGames.company.model.vo.Company"%>
-<%
-	Company c = (Company)request.getAttribute("c");
-%>
+    pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,42 +46,46 @@
 </style>
 </head>
 <body style="background-color: #0e332c;">
+    
 	<%@ include file="../common/topbar.jsp"%>
     <%@ include file="../common/navibar.jsp"%>
     <%@ include file="../common/companySidebar.jsp"%>
     
+    
+    
     <div class="outer" align="center">
+
         
         <div class="menu-name" align="left">
             <h2>게임사 정보 조회</h2>
         </div>
 
         <div class="info">
-            	<input type="hidden" name="cno" value="<%=loginCompany.getCompanyNo()%>">
             <table class="tbl">
                 <tr>
                     <th>게임사</th>
-                    <td colspan="4"><%=c.getCompanyName()%></td>
+                    <td colspan="4"><%=loginCompany.getCompanyName()%></td>
                 </tr>
                 <tr>
                     <th>아이디</th>
-                    <td colspan="4"><%=c.getCompanyId()%></td>
+                    <td colspan="4"><%=loginCompany.getCompanyId()%></td>
                 </tr>
                 <tr>
                     <th>등록코드</th>
-                    <td colspan="4"><%=c.getCompanyPwd()%></td>
+                    <td colspan="4"><%=loginCompany.getCompanyPwd()%></td>
                 </tr>
                 <tr>
                     <th>대표자</th>
-                    <td colspan="4"><%=c.getCompanyHead()%></td>
+                    <td colspan="4"><%=loginCompany.getCompanyHead()%></td>
                 </tr>
                 <tr>
                     <th>등록일자</th>
-                    <td colspan="4"><%=c.getCompanyEnroll()%></td>
+                    <td colspan="4"><%=loginCompany.getCompanyEnroll()%></td>
                 </tr>
             </table>
         </div>
     </div>
+ 
 
 </body>
 </html>
