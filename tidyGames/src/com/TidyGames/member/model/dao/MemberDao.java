@@ -207,6 +207,7 @@ public class MemberDao {
 			return listCount;			
 	}
 		
+		
 		public int deleteMember(Connection conn, int memNo) {
 			
 			int result = 0;
@@ -227,4 +228,34 @@ public class MemberDao {
 			return result;
 			
 		}
+	
+	public Member searchUserId(Connection conn, String searchName, String searchEmail) {
+		
+		Member m = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("searchUserId");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, searchName);
+			pstmt.setString(2, searchEmail);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				m = new Member(rset.getInt("mem_no"),
+							   rset.getString("mem_id"));	
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return m;
+		
+	}
+	
 }

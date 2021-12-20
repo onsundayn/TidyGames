@@ -88,6 +88,20 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+	
+	public Member searchUserId(String searchName, String searchEmail) {
+		
+		Connection conn = getConnection();
+		
+		Member m = new MemberDao().searchUserId(conn, searchName, searchEmail);
+	
+		close(conn);
+		
+		return m;
+		
+	}
+	
+
 
 	
 }

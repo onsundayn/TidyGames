@@ -68,6 +68,13 @@ public class Member {
 		this.indate = indate;
 		this.memStatus = memStatus;
 	}
+	
+	// searchUserId용
+	public Member(int memNo, String memId) {
+		super();
+		this.memNo = memNo;
+		this.memId = memId;
+	}
 
 	public int getMemNo() {
 		return memNo;

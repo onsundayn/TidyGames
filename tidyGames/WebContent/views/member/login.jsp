@@ -62,6 +62,7 @@
         color: white; 
         font-size: 14px;
         margin-top: 30px;
+        margin-bottom: 5px;
     }
     .find_login>a{
         color: white;
@@ -144,8 +145,8 @@
                     </div>
 
                     <div class="find_login">
-                        <a href="searchId.jsp">아이디 찾기</a> ㅣ
-                        <a href="searchPwd.jsp">비밀번호 재설정</a> ㅣ
+                        <a href="<%=contextPath%>/inputSearchId.me">아이디 찾기</a> ㅣ
+                        <a href="<%=contextPath%>/inputSearchPwd.me">비밀번호 재설정</a> ㅣ
                         <a href="enrollForm.jsp">회원가입</a>
                     </div>
                     <hr>
