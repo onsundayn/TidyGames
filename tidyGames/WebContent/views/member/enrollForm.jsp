@@ -14,7 +14,7 @@
     }
     .outer{
         width: 1500px;
-        height: 2100px;
+        height: 2500px;
         background-color: #0e332c;
         margin: auto;
         margin-top: 50px;
@@ -24,7 +24,7 @@
     }
     #content{
         width: 800px;
-        height: 1900px;
+        height: 2300px;
         background-color: rgba(255, 255, 255, 0.5);
         margin: auto;
         margin-top: 50px;
@@ -42,12 +42,13 @@
         right: 0px;        
     }
     .sign_up>*{
-        margin-top: 20px;
+        margin-top: 10px;
     }
     .sign_up_main{
         color: white;
         font-size: 15px;
         font-weight: bold;
+        margin-top: 25px;
     }
     .sign_up_etc{
         color: lightgray;
@@ -63,7 +64,7 @@
     }
     .numInput{
         display: inline-block; 
-        width: 140px; 
+        width: 60%; 
     }
     #category>input{
         margin-bottom:5px;
@@ -73,7 +74,7 @@
         background-color:white;
         color: #0e332c; 
         border: none; 
-        font-weight: bold;"
+        font-weight: bold;
     }
     #agree>span{
         color:white;
@@ -94,7 +95,7 @@
         <header>
             <div id="logo" align="center">
                 <a href="<%= contextPath %>">
-                    <img src="../../resources/image/tidyLogo.png" style="width:80px; height: 50px;"> <br>
+                    <img src="<%=contextPath%>/resources/image/tidyLogo.png" style="width:80px; height: 50px;"> <br>
                     <span style="color: white; font-size: 25px; font-weight: bold;">TIDY GAMES</span>
                 </a>
             </div>
@@ -102,7 +103,7 @@
 
         <content>
             <div id="content" align="center">
-                <form action="enrollFormFinish.jsp" method="">
+                <form action="<%= contextPath %>/memberEnrollForm.me" method="post" onsubmit="return enrollCheck();">
                     <div id="enroll_form">
                         <div style="color: white; font-size: 22px; font-weight: bold;">SIGN UP</div>
 
@@ -115,23 +116,27 @@
 
                         <div align="left" class="sign_up">
                             <div class="sign_up_main">● 아이디</div>
-                            <input type="text" name="userId" id="user_id" style="width: 40%;" required>
-                            <button class="btn_st" style="width: 19%; height: 30px;">중복확인</button>
+                            <input type="text" name="userId" id="userId" style="width: 40%;" required>
+                            <button type="button" class="btn_st" id="idCheckBtn" style="width: 19%; height: 30px;" onclick="idCheck();">중복확인</button>
                             <div class="sign_up_etc" style="margin-top:5px;">4~10자의 영문 대소문자, 숫자, 특수문자(_) 사용 가능합니다.</div>
 
                             <div class="sign_up_main">● 비밀번호</div>
-                            <input type="password" name="userPwd" id="user_pwd" style ="width: 70%;" required>
-                            <div class="sign_up_etc" style="margin-top: 5px;">8~16자 영문 대소문자, 숫자, 특수문자(!,@,#,$,%,^,&,*) 사용 가능합니다.</div>
+                            <input type="password" name="userPwd" id="userPwd" style ="width: 60%;" required onkeyup="pwdCheck1();">
+                            <div class="sign_up_etc" id="pwdMessage1" style="margin-top: 5px; color:red; display:none;">양식에 맞게 비밀번호를 입력해주세요.</div>
+                            <div class="sign_up_etc" style="margin-top: 5px;">8~16자의 영문 대소문자, 숫자, 특수문자(!,@,#,$,%,^,&,*) 사용 가능합니다.</div>
                             
                             <div class="sign_up_main">● 비밀번호확인</div>
-                            <input type="password" id="pwd_check" style ="width: 70%;" required>
+                            <input type="password" id="pwdCheck" style ="width: 60%;" required onkeyup="pwdCheck2();">
+                            <div class="sign_up_etc" id="pwdMessage2" style="margin-top: 5px; color:red; display:none;">비밀번호가 일치하지 않습니다.</div>
 
                             <div class="sign_up_main">● 닉네임</div>
-                            <input type="text" name="userNick" id="user_nick" style="width: 40%" required>
-                            <button class="btn_st" style="width: 19%; height: 30px;">중복확인</button>
+                            <input type="text" name="userNick" id="userNick" style="width: 40%" required>
+                            <button type="button" class="btn_st" id="nickCheckBtn" style="width: 19%; height: 30px;" onclick="nickCheck();">중복확인</button>
+                            <div class="sign_up_etc" style="margin-top:5px;">2~8자의 한글, 영문 대소문자, 숫자 사용 가능합니다.</div>
 
                             <div class="sign_up_main">● 이름</div>
-                            <input type="text" name="userName" id="user_name" style ="width: 40%;" required>
+                            <input type="text" name="userName" id="userName" style ="width: 40%;" required>
+                            <div class="sign_up_etc" style="margin-top:5px;">2~6자의 한글만 사용 가능합니다.</div>
 
                             <div class="sign_up_main">● 생년월일</div>
                             <select name="year" id="year" required style="width: 150px; height: 30px;">
@@ -156,16 +161,18 @@
                             </select>
 
                             <div class="sign_up_main">● 휴대폰번호</div>
-                            <input type="text" name="phone1" id="phone1" class="numInput" required maxlength="3"> - 
-                            <input type="text" name="phone2" id="phone2" class="numInput" required maxlength="4"> - 
-                            <input type="text" name="phone3" id="phone3" class="numInput" required maxlength="4">
+                            <input type="text" name="phone" id="phone" class="numInput" required maxlength="13">
+                            <div class="sign_up_etc" style="margin-top:5px;">'-'를 포함하여 입력해주세요. (000-0000-0000 형태)</div>
                             
                             <div class="sign_up_main">● 이메일 주소</div>
-                            <input type="email" name="email" id="email" required style="width: 70%;"> 
+                            <input type="text" name="email" id="email" required style="width: 60%;"> 
+                            <div class="sign_up_etc" style="margin-top:5px;">'@'를 포함하여 입력해주세요.</div>
                         </div>
 
+                        <hr style="margin-top:50px; margin-bottom:50px;">
+
                         <div align="left">
-                            <div style="color: white; font-size: 17px; font-weight: bold; margin-top:100px;">
+                            <div style="color: white; font-size: 17px; font-weight: bold;">
                                 >> 선택 입력 사항<br>
                             </div>
                         </div>
@@ -232,7 +239,121 @@
                     </div>
                 </form>
                 <script>
-                    function code_btn(){
+                    
+                    // onsubmit 체크용 int값
+                    var idCheckNum = 0;
+                    var nickCheckNum = 0;
+
+                    function idCheck(){
+                        // 중복확인버튼 클릭시 사용자가 입력한 아이디값 넘겨서 조회 -> 응답데이터 돌려받기
+                        // 1) 사용불가능할경우(NNNNN) : alert로 메세지 출력 후 다시입력받게 유도
+                        // 2) 사용가능한경우(NNNNY) : 진짜 사용할지 물어본 뒤 (confirm메소드 이용)
+                        //					사용하겠다고하면 아이디 수정못하게 픽스 후 회원가입 버튼 활성화
+                        //					안한다고하면 다시 입력하게 유도
+
+                        var $idCheck = $("#userId");
+                        var $idCheckBtn = $("#idCheckBtn");
+                        var regExp = /^[a-z\d_]{4,10}$/i;
+
+                        if(regExp.test($idCheck.val()) == true) {
+                            // 아이디 양식이 맞음
+                            $.ajax({
+                                url:"idCheck.me",
+                                data:{checkId:$idCheck.val()}, //키 checkId | 값 $idCheck.val()
+                                success:function(result){
+                                    if(result == 'NNNNN') {
+                                        alert("이미 존재하거나 탈퇴한 회원의 아이디입니다.");
+                                        $idCheck.focus();
+                                    } else {
+                                        if(confirm("사용가능한 아이디입니다. 해당 아이디를 사용하시겠습니까?\n확인을 누르면 더이상 아이디를 변경할 수 없습니다.")) {
+                                            $idCheck.attr("readonly", true);
+                                            idCheckNum = 1;
+                                            $idCheckBtn.attr("disabled", true);
+                                        } else {
+                                            $idCheck.focus();
+                                        }
+                                    }
+                                },
+                                error:function(){
+                                    console.log("아이디 중복체크용 ajax 실패");
+                                }
+                            })
+
+                        } else {
+                            // 아이디 양식이 틀림
+                            alert("양식에 맞는 아이디로 다시 입력해주세요.");
+                            $idCheck.focus();
+                        }
+
+                    }
+
+                    function pwdCheck1(){
+
+                        var userPwd = document.getElementById("userPwd").value;
+                        var pwdMessage1 = document.getElementById("pwdMessage1");
+                        var regExp = /^[a-z\d!@#$%^&*]{8,16}$/i;
+
+                        if(regExp.test(userPwd) == true) {
+                            // 비밀번호 양식에 맞게 입력
+                            pwdMessage1.style.display = "none";
+                        } else {
+                            // 비밀번호 양식에 틀리게 입력
+                            pwdMessage1.style.display = "inline-block";
+                        }
+
+                    }
+
+                    function pwdCheck2(){
+
+                        var userPwd = document.getElementById("userPwd").value;
+                        var pwdCheck = document.getElementById("pwdCheck").value;
+                        var pwdMessage2 = document.getElementById("pwdMessage2");
+
+                        if(userPwd == pwdCheck) {
+                            // 비밀번호가 일치할때
+                            pwdMessage2.style.display = "none";
+                        } else {
+                            // 비밀번호가 일치하지 않을때
+                            pwdMessage2.style.display = "inline-block";
+                        }
+
+                    }
+
+                    function nickCheck(){
+
+                        var $nickCheck = $("#userNick");
+                        var $nickCheckBtn = $("#nickCheckBtn");
+                        var regExp = /^[가-힣a-z\d]{2,8}$/i;
+
+                        if(regExp.test($nickCheck.val()) == true) {
+                            // 닉네임 양식이 맞음
+                            $.ajax({
+                                url:"nickCheck.me",
+                                data:{checkNick:$nickCheck.val()}, //키 checkNick | 값 $nickCheck.val()
+                                success:function(result){
+                                    if(result == 'NNNNN') {
+                                        alert("이미 존재하거나 탈퇴한 회원의 닉네임입니다.");
+                                        $nickCheck.focus();
+                                    } else {
+                                        if(confirm("사용가능한 닉네임입니다. 해당 닉네임을 사용하시겠습니까? \n확인을 누르면 더이상 닉네임을 변경할 수 없습니다.\n(가입 후 마이페이지에서 변경 가능)")) {
+                                            $nickCheck.attr("readonly", true);
+                                            nickCheckNum = 1;
+                                            $nickCheckBtn.attr("disabled", true);
+                                        } else {
+                                            $nickCheck.focus();
+                                        }
+                                    }
+                                },
+                                error:function(){
+                                    console.log("닉네임 중복체크용 ajax 실패");
+                                }
+                            })
+
+                        } else {
+                            // 닉네임 양식이 틀림
+                            alert("양식에 맞는 닉네임으로 다시 입력해주세요.");
+                            $nickCheck.focus();
+                        }
 
                     }
 
@@ -266,6 +387,91 @@
                             document.getElementById(elId+"_btn").style.color = "#0e332c";
                         }
                     }
+
+                    function enrollCheck(){
+
+                        // 비밀번호용 객체
+                        var userPwd = document.getElementById("userPwd").value;
+                        var pwdCheck = document.getElementById("pwdCheck").value;
+                        var regExpPwd = /^[a-z\d!@#$%^&*]{8,16}$/i;
+                        // 이름용 객체
+                        var userName = document.getElementById("userName").value;
+                        var regExpName = /^[가-힣]{2,6}$/;
+                        // 생년월일용 객체
+                        var year = document.getElementById("year").value;
+                        var month = document.getElementById("month").value;
+                        var day = document.getElementById("day").value;
+                        // 휴대폰번호용 객체
+                        var phone = document.getElementById("phone").value;
+                        var regExpPhone = /^[\d]{3}[-]{1}[\d]{4}[-]{1}[\d]{4}$/;
+                        // 이메일용 객체
+                        var email = document.getElementById("email").value;
+                        var regExpEmail = /^[a-z0-9_-]+@[a-z0-9_-]+\.[a-z0-9_-]+$/i;
+
+                        if(idCheckNum == 0) {
+                            alert("아이디 중복확인 완료 후 가입할 수 있습니다.");
+                            return false;
+                        }
+
+                        if(regExpPwd.test(userPwd) == true) {
+                            // 비밀번호 양식에 맞게 입력
+
+                            if(userPwd == pwdCheck) {
+                                // 비밀번호가 일치할때
+                            } else {
+                                alert("비밀번호가 일치하지 않습니다.");
+                                return false;
+                            }
+
+                        } else {
+                            alert("비밀번호를 양식에 맞게 입력해주세요.");
+                            return false;
+                        }
+
+                        if(nickCheckNum == 0) {
+                            alert("닉네임 중복확인 완료 후 가입할 수 있습니다.");
+                            return false;
+                        }
+
+                        if(regExpName.test(userName) == true){
+                            // 이름 양식에 맞게 입력
+                        } else {
+                            alert("이름을 양식에 맞게 입력해주세요.\n7자 이상의 이름이나 외국인 회원은 고객센터로 문의바랍니다.");
+                            return false;
+                        }
+
+                        if(year == '년도') {
+                            alert("생년월일을 모두 입력해주세요.");
+                            return false;
+                        } else if(month == '월') {
+                            alert("생년월일을 모두 입력해주세요.");
+                            return false;
+                        } else if(day == '일') {
+                            alert("생년월일을 모두 입력해주세요.");
+                            return false;
+                        }
+
+                        if(regExpPhone.test(phone) == true) {
+                            // 휴대폰번호 양식에 맞게 입력
+                        } else {
+                            alert("휴대폰번호를 양식에 맞게 입력해주세요.");
+                            return false;
+                        }
+
+                        if(regExpEmail.test(email) == true) {
+                            // 이메일 양식에 맞게 입력
+                        } else {
+                            alert("이메일주소를 양식에 맞게 입력해주세요.");
+                            return false;
+                        }
+
+
+
+
+                        return true;
+
+                    }
+
                 </script>
             </div>
         </content>

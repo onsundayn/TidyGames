@@ -123,5 +123,17 @@
 		 WHERE MEM_ID = ?
 	</entry>
 	
+	<entry key="idCheck">
+		SELECT COUNT(*) "COUNT"
+		  FROM MEMBER
+		 WHERE MEM_ID = ?
+	</entry>
+	
+	<entry key="nickCheck">
+		SELECT COUNT(*) "COUNT"
+		  FROM MEMBER
+		 WHERE MEM_NICK = ?
+	</entry>
+	
 	
 </properties>
