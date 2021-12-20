@@ -38,39 +38,24 @@ public class QnaInsertController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
-		
-
-		
-		Notice qna = new Notice();
-		String Writer = request.getParameter("user");
-		String Title = request.getParameter("title");
-		String Content = request.getParameter("content");
-		
-		System.out.println(Writer);
-		
-		
-		qna.setNotiWriter(Writer);
-		qna.setNotiTitle(Title);
-		qna.setNotiContent(Content);
-		
-		int result = new QnaService().insertQna(qna);
-		
 		
 		if(ServletFileUpload.isMultipartContent(request)) {
+			System.out.println("시작은됨");
+			
 			int maxSize = 10*1024*1024;
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/board_upfiles/");
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 		
-			Notice qna1 = new Notice();
-			String Writer1 = multiRequest.getParameter("user");
-			String Title1 = multiRequest.getParameter("title");
-			String Content1 = multiRequest.getParameter("content");
+			Notice qna = new Notice();
+			String Writer = multiRequest.getParameter("user");
+			String Title = multiRequest.getParameter("title");
+			String Content = multiRequest.getParameter("content");
 			
 			qna.setNotiWriter(Writer);
 			qna.setNotiTitle(Title);
 			qna.setNotiContent(Content);
+			
+			System.out.println(qna);
 			
 			Attachment at = null;
 			
@@ -81,9 +66,10 @@ public class QnaInsertController extends HttpServlet {
 				at.setFilePath("resources/board_upfiles/");
 			}
 			
+			int result = new QnaService().insertQna(qna, at);
 			
 			if(result > 0) {
-				
+				System.out.println("성공");
 				request.getSession().setAttribute("alertMsg", "문의글이 등록되었습니다.");
 				response.sendRedirect(request.getContextPath());
 
@@ -92,18 +78,15 @@ public class QnaInsertController extends HttpServlet {
 				if(at != null) {
 					new File(savePath + at.getChangeName()).delete(); 
 				}
-				
+				System.out.println("오류");
 				request.setAttribute("errorMsg", "오류 발생");
 				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 			}
 		
 		
 		}
+	
 		
-		if(result > 0) {
-			request.getSession().setAttribute("alertMsg", "문의글이 등록되었습니다.");
-			response.sendRedirect(request.getContextPath());			
-		}
 	}
 
 	/**

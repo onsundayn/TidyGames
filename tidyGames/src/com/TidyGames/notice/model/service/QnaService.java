@@ -10,16 +10,25 @@ import com.TidyGames.notice.model.vo.Notice;
 
 public class QnaService {
 
-	public int insertQna(Notice qna) {
+	public int insertQna(Notice qna, Attachment at) {
 		
 		Connection conn = getConnection();
 
-		int result = new QnaDao().insertQna(conn, qna);
+		int result1 = new QnaDao().insertQna(conn, qna);
+		int result2 = 1;
+		if(at != null) {
+			result2 = new QnaDao().insertAttachment(conn, at);
+		}
+		
+		if(result1 > 0 && result2 > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
 		
 		close(conn);
-		return result;
 		
-		
+		return result1 * result2;
 	}
 	
 }

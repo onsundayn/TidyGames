@@ -136,9 +136,8 @@
         <!-- 로그인을 안 한 사용자는 현재 페이지로 접근할 수 없음! -->
         
             <div id="tableOut1">
-            <form action="<%= contextPath %>/insertQna.me" method="post">
-            <!--  enctype="multpart/form-data" -->
-				<input type="hidden" name="user" value="<%= loginUser.getMemNo() %>">
+            <form action="<%= contextPath %>/insertQna.me" method="post" enctype="multipart/form-data">
+ 				<input type="hidden" name="user" value="<%= loginUser.getMemNo() %>">
                 <table id="table" class="table table-dark" align="center">
                     <tr>
                         <td width="100%" align="center">
@@ -153,7 +152,9 @@
                     <tr>
                         
 
-                        <td colspan="3"><input id="upfile" type="file" name="upfile"></td>
+                        <td colspan="3"><input id="upfile" type="file" name="upfile">
+                        	
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="3" align="center">

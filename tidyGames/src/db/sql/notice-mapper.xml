@@ -18,4 +18,23 @@
 			  , ?
 			  )
 	</entry>
+	<entry key="insertAttachment">
+		INSERT
+			  INTO QNA_FILE
+			  (
+			   FILE_NO
+			 , QNA_NO
+			 , FILE_ORIGIN
+			 , FILE_CHANGE
+			 , FILE_PATH
+			  )
+			  VALUES
+			  (
+			    SEQ_QFNO_K.NEXTVAL
+			  , SEQ_QNO_K.CURRVAL
+			  , ?
+			  , ?
+			  , ?
+			  )
+	</entry>
 </properties>
