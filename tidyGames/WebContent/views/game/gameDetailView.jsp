@@ -263,63 +263,90 @@
       
     }
    
+    
+     function wishConfirm(gameNo, aEl){
+     	
+     	$.ajax({
+     		url : "wishInsert.me",
+     		data : {
+     			
+     			gameNo:gameNo
+     		},
+     		type:"post",
+     		success:function(result) {
+     		
+     			
+     			if(result > 0 ) {
+  
+     				if(confirm("찜목록에 담겼습니다. 찜목록페이지로 이동하시겠습니까?")){
+     					
+     					location.href='<%=contextPath%>/wishList.me';
+     					
+     		    	}else {
+     		    		// 채워진 하트로 바꿔줘야됨 
+     		    		$(aEl).children().removeClass("far");
+     		    		$(aEl).children().addClass("fas");
+     		    		$(aEl).click(function(){
+     		    			return wishDelete(gameNo);
+     		    		})
+     		    	}
+     		    		
+     			
+     			}
+     			
+     		},error:function() {
+     			console.log("찜목록 담기 실패!")
+     		}
+     	})
+     	
+     	
+     }
      
-      function wishConfirm(gameNo){
-             
-             $.ajax({
-                url : "wishInsert.me",
-                data : {
-                   
-                   gameNo:gameNo
-                },
-                type:"post",
-                success:function(result) {
-                   
-                   
-                   if(result == 1) {
-       
-                      if(confirm("찜목록에 담겼습니다. 찜목록페이지로 이동하시겠습니까?")){
-                         
-                         location.href='<%=contextPath%>/wishList.me';
-                       }
-                   
-                   }
-                   
-                },error:function() {
-                   console.log("찜목록 담기 실패!")
-                }
-             })
-             return false;
-             
-            
-          }
-    
-    
-      function wishDelete(gameNo){
-      
-      $.ajax({
-         url : "wishDe.me",
-         data : {
-            
-            gameNo:gameNo
-         },
-         type:"post",
-         success:function(result) {
-         
-            
-            if(result > 0 ) {
-   
-               alert("찜목록에서 삭제되었습니다.")
-            
-            }
-            
-         },error:function() {
-            console.log("찜목록 삭제 실패!")
-         }
-      })
+     
+ 	function wishDelete(gameNo, aE2){
+ 	
+ 	$.ajax({
+ 		url : "wishDe.me",
+ 		data : {
+ 			
+ 			gameNo:gameNo
+ 		},
+ 		type:"post",
+ 		success:function(result) {
+ 		
+ 				if(result > 0 ) {
+ 					 
+     				if(alert("찜목록이 해제되었습니다.")){
+     					
+     		    		// 빈하트로 채워줘야함
+     		    		$(aE2).children().removeClass("fas");
+     		    		$(aE2).children().addClass("far");
+     		    		$(aE2).click(function(){
+     		    			return wishDelete(gameNo);
+     		    		})
+     		    		
+     			}
+ 			
+ 				//alert("찜목록에서 삭제되었습니다.")
+ 				
+ 			
+ 				}
+ 			
+ 			
+ 		},error:function() {
+ 			console.log("찜목록 삭제 실패!")
+ 		}
+ 	})
 
-   }
-    </script>
+ 	
+ 	
+ 		        	
+ 	
+ }
+    			
+     </script>
+
+
     
     
     

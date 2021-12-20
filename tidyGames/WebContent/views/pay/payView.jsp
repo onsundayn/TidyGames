@@ -258,7 +258,7 @@ tbody {
 					<div class="area1">&nbsp;TIDY POINT</div>
 					<div class="area1">
 						<span style="font-size: 15px; text-align: center; color: grey;">&nbsp;
-							보유 POINT</span>___________ <span style="text-align: right;"><%=sum.getSum()%></span>&nbsp;POINT
+							보유 POINT</span>___________ <span style="text-align: right;" id="pointsum"><%=sum.getSum()%></span>&nbsp;POINT
 						<div>
 							<button class="use_btn">전액사용</button>
 						</div>
@@ -399,10 +399,14 @@ tbody {
 			
 			
 			
-			
 		})
 		
-		
+		$(function(){
+			
+			$("#usePoint").keyup(function(){
+			const tmp = $("#usePoint").val();
+			$("#pointsum").html(<%=sum.getSum()%>-tmp)
+			
 
 
 
