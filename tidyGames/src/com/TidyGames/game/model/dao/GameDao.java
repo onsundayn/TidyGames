@@ -266,11 +266,12 @@ private Properties prop = new Properties();
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(new Game(rset.getString("kor_name"),
+				list.add(new Game(rset.getInt("game_no"),
+								  rset.getString("kor_name"),
 								  rset.getString("eng_name"),
 							      rset.getInt("price"),
 								  rset.getString("confirm"),
-							  	  rset.getString("upgame"),
+								  rset.getString("upgame"),
 								  rset.getString("upload_date")));
 									 
 			}
@@ -333,6 +334,105 @@ private Properties prop = new Properties();
 			close(pstmt);
 		}
 		return result;
+	}
+	
+	// 게임 첨부파일 조회
+	public Attachment3 selectAttachment(Connection conn, int gameNo) {
+		// select문
+		Attachment3 at = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectAttachment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, gameNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				at = new Attachment3();
+				at.setFileNo(rset.getInt("file_no"));
+				at.setOriginName(rset.getString("origin_name"));
+				at.setChangeName(rset.getString("change_name"));
+				at.setFilePath(rset.getString("file_path"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return at;
+		
+	}
+	
+	public int updateGame(Connection conn, Game ga) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateGame");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, ga.getKorName());
+			pstmt.setString(2, ga.getEngName());
+			pstmt.setString(3, ga.getGameIntro());
+			pstmt.setInt(4, ga.getPrice());
+			pstmt.setString(5, ga.getGameImg());
+			pstmt.setInt(6, ga.getGameNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		System.out.println(result);
+		return result;
+	}
+	
+	public int updateAttachment(Connection conn, Attachment3 at) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateAttachment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, at.getOriginName());
+			pstmt.setString(2, at.getChangeName());
+			pstmt.setString(3, at.getFilePath());
+			pstmt.setInt(4, at.getFileNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	public int insertNewAttachment(Connection conn, Attachment3 at, Game ga) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertNewAttachment");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, ga.getGameNo());
+			pstmt.setInt(2, ga.getGameNo());
+			pstmt.setString(3, at.getOriginName());
+			pstmt.setString(4, at.getChangeName());
+			pstmt.setString(5, at.getFilePath());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+		
 	}
 	
 }

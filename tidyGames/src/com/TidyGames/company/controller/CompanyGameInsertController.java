@@ -1,5 +1,6 @@
 package com.TidyGames.company.controller;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -40,7 +41,7 @@ public class CompanyGameInsertController extends HttpServlet {
 		
 		if(ServletFileUpload.isMultipartContent(request)) {
 			// 최대사이즈
-			int maxSize = 200*1024*1024;
+			int maxSize = 600*1024*1024;
 			// 저장할경로
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/game_upfiles/");
 			
@@ -87,7 +88,12 @@ public class CompanyGameInsertController extends HttpServlet {
 				session.setAttribute("alertMsg", "성공적으로 업로드 되었습니다.");
 				response.sendRedirect(request.getContextPath() + "/gameList.gc");
 				
-			}else { // 실패 => 실패메세지, 폼초기화 후 다시 그 페이지 
+			}else { // 실패 => 실패메세지, 폼초기화 후 다시 그 페이지  + 첨부파일 업도르된거 삭제후 에러페이지
+				
+				if(at != null) {
+					new File(savePath + at.getChangeName()).delete();
+				}
+				
 				request.setAttribute("errorMsg", "게임 업로드 실패");
 				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 				// ex)setAttribute로 값 전달하고  jsp에서는 그 값이 들어오면  페이지 이동없이 ajax로 폼 초기화 

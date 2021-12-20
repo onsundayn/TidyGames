@@ -40,10 +40,6 @@
         margin-top: 50px;
         margin-left: 90px;
     }
-    .uploadList>tbody>tr:hover{
-    	background:gray;
-    	cursor:pointer;
-    }
 </style>
 </head>
 <body style="background-color: #0e332c;">
@@ -54,7 +50,7 @@
     <div class="outer">
 
         <div class="menu-name">
-            <h2>업로드한 게임 목록</h2>
+            <h2>보유 게임 목록</h2>
         </div>
 
         <table class="uploadList">
@@ -63,13 +59,12 @@
                 <th>번호</th>
                 <th>게임명</th>
                 <th>가격</th>
-                <th>등록일</th>
-                <th>승인상태</th>
+                <th>마지막 업데이트 날짜</th>
                 <th>업데이트</th>
             </tr>
             <% for(Game g : list) { %>
             <tr>
-                <td>1</td>
+                <td>1<%++%></td>
                 <td><%=g.getKorName()%>(<%=g.getEngName()%>)</td>
                 <td><%=g.getPrice()%></td>
                 <td><%=g.getUploadDate()%></td>
@@ -81,8 +76,8 @@
                 <td><a href="gameCompanyEnrollForm.jsp" class="btn btn-sm btn-warning">미승인</a></td>
                 	<% } %>
                 	
-                	<% if ((g.getConfirm()).equals("Y")) { %>
-                <td><a href="<%=contextPath %>/updateForm.gc?gno=<%=g.getGameNo()%>" class="btn btn-sm btn-primary" id="up">업데이트</a></td>
+                	<% if ((g.getUpgame()).equals("Y")) { %>
+                <td><a href="gameCompanyUpdateForm.jsp" class="btn btn-sm btn-primary">업데이트</a></td>
                		<% } else { %>
                	<td></td>
                	<% } %>
@@ -91,6 +86,8 @@
       
 
         </table>
+
+
     </div>
 
 	

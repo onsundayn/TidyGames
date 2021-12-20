@@ -105,5 +105,47 @@ public class GameService {
 		
 		return result1 * result2;
 	}
+	
+	public Attachment3 selectAttachment(int gameNo) {
+		Connection conn = getConnection();
+		Attachment3 at = new GameDao().selectAttachment(conn, gameNo);
+		close(conn);
+		return at;
+	}
+	
+	public int updateGame(Game ga, ArrayList<Attachment3> list) {
+		
+		Connection conn = getConnection();
+		int result1 = new GameDao().updateGame(conn, ga);
+		
+		int result2 = 1;
+		int[] resultArray = new int[6];
+		for(Attachment3 at : list) {
+			if(at != null) { // 새로운 첨부파일이 있었을 경우 
+				if(at.getFileNo() != 0) { // 기존의 첨부파일이 있었을 경우 => Attachment Update
+					result2 = new GameDao().updateAttachment(conn, at);
+				}else { // => Attachment Insert // 없을경우 
+					result2 = new GameDao().insertNewAttachment(conn, at, ga);
+				}
+				
+				for(int i=0; i<=6; i++) {
+						resultArray[i] += result2;
+				}
+				for(int i=0; i<=6; i++) {
+					result2 *= resultArray[i];
+				}	
+			}
+		}
+		
+		if(result1 > 0 && result2 > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result1 * result2;
+	}
+	
 
 }

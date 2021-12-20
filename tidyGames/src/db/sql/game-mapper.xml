@@ -17,7 +17,7 @@
            , GAME_IMG 
            , (SELECT COUNT(*) FROM WISHLIST W WHERE W.MEM_NO= ? AND G.GAME_NO =W.GAME_NO ) AS count
          FROM GAME G
-		 WHERE UPPER(KOR_NAME || ENG_NAME) LIKE UPPER('%' || ? || '%') 
+		 WHERE UPPER(KOR_NAME || ENG_NAME) LIKE UPPER('%' || ? || '%') AND CONFIRM = 'Y'
 	</entry>
 	
 	
@@ -116,7 +116,8 @@
 	
 	<entry key="selectGameListGC">
 		SELECT
-		      KOR_NAME
+			  GAME_NO
+		    , KOR_NAME
 		    , ENG_NAME
 		    , PRICE
 		    , UPLOAD_DATE
@@ -178,6 +179,64 @@
 			  , ?
 			  , 2
 			  )
+	</entry>
+	
+	<entry key="selectAttachment">
+		SELECT
+		       FILE_NO
+		     , ORIGIN_NAME
+		     , CHANGE_NAME
+		     , FILE_PATH
+		  FROM UPLOAD_FILE
+		 WHERE GAME_NO = ?
+	
+	</entry>
+	
+	<entry key="updateGame">
+		UPDATE
+		       GAME
+		   SET KOR_NAME =?
+		     , ENG_NAME =?
+		     , GAME_INTRO = ?
+		     , PRICE = ?
+		     , GAME_IMG = ?
+		WHERE GAME_NO = ?
+	</entry>
+	
+	<entry key="updateAttachment">
+		UPDATE
+		       UPLOAD_FILE
+		   SET ORIGIN_NAME = ?
+		     , CHANGE_NAME = ?
+		     , FILE_PATH = ?
+		WHERE FILE_NO = ?
+	</entry>
+	
+	<entry key="insertNewAttachment">
+		INSERT
+		  INTO UPLOAD_FILE
+		  (
+		    FILE_NO
+		  , GAME_NO
+		  , REF_BNO
+		  , ORIGIN_NAME
+		  , CHANGE_NAME
+		  , UPLOAD_DATE
+		  , FILE_PATH
+		  , FILE_TYPE
+		  )
+		  VALUES
+		  (
+		    SEQ_UP_NO.NEXTVAL
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , SYSDATE
+		  , ?
+		  , ?
+		  )
+	
 	</entry>
 
 
