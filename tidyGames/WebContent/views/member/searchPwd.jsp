@@ -61,7 +61,7 @@
         color: white;
         font-weight: bold;
         font-size: 14px;
-        margin-top: 80px;
+        margin-top: 70px;
     }
     .code_btn{
         width: 29%; 
@@ -110,7 +110,8 @@
                                 ● 본인확인 이메일 인증<br>
                             </span>
                             <span style="color: lightgray; font-size: 15px;">
-                                가입시 입력한 아이디와 이메일 주소를 작성해주세요.
+                                가입시 입력한 아이디와 이메일 주소를 작성해주세요. <br>
+                                다음 버튼을 누른 뒤 약간의 시간이 소요될 수 있습니다. 
                             </span>
                         </div>
                         <br><br>

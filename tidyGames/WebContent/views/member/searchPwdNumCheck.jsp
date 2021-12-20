@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%
 	String contextPath = request.getContextPath();
+	int pwdCheckNum = (int)session.getAttribute("pwdCheckNum");
 %>
 <!DOCTYPE html>
 <html>
@@ -91,7 +92,7 @@
 
         <content>
             <div id="content" align="center">
-                <form action="<%= contextPath %>/UpdatePwd.me" method="post">
+                <form action="<%= contextPath %>/updatePwd.me" method="post" onsubmit="return check();">
                     <div id="find_id_form">
                         <span style="color: white; font-size: 20px; font-weight: bold;">비밀번호 재설정</span>
                         <br><br><hr>
@@ -108,8 +109,9 @@
 
                         <div align="left" class="search_user">
                             <div>인증번호</div>
-                            <input type="number" name="numCk" style="width: 80%;" maxlength="6" required>
+                            <input type="number" id="numCk" name="numCk" style="width: 80%;" maxlength="6" required>
                             <br>
+                            <input type="hidden" id="pwdCheckNum" name="pwdCheckNum" value="<%= pwdCheckNum %>">
                         </div>
                         <br><br><br>
 
@@ -121,11 +123,30 @@
                     </div>
                 </form>
                 <script>
+                    /*
                 	function page(){
                 		
                         location.href ="<%= contextPath %>/inputSearchPwd.me";
 
                 	}
+                    */
+
+                    function check(){
+                        
+                        var numCk = document.getElementById("numCk").value;
+                        var pwdCheckNum = document.getElementById("pwdCheckNum").value;
+
+                        if(numCk == pwdCheckNum) {
+                            // 인증번호를 제대로 입력했음
+                            return true;
+                        } else {
+                            // 인증번호 제대로 입력 안했음
+                            alert("인증번호를 다시 확인해주세요.");
+                            return false;
+                        }
+
+                    }
+
                 </script>
             </div>
         </content>

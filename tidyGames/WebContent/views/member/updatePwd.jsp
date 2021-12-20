@@ -60,7 +60,7 @@
         color: white;
         font-weight: bold;
         font-size: 14px;
-        margin-top: 120px;
+        margin-top: 170px;
     }
     .code_btn{
         width: 29%; 
@@ -96,9 +96,9 @@
 
         <content>
             <div id="content" align="center">
-                <form action="updatePwdFinish.jsp" method="">
+                <form action="<%= contextPath %>/" method="post" onsubmit="return check();">
                     <div id="search_id_form">
-                        <span style="color: white; font-size: 20px; font-weight: bold; ">비밀번호 재설정</span>
+                        <span style="color: white; font-size: 20px; font-weight: bold;">비밀번호 재설정</span>
                         <br><br><hr>
 
                         <div align="left">
@@ -108,9 +108,9 @@
                             <br><br>
 
                             <div class="updatePwd">
-                                <input type="password" name="updatePwd" placeholder="새 비밀번호 입력" style="float: left; margin-right: 10px;">
+                                <input type="password" id="updatePwd" name="updatePwd" placeholder="새 비밀번호 입력" style="float: left; margin-right: 10px;">
 
-                                <input type="password" placeholder="새 비밀번호 확인" style="float: left; margin-right: 10px;"><br>
+                                <input type="password" id="checkPwd" placeholder="새 비밀번호 확인" style="float: left; margin-right: 10px;"><br>
                                 <br><br>
                                 <span style="color: lightgray; font-size: 14px;">
                                     8~16자의 영문 대소문자, 숫자, 특수문자(!,@,#,$,%,^,&,*) 사용 가능합니다.
@@ -119,12 +119,36 @@
 
                         </div>
                         
-                        <button type="submit" class="next_btn">확인</button>
+                        <button type="submit" class="next_btn">변경</button>
 
                     </div>
                 </form>
                 <script>
+                    function check(){
+                        
+                        var updatePwd = document.getElementById("updatePwd").value;
+                        var checkPwd = document.getElementById("checkPwd").value;
+                        var regExp = /^[a-z\d!@#$%^&*]{8,16}$/i;
+                        
+                        if(regExp.test(updatePwd) == true) {
+                            // 비밀번호 양식이 맞음
+                        } else {
+                            // 비밀번호 양식이 다름
+                            alert("비밀번호 양식을 다시 확인해주세요.");
+                            return false;
+                        }
+                        
+                        if(updatePwd == checkPwd) {
+                            // 비밀번호가 서로 같음
+                        } else{
+                            // 비밀번호가 서로 다름
+                            alert("비밀번호가 일치하지 않습니다.");
+                            return false;
+                        }
 
+                        return true;
+
+                    }
                 </script>
             </div>
         </content>
