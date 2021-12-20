@@ -40,18 +40,112 @@
 		   AND POST_STATUS = 'Y'
 	</entry>
 	
-	<entry key="selectPostDetail">
+	<entry key="confirmMember">
 		SELECT
-		       POST_NO
-		     , POST_WRITER
-		     , POST_NAME
-		     , MEM_NICK
-		     , TO_CHAR(POST_MODIFY, 'YYYY/MM/DD HH24:mm:SS') "POST_MODIFY"
-		     , POST_VIEW
-		     , POST_LIKE
-		     , POST_CONTENT
-		  FROM POST
-		  JOIN MEMBER ON (POST_WRITER = MEM_NO)
+			   MEM_ACCESS
+		  FROM MEMBER
+		 WHERE MEM_ID = ?
+	</entry>
+	
+	<entry key="selectPostDetail">
+		SELECT *
+  		  FROM (
+  				SELECT
+		     		   POST_NO
+		             , POST_WRITER
+		             , POST_NAME
+		             , MEM_NICK
+		             , TO_CHAR(POST_MODIFY, 'YYYY/MM/DD HH24:mm:SS') "POST_MODIFY"
+		             , POST_VIEW
+		             , POST_LIKE
+		             , POST_CONTENT
+		             , LAG(POST_NO) OVER(ORDER BY POST_NO) PREV_NO
+		             , LEAD(POST_NO) OVER(ORDER BY POST_NO) NEXT_NO
+		          FROM POST
+		          JOIN MEMBER ON (POST_WRITER = MEM_NO)
+        		 )
+		 WHERE POST_NO = ?
+	</entry>
+	
+	<entry key="selectPostFile">
+		SELECT
+		        FILE_NO
+		      , FILE_ORIGIN
+		      , FILE_CHANGE
+		      , FILE_PATH
+		   FROM POST_FILE
+		  WHERE FILE_STATUS = 'Y'
+		    AND REF_POST = ?
+	</entry>
+	
+	<entry key="firstPostNo">
+		SELECT
+		       POST_NO FIRSTPOST
+		  FROM (
+		        SELECT POST_NO
+		          FROM POST
+		         ORDER
+		            BY POST_NO
+		        )
+		 WHERE ROWNUM=1
+	</entry>
+	
+	<entry key="lastPostNo">
+		SELECT
+		       POST_NO LASTPOST
+		  FROM (
+		        SELECT POST_NO
+		          FROM POST
+		         ORDER
+		            BY POST_NO DESC
+		        )
+		 WHERE ROWNUM=1
+	</entry>
+	
+	<entry key="insertPost">
+		INSERT
+		  INTO POST
+		  (
+		  	POST_NO
+		  , POST_WRITER
+		  , POST_NAME
+		  , POST_CONTENT
+		  , POST_NOTICE
+		  )
+		  VALUES
+		  (
+		  	SEQ_PNO.NEXTVAL
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  )
+	</entry>
+	
+	<entry key="insertFile">
+		INSERT
+		  INTO POST_FILE
+		  (
+		  	FILE_NO
+		  , REF_POST
+		  , FILE_ORIGIN
+		  , FILE_CHANGE
+		  , FILE_PATH
+		  )
+		  VALUES
+		  (
+		  	SEQ_FNO.NEXTVAL
+		  , SEQ_PNO.CURRVAL
+		  , ?
+		  , ?
+		  , ?
+		  )
+	</entry>
+	
+	<entry key="deletePost">
+		UPDATE
+		       POST
+		   SET POST_STATUS = 'N'
 		 WHERE POST_NO = ?
 	</entry>
 
