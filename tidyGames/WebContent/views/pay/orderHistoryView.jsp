@@ -1,11 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import ="java.util.ArrayList, com.TidyGames.pay.model.vo.*"%>
+    
+ <%
+ ArrayList<PayGame> order = (ArrayList<PayGame>)request.getAttribute("order");
+ %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+
     /* 전체div */
     #outer{
         width:1500px;
@@ -31,36 +36,61 @@
     /* 검색영역 */
     .area2{
         border: 1px solid blue;
-        width: 1200px;
-        height:80px;
-        margin-left: 70px;
-        
+        width: 1000px;
+        height:150px;
+        margin-left: 100px;
+      
         
         
     }
     /* 검색바 */
     .searchname div{
         display:inline;
-        
+       
+    }   
+    #searchtext{
+       border-radius: 3px;
+       width: 600px; 
+        height:40px;
+        border: 1px solid white;
+        margin-left: 150px;
+        margin-top: 30px;
+   
     }
     /* select */
     .searchbar{
         margin-top : 60px;
         margin-left: 100px;
+      
     }
+   
+
 
     .dateSearch .searchname{
         display: inline;
+        margin-top: 30px;
     }
     /* 주문내역 게임 1개 영역 */
     .area3{
         width: 1200px;
-        height: 350px;
+        height: 280px;
         border: 1px solid violet;
-        margin-left: 70px;
+        
+        margin-top: 30px;
+    }
+
+    .paging-area{
+        border: 1px solid red;
+        width: 1000px;
+        height: 50px;
+        margin-top: 40px;
+        margin-right: 150px;
+        text-align: center;
+        float: right;
     }
 
     .paging-area>button {
+        
         border-radius: 5px;
         background: none;
         border: none;
@@ -77,6 +107,63 @@
         color:orange;
     }
 
+     /* 달력 div */
+     .datetable{
+        display: inline-block;
+    }
+    .datetable>input{
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    /* 달력 정렬 조회 영역 */
+    .area4{
+        width: 700px;
+        float: right;
+      
+        height: 50px;
+        border: 1px solid red;
+       
+        margin: 30px 150px 30px 0px;
+    }
+
+    /* 주문영역 */
+    table.shoping-cart-table tr td.desc,
+	table.shoping-cart-table tr td:first-child {
+	  text-align: left;
+	}
+	    table.shoping-cart-table {
+	  margin-bottom: 0;
+	}
+	table.shoping-cart-table tr td {
+	  border: none;
+	  text-align: right;
+	}
+	table.shoping-cart-table tr td.desc,
+	table.shoping-cart-table tr td:first-child {
+	  text-align: left;
+	}
+	table.shoping-cart-table tr td:last-child {
+	  width: 80px;
+	}
+	.ibox.collapsed .ibox-content {
+	  display: none;
+	}
+	.ibox-content {
+	  background-color: #ffffff;
+	  color: inherit;
+	  padding: 15px 20px 20px 20px;
+	  border-color: #e7eaec;
+	  border-image: none;
+	  border-style: solid solid none;
+	  border-width: 1px 0;
+	}
+
+
+    .butt{
+        width: 100px;
+        height: 40px;
+    }
 </style>
 </head>
 <body>
@@ -100,153 +187,114 @@
             <div class="area2">
                 <div class="dateSearch">
                    
-                    <select class="btn btn-outline-secondary" style="color: white;">
-                        <option selected >조회기간</option>
-                        <option value="weekend" >일주일</option>
-                        <option value="month">한달</option>
-                        <option vlaue="threemonth">3개월</option>
-                        <option value="sixmonth">6개월</option>
-                        <option value="year">1년</option>
-            
-                    </select>
-                    &nbsp; &nbsp;
-                    <select class="btn btn-outline-secondary" style="color: white;">
-                        <option selected value="uptodate">최신순</option>
-                        <option value="olddae" >오래된순</option>
-
-                    </select>
+                  
                     
-                    &nbsp; &nbsp; &nbsp; &nbsp;
-                    <div class="searchname">
+                    
+                    <div class="searchname" >
                         <div id="game_search">
-                            <input type="text" name="keyword" style="border-radius: 3px; width: 800px; height:40px; border: 1px solid white;" placeholder="게임명을 입력해주세요">
+                            <input type="text" id="searchtext" name="keyword"  placeholder="게임명을 입력해주세요">
                         </div>
                         
                         <div id="search_btn">
                             <button type="submit" id="icon_btn"><i class="fas fa-search"></i></button>
+                           
                         </div>
                 
                     </div>
                 </div>
-
+                <div class="area4">
+                    <div class="datetable">
+                        <input type="date" name="startDate" class="date">
+                        <span style="color:black">&nbsp;&nbsp; ~ &nbsp;&nbsp;</span>
+                        <input type="date" name="endDate" class="date">
+                    </div>
+                            
+                    <select class="btn btn-outline-secondary" style="color: white; margin: 0px 50px 0px 50px; height: 30px; font-size: 13px;">
+                        <option selected value="uptodate">최신순</option>
+                        <option value="olddae" >오래된순</option>
+    
+                    </select>
+    
+                    <button type="submit" class="btn btn-sm btn-secondary" style="width: 50px; height: 35px;">조회</button>   
+                 </div>
 
              </div>
              <div id="line1" style="width: 1150px; height: 2px; background: rgba(255, 255, 255, 0.555); margin-left: 50px;"></div>
                 <br><br><br><br>
 
-             <div class="area3">
-                <div class="container" style="color:white;">
-                    <h4 style="font-size: 15px; font-weight: bold;">&nbsp;&nbsp;주문날짜 2021-12-09</h4>
-                    <table class="table table-borderless" style="color:white; border:1px solid grey; background:rgba(20, 20, 20, 0.87)">
-                      <thead>
-                        <tr>
-                          <th colspan="5" style="font-size: 25px; font-weight: bold;">BattleGround</th>
-                        
-                        </tr>
- 
-                    
-                      </thead>
-                      <tbody >
-                        <tr>
-                            <th colspan="5"><div style="width:1100px; height: 2px; background: grey;"></div></th>
-                           
-                        </tr>
-                        <tr>
-                            
-                            <td colspan="2" rowspan="2" width="200px" height="200px" style="text-align: center;">
-                                <img src="<%=contextPath%>/resources/image/battlefield.JPG" width="150px" height="200px">
+          
 
-                            </td> <!-- 1,2열 합쳐서 한 열로, 1,2행 하나로 합쳐서 한행으로-->
-                            <td width ="700" height="40px">
-                             
-                            </td>
-                           
-                            <td width = "200px"> 
-                                
-                            </td>
-                        </tr>
 
-                        <tr>
-                            <td style="font-weight: bold;">   
-                                <div>주문번호 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <a href="">100000</a></div><br>
-                                <div>결제금액 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <span>100000</span></div><br>
-                                <div>결제완료 or 환불중</div>
-                            </td>
-                           
-                            <td>
-                                <div><a href="<%= request.getContextPath() %>/refund.pa" class="btn btn-primary">환불요청</a></div> <br>
-                                <div><a href="<%= request.getContextPath() %>/orderDetail.pa" class="btn btn-secondary">상세보기</a></div>
-                            </td>
-                        </tr>
-                      
 
-                    
-                      </tbody>
-                    </table>
-                </div>
 
+
+
+			 <%for(PayGame p : order){ %>
+             <div class="area3" style="float: right;">
+                <div class="ibox-content" style="background: rgba(0, 0, 0, 0.445);  width: 1000px; height: 280px; margin-right: 150px; float: right;">
+                    <div class="table-responsive" >  
+                               <table class="table shoping-cart-table" >
+                                   <tbody>
+                                   
+                                           <tr>
+                                               <td width="200">
+                                                   <div >
+                                                            <img src="<%=contextPath%>/<%=p.getGameImg()%>" width="220px" height="180px" style="margin-top: 20px; margin-left: 20px;">
+                                                   </div>
+                                               </td>
+       
+                                           
+                                               <td class="desc" width="400">
+                                                   <h3>
+                                                   <a href="#" class="text-navy" style="font-size:18px;">
+                                                        <%=p.getKorName() %> <br>
+                   										<%=p.getEngName() %>
+                                                      </a>
+                                                              
+                                                   </h3><br>
+                                                   
+                                                   <div style="font-size: 14px;">
+                                                   <p style="color:white;">
+                                                    	주문번호 :  <%=p.getOrderNo() %>
+                                                   </p>
+                                                   <p  style="color:white;">
+                                                   		주문날짜 : <%=p.getPayDate() %>
+                                                   </p>
+                                                   <p  style="color:white;">
+                                                    	결제방법 : <%=p.getPayMethod() %>
+                                                    </p>
+                                                   <p style="color:white;">
+                                                    	<%=p.getPayStatus() %>
+                                                    </p>
+                                                </div>
+                                               </td>
+       
+                                            
+                                               <td width="200">
+                                                   <h4 style="color:white; font-size:19px" >
+                                                   
+                                                      	  총결제금액<br><br><span style="margin-right: 20px;"> <%=p.getPayAmount() %></span>원
+                                                       
+                                                       
+                                                        <div style="margin-top: 100px;"><a href="<%=contextPath%>/refund.pa?ono=<%=p.getOrderNo()%>" class="btn btn-primary butt" >환불요청</a></div> <br>
+                                                    	
+                                                        
+                                                   </h4>
+                                               </td>
+                                               
+                                           </tr>
+                                   </tbody>
+                               </table>
+                   
+                   
+                           </div>
+                       </div>
              </div>
 
-
-
-
-
-
-
-             <div class="area3">
-                <div class="container" style="color:white;">
-                    <h4 style="font-size: 15px; font-weight: bold;">&nbsp;&nbsp;주문날짜 2021-12-09</h4>
-                    <table class="table table-borderless" style="color:white; border:1px solid grey; background:rgba(20, 20, 20, 0.87);">
-                      <thead>
-                        <tr>
-                          <th colspan="5" style="font-size: 25px; font-weight: bold;">BattleGround</th>
-                        
-                        </tr>
- 
-                    
-                      </thead>
-                      <tbody >
-                        <tr>
-                            <th colspan="5"><div style="width:1100px; height: 2px; background: grey;"></div></th>
-                           
-                        </tr>
-
-                        <tr>
-                            
-                            <td colspan="2" rowspan="2" width="200px" height="200px" style="text-align: center;">
-                                <img src="<%=contextPath%>/resources/image/battlefield.JPG" width="150px" height="200px">
-
-                            </td> <!-- 1,2열 합쳐서 한 열로, 1,2행 하나로 합쳐서 한행으로-->
-                            <td width ="700" height="40px">
-                             
-                            </td>
-                           
-                            <td width = "200px"> 
-                                
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td style="font-weight: bold;">   
-                                <div>주문번호 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="">100000</a></div><br>
-                                <div>결제금액 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <span>100000</span></div><br>
-                                <div>결제완료 or 환불중</div>
-                            </td>
-                           
-                            <td>
-                                <div><button class="btn btn-primary">환불요청</button></div> <br>
-                                <div><button class="btn btn-secondary">상세보기</button></div>
-                            </td>
-                        </tr>
-                      
-
-                    
-                      </tbody>
-                    </table>
-                </div>
+				<%} %>
 
                 <br><br>
-             <div class="paging-area" align="center">
+             <div class="paging-area" style="float: right;">
 	
                 <button> &lt; </button>
                 <button>1</button>

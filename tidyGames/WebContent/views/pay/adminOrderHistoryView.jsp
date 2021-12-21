@@ -216,7 +216,8 @@
                         <td>2021-11-10</td>
                         <td>27500원</td>
                         <td>환불완료</td>
-                        <td><button class="btn btn-success btn-sm">상세보기</button></td>
+                        <td> <div><a href="<%= request.getContextPath() %>/orderDetail.pa" class="btn btn-secondary butt">상세보기</a></div></td>
+                        
                       </tr>
 
                       <tr><td></td>

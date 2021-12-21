@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import ="java.util.ArrayList, com.TidyGames.pay.model.vo.*"%>
+    
+<%
+ArrayList<Refund> list = (ArrayList<Refund>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -179,7 +183,6 @@
                       <tr style="background: white; color: black;">
                         <th>번호</th>
                         <th>주문번호</th>
-                        <th>제목</th>
                         <th>회원ID</th>
                         <th>결제일</th>
                         <th>결제금액</th>
@@ -188,29 +191,30 @@
                         <th></th>
                       </tr>
                     </thead>
+                    
                     <tbody>
+                    
+                     <%for(Refund rf : list){ %>
                       <tr>
-                        <td>1</td>
-                        <td>10000000</td>
-                        <td>환불요청</td>
-                        <td>user01</td>
-                        <td>2021-11-10</td>
-                        <td>27500원</td>
-                        <td>2021-11-11 19:22</td>
-                        <td style="color:rgb(42, 42, 248);">처리</td>
-                        <td><a href="<%= request.getContextPath()%>/adRefundHandle.pa"class="btn btn-success btn-sm">상세보기</a></td>
+                        <td><%=rf.getRefundNo()%></td>
+                        <td><%=rf.getOrderNo() %></td>
+                        <td><%=rf.getMemId() %></td>
+                        <td>결제일</td>
+                        <td><%=rf.getPayAmount() %></td>
+                        <td><%=rf.getRefundDate() %></td>
+                        <td>
+                        	<% if(rf.getRefundStatus().equals("N")){ %>
+                        			<span style="color: red;">미처리</span>  
+                      		<%} else { %>
+                      			     <span style="color: blue;">처리</span>	
+                      		<%}  %>
+                        
+                        </td>
+                        
+                        <td><a href="<%=request.getContextPath()%>/adRefundHandle.pa" class="btn btn-success btn-sm">상세보기</a></td>
                       </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>10000000</td>
-                        <td>Battlefields</td>
-                        <td>user01</td>
-                        <td>2021-11-10</td>
-                        <td>27500원</td>
-                        <td>결제완료</td>
-                        <td style="color: red;">미처리</td>
-                        <td><button class="btn btn-success btn-sm">상세보기</button></td>
-                      </tr>
+                      
+                      <%} %>
                      
 
                       <tr><td></td>
