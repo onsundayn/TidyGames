@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%
 	String contextPath = request.getContextPath();
+	String insertId = (String)session.getAttribute("insertId");
 %>
 <!DOCTYPE html>
 <html>
@@ -94,7 +95,7 @@
     <header>
         <div id="logo" align="center">
             <a href="<%= contextPath %>">
-                <img src="../../resources/image/tidyLogo.png" style="width:80px; height: 50px;"> <br>
+                <img src="<%=contextPath%>/resources/image/tidyLogo.png" style="width:80px; height: 50px;"> <br>
                 <span style="color: white; font-size: 25px; font-weight: bold;">TIDY GAMES</span>
             </a>
         </div>
@@ -109,10 +110,10 @@
                     <br><br>
 
                     <div align="center" style="color: white; font-weight: bold; margin-top:50px;">
-                        <span>회원님의 아이디는 </span>
-                        <span> 입니다.</span>
+                        <span>회원님의 아이디는 <%= insertId %> 입니다.</span>
                         <br>
                         <span>TIDY GAMES의 가족이 되어주셔서 감사합니다!</span>
+                        <% session.removeAttribute("insertId"); %>
                     </div>
 
                     <div class="login_btn">
@@ -123,7 +124,7 @@
             </form>
             <script>
                 function loginPage(){
-                    location.href = "login.jsp";
+                    location.href = "<%= contextPath %>/login.me";
                 }
             </script>
         </div>

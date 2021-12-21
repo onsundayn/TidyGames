@@ -2,6 +2,7 @@
     pageEncoding="UTF-8" import="java.util.Date"%>
 <%
 	String contextPath = request.getContextPath();
+	String alertMsg = (String)session.getAttribute("alertMsg");
 %>
 <!DOCTYPE html>
 <html>
@@ -14,7 +15,7 @@
     }
     .outer{
         width: 1500px;
-        height: 2500px;
+        height: 2200px;
         background-color: #0e332c;
         margin: auto;
         margin-top: 50px;
@@ -24,7 +25,7 @@
     }
     #content{
         width: 800px;
-        height: 2300px;
+        height: 2000px;
         background-color: rgba(255, 255, 255, 0.5);
         margin: auto;
         margin-top: 50px;
@@ -66,21 +67,21 @@
         display: inline-block; 
         width: 60%; 
     }
-    #category>input{
+    #categoryForm>input{
         margin-bottom:5px;
         display: none;
     }
-    #category>label{
+    #categoryForm>label{
         background-color:white;
         color: #0e332c; 
         border: none; 
         font-weight: bold;
     }
-    #agree>span{
+    #agreeForm>label{
         color:white;
-        margin-left: 10px;
+        margin-left: 5px;
     }
-    #agree>input{
+    #agreeForm>input{
         width: 15px;
         height: 15px;
     }
@@ -91,6 +92,14 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body style="background-color: #0e332c;">
+
+	<% if(alertMsg != null){  %>
+		<script>
+			alert("<%= alertMsg %>");
+		</script>
+		<% session.removeAttribute("alertMsg"); %>
+	<% } %>
+	
     <div class="outer">
         <header>
             <div id="logo" align="center">
@@ -149,7 +158,12 @@
 								<option selected style="display: none;">년도</option>
                             </select>
                             <select name="month" id="month" required style="width: 150px; height: 30px;" onchange="createDay(this);">
-								<% for(int i=1; i<=12; i++) { %>
+								<% for(int i=1; i<=9; i++) { %>
+									<option>
+										0<%= i %>
+									</option>
+								<% } %>
+								<% for(int i=10; i<=12; i++) { %>
 									<option>
 										<%= i %>
 									</option>
@@ -189,53 +203,70 @@
                             <input type="text" name="address" id="address" style="width: 70%;">
                             
                             <div class="sign_up_main">● 선호하는 게임 장르를 선택해주세요! (다수 선택 가능)</div>
-                            <div id="category">
-                                <input type="checkbox" id="action" name="action" onclick="btnStyle('action');">
+                            <div id="categoryForm">
+                                <input type="checkbox" id="action" name="category" value="action" onclick="btnStyle('action');">
                                 <label id="action_btn" class="btn" for="action">액션</label>
-                                <input type="checkbox" id="roll" name="roll" onclick="btnStyle('roll');">
+                                <input type="checkbox" id="roll" name="category" value="roll" onclick="btnStyle('roll');">
                                 <label id="roll_btn" class="btn" for="roll">롤플레잉</label>
-                                <input type="checkbox" id="racing" name="racing" onclick="btnStyle('racing');">
+                                <input type="checkbox" id="racing" name="category" value="racing" onclick="btnStyle('racing');">
                                 <label id="racing_btn" class="btn" for="racing">레이싱</label>
-                                <input type="checkbox" id="simul" name="simul" onclick="btnStyle('simul');">
+                                <input type="checkbox" id="simul" name="category" value="simul" onclick="btnStyle('simul');">
                                 <label id="simul_btn" class="btn" for="simul">시뮬레이션</label>
-                                <input type="checkbox" id="strategy" name="strategy" onclick="btnStyle('strategy');">
+                                <input type="checkbox" id="strategy" name="category" value="strategy" onclick="btnStyle('strategy');">
                                 <label id="strategy_btn" class="btn" for="strategy">전략</label>
-                                <input type="checkbox" id="sport" name="sport" onclick="btnStyle('sport');">
+                                <input type="checkbox" id="sport" name="category" value="sport" onclick="btnStyle('sport');">
                                 <label id="sport_btn" class="btn" for="sport">스포츠</label>
                                 <br>
-                                <input type="checkbox" id="indie" name="indie" onclick="btnStyle('indie');">
+                                <input type="checkbox" id="indie" name="category" value="indie" onclick="btnStyle('indie');">
                                 <label id="indie_btn" class="btn" for="indie">인디</label>
-                                <input type="checkbox" id="casual" name="casual" onclick="btnStyle('casual');">
+                                <input type="checkbox" id="casual" name="category" value="casual" onclick="btnStyle('casual');">
                                 <label id="casual_btn" class="btn" for="casual">캐주얼</label>
-                                <input type="checkbox" id="horror" name="horror" onclick="btnStyle('horror');">
+                                <input type="checkbox" id="horror" name="category" value="horror" onclick="btnStyle('horror');">
                                 <label id="horror_btn" class="btn" for="horror">공포</label>
-                                <input type="checkbox" id="multi" name="multi" onclick="btnStyle('multi');">
+                                <input type="checkbox" id="multi" name="category" value="multi" onclick="btnStyle('multi');">
                                 <label id="multi_btn" class="btn" for="multi">멀티플레이</label>
-                                <input type="checkbox" id="card" name="card" onclick="btnStyle('card');">
+                                <input type="checkbox" id="card" name="category" value="card" onclick="btnStyle('card');">
                                 <label id="card_btn" class="btn" for="card">카드</label>
+                                <input type="checkbox" id="adventure" name="category" value="adventure" onclick="btnStyle('adventure');">
+                                <label id="adventure_btn" class="btn" for="adventure">어드벤처</label>
+                                <input type="checkbox" id="puzzle" name="category" value="puzzle" onclick="btnStyle('puzzle');">
+                                <label id="puzzle_btn" class="btn" for="puzzle">퍼즐</label>
+                                <input type="checkbox" id="cooperation " name="category" value="cooperation " onclick="btnStyle('cooperation ');">
+                                <br>
+                                <label id="cooperation _btn" class="btn" for="cooperation ">협동</label>
+                                <input type="checkbox" id="split" name="category" value="split" onclick="btnStyle('split');">
+                                <label id="split_btn" class="btn" for="split">분할화면</label>
+                                <input type="checkbox" id="science" name="category" value="science" onclick="btnStyle('science');">
+                                <label id="science_btn" class="btn" for="science">공상과학</label>
+                                <input type="checkbox" id="first" name="category" value="first" onclick="btnStyle('first');">
+                                <label id="first_btn" class="btn" for="first">1인칭</label>
+                                <input type="checkbox" id="escape" name="category" value="escape" onclick="btnStyle('escape');">
+                                <label id="escape_btn" class="btn" for="escape">방탈출</label>
+
+
                             </div>
                             <br><br>
 
-                            <div id="agree">
-                                <input type="checkbox" name="allAgree"> <span>모두 동의합니다.</span> <br>
-                                <input type="checkbox" name="agree1"> <span>(필수) 이용약관과 개인정보 수집 및 이용에 동의합니다.</span> <br>
-                                <input type="checkbox" name="agree2"> 
-                                <span>
-                                    (필수) 만 14세 이상입니다.<br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;만 19세 미만의 미성년자가 결제 시 법정대리인이 거래를 취소할 수 있습니다.
-                                </span> <br>
-                                <input type="checkbox" name="agree3"> 
-                                <span>
-                                    (선택) 이메일 및 SMS 마케팅 정보 수신에 동의합니다. <br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;회원은 언제든지 회원 정보에서 수신 거부로 변경할 수 있습니다.
-                                </span>
+                            <div id="agreeForm">
+                                <input type="checkbox" id="allAgree" onclick="checkAll(this);">
+                                <label for="allAgree">모두 동의합니다.</label> <br>
+
+                                <input type="checkbox" id="agree1" class="agrees">
+                                <label for="agree1">(필수) 이용약관과 개인정보 수집 및 이용에 동의합니다.</label> <br>
+
+                                <input type="checkbox" id="agree2" class="agrees"> 
+                                <label for="agree2" style="margin-bottom: 0px;">(필수) 만 14세 이상입니다.</label> <br>
+                                <label for="agree2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;만 19세 미만의 미성년자가 결제 시 법정대리인이 거래를 취소할 수 있습니다.</label> <br>
+
+                                <input type="checkbox" id="agree3" class="agrees" name="agree" value="Y"> 
+                                <label for="agree3" style="margin-bottom: 0px;">(선택) 이메일 및 SMS 마케팅 정보 수신에 동의합니다.</label> <br>
+                                <label for="agree3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;회원은 언제든지 회원 정보에서 수신 거부로 변경할 수 있습니다.</label> <br>
                             </div>
 
                         </div>
                         <br><br><br>
 
                         <button type="submit" class="btn_st" style="width: 70px; height: 35px;">다음</button>
-                        <!-- 휴대폰번호에 숫자가 아닌 값이 들어가면 오류 ajax 뜨게해야함 -->
                     </div>
                 </form>
                 <script>
@@ -364,15 +395,24 @@
                         if( month == 1 || month == 3 || month == 5 || 
                             month == 7 || month == 8 || month == 10 || 
                             month == 12 ) {
-                            for(var i=1; i<=31; i++) {
+                            for(var i=1; i<=9; i++) {
+                                day.innerHTML += "<option>0" + i + "</option>"
+                            }
+                            for(var i=10; i<=31; i++) {
                                 day.innerHTML += "<option>" + i + "</option>"
                             }
                         } else if(month == 2) {
-                            for(var i=1; i<=29; i++) {
+                            for(var i=1; i<=9; i++) {
+                                day.innerHTML += "<option>0" + i + "</option>"
+                            }
+                            for(var i=10; i<=29; i++) {
                                 day.innerHTML += "<option>" + i + "</option>"
                             }
                         } else{
-                            for(var i=1; i<=30; i++) {
+                            for(var i=1; i<=9; i++) {
+                                day.innerHTML += "<option>0" + i + "</option>"
+                            }
+                            for(var i=10; i<=30; i++) {
                                 day.innerHTML += "<option>" + i + "</option>"
                             }
                         }
@@ -385,6 +425,16 @@
                         } else if(document.getElementById(elId).checked == false) {
                             document.getElementById(elId+"_btn").style.background = "white";
                             document.getElementById(elId+"_btn").style.color = "#0e332c";
+                        }
+                    }
+
+                    function checkAll(checkAll){
+ 
+                        const checkboxes 
+                            = document.getElementsByClassName('agrees');
+                        
+                        for(var i=0; i<checkboxes.length; i++) {
+                            checkboxes[i].checked = checkAll.checked;
                         }
                     }
 
@@ -407,6 +457,9 @@
                         // 이메일용 객체
                         var email = document.getElementById("email").value;
                         var regExpEmail = /^[a-z0-9_-]+@[a-z0-9_-]+\.[a-z0-9_-]+$/i;
+                        // 필수동의용 객체
+                        var agree1 = document.getElementById("agree1");
+                        var agree2 = document.getElementById("agree2");
 
                         if(idCheckNum == 0) {
                             alert("아이디 중복확인 완료 후 가입할 수 있습니다.");
@@ -465,11 +518,18 @@
                             return false;
                         }
 
-
+                        if(agree1.checked == false) {
+                            // 필수동의1 체크되어있지 않다면
+                            alert("필수약관에 모두 동의해주셔야 가입이 가능합니다.");
+                            return false;
+                        } else if(agree2.checked == false) {
+                            // 필수동의2 체크되어있지 않다면
+                            alert("필수약관에 모두 동의해주셔야 가입이 가능합니다.");
+                            return false;
+                        }
 
 
                         return true;
-
                     }
 
                 </script>

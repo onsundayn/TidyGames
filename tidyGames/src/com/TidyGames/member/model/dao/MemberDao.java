@@ -76,7 +76,8 @@ public class MemberDao {
 							   rset.getString("role_id"),
 							   rset.getString("mem_access"),
 							   rset.getDate("block_date"),
-							   rset.getString("mem_cookie"));
+							   rset.getString("mem_cookie"),
+							   rset.getString("mem_category"));
 			}
 			
 		} catch (SQLException e) {
@@ -142,7 +143,8 @@ public class MemberDao {
 							   rset.getString("role_id"),
 							   rset.getString("mem_access"),
 							   rset.getDate("block_date"),
-							   rset.getString("mem_cookie"));
+							   rset.getString("mem_cookie"),
+							   rset.getString("mem_category"));
 			}
 			
 		} catch (SQLException e) {
@@ -423,6 +425,37 @@ public class MemberDao {
 		
 		return count;
 		
+	}
+	
+	public int insertMem(Connection conn, Member m) {
+		
+		// 데이터 추가
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertMem");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, m.getMemId());
+			pstmt.setString(2, m.getMemPwd());
+			pstmt.setString(3, m.getMemNick());
+			pstmt.setString(4, m.getMemName());
+			pstmt.setString(5, m.getMemBirth());
+			pstmt.setString(6, m.getMemPhone());
+			pstmt.setString(7, m.getMemEmail());
+			pstmt.setString(8, m.getMemGender());
+			pstmt.setString(9, m.getMemAddress());
+			pstmt.setString(10, m.getMemAgr());
+			pstmt.setString(11, m.getMemCategory()); 
+
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 	
 }
