@@ -101,7 +101,81 @@ public class MemberService {
 		
 	}
 	
+	public Member searchUserPwd(String searchId, String searchEmail) {
+		
+		Connection conn = getConnection();
+		
+		Member m = new MemberDao().searchUserPwd(conn, searchId, searchEmail);
+		
+		close(conn);
+		
+		return m;
+		
+	}
+	
+	public int checkNum(String searchEmail) {
+		
+		int num = new MemberDao().checkNum(searchEmail);
+		
+		return num;
+		
+	}
+	
+	public int updatePwd(String userId, String updatePwd) {
+		
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().updatePwd(conn, userId, updatePwd);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
 
-
+	public int idCheck(String checkId) {
+		
+		Connection conn = getConnection();
+		
+		int count = new MemberDao().idCheck(conn, checkId);
+		
+		close(conn);
+		return count;
+		
+	}
+	
+	public int nickCheck(String checkNick) {
+		
+		Connection conn = getConnection();
+		
+		int count = new MemberDao().nickCheck(conn, checkNick);
+		
+		close(conn);
+		return count;
+		
+	}
+	
+	public int insertMem(Member m) {
+		
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().insertMem(conn, m);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+		
+	}
 	
 }

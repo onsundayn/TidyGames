@@ -21,7 +21,8 @@
 		       ROLE_ID,
 		       MEM_ACCESS,
 		       BLOCK_DATE,
-		       MEM_COOKIE
+		       MEM_COOKIE,
+		       MEM_CATEGORY
 		  FROM MEMBER
 		 WHERE MEM_ID = ?
 		   AND MEM_PWD = ?
@@ -55,7 +56,8 @@
 		       ROLE_ID,
 		       MEM_ACCESS,
 		       BLOCK_DATE,
-		       MEM_COOKIE
+		       MEM_COOKIE,
+		       MEM_CATEGORY
 		  FROM MEMBER
 		 WHERE MEM_COOKIE = ?
 		   AND MEM_STATUS = 'Y'
@@ -105,4 +107,68 @@
 		   AND MEM_EMAIL = ?
 		   AND MEM_STATUS = 'Y'
 	</entry>
+	
+		<entry key="searchUserPwd">
+		SELECT
+		       MEM_NO,
+		       MEM_ID,
+		       MEM_PWD
+		  FROM MEMBER
+		 WHERE MEM_ID = ?
+		   AND MEM_EMAIL = ?
+		   AND MEM_STATUS = 'Y'
+	</entry>
+	
+	<entry key="updatePwd">
+		UPDATE MEMBER
+		   SET MEM_PWD = ?
+		 WHERE MEM_ID = ?
+	</entry>
+	
+	<entry key="idCheck">
+		SELECT COUNT(*) "COUNT"
+		  FROM MEMBER
+		 WHERE MEM_ID = ?
+	</entry>
+	
+	<entry key="nickCheck">
+		SELECT COUNT(*) "COUNT"
+		  FROM MEMBER
+		 WHERE MEM_NICK = ?
+	</entry>
+	
+	<entry key="insertMem">
+		INSERT 
+		  INTO MEMBER
+		     ( 
+		       MEM_NO
+		     , MEM_ID
+		     , MEM_PWD
+		     , MEM_NICK
+		     , MEM_NAME
+		     , MEM_BIRTH
+		     , MEM_PHONE
+		     , MEM_EMAIL
+		     , MEM_GENDER
+		     , MEM_ADDRESS
+		     , MEM_AGR
+		     , MEM_CATEGORY
+		     )
+		VALUES 
+		     (
+		       SEQ_MEM_NO.NEXTVAL
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		     , ?
+		)
+	</entry>
+	
 </properties>

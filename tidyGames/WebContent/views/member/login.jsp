@@ -147,7 +147,7 @@
                     <div class="find_login">
                         <a href="<%=contextPath%>/inputSearchId.me">아이디 찾기</a> ㅣ
                         <a href="<%=contextPath%>/inputSearchPwd.me">비밀번호 재설정</a> ㅣ
-                        <a href="enrollForm.jsp">회원가입</a>
+                        <a href="<%=contextPath%>/memberEnrollPage.me">회원가입</a>
                     </div>
                     <hr>
 

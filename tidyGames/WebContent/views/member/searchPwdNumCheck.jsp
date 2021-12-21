@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%
 	String contextPath = request.getContextPath();
+	int pwdCheckNum = (int)session.getAttribute("pwdCheckNum");
 %>
 <!DOCTYPE html>
 <html>
@@ -31,7 +32,7 @@
         border-radius: 100px;
         position: relative;
     }
-    #search_id_form{
+    #find_id_form{
         width: 80%;
         height: 70%;
         position: absolute;
@@ -52,7 +53,7 @@
         font-weight: bold;
     }
     .next_btn{
-        width: 120px;
+        width: 130px;
         height: 35px;
         border-radius: 10px;
         background-color: #0e332c;
@@ -60,10 +61,11 @@
         color: white;
         font-weight: bold;
         font-size: 14px;
+        margin-top: 110px;
     }
     .code_btn{
         width: 29%; 
-        height: 25px;
+        height: 30px;
         border-radius: 5px;
         background-color: #0e332c;
         border: none;
@@ -71,7 +73,6 @@
         font-weight: bold;
         font-size: 14px;
     }
-
 </style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -91,27 +92,61 @@
 
         <content>
             <div id="content" align="center">
-                <form action="" method="">
-                    <div id="search_id_form">
-                        <span style="color: white; font-size: 20px; font-weight: bold; ">비밀번호 재설정</span>
+                <form action="<%= contextPath %>/updatePwd.me" method="post" onsubmit="return check();">
+                    <div id="find_id_form">
+                        <span style="color: white; font-size: 20px; font-weight: bold;">비밀번호 재설정</span>
                         <br><br><hr>
 
                         <div align="left">
                             <span style="color: white; font-size: 15px; font-weight: bold;">
-                                ● 고객님의 비밀번호가 성공적으로 재설정되었습니다.<br>
-                                &nbsp;&nbsp;&nbsp;변경된 비밀번호로 로그인 해주세요.
+                                ● 본인확인 이메일 인증<br>
                             </span>
-
+                            <span style="color: lightgray; font-size: 15px;">
+                                입력하신 이메일로 전송된 인증번호(6자리 숫자)를 입력해주세요. <br>
+                            </span>
                         </div>
-                        
-                        <button type="button" class="next_btn" onclick="loginPage();" style="margin-top: 220px;">로그인하기</button>
+                        <br><br>
+
+                        <div align="left" class="search_user">
+                            <div>인증번호</div>
+                            <input type="text" id="numCk" name="numCk" style="width: 80%;" required>
+                            <br>
+                            <input type="hidden" id="pwdCheckNum" name="pwdCheckNum" value="pwdCheckNum">
+                        </div>
+                        <br><br><br>
+
+                        <!--
+                        <button type="button" class="next_btn" onclick="page();">이전페이지로</button>
+                        -->
+                        <button type="submit" class="next_btn">인증번호 확인</button>
 
                     </div>
                 </form>
                 <script>
-                    function loginPage(){
-                        location.href = "<%= contextPath %>/login.me";
+                    /*
+                	function page(){
+                		
+                        location.href ="<%= contextPath %>/inputSearchPwd.me";
+
+                	}
+                    */
+
+                    function check(){
+                        
+                        var numCk = document.getElementById("numCk").value;
+                        var pwdCheckNum = document.getElementById("pwdCheckNum").value;
+
+                        if(numCk == pwdCheckNum) {
+                            // 인증번호를 제대로 입력했음
+                            return true;
+                        } else {
+                            // 인증번호 제대로 입력 안했음
+                            alert("인증번호를 다시 확인해주세요.");
+                            return false;
+                        }
+
                     }
+
                 </script>
             </div>
         </content>

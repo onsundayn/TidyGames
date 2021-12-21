@@ -1,6 +1,7 @@
 package com.TidyGames.member.model.vo;
 
 import java.sql.Date;
+import java.util.Arrays;
 
 public class Member {
 	
@@ -23,13 +24,14 @@ public class Member {
 	private String memAccess;
 	private Date blockDate;
 	private String memCookie;
+	private String memCategory;
 	
 	public Member() {}
-
+	
 	public Member(int memNo, String memId, String memPwd, String memNick, String memName, String memBirth,
 			String memPhone, String memEmail, String memGender, String memAddress, Date indate, String memAgr,
 			String memPic, String memStatus, Date memOutdate, String roleId, String memAccess, Date blockDate,
-			String memCookie) {
+			String memCookie, String memCategory) {
 		super();
 		this.memNo = memNo;
 		this.memId = memId;
@@ -50,10 +52,11 @@ public class Member {
 		this.memAccess = memAccess;
 		this.blockDate = blockDate;
 		this.memCookie = memCookie;
+		this.memCategory = memCategory;
 	}
-	
-	
-	
+
+
+
 	public Member(int memNo, String memId, String memNick, String memName, String memPhone, String memEmail,
 			String memGender, String memAddress, Date indate, String memStatus) {
 		super();
@@ -74,6 +77,31 @@ public class Member {
 		super();
 		this.memNo = memNo;
 		this.memId = memId;
+	}
+	
+	// searchUserPwd용
+	public Member(int memNo, String memId, String memPwd) {
+		super();
+		this.memNo = memNo;
+		this.memId = memId;
+		this.memPwd = memPwd;
+	}
+	
+	// insertMem 용
+	public Member(String memId, String memPwd, String memNick, String memName, String memBirth, String memPhone,
+			String memEmail, String memGender, String memAddress, String memAgr, String memCategory) {
+		super();
+		this.memId = memId;
+		this.memPwd = memPwd;
+		this.memNick = memNick;
+		this.memName = memName;
+		this.memBirth = memBirth;
+		this.memPhone = memPhone;
+		this.memEmail = memEmail;
+		this.memGender = memGender;
+		this.memAddress = memAddress;
+		this.memAgr = memAgr;
+		this.memCategory = memCategory;
 	}
 
 	public int getMemNo() {
@@ -228,6 +256,14 @@ public class Member {
 		this.memCookie = memCookie;
 	}
 
+	public String getMemCategory() {
+		return memCategory;
+	}
+
+	public void setMemCategory(String memCategory) {
+		this.memCategory = memCategory;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [memNo=" + memNo + ", memId=" + memId + ", memPwd=" + memPwd + ", memNick=" + memNick
@@ -235,9 +271,10 @@ public class Member {
 				+ memEmail + ", memGender=" + memGender + ", memAddress=" + memAddress + ", indate=" + indate
 				+ ", memAgr=" + memAgr + ", memPic=" + memPic + ", memStatus=" + memStatus + ", memOutdate="
 				+ memOutdate + ", roleId=" + roleId + ", memAccess=" + memAccess + ", blockDate=" + blockDate
-				+ ", memCookie=" + memCookie + "]";
+				+ ", memCookie=" + memCookie + ", memCategory=" + memCategory + "]";
 	}
-
 	
+	
+
 
 }
