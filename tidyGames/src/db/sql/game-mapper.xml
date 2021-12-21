@@ -20,11 +20,6 @@
 		 WHERE UPPER(KOR_NAME || ENG_NAME) LIKE UPPER('%' || ? || '%') AND CONFIRM = 'Y'
 	</entry>
 	
-	
-	
-	
-	
-	
 	<entry key="selectGame">
 		SELECT
 			   GAME_NO
@@ -139,7 +134,7 @@
 			  , PRICE
 			  , GAME_INTRO
 			  , UPLOAD_DATE
-	          , GAME_IMG
+			  , GAME_IMG
 			  )
 			  VALUES
 			  (
@@ -151,7 +146,7 @@
 			  , ?
 			  , ?
 			  , SYSDATE
-	          , ?
+			  , ?
 			  )
 	</entry>
 	
@@ -177,7 +172,7 @@
 			  , ?
 			  , SYSDATE
 			  , ?
-			  , 2
+			  , ?
 			  )
 	</entry>
 	
@@ -187,6 +182,7 @@
 		     , ORIGIN_NAME
 		     , CHANGE_NAME
 		     , FILE_PATH
+		     , FILE_TYPE
 		  FROM UPLOAD_FILE
 		 WHERE GAME_NO = ?
 	
@@ -199,7 +195,6 @@
 		     , ENG_NAME =?
 		     , GAME_INTRO = ?
 		     , PRICE = ?
-		     , GAME_IMG = ?
 		WHERE GAME_NO = ?
 	</entry>
 	

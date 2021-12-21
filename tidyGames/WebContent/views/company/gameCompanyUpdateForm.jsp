@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.game.model.vo.*"%>
 <%
 	Game g = (Game)request.getAttribute("g");
-	Attachment3 at = (Attachment3)request.getAttribute("at");
+	ArrayList<Attachment3> alist = (ArrayList<Attachment3>)request.getAttribute("alist");
 	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("list");
 %>
 <!DOCTYPE html>
@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-    .outer{
+     .outer{
         width: 1200px;
         height:1100px;
         display:flex;
@@ -20,7 +20,7 @@
         background: lightgray;
         flex-wrap: wrap;
     }
-    #update-form{
+    .update-form{
         width: 1200px;
         height:1100px;
         display:flex;
@@ -37,7 +37,6 @@
     .left-area{
         height: 700px;
         width: 700px;
-        flex:1;
     }
     #big{
         width:700px;
@@ -60,10 +59,8 @@
     }
     .right-area{
         width:500px;
-        height:700px;
+        height: 700px;
         margin-top: 141px;
-        flex:2;
-        float: right;
     }
     #t-img{
         width:450px;
@@ -130,51 +127,43 @@
     </div>
 
     <div class="outer">
-        <form action="<%=contextPath%>/update.gc" id="update-form" method="post" enctype="multipart/form-data" >
-			<input type="hidden" value="<%=loginCompany.getCompanyNo()%>" name="cno">
+       <form action="<%=contextPath%>/update.gc" class="update-form" method="post" enctype="multipart/form-data">
 			<input type="hidden" value="<%=g.getGameNo()%>" name="gno">
             <div class="left-area">
                 <div class="title">
                     <input type="text" placeholder="한글게임명" name="korName" value="<%=g.getKorName()%>" required><br>
                     <input type="text" placeholder="영문게임명" name="engName" value="<%=g.getEngName()%>" required>
                 </div>
-                
+               
                 <div  class="img11" id="big">
                     <video src="" id="video" controls autoplay muted  onclick="chooseFile(1);"></video>
                 </div>
                 <div style="display:none;">
-                <input type="file" name="video" id="file1" onchange="loadImg(this, 1);">
+                <input type="file" name="file1" id="file1" onchange="loadImg(this, 1);">
                 </div>
                 
                 <div class="img11" id="small" align="center">
+                	
                     <img src="" id="contentImg1" onclick="chooseFile(2);">
                 	<img src="" id="contentImg2" onclick="chooseFile(3);">
                 	<img src="" id="contentImg3" onclick="chooseFile(4);">
                 	<img src="" id="contentImg4" onclick="chooseFile(5);">
                 	<div style="display:none;">
-                    <input type="file" name="small1" id="file2" onchange="loadImg(this, 2);">
-                    <input type="file" name="small2" id="file3" onchange="loadImg(this, 3);">
-                    <input type="file" name="small3" id="file4" onchange="loadImg(this, 4);">
-                    <input type="file" name="small4" id="file5" onchange="loadImg(this, 5);">
+                    <input type="file" name="file2" id="file2" onchange="loadImg(this, 2);">
+                    <input type="file" name="file3" id="file3" onchange="loadImg(this, 3);">
+                    <input type="file" name="file4" id="file4" onchange="loadImg(this, 4);">
+                    <input type="file" name="file5" id="file5" onchange="loadImg(this, 5);">
                 	</div>
                 </div>
-                
             </div>
-            
-            
+           
             <div class="right-area">
                 <div class="info-area">
-                	
                     <div class="img11" id="t-img">
-                		<% if(at != null) { %>
-                		<!-- 원래 있던 첨부파일이 있을 경우 -->
-                			<%= at.getOriginName() %> <br>
-                			<input type="hidden" value="<%=g.getGameImg()%>" name="gameImg">
-                			<input type="hidden" value="<%=at.getFileNo() %>" name="originFileNo">
-                        <% } %>
-                        	<img src="<%=contextPath %>/<%=g.getGameImg()%>" name="titleImg" id="titleImg"  onclick="chooseFile(6);">
+                			<input type="hidden" value="<%if(alist.size() != 0) {%><%=alist.get(5).getFileNo()%><%}%>" name="originFileNo">
+                        	<img src="" name="titleImg" id="titleImg"  onclick="chooseFile(6);">
                         	<div style="display:none;">
-                        	<input type="file" name="title" id="file6" value="<%=contextPath %>/<%=g.getGameImg()%>" onchange="loadImg(this, 6);">
+                        	<input type="file" name="file6" id="file6" value="" onchange="loadImg(this, 6);">
                         	</div>
                     </div>
                     
@@ -183,88 +172,106 @@
                     </div>
                     <br>
                     <div id="content">
-                        <textarea name="" id="" cols="55" rows="6" placeholder="게임 소개 및 내용 작성" name="content" required><%=g.getGameIntro()%></textarea>
+                        <textarea name="content" id="" cols="55" rows="6" placeholder="게임 소개 및 내용 작성" required><%=g.getGameIntro()%></textarea>
                     </div>
                     <br><br><br>
-                    <div id="release-date">
-                        <p>
-                            출시일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" placeholder="예상출시일(숫자만입력)" name="releaseDate" value="<%=g.getReleaseDate()%>" readonly> <br>
-                            장르 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-                            <input type="text" placeholder="게임장르" name="category"><br>
-                            플레이어 &nbsp;&nbsp;&nbsp; 싱글플레이어<br> <!-- 장르랑 플레이어 dropdown 선택하는 형식으로-->
-                        </p>
-                    </div>
-                    <div id="tag">
-                    	
-                        관련태그&nbsp;&nbsp;&nbsp; <!--이 부분도 dropdown 복수 선택/ 선택하면 버튼 생기게 하면 더 좋겠음-->
-                        <select name="category" multiple>
+                     <tr>
+                        <th>출시일</th>
+                        <td><input type="number" value="<%=g.getReleaseDate()%>" name="releaseDate" readonly></td>
+                     </tr>
+                    <br>
+                     <tr>
+                        <th>장르</th>
+                        <td>
+                            <select name="genre" id="genre">
+                                <option value="">장르선택</option>
                         	<% for(Category c : list) {%>
                         		<option value="<%=c.getCategoryNo()%>"><%=c.getCategoryName()%></option>
                         	<% } %>
-                        </select>
-                        <script>
-                        
-                        	
-
-                        	
-                        	 function loadImg(inputFile, num){
-					             if(inputFile.files.length == 1) { //파일있으면 미리보기
-					                  
-					                // 파일을 읽어들이 FileReader 객체 생성
-					                const reader = new FileReader();
-					                
-					                // 파일을 읽어들이는 메소드
-					                reader.readAsDataURL(inputFile.files[0]);
-					                // 해당 파일을 읽어들이는 순간 해당 이 파일만의 고유한  url부여
-					
-					                // 파일 읽어들이기가 완료됐을 때 실행할 함수를 정의해두기
-					                reader.onload = function(e){ // 매개변수를 써야만 읽어들인 파일 전달받을수있음
-					                    // e.target.result => 읽어들인 파일의 고유한 url
-					                    switch(num){
-					                        case 1:$("#video").attr("src", e.target.result); break;
-					                        case 2:$("#contentImg1").attr("src", e.target.result); break;
-					                        case 3:$("#contentImg2").attr("src", e.target.result); break;
-					                        case 4:$("#contentImg3").attr("src", e.target.result); break;
-					                        case 5:$("#contentImg4").attr("src", e.target.result); break;
-					                        case 6:$("#titleImg").attr("src", e.target.result); break;
-					                    }
-					                }
-					
-					             }else{ // 파일 취소된경우 미리보기 사라짐
-					                switch(num){
-					                        case 1:$("#video").attr("src", null); break;
-					                        case 2:$("#contentImg1").attr("src", null); break;
-					                        case 3:$("#contentImg2").attr("src", null); break;
-					                        case 4:$("#contentImg3").attr("src", null); break;
-					                        case 5:$("#contentImg4").attr("src", null); break;
-					                        case 6:$("#titleImg").attr("src", null); break;
-					                    }
-					             }
-					        }
-	                        function chooseFile(num){
-	                        		$("#file" + num).click();
-	                        	}	
-                        </script>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="file-area" align="center">
-                        <pre style="font-weight: bold; font-size: 17px;">
+                            </select>
+                        </td>
+                     </tr>
+                     <br>
+                     <tr>
+                        <th>플레이어</th>
+                        <td>
+                            <select name="player" id="player">
+                            	<option value="">플레이어선택</option>
+                                <option value="1">싱글플레이어</option>
+                                <option value="2">멀티플레이어</option>
+                            </select>
+                        </td>
+                     </tr>
+                     <br>
+                     <tr>
+                        <th>관련태그</th>
+                        <td>
+                            <select name="tag" id="tag">
+                                <option value="">태그선택</option>
+                        	<% for(Category c : list) {%>
+                        		<option value="<%=c.getCategoryNo()%>"><%=c.getCategoryName() %></option>
+                        	<% } %>
+                            </select>
+                        </td>
+                     </tr>
+                 </div>
+               </div>
+             </div>
+                    <br>
+            <div class="file-area" align="center">
+                <pre style="font-weight: bold; font-size: 17px;">
             알파테스트 첨부      최소사양/요구사항 zip파일 첨부
-                        </pre>
-                        
-                        <input type="file" name="alpha" id="alpha">
-                        <input type="file" name="minimum">
-                        <br><br>
-                        <button class="btn btn-sm btn-primary">저장</button>
-                        <button type="submit" class="btn btn-sm btn-success">게임 업데이트 요청</button>
-                    </div>
+                                </pre>
+                            
+                <input type="file" name="alpha" id="alpha">
+                <input type="file" name="minimum">
+                <br><br>
+                <button class="btn btn-sm btn-primary">저장</button>
+                <button type="submit" class="btn btn-sm btn-success">게임 승인 요청</button>
+            </div>
 
         </form>
                 
-            </div>
-            
+     </div>
+		          <script>
+			          function loadImg(inputFile, num){
+				            if(inputFile.files.length == 1) { //파일있으면 미리보기
+				                 
+				               // 파일을 읽어들이 FileReader 객체 생성
+				               const reader = new FileReader();
+				               
+				               // 파일을 읽어들이는 메소드
+				               reader.readAsDataURL(inputFile.files[0]);
+				               // 해당 파일을 읽어들이는 순간 해당 이 파일만의 고유한  url부여
+				
+				               // 파일 읽어들이기가 완료됐을 때 실행할 함수를 정의해두기
+				               reader.onload = function(e){ // 매개변수를 써야만 읽어들인 파일 전달받을수있음
+				                   // e.target.result => 읽어들인 파일의 고유한 url
+				                   switch(num){
+				                       case 1:$("#video").attr("src", e.target.result); break;
+				                       case 2:$("#contentImg1").attr("src", e.target.result); break;
+				                       case 3:$("#contentImg2").attr("src", e.target.result); break;
+				                       case 4:$("#contentImg3").attr("src", e.target.result); break;
+				                       case 5:$("#contentImg4").attr("src", e.target.result); break;
+				                       case 6:$("#titleImg").attr("src", e.target.result); break;
+				                   }
+				               }
+				
+				            }else{ // 파일 취소된경우 미리보기 사라짐
+				               switch(num){
+				                       case 1:$("#video").attr("src", null); break;
+				                       case 2:$("#contentImg1").attr("src", null); break;
+				                       case 3:$("#contentImg2").attr("src", null); break;
+				                       case 4:$("#contentImg3").attr("src", null); break;
+				                       case 5:$("#contentImg4").attr("src", null); break;
+				                       case 6:$("#titleImg").attr("src", null); break;
+				                   	}
+				           		 }
+				      		 }	
+	                   function chooseFile(num){
+	                   		$("#file" + num).click();
+	                   	}	
+		       		</script>
                            <!-- 카테고리 옵션선택하면 버튼생성하는 (안됨)
                         	$(function(){
                         		$("#update-form option").selected(function(){
@@ -282,6 +289,7 @@
                         	})
     
 	 						-->
+
 
 </body>
 </html>

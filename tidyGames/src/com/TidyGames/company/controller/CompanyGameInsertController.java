@@ -2,17 +2,18 @@ package com.TidyGames.company.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.TidyGames.common.MyFileRenamePolicy;
+import com.TidyGames.common.model.vo.Attachment;
 import com.TidyGames.game.model.service.GameService;
 import com.TidyGames.game.model.vo.Attachment3;
 import com.TidyGames.game.model.vo.Game;
@@ -52,6 +53,9 @@ public class CompanyGameInsertController extends HttpServlet {
 			// DB에 기록할 데이터 vo에 담기
 			// GAME에 insert
 			// 넘어온 파일 있을때만 UPLOAD_FILE에 insert
+			String genre = multiRequest.getParameter("genre");
+			String player = multiRequest.getParameter("player");
+			String tag = multiRequest.getParameter("tag");
 			String korName = multiRequest.getParameter("korName");
 			String engName = multiRequest.getParameter("engName");
 			String gameIntro = multiRequest.getParameter("content");
@@ -67,32 +71,46 @@ public class CompanyGameInsertController extends HttpServlet {
 			ga.setPrice(price);
 			ga.setCompanyNo(companyNo);
 			
-			Attachment3 at = null; // 초기화, 첨부파일 있을때만 생성
-			// null일때 insert안함
-			if(multiRequest.getOriginalFileName("titleFile") != null) { // 첨부파일 있을 경우
-				at = new Attachment3();
-				at.setOriginName(multiRequest.getOriginalFileName("titleFile"));
-				at.setChangeName(multiRequest.getFilesystemName("titleFile"));
-				at.setFilePath("resources/game_upfiles/");
-				ga.setGameImg(multiRequest.getFilesystemName("titleFile"));
+			ArrayList<Attachment3> list = new ArrayList<>();
+			
+			for(int i=1; i<=6; i++) {
+				String key = "file" + i;
+				if(multiRequest.getOriginalFileName(key) != null) {
+					// 첨부파일 존재할 경우 
+					// Attachment 생성  + 원본명, 수정명, 폴더경로, 파일레벨 담아서 => list에쌓기
+					Attachment3 at = new Attachment3();
+					at.setOriginName(multiRequest.getOriginalFileName(key));
+					at.setChangeName(multiRequest.getFilesystemName(key));
+					at.setFilePath("resources/game_upfiles/");
+					
+					if(i == 6) { // 대표이미지일경우
+						at.setFileLevel(1);
+					}else if(i == 1) { // 동영상일경우
+						at.setFileLevel(3);
+					}else { //상세이미지일경우
+						at.setFileLevel(2);
+					}
+					
+					list.add(at);
+					
+				}
 			}
 			
 			
-			
 			// 서비스요청
-			int result = new GameService().insertGame(ga, at, companyNo);
-			HttpSession session = request.getSession(); // 밑에서 두번쓸라구 선언
+			int result = new GameService().insertGame(ga, list, companyNo);
 			// 응답뷰 지정
 			if(result > 0) { // 성공 => 성공완료 메세지, 작성한 폼 그대로두고 페이지이동x
 				
-				session.setAttribute("alertMsg", "성공적으로 업로드 되었습니다.");
+				request.getSession().setAttribute("alertMsg", "성공적으로 업로드 되었습니다.");
 				response.sendRedirect(request.getContextPath() + "/gameList.gc");
 				
 			}else { // 실패 => 실패메세지, 폼초기화 후 다시 그 페이지  + 첨부파일 업도르된거 삭제후 에러페이지
 				
-				if(at != null) {
-					new File(savePath + at.getChangeName()).delete();
-				}
+				
+					for(Attachment3 at : list) {
+						new File(savePath + at.getChangeName()).delete();
+					}
 				
 				request.setAttribute("errorMsg", "게임 업로드 실패");
 				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);

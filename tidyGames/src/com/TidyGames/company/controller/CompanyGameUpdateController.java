@@ -49,15 +49,14 @@ public class CompanyGameUpdateController extends HttpServlet {
 			
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 			
+			// 공통적으로 수행 : update Game
 			int gameNo = Integer.parseInt(multiRequest.getParameter("gno"));
+			// 장르, 플레이어, 태그 별로 따로 받아서 담기
 			String category = multiRequest.getParameter("category");
 			String korName = multiRequest.getParameter("korName");
 			String engName = multiRequest.getParameter("engName");
 			String gameIntro = multiRequest.getParameter("content");
-			String gameImg = multiRequest.getFilesystemName("gameImg");
 			int price = Integer.parseInt(multiRequest.getParameter("price"));
-			int companyNo = Integer.parseInt(multiRequest.getParameter("cno"));
-			
 			
 			Game ga = new Game();
 			ga.setGameNo(gameNo);
@@ -65,15 +64,15 @@ public class CompanyGameUpdateController extends HttpServlet {
 			ga.setEngName(engName);
 			ga.setGameIntro(gameIntro);
 			ga.setPrice(price);
-			ga.setCompanyNo(companyNo);
-			ga.setGameImg(gameImg);
-			// Attachment에 여러번 INSERT
+			
+			// Attachment에 파일이 없었다면 여러번 insert, 있었다면 여러번 update
+			// 일단 모든 파일 at에 반복적으로 담아서 list에 쌓기
 			ArrayList<Attachment3> list = new ArrayList<>();
 			
 			for(int i=1; i<=6; i++) {
 				String key = "file" + 1; // name이 file1,2,3,4라서 key에 순서대로 담는거임
 				
-				if(multiRequest.getOriginalFileName(key) != null) {
+				if(multiRequest.getOriginalFileName(key) != null) { // 새 첨부파일 있을경우
 					// Attachment3생성 + 원본명, 수정명, 폴더경로, 파일레벨 담아서 list에 쌓기
 					Attachment3 at = new Attachment3();
 					at.setOriginName(multiRequest.getOriginalFileName(key));
@@ -98,12 +97,33 @@ public class CompanyGameUpdateController extends HttpServlet {
 					}
 					
 					list.add(at);
+					
 				}
 			}
 			
 			int result = new GameService().updateGame(ga, list);
 			
-			/*
+				if(result > 0) { //성공메세지
+					request.getSession().setAttribute("alertMsg", "성공적으로 업로드 되었습니다.");
+					response.sendRedirect(request.getContextPath() + "/gameList.gc");
+
+				}else { // 실패시 에러페이지 포워딩, 파일 삭제
+					
+					for(Attachment3 at : list) {
+						if(at != null) {
+							new File(savePath + at.getChangeName()).delete();
+						}
+					}
+					request.setAttribute("errorMsg", "게임 업데이트 실패");
+					request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+				}
+				
+				
+			}
+			
+		}
+	
+	/*
 			Attachment3 at = null;
 			
 			if(multiRequest.getOriginalFileName("titleFile") != null) { // 첨부파일 있을 경우
@@ -125,27 +145,7 @@ public class CompanyGameUpdateController extends HttpServlet {
 				// 새로 넘어온 파일 없으면 null
 				
 				int result = new GameService().updateGame(ga, at);
-				*/
-				HttpSession session = request.getSession();
-				if(result > 0) { //성공메세지
-					session.setAttribute("alertMsg", "성공적으로 업로드 되었습니다.");
-					response.sendRedirect(request.getContextPath() + "/gameList.gc");
-
-				}else { // 
-					
-					for(Attachment3 at : list) {
-						if(at != null) {
-							new File(savePath + at.getChangeName()).delete();
-						}
-					}
-					request.setAttribute("errorMsg", "게임 업데이트 실패");
-					request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-				}
-				
-				
-			}
-			
-		}
+	 */
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

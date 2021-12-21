@@ -36,20 +36,17 @@ public class CompanyGameUpdateFormController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println(request.getParameter("gno").getClass().getName());
 		int gameNo = Integer.parseInt(request.getParameter("gno"));
-		System.out.println(gameNo);
 		int memNo = 0;
 		if(request.getSession().getAttribute("loginUser") != null) {
 			memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
 		}
-		GameService gService = new GameService();
-		Game g = gService.selectGame(memNo, gameNo);
-		Attachment3 at = gService.selectAttachment(gameNo);
+		Game g = new GameService().selectGame(memNo, gameNo);
+		ArrayList<Attachment3> alist = new GameService().selectAttachmentList(gameNo);
 		ArrayList <Category> list = new CategoryService().selectCategoryList();
 		
 		request.setAttribute("g", g);
-		request.setAttribute("at", at);
+		request.setAttribute("alist", alist);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/company/gameCompanyUpdateForm.jsp").forward(request, response);
 	}

@@ -17,6 +17,7 @@ import com.TidyGames.game.model.vo.Review;
 
 public class GameService {
 	
+	// 게임 객체 조회(게임리스트)
 	public ArrayList<Game> selectList(String keyword, int memNo) {
 		
 		Connection conn  = getConnection();
@@ -26,7 +27,7 @@ public class GameService {
 		
 		return list;
 	}
-
+	// 게임 한개 조회(상세페이지), (게임사 업데이트폼)
 	public Game selectGame(int memNo, int gameNo) {
 		Connection conn = getConnection();
 		Game g = new GameDao().selectGame(conn, memNo, gameNo);
@@ -34,14 +35,14 @@ public class GameService {
 		return g;
 	}
 	
-	
+	// 리뷰 목록 조회
 	public ArrayList<Review> selectReview(int gameNo){
 		Connection conn = getConnection();
 		ArrayList<Review> list = new GameDao().selectReview(conn, gameNo);
 		close(conn);
 		return list;
 	}
-	
+	// 리뷰작성
 	public int insertReview(Review r) {
 		Connection conn =  getConnection();
 		int result = new GameDao().insertReview(conn, r);
@@ -56,7 +57,7 @@ public class GameService {
 		
 		return result;
 	}
-	
+	// 게임리스트 (페이징)
 	public ArrayList<Game> selectGameList(PageInfo pi){
 		Connection conn = getConnection();
 		ArrayList<Game> list = new GameDao().selectGameList(conn, pi);
@@ -70,14 +71,14 @@ public class GameService {
 		close(conn);
 		return listCount;
 	}
-	
+	// 카테고리객체 조회
 	public ArrayList<Category> selectGameCategory(int gameNo){
 		Connection conn = getConnection();
 		ArrayList<Category> gcList = new GameDao().selectGameCategory(conn, gameNo);
 		close(conn);
 		return gcList;
 	}
-	
+	// 게임리스트(게임사별 게임목록 조회)
 	public ArrayList<Game> selectGameListGC(int comNo) {
 		
 		Connection conn = getConnection();
@@ -85,15 +86,12 @@ public class GameService {
 		close(conn);
 		return list;
 	}
-	
-	public int insertGame(Game ga, Attachment3 at, int companyNo) {
+	// 게임업로드(게임사)
+	public int insertGame(Game ga, ArrayList<Attachment3> list, int companyNo) {
 		Connection conn = getConnection();
 		
 		int result1 = new GameDao().insertGame(conn, ga, companyNo);
-		int result2 = 1;
-		if(at != null) {
-			result2 = new GameDao().insertAttachment(conn, at);
-		}
+		int result2 = new GameDao().insertAttachment(conn, list);
 		
 		if(result1 > 0 && result2 >0) {
 			commit(conn);
@@ -105,35 +103,28 @@ public class GameService {
 		
 		return result1 * result2;
 	}
-	
+	// 첨부파일 1개 조회
 	public Attachment3 selectAttachment(int gameNo) {
 		Connection conn = getConnection();
 		Attachment3 at = new GameDao().selectAttachment(conn, gameNo);
 		close(conn);
 		return at;
 	}
-	
+	// 게임 업데이트(게임사)
 	public int updateGame(Game ga, ArrayList<Attachment3> list) {
 		
 		Connection conn = getConnection();
 		int result1 = new GameDao().updateGame(conn, ga);
 		
 		int result2 = 1;
-		int[] resultArray = new int[6];
 		for(Attachment3 at : list) {
-			if(at != null) { // 새로운 첨부파일이 있었을 경우 
+			if(at != null) { // 새로운 첨부파일이 있었을 경우
 				if(at.getFileNo() != 0) { // 기존의 첨부파일이 있었을 경우 => Attachment Update
 					result2 = new GameDao().updateAttachment(conn, at);
 				}else { // => Attachment Insert // 없을경우 
 					result2 = new GameDao().insertNewAttachment(conn, at, ga);
 				}
 				
-				for(int i=0; i<=6; i++) {
-						resultArray[i] += result2;
-				}
-				for(int i=0; i<=6; i++) {
-					result2 *= resultArray[i];
-				}	
 			}
 		}
 		
@@ -146,6 +137,12 @@ public class GameService {
 		
 		return result1 * result2;
 	}
-	
+	// 첨부파일객체 조회 (게임업데이트폼)
+	public ArrayList<Attachment3> selectAttachmentList(int gameNo) {
+		Connection conn = getConnection();
+		ArrayList<Attachment3> list = new GameDao().selectAttachmentList(conn, gameNo);
+		close(conn);
+		return list;
+	}
 
 }

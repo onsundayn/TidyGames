@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.game.model.vo.*"%>
+<%
+ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -127,63 +130,61 @@
             <input type="hidden" value="<%=loginCompany.getCompanyNo()%>" name="cno">
             <div class="left-area">
                 <div class="title">
-                    <input type="text" placeholder="한글게임명" name="korName"><br>
-                    <input type="text" placeholder="영문게임명" name="engName">
+                    <input type="text" placeholder="한글게임명" name="korName" required><br>
+                    <input type="text" placeholder="영문게임명" name="engName" required>
                 </div>
                 
                 <div  class="img11" id="big">
-                    <video src="" id="video" controls autoplay muted></video>
+                    <video id="video" controls autoplay muted onclick="chooseFile(1);"></video>
                 </div>
-                <input type="file" name="video" id="big1" onchange="loadImg(this, 1);">
-             	
+                <div style="display:none;">
+                <input type="file" name="file1" id="file1" onchange="loadImg(this, 1);">
+             	</div>
+                
                 <div class="img11" id="small" align="center">
-                	<img src="" id="contentImg1">
-                	<img src="" id="contentImg2">
-                	<img src="" id="contentImg3">
-                	<img src="" id="contentImg4">
-                    <input type="file" name="small1" id="small1" onchange="loadImg(this, 2);">
-                    <input type="file" name="small2" id="small2" onchange="loadImg(this, 3);">
-                    <input type="file" name="small3" id="small3" onchange="loadImg(this, 4);">
-                    <input type="file" name="small4" id="small4" onchange="loadImg(this, 5);">
+                	<img id="contentImg1" onclick="chooseFile(2);">
+                	<img id="contentImg2" onclick="chooseFile(3);">
+                	<img id="contentImg3" onclick="chooseFile(4);">
+                	<img id="contentImg4" onclick="chooseFile(5);">
+                	<div style="display:none;">
+	                    <input type="file" name="file2" id="file2" onchange="loadImg(this, 2);">
+	                    <input type="file" name="file3" id="file3" onchange="loadImg(this, 3);">
+	                    <input type="file" name="file4" id="file4" onchange="loadImg(this, 4);">
+	                    <input type="file" name="file5" id="file5" onchange="loadImg(this, 5);">
+                    </div>
                 </div>
             </div>
-            
             
             <div class="right-area">
                 <div class="info-area">
                     <div class="img11" id="t-img">
-                    	<img src="" id="titleImg">
+                    	<img id="titleImg" onclick="chooseFile(6);">
+	                    <div style="display:none;">
+	                        <input type="file" name="file6" id="file6" onchange="loadImg(this, 6);" required>
+	                    </div>
                     </div>
-                        <input type="file" name="title" id="title" onchange="loadImg(this, 6);" required>
-                    
                     <div id="price">
-                        <span>판매가 : <input type="text" name="price"></span>
+                        <span>판매가 : <input type="text" name="price" placeholder="단위(원)"></span>
                     </div>
                     <br>
                     <div id="content">
-                        <textarea name="" id="" cols="55" rows="6" placeholder="게임 소개 및 내용 작성" name="content"></textarea>
+                        <textarea name="content" id="content" cols="55" rows="6" placeholder="게임 소개 및 내용 작성"></textarea>
                     </div>
                     <br><br><br>
 
                     <tr>
                         <th>출시일</th>
-                        <td><input type="text" placeholder="예상출시일(숫자만입력)"></td>
+                        <td><input type="number" placeholder="예상출시일(숫자만입력)" name="releaseDate"></td>
                     </tr>
                     <br>
                     <tr>
                         <th>장르</th>
                         <td>
-                            <select>
+                            <select name="genre" id="genre">
                                 <option value="">장르선택</option>
-                                <option value=""></option>
-                                <option value=""></option>
-                                <option value=""></option>
-                                <option value=""></option>
-                                <option value=""></option>
-                                <option value=""></option>
-                                <option value=""></option>
-                                <option value=""></option>
-                                <option value=""></option>
+                        	<% for(Category c : list) {%>
+                        		<option value="<%=c.getCategoryNo()%>"><%=c.getCategoryName()%></option>
+                        	<% } %>
                             </select>
                         </td>
                     </tr>
@@ -191,7 +192,8 @@
                     <tr>
                         <th>플레이어</th>
                         <td>
-                            <select name="" id="">
+                            <select name="player" id="player">
+                            	<option value="">플레이어선택</option>
                                 <option value="">싱글플레이어</option>
                                 <option value="">멀티플레이어</option>
                             </select>
@@ -201,15 +203,11 @@
                     <tr>
                         <th>관련태그</th>
                         <td>
-                            <select name="" id="" multiple>
+                            <select name="tag" id="tag">
                                 <option value="">태그선택</option>
-                                <option value=""></option>
-                                <option value=""></option>
-                                <option value=""></option>
-                                <option value=""></option>
-                                <option value=""></option>
-                                <option value=""></option>
-                                <option value=""></option>
+                        	<% for(Category c : list) {%>
+                        		<option value="<%=c.getCategoryNo()%>"><%=c.getCategoryName() %></option>
+                        	<% } %>
                             </select>
                         </td>
                     </tr>
@@ -267,6 +265,10 @@
                     }
              }
         }
+        
+        function chooseFile(num){
+    		$("#file" + num).click();
+    	}	
     </script>
 </body>
 </html>
