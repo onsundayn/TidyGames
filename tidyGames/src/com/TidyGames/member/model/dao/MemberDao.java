@@ -143,14 +143,33 @@ public class MemberDao {
 		
 	}
 		
+		public int selectMemberCount(Connection conn) {
+			
+			int listCount = 0;
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			String sql = prop.getProperty("selectMemberCount");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				rset = pstmt.executeQuery();
+				
+				while(rset.next()) {
+					listCount = rset.getInt("COUNT"); 
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} close(pstmt);
+			
+			return listCount;			
+	}
 	
-	
-		public ArrayList<Member> selectMember(Connection conn, PageInfo pi) {
+		public ArrayList<Member> selectMemberList(Connection conn, PageInfo pi) {
 			
 			ArrayList<Member> list = new ArrayList<>();
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
-			String sql = prop.getProperty("selectMember");
+			String sql = prop.getProperty("selectMemberList");
 			
 			int startRow = (pi.getCurrentPage() - 1) * (pi.getViewLimit()) + 1;
 			int endRow = startRow + pi.getViewLimit() - 1;
@@ -183,30 +202,52 @@ public class MemberDao {
 			
 			return list;
 			
+		}
 			
+		
+		public Member selectMember(Connection conn, int memNo) {
 			
-	}
-		public int selectMemberCount(Connection conn) {
-			
-			int listCount = 0;
+			Member m = null;
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
-			String sql = prop.getProperty("selectMemberCount");
+			String sql = prop.getProperty("selectMember");
 			
 			try {
 				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, memNo);
+				
 				rset = pstmt.executeQuery();
 				
-				while(rset.next()) {
-					listCount = rset.getInt("COUNT"); 
+				if(rset.next()) {
+					m = new Member();
+					
+					m.setMemNo(rset.getInt("mem_no"));
+					m.setMemId(rset.getString("mem_id"));
+					m.setMemName(rset.getString("mem_name"));
+					m.setMemNick(rset.getString("mem_nick"));
+					m.setMemBirth(rset.getString("mem_birth"));
+					m.setMemGender(rset.getString("mem_gender"));
+					m.setMemEmail(rset.getString("mem_phone"));
+					m.setMemPhone(rset.getString("mem_phone"));
+					m.setMemAddress(rset.getString("mem_address"));
+					m.setDate(rset.getString("mem_indate"));
+					m.setMemStatus(rset.getString("mem_status"));
+					
 				}
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} close(pstmt);
+			} finally {
+				close(rset);
+				close(pstmt);
+			}
 			
-			return listCount;			
-	}
-		
+			return m;
+			
+			
+		}
+			
+			
 		
 		public int deleteMember(Connection conn, int memNo) {
 			

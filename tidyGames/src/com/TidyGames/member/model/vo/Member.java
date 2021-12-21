@@ -23,6 +23,7 @@ public class Member {
 	private String memAccess;
 	private Date blockDate;
 	private String memCookie;
+	private String date;
 	
 	public Member() {}
 
@@ -226,6 +227,14 @@ public class Member {
 
 	public void setMemCookie(String memCookie) {
 		this.memCookie = memCookie;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 	@Override

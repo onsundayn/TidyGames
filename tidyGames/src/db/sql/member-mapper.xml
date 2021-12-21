@@ -61,7 +61,7 @@
 		   AND MEM_STATUS = 'Y'
 	</entry>
 	
-		<entry key="selectMember">
+		<entry key="selectMemberList">
 			SELECT *
 			  FROM (
 			        SELECT ROWNUM RNUM, A.*
@@ -105,4 +105,41 @@
 		   AND MEM_EMAIL = ?
 		   AND MEM_STATUS = 'Y'
 	</entry>
+	<entry key="selectMember">
+         SELECT
+                MEM_NO
+              , MEM_ID
+              , MEM_NAME
+              , MEM_NICK
+  			  , MEM_BIRTH 
+              , NVL(MEM_GENDER, ' ') "mem_gender"
+              , MEM_EMAIL
+              , MEM_PHONE
+              , NVL(MEM_ADDRESS, ' ') "mem_address"
+              , TO_CHAR(MEM_INDATE, 'YYYY-MM-DD') "MEM_INDATE"
+              , MEM_STATUS
+              FROM MEMBER
+             WHERE MEM_NO = ?
+	</entry>
+	<entry key="selectMemberAll">
+		SELECT *
+		  FROM 					(
+		        SELECT ROWNUM RNUM, A.*
+		          FROM ( 
+	                       SELECT
+	                              MEM_NO
+	                            , MEM_ID
+	                            , MEM_NAME
+	                            , MEM_NICK
+	                            , MEM_GENDER
+	                            , MEM_EMAIL
+	                            , MEM_PHONE
+	                            , MEM_ADDRESS
+	                            , MEM_INDATE
+	                            , MEM_STATUS
+	                            FROM MEMBER
+	                            ) A
+	                  )                
+		  WHERE RNUM BETWEEN ? AND ? 											
+	</entry>	
 </properties>

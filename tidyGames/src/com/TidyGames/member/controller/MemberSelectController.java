@@ -9,18 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.TidyGames.member.model.service.MemberService;
+import com.TidyGames.member.model.vo.Member;
+import com.google.gson.Gson;
 
 /**
- * Servlet implementation class adminDeleteMember
+ * Servlet implementation class MemberUpdateController
  */
-@WebServlet("/deleteMember.me")
-public class AdminDeleteMember extends HttpServlet {
+@WebServlet("/select.me")
+public class MemberSelectController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminDeleteMember() {
+    public MemberSelectController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,17 +33,14 @@ public class AdminDeleteMember extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
 		int memNo = Integer.parseInt(request.getParameter("mno"));
-		int result = new MemberService().deleteMember(memNo);
-		if(result > 0) {
-			request.getSession().setAttribute("alertMsg", "회원탈퇴 되었습니다.");
-			response.sendRedirect(request.getContextPath() + "/memberList.me?cpage=1");
-		}else {
-			request.getSession().setAttribute("alertMsg", "회원탈퇴 중 오류가 발생했습니다.");
-			response.sendRedirect(request.getContextPath() + "/memberList.me?cpage=1");
-		}
+		
+		Member m = new MemberService().selectMember(memNo);
+		
+		response.setContentType("application/json; charset=UTF-8");
+		
+		new Gson().toJson(m, response.getWriter());
 			
 	}
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

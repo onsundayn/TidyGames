@@ -19,7 +19,7 @@
 <style>
     div{
 		box-sizing: border-box;
-		color:white;
+		color:black;
 		/* border: 1px solid rgba(255, 255, 255, 0.555); */
 	}
 	#outer{
@@ -131,7 +131,6 @@
 
        
     }
-
     .pointcontent{
       
        width: 370px; 
@@ -140,7 +139,21 @@
        margin-top: 20px;
     }
 
-   
+	.memInfo {width:100%;}
+    .memInfo td, .memInfo th{
+        padding:10px;
+        border:1px solid lightgray;
+    }
+    .memInfo th{ background: rgba(211, 211, 211, 0.281)}
+    #btnA {padding:0px; font-weight: 500;}
+    #btnA:hover{
+   		cursor: pointer;
+    	color: darkgreen;
+        font-weight:700;
+    	
+    	
+    }  
+
 
 </style>
 </head>
@@ -211,10 +224,11 @@
                     <tbody>
                     
                     <% for(Member m : list) {%>
-                        <tr align="center">
+                        <tr align="center" id="memberData">
                             <td><input type="checkbox" id="checkBox" name="checkBox" value="<%= m.getMemNo() %>" ></td>
                             <td><%= m.getMemNo() %></td>
-                            <td><a href="<%= contextPath %>/memberSelect.me?mno=<%=m.getMemNo()%>" style="color:black"><%= m.getMemId() %></a></td>
+                            <td><a id="btnA" onclick="selectMember(<%= m.getMemNo() %>);" data-toggle="modal" data-target="#updateModal">
+                                <%= m.getMemId() %></a></td>
                             <td><%= m.getMemName() %></td>
                             <td><%= m.getMemNick() %></td>
                             <td><%= m.getMemEmail() %></td>
@@ -222,11 +236,11 @@
                             <td>
                                 
                             	<!-- contextPath로 point의 현재보유포인트를 불러올 자리 -->
-                                <a href="" id="btn" class="btn btn-sm btn-dark" data-toggle="modal" data-target="#myModal">변경</a>
+                                <a href="" id="btn" class="btn btn-sm btn-dark" data-toggle="modal" data-target="#pointModal">변경</a>
 
                             </td>
                             <td>
-                            	<a href="" id="btn" onclick="" class="btn btn-sm btn-info">수정</a>
+                            	<a href="" id="btn" class="btn btn-sm btn-info">수정</a>
                             	<a href="" id="btn" onclick="done();" class="btn btn-sm btn-dark">탈퇴</a>
 	                        </td>
                         </tr>
@@ -236,19 +250,19 @@
 	           
                 </div>
 
-
-				<div class="modal" id="myModal">
+				<!-- point modal -->
+				<div class="modal" id="pointModal">
 					<div class="modal-dialog"  style="width: 400px;">
 						<div class="modal-content"> 
 
 							<!-- Modal Header -->
-							<div class="modal-header" style="color:black; text-align: center;">
+							<div class="modal-header" text-align: center;">
 								<h4 class="modal-title" style="margin-left: 75px; font-weight: bold;">회원적립금 등록</h4>
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
 							</div>
 
 							<!-- Modal body -->
-							<div class="modal-body"  style="color:black;" >
+							<div class="modal-body">
                                 <div class="pointcontent">
                                     <b style="margin-top: 20px;">회원보유포인트 :</b>
                                     <div class="memPoint"></div>
@@ -283,9 +297,42 @@
 						</div>
 					</div>
 				</div>
-
-
-
+				
+				
+				<!-- update modal -->
+				
+				  <!-- The Modal -->
+				  <div class="modal fade" id="updateModal">
+				    <div class="modal-dialog modal-lg">
+				      <div class="modal-content">
+				      
+				        <!-- Modal Header -->
+				        <div class="modal-header">
+				          <h4 class="modal-title">
+				          	<div style="color:black;">회원 상세 정보</div>
+				          </h4>
+				          <button type="button" class="close" data-dismiss="modal">&times;</button>
+				        </div>
+				        
+				        <!-- Modal body -->
+				        <div class="modal-body">
+				        	<div align="center">
+				        		<table class="memInfo">
+				        			
+				        		</table>
+				        	</div>
+				        </div>
+				        
+				        <!-- Modal footer -->
+				        <div class="modal-footer">
+					          <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+					          <button type="button" class="btn btn-info">수정</button>				        
+                        </div>
+				        
+				      </div>
+				    </div>
+				  </div>
+				  
 
 
 
@@ -321,7 +368,7 @@
                 
             </div>
       
-      
+      				</div>
 
 
         <footer>
@@ -345,11 +392,70 @@
     	function done(){
 			 if(confirm("회원을 탈퇴시키겠습니까?")) {
 	            	$("#table>tbody>tr").click(function(){
-	    	         location.href ='<%= contextPath %>/delete.me?mno=' 	    	      	
+	    	         location.href ='<%= contextPath %>/deleteMember.me?mno=' 	    	      	
 	    	     			  	+ $(this).children().eq(1).text();
 	            	})
 			 }
 		}
+    	
+    	
+    	function selectMember(result) {
+    		
+			$.ajax({
+				url:"select.me",
+				data:{mno:result},
+				success:function(m){
+					
+					result += "<tr>"  
+                                +   "<th>회원번호</th>"
+                                +   "<td>" + m.memNo + "</td>" 
+                                +   "<th>생년월일</th>"
+                                +   "<td>" + m.memBirth + "</td>" +
+                                "</tr>" +
+                                "<tr>"  
+                                +   "<th>아이디</th>"
+                                +   "<td>" + m.memId + "</td>"
+                                +   "<th>이름</th>"
+                                +   "<td>" + m.memName + "</td>" +
+                                "</tr>" +
+                                "<tr>"  
+                                +   "<th>닉네임</th>"
+                                +   "<td>" + m.memNick + "</td>"
+                                +   "<th>성별</th>"
+                                +   "<td>" + m.memGender + "</td>" +
+                                "</tr>" +
+                                "<tr>"  
+                                +   "<th>전화번호</th>"
+                                +   "<td>" + m.memPhone + "</td>"
+                                +   "<th>이메일</th>"
+                                +   "<td>" + m.memEmail + "</td>" +
+                                "</tr>" +
+                                "<tr>"  
+                                +   "<th>주소</th>"
+                                +   "<td colspan='3'>" + m.memAddress + "</td>" +
+                                "</tr>" +
+                                "<tr>"  
+                                +   "<th>가입일</th>"
+                                +   "<td>" + m.date + "</td>"
+                                +   "<th>탈퇴여부</th>"
+                                +   "<td>" + m.memStatus + "</td>" +
+                                "</tr>" 
+                  
+					$(".memInfo").html(result);
+					
+				}, error:function(){
+					console.log("멤버조회 오류");
+				}
+				
+			})
+    	}
+    		
+    		
+				
+				
+    	
+    	
+    	
     </script>
 
 

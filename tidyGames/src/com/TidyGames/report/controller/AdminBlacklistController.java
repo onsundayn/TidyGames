@@ -60,8 +60,6 @@ public class AdminBlacklistController extends HttpServlet {
 		
 		ArrayList<Report> list = new ReportService().blacklist(pi);
 		
-		System.out.println(pi);
-		
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/report/adminBlacklist.jsp").forward(request, response);

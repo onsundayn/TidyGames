@@ -58,7 +58,7 @@ public class AdminMemberListController extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, viewLimit, maxPage, startPage, endPage);
 		
-		ArrayList<Member> list = new MemberService().selectMember(pi);
+		ArrayList<Member> list = new MemberService().selectMemberList(pi);
 		
 
 		request.setAttribute("pi", pi);	
