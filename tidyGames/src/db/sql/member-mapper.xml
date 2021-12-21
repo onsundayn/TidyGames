@@ -142,4 +142,19 @@
 	                  )                
 		  WHERE RNUM BETWEEN ? AND ? 											
 	</entry>	
+	<entry key="updateMemberList">
+		UPDATE 
+		      MEMBER
+		  SET 
+		      MEM_BIRTH = ?
+		    , MEM_ID = ?
+		    , MEM_NAME = ? 
+		    , MEM_NICK = ?
+		    , MEM_GENDER = ?
+		    , MEM_EMAIL = ?
+		    , MEM_PHONE = ?
+		    , MEM_ADDRESS = ?
+		    , MEM_STATUS = ?
+		WHERE MEM_NO = ?
+	</entry>
 </properties>

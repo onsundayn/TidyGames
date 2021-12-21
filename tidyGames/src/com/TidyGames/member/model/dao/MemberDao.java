@@ -227,8 +227,8 @@ public class MemberDao {
 					m.setMemNick(rset.getString("mem_nick"));
 					m.setMemBirth(rset.getString("mem_birth"));
 					m.setMemGender(rset.getString("mem_gender"));
-					m.setMemEmail(rset.getString("mem_phone"));
 					m.setMemPhone(rset.getString("mem_phone"));
+					m.setMemEmail(rset.getString("mem_Email"));
 					m.setMemAddress(rset.getString("mem_address"));
 					m.setDate(rset.getString("mem_indate"));
 					m.setMemStatus(rset.getString("mem_status"));
@@ -298,5 +298,38 @@ public class MemberDao {
 		return m;
 		
 	}
+	
+	public int updateMemberList(Connection conn, Member m) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateMemberList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, m.getMemBirth());
+			pstmt.setString(2, m.getMemId());
+			pstmt.setString(3, m.getMemName());
+			pstmt.setString(4, m.getMemNick());
+			pstmt.setString(5, m.getMemGender());
+			pstmt.setString(6, m.getMemEmail());
+			pstmt.setString(7, m.getMemPhone());
+			pstmt.setString(8, m.getMemAddress());
+			pstmt.setString(9, m.getMemStatus());
+			pstmt.setInt(10, m.getMemNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+		
+		
 	
 }

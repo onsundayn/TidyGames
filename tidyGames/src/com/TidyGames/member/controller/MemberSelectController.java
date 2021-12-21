@@ -39,7 +39,8 @@ public class MemberSelectController extends HttpServlet {
 		response.setContentType("application/json; charset=UTF-8");
 		
 		new Gson().toJson(m, response.getWriter());
-			
+		
+		
 	}
 
 	/**
