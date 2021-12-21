@@ -263,7 +263,7 @@
       
     }
    
-     
+    
      function wishConfirm(gameNo, aEl){
      	
      	$.ajax({
@@ -345,6 +345,7 @@
  }
     			
      </script>
+
 
     
     

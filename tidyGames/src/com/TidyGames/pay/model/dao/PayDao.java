@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.TidyGames.pay.model.vo.Cart;
+import com.TidyGames.pay.model.vo.Pay;
+import com.TidyGames.pay.model.vo.PayGame;
+import com.TidyGames.pay.model.vo.Refund;
 
 public class PayDao {
 	
@@ -159,5 +162,208 @@ public class PayDao {
 	}
 	
 	
+	public ArrayList<PayGame> orderList(Connection conn , int memNo) {
+		
+		ArrayList<PayGame> order = new  ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("orderList");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memNo);
+		
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				order.add(new PayGame(
+								   rset.getInt("order_no"),
+								   rset.getInt("game_no"),
+								   rset.getInt("mem_no"),
+								   rset.getInt("pay_amount"),
+								   rset.getString("pay_status"),
+								   rset.getString("pay_date"),
+								   rset.getString("pay_method"),
+								   rset.getString("kor_name"),
+								   rset.getString("eng_name"),
+								   rset.getString("game_img"),
+								   rset.getInt("discountprice"),
+								   rset.getInt("price")));
+								
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return order;
 	
+	}
+		
+	
+public ArrayList<PayGame> rforderList(Connection conn , int memNo, int orderNo) {
+		
+		ArrayList<PayGame> order = new  ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("rfOrderList");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memNo);
+			pstmt.setInt(2, orderNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				order.add(new PayGame(
+								   rset.getInt("order_no"),
+								   rset.getInt("game_no"),
+								   rset.getInt("mem_no"),
+								   rset.getInt("pay_amount"),
+								   rset.getString("pay_status"),
+								   rset.getString("pay_date"),
+								   rset.getString("pay_method"),
+								   rset.getString("kor_name"),
+								   rset.getString("eng_name"),
+								   rset.getString("game_img"),
+								   rset.getInt("discountprice"),
+								   rset.getInt("price")));
+								
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return order;
+	
+	}
+		
+	
+	public Pay payInfo(Connection conn, int memNo, int orderNo) {
+		
+		Pay pi = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("payInfo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, orderNo);
+			pstmt.setInt(2, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				pi = new Pay(rset.getInt("order_no"),
+								  rset.getInt("mem_no"),
+								  rset.getInt("pay_amount"),
+								  rset.getString("pay_status"),
+								  rset.getString("pay_date"),
+								  rset.getString("pay_method"),
+								  rset.getInt("point_amount"));
+			}
+			
+			
+		
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return pi;
+	
+	
+		
+		
+	}
+	
+	public ArrayList<Refund> adRefundList(Connection conn) {
+		
+		ArrayList<Refund> list = new  ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adRefundList");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+		
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Refund(
+								   rset.getInt("REFUND_NO"),
+								   rset.getInt("ORDER_NO"),
+								   rset.getString("REFUND"),
+								   rset.getString("ADD_WRITING"),
+								   rset.getString("REFUND_DATE"),
+								   rset.getString("REFUND_STATUS"),
+								   rset.getString("MEM_ID"),
+								   rset.getInt("PAY_AMOUNT"),
+								   rset.getString("PAY_DATE")));
+								
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+	
+		return list;
+		
+	}
+	
+	
+	public int enrollRefund(Connection conn, Refund re) {
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("enrollRefund");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, re.getMemNo());
+			pstmt.setInt(2, re.getOrderNo());
+			pstmt.setString(3, re.getRefund());
+			pstmt.setString(4, re.getAddWriting());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+		
+		
+	}
+		
 }
