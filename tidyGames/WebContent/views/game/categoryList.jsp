@@ -57,7 +57,7 @@
 }
 
 .enform {
-	position: fixed;
+	position: absolute;
 	background: lightgrey;
 	z-index: 999;
 	padding: 15px;
@@ -70,7 +70,7 @@
 }
 
 .upform {
-	position: fixed;
+	position: absolute;
 	background: lightgrey;
 	z-index: 999;
 	padding: 15px;
@@ -125,7 +125,7 @@
 						</tr>
 						<tr align="center" height="50px">
 							<td>
-								<button type="button" class="btn btn-primary">등록</button>
+								<button type="button" class="btn btn-primary" onclick="add();">등록</button>
 							</td>
 							<td>
 								<button type="button" class="btn btn-danger" id="add_close">취소</button>
@@ -187,13 +187,34 @@
 		
 		function up(){
 			
-			const $upInput = $(".upform input[name=upCateName]");
+			const $upInput = $(".upform input");
 			
 			
 			$.ajax({
 				url:"updateCategory.ga",
 				data:{upCate:$upInput.val(),inCate:$inInput},
-				type:"get",
+				success:function(){
+					console.log("업데이트카테고리 ajax 통신성공!!!");
+					alert("수정이 완료되었습니다.");
+	                location.href="<%=request.getContextPath()%>/catelist.ga";
+
+
+
+				},
+				error:function(){
+					console.log("업데이트카테고리 ajax 통신실패");
+				}
+			});
+		}
+		
+		function add(){
+			
+			const $upInput = $(".enform input");
+			
+			
+			$.ajax({
+				url:"updateCategory.ga",
+				data:{upCate:$upInput.val(),inCate:$inInput},
 				success:function(){
 					console.log("업데이트카테고리 ajax 통신성공!!!");
 					alert("수정이 완료되었습니다.");

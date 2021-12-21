@@ -13,7 +13,7 @@ import com.TidyGames.member.model.service.MemberService;
 /**
  * Servlet implementation class adminDeleteMember
  */
-@WebServlet("/delete.me")
+@WebServlet("/deleteMember.me")
 public class AdminDeleteMember extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

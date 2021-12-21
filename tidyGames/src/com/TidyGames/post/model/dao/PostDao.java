@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.TidyGames.common.model.vo.PageInfo;
+import com.TidyGames.member.model.vo.Member;
 import com.TidyGames.post.model.vo.Post;
+import com.TidyGames.post.model.vo.PostFile;
 
 public class PostDao {
 	
@@ -124,6 +126,31 @@ public class PostDao {
 		return result;
 	}
 	
+	
+	
+	public Member confirmMember(Connection conn, String memId) {
+		Member m = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("confirmMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memId);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				m = new Member();
+				m.setMemAccess(rset.getString("mem_access"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return m;
+	}
+	
 	/**
 	 * 글 상세 조회
 	 * @param conn
@@ -149,7 +176,9 @@ public class PostDao {
 				p.setPostModify(rset.getString("post_modify"));
 				p.setPostView(rset.getInt("post_view"));
 				p.setPostLike(rset.getInt("post_like"));
-				p.setPostContent(rset.getString("post_content"));	
+				p.setPostContent(rset.getString("post_content"));
+				p.setPrevNo(rset.getInt("prev_no"));
+				p.setNextNo(rset.getInt("next_no"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -159,6 +188,176 @@ public class PostDao {
 		}
 		return p;
 	}
+	
+	/**
+	 * 첨부파일 조회
+	 * @param conn
+	 * @param postNo
+	 * @return
+	 */
+	public ArrayList<PostFile> selectPostFile(Connection conn, int postNo) {
+		ArrayList<PostFile> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectPostFile");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, postNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				PostFile pf = new PostFile();
+				pf.setFileNo(rset.getInt("file_no"));
+				pf.setFileOrigin(rset.getString("file_origin"));
+				pf.setFileChange(rset.getString("file_change"));
+				pf.setFilePath(rset.getString("file_path"));
+				
+				list.add(pf);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	/**
+	 * 첫번째 글 번호
+	 * @param conn
+	 * @return
+	 */
+	public Post firstPostNo(Connection conn) {
+		Post result = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("firstPostNo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = new Post();
+				result.setFirstPost(rset.getInt("firstpost"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	/**
+	 * 마지막 글 번호
+	 * @param conn
+	 * @return
+	 */
+	public Post lastPostNo(Connection conn) {
+		Post result = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("lastPostNo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = new Post();
+				result.setLastPost(rset.getInt("lastpost"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	/**
+	 * 글 등록
+	 * @param conn
+	 * @param p
+	 * @return
+	 */
+	public int insertPost(Connection conn, Post p) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertPost");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(p.getPostWriter()));
+			pstmt.setString(2, p.getPostName());
+			pstmt.setString(3, p.getPostContent());
+			pstmt.setString(4, p.getPostNotice());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	/**
+	 * 첨부파일 INSERT
+	 * @param conn
+	 * @param list
+	 * @return
+	 */
+	public int insertFile(Connection conn, ArrayList<PostFile> list) {
+		int result = 1;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertFile");
+		
+		try {
+			
+			for(PostFile f : list) {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, f.getFileOrigin());
+				pstmt.setString(2, f.getFileChange());
+				pstmt.setString(3, f.getFilePath());
+				result = pstmt.executeUpdate();
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 글 삭제
+	 * @param conn
+	 * @param postNo
+	 * @return
+	 */
+	public int deletePost(Connection conn, int postNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deletePost");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, postNo);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
 		
 	
 

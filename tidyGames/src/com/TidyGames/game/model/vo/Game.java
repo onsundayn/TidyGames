@@ -110,12 +110,13 @@ public class Game {
 		this.count = count;
 	}
 	
-	public Game(int gameNo, String korName, String engName, String uploadDate) {
+	public Game(int gameNo, String korName, String engName, String uploadDate, String gameStatus) {
 		super();
 		this.gameNo = gameNo;
 		this.korName = korName;
 		this.engName = engName;
 		this.uploadDate = uploadDate;
+		this.gameStatus = gameStatus;
 	}
 
 	

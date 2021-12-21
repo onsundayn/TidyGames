@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="com.TidyGames.post.model.vo.Post"%>
+	pageEncoding="UTF-8"%>
+<%@ page import="com.TidyGames.post.model.vo.Post, com.TidyGames.common.model.vo.PageInfo,
+				 com.TidyGames.post.model.vo.PostFile, java.util.ArrayList"
+%>
 <%
-	Post p = (Post) request.getAttribute("post");
+	Post p = (Post)request.getAttribute("post");
+	Post lpn = (Post)request.getAttribute("lpn");
+	Post fpn = (Post)request.getAttribute("fpn");
+	ArrayList<PostFile> flist = (ArrayList<PostFile>)request.getAttribute("flist");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
 %>
 <!DOCTYPE html>
 <html>
@@ -53,6 +60,9 @@
 table {
 	color: black;
 }
+.like {
+	cursor:pointer;
+}
 </style>
 </head>
 <body style="background-color: #0e332c;">
@@ -61,18 +71,23 @@ table {
 		<%@ include file="../common/topbar.jsp"%>
 		<%@ include file="../common/navibar.jsp"%>
 	</div>
+	
+	
 
 	<div class="outer">
 
 		<h2>
 			TIDY COMMUNITY <i class="far fa-comments"></i>
 		</h2>
+		
 		<br>
 		<div align="right">
-			<button type="button" class="btn btn-sm btn-warning"
-				data-toggle="modal" data-target="#myModal">신고</button>
-			<a href="" class="btn btn-sm btn-info">수정</a> <a href=""
-				class="btn btn-sm btn-danger">삭제</a>
+			<% if(loginUser != null && loginUser.getMemNo() == p.getMemNo()) { %>
+				<a href="<%= contextPath %>/updateForm.po?cpage=<%=pi.getCurrentPage()%>&num=<%= p.getPostNo() %>" class="btn btn-sm btn-info">수정</a> 
+				<a href="<%= contextPath %>/delete.po?cpage=<%=pi.getCurrentPage()%>&num=<%=p.getPostNo()%>" class="btn btn-sm btn-danger">삭제</a>
+			<% } else if(loginUser != null && loginUser.getMemAccess().equals("unblock")) { %>
+				<button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#myModal">신고</button>
+			<% } %>
 		</div>
 		<br>
 		<div class="view-form">
@@ -112,32 +127,64 @@ table {
 						</tr>
 						<tr>
 							<th width="50" style="display: flow-root"><h5>내용</h5></th>
-							<td colspan="6"><p width="1000" height="20000"><%=p.getPostContent()%></p></td>
+							<td colspan="6"><pre width="1000" height="20000"><%=p.getPostContent()%></pre></td>
 						</tr>
 						<tr>
-							<td colspan="6" height="20"></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td><i class="far fa-comment-dots fa-2x"></i></td>
-							<th>댓글</th>
-							<td width="50">123</td>
-							<td><i class="far fa-heart fa-2x"></i></td>
-							<th>추천</th>
-							<td><%=p.getPostLike()%></td>
+							<th></th>
+							<% for(int i=0; i<flist.size(); i++) { %>
+								<td colspan="2">
+                        			<img src="<%=contextPath%>/<%=flist.get(i).getFilePath() + flist.get(i).getFileChange()%>" width="300" height="200" onerror="this.style.display='none'">
+                        		</td>
+                        	<% } %>
 						</tr>
 						<tr>
 							<td colspan="7" height="20"></td>
 						</tr>
 					</table>
-				</div>
+					<table>
+						<th width="80">첨부파일</th>
+							<% if(flist.isEmpty()) { %>
+								<td>첨부파일이 없습니다</td>
+							<% } else { %>
+								<% for(int i=0; i<flist.size(); i++) { %>
+									<tr><td><a download="<%= flist.get(i).getFileOrigin() %>" href="<%=contextPath%>/<%=flist.get(i).getFilePath() + flist.get(i).getFileChange()%>"><%= flist.get(i).getFileOrigin() %></td></tr></a>
+								<% } %>
+							<% } %>
+					</table>
+				 </div>
+
+					<table>
+						<tr>
+							<td></td>
+							<td><i class="far fa-comment-dots fa-2x"></i></td>
+							<th>댓글</th>
+							<td width="50">123</td>
+							<% if(loginUser == null || !(loginUser.getMemAccess()).equals("unblock")) { %>
+								<div id="canNotLike" class="like">								
+									<td><i class="far fa-heart fa-2x"></i></td>
+									<th>추천</th>
+									<td><%=p.getPostLike()%></td>
+								</div>
+							<% } else { %>
+								<div id="canLike" class="like">								
+									<td><i class="far fa-heart fa-2x"></i></td>
+									<th>추천</th>
+									<td><%=p.getPostLike()%></td>
+								</div>
+							<% } %>
+						</tr>
+						<tr>
+							<td colspan="7" height="20"></td>
+						</tr>
+					</table>
+				
 
 				<div class="comment-view">
 					<table>
 						<tr>
 							<td></td>
 							<th style="display: flow-root" width="70">닉네임</th>
-							<td ><p width="500" size="auto">댓글 내용 자리...</p></td>
+							<td><p width="500" size="auto">댓글 내용 자리...</p></td>
 							<td><a>수정</a></td>
 							<td><a>삭제</a></td>
 							<td><button type="button" class="btn btn-sm btn-warning"
@@ -153,9 +200,13 @@ table {
 	</div><!-- outer -->
 	<br>
 	<div align="center">
-		<a href="<%=contextPath%>/detail.po?num=<%=p.getPostNo()-1%>" class="btn btn-sm btn-secondary">이전글</a> 
-		<a href="<%=contextPath%>/list.po?cpage=1" class="btn btn-sm btn-secondary">목록</a> 
-		<a href="<%=contextPath%>/detail.po?num=<%=p.getPostNo()+1%>" class="btn btn-sm btn-secondary">다음글</a>
+		<% if(p.getPostNo() != fpn.getFirstPost()) { %>
+			<a href="<%=contextPath%>/detail.po?cpage=<%=pi.getCurrentPage()%>&num=<%=p.getPrevNo()%>" class="btn btn-sm btn-secondary"><i class="fas fa-angle-double-left fa-lg"></i></a> 
+		<% } %>
+		<a href="<%=contextPath%>/list.po?cpage=<%=pi.getCurrentPage()%>" class="btn btn-sm btn-secondary"><i class="fas fa-align-justify fa-lg"></i></a> 
+		<% if(p.getPostNo() != lpn.getLastPost()) { %>
+			<a href="<%=contextPath%>/detail.po?cpage=<%=pi.getCurrentPage()%>&num=<%=p.getNextNo()%>" class="btn btn-sm btn-secondary"><i class="fas fa-angle-double-right fa-lg"></i></a>
+		<% } %>
 	</div>
 	<br>
 	<br>
@@ -169,13 +220,16 @@ table {
 				</div>
 				<div class="modal-body">
 					<div>
-						<input type="radio" id="r1" name="report" value="1" checked><label for="r1">욕설, 비방, 혐오</label>
+						<input type="radio" id="r1" name="report" value="1" checked><label
+							for="r1">욕설, 비방, 혐오</label>
 					</div>
 					<div>
-						<input type="radio" id="r2" name="report" value="2"><label for="r2">부적절한 홍보</label>
+						<input type="radio" id="r2" name="report" value="2"><label
+							for="r2">부적절한 홍보</label>
 					</div>
 					<div>
-						<input type="radio" id="r3" name="report" value="3"><label for="r3">루머 유포</label>
+						<input type="radio" id="r3" name="report" value="3"><label
+							for="r3">루머 유포</label>
 					</div>
 					<div>
 						<input type="radio" id="r4" name="report" value="4"><label for="r4">음란, 청소년 유해</label>
@@ -191,13 +245,13 @@ table {
 					</div>
 					<br>
 					<div>
-						<label for="r7"><textarea id="etc" cols="60" rows="4"
+						<label for="r7"><textarea cols="60" rows="4"
 								style="resize: none" placeholder="신고 사유 입력 (최대 160자 이내)"></textarea>
 					</div>
 					<div class="modal-footer">
 						<input type="hidden" id="reportNo" value="<%=p.getPostNo()%>">
 						<input type="hidden" name="reportedMemNo" value="<%=p.getMemNo()%>">
-						<button type ="submit" id="postReport" class="btn btn-info">신고완료</button>
+						<button id="postReport" class="btn btn-info">신고완료</button>
 						<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
 					</div>
 				</div>
@@ -206,36 +260,20 @@ table {
 		
 		<script>
 			$(function(){
+				
+				$("#")
+				
 				$("#postReport").click(function(){
-					if(<%= loginUser %> != null) {
-
-						$.ajax({
-							url:"report.re",
-							data:{
-								pno:$(".modal-footer").children().eq(0).val(),
-								mno:$(".modal-footer").children().eq(1).val(),
-								cno:$("input[name='report']:checked").val(),
-								etc:$("#etc").val(),
-								/* rno:$(댓글완성되면댓글번호가져올게요) */	
-							},
-							type:"post",
-							success:function(result){
-								if(result > 0) {
-									alert("신고되었습니다.");
-									$(".modal").modal("hide");
-								}else{
-									alert("다시 입력해주세요.")
-								}
-							}, error:function(){
-								alert("오류가 발생했습니다. 다시 시도해주세요.")
-							}
-						});
-						
-						}else{
-						alert("로그인 후 사용 가능합니다.");
-				}
-		})
-	})
+					const reportNo = $(".modal-footer").children().eq(0).val();
+					console.log(reportNo);
+					const reportedMemNo = $(".modal-footer").children().eq(1).val();
+					console.log(reportedMemNo);
+				});
+				
+				$("#canNotLike").click(function(){
+					alert('로그인한 회원만 이용할 수 있는 기능입니다');
+				});
+			})
 		</script>
 </body>
 </html>

@@ -8,29 +8,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class myPageController
+ * Servlet implementation class MemberEnrollPageController
  */
-@WebServlet("/myPage.me")
-public class MyPageController extends HttpServlet {
+@WebServlet("/memberEnrollPage.me")
+public class MemberEnrollPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyPageController() {
+    public MemberEnrollPageController() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	/**
-	 * 다현
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		
-		request.getRequestDispatcher("views/member/myPage.jsp").forward(request, response);
+
+		// 페이지 이동용 서블렛
+		request.getRequestDispatcher("views/member/enrollForm.jsp").forward(request, response);
 	
 	}
 

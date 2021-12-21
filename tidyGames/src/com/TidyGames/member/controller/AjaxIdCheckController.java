@@ -1,36 +1,47 @@
 package com.TidyGames.member.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.TidyGames.member.model.service.MemberService;
+
 /**
- * Servlet implementation class myPageController
+ * Servlet implementation class AjaxIdCheckController
  */
-@WebServlet("/myPage.me")
-public class MyPageController extends HttpServlet {
+@WebServlet("/idCheck.me")
+public class AjaxIdCheckController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyPageController() {
+    public AjaxIdCheckController() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	/**
-	 * 다현
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String checkId = request.getParameter("checkId");
 		
+		int count = new MemberService().idCheck(checkId);
 		
-		
-		request.getRequestDispatcher("views/member/myPage.jsp").forward(request, response);
+		if(count > 0) {
+			// 이미 존재하는 아이디 일 경우 (사용불가)
+			response.getWriter().print("NNNNN");
+		} else {
+			// 존재하지 않는 아이디일경우 (사용가능)
+			response.getWriter().print("NNNNY");
+		}
+	
 	
 	}
 

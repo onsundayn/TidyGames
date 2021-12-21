@@ -7,31 +7,40 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.TidyGames.member.model.service.MemberService;
+
 /**
- * Servlet implementation class myPageController
+ * Servlet implementation class AjaxNickCheckController
  */
-@WebServlet("/myPage.me")
-public class MyPageController extends HttpServlet {
+@WebServlet("/nickCheck.me")
+public class AjaxNickCheckController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyPageController() {
+    public AjaxNickCheckController() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	/**
-	 * 다현
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String checkNick = request.getParameter("checkNick");
 		
+		int count = new MemberService().nickCheck(checkNick);
 		
+		if(count > 0) {
+			// 이미 존재하는 닉네임 일 경우 (사용불가)
+			response.getWriter().print("NNNNN");
+		} else {
+			// 존재하지 않는 닉네임 일경우 (사용가능)
+			response.getWriter().print("NNNNY");
+		}
 		
-		request.getRequestDispatcher("views/member/myPage.jsp").forward(request, response);
-	
 	}
 
 	/**
