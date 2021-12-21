@@ -40,7 +40,6 @@ public class QnaInsertController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		if(ServletFileUpload.isMultipartContent(request)) {
-			System.out.println("시작은됨");
 			
 			int maxSize = 10*1024*1024;
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/board_upfiles/");
@@ -55,8 +54,6 @@ public class QnaInsertController extends HttpServlet {
 			qna.setNotiTitle(Title);
 			qna.setNotiContent(Content);
 			
-			System.out.println(qna);
-			
 			Attachment at = null;
 			
 			if(multiRequest.getOriginalFileName("upfile") != null) { // 넘어온 첨부파일이 있을 경우
@@ -69,7 +66,6 @@ public class QnaInsertController extends HttpServlet {
 			int result = new QnaService().insertQna(qna, at);
 			
 			if(result > 0) {
-				System.out.println("성공");
 				request.getSession().setAttribute("alertMsg", "문의글이 등록되었습니다.");
 				response.sendRedirect(request.getContextPath());
 
@@ -78,7 +74,6 @@ public class QnaInsertController extends HttpServlet {
 				if(at != null) {
 					new File(savePath + at.getChangeName()).delete(); 
 				}
-				System.out.println("오류");
 				request.setAttribute("errorMsg", "오류 발생");
 				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 			}

@@ -52,18 +52,6 @@ public class MemberService {
 		return m;
 	}
 
-	
-	
-	public ArrayList<Member> selectMember(PageInfo pi) {
-		Connection conn = getConnection();
-		
-		ArrayList<Member> list = new MemberDao().selectMember(conn, pi);
-		
-		close(conn);
-		
-		return list;
-	}
-	
 	public int selectMemberCount() {
 		Connection conn = getConnection();
 		
@@ -72,6 +60,29 @@ public class MemberService {
 		close(conn);
 		
 		return listCount;
+	}
+	
+	
+	public ArrayList<Member> selectMemberList(PageInfo pi) {
+		Connection conn = getConnection();
+		
+		ArrayList<Member> list = new MemberDao().selectMemberList(conn, pi);
+		
+		close(conn);
+		
+		return list;
+	}
+	
+	
+	public Member selectMember(int memNo) {
+		Connection conn = getConnection();
+		
+		Member m = new MemberDao().selectMember(conn, memNo);
+		
+		close(conn);
+		
+		return m;
+	
 	}
 	
 	public int deleteMember(int memNo) {
@@ -131,12 +142,12 @@ public class MemberService {
 			commit(conn);
 		}else {
 			rollback(conn);
-		}
-		
-		close(conn);
+		} 
+			close(conn);
 		
 		return result;
 	}
+	
 
 	public int idCheck(String checkId) {
 		
@@ -177,5 +188,21 @@ public class MemberService {
 		return result;
 		
 	}
+
+		public int updateMemberList(Member m) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().updateMemberList(conn, m);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		} 
+			close(conn);
+		
+		return result;
+	}
+
 	
 }

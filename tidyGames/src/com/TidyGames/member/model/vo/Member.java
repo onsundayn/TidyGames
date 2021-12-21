@@ -24,7 +24,9 @@ public class Member {
 	private String memAccess;
 	private Date blockDate;
 	private String memCookie;
+
 	private String memCategory;
+	private String date;
 	
 	public Member() {}
 	
@@ -256,12 +258,21 @@ public class Member {
 		this.memCookie = memCookie;
 	}
 
+
 	public String getMemCategory() {
 		return memCategory;
 	}
 
 	public void setMemCategory(String memCategory) {
 		this.memCategory = memCategory;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 	@Override
