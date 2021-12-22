@@ -19,5 +19,14 @@
 		CATEGORY_NAME = ?
 
 	</entry>
+	
+		<entry key="insertCategory">
+		INSERT INTO CATEGORY
+				(CATEGORY_NO,
+				CATEGORY_NAME)
+		VALUES (SEQ_CATE_NO.NEXTVAL,
+				 ?)
+	</entry>
+	
 
 </properties>

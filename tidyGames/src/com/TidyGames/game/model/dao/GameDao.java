@@ -170,7 +170,7 @@ public Game selectGameGC(Connection conn, int comNo, int gameNo) {
 						  		  rset.getString("company_name"),
 						  		  rset.getString("eng_name"),
 						  		  rset.getString("upload_date"),
-						  		  rset.getString("game_status")));				  	
+						  		  rset.getString("confirm")));				  	
 			}
 			
 		} catch (SQLException e) {

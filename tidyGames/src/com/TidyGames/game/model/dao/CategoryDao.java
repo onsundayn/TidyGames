@@ -11,22 +11,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-
-import static com.TidyGames.common.JDBCTemplate.*;
-
-import com.TidyGames.common.model.vo.PageInfo;
-
 import com.TidyGames.game.model.vo.Category;
-import com.TidyGames.game.model.vo.Game;
-import com.TidyGames.game.model.vo.Review;
-import com.TidyGames.member.model.vo.*;
+
 
 public class CategoryDao {
 
 private Properties prop = new Properties();
 
 	public CategoryDao() {
-		String filePath = GameDao.class.getResource("/db/sql/category-mapper.xml").getPath();
+		String filePath = CategoryDao.class.getResource("/db/sql/category-mapper.xml").getPath();
 		
 		try {
 			prop.loadFromXML(new FileInputStream(filePath));
@@ -78,6 +71,30 @@ private Properties prop = new Properties();
 			
 			pstmt.setString(1, c.getCategoryName());
 			pstmt.setString(2, c.getCheckCategoryName());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+	
+	public int addCategory(Connection conn, Category c) {
+
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertCategory");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, c.getCategoryName());
 			
 			result = pstmt.executeUpdate();
 			

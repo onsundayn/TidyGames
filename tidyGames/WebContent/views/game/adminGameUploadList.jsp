@@ -143,7 +143,7 @@
 							<td><%=g.getEngName() %></td>
 							<td><%=g.getUploadDate() %></td>
 							
-							<% if(g.getGameStatus().equals("Y")) { %>
+							<% if(g.getConfirm().equals("Y")) { %>
 							<td><span class="badge bg-info" id="bdg">승인</span></td>
 							<% }else { %>							
 							<td><span class="badge bg-secondary" id="bdg">미승인</span></td>
