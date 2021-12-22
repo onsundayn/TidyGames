@@ -132,7 +132,7 @@ private Properties prop = new Properties();
 						  		  rset.getString("company_name"),
 						  		  rset.getString("eng_name"),
 						  		  rset.getString("upload_date"),
-						  		  rset.getString("game_status")));				  	
+						  		  rset.getString("confirm")));				  	
 			}
 			
 		} catch (SQLException e) {

@@ -41,7 +41,7 @@ public class CategoryService {
 public int addCategory(Category c) {
 		
 		Connection conn = getConnection();
-		int result = new CategoryDao().updateCategory(conn, c);
+		int result = new CategoryDao().addCategory(conn, c);
 		
 		if(result > 0) { 
 			commit(conn);

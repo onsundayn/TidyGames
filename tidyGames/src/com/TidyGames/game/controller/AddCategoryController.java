@@ -36,7 +36,6 @@ public class AddCategoryController extends HttpServlet {
 		Category c = new Category();
 		c.setCategoryName(addCate);
 		
-		
 		int result = new CategoryService().addCategory(c);
 		
 		if(result > 0) {
