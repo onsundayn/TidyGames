@@ -479,7 +479,7 @@ public Game selectGameGC(Connection conn, int comNo, int gameNo) {
 		ArrayList<Attachment3> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("selectAttachment");
+		String sql = prop.getProperty("selectAttachmentList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);

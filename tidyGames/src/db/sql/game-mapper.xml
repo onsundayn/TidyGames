@@ -72,7 +72,7 @@
 		  FROM REVIEW
 		  LEFT JOIN MEMBER USING (MEM_NO)
 		 WHERE GAME_NO = ?
-</entry>
+	</entry>
 	<entry key="selectGameList">
 	SELECT *
 		  FROM (
@@ -175,8 +175,18 @@
 			  , ?
 			  )
 	</entry>
-	
 	<entry key="selectAttachment">
+		SELECT
+		       FILE_NO
+		     , ORIGIN_NAME
+		     , CHANGE_NAME
+		     , FILE_PATH
+		     , FILE_TYPE
+		  FROM UPLOAD_FILE
+		 WHERE GAME_NO = ? AND FILE_TYPE = 1
+	</entry>
+	
+	<entry key="selectAttachmentList">
 		SELECT
 		       FILE_NO
 		     , ORIGIN_NAME
@@ -186,8 +196,6 @@
 		  FROM UPLOAD_FILE
 		 WHERE GAME_NO = ?
 		 ORDER BY FILE_TYPE
-		
-	
 	</entry>
 	
 	<entry key="updateGame">

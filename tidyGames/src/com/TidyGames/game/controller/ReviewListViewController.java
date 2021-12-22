@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.TidyGames.game.model.service.GameService;
+import com.TidyGames.game.model.vo.Attachment3;
 import com.TidyGames.game.model.vo.Game;
 import com.TidyGames.game.model.vo.Review;
 import com.TidyGames.member.model.vo.Member;
@@ -39,11 +40,14 @@ public class ReviewListViewController extends HttpServlet {
 		}
 		int gameNo = Integer.parseInt(request.getParameter("gno"));
 		Game g = new GameService().selectGame(memNo, gameNo);
+		Attachment3 at = new GameService().selectAttachment(gameNo);
 		ArrayList<Review> list = new GameService().selectReview(gameNo);
 		
 		request.setAttribute("list", list);
 		request.setAttribute("g", g);
+		request.setAttribute("at", at);
 		request.getRequestDispatcher("views/game/reviewListView.jsp").forward(request, response);;
+		
 	}
 
 	/**

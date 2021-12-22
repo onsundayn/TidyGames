@@ -2,6 +2,7 @@
     pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.game.model.vo.*"%>
 <%
 	Game g = (Game)request.getAttribute("g");
+	Attachment3 at = (Attachment3)request.getAttribute("at");
 	ArrayList<Review> list = (ArrayList<Review>)request.getAttribute("list");
 %>
 <!DOCTYPE html>
@@ -132,7 +133,6 @@
     <div class="outer" align="center">
         <div class="top-line">
             <div class="left-area">
-        		<input type="hidden" value="<%=g.getGameNo()%>" name="gno">
                 <div class="title">
                     <br>
                     <%=g.getKorName()%>
@@ -152,7 +152,7 @@
                 </div>
             </div>
             <div class="title-img">
-                <img src="<%=contextPath%>/<%=g.getGameImg()%>">
+                <img src="<%=contextPath%>/<%=at.getFilePath() + at.getChangeName()%>">
             </div>
         </div>
         <div class="middle-area">
