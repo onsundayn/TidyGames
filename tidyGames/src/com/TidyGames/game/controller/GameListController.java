@@ -42,8 +42,6 @@ public class GameListController extends HttpServlet {
 		}
 		String keyword = request.getParameter("keyword");
 		
-		
-		
 		ArrayList<Game> list = new GameService().selectList(keyword, memNo);
 		
 		request.setAttribute("list", list);

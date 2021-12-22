@@ -31,9 +31,14 @@ public class ReviewEnrollFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int memNo = 0;
+		if(request.getSession().getAttribute("loginUser") != null) {
+			memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
+		}
+		
 		int gameNo = Integer.parseInt(request.getParameter("gno"));
 		
-		Game g = new GameService().selectGame(gameNo);
+		Game g = new GameService().selectGame(memNo, gameNo);
 		
 		request.setAttribute("g", g);
 		request.getRequestDispatcher("views/game/reviewEnrollForm.jsp").forward(request, response);
