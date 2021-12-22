@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.TidyGames.game.model.vo.*, java.util.ArrayList"%>
 <%
-	Game g = (Game)request.getAttribute("g");
-	ArrayList<Category> gcList = (ArrayList <Category>)request.getAttribute("gcList");
+   Game g = (Game)request.getAttribute("g");
+   ArrayList<Category> gcList = (ArrayList <Category>)request.getAttribute("gcList");
 %>
 <!DOCTYPE html>
 <html>
@@ -102,13 +102,13 @@
         color:orange;
     }
     #review-btn:hover{
-    	background-color:orange;
+       background-color:orange;
     }
 </style>
 </head>
 <body style="background-color: #0e332c;">
 
-	<%@ include file="../common/topbar.jsp"%>
+   <%@ include file="../common/topbar.jsp"%>
     <%@ include file="../common/navibar.jsp"%>
 
     <div class="outer">
@@ -163,7 +163,7 @@
                 </div>
                 <div id="tag">
                     관련태그&nbsp;&nbsp;&nbsp; 
-                    		<% for(int i=0; i<gcList.size(); i++) {%>
+                          <% for(int i=0; i<gcList.size(); i++) {%>
                             <a href="" class="category-btn"><%=gcList.get(i).getCategoryName()%></a>
                             <% } %>
                 </div>
@@ -181,15 +181,15 @@
              <% } else { %>
              
              
-	             	<div id="heart">
-	          	<% if(g.getCount() == 0) { %>
-	                     <a href="" onclick="return wishConfirm(<%=g.getGameNo()%>)"><i class="far fa-heart fa-2x"></i></a>
-	                 
-	            	<% }else { %>
-	                 
-	                    <a href="" onclick="return wishDelete(<%=g.getGameNo()%>)"><i class="fas fa-heart fa-2x"></i></a>
-	              	<% } %>
-	                </div>
+                   <div id="heart">
+                <% if(g.getCount() == 0) { %>
+                        <a href="" onclick="return wishConfirm(<%=g.getGameNo()%>)"><i class="far fa-heart fa-2x"></i></a>
+                    
+                  <% }else { %>
+                    
+                       <a href="" onclick="return wishDelete(<%=g.getGameNo()%>)"><i class="fas fa-heart fa-2x"></i></a>
+                    <% } %>
+                   </div>
 
                 
                
@@ -203,17 +203,17 @@
 
 
 
-             <% } %>		
+             <% } %>      
                 <br>
                 <br><br>
                 <div id="rating">
                    <a href="">
-                    	<!-- 별점 띄워줄때 반복문 돌려볼까?-->
-                    	<i class="fas fa-star fa-lg"></i>
-                    	<i class="fas fa-star fa-lg"></i>
-                    	<i class="fas fa-star fa-lg"></i>
-                    	<i class="fas fa-star fa-lg"></i>
-                    	<i class="fas fa-star fa-lg"></i>
+                       <!-- 별점 띄워줄때 반복문 돌려볼까?-->
+                       <i class="fas fa-star fa-lg"></i>
+                       <i class="fas fa-star fa-lg"></i>
+                       <i class="fas fa-star fa-lg"></i>
+                       <i class="fas fa-star fa-lg"></i>
+                       <i class="fas fa-star fa-lg"></i>
                     </a>
                 </div>
                 <div id="go-review">
@@ -227,105 +227,132 @@
     <script>
    
     function loginMsg(){
-    	if(!confirm("로그인이 필요합니다. 로그인하시겠습니까?")){
-    		return false; 
-    	}
+       if(!confirm("로그인이 필요합니다. 로그인하시겠습니까?")){
+          return false; 
+       }
     }
     
-  	function cartConfirm(gameNo){
-    	
-    	$.ajax({
-    		url : "cartInsert.pa",
-    		data : {
-    			
-    			gameNo:gameNo
-    		},
-    		type:"post",
-    		success:function(result) {
-    			
-    			
-    			if(result == 1) {
+     function cartConfirm(gameNo){
+       
+       $.ajax({
+          url : "cartInsert.pa",
+          data : {
+             
+             gameNo:gameNo
+          },
+          type:"post",
+          success:function(result) {
+             
+             
+             if(result == 1) {
  
-    				if(confirm("장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?")){
-    		    		location.href='<%=contextPath%>/cart.pa?memNo=<%=loginUser.getMemNo()%>';
-    		    	}
-    				
-    			}else if(result == 2 ) {
-    				alert("장바구니가 이미 존재합니다.")
-    			}
-    			
-    		},error:function() {
-    			console.log("장바구니 담기 실패!")
-    		}
-    	})
-    	return false;
-    	
-   	
+                if(confirm("장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?")){
+                    location.href='<%=contextPath%>/cart.pa';
+                 }
+                
+             }else if(result == 2 ) {
+                alert("장바구니가 이미 존재합니다.")
+             }
+             
+          },error:function() {
+             console.log("장바구니 담기 실패!")
+          }
+       })
+       return false;
+       
+      
     }
-	
-  	
-		function wishConfirm(gameNo){
-		    	
-		    	$.ajax({
-		    		url : "wishInsert.me",
-		    		data : {
-		    			
-		    			gameNo:gameNo
-		    		},
-		    		type:"post",
-		    		success:function(result) {
-		    			
-		    			
-		    			if(result == 1) {
-		 
-		    				if(confirm("찜목록에 담겼습니다. 찜목록페이지로 이동하시겠습니까?")){
-		    					
-		    					location.href='<%=contextPath%>/wishList.me?memNo=<%=loginUser.getMemNo()%>';
-		    		    	}
-		    			
-		    			}
-		    			
-		    		},error:function() {
-		    			console.log("찜목록 담기 실패!")
-		    		}
-		    	})
-		    	return false;
-		    	
-		   	
-		    }
+   
     
-    
-		function wishDelete(gameNo){
-		
-		$.ajax({
-			url : "wishDe.me",
-			data : {
-				
-				gameNo:gameNo
-			},
-			type:"post",
-			success:function(result) {
-			
-				
-				if(result > 0 ) {
-	
-					alert("찜목록에서 삭제되었습니다.")
-				
-				}
-				
-			},error:function() {
-				console.log("찜목록 삭제 실패!")
-			}
-		})
+     function wishConfirm(gameNo, aEl){
+     	
+     	$.ajax({
+     		url : "wishInsert.me",
+     		data : {
+     			
+     			gameNo:gameNo
+     		},
+     		type:"post",
+     		success:function(result) {
+     		
+     			
+     			if(result > 0 ) {
+  
+     				if(confirm("찜목록에 담겼습니다. 찜목록페이지로 이동하시겠습니까?")){
+     					
+     					location.href='<%=contextPath%>/wishList.me';
+     					
+     		    	}else {
+     		    		// 채워진 하트로 바꿔줘야됨 
+     		    		$(aEl).children().removeClass("far");
+     		    		$(aEl).children().addClass("fas");
+     		    		$(aEl).click(function(){
+     		    			return wishDelete(gameNo);
+     		    		})
+     		    	}
+     		    		
+     			
+     			}
+     			
+     		},error:function() {
+     			console.log("찜목록 담기 실패!")
+     		}
+     	})
+     	
+     	
+     }
+     
+     
+ 	function wishDelete(gameNo, aE2){
+ 	
+ 	$.ajax({
+ 		url : "wishDe.me",
+ 		data : {
+ 			
+ 			gameNo:gameNo
+ 		},
+ 		type:"post",
+ 		success:function(result) {
+ 		
+ 				if(result > 0 ) {
+ 					 
+     				if(alert("찜목록이 해제되었습니다.")){
+     					
+     		    		// 빈하트로 채워줘야함
+     		    		$(aE2).children().removeClass("fas");
+     		    		$(aE2).children().addClass("far");
+     		    		$(aE2).click(function(){
+     		    			return wishDelete(gameNo);
+     		    		})
+     		    		
+     			}
+ 			
+ 				//alert("찜목록에서 삭제되었습니다.")
+ 				
+ 			
+ 				}
+ 			
+ 			
+ 		},error:function() {
+ 			console.log("찜목록 삭제 실패!")
+ 		}
+ 	})
 
-	}
-    </script>
+ 	
+ 	
+ 		        	
+ 	
+ }
+    			
+     </script>
+
+
     
     
     
     
     
-	
+   
 
 </body>
 </html>

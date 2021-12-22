@@ -59,5 +59,124 @@
 	
 	
 	</entry>
+	
+	
+	
+	<entry key = "orderList">
+			SELECT
+			          ORDER_NO
+			        , GAME_NO
+			        , MEM_NO
+			        , PAY_AMOUNT
+			        , PAY_STATUS
+			        , TO_CHAR(PAY_DATE, 'YYYY-MM-DD') "PAY_DATE"
+			        , PAY_METHOD
+			        , KOR_NAME
+			        , ENG_NAME
+			        , GAME_IMG
+			        , G.PRICE - G.PRICE*G.POINT  "DISCOUNTPRICE"
+					, PRICE
+			FROM PAY_GAME PG
+			JOIN PAY P USING(ORDER_NO)
+			JOIN GAME G USING(GAME_NO)
+			WHERE MEM_NO = ?
+			
+	
+	
+	
+	
+	
+	</entry>
+	
+	<entry key = "rfOrderList">
+			SELECT
+			          ORDER_NO
+			        , GAME_NO
+			        , MEM_NO
+			        , PAY_AMOUNT
+			        , PAY_STATUS
+			        , TO_CHAR(PAY_DATE, 'YYYY-MM-DD') "PAY_DATE"
+			        , PAY_METHOD
+			        , KOR_NAME
+			        , ENG_NAME
+			        , GAME_IMG
+			        , G.PRICE - G.PRICE*G.POINT  "DISCOUNTPRICE"
+					, PRICE
+			FROM PAY_GAME PG
+			JOIN PAY P USING(ORDER_NO)
+			JOIN GAME G USING(GAME_NO)
+			WHERE MEM_NO = ?
+			AND ORDER_NO =?
+			
+
+	</entry>
+	
+	
+	<!-- 환불 결제정보 -->
+	<entry key ="payInfo">
+			SELECT   
+					  ORDER_NO
+			        , P.MEM_NO
+			        , PAY_AMOUNT
+			        , PAY_STATUS
+			        , TO_CHAR(PAY_DATE, 'YYYY-MM-DD') "PAY_DATE"
+			        , PAY_METHOD
+			        , POINT_AMOUNT
+			FROM PAY P
+			JOIN POINT PO USING(ORDER_NO)
+			WHERE ORDER_NO = ?
+			AND P.MEM_NO = ?
+				
+	
+	</entry>
+	
+	<entry key="adRefundList">
+		SELECT
+			  REFUND_NO
+			 , ORDER_NO
+			 , REFUND
+			 , ADD_WRITING
+			 , TO_CHAR(REFUND_DATE, 'YYYY-MM-DD HH:MI:SS') AS "REFUND_DATE"
+			 , REFUND_STATUS
+			 , MEM_ID
+			 , PAY_AMOUNT
+			 , TO_CHAR(PAY_DATE, 'YYYY-MM-DD') AS "PAY_DATE"
+		FROM REFUND
+		JOIN MEMBER USING(MEM_NO)
+		JOIN PAY USING(ORDER_NO)
+		
+	</entry>
+	
+	<entry key="enrollRefund">
+ INSERT
+		INTO REFUND
+		(
+		   REFUND_NO
+		 , MEM_NO
+		 , ORDER_NO
+		 , REFUND
+		 , ADD_WRITING
+		 , REFUND_DATE
+		 
+		 )
+	 VALUES
+		 (
+		      SEQ_REFUND_NO.NEXTVAL
+		    , ?
+		    , ?
+		    , ?
+		    , ?
+		    , SYSDATE
+		    )
+    
+	
+	
+	
+	</entry>
+	
+	
+	
+	
+	
 
 </properties>

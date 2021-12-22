@@ -44,7 +44,7 @@
         color: white;
         margin-top: 40px;
         margin-left: 100px;
-        background: rgb(227, 220, 210);;
+        background: rgb(227, 220, 210);
     }
     /* 7일 ,한달, 3개월 6개월 조회버튼 */
     .dateSearch{

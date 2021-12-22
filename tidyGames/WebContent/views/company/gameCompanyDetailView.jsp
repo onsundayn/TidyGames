@@ -83,9 +83,17 @@
                     <td colspan="4"><%=loginCompany.getCompanyEnroll()%></td>
                 </tr>
             </table>
+            <div onclick="logout();" align="right" style="margin-right:25px; color:gray; cursor: pointer;">>> 로그아웃</div>
         </div>
     </div>
  
+    <script>
+        function logout(){
+            if(confirm("로그아웃 하시겠습니까?")) {
+                    location.href = "<%= contextPath%>/logout.me";
+            } 
+        }
+    </script>
 
 </body>
 </html>

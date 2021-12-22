@@ -198,7 +198,7 @@ Game g = (Game)session.getAttribute("g");
             <form action="" id="wishList-search">
 
                 <div id="game_search">
-                    <input type="text" name="keyword" style="border-radius: 3px; width: 800px; height:30px; background:#0e332c; border: 1px solid white;" placeholder="이름 또는 태그로 검색">
+                    <input type="text" name="keyword" style="border-radius: 3px; width: 800px; height:30px; background:#ffffff; border: 1px solid white;" placeholder="이름 또는 태그로 검색">
                 </div>
                 
                 <div id="search_btn">

@@ -11,16 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.TidyGames.member.model.service.MemberService;
 
 /**
- * Servlet implementation class adminDeleteMember
+ * Servlet implementation class AjaxIdCheckController
  */
-@WebServlet("/deleteMember.me")
-public class AdminDeleteMember extends HttpServlet {
+@WebServlet("/idCheck.me")
+public class AjaxIdCheckController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminDeleteMember() {
+    public AjaxIdCheckController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,19 +29,21 @@ public class AdminDeleteMember extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
-		int memNo = Integer.parseInt(request.getParameter("mno"));
-		int result = new MemberService().deleteMember(memNo);
-		if(result > 0) {
-			request.getSession().setAttribute("alertMsg", "회원탈퇴 되었습니다.");
-			response.sendRedirect(request.getContextPath() + "/memberList.me?cpage=1");
-		}else {
-			request.getSession().setAttribute("alertMsg", "회원탈퇴 중 오류가 발생했습니다.");
-			response.sendRedirect(request.getContextPath() + "/memberList.me?cpage=1");
+
+		String checkId = request.getParameter("checkId");
+		
+		int count = new MemberService().idCheck(checkId);
+		
+		if(count > 0) {
+			// 이미 존재하는 아이디 일 경우 (사용불가)
+			response.getWriter().print("NNNNN");
+		} else {
+			// 존재하지 않는 아이디일경우 (사용가능)
+			response.getWriter().print("NNNNY");
 		}
-			
-	}
 	
+	
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

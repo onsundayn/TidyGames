@@ -258,9 +258,9 @@ tbody {
 					<div class="area1">&nbsp;TIDY POINT</div>
 					<div class="area1">
 						<span style="font-size: 15px; text-align: center; color: grey;">&nbsp;
-							보유 POINT</span>___________ <span style="text-align: right;"><%=sum.getSum()%></span>&nbsp;POINT
+							보유 POINT</span>___________ <span style="text-align: right;" id="pointsum"><%=sum.getSum()%></span>&nbsp;POINT
 						<div>
-							<button class="use_btn">전액사용</button>
+							<!-- <button class="use_btn">전액사용</button> -->
 						</div>
 					</div>
 					<div class="area1">
@@ -302,15 +302,15 @@ tbody {
 				<h3>최종결제정보</h3>
 				<div class="area3">
 					<span style="font-size: 15px; text-align: center; color: grey;">&nbsp;
-						상품금액</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<div style="text-align: right; display: inline-block;"><%=total%>원
-					</div>
+						상품금액</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<div style="text-align: right; display: inline-block; width: 80px;"><%=total%>
+					</div>&nbsp;원
 					&nbsp;
 				</div>
 				<div class="area3" style="color: red;">
 					<span style="font-size: 15px; text-align: center; color: red;">&nbsp;
-						할인금액</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<div style="text-align: right; display: inline-block;"">
+						할인금액</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<div style="text-align: right; display: inline-block; width: 80px;">
 						-
 						<%
 								int discount = 0;
@@ -318,27 +318,27 @@ tbody {
 								discount += (cart.get(i).getPrice() - cart.get(i).getDiscountPrice());
 							}
 							%>
-						<%=discount%>원
-					</div>
+						<%=discount%>
+					</div>&nbsp;원
 					&nbsp;
 
 				</div>
 				<div class="area3">
 					<span style="font-size: 15px; text-align: center; color: grey;">&nbsp;
-						사용 POINT</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<div style="text-align: right; display: inline-block;" id="usearea">0</div>POINT
+						사용 POINT</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<div style="text-align: right; display: inline-block; width: 70px;" id="usearea">0</div>&nbsp;POINT
 					&nbsp;
 				</div>
 				<div class="area4">
 					<span style="font-size: 15px; text-align: center; color: grey;">&nbsp;
-						최종결제금액</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<div style="text-align: right; display: inline-block;"i">0</div>
+						최종결제금액</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<div style="text-align: right; display: inline-block; width: 80px;" id="finalpay"><%=total%></div>
 					&nbsp;원
 				</div>
 				<div class="area4">
 					<span style="font-size: 15px; text-align: center; color: grey;">&nbsp;
 						적립 TIDY POINT(5%)</span><br>
-					<div style="text-align: right;"><%=Math.round(total * 0.05)%>POINT
+					<div style="text-align: right; "><%=Math.round(total * 0.05)%>&nbsp;POINT
 					</div>
 					&nbsp;
 
@@ -399,12 +399,39 @@ tbody {
 			
 			
 			
+		})
+		
+		$(function(){
+			
+			$("#usePoint").keyup(function(){
+			const tmp = $("#usePoint").val();
+			
+			$("#pointsum").html(<%=sum.getSum()%>-tmp)
+			
+
+			})
+			
+			
 			
 		})
 		
 		
+		
+		$(function(){
+			
+			$("#usePoint").keyup(function(){
+			const tmp = $("#usePoint").val();
+			
+			$("#finalpay").html(<%=total%>-<%=discount%>-tmp)
+			
 
-
+			})
+			
+			
+			
+		})
+		
+		
 
 	</script>
 

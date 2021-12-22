@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%
 	String contextPath = request.getContextPath();
+	String alertMsg = (String)session.getAttribute("alertMsg");
 %>
 <!DOCTYPE html>
 <html>
@@ -60,6 +61,7 @@
         color: white;
         font-weight: bold;
         font-size: 14px;
+        margin-top: 70px;
     }
     .code_btn{
         width: 29%; 
@@ -78,6 +80,14 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body style="background-color: #0e332c;">
+
+	<% if(alertMsg != null){  %>
+	<script>
+		alert("<%= alertMsg %>");
+	</script>
+	<% session.removeAttribute("alertMsg"); %>
+	<% } %>
+
     <div class="outer">
         <header>
             <div id="logo" align="center">
@@ -90,7 +100,7 @@
 
         <content>
             <div id="content" align="center">
-                <form action="" method="">
+                <form action="<%= contextPath %>/searchPwd.me" method="post">
                     <div id="find_id_form">
                         <span style="color: white; font-size: 20px; font-weight: bold;">비밀번호 재설정</span>
                         <br><br><hr>
@@ -100,9 +110,8 @@
                                 ● 본인확인 이메일 인증<br>
                             </span>
                             <span style="color: lightgray; font-size: 15px;">
-                                입력하신 이메일로 전송된 인증번호를 입력해주세요. <br>
-                                가입하신 이메일 주소와 입력한 이메일 주소가 같아야, <br>
-                                인증번호를 받을 수 있습니다.
+                                가입시 입력한 아이디와 이메일 주소를 작성해주세요. <br>
+                                다음 버튼을 누른 뒤 약간의 시간이 소요될 수 있습니다. 
                             </span>
                         </div>
                         <br><br>
@@ -114,23 +123,15 @@
                             <div>이메일 주소</div>
                             <input type="email" name="searchEmail" style="width: 80%;" required>
                             <br>
-                            <div>인증번호</div>
-                            <input type="number" name="verificationCode" placeholder="6자리 숫자 입력" maxlength="6" disabled style="width: 50%;" required>
-                            <button class="code_btn" onclick="code_btn();">인증번호 받기</button>
                         </div>
                         <br><br><br>
 
-                        <button type="submit" class="next_btn" onclick="numCheck();">다음</button>
+                        <button type="submit" class="next_btn">다음</button>
 
                     </div>
                 </form>
                 <script>
-                    function code_btn(){
-                        
-                    }
-                    function numCheck(){
-                        
-                    }
+                
                 </script>
             </div>
         </content>

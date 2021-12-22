@@ -19,7 +19,7 @@
 <style>
     div{
 		box-sizing: border-box;
-		color:white;
+		color:black;
 		/* border: 1px solid rgba(255, 255, 255, 0.555); */
 	}
 	#outer{
@@ -131,7 +131,6 @@
 
        
     }
-
     .pointcontent{
       
        width: 370px; 
@@ -140,7 +139,31 @@
        margin-top: 20px;
     }
 
-   
+	.memInfo {width:100%;}
+    .memInfo td, .memInfo th{
+        padding:10px;
+        border:1px solid lightgray;
+    }
+    .memInfo th{ background: rgba(211, 211, 211, 0.281)}
+    #btnA {padding:0px; font-weight: 500;}
+    #btnA:hover{
+   		cursor: pointer;
+    	color: darkgreen;
+        font-weight:700;    	
+    }  
+    .memInfo input{
+    	width:100%;
+    	height:100%;
+    	box-sizing: border-box;
+    	border:0px;
+    	padding-left:10px;
+    }
+    .memInfo input:focus{
+    	outline:none;
+        background: lightgray;    	    	
+    }
+    .memInfo td {padding:0px}
+	
 
 </style>
 </head>
@@ -166,9 +189,6 @@
                 <div id="tableTop">
                     <div id="leftTop">
                         
-                         <div id="btnDiv">
-		                     <button type="sumbit" class="btn btn-sm btn-secondary" style="width:52px">상세 조회</button>
-	                    </div>
                     </div>
                     
                     <div id="midTop">
@@ -197,7 +217,7 @@
                 <table id="table" class="table table-hover">
                     <thead>
                         <tr align="center">
-                            <th width="30"><button type="button" onclick="allCheck();" id="btn" class="btn btn-sm btn-outline-secondary" style="width:24px">V</button></th>
+                            <!--  <th width="30"><button type="button" onclick="allCheck();" id="btn" class="btn btn-sm btn-outline-secondary" style="width:24px">V</button></th>  -->
                             <th width="30">No.</th>
                             <th width="130">아이디</th>
                             <th width="100">이름</th>
@@ -211,10 +231,11 @@
                     <tbody>
                     
                     <% for(Member m : list) {%>
-                        <tr align="center">
-                            <td><input type="checkbox" id="checkBox" name="checkBox" value="<%= m.getMemNo() %>" ></td>
+                        <tr align="center" id="memberData">
+                            <!-- <td><input type="checkbox" id="checkBox" name="checkBox" value="<%= m.getMemNo() %>" ></td>  -->
                             <td><%= m.getMemNo() %></td>
-                            <td><a href="<%= contextPath %>/memberSelect.me?mno=<%=m.getMemNo()%>" style="color:black"><%= m.getMemId() %></a></td>
+                            <td><a id="btnA" onclick="selectMember(<%= m.getMemNo() %>);" data-toggle="modal" data-target="#selectModal">
+                                <%= m.getMemId() %></a></td>
                             <td><%= m.getMemName() %></td>
                             <td><%= m.getMemNick() %></td>
                             <td><%= m.getMemEmail() %></td>
@@ -222,12 +243,12 @@
                             <td>
                                 
                             	<!-- contextPath로 point의 현재보유포인트를 불러올 자리 -->
-                                <a href="" id="btn" class="btn btn-sm btn-dark" data-toggle="modal" data-target="#myModal">변경</a>
+                                <a href="" id="btn" class="btn btn-sm btn-dark" data-toggle="modal" data-target="#pointModal">변경</a>
 
                             </td>
                             <td>
-                            	<a href="" id="btn" onclick="" class="btn btn-sm btn-info">수정</a>
-                            	<a href="" id="btn" onclick="done();" class="btn btn-sm btn-dark">탈퇴</a>
+                            	<a href="" id="btn"  onclick="updateMember(selectMember(<%= m.getMemNo() %>));" class="btn btn-sm btn-basic" data-toggle="modal" data-target="#updateModal">수정</a>
+                            	<a href="" id="btn" onclick="done();" class="btn btn-sm btn-basic">탈퇴</a>
 	                        </td>
                         </tr>
                         <% } %>
@@ -236,19 +257,19 @@
 	           
                 </div>
 
-
-				<div class="modal" id="myModal">
+				<!-- point modal -->
+				<div class="modal" id="pointModal">
 					<div class="modal-dialog"  style="width: 400px;">
 						<div class="modal-content"> 
 
 							<!-- Modal Header -->
-							<div class="modal-header" style="color:black; text-align: center;">
+							<div class="modal-header" text-align: center;">
 								<h4 class="modal-title" style="margin-left: 75px; font-weight: bold;">회원적립금 등록</h4>
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
 							</div>
 
 							<!-- Modal body -->
-							<div class="modal-body"  style="color:black;" >
+							<div class="modal-body">
                                 <div class="pointcontent">
                                     <b style="margin-top: 20px;">회원보유포인트 :</b>
                                     <div class="memPoint"></div>
@@ -283,17 +304,79 @@
 						</div>
 					</div>
 				</div>
+				
+				
+				<!-- 상세보기 modal -->
+				
+				  <!-- The Modal -->
+				  <div class="modal fade" id="selectModal">
+				    <div class="modal-dialog modal-lg">
+				      <div class="modal-content">
+				      
+				        <!-- Modal Header -->
+				        <div class="modal-header">
+				          <h4 class="modal-title">
+				          	<div>회원 상세 정보</div>
+				          </h4>
+				          <button type="button" class="close" data-dismiss="modal">&times;</button>
+				        </div>
+				        
+				        <!-- Modal body -->
+				        <div class="modal-body">
+				        	<div align="center">
+				        		<table id="readMem" class="memInfo">
+				        			
+				        		</table>
+				        	</div>
+				        </div>
+				        
+				        <!-- Modal footer -->
+				        <div class="modal-footer">
+					          <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                        </div>
+				        
+				      </div>
+				    </div>
+				  </div>
+				
+				
+				<!-- 정보변경 modal -->
+				
+				  <!-- The Modal -->
+				  <div class="modal fade" id="updateModal">
+				    <div class="modal-dialog modal-lg">
+				      <div class="modal-content">
+				      
+						<form action="updateMember.me">
+				        <!-- Modal Header -->
+				        <div class="modal-header">
+				          <h4 class="modal-title">
+				          		회원 정보 변경
+				          </h4>
+				          <button type="button" class="close" data-dismiss="modal">&times;</button>
+				        </div>
+				        <!-- Modal body -->
+				        <div class="modal-body">
+				        	<div align="center">
+				        		<table class="updateInfo memInfo">
+				        			
+				        		</table>
+				        	</div>
+				        </div>
+				        
+				        <!-- Modal footer -->
+				        <div class="modal-footer">
+   					          <button type="submit" class="btn btn-secondary">정보수정</button>
+					          <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                        </div>
+				        
+						</form>				        
 
-
-
-
-
-
-
-
-
-
-
+				      </div>
+				    </div>
+				  </div>
+				
+				  
 
 
 				<div id="tableOut2">
@@ -321,7 +404,7 @@
                 
             </div>
       
-      
+      				</div>
 
 
         <footer>
@@ -345,14 +428,74 @@
     	function done(){
 			 if(confirm("회원을 탈퇴시키겠습니까?")) {
 	            	$("#table>tbody>tr").click(function(){
-	    	         location.href ='<%= contextPath %>/delete.me?mno=' 	    	      	
+	    	         location.href ='<%= contextPath %>/deleteMember.me?mno=' 	    	      	
 	    	     			  	+ $(this).children().eq(1).text();
 	            	})
 			 }
 		}
+    	
+    	
+    	function selectMember(result) {
+    	
+			$.ajax({
+				url:"select.me",
+				data:{mno:result},
+				success:function(m){
+					
+					table = "<tr>"  
+                                +   "<th>회원번호</th>"
+                                +   "<td>" + "<input type='text' name='memNo' value='" + m.memNo + "' readonly>" + "</td>" 
+                                +   "<th>생년월일</th>"
+                                +   "<td>" + "<input type='text' name='memBirth' value='" + m.memBirth + "'>" + "</td>" +
+                                "</tr>" +
+                                "<tr>"  
+                                +   "<th>아이디</th>"
+                                +   "<td>" + "<input type='text' name='memId' value='" + m.memId + "'>" + "</td>" 
+                                +   "<th>이름</th>"
+                                +   "<td>" + "<input type='text' name='memName' value='" + m.memName + "'>" + "</td>" +
+                                "</tr>" +
+                                "<tr>"  
+                                +   "<th>닉네임</th>"
+                                +   "<td>" + "<input type='text' name='memNick' value='" + m.memNick + "'>" + "</td>" 
+                                +   "<th>성별</th>"
+                                +   "<td>" + "<input type='text' name='memGender' value='" + m.memGender + "' maxlength='1'>" + "</td>" +
+                                "</tr>" +
+                                "<tr>"  
+                                +   "<th>전화번호</th>"
+                                +   "<td>" + "<input type='text' name='memPhone' value='" + m.memPhone + "'>" + "</td>" 
+                                +   "<th>이메일</th>"
+                                +   "<td>" + "<input type='text' name='memEmail' value='" + m.memEmail + "'>" + "</td>" +
+                                "</tr>" +
+                                "<tr>"  
+                                +   "<th>주소</th>"
+                                +   "<td colspan='3'>" + "<input type='text' name='memAddress' value='" + m.memAddress + "'>" + "</td>" +
+                                "</tr>" +
+                                "<tr>"  
+                                +   "<th>가입일</th>"
+                                +   "<td>" + "<input type='text' name='memDate' value='" + m.date + "'readonly>" + "</td>" 
+                                +   "<th>탈퇴여부</th>"
+                                +   "<td>" + "<input type='text' name='memStatus' value='" + m.memStatus + "'>" + "</td>" +
+                                "</tr>" 
+                  
+                    $("#formInfo").text("회원 상세 정보");
+					$(".memInfo").html(table);
+					$("#readMem input").attr('readonly', 'readonly');
+					
+					
+				}, error:function(){
+					console.log("멤버조회 오류");
+				}
+				
+			});
+			
+    	}
+   
+		function updateMember() {
+			
+    	}
+    	
+    	
     </script>
-
-
 
 </body>
 </html>
