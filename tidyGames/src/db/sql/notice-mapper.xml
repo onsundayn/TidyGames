@@ -37,4 +37,33 @@
 			  , ?
 			  )
 	</entry>
+	<entry key="selectListCount">
+		
+	</entry>
+	<entry key="qnaWaitList">
+		SELECT *
+		  FROM
+		       (SELECT ROWNUM RNUM, A.* 
+		          FROM
+		                (SELECT 
+		                  QNA_NO
+		                , MEM_NO
+		                , MEM_ID
+		                , MEM_NICK
+		                , QNA_TITLE
+		                , TO_CHAR(REPORT_DATE, 'YY/MM/DD HH:MI') "REPORT_DATE"
+		                , ANS_CONFIRM
+		             FROM QNA
+		             JOIN MEMBER USING(MEM_NO)
+		            WHERE QNA_STATUS = 'Y'
+		            ) A
+		        )
+		    WHERE RNUM BETWEEN ? AND ?
+
+	</entry>
+	<entry key="selectListCount">
+		SELECT 
+		       COUNT(*) "COUNT" 
+		  FROM QNA
+	</entry>
 </properties>

@@ -1,10 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.notice.model.vo.Notice, com.TidyGames.common.model.vo.PageInfo"%>
+
+<%
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+	
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+	int listCount = pi.getListCount();
+%>
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Tidy Games</title>
 <style>
     div{
 		box-sizing: border-box;
@@ -120,7 +132,6 @@
             <div id="line_3"></div>
             
       
-            <form action="">
     	    <div id="tableBox">
                 <div id="tableTop">
                     <div id="leftTop">
@@ -150,182 +161,68 @@
                 <table id="table" class="table table-hover">
                     <thead>
                         <tr align="center">
-                            <!-- <th width="50"> </th> -->
                             <th width="100">No.</th>
                             <th width="150">아이디</th>
                             <th width="150">닉네임</th>
                             <th>문의글</th>
                             <th width="180">등록일</th>
-                            <!-- 트리거 (문의글에 답변을 달아서 insert가 생기면 답변여부가 자동으로 Y가 되게 설정하기) -->
                             <th width="180">답변 여부</th>
                         </tr>
                     </thead>
                     <tbody>
                         
-                        <!-- if() {} -->
+                       <%  for(Notice n : list) { %>
                         <tr align="center">
-                            <td>1</td>
-                            <td>namesname</td>
-                            <td>이르미</td>
-                            <td>탈퇴 후 바로 재가입할 수 있나요?</td>
-                            <td>2021/12/12 03:39</td>
-                            <!-- ajax -->
+                            <td><%= n.getNotiNo() %></td>
+                            <td><%= n.getNotiWriter() %></td>
+                            <td><%= n.getMember() %></td>
+                            <td><%= n.getNotiTitle() %></td>
+                            <td><%= n.getDate() %></td>
                             <td>
-                                <!-- if -->
+                            	<% if(n.getAnswer().equals(String.valueOf('N'))) { %>
                                 <a href="" class="btn btn-sm btn-primary">미답변</a>
-                                <!-- 답변완료 시  -->
-                                <!-- <a href="" class="btn btn-sm btn-secondary">답변완료</a> -->
+                                <% }else { %>
+                                <a href="" class="btn btn-sm btn-secondary">답변완료</a>
+                            	<% } %>
                             </td>
                         </tr>
-              
-                </div>
-<!-- 반복 예시 -->
-<tr align="center">
-    <td>1</td>
-    <td>namesname</td>
-    <td>이르미</td>
-    <td>탈퇴 후 바로 재가입할 수 있나요?</td>
-    <td>2021/12/12 03:39</td>
-    <!-- ajax -->
-    <td>
-        <a href="" class="btn btn-sm btn-secondary">답변완료</a>
-    </td>
-</tr>
-<tr align="center">
-    <td>1</td>
-    <td>namesname</td>
-    <td>이르미</td>
-    <td>탈퇴 후 바로 재가입할 수 있나요?</td>
-    <td>2021/12/12 03:39</td>
-    <!-- ajax -->
-    <td>
-        <a href="" class="btn btn-sm btn-secondary">답변완료</a>
-    </td>
-</tr>
-
-<tr align="center">
-    <td>1</td>
-    <td>namesname</td>
-    <td>이르미</td>
-    <td>탈퇴 후 바로 재가입할 수 있나요?</td>
-    <td>2021/12/12 03:39</td>
-    <!-- ajax -->
-    <td>
-        <a href="" class="btn btn-sm btn-secondary">답변완료</a>
-    </td>
-</tr>
-
-<tr align="center">
-    <td>1</td>
-    <td>namesname</td>
-    <td>이르미</td>
-    <td>탈퇴 후 바로 재가입할 수 있나요?</td>
-    <td>2021/12/12 03:39</td>
-    <!-- ajax -->
-    <td>
-        <a href="" class="btn btn-sm btn-secondary">답변완료</a>
-    </td>
-</tr>
-
-<tr align="center">
-    <td>1</td>
-    <td>namesname</td>
-    <td>이르미</td>
-    <td>탈퇴 후 바로 재가입할 수 있나요?</td>
-    <td>2021/12/12 03:39</td>
-    <!-- ajax -->
-    <td>
-        <a href="" class="btn btn-sm btn-secondary">답변완료</a>
-    </td>
-</tr>
-
-<tr align="center">
-    <td>1</td>
-    <td>namesname</td>
-    <td>이르미</td>
-    <td>탈퇴 후 바로 재가입할 수 있나요?</td>
-    <td>2021/12/12 03:39</td>
-    <!-- ajax -->
-    <td>
-        <a href="" class="btn btn-sm btn-secondary">답변완료</a>
-    </td>
-</tr>
-
-<tr align="center">
-    <td>1</td>
-    <td>namesname</td>
-    <td>이르미</td>
-    <td>탈퇴 후 바로 재가입할 수 있나요?</td>
-    <td>2021/12/12 03:39</td>
-    <!-- ajax -->
-    <td>
-        <a href="" class="btn btn-sm btn-secondary">답변완료</a>
-    </td>
-</tr>
-
-<tr align="center">
-    <td>1</td>
-    <td>namesname</td>
-    <td>이르미</td>
-    <td>탈퇴 후 바로 재가입할 수 있나요?</td>
-    <td>2021/12/12 03:39</td>
-    <!-- ajax -->
-    <td>
-        <a href="" class="btn btn-sm btn-secondary">답변완료</a>
-    </td>
-</tr>
-
-<tr align="center">
-    <td>1</td>
-    <td>namesname</td>
-    <td>이르미</td>
-    <td>탈퇴 후 바로 재가입할 수 있나요?</td>
-    <td>2021/12/12 03:39</td>
-    <!-- ajax -->
-    <td>
-        <a href="" class="btn btn-sm btn-secondary">답변완료</a>
-    </td>
-</tr>
-
-<tr align="center">
-    <td>1</td>
-    <td>namesname</td>
-    <td>이르미</td>
-    <td>탈퇴 후 바로 재가입할 수 있나요?</td>
-    <td>2021/12/12 03:39</td>
-    <!-- ajax -->
-    <td>
-        <a href="" class="btn btn-sm btn-secondary">답변완료</a>
-    </td>
-</tr>
-
-<!-- 반복 예시 끝-->
-                                
-
+              		<% } %>	
+              	
                     </tbody>
                     </table>
                   
-                    <!-- <div id="rightTop">
-                      <a href="" class="btn btn-dark">삭제</a>
-                      <a href="" class="btn btn-dark">확인</a>
-                    </div> -->
                 </div>
-            </from>
 
-                <div id="tableOut2">
-                  <div id="pagebar" align="center">
-                        <button>&lt;</button>   
-                        <button>1</button>
-                        <button>2</button>
-                        <button>3</button>
-                        <button>4</button>
-                        <button>5</button>
-                        <button>&gt;</button>
-                  </div>
-                </div>
+                	<div id="tableOut2">
+           		    <% if(!list.isEmpty()) { %>
+	                    <div class="paging-area" align="center">
+	                        <!-- 첫 페이지에서는 이전으로 비활성화 -->
+	 						<% if(currentPage != 1) { %>
+	            				<button onclick="location.href='<%=contextPath%>/qnaList.no?cpage=<%=currentPage-1%>';"> &lt; </button>
+	           				 <% } %>
+	                        
+	                        <% for(int p=startPage; p<=endPage; p++) { %>
+	                        <!-- 페이징 버튼 활성화 조건 게시물수에 따른 버튼 활성화  -->
+	                            <% if(p == currentPage) { %>
+	                                <button disabled><%= p %></button>
+	                            <% }else { %>
+	                                <button onclick="location.href='<%= contextPath %>/qnaList.no?cpage=<%= p %>';"><%= p %></button>
+	                            <% } %>
+	                        <% } %>
+	                        
+	                        <% if(currentPage != maxPage) { %>
+	                            <button onclick="loaction.href='<%= contextPath %>/qnaList.no?cpage=<%=currentPage+1%>';"> &gt; </button>
+	                            <!-- 현재 페이지가 마지막 페이지일 땐 다음으로 버튼 비활성화 -->
+	                        <% } %>
+	                     <% } %>
+                    </div>
                 </div>
                 
-            </div>
+                
+          
+          </div>
+          
+      </div>
       
       
 

@@ -107,7 +107,7 @@
             <div id="line_2"></div>
             <ul>
                 <li id="myPageBtn" style="font-weight: bolder">고객센터</li>
-                <li><a href="<%= request.getContextPath() %>/qnaList.me" id="qnaList">1:1 문의</a></li>
+                <li><a href="<%= request.getContextPath() %>/qnaList.no?cpage=1" id="qnaList">1:1 문의</a></li>
             </ul>
 
             <!-- <div id="line_2"></div> -->
