@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.TidyGames.game.model.vo.*, java.util.ArrayList"%>
 <%
-   Game g = (Game)request.getAttribute("g");
-   ArrayList<Category> gcList = (ArrayList <Category>)request.getAttribute("gcList");
+	Game g = (Game)request.getAttribute("g");
+	ArrayList<Category> gcList = (ArrayList <Category>)request.getAttribute("gcList");
+	Attachment3 at = (Attachment3)request.getAttribute("at");
 %>
 <!DOCTYPE html>
 <html>
@@ -122,7 +123,7 @@
             </div>
             
             <div  class="img11" id="big">
-                <img src="<%=contextPath%>/<%=g.getGameImg()%>">
+                <img src="<%=contextPath%>/<%=at.getFilePath()%>">
             </div>
             
             <div class="img11" id="small" align="center">
@@ -246,23 +247,54 @@
              
              if(result == 1) {
  
-                if(confirm("장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?")){
-                    location.href='<%=contextPath%>/cart.pa';
-                 }
-                
-             }else if(result == 2 ) {
-                alert("장바구니가 이미 존재합니다.")
-             }
-             
-          },error:function() {
-             console.log("장바구니 담기 실패!")
-          }
-       })
-       return false;
-       
-      
+
+    				if(confirm("장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?")){
+    		    		location.href='<%=contextPath%>/cart.pa';
+    		    	}
+    				
+    			}else if(result == 2 ) {
+    				alert("장바구니가 이미 존재합니다.")
+    			}
+    			
+    		},error:function() {
+    			console.log("장바구니 담기 실패!")
+    		}
+    	})
+    	return false;
+    	
+   	
     }
-   
+	
+  	
+		function wishConfirm(gameNo){
+		    	
+		    	$.ajax({
+		    		url : "wishInsert.me",
+		    		data : {
+		    			
+		    			gameNo:gameNo
+		    		},
+		    		type:"post",
+		    		success:function(result) {
+		    			
+		    			
+		    			if(result == 1) {
+		 
+		    				if(confirm("찜목록에 담겼습니다. 찜목록페이지로 이동하시겠습니까?")){
+		    					
+		    					location.href='<%=contextPath%>/wishList.me';
+		    		    	}
+		    			
+		    			}
+		    			
+		    		},error:function() {
+		    			console.log("찜목록 담기 실패!")
+		    		}
+		    	})
+		    	return false;
+		    	
+		   	
+		    }
     
      function wishConfirm(gameNo, aEl){
      	

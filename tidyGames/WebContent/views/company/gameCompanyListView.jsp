@@ -40,6 +40,10 @@
         margin-top: 50px;
         margin-left: 90px;
     }
+    .uploadList>tbody>tr:hover{
+    	background:gray;
+    	cursor:pointer;
+    }
 </style>
 </head>
 <body style="background-color: #0e332c;">
@@ -50,7 +54,7 @@
     <div class="outer">
 
         <div class="menu-name">
-            <h2>업로드 게임 목록</h2>
+            <h2>업로드한 게임 목록</h2>
         </div>
 
         <table class="uploadList">
@@ -71,14 +75,14 @@
                 <td><%=g.getUploadDate()%></td>
                 	<% if((g.getConfirm()).equals("Y")) { %>
                 <td><a href="gameCompanyEnrollForm.jsp" class="btn btn-sm btn-primary">승인</a></td>
-                	<% }else if((g.getConfirm()).equals("N")){ %>
-                <td><a href="gameCompanyEnrollForm.jsp" class="btn btn-sm btn-primary">반려</a></td>	
-                	<% }else if((g.getConfirm()).equals("A")) { %>
-                <td><a href="gameCompanyEnrollForm.jsp" class="btn btn-sm btn-primary">미승인</a></td>
+                	<% }else if((g.getConfirm()).equals("A")){ %>
+                <td><a href="gameCompanyEnrollForm.jsp" class="btn btn-sm btn-danger">반려</a></td>	
+                	<% }else if((g.getConfirm()).equals("N")) { %>
+                <td><a href="gameCompanyEnrollForm.jsp" class="btn btn-sm btn-warning">미승인</a></td>
                 	<% } %>
                 	
-                	<% if ((g.getUpgame()).equals("Y")) { %>
-                <td><a href="gameCompanyUpdateForm.jsp" class="btn btn-sm btn-primary">업데이트</a></td>
+                	<% if ((g.getConfirm()).equals("Y")) { %>
+                <td><a href="<%=contextPath %>/updateForm.gc?gno=<%=g.getGameNo()%>" class="btn btn-sm btn-primary" id="up">업데이트</a></td>
                		<% } else { %>
                	<td></td>
                	<% } %>
@@ -87,8 +91,6 @@
       
 
         </table>
-
-
     </div>
 
 	

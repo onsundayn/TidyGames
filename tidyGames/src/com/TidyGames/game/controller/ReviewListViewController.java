@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.TidyGames.game.model.service.GameService;
 import com.TidyGames.game.model.vo.Game;
 import com.TidyGames.game.model.vo.Review;
+import com.TidyGames.member.model.vo.Member;
 
 /**
  * Servlet implementation class ReviewListViewController
@@ -32,9 +33,12 @@ public class ReviewListViewController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		int memNo = 0;
+		if(request.getSession().getAttribute("loginUser") != null) {
+			memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
+		}
 		int gameNo = Integer.parseInt(request.getParameter("gno"));
-		Game g = new GameService().selectGame(gameNo);
+		Game g = new GameService().selectGame(memNo, gameNo);
 		ArrayList<Review> list = new GameService().selectReview(gameNo);
 		
 		request.setAttribute("list", list);

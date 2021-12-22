@@ -63,10 +63,21 @@ public class Game {
 		this.gameStatus = gameStatus;
 		this.gameImg = gameImg;
 	}
-	
-	
-	
-	
+
+	public Game(int gameNo, String korName, String engName, int price, String confirm, String upgame,
+			String uploadDate) {
+		super();
+		this.gameNo = gameNo;
+		this.korName = korName;
+		this.engName = engName;
+		this.price = price;
+		this.confirm = confirm;
+		this.upgame = upgame;
+		this.uploadDate = uploadDate;
+	}
+
+
+
 
 	public Game(String korName, String engName, int price, String confirm, String upgame, String uploadDate) {
 		super();
