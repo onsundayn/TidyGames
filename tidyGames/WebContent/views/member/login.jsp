@@ -153,10 +153,12 @@
 
                     <div class="sns_login">
                         <button type="button" style="background-color: #03C75A; color: white;">
-                            <img src="">네이버 아이디로 로그인
+                            <img src="<%=contextPath%>/resources/image/naverlogin.png" style="height: 18px; margin-left: 10px;" align="left">
+                            <div style="margin-right: 35px;">네이버 아이디로 로그인</div>
                         </button>
                         <button type="button" style="background-color: #FFE90A;">
-                            <img src="">카카오 아이디로 로그인
+                            <img src="<%=contextPath%>/resources/image/kakaologin.png" style="height: 20px; margin-left: 9px;" align="left">
+                            <div style="margin-right: 35px;">카카오 아이디로 로그인</div>
                         </button>
                     </div>
 
