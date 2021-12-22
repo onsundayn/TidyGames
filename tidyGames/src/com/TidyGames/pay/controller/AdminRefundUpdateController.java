@@ -1,8 +1,6 @@
 package com.TidyGames.pay.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,19 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.TidyGames.pay.model.service.PayService;
-import com.TidyGames.pay.model.vo.Refund;
 
 /**
- * Servlet implementation class adminRefundController
+ * Servlet implementation class AdminRefundUpdateController
  */
-@WebServlet("/adrefund.pa")
-public class AdminRefundController extends HttpServlet {
+@WebServlet("/reupdate.pa")
+public class AdminRefundUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminRefundController() {
+    public AdminRefundUpdateController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,13 +28,16 @@ public class AdminRefundController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+		
+		int result1 = new PayService().refundUpdate();
+		
+		int result2 =  new PayService().refundUpdate2();
+		if(result1 > 0  && result2 >0) {
+			request.getSession().setAttribute("alertMsg", "환불처리가 완료되었습니다.");
+			response.sendRedirect(request.getContextPath() + "/adrefund.pa");
+		}
 		
 		
-		ArrayList<Refund> list = new PayService().adRefundList();
-		request.setAttribute("list", list);
-		
-		request.getRequestDispatcher("views/pay/adminRefundListView.jsp").forward(request, response);
 	}
 
 	/**

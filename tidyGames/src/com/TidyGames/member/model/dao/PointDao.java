@@ -181,8 +181,7 @@ public class PointDao {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				sum = new Point(rset.getInt("mem_no"),
-							  rset.getInt("sum"));
+				sum = new Point(rset.getInt("sum"));
 						
 			}
 			

@@ -146,7 +146,10 @@ public class PayGame {
 
 	@Override
 	public String toString() {
-		return "PAY_GAME [orderNo=" + orderNo + ", gameNo=" + gameNo + "]";
+		return "PayGame [orderNo=" + orderNo + ", gameNo=" + gameNo + ", memNo=" + memNo + ", payAmount=" + payAmount
+				+ ", payStatus=" + payStatus + ", payDate=" + payDate + ", payMethod=" + payMethod + ", korName="
+				+ korName + ", engName=" + engName + ", gameImg=" + gameImg + ", discountPrice=" + discountPrice
+				+ ", price=" + price + "]";
 	}
 	
 	

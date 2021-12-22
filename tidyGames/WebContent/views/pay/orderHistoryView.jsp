@@ -164,6 +164,21 @@
         width: 100px;
         height: 40px;
     }
+    
+      .area5{
+        background: none;
+        text-align: center;
+        border: 1px solid blue;
+        width: 1000px;
+        height: 400px;
+        margin-top: 50px;
+        margin-left: 100px;
+        color:white;
+       
+    }
+    .area5>h4 {
+        font-size: 18px;
+    }
 </style>
 </head>
 <body>
@@ -183,7 +198,7 @@
         
 
 
-
+			
             <div class="area2">
                 <div class="dateSearch">
                    
@@ -202,6 +217,12 @@
                 
                     </div>
                 </div>
+                
+                
+                
+                
+                
+                
                 <div class="area4">
                     <div class="datetable">
                         <input type="date" name="startDate" class="date">
@@ -225,6 +246,21 @@
           
 
 
+			<% if(order.isEmpty()) { %>
+		
+             <div class="area5">
+                 <br><br>
+                <img src="<%=contextPath%>/resources/image/warning.png" width="100px" height="100px"><br>
+                <br>
+                <h2>검색결과가 없습니다.</h2>
+                <h4 style="color:gray">설정한 조건에 해당하는 검색결과가 없습니다.</h4>
+                <h4 style="color:gray">상세조건을 다시 설정해주세요.</h4>
+
+             </div>
+				
+				
+			<%}else { %>
+				
 
 
 
@@ -275,9 +311,13 @@
                                                    
                                                       	  총결제금액<br><br><span style="margin-right: 20px;"> <%=p.getPayAmount() %></span>원
                                                        
+                                                       <% if(p.getPayStatus().equals("환불완료")) { %>
                                                        
-                                                        <div style="margin-top: 100px;"><a href="<%=contextPath%>/refund.pa?ono=<%=p.getOrderNo()%>" class="btn btn-primary butt" >환불요청</a></div> <br>
+                                                    	<div style="margin-top: 100px;"><button class="btn btn-primary butt" disabled>환불요청</button></div> <br>
+                                                    	<% }else { %>
                                                     	
+                                                        <div style="margin-top: 100px;"><a href="<%=contextPath%>/refund.pa?ono=<%=p.getOrderNo()%>" class="btn btn-primary butt" >환불요청</a></div> <br>
+                                                    	<% } %>
                                                         
                                                    </h4>
                                                </td>
@@ -291,7 +331,11 @@
                        </div>
              </div>
 
+					<%} %>
+				
 				<%} %>
+				
+				<% if(!order.isEmpty()) { %>
 
                 <br><br>
              <div class="paging-area" style="float: right;">
@@ -310,6 +354,8 @@
                 <button> &gt; </button>
         
             </div>
+            
+            <% } %>
 
              </div>
 

@@ -63,7 +63,7 @@
 	</entry>
 	
 	<entry key="sumPoint">
-			SELECT MEM_NO, SUM(POINT_AMOUNT) AS "SUM"
+			SELECT SUM(POINT_AMOUNT) AS "SUM"
             FROM POINT
             GROUP BY MEM_NO
             HAVING MEM_NO = ?

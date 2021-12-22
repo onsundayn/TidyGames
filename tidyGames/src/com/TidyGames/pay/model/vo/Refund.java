@@ -65,6 +65,29 @@ public class Refund {
 	}
 
 
+	public Refund(String refund, String addWriting) {
+		super();
+		this.refund = refund;
+		this.addWriting = addWriting;
+	}
+
+
+	public Refund(int refundNo, int memNo, int orderNo, String refund, String addWriting, String refundDate,
+			String refundStatus, String memId, int payAmount, String payDate) {
+		super();
+		this.refundNo = refundNo;
+		this.memNo = memNo;
+		this.orderNo = orderNo;
+		this.refund = refund;
+		this.addWriting = addWriting;
+		this.refundDate = refundDate;
+		this.refundStatus = refundStatus;
+		this.memId = memId;
+		this.payAmount = payAmount;
+		this.payDate = payDate;
+	}
+
+
 	public int getRefundNo() {
 		return refundNo;
 	}

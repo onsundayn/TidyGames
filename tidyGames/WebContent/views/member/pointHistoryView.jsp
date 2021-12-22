@@ -237,12 +237,11 @@
                   <tr class="usecol">
                     <td><%=p.getPointDate() %></td>
                     <td><%=p.getPointCotent() %></td>
-                    <%if(p.getPointAmount() > 0) {%>
+                    <td><%=p.getPointAmount() %></td>
                     
-                    	<td style="color:rgb(57, 57, 216);">+ 5000</td>
+                    <%if(p.getPointAmount() > 0) {%>
                     	<th style="color:rgb(57, 57, 216);">적립</th>
                       <% } else { %>
-	                    <td style="color:red;">- 3000</td>
 	                    <td style="color:red;">사용</td>
                		 <% }  %>	
                     	

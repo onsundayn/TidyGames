@@ -12,9 +12,21 @@ public class Pay {
 	private String engName;
 	private String gameImg;
 	private int pointAmount;
+	private String memId;
 	
 	
 	public void pay() {}
+	
+
+	public Pay(int orderNo, int memNo, int payAmount, String payStatus, String payDate, String memId) {
+		super();
+		this.orderNo = orderNo;
+		this.memNo = memNo;
+		this.payAmount = payAmount;
+		this.payStatus = payStatus;
+		this.payDate = payDate;
+		this.memId = memId;
+	}
 
 
 	public Pay(int orderNo, int memNo, int payAmount, String payStatus, String payDate, String payMethod,
@@ -142,6 +154,16 @@ public class Pay {
 
 	public void setPointAmount(int pointAmount) {
 		this.pointAmount = pointAmount;
+	}
+	
+
+	public String getMemId() {
+		return memId;
+	}
+
+
+	public void setMemId(String memId) {
+		this.memId = memId;
 	}
 
 

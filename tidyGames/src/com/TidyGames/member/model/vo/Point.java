@@ -16,9 +16,9 @@ public class Point {
 
 	
 	
-	public Point(int memNo, int sum) {
+	public Point(int sum) {
 		super();
-		this.memNo = memNo;
+		
 		this.sum = sum;
 	}
 	

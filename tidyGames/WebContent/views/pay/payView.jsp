@@ -4,7 +4,7 @@
 
 <%
 	ArrayList<Cart> cart = (ArrayList<Cart>) request.getAttribute("cart");
-Point sum = (Point) request.getAttribute("sum");
+	Point sum = (Point) request.getAttribute("sum");
 %>
 <!DOCTYPE html>
 <html>
@@ -260,16 +260,22 @@ tbody {
 					<div class="area1">&nbsp;TIDY POINT</div>
 					<div class="area1">
 						<span style="font-size: 15px; text-align: center; color: grey;">&nbsp;
-							보유 POINT</span>___________ <span style="text-align: right;" id="pointsum"><%=sum.getSum()%></span>&nbsp;POINT
+							보유 POINT</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div style="text-align: right; display: inline-block; width: 100px;" id="pointsum"><%=sum.getSum()%></div>&nbsp;<span style="float: right;"></span>POINT
 						<div>
 							<!-- <button class="use_btn">전액사용</button> -->
 						</div>
 					</div>
 					<div class="area1">
+					
 						<span style="font-size: 15px; text-align: center; color: grey;">&nbsp;
-							사용할 POINT</span> <span style="text-align: right;">
-							<input type="text" name="usePoint" id="usePoint"></span>&nbsp;POINT
-							
+							사용할 POINT</span> 
+					   <%if(sum.getSum()> 0){ %>
+							<span style="text-align: right;">
+							<input type="text" name="usePoint" id="usePoint" style="text-aglign:right;">
+							</span>&nbsp;POINT
+						<%} else {%>
+							<input type="text" name="usePoint" id="usePoint" disabled>&nbsp;POINT
+						<% } %>	
 					</div>
 				</div>
 
@@ -277,7 +283,7 @@ tbody {
 				<div id="left-down">
 					<h3>결제수단</h3>
 					<div class="area2">
-						<input type="radio" name="payment" value="Credit"> <img
+						<input type="radio" name="payment" value="Credit" checked> <img
 							src="<%=contextPath%>/resources/image/creditcard.png"
 							width="50px" height="40px"> Credit Card
 					</div>
@@ -366,15 +372,15 @@ tbody {
 
 				<div class="area5">
 					<p id="check">
-						<input type="checkbox" value="">&nbsp;구매하실 상품의 상품정보 및 가격을
+						<input type="checkbox" checked>&nbsp;구매하실 상품의 상품정보 및 가격을
 						확인하였으며, <br> 이에 동의합니다(전자상거래법 제 8조 제 2항)
 					</p>
 					<p id="check">
-						<input type="checkbox" value="">&nbsp;상품 구매시 환불요청은 결제완료 후
+						<input type="checkbox" checked>&nbsp;상품 구매시 환불요청은 결제완료 후
 						2일간 가능하며, <br>포인트는 환불승인이되면 반환됩니다.
 					</p>
 					<p id="check">
-						<input type="checkbox" value="">&nbsp;TIDY GAMES의 약관에
+						<input type="checkbox" checked>&nbsp;TIDY GAMES의 약관에
 						동의합니다.
 					</p>
 				</div>
@@ -392,7 +398,7 @@ tbody {
 
 		<div class="area6">
 			<button type="submit" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> 결제하기</button> 
-			<a href="#" class="btn btn btn-secondary"> 장바구니로</a>
+			<a href="<%=request.getContextPath()%>/cart.pa" class="btn btn btn-secondary"> 장바구니로</a>
 		</div>
 	</form>
 
