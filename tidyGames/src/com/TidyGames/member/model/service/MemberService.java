@@ -203,6 +203,5 @@ public class MemberService {
 		
 		return result;
 	}
-
 	
 }

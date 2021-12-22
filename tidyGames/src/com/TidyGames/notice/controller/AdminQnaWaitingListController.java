@@ -1,16 +1,22 @@
 package com.TidyGames.notice.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.TidyGames.common.model.vo.PageInfo;
+import com.TidyGames.notice.model.service.QnaService;
+import com.TidyGames.notice.model.vo.Notice;
+
 /**
  * Servlet implementation class adminQnaWaitingListController
  */
-@WebServlet("/qnaList.me")
+@WebServlet("/qnaList.no")
 public class AdminQnaWaitingListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,8 +32,38 @@ public class AdminQnaWaitingListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		request.getRequestDispatcher("views/member/adminQnaWaitingList.jsp").forward(request, response);
+		
+		int listCount;
+		int currentPage;
+		int pageLimit;
+		int viewLimit;
+		int maxPage;
+		int startPage;
+		int endPage;
+		
+		listCount = new QnaService().selectListCount();
+		currentPage = Integer.parseInt(request.getParameter("cpage"));
+		pageLimit = 10;
+		viewLimit = 10;
+		
+		maxPage = (int)Math.ceil((double)listCount / viewLimit);
+		startPage = (currentPage-1) / pageLimit * pageLimit + 1;
+		endPage = startPage + pageLimit - 1;
+		
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, viewLimit, maxPage, startPage, endPage);
+		
+		ArrayList<Notice> list = new QnaService().qnaWaitList(pi);
+		
+		if(!list.isEmpty()) {			
+			request.setAttribute("pi", pi);	
+			request.setAttribute("list", list);
+			request.getRequestDispatcher("views/notice/adminQnaWaitingList.jsp").forward(request, response);
+		}
+			
 	}
 
 	/**

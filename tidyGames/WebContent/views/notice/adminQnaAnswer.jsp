@@ -1,19 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.notice.model.vo.Notice, com.TidyGames.common.model.vo.Attachment" %>
+
+<%
+	Attachment at = (Attachment)request.getAttribute("at");
+	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Tidy Games</title>
 <style>
     div{
 		box-sizing: border-box;
 		color:white;
-		/* border: 1px solid rgba(255, 255, 255, 0.555); */
 	}
 	#outer{
         width:1500px;
-        /* height:1500px; */
         margin:auto;
     }
     #outer>div{float:left;}
@@ -36,14 +40,10 @@
     }
     #box{
     	width:1290px;	
-    	/* border:1px solid rgba(255, 255, 255, 0.222); */
-        /* height: */
-        
     }
     #tableBox{
         width:800px;
         height:800px;
-        /* margin-left:145px; */
         margin: 30px 0px 100px 105px;
         background-color: rgb(197, 197, 197);
         border: 10px solid rgba(255, 255, 255, 0.555);
@@ -53,7 +53,6 @@
     }
     #leftTop{   
         width:100%;
-        /* margin:20px; */
         margin:30px 20px 50px 0px;
     }
     #leftTop span{
@@ -77,7 +76,6 @@
         background:none;
         color:black;
     }
-   /* 여기까지 */
     .table *{
         font-size:14px;
         padding:20px;
@@ -89,9 +87,6 @@
     }
     #qnaList{
         color:orange;
-    }
-    tbody a{
-        color:gray;
     }
     .btn{
         margin:0px;
@@ -107,7 +102,6 @@
     .content{
         margin:0px;
         width:100%;
-        /* height:100%;         */
         background:none;
         border:none;
     }
@@ -122,6 +116,13 @@
 
     textarea:focus{
         outline:none;
+    }
+    #table a{
+    	padding:0px;
+    	color:black;
+    }
+    #titleBar *{
+    	font-size:15px;
     }
 
 
@@ -143,7 +144,6 @@
         <div id="box">
             <div id="intro">QNA</div>
             <div id="line_3"></div>
-            <form action="">
             <div id="tableBox">
             
             <div id="tableTop">
@@ -155,66 +155,91 @@
             </div>
 
             <div id="tableOut1">
-
+				
                 <table id="table" class="table table-dark" align="center">
-                    <tr>
+                	<% for(Notice no : list) { %>
+                    <tr id="titleBar">
                         <th width="60">제목</th>
-                        <td width="300" style="padding-left:0px">
-                            <input type="text" value="탈퇴 후 재가입할 수 있나요?" readonly>
-                        </td>
+                        <th width="300" style="padding-left:0px">
+                            <input type="text" value="<%= no.getNotiTitle() %>" readonly>
+                        </th>
                         <th width="70">작성자</th>
-                        <td style="padding-left:0px">호빵</td>
-                        <td align=right>작성일시 | 21-11-18</td>
-                        <!-- <td width="50px"></td> -->
+                        <td style="padding-left:0px"><%= no.getNotiWriter() %></td>
+                        <td align=right>작성일시 | <%= no.getNotiDate() %></td>
                     </tr>
                     <tr>
                         <td colspan="5">
-                            <textarea name="content" class="content" cols="10" rows="6" style="resize:none" readonly>아이디를 바꾸고 싶습니다 탈퇴 후에 바로 재가입이 가능한가요?</textarea>
+                            <textarea name="content" class="content" cols="10" rows="6" style="resize:none" readonly><%= no.getNotiContent() %></textarea>
                         </td>
                     </tr>
                     <tr>
-                        <th width="80">첨부파일 </th>
+                        <th width="80">첨부파일</th>
                         <td colspan="4">
-                            <a download="" href="" style="color:black;">upload 파일명.png</a>
+                  <% if(!(at == null)) { %>
+                <a download="<%= at.getOriginName() %>" href="<%=contextPath%>/<%=at.getFilePath() + at.getChangeName()%>"><%= at.getOriginName() %></a>
+                       <% } %>
                         </td>
-
                     </tr>
+               
                 </table>
 
 
             </div>
-            <form action="">
+            <form action="<%= contextPath %>/insertAnswer.no" method="post">
+            <input type="hidden" name="qno" value="<%= list.get(0).getNotiNo() %>">
             <div id="tableOut2">
                 <table id="answerTable" class="table table-dark" align="center">
-                    <tr class="">
+                    <tr>
                         <th width="55" style="padding-right:0px">답변 | </th>
                         <th>Tidy Games</th>
                     </tr>
                     <tr>
                         <td colspan="3">
-                            <textarea name="answer" id="answerArea" class="content" cols="10" rows="3" style="resize:none"></textarea>
+                        	<% if(no.getAnswer().equals(" ")) { %>
+                            <textarea name="answerArea" id="answerArea" class="content" cols="10" rows="3" style="resize:none"><%= no.getAnswer() %></textarea>
+                        	<% }else { %>
+                        	<textarea name="answerArea" id="answerArea" class="content" cols="10" rows="3" style="resize:none; background:none; border:none" readonly><%= no.getAnswer() %></textarea>
+                        	<% } %>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="3" align="center">
-                            <button type="submit" class="btn btn-sm btn-secondary" disabled>수정</button>
+                       		<% if(no.getAnswer().equals(" ")) { %>
+                            <button type="button" class="btn btn-sm btn-secondary" disabled>수정</button>
                             <button type="submit" class="btn btn-sm btn-primary">등록</button>
+                       		<% }else { %>
+                       		  <button type="button" id="upBtn" onclick="return updateAnswer();" class="btn btn-sm btn-secondary" >수정</button>
+                            <button type="submit" class="btn btn-sm btn-primary" disabled>등록</button>
+                       		<% } %>
                         </td>
                     </tr>
                 </table>
             </div>
             </form>
-
-
-                
-
-     
-                
+    		<% } %>	
             </div>        
-            </from>
-                
         </div>
             
+        <footer>
+            <div style="height:100px"></div>
+        </footer>
+    </div>
+	
+	
+	<script>
+		function updateAnswer(){
+			$("#answerArea").removeAttr("readonly");
+			$(".btn").attr("disabled", false);
+			$(".content").css("background", "").css("border", "");
+			$("#upBtn").text("취소");
+			
+			$("#upBtn").click(function(){
+				location.reload();
+			});
+				
+		}
+		
+	</script>	
                 
       
 
@@ -222,11 +247,6 @@
 
 
 
-
-        <footer>
-            <div style="height:100px"></div>
-        </footer>
-    </div>
 
 
 
