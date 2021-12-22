@@ -16,13 +16,13 @@ import com.TidyGames.member.model.vo.Member;
  * Servlet implementation class MemberUpdateController
  */
 @WebServlet("/updateMember.me")
-public class MemberUpdateController extends HttpServlet {
+public class AdminUpdateMemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberUpdateController() {
+    public AdminUpdateMemberController() {
         super();
         // TODO Auto-generated constructor stub
     }

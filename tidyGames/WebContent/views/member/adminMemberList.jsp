@@ -15,7 +15,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Tidy Games</title>
 <style>
     div{
 		box-sizing: border-box;
@@ -402,9 +402,8 @@
                     </div>
                 </div>
                 
-            </div>
-      
-      				</div>
+        </div>
+    </div>
 
 
         <footer>

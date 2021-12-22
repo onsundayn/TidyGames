@@ -1,7 +1,6 @@
 package com.TidyGames.member.model.dao;
 
-import static com.TidyGames.common.JDBCTemplate.close;
-
+import static com.TidyGames.common.JDBCTemplate.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
