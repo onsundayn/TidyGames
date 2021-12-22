@@ -47,10 +47,12 @@
         float: left;
         width: 50%;
     }
+    /*
     #profileImg>img{
         width:100%;
         height:100%;
     }
+    */
     #nick{
         font-size:32px;
         font-weight: bolder;
@@ -100,19 +102,21 @@
             <div id="line_3" style="margin:10px 50px;"></div>
 
             <div id="profileBox">
-                <div id="box1">
-                    <div id="profileImg">
+
+                <!--<div id="box1">-->
+                    <!--<div id="profileImg">-->
                         <!-- case1. 프로필을 설정하지 않았을 때 -->
-                        <img src="<%= contextPath %>/resources/image/profile.png">
+                        <!--<img src="<%= contextPath %>/resources/image/profile.png">-->
                         <!-- case2. 프로필을 설정했을 때 -->
                         <!-- <img> -->
-                    </div>
-                </div>
-                <div id="box2">
-                    <label id="nick"><%= loginUser.getMemName() %></label> <br>
-                    <label id="id"><%= loginUser.getMemId() %></label>
+                    <!--</div>-->
+                <!--</div>-->
+            
+                <div id="box2" style="margin-left: 100px;">
+                    <label id="nick"><%= loginUser.getMemNick() %>님 환영합니다!</label> <br>
+                    <label id="id">아이디 : <%= loginUser.getMemId() %></label>
                     <div id="edit">
-                        <a href="views/member/updateUserCheck.jsp">>> 내 정보 수정</a> <br>
+                        <a href="<%= contextPath %>/updateUserCheck.me">>> 내 정보 수정</a> <br>
                         <!--<a href="<%= contextPath %>/logout.me">>> 로그아웃</a>-->
                         <span onclick="logout();">>> 로그아웃</span>
                     </div>

@@ -527,5 +527,118 @@ public class MemberDao {
 		return result;
 		
 	}
+		
+	public int updateUserCheck(Connection conn, String userId, String userPwd) {
+		
+		// 조회 -> 조회된 행 있는지 확인
+		int count = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("updateUserCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, userPwd);
+	
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				count = rset.getInt("count");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return count;
+		
+	}
+	
+	public int nickUpdateCheck(Connection conn, String checkNick, String checkId) {
+		
+		//select문 --> 조회된 행수로 반환
+		int count = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("nickUpdateCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, checkNick);
+			pstmt.setString(2, checkId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				count = rset.getInt("count");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return count;
+		
+	}
+	
+	public int updateMember(Connection conn, Member m) {
+		
+		//update문
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, m.getMemPwd());
+			pstmt.setString(2, m.getMemNick());
+			pstmt.setString(3, m.getMemName());
+			pstmt.setString(4, m.getMemBirth());
+			pstmt.setString(5, m.getMemPhone());
+			pstmt.setString(6, m.getMemEmail());
+			pstmt.setString(7, m.getMemGender());
+			pstmt.setString(8, m.getMemAddress());
+			pstmt.setString(9, m.getMemAgr());
+			pstmt.setString(10, m.getMemCategory());
+			pstmt.setString(11, m.getMemId());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+	
+	public int deleteMember(Connection conn, String userId) {
+		
+		//update문
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
 	
 }
