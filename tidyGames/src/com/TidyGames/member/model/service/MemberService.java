@@ -203,5 +203,63 @@ public class MemberService {
 		
 		return result;
 	}
+		
+	public int updateUserCheck(String userId, String userPwd) {
+		
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().updateUserCheck(conn, userId, userPwd);
+		
+		close(conn);
+		
+		return result;
+		
+	}
+	
+	public int nickUpdateCheck(String checkNick, String checkId) {
+		
+		Connection conn = getConnection();
+		
+		int count = new MemberDao().nickUpdateCheck(conn, checkNick, checkId);
+		
+		close(conn);
+		return count;
+		
+	}
+	
+	public int updateMember(Member m) {
+		
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().updateMember(conn, m);
+
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+
+		return result;
+	}
+
+	public int deleteMember(String userId) {
+		
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().deleteMember(conn, userId);
+
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+
+		return result;
+		
+	}
 	
 }

@@ -99,23 +99,17 @@
             <div id="line_3" style="margin:10px 50px;"></div>
 
             <div id="profileBox">
-                <form action="" method="">
+                <form action="<%= contextPath %>/updateUserPage.me" method="post">
                     <div id="text_area">
                         <div class="sign_up_main">● 아이디</div><br>
-                        <input type="text" name="userId" id="user_id" value="userId" style="width: 50%; background-color: gray;" readonly><br><br><br>
+                        <input type="text" name="userId" value="<%= loginUser.getMemId() %>" style="width: 50%; background-color: gray;" readonly><br><br><br>
         
                         <div class="sign_up_main">● 비밀번호</div><br>
-                        <input type="password" name="userPwd" id="user_pwd" style ="width: 50%;" required>
+                        <input type="password" name="userPwd" id="userPwd" style ="width: 50%;" required>
 
-                        <button type="submit" id="checkPwd" onclick="checkPwd();">확인</button>
+                        <button type="submit">확인</button>
                     </div>
                 </form>
-
-                <script>
-                    function checkPwd(){
-                        //아이디 비밀번호 맞으면 링크 넘기기
-                    }
-                </script>
             </div>
 
         </div>

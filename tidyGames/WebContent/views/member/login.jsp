@@ -89,6 +89,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+
 </head>
 <body style="background-color: #0e332c;">
 
@@ -152,10 +154,12 @@
                     <hr>
 
                     <div class="sns_login">
+
                         <button type="button" style="background-color: #03C75A; color: white;">
                             <img src="<%=contextPath%>/resources/image/naverlogin.png" style="height: 18px; margin-left: 10px;" align="left">
                             <div style="margin-right: 35px;">네이버 아이디로 로그인</div>
                         </button>
+
                         <button type="button" style="background-color: #FFE90A;">
                             <img src="<%=contextPath%>/resources/image/kakaologin.png" style="height: 20px; margin-left: 9px;" align="left">
                             <div style="margin-right: 35px;">카카오 아이디로 로그인</div>
@@ -166,8 +170,8 @@
             </form>
 
         </div>
-    </content>
 
+    </content>
     </div>
 </body>
 </html>
