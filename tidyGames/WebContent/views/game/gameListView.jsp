@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.game.model.vo.Game"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.game.model.vo.*"%>
 <%
 	ArrayList<Game> list = (ArrayList<Game>)request.getAttribute("list");
 %>
@@ -154,9 +154,7 @@
 				<% for(Game g : list) { %>
             <div class="game-list">
                 <div class="game-title-img">
-
-            		<input type="hidden" value="<%=g.getGameNo()%>" name="gno">
-
+                
                     <a href="<%=contextPath%>/detail.ga?gno=<%=g.getGameNo()%>"><img src="<%=contextPath%>/<%=g.getGameImg()%>"></a>
                 
                 </div>
@@ -172,7 +170,6 @@
                 <div class="star-rating" align="center">
                     <br>
                     <a href="">
-                    	<!-- 별점 띄워줄때 반복문 돌려볼까?-->
                     	<i class="fas fa-star fa-lg"></i>
                     	<i class="fas fa-star fa-lg"></i>
                     	<i class="fas fa-star fa-lg"></i>
@@ -217,8 +214,8 @@
 
                 <% } %>
             </div>
-	        
             <% } %>
+	        
 		<% } %>   
 
         </div>

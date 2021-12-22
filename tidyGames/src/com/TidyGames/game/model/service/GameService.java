@@ -117,6 +117,9 @@ public class GameService {
 		int result1 = new GameDao().updateGame(conn, ga);
 		
 		int result2 = 1;
+		
+		System.out.println(list);
+		
 		for(Attachment3 at : list) {
 			if(at != null) { // 새로운 첨부파일이 있었을 경우
 				if(at.getFileNo() != 0) { // 기존의 첨부파일이 있었을 경우 => Attachment Update
@@ -126,6 +129,8 @@ public class GameService {
 				}
 				
 			}
+
+			
 		}
 		
 		if(result1 > 0 && result2 > 0) {
@@ -143,6 +148,7 @@ public class GameService {
 		ArrayList<Attachment3> list = new GameDao().selectAttachmentList(conn, gameNo);
 		close(conn);
 		return list;
+		
 	}
 
 }
