@@ -184,7 +184,7 @@ tbody {
 	</div>
 
 
-	<form action="" method="post">
+	<form action="<%=contextPath%>/pay.pa" method="post">
 		<div class="container">
 			<span style="color: white; font-size: 25px; font-weight: bold;">구매/결제</span>
 			<span style="color: grey; font-size: 18px;"> >결제완료</span> <br> <br>
@@ -209,6 +209,8 @@ tbody {
 						for (Cart c : cart) {
 					%>
 					<tr>
+					<input type="hidden" name="gameNo" value="<%=c.getGameNo()%>">
+					
 						<td height="120px" style="text-align: right;"><img
 							src="<%=contextPath%>/<%=c.getGameImg()%>" Width="130px"
 							height="90px"></td>
@@ -265,8 +267,9 @@ tbody {
 					</div>
 					<div class="area1">
 						<span style="font-size: 15px; text-align: center; color: grey;">&nbsp;
-							사용할 POINT</span> <span style="text-align: right;"><input
-							type="text" name="usePoint" id="usePoint"></span>&nbsp;POINT
+							사용할 POINT</span> <span style="text-align: right;">
+							<input type="text" name="usePoint" id="usePoint"></span>&nbsp;POINT
+							
 					</div>
 				</div>
 
@@ -274,23 +277,23 @@ tbody {
 				<div id="left-down">
 					<h3>결제수단</h3>
 					<div class="area2">
-						<input type="radio" name="payment" value="credit"> <img
+						<input type="radio" name="payment" value="Credit"> <img
 							src="<%=contextPath%>/resources/image/creditcard.png"
 							width="50px" height="40px"> Credit Card
 					</div>
 					<div class="area2">
-						<input type="radio" name="payment" value="kakaopay"> <img
+						<input type="radio" name="payment" value="KAKAOPAY"> <img
 							src="<%=contextPath%>/resources/image/kakao.png" width="70px"
 							height="40px"> KaokoPay
 					</div>
 					<div class="area2">
-						<input type="radio" name="payment" value="naverpay">&nbsp;
+						<input type="radio" name="payment" value="NAVERPAY">&nbsp;
 						<img src="<%=contextPath%>/resources/image/naverpay.png"
 							width="50px" height="30px"> &nbsp;&nbsp;NaverPay
 
 					</div>
 					<div class="area2">
-						<input type="radio" name="payment" value="toss">&nbsp;&nbsp;
+						<input type="radio" name="payment" value="TOSS">&nbsp;&nbsp;
 						<img src="<%=contextPath%>/resources/image/toss.png" width="50px"
 							height="30px"> &nbsp;Toss
 					</div>
@@ -303,7 +306,16 @@ tbody {
 				<div class="area3">
 					<span style="font-size: 15px; text-align: center; color: grey;">&nbsp;
 						상품금액</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<div style="text-align: right; display: inline-block; width: 80px;"><%=total%>
+
+					<%
+						int totalprice = 0;
+					for (int i = 0; i < cart.size(); i++) {
+						totalprice += cart.get(i).getPrice();
+					}
+					%>
+
+
+					<div style="text-align: right; display: inline-block; width: 80px;"><%=totalprice%>
 					</div>&nbsp;원
 					&nbsp;
 				</div>
@@ -319,6 +331,8 @@ tbody {
 							}
 							%>
 						<%=discount%>
+						
+			
 					</div>&nbsp;원
 					&nbsp;
 
@@ -334,13 +348,18 @@ tbody {
 						최종결제금액</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<div style="text-align: right; display: inline-block; width: 80px;" id="finalpay"><%=total%></div>
 					&nbsp;원
+					<input type="hidden" name="total" value="<%=total%>">
 				</div>
 				<div class="area4">
 					<span style="font-size: 15px; text-align: center; color: grey;">&nbsp;
 						적립 TIDY POINT(5%)</span><br>
-					<div style="text-align: right; "><%=Math.round(total * 0.05)%>&nbsp;POINT
+						
+						
+					<div style="text-align: right;" ><%=Math.round(total * 0.05)%>&nbsp;POINT
 					</div>
 					&nbsp;
+					
+					<input type="hidden" name="savePoint" value="<%=Math.round(total* 0.05)%>">
 
 				</div>
 				<br> <br>
@@ -372,9 +391,8 @@ tbody {
 		</div>
 
 		<div class="area6">
-			<a href="#" class="btn btn-primary"><i
-				class="fa fa-shopping-cart"></i> 결제하기</a> <a href="#"
-				class="btn btn btn-secondary"> 장바구니로</a>
+			<button type="submit" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> 결제하기</button> 
+			<a href="#" class="btn btn btn-secondary"> 장바구니로</a>
 		</div>
 	</form>
 
@@ -405,7 +423,7 @@ tbody {
 			
 			$("#usePoint").keyup(function(){
 			const tmp = $("#usePoint").val();
-			
+			//보유포인트-사용포인트
 			$("#pointsum").html(<%=sum.getSum()%>-tmp)
 			
 
@@ -422,7 +440,8 @@ tbody {
 			$("#usePoint").keyup(function(){
 			const tmp = $("#usePoint").val();
 			
-			$("#finalpay").html(<%=total%>-<%=discount%>-tmp)
+			//게임총가격 -할인가격 -사용포인트
+			$("#finalpay").html(<%=totalprice%>-<%=discount%>-tmp) // 최종금액으로 전달
 			
 
 			})
