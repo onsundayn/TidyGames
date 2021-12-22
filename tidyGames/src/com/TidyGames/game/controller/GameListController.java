@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.TidyGames.game.model.service.GameService;
+import com.TidyGames.game.model.vo.Attachment3;
 import com.TidyGames.game.model.vo.Game;
 import com.TidyGames.member.model.vo.Member;
-import com.TidyGames.member.model.vo.WishList;
 
 /**
  * Servlet implementation class GameSearchController
@@ -43,9 +43,8 @@ public class GameListController extends HttpServlet {
 		String keyword = request.getParameter("keyword");
 		
 		ArrayList<Game> list = new GameService().selectList(keyword, memNo);
-		
+	
 		request.setAttribute("list", list);
-		
 		request.getRequestDispatcher("views/game/gameListView.jsp").forward(request, response);
 		
 		

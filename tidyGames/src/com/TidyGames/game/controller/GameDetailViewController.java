@@ -8,8 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import com.TidyGames.game.model.service.CategoryService;
 import com.TidyGames.game.model.service.GameService;
 import com.TidyGames.game.model.vo.Attachment3;
 import com.TidyGames.game.model.vo.Category;
@@ -47,17 +47,16 @@ public class GameDetailViewController extends HttpServlet {
 		GameService gService = new GameService();
 		
 		Game g = gService.selectGame(memNo, gameNo);
-		ArrayList<Category> gcList = gService.selectGameCategory(gameNo);
+		ArrayList<Category> gcList = new CategoryService().selectCategoryList();
+		ArrayList<Attachment3> list = gService.selectAttachmentList(gameNo);
 		Attachment3 at = gService.selectAttachment(gameNo);
 		
 		request.setAttribute("gcList", gcList);
 		request.setAttribute("at", at);
-		request.setAttribute("g", g);		
+		request.setAttribute("g", g);
+		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/game/gameDetailView.jsp").forward(request, response);
-		
-		HttpSession session = request.getSession();
-		session.setAttribute("g", g);
-		
+
 	}
 
    /**

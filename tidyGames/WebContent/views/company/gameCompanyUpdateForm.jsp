@@ -4,6 +4,7 @@
 	Game g = (Game)request.getAttribute("g");
 	ArrayList<Attachment3> alist = (ArrayList<Attachment3>)request.getAttribute("alist");
 	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("list");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -113,6 +114,19 @@
         margin-top: 50px;
         margin-left:450px;
     }
+    .video-container {
+	    position: relative;
+	    height: 0;
+	    padding-bottom: 56.25%;
+	}
+
+	.video-container iframe {
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    height: 100%;
+	}
 </style>
 </head>
 <body style="background-color: #0e332c;">
@@ -136,8 +150,9 @@
                 </div>
                
                 <div  class="img11" id="big">
-                    <video src="" id="video" controls autoplay muted  onclick="chooseFile(1);"></video>
+                    <video src="" id="video" controls autoplay muted onclick="chooseFile(1);" ></video>
                 </div>
+                
                 <div style="display:none;">
                 <input type="file" name="file1" id="file1" onchange="loadImg(this, 1);">
                 </div>
@@ -160,8 +175,14 @@
             <div class="right-area">
                 <div class="info-area">
                     <div class="img11" id="t-img">
-                			<input type="hidden" value="<%if(alist.size() != 0) {%><%=alist.get(5).getFileNo()%><%}%>" name="originFileNo">
-                        	<img src="" name="titleImg" id="titleImg"  onclick="chooseFile(6);">
+                    <% for(int i=0;i<alist.size(); i++){ %>
+                    	<% if(alist.get(i) != null) { %>
+                			<input type="hidden" value="<%=alist.get(i).getFileNo()%>" name="originFileNo">
+                        <%} %>	
+                    <% } %>   	
+    						<!-- 업로드 폼을 저장할수도 있어서 불러왔을때 사진이 있으면 보여주고 없으면 안보이게...상세이미지랑 동영상 -->
+                        	<img src="<%= contextPath %>/<%=alist.get(0).getFilePath() + alist.get(0).getChangeName() %>" name="titleImg" id="titleImg"  onclick="chooseFile(6);">
+                        	
                         	<div style="display:none;">
                         	<input type="file" name="file6" id="file6" value="" onchange="loadImg(this, 6);">
                         	</div>
@@ -216,7 +237,7 @@
                      </tr>
                  </div>
                </div>
-             </div>
+          
                     <br>
             <div class="file-area" align="center">
                 <pre style="font-weight: bold; font-size: 17px;">
