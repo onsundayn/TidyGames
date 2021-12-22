@@ -3,7 +3,7 @@
 <%
 	Game g = (Game)request.getAttribute("g");
 	ArrayList<Category> gcList = (ArrayList <Category>)request.getAttribute("gcList");
-	Attachment3 at = (Attachment3)request.getAttribute("at");
+	ArrayList<Attachment3> list = (ArrayList<Attachment3>)request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html>
@@ -122,15 +122,15 @@
                 </p>
             </div>
             
-            <div  class="img11" id="big">
-                <img src="<%=contextPath%>/<%=at.getFilePath()%>">
+            <div  class="img11" id="big" align="center">
+            	<video src="<%=contextPath%>/<%=list.get(5).getFilePath() + list.get(5).getChangeName()%>" id="video" width="600" height="300" controls autoplay muted  onclick="chooseFile(1);"></video>
+
             </div>
             
             <div class="img11" id="small" align="center">
-                <img src="">
-                <img src="">
-                <img src="">
-                <img src="">
+            	<% for(int i=1; i<list.size()-1; i++) {%>
+                <img src="<%=contextPath%>/<%=list.get(i).getFilePath() + list.get(i).getChangeName()%>">
+                <% } %>
             </div>
 
             <div id="btn" align="center">
@@ -146,7 +146,7 @@
         <div class="right-area">
             <div class="info-area">
                 <div id="t-img">
-                    <img src="<%=contextPath%>/<%=g.getGameImg()%>">
+                    <img src="<%=contextPath%>/<%=list.get(0).getFilePath() + list.get(0).getChangeName()%>">
                 </div>
 
                 <div id="price">

@@ -3,10 +3,8 @@
 <properties>
 
 
-	<entry key="selectList">
-		
-		    
-      SELECT GAME_NO
+	<entry key="selectList">	    
+      SELECT G.GAME_NO
            , COMPANY_NO
            , KOR_NAME
            , ENG_NAME
@@ -14,10 +12,11 @@
            , PRICE
            , POINT
            , GAME_STATUS
-           , GAME_IMG 
+           , (FILE_PATH || CHANGE_NAME) "GAME_IMG"
            , (SELECT COUNT(*) FROM WISHLIST W WHERE W.MEM_NO= ? AND G.GAME_NO =W.GAME_NO ) AS count
          FROM GAME G
-		 WHERE UPPER(KOR_NAME || ENG_NAME) LIKE UPPER('%' || ? || '%') AND CONFIRM = 'Y'
+         JOIN UPLOAD_FILE U ON (G.GAME_NO = U.REF_BNO)
+		 WHERE UPPER(KOR_NAME || ENG_NAME) LIKE UPPER('%' || ? || '%') AND CONFIRM = 'Y' AND FILE_TYPE = 1
 	</entry>
 	
 	<entry key="selectGame">
@@ -186,6 +185,8 @@
 		     , FILE_TYPE
 		  FROM UPLOAD_FILE
 		 WHERE GAME_NO = ?
+		 ORDER BY FILE_TYPE
+		
 	
 	</entry>
 	
@@ -234,6 +235,7 @@
 		  )
 	
 	</entry>
-
+	
+	
 
 </properties>

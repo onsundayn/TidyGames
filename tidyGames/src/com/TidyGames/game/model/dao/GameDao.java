@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.TidyGames.common.model.vo.Attachment;
 import com.TidyGames.common.model.vo.PageInfo;
 import com.TidyGames.game.model.vo.Attachment3;
 import com.TidyGames.game.model.vo.Category;
@@ -395,7 +396,7 @@ public Game selectGameGC(Connection conn, int comNo, int gameNo) {
 				at.setOriginName(rset.getString("origin_name"));
 				at.setChangeName(rset.getString("change_name"));
 				at.setFilePath(rset.getString("file_path"));
-				at.setFileLevel(rset.getInt("file_level"));
+				at.setFileLevel(rset.getInt("file_type"));
 			}
 			
 		} catch (SQLException e) {
@@ -487,11 +488,11 @@ public Game selectGameGC(Connection conn, int comNo, int gameNo) {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(new Attachment3(rset.getInt("file_no"),
-								  		 rset.getString("origin_name"),
-								  		 rset.getString("change_name"),
-								  		 rset.getString("file_path"),
-								  		 rset.getInt("file_type")));
+				Attachment3 at = new Attachment3();
+				at.setChangeName(rset.getString("change_name"));
+				at.setFilePath(rset.getString("file_path"));
+				at.setFileLevel(rset.getInt("file_type"));
+				list.add(at);
 			}
 			
 		} catch (SQLException e) {
