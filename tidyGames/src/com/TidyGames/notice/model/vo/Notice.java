@@ -33,11 +33,6 @@ public class Notice {
 		this.answer = answer;
 		this.ansDate = ansDate;
 	}
-
-	
-	
-	
-
 	
 	public Notice(int notiNo, String notiTitle, String notiWriter, int memNo, String member, String answer,
 			String date) {
@@ -49,6 +44,19 @@ public class Notice {
 		this.member = member;
 		this.answer = answer;
 		this.date = date;
+	}	
+
+	public Notice(int notiNo, String notiTitle, String notiContent, String notiWriter, Date notiDate, int memNo,
+			String answer, Date ansDate) {
+		super();
+		this.notiNo = notiNo;
+		this.notiTitle = notiTitle;
+		this.notiContent = notiContent;
+		this.notiWriter = notiWriter;
+		this.notiDate = notiDate;
+		this.memNo = memNo;
+		this.answer = answer;
+		this.ansDate = ansDate;
 	}
 
 	public int getNotiNo() {

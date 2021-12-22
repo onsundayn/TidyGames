@@ -62,4 +62,31 @@ public class QnaService {
 		
 	}
 	
+	public ArrayList<Notice> qnaDetailView(int notiNo) {
+		Connection conn = getConnection();
+		
+		ArrayList<Notice> list = new QnaDao().qnaDetailView(conn, notiNo);
+		
+		close(conn);
+		return list;
+	}
+	
+	public Attachment selectAttachment(int notiNo) {
+		Connection conn = getConnection();
+		
+		Attachment at = new QnaDao().selectAttachment(conn, notiNo);
+		close(conn);
+		
+		return at;
+	}
+	
+	public int qnaAnswer(String answer, int qno) {
+		Connection conn = getConnection();
+		
+		int result = new QnaDao().qnaAnswer(conn, answer, qno);
+		
+		close(conn);
+		return result;
+		
+	}
 }

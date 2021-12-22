@@ -180,9 +180,9 @@
                             <td><%= n.getDate() %></td>
                             <td>
                             	<% if(n.getAnswer().equals(String.valueOf('N'))) { %>
-                                <a href="" class="btn btn-sm btn-primary">미답변</a>
+                                <a href="<%= contextPath %>/answer.no?qno=<%= n.getNotiNo() %>" class="btn btn-sm btn-primary">미답변</a>
                                 <% }else { %>
-                                <a href="" class="btn btn-sm btn-secondary">답변완료</a>
+                                <a href="<%= contextPath %>/answer.no?qno=<%= n.getNotiNo() %>" class="btn btn-sm btn-secondary">답변완료</a>
                             	<% } %>
                             </td>
                         </tr>
@@ -234,7 +234,6 @@
         </footer>
     
     </div>
-
 
 
 </body>

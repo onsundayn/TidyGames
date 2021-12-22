@@ -42,7 +42,6 @@ public class AdminQnaWaitingListController extends HttpServlet {
 		int endPage;
 		
 		listCount = new QnaService().selectListCount();
-		// 현재 총 게시물이 몇 개인지 알아올 메소드
 		currentPage = Integer.parseInt(request.getParameter("cpage"));
 		pageLimit = 10;
 		viewLimit = 10;
