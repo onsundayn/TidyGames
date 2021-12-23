@@ -1,8 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import ="java.util.ArrayList, com.TidyGames.game.model.vo.*, com.TidyGames.member.model.vo.*"%>
+    pageEncoding="UTF-8" import ="java.util.ArrayList,com.TidyGames.common.model.vo.*, com.TidyGames.game.model.vo.*, com.TidyGames.member.model.vo.*"%>
     
     
 <%
+
+PageInfo pi = (PageInfo)request.getAttribute("pi");
+
+int currentPage = pi.getCurrentPage();
+int startPage = pi.getStartPage();
+int endPage = pi.getEndPage();
+int maxPage = pi.getMaxPage();
+
+
 ArrayList<WishList> wish = (ArrayList<WishList>)request.getAttribute("wish");
 Game g = (Game)session.getAttribute("g");
 %>    
@@ -315,20 +324,13 @@ Game g = (Game)session.getAttribute("g");
         <% if(!wish.isEmpty()) { %>
             <div class="paging-area" style="float: right; margin-top: 100px; margin-right: 150px; text-align: center;">
 
-                <button> &lt; </button>
-                <button>1</button>
-                <button>2</button>
-                <button>3</button>
-                <button>4</button>
-                <button>5</button>
-                <button>6</button>
-                <button>7</button>
-                <button>8</button>
-                <button>9</button>
-                <button>10</button>
-                <button> &gt; </button>
-        
-            </div>
+		
+			</div>
+            
+            
+            
+            
+            
             <br><br><br>
           <% } %>
     </div>

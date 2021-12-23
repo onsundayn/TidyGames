@@ -11,9 +11,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.TidyGames.member.model.vo.Member;
+import com.TidyGames.common.model.vo.PageInfo;
 import com.TidyGames.member.model.vo.WishList;
-import com.TidyGames.pay.model.vo.Cart;
 
 public class WishListDao {
 
@@ -29,7 +28,7 @@ public class WishListDao {
 		
 	}
 	
-	public ArrayList<WishList> selectWish(Connection conn, int memNo) {
+	public ArrayList<WishList> selectWish(Connection conn, PageInfo pi, int memNo) {
 		
 		// select문 => ResultSet (여러행) => WishList
 		ArrayList<WishList> wish = new  ArrayList<>();
@@ -41,7 +40,13 @@ public class WishListDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
+			int startRow = (pi.getCurrentPage() -1 ) * pi.getViewLimit() + 1;
+			int endRow = startRow +  pi.getViewLimit() - 1;
+			
+			
 			pstmt.setInt(1, memNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 		
 			
 			rset = pstmt.executeQuery();
@@ -128,5 +133,35 @@ public class WishListDao {
 		}
 		
 
+		public int selectListCount(Connection conn, int memNo) {
+			
+			int listCount = 0;
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			
+			String sql = prop.getProperty("selectListCount");
+			
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				
+				rset = pstmt.executeQuery();
+				
+				pstmt.setInt(1, memNo);
+				
+				if(rset.next()) {
+//					count(*) 컬럼의 별칭인 count임
+					listCount = rset.getInt("count");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rset);
+				close(pstmt);
+			}
+			return listCount;
+		}
+		
+		
 		
 }

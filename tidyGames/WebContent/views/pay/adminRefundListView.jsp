@@ -199,8 +199,8 @@ ArrayList<Refund> list = (ArrayList<Refund>)request.getAttribute("list");
                         <td><%=rf.getRefundNo()%></td>
                         <td><%=rf.getOrderNo() %></td>
                         <td><%=rf.getMemId() %></td>
-                        <td>결제일</td>
-                        <td><%=rf.getPayAmount() %></td>
+                        <td><%=rf.getPayDate() %></td>
+                        <td><%=rf.getPayAmount() %>원</td>
                         <td><%=rf.getRefundDate() %></td>
                         <td>
                         	<% if(rf.getRefundStatus().equals("N")){ %>

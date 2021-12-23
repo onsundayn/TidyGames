@@ -8,21 +8,20 @@ import static com.TidyGames.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.TidyGames.common.model.vo.PageInfo;
 import com.TidyGames.member.model.dao.WishListDao;
 import com.TidyGames.member.model.vo.WishList;
-import com.TidyGames.pay.model.dao.PayDao;
-import com.TidyGames.pay.model.vo.Cart;
 
 public class WishListService {
 
 
 
-	public  ArrayList<WishList> selectWish(int memNo) {
+	public  ArrayList<WishList> selectWish(PageInfo pi, int memNo) {
 		
 		
 		Connection conn = getConnection();
 		
-		ArrayList<WishList> wish = new WishListDao().selectWish(conn, memNo);
+		ArrayList<WishList> wish = new WishListDao().selectWish(conn,pi, memNo);
 		 
 		 close(conn);
 		 
@@ -66,6 +65,18 @@ public class WishListService {
 		return result;
 	}
 
-
+		public int selectListCount(int memNo) {
+			Connection conn = getConnection();
+			int listCount = new WishListDao().selectListCount(conn, memNo);
+			
+			close(conn);
+			
+			return listCount;
+		
+		
+		
+		
 	
+	}
+		
 }
