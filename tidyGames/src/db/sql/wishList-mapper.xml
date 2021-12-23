@@ -9,22 +9,21 @@
 		  FROM (
 		        SELECT ROWNUM RNUM, A.*
 		          FROM (
-                          SELECT    
-                                  MEM_NO	
+                                SELECT    
+                                  MEM_NO   
                                 , GAME_NO
-                                , GAME_IMG
                                 , KOR_NAME
                                 , ENG_NAME
                                 , GAME_INTRO
                                 , PRICE
                                 , POINT
-                                , MEM_NICK
-                                
-                          FROM WISHLIST
-                          JOIN GAME USING(GAME_NO)
-                          JOIN MEMBER USING(MEM_NO)
-                         WHERE MEM_NO = ?
-                           AND GAME_STATUS = 'Y'
+                                , CHANGE_NAME
+                                , FILE_PATH
+                          FROM WISHLIST W
+                          LEFT JOIN UPLOAD_FILE UP USING(GAME_NO)
+                          LEFT JOIN GAME G USING(GAME_NO)
+                          WHERE MEM_NO = ?
+                           AND FILE_TYPE = 1
                              ORDER 
 		                    BY GAME_NO DESC
 
@@ -65,7 +64,7 @@
 	<!-- 페이징  총게시글 개수 -->
 		<entry key="selectListCount">
 		SELECT
-      			COUNT(*) count
+      			COUNT(*) "count"
   		  FROM WISHLIST
          WHERE MEM_NO = ?
 	

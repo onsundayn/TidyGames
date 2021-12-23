@@ -28,7 +28,7 @@ public class WishListDao {
 		
 	}
 	
-	public ArrayList<WishList> selectWish(Connection conn, PageInfo pi, int memNo) {
+	public ArrayList<WishList> selectWish(Connection conn, int memNo, PageInfo pi) {
 		
 		// select문 => ResultSet (여러행) => WishList
 		ArrayList<WishList> wish = new  ArrayList<>();
@@ -54,14 +54,14 @@ public class WishListDao {
 			while(rset.next()) {
 				wish.add(new WishList(
 								  rset.getInt("mem_no"),	
-								  rset.getInt("game_no"),  
-								  rset.getString("game_img"),
+								  rset.getInt("game_no"),
 								  rset.getString("kor_name"),
 								  rset.getString("eng_name"),
 								  rset.getString("game_intro"),
 								  rset.getInt("price"),
 								  rset.getInt("point"),
-								  rset.getString("mem_nick")));
+								  rset.getString("CHANGE_NAME"),
+								  rset.getString("FILE_PATH")));
 			}
 			
 			
@@ -145,9 +145,10 @@ public class WishListDao {
 			try {
 				pstmt = conn.prepareStatement(sql);
 				
+				pstmt.setInt(1, memNo);
+				
 				rset = pstmt.executeQuery();
 				
-				pstmt.setInt(1, memNo);
 				
 				if(rset.next()) {
 //					count(*) 컬럼의 별칭인 count임

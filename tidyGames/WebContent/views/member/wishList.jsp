@@ -261,7 +261,7 @@ Game g = (Game)session.getAttribute("g");
                                     <tr>
                                         <td width="150">
                                             <div >
-                       							<img src="<%=contextPath%>/<%=w.getGameImg()%>" width="200px" height="150px">
+                       							<img src="<%=request.getContextPath()%>/<%=w.getFilePath() + w.getChangeName()%>" width="200px" height="150px">
                                             </div>
                                         </td>
 
@@ -323,6 +323,25 @@ Game g = (Game)session.getAttribute("g");
 
         <% if(!wish.isEmpty()) { %>
             <div class="paging-area" style="float: right; margin-top: 100px; margin-right: 150px; text-align: center;">
+					
+  <%if(currentPage != 1){ %>
+            <button onclick="location.href='<%=contextPath%>/wishList.me?cpage=<%=currentPage-1%>';"> &lt; </button>
+          <%} %>  
+            
+            <%for(int p=startPage; p<=endPage; p++){ %>
+            
+            	<!-- 현재페이지이면 클릭안되게 -->
+            	<%if(p== currentPage) { %>
+            		<button disabled><%= p %></button>
+            	<%}else { %>
+            	<!-- 클릭이벤트 부여해서 url 요청-->
+            		<button onclick="location.href='<%=contextPath%>/wishList.me?cpage=<%=p%>';"><%= p %></button>
+            	<%} %>
+            <% } %>
+            <% if(currentPage != maxPage) { %>
+            <button onclick="location.href='<%=contextPath%>/wishList.me?cpage=<%=currentPage+1%>';"> &gt; </button>
+      		 <%} %>
+
 
 		
 			</div>

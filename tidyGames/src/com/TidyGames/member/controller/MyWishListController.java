@@ -51,6 +51,7 @@ public class MyWishListController extends HttpServlet {
 		int endPage; // 페이징바의 끝수
 		
 		listCount = new WishListService().selectListCount(memNo);
+		System.out.println(listCount);
 		
 		// * currentPage : 현재 페이지(즉, 사용자가 요청한 페이지)
 		// menubar에 일반게시판 url넘길때 cpage=1 이 key값
@@ -79,7 +80,7 @@ public class MyWishListController extends HttpServlet {
 		
 	
 		
-		ArrayList<WishList> wish = new WishListService().selectWish(pi, memNo);  
+		ArrayList<WishList> wish = new WishListService().selectWish(memNo, pi);  
 		
 		
 		request.setAttribute("pi", pi);
