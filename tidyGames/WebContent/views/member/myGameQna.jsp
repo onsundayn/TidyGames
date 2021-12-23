@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Tidy Games</title>
 <style>
     div{
 		box-sizing: border-box;
@@ -155,7 +155,7 @@
           		
                 <p><a style="font-weight:bolder; color:rgba(255, 166, 0, 0.700)">게임관련 문의</a></p>
                 <p style="margin:0px 5px;">|</p>
-                <p><a href="<%= contextPath %>/myQna.me">1:1문의내역</a></p>
+                <p><a href="<%= contextPath %>/myQna.me?cpage=1">1:1문의내역</a></p>
                 
                 
             </div>

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import com.TidyGames.common.model.vo.PageInfo;
 import com.TidyGames.member.model.dao.MemberDao;
 import com.TidyGames.member.model.vo.Member;
-import com.TidyGames.member.model.vo.WishList;
+import com.TidyGames.notice.model.vo.Notice;
 
 public class MemberService {
 
@@ -259,7 +259,27 @@ public class MemberService {
 		close(conn);
 
 		return result;
+	}
 		
+	
+	public ArrayList<Notice> myQnaList(int memNo, PageInfo pi) {
+		Connection conn = getConnection();
+		
+		ArrayList<Notice> list = new MemberDao().myQnaList(conn, memNo, pi);
+		
+		
+		close(conn);
+		return list;
+		
+	}
+	
+	public int qnaListCount(int memNo) {
+		Connection conn = getConnection();
+		
+		int listCount = new MemberDao().qnaListCount(conn, memNo);
+		
+		close(conn);
+		return listCount;
 	}
 	
 }

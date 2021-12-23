@@ -87,13 +87,12 @@
             </ul>
             <div id="line_2"></div>
             <ul>
-                <li><a href="<%= request.getContextPath() %>/myQna.me" id="myQna">나의 문의 내역</a></li>
+                <li><a href="<%= request.getContextPath() %>/myQna.me?cpage=1" id="myQna">나의 문의 내역</a></li>
                 <li><a href="<%= request.getContextPath() %>/myReview.me" id="myReview">내 리뷰 조회</a></li>
             </ul>
-            <!-- <div id="line_2"></div> -->
         </div>
 
-        <!-- request.getContextPath -->
+
     </div>
 </body>
 </html>
