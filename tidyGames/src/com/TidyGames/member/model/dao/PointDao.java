@@ -60,6 +60,42 @@ public class PointDao {
 
 		return point;
 	}
+	
+	public ArrayList<Point> selectAllPoint(Connection conn, int memNo, String start, String end) {
+
+		ArrayList<Point> point = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectAllPoint");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, memNo);
+			pstmt.setString(2, start);
+			pstmt.setString(3, end);
+
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				point.add(new Point(rset.getInt("mem_no"), 
+									rset.getInt("point_amount"), 
+									rset.getString("point_date"),
+									rset.getString("point_content"), 
+									rset.getInt("order_no")));
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return point;
+	}
+
 
 	public ArrayList<Point> selectSave(Connection conn, int memNo, String start, String end) {
 

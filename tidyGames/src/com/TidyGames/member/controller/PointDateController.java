@@ -43,6 +43,8 @@ public class PointDateController extends HttpServlet {
 		String end = request.getParameter("endDate");
 		String select = request.getParameter("select");
 
+		System.out.println(memNo);
+		System.out.println(end);
 		System.out.println(start);
 		System.out.println(select);
 
@@ -55,11 +57,13 @@ public class PointDateController extends HttpServlet {
 		} else {
 
 			if (select.equals("all")) {
-				ArrayList<Point> point = new PointService().selectPoint(memNo);
+				ArrayList<Point> point = new PointService().selectAllPoint(memNo, start, end);
 
 				System.out.println(point);
 				request.setAttribute("point", point);
-
+				Point sum = new PointService().sumPoint(memNo);
+				
+				request.setAttribute("sum", sum);
 				request.getRequestDispatcher("views/member/pointHistoryView.jsp").forward(request, response);
 
 			} else if (select.equals("save")) {
@@ -68,7 +72,9 @@ public class PointDateController extends HttpServlet {
 
 				System.out.println(point);
 				request.setAttribute("point", point);
-
+				Point sum = new PointService().sumPoint(memNo);
+				
+				request.setAttribute("sum", sum);
 				request.getRequestDispatcher("views/member/pointHistoryView.jsp").forward(request, response);
 
 			} else {
@@ -77,7 +83,9 @@ public class PointDateController extends HttpServlet {
 
 				System.out.println(point);
 				request.setAttribute("point", point);
-
+				Point sum = new PointService().sumPoint(memNo);
+				
+				request.setAttribute("sum", sum);
 				request.getRequestDispatcher("views/member/pointHistoryView.jsp").forward(request, response);
 				
 				

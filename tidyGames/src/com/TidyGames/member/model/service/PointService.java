@@ -22,6 +22,18 @@ public class PointService {
 		return point;
 
 	}
+	
+	public ArrayList<Point> selectAllPoint(int memNo, String start, String end) {
+
+		Connection conn = getConnection();
+
+		ArrayList<Point> point = new PointDao().selectAllPoint(conn, memNo, start, end);
+
+		close(conn);
+
+		return point;
+
+	}
 
 	public ArrayList<Point> selectSave(int memNo, String start, String end) {
 

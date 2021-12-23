@@ -4,22 +4,33 @@
 	
 
 	<entry key ="selectWish">
-		SELECT    
-				  MEM_NO	
-			    , GAME_NO
-			    , GAME_IMG
-			    , KOR_NAME
-			    , ENG_NAME
-			    , GAME_INTRO
-			    , PRICE
-			    , POINT
-			    , MEM_NICK
-			    
-		  FROM WISHLIST
-		  JOIN GAME USING(GAME_NO)
-		  JOIN MEMBER USING(MEM_NO)
-		 WHERE MEM_NO = ?
-		   AND GAME_STATUS = 'Y'	
+	
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+                          SELECT    
+                                  MEM_NO	
+                                , GAME_NO
+                                , GAME_IMG
+                                , KOR_NAME
+                                , ENG_NAME
+                                , GAME_INTRO
+                                , PRICE
+                                , POINT
+                                , MEM_NICK
+                                
+                          FROM WISHLIST
+                          JOIN GAME USING(GAME_NO)
+                          JOIN MEMBER USING(MEM_NO)
+                         WHERE MEM_NO = ?
+                           AND GAME_STATUS = 'Y'
+                             ORDER 
+		                    BY GAME_NO DESC
+
+		                ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?	
 	
 
 	</entry>
@@ -49,6 +60,16 @@
 		
 	
 	</entry>
+	
+	
+	<!-- 페이징  총게시글 개수 -->
+		<entry key="selectListCount">
+		SELECT
+      			COUNT(*) count
+  		  FROM WISHLIST
+         WHERE MEM_NO = ?
+	
+		</entry>
 	
 	
 	

@@ -209,7 +209,7 @@
                         <td><%=po.getMemId() %></td>
                         <td><%=po.getSum() %>POINT</td>
                         <td><a href="" id="btn" class="btn btn-sm btn-dark" data-toggle="modal" data-target="#pointModal">변경</a>
-                            <a href="<%= request.getContextPath() %>/adPointDe.me" class="btn btn-success btn-sm">상세보기</a></td>
+                            <a href="<%= request.getContextPath() %>/adPointDe.me?mNo=<%=po.getMemNo()%>" class="btn btn-success btn-sm">상세보기</a></td>
                       
                      <%} %>
                    
@@ -232,7 +232,7 @@
 							<!-- Modal body -->
 							<div class="modal-body">
                                 <div class="pointcontent">
-                                    <b style="margin-top: 20px;">회원보유포인트 : <%=po.getSum() %></b>
+                                    <b style="margin-top: 20px;">회원보유포인트 :</b>
                                     <div class="memPoint"></div>
                                 </div>
 

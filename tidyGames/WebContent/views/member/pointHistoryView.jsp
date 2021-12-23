@@ -167,7 +167,7 @@
             <span style="font-size: 30px; color:black;"><%=sum.getSum()%> POINT</span>
 
             <span class="selectForm">
-           <form action="<%=contextPath%>/pointDate.me" method="post">
+           <form action="<%=request.getContextPath() %>/pointDate.me" method="post">
                 
                 <!-- <div class="dateSearch">
 
@@ -208,10 +208,10 @@
         <br><br>
         <div style="width: 1000px; height: 2px; background: gray; margin:30px 0px 20px 100px;" ></div>
         <br><br>
-
+			<form action="" method="post"></form>
             <div class="area4">
                 <select class="btn btn-outline-secondary" style="color: white;"">
-                    <option selected value="uptodate">최신순</option>
+                    <option selected value="uptodate"><button type="submit">최신순</button></option>
                     <option class="olddate" ><button onclick="olddate();">오래된순</button></option>
     
                 </select>
@@ -257,19 +257,20 @@
 
 		<script>
 		   
+		
 
 			function olddate() {
 				$.ajax({
 					url : "oldDate.me",
 					type : "post",
-					data : ""
+					data : "",
 					success : function(point) {
 
 						location.href = "";
 
 					},
 					error : function() {
-						console.log("찜목록 삭제 실패!")
+						
 					}
 				});
 				

@@ -81,7 +81,7 @@
             </ul>
             <div id="line_2"></div>
             <ul>
-                <li><a href="<%= request.getContextPath() %>/wishList.me" id="wishListbar">찜한 내역 조회</a></li>
+                <li><a href="<%= request.getContextPath() %>/wishList.me?cpage=1" id="wishListbar">찜한 내역 조회</a></li>
                 <li><a href="<%= request.getContextPath() %>/orderHistory.pa" id="orderbar">주문 내역 조회</a></li>
                 <li><a href="<%= request.getContextPath() %>/pointHistory.me" id="pointbar">포인트 이력 조회</a></li>
             </ul>
