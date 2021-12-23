@@ -5,6 +5,8 @@
 	ArrayList<Attachment3> alist = (ArrayList<Attachment3>)request.getAttribute("alist");
 	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("list");
 	
+	//System.out.println("보람출력:" + alist);
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -150,7 +152,12 @@
                 </div>
                
                 <div  class="img11" id="big">
-                    <video src="" id="video" controls autoplay muted onclick="chooseFile(1);" ></video>
+                	<% if(alist.get(alist.size()-1).getFileLevel() == 3) { %>
+                		<input type="hidden" name="originFileNo1" value="<%= alist.get(alist.size()-1).getFileNo() %>"
+>                    	<video src="<%= contextPath %>/<%=alist.get(alist.size()-1).getFilePath() + alist.get(alist.size()-1).getChangeName() %>" id="video" controls autoplay muted onclick="chooseFile(1);" ></video>
+                    <% }else { %>
+                    	<video src="" id="video" controls autoplay muted onclick="chooseFile(1);" ></video>
+                    <% } %>
                 </div>
                 
                 <div style="display:none;">
@@ -158,28 +165,31 @@
                 </div>
                 
                 <div class="img11" id="small" align="center">
+                	<% for(int i=1; i<5; i++) { // 1 2 3 4%>
+                		<% if(i < alist.size() && alist.get(i).getFileLevel() == 2) { %>
+                			<input type="hidden" name="originFileNo<%= i+1 %>" value="<%=alist.get(i).getFileNo()%>">
+                    		<img src="<%= contextPath %>/<%=alist.get(i).getFilePath() + alist.get(i).getChangeName() %>" id="contentImg<%=i %>" onclick="chooseFile(<%=i+1%>);">
+                    	<% }else{ %>
+                    		<img src="" id="contentImg<%=i %>" onclick="chooseFile(<%=i+1%>);">
+                    	<% } %>
+                    	
+                	<% } %>
                 	
-                    <img src="" id="contentImg1" onclick="chooseFile(2);">
-                	<img src="" id="contentImg2" onclick="chooseFile(3);">
-                	<img src="" id="contentImg3" onclick="chooseFile(4);">
-                	<img src="" id="contentImg4" onclick="chooseFile(5);">
                 	<div style="display:none;">
-                    <input type="file" name="file2" id="file2" onchange="loadImg(this, 2);">
-                    <input type="file" name="file3" id="file3" onchange="loadImg(this, 3);">
-                    <input type="file" name="file4" id="file4" onchange="loadImg(this, 4);">
-                    <input type="file" name="file5" id="file5" onchange="loadImg(this, 5);">
+	                    <input type="file" name="file2" id="file2" onchange="loadImg(this, 2);">
+	                    <input type="file" name="file3" id="file3" onchange="loadImg(this, 3);">
+	                    <input type="file" name="file4" id="file4" onchange="loadImg(this, 4);">
+	                    <input type="file" name="file5" id="file5" onchange="loadImg(this, 5);">
                 	</div>
+                	
                 </div>
             </div>
            
             <div class="right-area">
                 <div class="info-area">
                     <div class="img11" id="t-img">
-                    <% for(int i=0;i<alist.size(); i++){ %>
-                    	<% if(alist.get(i) != null) { %>
-                			<input type="hidden" value="<%=alist.get(i).getFileNo()%>" name="originFileNo">
-                        <%} %>	
-                    <% } %>   	
+                    
+                			<input type="hidden" value="<%=alist.get(0).getFileNo()%>" name="originFileNo6">
     						<!-- 업로드 폼을 저장할수도 있어서 불러왔을때 사진이 있으면 보여주고 없으면 안보이게...상세이미지랑 동영상 -->
                         	<img src="<%= contextPath %>/<%=alist.get(0).getFilePath() + alist.get(0).getChangeName() %>" name="titleImg" id="titleImg"  onclick="chooseFile(6);">
                         	
@@ -198,7 +208,7 @@
                     <br><br><br>
                      <tr>
                         <th>출시일</th>
-                        <td><input type="number" value="<%=g.getReleaseDate()%>" name="releaseDate" readonly></td>
+                        <td><input type="text" value="<%=g.getReleaseDate()%>" name="releaseDate" readonly></td>
                      </tr>
                     <br>
                      <tr>

@@ -95,7 +95,6 @@ private Properties prop = new Properties();
 							 rset.getString("upload_date"),
 							 rset.getDouble("point"),
 							 rset.getString("game_status"),
-							 rset.getString("game_img"),
 							 rset.getInt("count"));
 			}
 		} catch (SQLException e) {
@@ -186,12 +185,12 @@ public Game selectGameGC(Connection conn, int comNo, int gameNo) {
 	}
 	
 
-	public ArrayList<Review> selectReview(Connection conn, int gameNo) {
+	public ArrayList<Review> selectReviewList(Connection conn, int gameNo) {
 		//여러행조회
 		ArrayList<Review> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("selectReview");
+		String sql = prop.getProperty("selectReviewList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -201,13 +200,9 @@ public Game selectGameGC(Connection conn, int comNo, int gameNo) {
 			while(rset.next()) {
 				list.add(new Review( rset.getInt("review_no"),
 									 rset.getInt("game_no"),
-									 rset.getInt("mem_no"),
+									 rset.getString("writer"),
 									 rset.getString("contents"),
-									 rset.getInt("recommend"),
-									 rset.getString("upload_date"),
-									 rset.getInt("star_no"),
-									 rset.getString("mem_nick"),
-									 rset.getString("mem_pic")));
+									 rset.getString("upload_date")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -229,7 +224,7 @@ public Game selectGameGC(Connection conn, int comNo, int gameNo) {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, r.getGameNo());
-			pstmt.setInt(2, r.getMemNo());
+			pstmt.setInt(2, Integer.parseInt(r.getWriter()));
 			pstmt.setString(3, r.getContents());
 			
 			result = pstmt.executeUpdate();
@@ -339,7 +334,7 @@ public Game selectGameGC(Connection conn, int comNo, int gameNo) {
 			pstmt.setString(4, ga.getReleaseDate());
 			pstmt.setInt(5, ga.getPrice());
 			pstmt.setString(6, ga.getGameIntro());
-			pstmt.setString(7, ga.getKorName());
+			pstmt.setString(7, ga.getGameImg());
 			
 			result = pstmt.executeUpdate();
 			
@@ -489,6 +484,7 @@ public Game selectGameGC(Connection conn, int comNo, int gameNo) {
 			
 			while(rset.next()) {
 				Attachment3 at = new Attachment3();
+				at.setFileNo(rset.getInt("file_no"));
 				at.setChangeName(rset.getString("change_name"));
 				at.setFilePath(rset.getString("file_path"));
 				at.setFileLevel(rset.getInt("file_type"));

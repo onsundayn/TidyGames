@@ -33,7 +33,6 @@
 		     , UPLOAD_DATE
 		     , POINT
 		     , GAME_STATUS
-		     , GAME_IMG
 		     , (SELECT COUNT(*) FROM WISHLIST W WHERE W.MEM_NO= ? AND G.GAME_NO =W.GAME_NO ) AS count
 		  FROM GAME G
 		 WHERE GAME_NO = ?
@@ -58,20 +57,19 @@
 		    )
 	</entry>
 	
-	<entry key="selectReview">
+	<entry key="selectReviewList">
 		SELECT
-			   REVIEW_NO 
+		       REVIEW_NO
 		     , GAME_NO
-		     , MEM_NO
+		     , MEM_NICK "WRITER"
 		     , CONTENTS
-		     , RECOMMEND
-		     , TO_CHAR(UPLOAD_DATE, '""YYYY"년 "MM"월 "DD"일"') "UPLOAD_DATE"
-		     , STAR_NO
-		     , MEM_NICK
-		     , MEM_PIC
+		     , TO_CHAR(UPLOAD_DATE, 'YY/MM/DD HH:MI') "UPLOAD_DATE"
 		  FROM REVIEW
-		  LEFT JOIN MEMBER USING (MEM_NO)
-		 WHERE GAME_NO = ?
+		  JOIN MEMBER USING (MEM_NO)
+		 WHERE REVIEW_STATUS = 'Y'
+		   AND GAME_NO = ?
+		 ORDER
+		    BY REVIEW_NO DESC
 	</entry>
 	<entry key="selectGameList">
 	SELECT *
