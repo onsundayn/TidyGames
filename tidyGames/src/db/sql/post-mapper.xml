@@ -20,7 +20,7 @@
 						     , POST_NAME
 						     , POST_VIEW
 						     , POST_LIKE
-						     , TO_CHAR(POST_MODIFY, 'YYYY/MM/DD') "POST_MODIFY"
+						     , TO_CHAR(POST_ENROLL, 'YYYY/MM/DD') "POST_ENROLL"
 						     , POST_NOTICE
 						  FROM POST P
 						  JOIN MEMBER ON (POST_WRITER = MEM_NO)
@@ -40,13 +40,6 @@
 		   AND POST_STATUS = 'Y'
 	</entry>
 	
-	<entry key="confirmMember">
-		SELECT
-			   MEM_ACCESS
-		  FROM MEMBER
-		 WHERE MEM_ID = ?
-	</entry>
-	
 	<entry key="selectPostDetail">
 		SELECT *
   		  FROM (
@@ -55,7 +48,7 @@
 		             , POST_WRITER
 		             , POST_NAME
 		             , MEM_NICK
-		             , TO_CHAR(POST_MODIFY, 'YYYY/MM/DD HH24:mm:SS') "POST_MODIFY"
+		             , TO_CHAR(POST_ENROLL, 'YYYY/MM/DD HH24:mm:SS') "POST_ENROLL"
 		             , POST_VIEW
 		             , POST_LIKE
 		             , POST_CONTENT
@@ -63,6 +56,7 @@
 		             , LEAD(POST_NO) OVER(ORDER BY POST_NO) NEXT_NO
 		          FROM POST
 		          JOIN MEMBER ON (POST_WRITER = MEM_NO)
+		         WHERE POST_STATUS = 'Y'
         		 )
 		 WHERE POST_NO = ?
 	</entry>
@@ -148,6 +142,150 @@
 		   SET POST_STATUS = 'N'
 		 WHERE POST_NO = ?
 	</entry>
+	
+	<entry key="updatePost">
+	UPDATE
+		   POST
+	   SET POST_NAME = ?
+	     , POST_CONTENT = ?
+	     , POST_MODIFY = SYSDATE
+	 WHERE POST_NO = ?
+	</entry>
+	
+	<entry key="nicknamePostCount">
+		SELECT
+		       COUNT(*) COUNT
+		  FROM POST
+		 WHERE POST_STATUS = 'Y'
+		   AND POST_WRITER = (
+		   						SELECT MEM_NO 
+		   						  FROM MEMBER 
+		   						 WHERE MEM_NICK = ?
+		   					  )
+	</entry>
+	
+	<entry key="searchPostCount">
+		SELECT
+		       COUNT(*) COUNT
+		  FROM POST
+		 WHERE POST_STATUS = 'Y' 
+		   AND UPPER(POST_NAME) 
+		  LIKE UPPER('%' || ? || '%')
+		    OR UPPER(POST_CONTENT)
+		  LIKE UPPER('%' || ? || '%')
+	</entry>
+	
+	<entry key="selectNicknamePost">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                SELECT 
+						       POST_NO
+						     , MEM_NICK
+						     , POST_NAME
+						     , POST_VIEW
+						     , POST_LIKE
+						     , TO_CHAR(POST_ENROLL, 'YYYY/MM/DD') "POST_ENROLL"
+						     , POST_NOTICE
+						  FROM POST P
+						  JOIN MEMBER ON (POST_WRITER = MEM_NO)
+						 WHERE P.POST_STATUS = 'Y'
+						   AND POST_WRITER = (
+		   										SELECT MEM_NO 
+		   						  				FROM MEMBER 
+		   						 				WHERE MEM_NICK = ?
+		   					  					)
+						 ORDER
+						    BY POST_NO DESC
+		                ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="searchRecentPost">
+		SELECT *
+			  FROM (
+			        SELECT ROWNUM RNUM, A.*
+			          FROM (
+			                SELECT 
+							       POST_NO
+							     , MEM_NICK
+							     , POST_NAME
+							     , POST_VIEW
+							     , POST_LIKE
+							     , TO_CHAR(POST_ENROLL, 'YYYY/MM/DD') "POST_ENROLL"
+							     , POST_NOTICE
+							  FROM POST P
+							  JOIN MEMBER ON (POST_WRITER = MEM_NO)
+							 WHERE P.POST_STATUS = 'Y'
+							   AND UPPER(POST_NAME) 
+		 					  LIKE UPPER('%' || ? || '%')
+		    					OR UPPER(POST_CONTENT)
+		  					  LIKE UPPER('%' || ? || '%')
+							 ORDER
+							    BY POST_NO DESC
+			                ) A
+			        )
+			 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+
+	<entry key="searchViewPost">
+		SELECT *
+			  FROM (
+			        SELECT ROWNUM RNUM, A.*
+			          FROM (
+			                SELECT 
+							       POST_NO
+							     , MEM_NICK
+							     , POST_NAME
+							     , POST_VIEW
+							     , POST_LIKE
+							     , TO_CHAR(POST_ENROLL, 'YYYY/MM/DD') "POST_ENROLL"
+							     , POST_NOTICE
+							  FROM POST P
+							  JOIN MEMBER ON (POST_WRITER = MEM_NO)
+							 WHERE P.POST_STATUS = 'Y'
+							   AND UPPER(POST_NAME) 
+		 					  LIKE UPPER('%' || ? || '%')
+		    					OR UPPER(POST_CONTENT)
+		  					  LIKE UPPER('%' || ? || '%')
+							 ORDER
+							    BY POST_VIEW DESC
+			                ) A
+			        )
+			 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+
+	<entry key="searchLikePost">
+		SELECT *
+			  FROM (
+			        SELECT ROWNUM RNUM, A.*
+			          FROM (
+			                SELECT 
+							       POST_NO
+							     , MEM_NICK
+							     , POST_NAME
+							     , POST_VIEW
+							     , POST_LIKE
+							     , TO_CHAR(POST_ENROLL, 'YYYY/MM/DD') "POST_ENROLL"
+							     , POST_NOTICE
+							  FROM POST P
+							  JOIN MEMBER ON (POST_WRITER = MEM_NO)
+							 WHERE P.POST_STATUS = 'Y'
+							   AND UPPER(POST_NAME) 
+		 					  LIKE UPPER('%' || ? || '%')
+		    					OR UPPER(POST_CONTENT)
+		  					  LIKE UPPER('%' || ? || '%')
+							 ORDER
+							    BY POST_LIKE DESC
+			                ) A
+			        )
+			 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	
 
 
 

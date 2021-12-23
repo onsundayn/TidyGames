@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.TidyGames.post.model.vo.Post, com.TidyGames.common.model.vo.PageInfo"%>
+<%
+	Post p = (Post)request.getAttribute("p");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +32,7 @@
 	    margin:auto;
 	    margin-top:50px;
 	}
-	#enroll-form input, #enroll-form textarea{
+	#update-form input, #update-form textarea{
 		width:100%;
 		box-sizing:border-box;
 	 }
@@ -51,41 +55,38 @@
 
         <div class="write-form">
 			<br><br>
-            <form action="" id="enroll-form" method="post">
+            <form action="<%=request.getContextPath()%>/update.po" id="update-form" method="post">
+				<input type="hidden" name="postNo" value="<%=p.getPostNo()%>">
+				<input type="hidden" name="currentPage" value="<%=pi.getCurrentPage()%>">
 				
                 <table>
                     <tr>
-                        <th width="100"><h5>제목</h5></th>
-                        <td width="800" heigt="30" colspan="4"><input type="text" name="title" required></td>
+                        <th width="70"><h5>제목</h5></th>
+                        <td width="830" heigt="30" colspan="3"><input type="text" name="title" required value="<%=p.getPostName()%>"></td>
                     </tr>
-                    <tr><td colspan="5" height="20"></td></tr>
+                    <tr><td colspan="4" height="20"></td></tr>
                     <tr>
-                        <td colspan="5" style="background:white">
-                            <textarea rows="30" name="content" required style="resize:none"></textarea>
+                        <td colspan="4" style="background:white">
+                            <textarea class="summernote" rows="30" name="content" required style="resize:none"><%=p.getPostContent()%></textarea>
                         </td>
                     </tr>
-                    <tr><td colspan="5" height="20"></td></tr>
                     <tr>
-                    <th>첨부파일</th>
-                    <td width="50"><input type="file" name="file1"></td>
-                    <td width="50"><input type="file" name="file2"></td>
-                    <td width="50"><input type="file" name="file3"></td>
-                    <td width="50"><input type="file" name="file4"></td>
-                	</tr>
+						<td colspan="4" height="20"></td>
+					</tr>
                 </table>
-                <br>
+
                 <div align="right" style="width:1000px">
                     <button type="button" onclick="history.back();" class="btn btn-sm btn-secondary">뒤로가기</button>
-                    <button type="reset" class="btn btn-sm btn-info">취소</button>
-                    <button type="submit" class="btn btn-sm btn-success">등록</button>
+                    <button type="submit" class="btn btn-sm btn-success">수정완료</button>
                 </div>
-
-
             </form>
 
         </div>
         
     </div>
+    
+ 
+
 
 </body>
 </html>

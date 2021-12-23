@@ -1,27 +1,25 @@
-package com.TidyGames.company.controller;
+package com.TidyGames.post.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.TidyGames.company.model.service.AdminCompanyService;
-import com.TidyGames.company.model.vo.Company;
+import com.TidyGames.post.model.service.PostService;
 
 /**
- * Servlet implementation class AdminCompanyUpdateFormController
+ * Servlet implementation class AdminDeletePost
  */
-@WebServlet("/updateForm.co")
-public class AdminCompanyUpdateFormController extends HttpServlet {
+@WebServlet("/deleteAll.po")
+public class AdminDeletePost extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminCompanyUpdateFormController() {
+    public AdminDeletePost() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,13 +29,21 @@ public class AdminCompanyUpdateFormController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int companyNo = Integer.parseInt(request.getParameter("num"));
+		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		String[] deleteNum = request.getParameterValues("deleteNum");
+		int result = 0;
 		
-		Company c = new AdminCompanyService().selectCompanyDetail(companyNo);
+		for(String postNo : deleteNum) {
+			result = new PostService().deletePost(Integer.parseInt(postNo));
+		}
 		
-		request.setAttribute("comp", c);
-		
-		request.getRequestDispatcher("views/company/adminCompanyUpdateForm.jsp").forward(request,response);
+		if(result > 0) { 		
+			request.getSession().setAttribute("alertMsg", "총 " + deleteNum.length + " 개의 게시물을 삭제하셨습니다.");
+			response.sendRedirect(request.getContextPath() + "/list.po?cpage="+currentPage);
+		}else { 
+			request.setAttribute("errorMsg", "글 삭제에 실패하셨습니다!");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request,response);
+		}
 		
 	}
 

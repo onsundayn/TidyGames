@@ -44,13 +44,6 @@ public class PostService {
 		return result;
 	}
 	
-	public Member confirmMember(String memId) {
-		Connection conn = getConnection();
-		Member m = pd.confirmMember(conn, memId);
-		close(conn);
-		return m;
-	}
-	
 	public Post selectPostDetail(int postNo) {
 		Connection conn = getConnection();
 		Post pf = pd.selectPostDetail(conn, postNo);
@@ -108,7 +101,54 @@ public class PostService {
 		return result;
 	}
 	
+	public int updatePost(Post p) {
+		Connection conn = getConnection();
+		int result = pd.updatePost(conn, p);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 	
+	// ==============================================================================
+	
+	public int nicknamePostCount(String word) {
+		Connection conn = getConnection();
+		int result = pd.nicknamePostCount(conn, word);
+		close(conn);
+		return result;
+	}
+	
+	
+	public int searchPostCount(String word) {
+		Connection conn = getConnection();
+		int result = pd.searchPostCount(conn, word);
+		close(conn);
+		return result;
+	}
+	
+	
+	public ArrayList<Post> selectSearchList(String search, PageInfo pi, String word) {
+		Connection conn = getConnection();
+		ArrayList<Post> list = new ArrayList<>();
+
+		switch(search) {
+		case "r" : list = pd.searchRecentPost(conn, pi, word);
+				   break;
+		case "v" : list = pd.searchViewPost(conn, pi, word);
+				   break;
+		case "l" : list = pd.searchLikePost(conn, pi, word);
+				   break;
+		case "n" : list = pd.selectNicknamePost(conn, pi, word);
+				   break;
+		}
+		
+		close(conn);
+		return list;
+	}
 	
 	
 	

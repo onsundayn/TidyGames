@@ -33,18 +33,33 @@ public class PostListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int listCount;		
-		int currentPage; 	
-		int pageLimit; 		
-		int viewLimit;	
+		int listCount = 0;		
+		int currentPage = 0; 	
+		int pageLimit = 10; 		
+		int viewLimit = 15;	
 		int maxPage;		
 		int startPage;		
 		int endPage;	
 		
-		listCount = new PostService().selectPostListCount();	
+		String search = request.getParameter("search");
+		String word = request.getParameter("word");
+		
+		if(word==null) {
+			word = "";
+		}
+		
+		if(search == null) {
+			listCount = new PostService().selectPostListCount();	
+		} else {
+			switch(search) {
+			case "r" : 
+			case "v" : 
+			case "l" : listCount = new PostService().searchPostCount(word); break;
+			case "n" : listCount = new PostService().nicknamePostCount(word); break;
+			}
+		}	
+		
 		currentPage = Integer.parseInt(request.getParameter("cpage"));
-		pageLimit = 10;
-		viewLimit = 15;
 		maxPage = (int)Math.ceil((double)listCount / viewLimit);
 		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
 		endPage = startPage + pageLimit - 1;
@@ -54,8 +69,22 @@ public class PostListController extends HttpServlet {
 		}
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, viewLimit, maxPage, startPage, endPage);
-		ArrayList<Post> list = new PostService().selectPostList(pi);
+		ArrayList<Post> list = new ArrayList<>();
 		
+
+		if(search ==null) {
+			list = new PostService().selectPostList(pi);			
+		} else {
+			switch(search) {
+			case "r" : 
+			case "v" : 
+			case "l" : 
+			case "n" : list = new PostService().selectSearchList(search, pi, word);
+					   break;
+			}
+		}
+		
+	
 		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 		
