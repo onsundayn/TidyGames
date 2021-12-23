@@ -1,4 +1,4 @@
-package com.TidyGames.company.controller;
+package com.TidyGames.qna.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -27,7 +27,7 @@ public class GameCompanyQnaList extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		request.getRequestDispatcher("views/company/gameCompanyQnaList.jsp").forward(request, response);
+		request.getRequestDispatcher("views/qna/companyGameQnaList.jsp").forward(request, response);
 		
 	}
 
