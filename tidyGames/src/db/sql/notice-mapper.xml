@@ -99,4 +99,30 @@
 		     , ANS_CONFIRM = 'Y'
 		 WHERE QNA_NO = ?
 	</entry>
+	
+	<entry key="noticeSelectListCount">
+		SELECT
+		       COUNT(*) count
+		  FROM NOTICE
+		 WHERE NOTI_STATUS = 'Y'
+	</entry>
+	
+	<entry key="selectNoticeList">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                SELECT 
+		                       NOTI_NO
+		                     , NOTI_TITLE
+		                     , TO_CHAR(NOTI_DATE, 'YYYY/MM/DD') "NOTI_DATE"
+		                     , NOTI_CONTENT
+		                  FROM NOTICE
+		                 WHERE NOTI_STATUS = 'Y'
+		                 ORDER
+		                    BY NOTI_NO DESC
+		                ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
 </properties>
