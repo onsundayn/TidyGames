@@ -3,7 +3,7 @@
 <%
 	Game g = (Game)request.getAttribute("g");
 	Attachment3 at = (Attachment3)request.getAttribute("at");
-	ArrayList<Review> list = (ArrayList<Review>)request.getAttribute("list");
+	//ArrayList<Review> list = (ArrayList<Review>)request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html>
@@ -13,7 +13,7 @@
 <style>
     .outer{
         width: 1200px;
-        height:1000px;
+        height:auto;
         margin: auto;
     }
     .top-line{
@@ -174,41 +174,97 @@
      		<% } %>
         </div>
         <div class="buttom-area">
-        	<% if(list.isEmpty()) { %>
-        		<h3 align="center" style="color:white"> 아직 리뷰가 없습니다.</h3>
-        	<% }else{ %>
-        		<% for(Review r : list) { %>
-	            <div class="review-list">
-	                <div class="user-info">
-	                    <div id="profile-img">
-	                        <img src="<%=contextPath%>/<%=r.getMemPic()%>">
-	                    </div>
-	                    <div id="user-name">
-	                        <br>
-	                        <%=r.getMemNick()%>
-	                        <br><br>
-	                       <%=r.getUploadDate() %>
-	                    </div>
-	                </div>
-	                <div class="content">
-	                    <span id="user-star">★★★★★</span>
-	                    
-	                    <a href=""><i class="far fa-thumbs-up fa-2x" style="float:right;"></i></a>
-	                    <br>
-	                    <textarea name="" id="review-content" readonly>
-	                        <%=r.getContents()%>
-	                    </textarea>
-	                </div>
-	            </div>
-	            <% } %>
-	          <% } %>
+        		
+			    <div id="review-area">
+			    	<table>
+			    		<thead>
+			    			
+			    			<tr>
+			    				<th>리뷰작성</th>
+			    				<% if(loginUser != null) { //로그인 되어있을 경우%>
+			    				<td>
+			    					<textarea id="reviewContent" rows="3" cols="50" style="resize:none"></textarea>
+			    				</td>
+			    				<td><button onclick="insertReview();">리뷰등록</button></td>
+			    				<% }else { // 로그인 안되어있을 경우 %>
+			    				<td>
+			    					<textarea rows="3" cols="50" style="resize:none" readonly>로그인 후 이용 가능합니다.</textarea>
+			    				</td>
+			    				<td><button disabled>리뷰등록</button></td>
+			    				<% } %> 
+			    			</tr>
+			    			
+			    		</thead>
+			    		<tbody>
+			    		
+
+			    			
+			    		</tbody>
+			    	
+			    	</table>
+			    	
+			    	<br><br>
+			    	
+			    	<script>
+			    		$(function(){ //페이지로딩되고 곧바로 호출
+			    			
+			    			selectReviewList();
+			    		
+			    		})
+			    		// ajax로 댓글 작성용
+			    		function insertReview(){
+			    			
+			    			$.ajax({
+			    				url:"rinsert.ga",
+			    				data:{
+			    					contents:$("#reviewContent").val(),
+			    					gno:<%=g.getGameNo()%>
+			    				},
+			    				type:"post",
+			    				success:function(result){
+			    					if(result > 0){//댓글작성 성공 => 갱신된 댓글 리스트 조회
+			    						selectReviewList();
+			    					    $("#reviewContent").val("");
+			    					}
+			    				},error:function(){
+			    					console.log("댓글작성용 ajax 통신 실패")
+			    				}
+			    			})
+			    			
+			    		}
+			    		// ajax로 해당 게시글에 딸린 댓글 목록 조회용
+			    		function selectReviewList(){
+			    			$.ajax({
+			    				url:"rList.ga",
+			    				data:{gno:<%=g.getGameNo()%>},
+			    				success:function(list){
+			    					
+			    					//console.log(list);
+			    					
+			    					let result = "";
+			    					// 반복문이용해서
+			    					for(let i=0; i<list.length; i++){
+			    						result += "<tr>"
+									    			+ "<td>" + list[i].writer + "</td>"
+									    		 	+ "<td>" + list[i].contents + "</td>"
+									    			+ "<td>" + list[i].uploadDate + "</td>"
+									    		   + "</tr>";
+			    					}
+			    					
+			    					$("#review-area tbody").html(result);
+			    					
+			    				},error:function(){
+			    					console.log("댓글목록조회용 ajax 통신실패");
+			    				}
+			    			})
+			    		}
+			    	</script>
+			    	
+			    </div>
         </div>
-
-
-
     </div>
     
-    
+
 
 </body>
 </html>

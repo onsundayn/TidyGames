@@ -91,7 +91,7 @@ public class PostDao {
 								  rset.getString("post_name"),
 								  rset.getInt("post_view"),
 								  rset.getInt("post_like"),
-								  rset.getString("post_modify"),
+								  rset.getString("post_enroll"),
 								  rset.getString("post_notice")));
 			}	
 		} catch (SQLException e) {
@@ -127,30 +127,6 @@ public class PostDao {
 	}
 	
 	
-	
-	public Member confirmMember(Connection conn, String memId) {
-		Member m = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String sql = prop.getProperty("confirmMember");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, memId);
-			rset = pstmt.executeQuery();
-			if(rset.next()) {
-				m = new Member();
-				m.setMemAccess(rset.getString("mem_access"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		return m;
-	}
-	
 	/**
 	 * 글 상세 조회
 	 * @param conn
@@ -173,7 +149,7 @@ public class PostDao {
 				p.setMemNo(rset.getInt("post_writer"));
 				p.setPostName(rset.getString("post_name"));
 				p.setPostWriter(rset.getString("mem_nick"));
-				p.setPostModify(rset.getString("post_modify"));
+				p.setPostEnroll(rset.getString("post_enroll"));
 				p.setPostView(rset.getInt("post_view"));
 				p.setPostLike(rset.getInt("post_like"));
 				p.setPostContent(rset.getString("post_content"));
@@ -357,8 +333,274 @@ public class PostDao {
 		return result;
 	}
 	
-	
+	/**
+	 * 글 수정
+	 * @param conn
+	 * @param p
+	 * @return
+	 */
+	public int updatePost(Connection conn, Post p) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updatePost");
 		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, p.getPostName());
+			pstmt.setString(2, p.getPostContent());
+			pstmt.setInt(3, p.getPostNo());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	// ==================================================
+	
+	/**
+	 * 닉네임 검색 글 수 조회
+	 * @param conn
+	 * @param word
+	 * @return
+	 */
+	public int nicknamePostCount(Connection conn, String word) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("nicknamePostCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, word);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("count");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
+	/**
+	 * 그 외 검색 글 수 조회
+	 * @param conn
+	 * @param word
+	 * @return
+	 */
+	public int searchPostCount(Connection conn, String word) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("searchPostCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, word);
+			pstmt.setString(2, word);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt("count");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
+	
+	/**
+	 * 닉네임 검색
+	 * @param conn
+	 * @param pi
+	 * @param word
+	 * @return
+	 */
+	public ArrayList<Post> selectNicknamePost(Connection conn, PageInfo pi, String word) {
+		
+		ArrayList<Post> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectNicknamePost");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getViewLimit() + 1;
+			int endRow = startRow + pi.getViewLimit() - 1;
+			
+			pstmt.setString(1, word);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Post(rset.getInt("post_no"),
+								  rset.getString("mem_nick"),
+								  rset.getString("post_name"),
+								  rset.getInt("post_view"),
+								  rset.getInt("post_like"),
+								  rset.getString("post_enroll"),
+								  rset.getString("post_notice")));
+			}	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	/**
+	 * 최신순 검색 리스트
+	 * @param conn
+	 * @param pi
+	 * @param word
+	 * @return
+	 */
+	public ArrayList<Post> searchRecentPost(Connection conn, PageInfo pi, String word) {
+		
+		ArrayList<Post> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("searchRecentPost");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getViewLimit() + 1;
+			int endRow = startRow + pi.getViewLimit() - 1;
+			
+			pstmt.setString(1, word);
+			pstmt.setString(2, word);
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Post(rset.getInt("post_no"),
+								  rset.getString("mem_nick"),
+								  rset.getString("post_name"),
+								  rset.getInt("post_view"),
+								  rset.getInt("post_like"),
+								  rset.getString("post_enroll"),
+								  rset.getString("post_notice")));
+			}	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	
+	/**
+	 * 조회순 검색 리스트
+	 * @param conn
+	 * @param pi
+	 * @param word
+	 * @return
+	 */
+	public ArrayList<Post> searchViewPost(Connection conn, PageInfo pi, String word) {
+		
+		ArrayList<Post> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("searchViewPost");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getViewLimit() + 1;
+			int endRow = startRow + pi.getViewLimit() - 1;
+			
+			pstmt.setString(1, word);
+			pstmt.setString(2, word);
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Post(rset.getInt("post_no"),
+								  rset.getString("mem_nick"),
+								  rset.getString("post_name"),
+								  rset.getInt("post_view"),
+								  rset.getInt("post_like"),
+								  rset.getString("post_enroll"),
+								  rset.getString("post_notice")));
+			}	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
+	
+	/**
+	 * 추천순 검색 리스트
+	 * @param conn
+	 * @param pi
+	 * @param word
+	 * @return
+	 */
+	public ArrayList<Post> searchLikePost(Connection conn, PageInfo pi, String word) {
+		
+		ArrayList<Post> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("searchLikePost");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getViewLimit() + 1;
+			int endRow = startRow + pi.getViewLimit() - 1;
+			
+			pstmt.setString(1, word);
+			pstmt.setString(2, word);
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Post(rset.getInt("post_no"),
+								  rset.getString("mem_nick"),
+								  rset.getString("post_name"),
+								  rset.getInt("post_view"),
+								  rset.getInt("post_like"),
+								  rset.getString("post_enroll"),
+								  rset.getString("post_notice")));
+			}	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	
 	
 
 }

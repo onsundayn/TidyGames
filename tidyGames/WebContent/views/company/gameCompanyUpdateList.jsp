@@ -63,8 +63,9 @@
                 <th>업데이트</th>
             </tr>
             <% for(Game g : list) { %>
+<
             <tr>
-                <td>1<%++%></td>
+                <td>1</td>
                 <td><%=g.getKorName()%>(<%=g.getEngName()%>)</td>
                 <td><%=g.getPrice()%></td>
                 <td><%=g.getUploadDate()%></td>
@@ -83,6 +84,7 @@
                	<% } %>
             </tr>
             <% } %>
+
       
 
         </table>

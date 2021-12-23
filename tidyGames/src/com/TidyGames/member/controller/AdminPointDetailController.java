@@ -37,17 +37,16 @@ public class AdminPointDetailController extends HttpServlet {
 		
 		int memNo = Integer.parseInt(request.getParameter("mNo"));
 		
-		System.out.println(memNo);
+		
 		ArrayList<Point> point = new PointService().selectPoint(memNo);  
 		
 		request.setAttribute("point", point);
-		System.out.println(point);
+	
 	
 		Point sum = new PointService().sumPoint(memNo);
 		
 		request.setAttribute("sum", sum);
-		
-		System.out.println(sum);
+	
 		request.getRequestDispatcher("views/member/adminPointDetailView.jsp").forward(request, response);
 	
 	}

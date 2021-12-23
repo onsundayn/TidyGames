@@ -35,7 +35,7 @@ public class AdminCompanyUpdateFormController extends HttpServlet {
 		
 		Company c = new AdminCompanyService().selectCompanyDetail(companyNo);
 		
-		request.setAttribute("c", c);
+		request.setAttribute("comp", c);
 		
 		request.getRequestDispatcher("views/company/adminCompanyUpdateForm.jsp").forward(request,response);
 		

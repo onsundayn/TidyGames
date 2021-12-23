@@ -38,8 +38,6 @@ public class AdminOrderDetailController extends HttpServlet {
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
 		int orderNo = Integer.parseInt(request.getParameter("ono"));
 		
-		System.out.println(memNo);
-		System.out.println(orderNo);
 		ArrayList<PayGame> order = new PayService().rforderList(memNo, orderNo);  
 		
 		request.setAttribute("order", order);
