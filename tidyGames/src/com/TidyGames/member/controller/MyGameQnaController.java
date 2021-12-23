@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class adminMemberDetailSelectController
+ * Servlet implementation class myGQnaListController
  */
-@WebServlet("/memberSelect.me")
-public class AdminMemberDetailSelectController extends HttpServlet {
+@WebServlet("/mygQna.me")
+public class MyGameQnaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminMemberDetailSelectController() {
+    public MyGameQnaController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +26,8 @@ public class AdminMemberDetailSelectController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		request.getRequestDispatcher("views/member/adminMemberDetailSelect.jsp").forward(request, response);
+		
+		request.getRequestDispatcher("views/member/myGameQna.jsp").forward(request, response);
 	}
 
 	/**

@@ -46,6 +46,16 @@ public class Notice {
 		this.date = date;
 	}	
 
+	
+	public Notice(int notiNo, String notiTitle, String notiContent, Date notiDate, String answer) {
+		super();
+		this.notiNo = notiNo;
+		this.notiTitle = notiTitle;
+		this.notiContent = notiContent;
+		this.notiDate = notiDate;
+		this.answer = answer;
+	}
+
 	public Notice(int notiNo, String notiTitle, String notiContent, String notiWriter, Date notiDate, int memNo,
 			String answer, Date ansDate) {
 		super();

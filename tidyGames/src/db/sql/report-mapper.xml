@@ -11,7 +11,7 @@
 		 SELECT *
 		   FROM
 				(SELECT 
-				       ROWNUM, B.*
+				       ROWNUM RNUM, B.*
 				  FROM
 					   (SELECT 
 					   		   MEM_NO
@@ -27,7 +27,7 @@
 					     ORDER BY BLOCK_DATE) B
 				 ORDER 
 				    BY ROWNUM DESC)
-		  WHERE ROWNUM BETWEEN ? AND ?
+		  WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	<entry key="unblock">
 		UPDATE 
@@ -74,7 +74,7 @@
 	<entry key="selectReportList">
 		SELECT *
 		  FROM
-		        (SELECT ROWNUM, A.*
+		        (SELECT ROWNUM RNUM, A.*
 		           FROM
 		                (SELECT 
 		                       REPORT_NO
@@ -97,7 +97,7 @@
 		                ORDER
 		                   BY REPORT_NO DESC) A
 		                   )
-		         WHERE ROWNUM BETWEEN ? AND ?
+		         WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	<entry key="reportAtCommunity">
 		INSERT 

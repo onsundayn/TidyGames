@@ -1,6 +1,7 @@
 package com.TidyGames.member.model.dao;
 
-import static com.TidyGames.common.JDBCTemplate.*;
+import static com.TidyGames.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -9,10 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
-import java.io.UnsupportedEncodingException;
-import java.util.Date;
 
-import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -21,11 +19,10 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpSession;
 
 import com.TidyGames.common.model.vo.PageInfo;
 import com.TidyGames.member.model.vo.Member;
-import com.TidyGames.member.model.vo.WishList;
+import com.TidyGames.notice.model.vo.Notice;
 
 public class MemberDao {
 
@@ -640,4 +637,68 @@ public class MemberDao {
 		
 	}
 	
+	public ArrayList<Notice> myQnaList(Connection conn, int memNo, PageInfo pi) {
+		
+		ArrayList<Notice> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("myQna");
+		
+		int startRow = (pi.getCurrentPage() - 1) * (pi.getViewLimit()) + 1;
+		int endRow = startRow + pi.getViewLimit() - 1;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Notice(
+									rset.getInt("qna_no")
+						          , rset.getString("qna_title")
+						          , rset.getString("qna_content")
+						          , rset.getDate("report_date")
+						          , rset.getString("ans_content")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	
+	public int qnaListCount(Connection conn, int memNo) {
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("qnaListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt("COUNT");
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+		
+	}
 }
