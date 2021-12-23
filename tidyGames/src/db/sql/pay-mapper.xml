@@ -82,11 +82,23 @@
 			WHERE MEM_NO = ?
 			
 	
+	</entry>
 	
+	<entry key="adOrderList">
 	
-	
+			SELECT
+			          ORDER_NO
+			        , MEM_NO
+			        , PAY_AMOUNT
+			        , PAY_STATUS
+			        , TO_CHAR(PAY_DATE, 'YYYY-MM-DD') "PAY_DATE"
+					, MEM_ID
+			FROM PAY P
+            JOIN MEMBER USING(MEM_NO)
+		
 	
 	</entry>
+
 	
 	<entry key = "rfOrderList">
 			SELECT
@@ -130,9 +142,21 @@
 	
 	</entry>
 	
+	
+	<entry key="memInfo">
+	  SELECT
+              MEM_ID
+            , MEM_NICK
+            , MEM_EMAIL
+        FROM MEMBER
+       WHERE MEM_NO = ?
+	
+	
+	</entry>
 	<entry key="adRefundList">
 		SELECT
 			  REFUND_NO
+			 , PAY.MEM_NO
 			 , ORDER_NO
 			 , REFUND
 			 , ADD_WRITING
@@ -147,8 +171,34 @@
 		
 	</entry>
 	
+	<entry key="refundContent">
+			  SELECT
+         			 REFUND
+        		   , ADD_WRITING
+			     FROM REFUND
+			    WHERE MEM_NO = ?
+			      AND ORDER_NO = ? 
+	
+	
+	
+	</entry>
+	
+	<entry key="refundUpdate">
+		 UPDATE REFUND
+      SET REFUND_STATUS = 'Y'
+	
+	</entry>
+	
+	<entry key="refundUpdate2">
+		UPDATE PAY
+		   SET PAY_STATUS = '환불완료'
+	</entry>
+	
+	
+	
+	
 	<entry key="enrollRefund">
- INSERT
+ 		INSERT
 		INTO REFUND
 		(
 		   REFUND_NO
@@ -175,7 +225,110 @@
 	</entry>
 	
 	
+	<entry key="insertPay">
 	
+	INSERT 
+	  INTO PAY
+			(ORDER_NO
+			, MEM_NO
+			, PAY_AMOUNT
+			, PAY_STATUS
+			, PAY_DATE
+			, PAY_METHOD
+			)
+	VALUES
+			(
+			    SEQ_ORDER_NO.nextval
+			 , ?
+			 , ?
+			 , '결제완료'
+			 , SYSDATE
+			 , ?
+			 )
+ 
+	
+	
+	
+	</entry>
+	
+	<entry key="selectSeq">
+		select seq_order_no.currval
+	 	from dual
+	</entry>
+	
+	<entry key="insertPayGame">
+		 INSERT
+		    INTO PAY_GAME
+				 (
+				  ORDER_NO
+				, GAME_NO
+				    )
+		VALUES 
+				(
+				 SEQ_ORDER_NO.CURRVAL
+				,?
+				)
+					
+	
+	</entry>
+	
+	<entry key="usePoint">
+		INSERT
+		  INTO POINT
+				(
+				  MEM_NO
+				 , POINT_AMOUNT
+				 , POINT_DATE
+				 , POINT_CONTENT
+				 , ORDER_NO
+				 )
+				 VALUES
+				 ( 
+				   ?
+				 , ? * -1
+				 , SYSDATE
+				 , '결제시사용'
+				 , SEQ_ORDER_NO.CURRVAL
+				 )
+ 
+	
+	
+	
+	</entry>
+	
+	<entry key="savePoint">
+			 INSERT
+               INTO POINT
+					(
+					   MEM_NO
+					 , POINT_AMOUNT
+					 , POINT_DATE
+					 , POINT_CONTENT
+					 , ORDER_NO
+					 )
+ 			  VALUES
+					 ( 
+					   ?
+					 , ?
+					 , SYSDATE
+					 , '결제적립'
+					 , SEQ_ORDER_NO.CURRVAL
+					 )
+	
+	
+	
+	</entry>
+	
+	
+	<entry key ="deleteAllCart">
+		DELETE 
+		  FROM CART 
+		 WHERE MEM_NO = ?
+	
+	
+	
+	
+	</entry>
 	
 	
 

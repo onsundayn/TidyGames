@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"  import ="java.util.ArrayList, com.TidyGames.pay.model.vo.*"%>
+    
+ <%
+ ArrayList<Pay> list = (ArrayList<Pay>)request.getAttribute("list");
+ 
+ %>   
+    
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -177,9 +184,8 @@
                 <table class="table table-hover" id="ordercontent">
                     <thead>
                       <tr style="background: white; color: black;">
-                        <th>번호</th>
+                        
                         <th>주문번호</th>
-                        <th>게임명</th>
                         <th>회원ID</th>
                         <th>결제일</th>
                         <th>결제금액</th>
@@ -188,45 +194,27 @@
                       </tr>
                     </thead>
                     <tbody>
+                    
+                    <%for(Pay al : list){%>
                       <tr>
-                        <td>1</td>
-                        <td>10000000</td>
-                        <td>Battlefields</td>
-                        <td>user01</td>
-                        <td>2021-11-10</td>
-                        <td>27500원</td>
-                        <td>환불완료</td>
-                        <td><a href="<%= request.getContextPath() %>/adOrderDetail.pa" class="btn btn-success btn-sm">상세보기</a></td>
+                    
+                        <td><%=al.getOrderNo() %></td>
+                       
+                        <td><%=al.getMemId() %></td>
+                        <td><%=al.getPayDate() %></td>
+                        <td><%=al.getPayAmount() %>원</td>
+                        <td><%=al.getPayStatus() %></td>
+                        <td><a href="<%= request.getContextPath() %>/adOrderDetail.pa?ono=<%=al.getOrderNo()%>&memNo=<%=al.getMemNo()%>" class="btn btn-success btn-sm">상세보기</a></td>
                       </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>10000000</td>
-                        <td>Battlefields</td>
-                        <td>user01</td>
-                        <td>2021-11-10</td>
-                        <td>27500원</td>
-                        <td>결제완료</td>
-                        <td><button class="btn btn-success btn-sm">상세보기</button></td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>10000000</td>
-                        <td>Battlefields</td>
-                        <td>user01</td>
-                        <td>2021-11-10</td>
-                        <td>27500원</td>
-                        <td>환불완료</td>
-                        <td> <div><a href="<%= request.getContextPath() %>/orderDetail.pa" class="btn btn-secondary butt">상세보기</a></div></td>
-                        
-                      </tr>
-
+                      
+                     <%  } %>
                       <tr><td></td>
+                   
                       <td></td>
                       <td></td>
                       <td></td>
                       <td></td>
-                      <td></td>
-                      <td></td>
+                     
                       <td></td></tr>
                     </tbody>
                   </table>

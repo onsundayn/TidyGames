@@ -67,8 +67,20 @@ public class PointService {
 		
 		return sum;
 		
-		
-		
+	
+	}
+	
+	public ArrayList<Point> adPointList() {
+		Connection conn = getConnection();
+
+		ArrayList<Point> list = new PointDao().adPointList(conn);
+
+		close(conn);
+
+		return list;
 		
 	}
+	
+	
+	
 }

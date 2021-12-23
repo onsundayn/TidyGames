@@ -4,7 +4,7 @@
 
 <%
 	ArrayList<Cart> cart = (ArrayList<Cart>) request.getAttribute("cart");
-Point sum = (Point) request.getAttribute("sum");
+	Point sum = (Point) request.getAttribute("sum");
 %>
 <!DOCTYPE html>
 <html>
@@ -184,7 +184,7 @@ tbody {
 	</div>
 
 
-	<form action="" method="post">
+	<form action="<%=contextPath%>/pay.pa" method="post">
 		<div class="container">
 			<span style="color: white; font-size: 25px; font-weight: bold;">구매/결제</span>
 			<span style="color: grey; font-size: 18px;"> >결제완료</span> <br> <br>
@@ -209,6 +209,8 @@ tbody {
 						for (Cart c : cart) {
 					%>
 					<tr>
+					<input type="hidden" name="gameNo" value="<%=c.getGameNo()%>">
+					
 						<td height="120px" style="text-align: right;"><img
 							src="<%=contextPath%>/<%=c.getGameImg()%>" Width="130px"
 							height="90px"></td>
@@ -258,15 +260,22 @@ tbody {
 					<div class="area1">&nbsp;TIDY POINT</div>
 					<div class="area1">
 						<span style="font-size: 15px; text-align: center; color: grey;">&nbsp;
-							보유 POINT</span>___________ <span style="text-align: right;" id="pointsum"><%=sum.getSum()%></span>&nbsp;POINT
+							보유 POINT</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div style="text-align: right; display: inline-block; width: 100px;" id="pointsum"><%=sum.getSum()%></div>&nbsp;<span style="float: right;"></span>POINT
 						<div>
 							<!-- <button class="use_btn">전액사용</button> -->
 						</div>
 					</div>
 					<div class="area1">
+					
 						<span style="font-size: 15px; text-align: center; color: grey;">&nbsp;
-							사용할 POINT</span> <span style="text-align: right;"><input
-							type="text" name="usePoint" id="usePoint"></span>&nbsp;POINT
+							사용할 POINT</span> 
+					   <%if(sum.getSum()> 0){ %>
+							<span style="text-align: right;">
+							<input type="text" name="usePoint" id="usePoint" style="text-aglign:right;">
+							</span>&nbsp;POINT
+						<%} else {%>
+							<input type="text" name="usePoint" id="usePoint" disabled>&nbsp;POINT
+						<% } %>	
 					</div>
 				</div>
 
@@ -274,23 +283,23 @@ tbody {
 				<div id="left-down">
 					<h3>결제수단</h3>
 					<div class="area2">
-						<input type="radio" name="payment" value="credit"> <img
+						<input type="radio" name="payment" value="Credit" checked> <img
 							src="<%=contextPath%>/resources/image/creditcard.png"
 							width="50px" height="40px"> Credit Card
 					</div>
 					<div class="area2">
-						<input type="radio" name="payment" value="kakaopay"> <img
+						<input type="radio" name="payment" value="KAKAOPAY"> <img
 							src="<%=contextPath%>/resources/image/kakao.png" width="70px"
 							height="40px"> KaokoPay
 					</div>
 					<div class="area2">
-						<input type="radio" name="payment" value="naverpay">&nbsp;
+						<input type="radio" name="payment" value="NAVERPAY">&nbsp;
 						<img src="<%=contextPath%>/resources/image/naverpay.png"
 							width="50px" height="30px"> &nbsp;&nbsp;NaverPay
 
 					</div>
 					<div class="area2">
-						<input type="radio" name="payment" value="toss">&nbsp;&nbsp;
+						<input type="radio" name="payment" value="TOSS">&nbsp;&nbsp;
 						<img src="<%=contextPath%>/resources/image/toss.png" width="50px"
 							height="30px"> &nbsp;Toss
 					</div>
@@ -303,7 +312,16 @@ tbody {
 				<div class="area3">
 					<span style="font-size: 15px; text-align: center; color: grey;">&nbsp;
 						상품금액</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<div style="text-align: right; display: inline-block; width: 80px;"><%=total%>
+
+					<%
+						int totalprice = 0;
+					for (int i = 0; i < cart.size(); i++) {
+						totalprice += cart.get(i).getPrice();
+					}
+					%>
+
+
+					<div style="text-align: right; display: inline-block; width: 80px;"><%=totalprice%>
 					</div>&nbsp;원
 					&nbsp;
 				</div>
@@ -319,6 +337,8 @@ tbody {
 							}
 							%>
 						<%=discount%>
+						
+			
 					</div>&nbsp;원
 					&nbsp;
 
@@ -334,28 +354,33 @@ tbody {
 						최종결제금액</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<div style="text-align: right; display: inline-block; width: 80px;" id="finalpay"><%=total%></div>
 					&nbsp;원
+					<input type="hidden" name="total" value="<%=total%>">
 				</div>
 				<div class="area4">
 					<span style="font-size: 15px; text-align: center; color: grey;">&nbsp;
 						적립 TIDY POINT(5%)</span><br>
-					<div style="text-align: right; "><%=Math.round(total * 0.05)%>&nbsp;POINT
+						
+						
+					<div style="text-align: right;" ><%=Math.round(total * 0.05)%>&nbsp;POINT
 					</div>
 					&nbsp;
+					
+					<input type="hidden" name="savePoint" value="<%=Math.round(total* 0.05)%>">
 
 				</div>
 				<br> <br>
 
 				<div class="area5">
 					<p id="check">
-						<input type="checkbox" value="">&nbsp;구매하실 상품의 상품정보 및 가격을
+						<input type="checkbox" checked>&nbsp;구매하실 상품의 상품정보 및 가격을
 						확인하였으며, <br> 이에 동의합니다(전자상거래법 제 8조 제 2항)
 					</p>
 					<p id="check">
-						<input type="checkbox" value="">&nbsp;상품 구매시 환불요청은 결제완료 후
+						<input type="checkbox" checked>&nbsp;상품 구매시 환불요청은 결제완료 후
 						2일간 가능하며, <br>포인트는 환불승인이되면 반환됩니다.
 					</p>
 					<p id="check">
-						<input type="checkbox" value="">&nbsp;TIDY GAMES의 약관에
+						<input type="checkbox" checked>&nbsp;TIDY GAMES의 약관에
 						동의합니다.
 					</p>
 				</div>
@@ -372,9 +397,8 @@ tbody {
 		</div>
 
 		<div class="area6">
-			<a href="#" class="btn btn-primary"><i
-				class="fa fa-shopping-cart"></i> 결제하기</a> <a href="#"
-				class="btn btn btn-secondary"> 장바구니로</a>
+			<button type="submit" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> 결제하기</button> 
+			<a href="<%=request.getContextPath()%>/cart.pa" class="btn btn btn-secondary"> 장바구니로</a>
 		</div>
 	</form>
 
@@ -405,7 +429,7 @@ tbody {
 			
 			$("#usePoint").keyup(function(){
 			const tmp = $("#usePoint").val();
-			
+			//보유포인트-사용포인트
 			$("#pointsum").html(<%=sum.getSum()%>-tmp)
 			
 
@@ -422,7 +446,8 @@ tbody {
 			$("#usePoint").keyup(function(){
 			const tmp = $("#usePoint").val();
 			
-			$("#finalpay").html(<%=total%>-<%=discount%>-tmp)
+			//게임총가격 -할인가격 -사용포인트
+			$("#finalpay").html(<%=totalprice%>-<%=discount%>-tmp) // 최종금액으로 전달
 			
 
 			})

@@ -8,23 +8,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.TidyGames.member.model.vo.Member;
 import com.TidyGames.pay.model.service.PayService;
-import com.TidyGames.pay.model.vo.Pay;
-import com.TidyGames.pay.model.vo.PayGame;
+import com.TidyGames.pay.model.vo.Cart;
 
 /**
- * Servlet implementation class AdminOrderDetailController
+ * Servlet implementation class PayController
  */
-@WebServlet("/adOrderDetail.pa")
-public class AdminOrderDetailController extends HttpServlet {
+@WebServlet("/pay.pa")
+public class PayController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminOrderDetailController() {
+    public PayController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,25 +35,36 @@ public class AdminOrderDetailController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("UTF-8");
-		int memNo = Integer.parseInt(request.getParameter("memNo"));
-		int orderNo = Integer.parseInt(request.getParameter("ono"));
 		
-		System.out.println(memNo);
-		System.out.println(orderNo);
-		ArrayList<PayGame> order = new PayService().rforderList(memNo, orderNo);  
+		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
+		int payAmount = Integer.parseInt(request.getParameter("total"));
+		String payMethod = request.getParameter("payment");
+		String usePoint = request.getParameter("usePoint");
+		int savePoint = Integer.parseInt(request.getParameter("savePoint"));
+		int totalPrice = payAmount-Integer.parseInt(usePoint);
+		String[] gameNo = request.getParameterValues("gameNo");
+	
 		
-		request.setAttribute("order", order);
+		int result = new PayService().insertPay(memNo, totalPrice, payMethod, gameNo, usePoint, savePoint);
 		
-		Pay pi = new PayService().payInfo(memNo, orderNo);
 		
-		request.setAttribute("pi", pi);
+		if(result > 0) {
 		
-		Member mi = new PayService().memInfo(memNo);
+			request.getSession().setAttribute("alertMsg", "결제가 성공적으로 완료되었습니다.");
+			response.sendRedirect(request.getContextPath() + "/orderHistory.pa");
+			
+			
+		}else {
+			
+			//pay테이블에 insert 실패
+		}
 		
-		request.setAttribute("mi", mi);
 		
-		request.getRequestDispatcher("views/pay/adminOrderHistoryDetailView.jsp").forward(request, response);
+		
+		
+		
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

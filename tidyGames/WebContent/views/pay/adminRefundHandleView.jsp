@@ -1,62 +1,98 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import ="java.util.ArrayList, com.TidyGames.pay.model.vo.*"%>
+    
+ <%
+	ArrayList<PayGame> order = (ArrayList<PayGame>)request.getAttribute("order");
+ 	Pay pi = (Pay)request.getAttribute("pi");
+ 	Refund re = (Refund)request.getAttribute("re");
+ %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+     /* 화면전체 div */
      #outer{
         width:1500px;
+        height: 1500px;
         margin:auto;
+        border: 2px solid orange;
     }
     #outer>div{
         float:left;
     } 
-    #line_1{
-        width:100%;
-        height:2px;
-        background: rgba(255, 255, 255, 0.555);
+
+    #line1{
+        width:1000px;
+        height:3px;
+        background: white
+    
     }
-    /* 닉네임 포인트내역 글 영역*/
-    .area0{
+
+    #text{
         width: 1000px;
         height: 100px;
-        border: 3px solid blue;
-        font-weight: bold;
-        color: white;
-        margin-top: 50px;
-        margin-left: 100px;
+        margin: auto;
     }
 
-
-    /* 주문내역 게임 1개 영역 */
-    .area1{
-        width: 500px;
-        height: 350px;
-        border: 1px solid violet;
-        margin-left : 100px;
-        display:inline-block;
-        
-    }
+   /* 전체 div */
+.container {
+	width: 1000px;
+	border: 1px solid red;
+	
     
-    .area2{
-        width: 500px;
-        height: 350px;
-        border: 1px solid violet;
+    
+}
+
+#line1 {
+	width: 1000px;
+	height: 2px;
+	background: rgba(255, 255, 255, 0.555);
+}
+/* 테이블영역 */
+.tablecontent{
+    width: 1010px;
+    border: 1px solid blue;
+    margin-left:110px;
+}
+/* 테이블 제목단 */
+.table tr {
+	color: white;
+    text-align: center;
+}
+/* 테이블 제목 */
+thead {
+	text-align: center;
+}
+
+/* 테이블 내용 */
+.table-striped>tbody>tr>td {background-color: #0e1f1c;}
+
+
+tbody>tr>td>span {
+	
+	font-size: 18px;
+    text-align: center;
+   
+}
+/* 환불영역 */
+.area2{
+        width: 1000px;
+        height: 320px;
+        border: 1px solid rgb(166, 202, 66);
         float: right;
-        margin-right: 50px;
+        margin-right: 180px;
        
     }
-
     .resonse{
-        width: 500px;
-        height: 280px;
-        background: black;
+        width: 1000px;
+        height: 320px;
+        background: rgba(0, 0, 0, 0.445);
     }
 
-     /* 환불사유select */
-     #why{
+    /* 환불사유select */
+    #why{
         border-radius: 3px;
         border: 1px solid white;
         background: rgb(227, 220, 210);
@@ -64,21 +100,36 @@
         height: 30px;
         width: 400px;
         text-align: center;
-        margin-left: 50px;
-        margin-top: 20px;
+        margin-left: 20px;
         font-weight: bold;
+    }
+
+    .why{
+       display: inline-block;
+        width: 450px;
+        height: 230px;
+        margin-left: 70px;
+       
+       
+
+
     }
     /* 추가글영역 */
     #add{
-        width: 400px;
-        height: 190px;
-        margin-left: 50px;
+        float: right;
+        width: 420px;
+        height: 230px;
+        margin-right: 50px;
         background: rgb(227, 220, 210);
         border-radius: 6px;
+        display: inline-block;
+        border: 1px solid blue;
+        margin-top: 40px;
+       
     }
     /* 추가글작성 */
     #addtext{
-        width: 350px;
+        width: 360px;
         height:120px;
         background: rgb(227, 220, 210);
         margin-left: 25px;
@@ -86,12 +137,13 @@
 
     }
 
-       /* 환불정보 */
-       .area3{
+    /* 환불정보 */
+    .area3{
+        border: 1px solid violet;
         width: 1000px;
         height: 400px;
-        border: 1px solid violet;
-        margin-left: 100px;
+        margin-top:20px;
+        margin-left: 110px;
     }
 
     /* 버튼 */
@@ -99,13 +151,20 @@
         width: 1000px;
         height: 100px;
         border: 1px solid violet;
-        margin-left: 310px;
+        margin-left: 320px;
         text-align: center;
-
+       
     }
 
-    #refundList{
-        color:orange;
+    .radio {
+	background: rgb(227, 220, 210);
+	width: 300px;
+	height: 40px;
+	margin: auto;
+	margin-top: 10px;
+	padding: 10px;
+	font-weight: bold;
+    font-size: 14px;
     }
 
 </style>
@@ -119,148 +178,179 @@
             <%@ include file="../common/adminSidebar.jsp" %>
         </div>
 
-        <div class="area0">
-            <span style="color: grey; font-size: 18px;"> 환불요청목록 </span>
-            <span style="color:white; font-size: 25px; font-weight: bold;"> >환불처리</span>
-            <div style="background: grey; width: 1000px; height: 2px;"></div>
-        </div>
-        <br><br><br>
-        
-    
-        
+        <div class="container" style="margin-left: 100px;">
+            <span style="color: grey; font-size: 18px;">주문내역</span>
+            <span style="color: white; font-size: 25px; font-weight: bold;"> >환불신청</span><br><br><br>
+            <div id="line1"></div>
+            <br>
+
+            <h4 style="color: white; font-size: 19px;">주문내역</h4>
+        </div>   
+
+
+        <div class="tablecontent">
+        <table class="table table-striped">
+            <thead>
+                
+                <tr>
+                    <th width="200px"></th>
+                    <th width="300px">게임명</th>
+                    <th>게임가격</th>
+                    <th>할인가격</th>
+                    <th>결제금액</th>
+                </tr>
+            </thead>
             
-            <div class="area1">
-                <div>
-                    
-                        <table class="table table-borderless" style="color:white; border:1px solid grey; background:rgb(20, 20, 20)">
-                            <thead>
-                                <tr>
-                                <th colspan="4" width="450px" style="font-size: 25px; font-weight: bold;">BattleGround</th>
-                                
-                                </tr>
+            
+            <tbody>
+
+          	 <%for(PayGame p : order){ %>
+                     
+                <tr>
+                    <td height="120px" style="text-align: right;">
+                         <img src="<%=contextPath%>/<%=p.getGameImg()%>" Width="130px" height="90px"></td>
+                    <td>
+                        <span>     
+                          <%=p.getKorName() %> <br>
+                  		  <%=p.getEngName() %> 
+                         </span>
+                          
+                            
+                    </td>
+                    <td><span><%=p.getPrice() %></span>원 </td>
+                    <td style="color: red;">
+                           <span>-<%=p.getPrice()-p.getDiscountPrice()%></span>원
+                        </td>
+                    <td><span><%=p.getDiscountPrice() %> </span>원</td>
+                </tr>
+                      	<%} %>
+				
+
+                <tr>
+                    <td style="text-align:left"><span style="font-size: 14px;">주문번호 :<%=pi.getOrderNo()%> </span><br>
+                        <span style="font-size: 14px;">주문날짜 : <%=pi.getPayDate() %> </span>
+                    </td>
+                    <td colspan="4" style="text-align: right; height: 70px;">
+                          <span> 총 금액 :  	<%
+                          				int total = 0;
+                          				for(int i=0; i<order.size(); i++) {
+                          					total += order.get(i).getDiscountPrice();	
+                          				}
+                          
+                          				%>
+                          				<%=total %>
+                                        	
+                                  
+                        </h2>원</span> 
+                        </td>
+                </tr>
+
+
+            </tbody>
+        </table>
+        <br> <br> <br>
+
+     </div>
+    
+     <div class="area2" style="float: right;">
         
-                            
-                            </thead>
-                            <tbody >
-                                <tr>
-                                    <th colspan="5"><div style="width:400px; height: 2px; background: grey;"></div></th>
-                                
-                                </tr>
+          
+             <div class="resonse">
+            
 
-                                <tr>
-                                    
-                                    <td width="200px" height="160px" style="text-align: center;">
-
-                                        <img src="<%=contextPath%>/resources/image/battlefield.JPG" width="120px" height="150px">
-                                    </td> 
-                                    <td width ="300" style="font-weight: bold;">
-                                        <div><br></div>
-                                        <div>결제금액 :  <span>10000</span></div><br>
-                                        <div>주문날짜 : <span>2021-12-09</span></div><br>
-                                        <div>결제금액 : <span>27500</span></div><br>
-                                        
-
-                                    </td>
-                                    <td></td></tid>
-                                
-                                    <td width = "50px"></td>
-                                </tr>
-                        
-                            </tbody>
-                        </table>
-                </div>
-
-            </div>
-
-            <div class="area2">
-                <div class="resonse">
-                    <form action="">
-                
-                        <select name ="why" id="why">
-                            <option selected >환불사유</option>
-                            <option value="releaseDate" >예상하던게임과다름</option>
-                            <option value="gameName">게임플레이 및 기술적인문제</option>
-                            <option vlaue="eventGame">실수로 구매함</option>
-                            <option value="priceAsc">재미없음</option>
-                            <option value="priceDesc">기타</option>
-                
-                        </select>
-                        <br><br>
-                        <div id="add">
-                            
-                            <div style="font-weight:bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;추가글</div>
-                            <div style="width: 350px; height:2px; background: grey; margin:auto;"></div>
-                            <textarea id="addtext" name="addtext"></textarea>
-
+                <div class="why">
+                         <div class="radio" style="font-size: 18px; font-weight:bold;margin-top: 40px;">환불사유</div>
+                        <div class="radio" style="height: 180px;">
+                            <%=re.getRefund() %>
                         </div>
-        
-                    </form>
+                       
                     
                 </div>
 
                 
+                <div id="add" >
+                    <br>
+                    <div style="font-weight:bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;추가글</div><br>
+                    
+                    <div id="addtext" name="addtext" style="border:1px solid grey; border-width: 4px;">
+						<%=re.getAddWriting() %>
+					</div>
+               
+               
+                </div>
+
+           
+            
             </div>
 
+       
+
+    </div>
 
 
-
-
-
-
-
-            <div class="area3">
-                <div class="container" style="color: white;">
-                    <h2>환불정보</h2>
-                
-                    <table class="table"style="color: white;">
-                      
-                        <tr>
-                          <th>주문금액</th>
-                          <td>결제금액</td>
-                          <th>61,000원</th>
-                        </tr>
-                      
-                      <tbody>
-                        <tr>
-                          <td></td>
-                          <td>할인금액</td>
-                          <th style="color:red;">-35000원</th>
-                        </tr>
-                        <tr>
-                            <td></td>
-                          <td>사용한POINT</td>
-                          <th style="color:red;">-3000POINT</th>
-                         
-                        </tr>
-                        <tr>
-                            <td></td>
-                          <td>환불예정금액</td>
-                          <th>27500원</th>
-                         
-                        </tr>
-                        <tr>
-                          <td>결제방법</td>
-                          <td></td>
-                          <th>KAKAOPAY</th>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-
-            </div>
-
-            <div class="area4">
-                <a href="#" class="btn btn-dark"><i class="fa fa-shopping-cart"></i>환불승인</a>
-                <a href="#" class="btn btn-danger">환불불가</a>
-            </div>
-
-
-
-
-
+    <div class="area3" style="float: right; margin-right: 180px;">
+        <h2 style="color: white;">환불정보</h2>
+            
+        <table class="table"style="color: white;">
+          
+            <tr>
+              <th>주문금액</th>
+              <td>결제금액</td>
+              <th><%=pi.getPayAmount() %>원</th>
+            </tr>
+          
+          <tbody>
+            <tr>
+              <td></td>
+              <td>할인금액</td>
+              <th>-
+                   <%
+							int totaldiscount = 0;
+                          for (int i = 0; i < order.size(); i++){ 
+                         		totaldiscount += (order.get(i).getPrice() - order.get(i).getDiscountPrice());
+							}
+							%>
+						<%=totaldiscount%> 원 
+                   
+              
+              </th>
+            </tr>
+            <tr>
+                <td></td>
+              <td>사용한POINT</td>
+              <th><%=pi.getPointAmount()%>POINT</th>
+             
+            </tr>
+            <tr>
+                <td></td>
+              <td>환불예정금액</td>
+              <th style="color:red;">	
+			<%=total+pi.getPointAmount()%> 원
+              </th>
+             
+            </tr>
+            <tr>
+              <td>결제방법</td>
+              <td></td>
+              <th><%=pi.getPayMethod() %></th>
+            </tr>
+          </tbody>
+        </table>
+       
 
 
     </div>
+
+    
+    <div class="area4">
+        <a href="" class="btn btn-dark"><i class="fa fa-shopping-cart"></i> 취소</a>
+        <a href="<%=request.getContextPath()%>/reupdate.pa" class="btn btn-danger">환불신청하기</a>
+    </div>
+
+
+
+</div>
+
 
 </body>
 </html>

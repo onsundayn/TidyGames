@@ -268,11 +268,11 @@ body {
                         							
                         			
                                                         <td width="65">
-                                                            <input type="text" class="form-control" placeholder="1" style="background: none;">
+                                                            <input type="text" class="form-control" placeholder="1" style="background: none;" disabled>
                                                         </td>
                                                         
                                                         <td>
-                                                            <h4 style="color:white; font-size:19px" >
+                                                            <h4 style="color:white; font-size:19px; width:80px" >
                                                             
                                                                 <span> <%=c.getDiscountPrice() %>원</span>
                                                              

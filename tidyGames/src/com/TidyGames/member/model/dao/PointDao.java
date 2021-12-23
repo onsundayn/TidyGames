@@ -181,8 +181,7 @@ public class PointDao {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				sum = new Point(rset.getInt("mem_no"),
-							  rset.getInt("sum"));
+				sum = new Point(rset.getInt("sum"));
 						
 			}
 			
@@ -197,5 +196,39 @@ public class PointDao {
 		return sum;
 		
 	}
+	
+	
+	public ArrayList<Point> adPointList(Connection conn) {
+		
+
+		ArrayList<Point> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adPointList");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				list.add(new Point(rset.getInt("mem_no"),
+								   rset.getString("mem_id"),
+								   rset.getInt("sum")));
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
+		
+	}
+	
+	
 
 }

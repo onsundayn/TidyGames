@@ -181,7 +181,7 @@ ArrayList<Refund> list = (ArrayList<Refund>)request.getAttribute("list");
                 <table class="table table-hover" id="ordercontent">
                     <thead>
                       <tr style="background: white; color: black;">
-                        <th>번호</th>
+                        <th>환불번호</th>
                         <th>주문번호</th>
                         <th>회원ID</th>
                         <th>결제일</th>
@@ -211,7 +211,7 @@ ArrayList<Refund> list = (ArrayList<Refund>)request.getAttribute("list");
                         
                         </td>
                         
-                        <td><a href="<%=request.getContextPath()%>/adRefundHandle.pa" class="btn btn-success btn-sm">상세보기</a></td>
+                        <td><a href="<%=request.getContextPath()%>/adRefundHandle.pa?ono=<%=rf.getOrderNo()%>&memNo=<%=rf.getMemNo()%>" class="btn btn-success btn-sm">상세보기</a></td>
                       </tr>
                       
                       <%} %>

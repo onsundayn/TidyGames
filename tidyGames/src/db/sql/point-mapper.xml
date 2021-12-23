@@ -63,10 +63,23 @@
 	</entry>
 	
 	<entry key="sumPoint">
-			SELECT MEM_NO, SUM(POINT_AMOUNT) AS "SUM"
+			SELECT SUM(POINT_AMOUNT) AS "SUM"
             FROM POINT
             GROUP BY MEM_NO
             HAVING MEM_NO = ?
+	
+	
+	</entry>
+	
+	<entry key="adPointList">
+		   
+		 SELECT 
+		   MEM_NO
+         , MEM_ID
+         , (SELECT SUM(POINT_AMOUNT)
+            FROM POINT P
+            GROUP BY MEM_NO HAVING M.MEM_NO=P.MEM_NO) AS "SUM"
+     	  FROM MEMBER M
 	
 	
 	</entry>
