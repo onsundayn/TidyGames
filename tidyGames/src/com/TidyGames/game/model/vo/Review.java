@@ -4,46 +4,37 @@ public class Review {
 	
 	private int reviewNo;
 	private int gameNo;
-	private int memNo;
+	private String writer;
 	private String contents;
 	private int recommend;
 	private String uploadDate;
 	private int starNo;
 	private String reviewStatus;
-	private String memNick;
-	private String memPic;
-
+	
 	public Review () {}
-
-	public Review(int reviewNo, int gameNo, int memNo, String contents, int recommend, String uploadDate, int starNo,
-			String reviewStatus, String memNick, String memPic) {
+	
+	public Review(int reviewNo, int gameNo, String writer, String contents, int recommend, String uploadDate,
+			int starNo, String reviewStatus) {
 		super();
 		this.reviewNo = reviewNo;
 		this.gameNo = gameNo;
-		this.memNo = memNo;
+		this.writer = writer;
 		this.contents = contents;
 		this.recommend = recommend;
 		this.uploadDate = uploadDate;
 		this.starNo = starNo;
 		this.reviewStatus = reviewStatus;
-		this.memNick = memNick;
-		this.memPic = memPic;
 	}
 	
 	
 
-	public Review(int reviewNo, int gameNo, int memNo, String contents, int recommend, String uploadDate, int starNo,
-			String memNick, String memPic) {
+	public Review(int reviewNo, int gameNo, String writer, String contents, String uploadDate) {
 		super();
 		this.reviewNo = reviewNo;
 		this.gameNo = gameNo;
-		this.memNo = memNo;
+		this.writer = writer;
 		this.contents = contents;
-		this.recommend = recommend;
 		this.uploadDate = uploadDate;
-		this.starNo = starNo;
-		this.memNick = memNick;
-		this.memPic = memPic;
 	}
 
 	public int getReviewNo() {
@@ -62,12 +53,12 @@ public class Review {
 		this.gameNo = gameNo;
 	}
 
-	public int getMemNo() {
-		return memNo;
+	public String getWriter() {
+		return writer;
 	}
 
-	public void setMemNo(int memNo) {
-		this.memNo = memNo;
+	public void setWriter(String writer) {
+		this.writer = writer;
 	}
 
 	public String getContents() {
@@ -110,31 +101,16 @@ public class Review {
 		this.reviewStatus = reviewStatus;
 	}
 
-	public String getMemNick() {
-		return memNick;
-	}
-
-	public void setMemNick(String memNick) {
-		this.memNick = memNick;
-	}
-
-	public String getMemPic() {
-		return memPic;
-	}
-
-	public void setMemPic(String memPic) {
-		this.memPic = memPic;
-	}
-
 	@Override
 	public String toString() {
-		return "Review [reviewNo=" + reviewNo + ", gameNo=" + gameNo + ", memNo=" + memNo + ", contents=" + contents
+		return "Review [reviewNo=" + reviewNo + ", gameNo=" + gameNo + ", writer=" + writer + ", contents=" + contents
 				+ ", recommend=" + recommend + ", uploadDate=" + uploadDate + ", starNo=" + starNo + ", reviewStatus="
-				+ reviewStatus + ", memNick=" + memNick + ", memPic=" + memPic + "]";
+				+ reviewStatus + "]";
 	}
+	
+	
+	
 
-
-
-
+		
 	
 }

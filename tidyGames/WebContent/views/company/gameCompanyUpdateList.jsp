@@ -63,26 +63,26 @@
                 <th>업데이트</th>
             </tr>
             <% for(Game g : list) { %>
-            <tr>
-                <td>1<%++%></td>
-                <td><%=g.getKorName()%>(<%=g.getEngName()%>)</td>
-                <td><%=g.getPrice()%></td>
-                <td><%=g.getUploadDate()%></td>
-                	<% if((g.getConfirm()).equals("Y")) { %>
-                <td><a href="gameCompanyEnrollForm.jsp" class="btn btn-sm btn-primary">승인</a></td>
-                	<% }else if((g.getConfirm()).equals("A")){ %>
-                <td><a href="gameCompanyEnrollForm.jsp" class="btn btn-sm btn-danger">반려</a></td>	
-                	<% }else if((g.getConfirm()).equals("N")) { %>
-                <td><a href="gameCompanyEnrollForm.jsp" class="btn btn-sm btn-warning">미승인</a></td>
-                	<% } %>
-                	
-                	<% if ((g.getUpgame()).equals("Y")) { %>
-                <td><a href="gameCompanyUpdateForm.jsp" class="btn btn-sm btn-primary">업데이트</a></td>
-               		<% } else { %>
-               	<td></td>
-               	<% } %>
-            </tr>
-            <% } %>
+	            <tr>
+	                <td>1</td>
+	                <td><%=g.getKorName()%>(<%=g.getEngName()%>)</td>
+	                <td><%=g.getPrice()%></td>
+	                <td><%=g.getUploadDate()%></td>
+	                	<% if((g.getConfirm()).equals("Y")) { %>
+	                <td><a href="gameCompanyEnrollForm.jsp" class="btn btn-sm btn-primary">승인</a></td>
+	                	<% }else if((g.getConfirm()).equals("A")){ %>
+	                <td><a href="gameCompanyEnrollForm.jsp" class="btn btn-sm btn-danger">반려</a></td>	
+	                	<% }else if((g.getConfirm()).equals("N")) { %>
+	                <td><a href="gameCompanyEnrollForm.jsp" class="btn btn-sm btn-warning">미승인</a></td>
+	                	<% } %>
+	                	
+	                	<% if ((g.getUpgame()).equals("Y")) { %>
+	                <td><a href="gameCompanyUpdateForm.jsp" class="btn btn-sm btn-primary">업데이트</a></td>
+	               		<% } else { %>
+	               	<td></td>
+	               	<% } %>
+	            </tr>
+           <% } %>
       
 
         </table>

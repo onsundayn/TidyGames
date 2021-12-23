@@ -76,6 +76,25 @@ public class Game {
 		this.uploadDate = uploadDate;
 	}
 
+	public Game(int gameNo, int companyNo, String korName, String engName, String releaseDate, int price,
+			String gameIntro, String confirm, String upgame, String uploadDate, double point, String gameStatus,
+			int count) {
+		super();
+		this.gameNo = gameNo;
+		this.companyNo = companyNo;
+		this.korName = korName;
+		this.engName = engName;
+		this.releaseDate = releaseDate;
+		this.price = price;
+		this.gameIntro = gameIntro;
+		this.confirm = confirm;
+		this.upgame = upgame;
+		this.uploadDate = uploadDate;
+		this.point = point;
+		this.gameStatus = gameStatus;
+		this.count = count;
+	}
+
 
 
 
