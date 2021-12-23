@@ -31,7 +31,7 @@ public class AdminQnaQuestionController extends HttpServlet {
 			
 			
 			
-		request.getRequestDispatcher("views/member/adminQnaQuestion.jsp").forward(request, response);
+		request.getRequestDispatcher("views/notice/adminQnaQuestion.jsp").forward(request, response);
 		
 	}
 

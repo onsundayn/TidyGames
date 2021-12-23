@@ -51,7 +51,7 @@
 		                , MEM_ID
 		                , MEM_NICK
 		                , QNA_TITLE
-		                , TO_CHAR(REPORT_DATE, 'YY/MM/DD HH:MI') "REPORT_DATE"
+		                , TO_CHAR(REPORT_DATE, 'YY/MM/DD') "REPORT_DATE"
 		                , ANS_CONFIRM
 		             FROM QNA
 		             JOIN MEMBER USING(MEM_NO)

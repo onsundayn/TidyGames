@@ -185,7 +185,7 @@
             <div></div>
             <div id="tableBox" style="height:300px">
             <div id="tableOut1" align="center">
-            		<span style="font-size:20px">작성한 1:1 문의가 없습니다.</span>
+            		<span style="font-size:20px; font-weight:700">작성한 1:1 문의가 없습니다.</span>
             </div>
             
         

@@ -269,7 +269,7 @@
 		                     , QNA_TITLE
 		                     , QNA_CONTENT
 		                     , REPORT_DATE
-		                     , ANS_CONTENT
+		                     , NVL(ANS_CONTENT, ' ') "ANS_CONTENT"
 		                 FROM QNA
 		                WHERE MEM_NO = ?
 		                ORDER 

@@ -62,12 +62,17 @@ public class MyQnaListController extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, viewLimit, maxPage, startPage, endPage);
 		ArrayList<Notice> list = new MemberService().myQnaList(memNo, pi);
-		int qno = list.get(0).getNotiNo();
-		Attachment at = new QnaService().selectAttachment(qno);
+		
+		if(!list.isEmpty()) {
+			int qno = list.get(0).getNotiNo();			
+			Attachment at = new QnaService().selectAttachment(qno);
+			
+			request.setAttribute("at", at);
+		}
+
 		
 		request.setAttribute("list", list);
 		request.setAttribute("pi", pi);
-		request.setAttribute("at", at);
 		request.getRequestDispatcher("views/member/myQnaList.jsp").forward(request, response);
 	}
 

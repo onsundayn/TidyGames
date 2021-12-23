@@ -170,7 +170,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
+                    	
+                    	
                        <%  for(Notice n : list) { %>
                         <tr align="center">
                             <td><%= n.getNotiNo() %></td>
@@ -186,14 +187,14 @@
                             	<% } %>
                             </td>
                         </tr>
-              		<% } %>	
-              	
+              		<% } %>	              	
                     </tbody>
                     </table>
                   
                 </div>
 
                 	<div id="tableOut2">
+
            		    <% if(!list.isEmpty()) { %>
 	                    <div class="paging-area" align="center">
 	                        <!-- 첫 페이지에서는 이전으로 비활성화 -->
@@ -214,22 +215,17 @@
 	                            <button onclick="loaction.href='<%= contextPath %>/qnaList.no?cpage=<%=currentPage+1%>';"> &gt; </button>
 	                            <!-- 현재 페이지가 마지막 페이지일 땐 다음으로 버튼 비활성화 -->
 	                        <% } %>
-	                     <% } %>
-                    </div>
-                </div>
-                
-                
-          
+                        <% } %>
+                   </div>
+               </div>
           </div>
           
       </div>
       
       
 
-
         <footer>
             <div style="height:100px">
-    
             </div>
         </footer>
     
