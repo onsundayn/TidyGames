@@ -285,4 +285,18 @@
 		ORDER 
 		   BY 1 DESC
 	</entry>
+	<entry key="myReviewList">
+		SELECT 
+		       REVIEW_NO
+		     , ENG_NAME
+		     , KOR_NAME
+		     , CONTENTS
+		     , RECOMMEND
+		     , R.UPLOAD_DATE
+		     , STAR_NO
+		  FROM REVIEW R
+		  JOIN GAME USING(GAME_NO)
+		 WHERE REVIEW_STATUS = 'Y' 
+		   AND R.MEM_NO = ?
+	</entry>
 </properties>
