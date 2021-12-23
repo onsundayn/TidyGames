@@ -170,8 +170,9 @@
             <span style="font-size: 30px; color:black;"><%=sum.getSum()%>  POINT</span>
 			<% } %>
             <span class="selectForm">
-           <form action="<%=contextPath%>/pointDate.me" method="post">
-                
+            <% for(Point pm : point) { %>
+           <form action="<%=contextPath%>/adPointDate.me?mNo=<%=pm.getMemNo()%>" method="post">
+                <%} %>
                 <!-- <div class="dateSearch">
 
                    <button name="weekend">일주일</button>
@@ -190,7 +191,7 @@
                 <div class="pointstatus">
 
                     <select name="select">
-                        <option name= "all"  value="all" selected>전체상태</option>
+                        <option name="all"  value="all" selected>전체상태</option>
                         <option name="save" value="save">적립</option>
                         <option name="use" value="use">사용</option>
 

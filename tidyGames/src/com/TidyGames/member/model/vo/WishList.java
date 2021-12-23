@@ -12,6 +12,9 @@ public class WishList {
 	private int point;
 	private String memNick;
 	private int countWish;
+	private String changeName;
+	private String filePath;
+	
 	
 	public WishList() {}
 	
@@ -19,25 +22,14 @@ public class WishList {
 	
 
 
-
-
 	public int getCountWish() {
 		return countWish;
 	}
 
 
-
-
-
-
-
 	public void setCountWish(int countWish) {
 		this.countWish = countWish;
 	}
-
-
-
-
 
 
 
@@ -74,6 +66,28 @@ public class WishList {
 		this.point = point;
 		this.memNick = memNick;
 	}
+
+	
+	
+
+
+	public WishList(int memNo, int gameNo, String korName, String engName, String gameIntro, int price, int point,
+			String changeName, String filePath) {
+		super();
+		this.memNo = memNo;
+		this.gameNo = gameNo;
+		this.korName = korName;
+		this.engName = engName;
+		this.gameIntro = gameIntro;
+		this.price = price;
+		this.point = point;
+		this.changeName = changeName;
+		this.filePath = filePath;
+	}
+
+
+
+
 
 
 
@@ -183,13 +197,56 @@ public class WishList {
 		this.memNick = memNick;
 	}
 
+	
+
+	public String getChangeName() {
+		return changeName;
+	}
+
+
+
+
+
+
+
+	public void setChangeName(String changeName) {
+		this.changeName = changeName;
+	}
+
+
+
+
+
+
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+
+
+
+
+
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+
+
+
+
+
+
 
 
 	@Override
 	public String toString() {
 		return "WishList [memNo=" + memNo + ", gameNo=" + gameNo + ", gameImg=" + gameImg + ", korName=" + korName
 				+ ", engName=" + engName + ", gameIntro=" + gameIntro + ", price=" + price + ", point=" + point
-				+ ", memNick=" + memNick + "]";
+				+ ", memNick=" + memNick + ", countWish=" + countWish + ", changeName=" + changeName + ", filePath="
+				+ filePath + "]";
 	}
 
 	

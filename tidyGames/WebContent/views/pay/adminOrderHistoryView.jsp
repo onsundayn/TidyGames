@@ -128,9 +128,9 @@
         <br><br><br>
         
         <!-- 조회div -->
-        <div class="area2">
+       <div class="area2">
            
-            <form action="">
+          
 
             
 
@@ -154,7 +154,11 @@
                         </div>
                 </div> 
 
-            
+             
+               <%for(Pay al : list){ %>
+             <form action="<%=contextPath%>/adOrderDate.pa" action="post">
+               	
+               <%} %>
                 <div class="dateSearch">
                    
                    <button name="weekend">일주일</button>
@@ -163,20 +167,18 @@
                    <button name="sixmonth">6개월</button>
                 
                 </div>
-
-                <div class="datetable">
-                    <input type="date" name="startdate" class="date">
+ 			
+               <div class="datetable">
+                    <input type="date" name="startDate" class="date">
                     <span style="color:black">&nbsp;&nbsp; ~ &nbsp;&nbsp;</span>
-                    <input type="date" name="startdate" class="date">
+                    <input type="date" name="endDate" class="date">
                 </div>
             
-                
+
                 <button type="submit" class="btn btn-sm btn-secondary" style="width: 50px; height: 35px;">조회</button>
 
             </form>
         </div>
-
-
 
 
         <!-- 테이블div -->

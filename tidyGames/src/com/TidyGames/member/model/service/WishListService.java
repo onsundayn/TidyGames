@@ -16,12 +16,12 @@ public class WishListService {
 
 
 
-	public  ArrayList<WishList> selectWish(PageInfo pi, int memNo) {
+	public  ArrayList<WishList> selectWish( int memNo, PageInfo pi) {
 		
 		
 		Connection conn = getConnection();
 		
-		ArrayList<WishList> wish = new WishListDao().selectWish(conn,pi, memNo);
+		ArrayList<WishList> wish = new WishListDao().selectWish(conn, memNo, pi);
 		 
 		 close(conn);
 		 
@@ -47,6 +47,8 @@ public class WishListService {
 		
 		return result;
 	}
+	
+	
 	
 		public int deleteWish(WishList d) {
 		
