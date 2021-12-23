@@ -16,6 +16,13 @@ public class Member {
 	private String memGender;
 	private String memAddress;
 	private Date indate;
+	public Member(String memId, String memNick, String memEmail) {
+		super();
+		this.memId = memId;
+		this.memNick = memNick;
+		this.memEmail = memEmail;
+	}
+
 	private String memAgr;
 	private String memPic;
 	private String memStatus;

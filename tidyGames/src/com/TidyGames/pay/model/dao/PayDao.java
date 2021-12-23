@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.TidyGames.member.model.vo.Member;
 import com.TidyGames.pay.model.vo.Cart;
 import com.TidyGames.pay.model.vo.Pay;
 import com.TidyGames.pay.model.vo.PayGame;
@@ -319,9 +320,6 @@ public class PayDao {
 			}
 			
 			
-		
-			
-			
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
@@ -336,6 +334,45 @@ public class PayDao {
 		
 		
 	}
+	
+	public Member memInfo(Connection conn, int memNo) {
+		
+		Member mi = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("memInfo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				mi = new Member(rset.getString("mem_id"),
+							 rset.getString("mem_nick"),
+							 rset.getString("mem_email"));
+			}
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return mi;
+	
+	
+		
+		
+	}
+	
+	
+	
 	
 	public ArrayList<Refund> adRefundList(Connection conn) {
 		

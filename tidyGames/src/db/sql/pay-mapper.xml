@@ -142,6 +142,17 @@
 	
 	</entry>
 	
+	
+	<entry key="memInfo">
+	  SELECT
+              MEM_ID
+            , MEM_NICK
+            , MEM_EMAIL
+        FROM MEMBER
+       WHERE MEM_NO = ?
+	
+	
+	</entry>
 	<entry key="adRefundList">
 		SELECT
 			  REFUND_NO

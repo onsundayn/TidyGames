@@ -8,6 +8,7 @@ import static com.TidyGames.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.TidyGames.member.model.vo.Member;
 import com.TidyGames.pay.model.dao.PayDao;
 import com.TidyGames.pay.model.vo.Cart;
 import com.TidyGames.pay.model.vo.Pay;
@@ -87,6 +88,7 @@ public class PayService {
 		return order;
 	}
 	
+	//관리자 주문관리 and 환불관리
 	public ArrayList<Pay> adOrderList() {
 
 		Connection conn = getConnection();
@@ -97,9 +99,6 @@ public class PayService {
 		 
 		return list;
 	}
-	
-	
-	
 	
 	
 	public ArrayList<PayGame> rforderList(int memNo, int orderNo) {
@@ -122,6 +121,18 @@ public class PayService {
 		 
 		return pi;
 	}
+	
+	public Member memInfo(int memNo) {
+		Connection conn = getConnection();
+		
+		Member mi = new PayDao().memInfo(conn, memNo);
+		
+		close(conn);
+		 
+		return mi;
+		
+	}
+	
 	
 //	관리자환불목록조회
 	public ArrayList<Refund> adRefundList() {

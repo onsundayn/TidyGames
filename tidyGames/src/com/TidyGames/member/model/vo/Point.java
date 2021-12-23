@@ -1,7 +1,5 @@
 package com.TidyGames.member.model.vo;
 
-import java.sql.Date;
-
 public class Point {
 
 	private int memNo;
@@ -9,6 +7,7 @@ public class Point {
 	private String pointDate;
 	private String pointCotent;
 	private int orderNo;
+	private String memId;
 	private int sum;
 
 
@@ -16,6 +15,23 @@ public class Point {
 
 	
 	
+	public Point(int memNo, String memId, int sum) {
+		super();
+		this.memNo = memNo;
+		this.memId = memId;
+		this.sum = sum;
+	}
+
+
+
+	public Point(int memNo, int sum) {
+		super();
+		this.memNo = memNo;
+		this.sum = sum;
+	}
+
+
+
 	public Point(int sum) {
 		super();
 		
@@ -83,11 +99,25 @@ public class Point {
 	public void setOrderNo(int orderNo) {
 		this.orderNo = orderNo;
 	}
+	
+	
+
+	public String getMemId() {
+		return memId;
+	}
+
+
+
+	public void setMemId(String memId) {
+		this.memId = memId;
+	}
+
+
 
 	@Override
 	public String toString() {
 		return "Point [memNo=" + memNo + ", pointAmount=" + pointAmount + ", pointDate=" + pointDate + ", pointCotent="
-				+ pointCotent + ", orderNo=" + orderNo + "]";
+				+ pointCotent + ", orderNo=" + orderNo + ", memId=" + memId + ", sum=" + sum + "]";
 	}
 	
 	

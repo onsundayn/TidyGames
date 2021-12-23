@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"  import ="java.util.ArrayList, com.TidyGames.member.model.vo.*"%>
+     
+ <%
+ ArrayList<Point> list = (ArrayList<Point>)request.getAttribute("list");
+ %>   
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,15 +39,18 @@
         height: 200px;
         border: 3px solid red;
         font-weight: bold;
-        color: white;
+       
         margin-top: 40px;
         margin-left: 100px;
         background: rgb(227, 220, 210);;
     }
+
+
     /* 7일 ,한달, 3개월 6개월 조회버튼 */
     .dateSearch{
-        margin: 8px 30px 0px 70px;
+        margin: 8px 30px 0px 120px;
         display: inline-block;
+        border: 1px solid orange;
    
     }
     .dateSearch>button{
@@ -53,61 +61,62 @@
     /* 달력 div */
     .datetable{
         display: inline-block;
+        margin-right: 20px;
     }
     .datetable>input{
         border-radius: 5px;
-        font-weight: bold;
-    }
-    /* 전체상태 div */
-    .pointstatus{
-        display: inline-block;
-        margin-left: 30px;
-        margin-right: 10px;
-    }
-
-    .pointstatus>select{
-        border-radius: 5px;
-        background: white;
-        width: 150px;
-        height: 30px;
-        text-align: center;
-        font-weight: bold;
         
     }
-    select>option{
-        font-weight: bold;
-    }
-
-    .area3{
+   /* 분류 */
+   .search{
+       border: 1px;
+        margin-right: 10px;
+       
+   }
+   /*  분류 검색창 영역 */
+   .searcharea{
         width: 1000px;
-        margin-left: 100px;
-        border: 1px solid red;
-
+        height: 70px;
+        
+        margin:30px 0px 10px 90px;
+      
+      
+    }
+    .searcharea div{
+        display:inline;
+    }
+    .searcharea form{
+        display: inline;
     }
 
-    .table table-bordered tr{
-        background: white;
+    /* 테이블 영역 */
+    .area3{
+        border: 3px solid rebeccapurple;
+        width: 1050px;
+        height: 500px;
+        margin: 50px 0px 0px 100px;
+       
     }
 
-    #pointcontent{
-        color:white;
+    #ordercontent{
+        color: white;
         text-align: center;
 
-    }
-    .area4{
-        width: 1000px;
-        height: 40px;
-        border: 1px solid blue;
-        margin:0px 0px 20px 100px;
-    }
-
-    .area4>select{
-        float: right;
     }
 
     #pointbar{
         color:orange;
     }
+
+    /* 모달 */
+    .pointcontent{
+      
+      width: 370px; 
+      height:40px; 
+      color:black;
+      margin-top: 20px;
+   }
+
 </style>
 </head>
 <body>
@@ -116,27 +125,45 @@
     <div id="outer">
         <div id="line_1"></div>
         <div>
-            <%@ include file="../common/memberSidebar.jsp" %>
-
-
+            <%@ include file="../common/adminSidebar.jsp" %>
         </div>
-        <!-- 닉네임 불러와지게 -->
+
         <div class="area1">
-            <h3>닉네임님의</h3><h2>TIDY POINT 내역</h2>
+            <h2>회원 포인트 내역</h2><br><br>
             <div style="background: grey; width: 1000px; height: 2px;"></div>
         </div>
         <br><br><br>
-
+        
+        <!-- 조회div -->
         <div class="area2">
-            <div style="color:black; font-size:18px; font-weight: bold; margin: 10px 0px 0px 70px;">보유 TIDY POINT</div>
-            <span style="margin-left: 60px;"><img src="<%=contextPath%>/resources/image/point.png" width="70px" height="70px"></span>
-            <!-- 보유포인트 조회 -->
-            <span style="font-size: 30px; color:black;">9525 POINT</span>
-
+           
             <form action="">
-                
-                <div class="dateSearch">
 
+            
+
+                <div class="searcharea">
+                        <div class="search">
+                            <select class="btn btn-outline-secondary" >
+                                <option selected value="uptodate">회원ID</option>
+                                <option value="olddae" >회원번호</option>
+                
+                            </select>
+                        
+                        </div>
+                    
+        
+                        <div id="game_search">
+                            <input type="text" name="keyword" style="border-radius: 3px; width: 600px; height:40px; border: 1px solid white;" placeholder="검색명을 입력하세요.">
+                        </div>
+                        
+                        <div id="search_btn">
+                            <button type="submit" id="icon_btn" style="background: none;"><i class="fas fa-search"></i></button>
+                        </div>
+                </div> 
+
+            
+                <div class="dateSearch">
+                   
                    <button name="weekend">일주일</button>
                    <button name="month">1개월</button>
                    <button name="threemonth">3개월</button>
@@ -150,99 +177,113 @@
                     <input type="date" name="startdate" class="date">
                 </div>
             
-                <div class="pointstatus">
-
-                    <select>
-                        <option selected>전체상태</option>
-                        <option name="save">적립</option>
-                        <option name="use">사용</option>
-
-                    </select>
-                </div>
+                
                 <button type="submit" class="btn btn-sm btn-secondary" style="width: 50px; height: 35px;">조회</button>
 
             </form>
-
-            <div style="color:grey; margin:10px 0px 0px 70px">적립된 당일로부터 POINT는 5년동안 유지됩니다.</div>
         </div>
 
-     
-        
 
 
-        <br><br>
-        <div style="width: 1000px; height: 2px; background: gray; margin:30px 0px 20px 100px;" ></div>
-        <br><br>
 
-
-    
-     
-            <div class="area4">
-                <select class="btn btn-outline-secondary" style="color: white;"">
-                    <option selected value="uptodate">최신순</option>
-                    <option value="olddae" >오래된순</option>
-    
-                </select>
-             </div>
-
-        
-
-        <div class="area3">
-
-            <table class="table table-bordered" id="pointcontent">
-                <thead>
-                  <tr style="background: white; color:black;">
-                    <th>날짜</th>
-                    <th>적립/사용내용</th>
-                    <th>POINT</th>
-                    <th>적립/사용</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    <!-- 적립시 tr -->
-                  <tr>
-                    <td>2021.10.01</td>
+        <!-- 테이블div -->
+            <div class="area3">
+                <table class="table table-hover" id="ordercontent">
+                    <thead>
+                      <tr style="background: white; color: black;">
+                        
+                        <th width="250">회원번호</th>
+                        <th width="250">회원ID</th>
+                        <th width="250">보유POINT</th>
+                        <th width="300"></th>
+                       
+                       
+                      </tr>
+                    </thead>
+                    <tbody>
+                    
+                  <%for(Point po:list ) {%>
+                      <tr>
+                
+                        <td><%=po.getMemNo() %></td>
+                        <td><%=po.getMemId() %></td>
+                        <td><%=po.getSum() %>POINT</td>
+                        <td><a href="" id="btn" class="btn btn-sm btn-dark" data-toggle="modal" data-target="#pointModal">변경</a>
+                            <a href="<%= request.getContextPath() %>/adPointDe.me" class="btn btn-success btn-sm">상세보기</a></td>
+                      
+                     <%} %>
                    
-                    <td>회원 가입 축하 POINT</td>
-                    <td style="color:rgb(57, 57, 216);">+ 5000</td>
-                    <td style="color:rgb(57, 57, 216);">적립</td>
-                  </tr>
+                   </tr> 
+                    
+                    
+                
 
-                  <!-- 사용시 tr -->
-                  <tr class="usecol">
-                    <td>2021.11.10</td>
-                    <td>결제시 사용</td>
-                    <td style="color:red;">- 3000</td>
-                    <td style="color:red;">사용</td>
-                  </tr>
-                  <tr>
-                    <td>2021.11.10</td>
-                    <td>구매 적립 POINT</td>
-                    <td>+ 7525</td>
-                    <td>적립</td>
-                  </tr>
-                </tbody>
-              </table>
-        </div>
+                    <!-- point modal -->
+				<div class="modal" id="pointModal">
+					<div class="modal-dialog"  style="width: 400px;">
+						<div class="modal-content"> 
+
+							<!-- Modal Header -->
+							<div class="modal-header" text-align: center;">
+								<h4 class="modal-title" style="margin-left: 75px; font-weight: bold;">회원적립금 등록</h4>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+
+							<!-- Modal body -->
+							<div class="modal-body">
+                                <div class="pointcontent">
+                                    <b style="margin-top: 20px;">회원보유포인트 : <%=po.getSum() %></b>
+                                    <div class="memPoint"></div>
+                                </div>
+
+                                <div class="pointcontent">
+                                    <button  class="btn btn-secondary btn-sm" style="width: 30px; height: 30px; margin-left: 55px;">╊</button>&nbsp;
+                                    <button  class="btn btn-secondary btn-sm" style="width: 30px; height: 30px;">─</button>
+                                    <input type="text" class="memPoint "></input>
+                                </div>
+                          
+                                <div class="pointcontent">
+                                    <b style="margin-top: 20px;">&nbsp;
+                                        적립/차감 내용 :</b> 
+                                    <input type="text" class="memPoint "></input>
+                                </div>
+                            
+                            
+                            
+                            </div>
+
+							<!-- Modal footer -->
+							<div class="modal-footer" >
+                                
+                                    <button type="submit" class="btn " style="background: #31665c; color: white;" >적립</button>
+                                
+                                    <button type="button" class="btn btn-danger"data-dismiss="modal" style="background: rgba(255, 0, 0, 0.815);">취소</button>
+                              
+							</div>
+                           
+                    
+						</div>
+					</div>
+				</div>
+                      
+                 
+                      <tr><td></td>
+                   
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                     
+                      <td></td></tr>
+                    </tbody>
+                  </table>
 
 
-    
-
-
-
+            </div>
 
 
 
     </div>
-
-
-
-
-
-
-
-   
-
 
 </body>
 </html>

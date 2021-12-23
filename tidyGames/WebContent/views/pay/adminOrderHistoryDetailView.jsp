@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import ="java.util.ArrayList, com.TidyGames.pay.model.vo.*, com.TidyGames.member.model.vo.*"%>
+    
+ <%
+	ArrayList<PayGame> order = (ArrayList<PayGame>)request.getAttribute("order");
+ 	Pay pi = (Pay)request.getAttribute("pi");
+ 	Member mi = (Member)request.getAttribute("mi");
+ %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +40,7 @@
   /* 주문내역 게임 1개 영역 */
   .area2{
         width: 1000px;
-        height: 280px;
+       
         border: 1px solid violet;
         margin-left: 100px;
        
@@ -44,6 +50,26 @@
         color:orange;
     }
 
+        /* 테이블 제목단 */
+    .table tr {
+        color: white;
+        text-align: center;
+    }
+    /* 테이블 제목 */
+    thead {
+        text-align: center;
+    }
+
+    /* 테이블 내용 */
+    .table-striped>tbody>tr>td {background-color: #0e1f1c;}
+
+
+tbody>tr>td>span {
+	
+	font-size: 18px;
+    text-align: center;
+   
+}
     /* 회원정보 */
     .area3{
         width: 1000px;
@@ -91,44 +117,72 @@
         
     
         <div class="area2">
-
-                <table class="table table-borderless" style="width: 1000px; color:white; border:1px solid grey; background:rgba(20, 20, 20, 0.87)">
-                    <thead>
-                    <tr>
-                        <th colspan="5" style="font-size: 25px; font-weight: bold;">BattleGround</th>
+            <table class="table table-striped">
+                <thead>
                     
+                    <tr>
+                        <th width="200px"></th>
+                        <th width="300px">게임명</th>
+                        <th>게임가격</th>
+                        <th>할인가격</th>
+                        <th>결제금액</th>
                     </tr>
-
+                </thead>
                 
-                    </thead>
-                    <tbody >
+                
+                <tbody>
+    
+                 	 <%for(PayGame p : order){ %>
+                         
                     <tr>
-                        <th colspan="5"><div style="width:950px; height: 2px; background: grey;"></div></th>
-                        
+                        <td height="120px" style="text-align: right;">
+                            <img src="<%=contextPath%>/<%=p.getGameImg()%>"Width="130px" height="90px"></td>
+                        <td>
+                            <span>     
+                             <%=p.getKorName() %> <br>
+                  		  <%=p.getEngName() %> 
+                             </span>
+                              
+                                
+                        </td>
+                        <td><span><%=p.getPrice() %></span>원 </td>
+                        <td style="color: red;">
+                               <span>-<%=p.getPrice()-p.getDiscountPrice()%></span>원
+                            </td>
+                        <td><span><%=p.getDiscountPrice() %></span>원</td>
                     </tr>
-                    <tr>
-                        
-                        <td colspan="2" rowspan="2" width="200px" height="100px" style="text-align: center;">
-                            <img src="<%=contextPath%>/resources/image/battlefield.JPG" width="100px" height="120px">
-
-                        </td> 
-                        <td width ="500" height="40px">
-                            <br>
-                            <div>주문번호 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <a href="">100000</a></div><br>
-                            <div>결제날짜 :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>2021-11-10</span></div><br>
-                            
-                        </td>
-                        </td>
-                        
-                        <td width = "300px"> 
-                            <div style="text-align: center;">결제금액<span style="font-size: 25px;"><br>100000</span></div><br>
-                        </td>
-                    </tr>
-
+                             
+                      	<%} %>
                     
-                    </tbody>
-                </table>
-            </div>
+    
+                    <tr>
+                        <td style="text-align:left"><span style="font-size: 14px;">주문번호 :<%=pi.getOrderNo()%>  </span><br>
+                            <span style="font-size: 14px;">주문날짜 :  <%=pi.getPayDate() %> </span>
+                        </td>
+                        <td colspan="4" style="text-align: right; height: 70px;">
+                              <span> 총 금액 :  <%
+                          				int total = 0;
+                          				for(int i=0; i<order.size(); i++) {
+                          					total += order.get(i).getDiscountPrice();	
+                          				}
+                          
+                          				%>
+                          				<%=total %>
+                                        	
+                                      
+                            </h2>원</span> 
+                            </td>
+                    </tr>
+    
+    
+                </tbody>
+            </table>
+            <br> <br> <br>
+                
+
+        </div>
+
+
               <div class="area3">
                 <div class="container" style="color: white;">
                     <h2>회원정보</h2>
@@ -137,19 +191,19 @@
                       
                         <tr>
                           <th>구매자 ID</th>
-                          <td>user12</td>
+                          <td><%=mi.getMemId() %></td>
                         
                         </tr>
                       
                       <tbody>
                         <tr>
                           <td>닉네임</td>
-                          <td>호빵</td>
+                          <td><%=mi.getMemNick() %></td>
                          
                         </tr>
                         <tr>
                             <td>E-MAil</td>
-                          <td>hobun@gmail.com</td>
+                          <td><%=mi.getMemEmail() %></td>
                          
                         </tr>
 
@@ -162,8 +216,8 @@
                     </table>
                   </div>
               </div>
-            
-                <div class="area4">
+        
+                <div class="area4" style="float: right; margin-right: 190px;">
                     <div class="container" style="color: white;">
                         <h2>결제정보</h2>
                     
@@ -172,31 +226,42 @@
                             <tr>
                             <th>주문금액</th>
                             <td>결제금액</td>
-                            <th>61,000원</th>
+                            <th><%=pi.getPayAmount() %> 원</th>
                             </tr>
                         
                         <tbody>
                             <tr>
                             <td></td>
-                            <td>할인금액</td>
-                            <th style="color:red;">-35000원</th>
+                            <td>할인금액
+                             
+                   
+                            
+                            
+                            </td>
+                            <th style="color:red;">-<%
+								int totaldiscount = 0;
+	                          	for (int i = 0; i < order.size(); i++){ 
+	                         		totaldiscount += (order.get(i).getPrice() - order.get(i).getDiscountPrice());
+								}
+							%>
+							<%=totaldiscount%> 원</th>
                             </tr>
                             <tr>
                                 <td></td>
                             <td>사용한POINT</td>
-                            <th style="color:red;">-3000POINT</th>
+                            <th style="color:red;"><%=pi.getPointAmount()%>POINT</th>
                             
                             </tr>
                             <tr>
                                 <td></td>
                             <td>총결제금액</td>
-                            <th>27500원</th>
+                            <th><%=total+pi.getPointAmount()%> 원 </th>
                             
                             </tr>
                             <tr>
                             <td>결제방법</td>
                             <td></td>
-                            <th>KAKAOPAY</th>
+                            <th><%=pi.getPayMethod() %></th>
                             </tr>
                         </tbody>
                         </table>
@@ -206,7 +271,7 @@
 
 
                 <div class="area5">
-                    <a href="#" class="btn btn-dark"> < 이전 </a>
+                    <a href="<%=request.getContextPath()%>/adorderHistory.pa" class="btn btn-dark"> < 이전 </a>
                    
                 </div>
 

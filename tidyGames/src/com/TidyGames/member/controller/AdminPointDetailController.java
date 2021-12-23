@@ -13,16 +13,16 @@ import com.TidyGames.member.model.service.PointService;
 import com.TidyGames.member.model.vo.Point;
 
 /**
- * Servlet implementation class AdminPointHistoryController
+ * Servlet implementation class AdminPointDetailController
  */
-@WebServlet("/adPoint.me")
-public class AdminPointHistoryController extends HttpServlet {
+@WebServlet("/adPointDe.me")
+public class AdminPointDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminPointHistoryController() {
+    public AdminPointDetailController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,17 +31,11 @@ public class AdminPointHistoryController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		
-		ArrayList<Point> list = new PointService().adPointList(); 
+	
 		
-		request.setAttribute("list", list);
-		
-		
-		
-		
-		request.getRequestDispatcher("views/member/adminPointHistoryView.jsp").forward(request, response);
-		
+		request.getRequestDispatcher("views/member/adminPointDetailView.jsp").forward(request, response);
+	
 	}
 
 	/**

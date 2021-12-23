@@ -204,7 +204,7 @@
                         <td><%=al.getPayDate() %></td>
                         <td><%=al.getPayAmount() %>원</td>
                         <td><%=al.getPayStatus() %></td>
-                        <td><a href="<%= request.getContextPath() %>/adOrderDetail.pa" class="btn btn-success btn-sm">상세보기</a></td>
+                        <td><a href="<%= request.getContextPath() %>/adOrderDetail.pa?ono=<%=al.getOrderNo()%>&memNo=<%=al.getMemNo()%>" class="btn btn-success btn-sm">상세보기</a></td>
                       </tr>
                       
                      <%  } %>
