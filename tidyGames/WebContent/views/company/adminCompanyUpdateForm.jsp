@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.TidyGames.company.model.vo.Company"%>
 <%
-	Company c = (Company)request.getAttribute("c");
+	Company comp = (Company)request.getAttribute("comp");
 %>
 <!DOCTYPE html>
 <html>
@@ -54,34 +54,34 @@
 	
 	        <form action="<%=contextPath%>/update.co" method="post" id="enroll-form">
 	        
-	        	<input type="hidden" name="num" value="<%= c.getCompanyNo() %>">
+	        	<input type="hidden" name="num" value="<%= comp.getCompanyNo() %>">
 	
 	            <table>
 	                <tr>
 	                    <th width="100"><h4>게임사</h4></th>
-	                    <td><input type="text" name="companyName" required value="<%=c.getCompanyName()%>"></td>
+	                    <td><input type="text" name="companyName" required value="<%=comp.getCompanyName()%>"></td>
 	                </tr>
 	                <tr><td colspan=2 height="30"></td></tr>
 	                <tr>
 	                    <th><h4>아이디</h4></th>
-	                    <td><input type="text" name="companyId" required value="<%=c.getCompanyId()%>"></td>
+	                    <td><input type="text" name="companyId" required value="<%=comp.getCompanyId()%>"></td>
 	                </tr>
 	                <tr><td colspan=2 height="30"></td></tr>
 	                <tr>
 	                    <th><h4>등록코드</h4></th>
-	                    <td><%=c.getCompanyPwd()%></td>
+	                    <td><%=comp.getCompanyPwd()%></td>
 	                </tr>
 	                <tr><td colspan=2 height="30"></td></tr>
 	                <tr>
 	                    <th><h4>대표자</h4></th>
-	                    <td><input type="text" name="companyHead" required value="<%=c.getCompanyHead()%>"></td>
+	                    <td><input type="text" name="companyHead" required value="<%=comp.getCompanyHead()%>"></td>
 	                </tr>
 	                <tr><td colspan=2 height="30"></td></tr>
 	                <tr>
 	                    <th style="display: flow-root;"><h4>코멘트</h4></th>
 	                    <td>
-	                    	<% if(c.getCompanyComment() != null) { %>
-	                    		<textarea name="comment" cols="79" rows="5" style="resize:none"><%=c.getCompanyComment()%></textarea>
+	                    	<% if(comp.getCompanyComment() != null) { %>
+	                    		<textarea name="comment" cols="79" rows="5" style="resize:none"><%=comp.getCompanyComment()%></textarea>
 	                   		<% }else { %>
 	                   			<textarea name="comment" cols="79" rows="5" style="resize:none" placeholder="등록된 코멘트가 없습니다"></textarea>
 	                   		<%} %>

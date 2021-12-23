@@ -47,7 +47,7 @@ ArrayList<Refund> list = (ArrayList<Refund>)request.getAttribute("list");
 
     /* 7일 ,한달, 3개월 6개월 조회버튼 */
     .dateSearch{
-        margin: 8px 30px 0px 120px;
+        margin: 8px 20px 0px 70px;
         display: inline-block;
         border: 1px solid orange;
    
@@ -60,7 +60,7 @@ ArrayList<Refund> list = (ArrayList<Refund>)request.getAttribute("list");
     /* 달력 div */
     .datetable{
         display: inline-block;
-        margin-right: 20px;
+      
     }
     .datetable>input{
         border-radius: 5px;
@@ -106,6 +106,26 @@ ArrayList<Refund> list = (ArrayList<Refund>)request.getAttribute("list");
     #refundList{
         color:orange;
     }
+
+    /* 처리,미처리 select */
+    .pointstatus{
+        display: inline-block;
+        margin-left: 30px;
+        margin-right: 10px;
+    }
+
+    .pointstatus>select{
+        border-radius: 5px;
+        background: white;
+        width: 90px;
+        height: 30px;
+        text-align: center;
+        font-weight: bold;
+        
+    }
+    select>option{
+        font-weight: bold;
+    }
 </style>
 </head>
 <body>
@@ -127,7 +147,7 @@ ArrayList<Refund> list = (ArrayList<Refund>)request.getAttribute("list");
         <!-- 조회div -->
         <div class="area2">
            
-            <form action="">
+          
 
             
 
@@ -151,7 +171,10 @@ ArrayList<Refund> list = (ArrayList<Refund>)request.getAttribute("list");
                         </div>
                 </div> 
 
-            
+               <%for(Refund rf : list){ %>
+             <form action="<%=contextPath%>/adRefundDate.pa?mNo="<%=rf.getMemNo()%>" action="post">
+               	
+               <%} %>
                 <div class="dateSearch">
                    
                    <button name="weekend">일주일</button>
@@ -160,13 +183,23 @@ ArrayList<Refund> list = (ArrayList<Refund>)request.getAttribute("list");
                    <button name="sixmonth">6개월</button>
                 
                 </div>
-
-                <div class="datetable">
-                    <input type="date" name="startdate" class="date">
+ 			
+               <div class="datetable">
+                    <input type="date" name="startDate" class="date">
                     <span style="color:black">&nbsp;&nbsp; ~ &nbsp;&nbsp;</span>
-                    <input type="date" name="startdate" class="date">
+                    <input type="date" name="endDate" class="date">
                 </div>
             
+
+                <div class="pointstatus">
+
+                    <select name="select">
+                        <option name="all"  value="all" selected>전체상태</option>
+                        <option name="confirm" value="confirm">처리</option>
+                        <option name="noConfirm" value="noConfirm">미처리</option>
+
+                    </select>
+                </div>
                 
                 <button type="submit" class="btn btn-sm btn-secondary" style="width: 50px; height: 35px;">조회</button>
 
@@ -199,8 +232,8 @@ ArrayList<Refund> list = (ArrayList<Refund>)request.getAttribute("list");
                         <td><%=rf.getRefundNo()%></td>
                         <td><%=rf.getOrderNo() %></td>
                         <td><%=rf.getMemId() %></td>
-                        <td>결제일</td>
-                        <td><%=rf.getPayAmount() %></td>
+                        <td><%=rf.getPayDate() %></td>
+                        <td><%=rf.getPayAmount() %>원</td>
                         <td><%=rf.getRefundDate() %></td>
                         <td>
                         	<% if(rf.getRefundStatus().equals("N")){ %>

@@ -41,7 +41,7 @@ public class ReviewListViewController extends HttpServlet {
 		int gameNo = Integer.parseInt(request.getParameter("gno"));
 		Game g = new GameService().selectGame(memNo, gameNo);
 		Attachment3 at = new GameService().selectAttachment(gameNo);
-		ArrayList<Review> list = new GameService().selectReview(gameNo);
+		ArrayList<Review> list = new GameService().selectReviewList(gameNo);
 		
 		request.setAttribute("list", list);
 		request.setAttribute("g", g);

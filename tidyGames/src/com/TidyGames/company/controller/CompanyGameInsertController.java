@@ -96,7 +96,7 @@ public class CompanyGameInsertController extends HttpServlet {
 				}
 			}
 			
-			
+			ga.setGameImg("resources/game_upfiles/" + multiRequest.getFilesystemName("file6"));
 			// 서비스요청
 			int result = new GameService().insertGame(ga, list, companyNo);
 			// 응답뷰 지정

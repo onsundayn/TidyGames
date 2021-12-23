@@ -71,6 +71,7 @@ public class CompanyGameUpdateController extends HttpServlet {
 			
 			for(int i=1; i<=6; i++) {
 				String key = "file" + i; // name이 file1,2,3,4라서 key에 순서대로 담는거임
+				String fileNoKey = "originFileNo" + i;
 				if(multiRequest.getOriginalFileName(key) != null) { // 새 첨부파일 있을경우
 					// Attachment3생성 + 원본명, 수정명, 폴더경로, 파일레벨 담아서 list에 쌓기
 					Attachment3 at = new Attachment3();
@@ -81,16 +82,15 @@ public class CompanyGameUpdateController extends HttpServlet {
 					if(i == 6) { // 대표이미지일경우
 						at.setFileLevel(1);
 					}else if(i == 1) { // 동영상일경우
-						at.setFileLevel(2);
-					}else { //상세이미지일경우
 						at.setFileLevel(3);
+					}else { //상세이미지일경우
+						at.setFileLevel(2);
 					}
 
 					
-					if(multiRequest.getParameter("originFileNo") != null) {
+					if(multiRequest.getParameter(fileNoKey) != null) {
 						// 기존의 첨부파일 있었을 경우 => Update
-						at.setFileNo(Integer.parseInt(multiRequest.getParameter("originFileNo")));
-						System.out.println(multiRequest.getParameter("originFileNo"));
+						at.setFileNo(Integer.parseInt(multiRequest.getParameter(fileNoKey)));
 					}else {
 						// 없었을경우 => Insert
 						at.setRefBoardNo(gameNo);

@@ -98,6 +98,21 @@
 		
 	
 	</entry>
+	
+	<entry key="adDateOrderList">
+	
+			SELECT
+			          ORDER_NO
+			        , MEM_NO
+			        , PAY_AMOUNT
+			        , PAY_STATUS
+			        , TO_CHAR(PAY_DATE, 'YYYY-MM-DD') "PAY_DATE"
+					, MEM_ID
+			FROM PAY P
+            JOIN MEMBER USING(MEM_NO)
+			WHERE "PAY_DATE" BETWEEN TO_DATE(?) AND TO_DATE(?)
+	
+	</entry>
 
 	
 	<entry key = "rfOrderList">
@@ -170,6 +185,65 @@
 		JOIN PAY USING(ORDER_NO)
 		
 	</entry>
+	<entry key="adAllRefundList">
+		SELECT
+			  REFUND_NO
+			 , PAY.MEM_NO
+			 , ORDER_NO
+			 , REFUND
+			 , ADD_WRITING
+			 , TO_CHAR(REFUND_DATE, 'YYYY-MM-DD HH:MI:SS') AS "REFUND_DATE"
+			 , REFUND_STATUS
+			 , MEM_ID
+			 , PAY_AMOUNT
+			 , TO_CHAR(PAY_DATE, 'YYYY-MM-DD') AS "PAY_DATE"
+		FROM REFUND
+		JOIN MEMBER USING(MEM_NO)
+		JOIN PAY USING(ORDER_NO)
+		 WHERE "REFUND_DATE" BETWEEN TO_DATE(?) AND TO_DATE(?)
+	</entry>
+	<entry key="adComfirmRefundList">
+		SELECT
+			  REFUND_NO
+			 , PAY.MEM_NO
+			 , ORDER_NO
+			 , REFUND
+			 , ADD_WRITING
+			 , TO_CHAR(REFUND_DATE, 'YYYY-MM-DD HH:MI:SS') AS "REFUND_DATE"
+			 , REFUND_STATUS
+			 , MEM_ID
+			 , PAY_AMOUNT
+			 , TO_CHAR(PAY_DATE, 'YYYY-MM-DD') AS "PAY_DATE"
+		FROM REFUND
+		JOIN MEMBER USING(MEM_NO)
+		JOIN PAY USING(ORDER_NO)
+		 WHERE "REFUND_DATE" BETWEEN TO_DATE(?) AND TO_DATE(?)
+		AND REFUND_STATUS = 'Y'
+	
+	</entry>
+	
+		<entry key="adNoComfirmRefundList">
+		SELECT
+			  REFUND_NO
+			 , PAY.MEM_NO
+			 , ORDER_NO
+			 , REFUND
+			 , ADD_WRITING
+			 , TO_CHAR(REFUND_DATE, 'YYYY-MM-DD HH:MI:SS') AS "REFUND_DATE"
+			 , REFUND_STATUS
+			 , MEM_ID
+			 , PAY_AMOUNT
+			 , TO_CHAR(PAY_DATE, 'YYYY-MM-DD') AS "PAY_DATE"
+		FROM REFUND
+		JOIN MEMBER USING(MEM_NO)
+		JOIN PAY USING(ORDER_NO)
+		 WHERE "REFUND_DATE" BETWEEN TO_DATE(?) AND TO_DATE(?)
+		AND REFUND_STATUS = 'N'
+	
+	</entry>
+	
+	
+	
 	
 	<entry key="refundContent">
 			  SELECT

@@ -36,9 +36,9 @@ public class GameService {
 	}
 	
 	// 리뷰 목록 조회
-	public ArrayList<Review> selectReview(int gameNo){
+	public ArrayList<Review> selectReviewList(int gameNo){
 		Connection conn = getConnection();
-		ArrayList<Review> list = new GameDao().selectReview(conn, gameNo);
+		ArrayList<Review> list = new GameDao().selectReviewList(conn, gameNo);
 		close(conn);
 		return list;
 	}

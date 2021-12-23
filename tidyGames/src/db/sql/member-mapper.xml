@@ -254,10 +254,35 @@
 	       MEM_CATEGORY = ?
 	 WHERE MEM_ID = ?
 	</entry>
-	
 	<entry key="deleteMember">
 		UPDATE MEMBER
 		   SET MEM_STATUS = 'N'
 		 WHERE MEM_ID = ?
+	</entry>
+	<entry key="myQna">
+		SELECT *
+		FROM (
+		       SELECT ROWNUM RNUM, A.*
+		       FROM (
+		              	SELECT 
+		                       QNA_NO
+		                     , QNA_TITLE
+		                     , QNA_CONTENT
+		                     , REPORT_DATE
+		                     , ANS_CONTENT
+		                 FROM QNA
+		                WHERE MEM_NO = ?
+		                ORDER 
+		                   BY 1 DESC) A
+		            )
+		WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="qnaListCount">
+	   SELECT 
+		       COUNT(*) COUNT
+		 FROM QNA
+		WHERE MEM_NO = ?
+		ORDER 
+		   BY 1 DESC
 	</entry>
 </properties>

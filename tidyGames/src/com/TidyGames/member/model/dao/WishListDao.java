@@ -11,9 +11,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.TidyGames.member.model.vo.Member;
+import com.TidyGames.common.model.vo.PageInfo;
 import com.TidyGames.member.model.vo.WishList;
-import com.TidyGames.pay.model.vo.Cart;
 
 public class WishListDao {
 
@@ -29,7 +28,7 @@ public class WishListDao {
 		
 	}
 	
-	public ArrayList<WishList> selectWish(Connection conn, int memNo) {
+	public ArrayList<WishList> selectWish(Connection conn, int memNo, PageInfo pi) {
 		
 		// select문 => ResultSet (여러행) => WishList
 		ArrayList<WishList> wish = new  ArrayList<>();
@@ -41,7 +40,13 @@ public class WishListDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
+			int startRow = (pi.getCurrentPage() -1 ) * pi.getViewLimit() + 1;
+			int endRow = startRow +  pi.getViewLimit() - 1;
+			
+			
 			pstmt.setInt(1, memNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 		
 			
 			rset = pstmt.executeQuery();
@@ -49,14 +54,14 @@ public class WishListDao {
 			while(rset.next()) {
 				wish.add(new WishList(
 								  rset.getInt("mem_no"),	
-								  rset.getInt("game_no"),  
-								  rset.getString("game_img"),
+								  rset.getInt("game_no"),
 								  rset.getString("kor_name"),
 								  rset.getString("eng_name"),
 								  rset.getString("game_intro"),
 								  rset.getInt("price"),
 								  rset.getInt("point"),
-								  rset.getString("mem_nick")));
+								  rset.getString("CHANGE_NAME"),
+								  rset.getString("FILE_PATH")));
 			}
 			
 			
@@ -128,5 +133,36 @@ public class WishListDao {
 		}
 		
 
+		public int selectListCount(Connection conn, int memNo) {
+			
+			int listCount = 0;
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			
+			String sql = prop.getProperty("selectListCount");
+			
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, memNo);
+				
+				rset = pstmt.executeQuery();
+				
+				
+				if(rset.next()) {
+//					count(*) 컬럼의 별칭인 count임
+					listCount = rset.getInt("count");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rset);
+				close(pstmt);
+			}
+			return listCount;
+		}
+		
+		
 		
 }

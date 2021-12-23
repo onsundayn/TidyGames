@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.TidyGames.member.model.service.PointService;
+import com.TidyGames.member.model.vo.Member;
 import com.TidyGames.member.model.vo.Point;
 
 /**
@@ -32,8 +33,20 @@ public class AdminPointDetailController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-	
+		request.setCharacterEncoding("UTF-8");
 		
+		int memNo = Integer.parseInt(request.getParameter("mNo"));
+		
+		
+		ArrayList<Point> point = new PointService().selectPoint(memNo);  
+		
+		request.setAttribute("point", point);
+	
+	
+		Point sum = new PointService().sumPoint(memNo);
+		
+		request.setAttribute("sum", sum);
+	
 		request.getRequestDispatcher("views/member/adminPointDetailView.jsp").forward(request, response);
 	
 	}

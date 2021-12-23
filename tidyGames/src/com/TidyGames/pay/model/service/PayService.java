@@ -100,6 +100,17 @@ public class PayService {
 		return list;
 	}
 	
+	public ArrayList<Pay> adDateOrderList(String start, String end) {
+
+		Connection conn = getConnection();
+		
+		 ArrayList<Pay> list = new PayDao().adDateOrderList(conn, start, end);
+		 
+		 close(conn);
+		 
+		return list;
+	}
+	
 	
 	public ArrayList<PayGame> rforderList(int memNo, int orderNo) {
 
@@ -146,6 +157,47 @@ public class PayService {
 		 
 		return list;
 	}
+	
+	//관리자 환불 날짜 전체상태조회
+	
+public ArrayList<Refund> adAllRefundList(String start, String end) {
+		
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Refund> list = new PayDao().adAllRefundList(conn, start, end);
+		
+		 close(conn);
+		 
+		return list;
+	}
+	
+public ArrayList<Refund> adComfirmRefundList(String start, String end) {
+	
+	
+	Connection conn = getConnection();
+	
+	ArrayList<Refund> list = new PayDao().adComfirmRefundList(conn, start, end);
+	
+	 close(conn);
+	 
+	return list;
+}
+public ArrayList<Refund> adNoComfirmRefundList(String start, String end) {
+	
+	
+	Connection conn = getConnection();
+	
+	ArrayList<Refund> list = new PayDao().adNoComfirmRefundList(conn, start, end);
+	
+	 close(conn);
+	 
+	return list;
+}
+	
+	
+	
+	
 	
 	public Refund refundContent(int memNo, int orderNo) {
 		
@@ -261,4 +313,7 @@ public class PayService {
 		
 		
 	}
+	
+	
+	
 }

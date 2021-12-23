@@ -84,9 +84,9 @@ table {
 		<div align="right">
 			<% if(loginUser != null && loginUser.getMemNo() == p.getMemNo()) { %>
 				<a href="<%= contextPath %>/updateForm.po?cpage=<%=pi.getCurrentPage()%>&num=<%= p.getPostNo() %>" class="btn btn-sm btn-info">수정</a> 
-				<a href="<%= contextPath %>/delete.po?cpage=<%=pi.getCurrentPage()%>&num=<%=p.getPostNo()%>" class="btn btn-sm btn-danger">삭제</a>
-			<% } else if(loginUser != null && loginUser.getMemAccess().equals("unblock")) { %>
-				<button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#myModal">신고</button>
+				<button data-toggle="modal" data-target="#deleteModal" class="btn btn-sm btn-danger">삭제</button>
+			<% } else if(loginUser != null) { %>
+				<button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#myModal">신고</button>
 			<% } %>
 		</div>
 		<br>
@@ -108,7 +108,7 @@ table {
 							<th width="60">작성자</th>
 							<td width="100"><%=p.getPostWriter()%></td>
 							<th width="60">작성일</th>
-							<td width="200"><%=p.getPostModify()%></td>
+							<td width="200"><%=p.getPostEnroll()%></td>
 							<th width="70">조회수</th>
 							<td width="80"><%=p.getPostView()%></td>
 							<th width="70">추천수</th>
@@ -127,7 +127,7 @@ table {
 						</tr>
 						<tr>
 							<th width="50" style="display: flow-root"><h5>내용</h5></th>
-							<td colspan="6"><pre width="1000" height="20000"><%=p.getPostContent()%></pre></td>
+							<td colspan="6"><pre><%=p.getPostContent()%></pre></td>
 						</tr>
 						<tr>
 							<th></th>
@@ -142,10 +142,11 @@ table {
 						</tr>
 					</table>
 					<table>
-						<th width="80">첨부파일</th>
 							<% if(flist.isEmpty()) { %>
+								<th width="80">첨부파일</th>
 								<td>첨부파일이 없습니다</td>
 							<% } else { %>
+									<th width="1000">첨부파일</th>
 								<% for(int i=0; i<flist.size(); i++) { %>
 									<tr><td><a download="<%= flist.get(i).getFileOrigin() %>" href="<%=contextPath%>/<%=flist.get(i).getFilePath() + flist.get(i).getFileChange()%>"><%= flist.get(i).getFileOrigin() %></td></tr></a>
 								<% } %>
@@ -210,6 +211,29 @@ table {
 	</div>
 	<br>
 	<br>
+	
+	
+	
+	<%-- deleteModal --%>
+	<div class="modal" id="deleteModal">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h4 class="modal-title">잠깐!</h4>
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	      </div>
+	      <div class="modal-body">
+	        	정말 게시물을 삭제하시겠습니까? 예를 누르면 삭제됩니다.
+	      </div>
+	      <div class="modal-footer">
+	      	<button id="deletePost" class="btn btn-info">예</button>
+	        <button type="button" class="btn btn-danger" data-dismiss="modal">아니오</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	
 
 	<div class="modal" id="myModal">
 		<div class="modal-dialog">
@@ -261,7 +285,10 @@ table {
 		<script>
 			$(function(){
 				
-				$("#")
+				$("#deletePost").click(function(){
+					var url = "<%= contextPath %>/delete.po?cpage=<%=pi.getCurrentPage()%>&num=<%= p.getPostNo() %>";
+					location.href = url;
+				});
 				
 				$("#postReport").click(function(){
 					const reportNo = $(".modal-footer").children().eq(0).val();

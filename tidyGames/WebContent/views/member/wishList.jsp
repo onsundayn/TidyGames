@@ -1,8 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import ="java.util.ArrayList, com.TidyGames.game.model.vo.*, com.TidyGames.member.model.vo.*"%>
+    pageEncoding="UTF-8" import ="java.util.ArrayList,com.TidyGames.common.model.vo.*, com.TidyGames.game.model.vo.*, com.TidyGames.member.model.vo.*"%>
     
     
 <%
+
+PageInfo pi = (PageInfo)request.getAttribute("pi");
+
+int currentPage = pi.getCurrentPage();
+int startPage = pi.getStartPage();
+int endPage = pi.getEndPage();
+int maxPage = pi.getMaxPage();
+
+
 ArrayList<WishList> wish = (ArrayList<WishList>)request.getAttribute("wish");
 Game g = (Game)session.getAttribute("g");
 %>    
@@ -252,7 +261,7 @@ Game g = (Game)session.getAttribute("g");
                                     <tr>
                                         <td width="150">
                                             <div >
-                       							<img src="<%=contextPath%>/<%=w.getGameImg()%>" width="200px" height="150px">
+                       							<img src="<%=request.getContextPath()%>/<%=w.getFilePath() + w.getChangeName()%>" width="200px" height="150px">
                                             </div>
                                         </td>
 
@@ -314,21 +323,33 @@ Game g = (Game)session.getAttribute("g");
 
         <% if(!wish.isEmpty()) { %>
             <div class="paging-area" style="float: right; margin-top: 100px; margin-right: 150px; text-align: center;">
+					
+  <%if(currentPage != 1){ %>
+            <button onclick="location.href='<%=contextPath%>/wishList.me?cpage=<%=currentPage-1%>';"> &lt; </button>
+          <%} %>  
+            
+            <%for(int p=startPage; p<=endPage; p++){ %>
+            
+            	<!-- 현재페이지이면 클릭안되게 -->
+            	<%if(p== currentPage) { %>
+            		<button disabled><%= p %></button>
+            	<%}else { %>
+            	<!-- 클릭이벤트 부여해서 url 요청-->
+            		<button onclick="location.href='<%=contextPath%>/wishList.me?cpage=<%=p%>';"><%= p %></button>
+            	<%} %>
+            <% } %>
+            <% if(currentPage != maxPage) { %>
+            <button onclick="location.href='<%=contextPath%>/wishList.me?cpage=<%=currentPage+1%>';"> &gt; </button>
+      		 <%} %>
 
-                <button> &lt; </button>
-                <button>1</button>
-                <button>2</button>
-                <button>3</button>
-                <button>4</button>
-                <button>5</button>
-                <button>6</button>
-                <button>7</button>
-                <button>8</button>
-                <button>9</button>
-                <button>10</button>
-                <button> &gt; </button>
-        
-            </div>
+
+		
+			</div>
+            
+            
+            
+            
+            
             <br><br><br>
           <% } %>
     </div>

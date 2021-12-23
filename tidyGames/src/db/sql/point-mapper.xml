@@ -14,7 +14,22 @@
       WHERE MEM_NO = ?
 	  
 	</entry>
-
+	
+	
+	
+	
+	<entry key="selectAllPoint">
+	    SELECT
+              MEM_NO
+            , POINT_AMOUNT
+            , TO_CHAR(POINT_DATE, 'YYYY-MM-DD') "POINT_DATE"
+            , POINT_CONTENT
+            , ORDER_NO
+       FROM POINT
+      WHERE MEM_NO = ?
+	  	AND "POINT_DATE" BETWEEN TO_DATE(?)
+                             AND TO_DATE(?)
+	</entry>
 	
 	<entry key="selectSave">
 	

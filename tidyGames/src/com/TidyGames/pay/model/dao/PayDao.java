@@ -246,6 +246,45 @@ public class PayDao {
 		
 	}
 	
+	public ArrayList<Pay> adDateOrderList(Connection conn, String start, String end) {
+		ArrayList<Pay> list = new  ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adDateOrderList");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			
+			pstmt.setString(1, start);
+			pstmt.setString(2, end);
+			
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				list.add(new Pay(
+								   rset.getInt("order_no"),
+								   rset.getInt("mem_no"),
+								   rset.getInt("pay_amount"),
+								   rset.getString("pay_status"),
+								   rset.getString("pay_date"),
+								   rset.getString("mem_id")));
+								
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	
+	
+		
+	}
 	
 	
 	public ArrayList<PayGame> rforderList(Connection conn , int memNo, int orderNo) {
@@ -414,6 +453,137 @@ public class PayDao {
 		return list;
 		
 	}
+	
+	
+	public ArrayList<Refund> adAllRefundList(Connection conn, String start, String end) {
+		
+		ArrayList<Refund> list = new  ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adAllRefundList");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, start);
+			pstmt.setString(2, end);
+			
+		
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Refund(
+								   rset.getInt("REFUND_NO"),
+								   rset.getInt("MEM_NO"),
+								   rset.getInt("ORDER_NO"),
+								   rset.getString("REFUND"),
+								   rset.getString("ADD_WRITING"),
+								   rset.getString("REFUND_DATE"),
+								   rset.getString("REFUND_STATUS"),
+								   rset.getString("MEM_ID"),
+								   rset.getInt("PAY_AMOUNT"),
+								   rset.getString("PAY_DATE")));
+								
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+	
+		return list;
+		
+	}
+	
+	// 처리된 것만 조회
+public ArrayList<Refund> adComfirmRefundList(Connection conn, String start, String end) {
+		
+		ArrayList<Refund> list = new  ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adComfirmRefundList");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, start);
+			pstmt.setString(2, end);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Refund(
+								   rset.getInt("REFUND_NO"),
+								   rset.getInt("MEM_NO"),
+								   rset.getInt("ORDER_NO"),
+								   rset.getString("REFUND"),
+								   rset.getString("ADD_WRITING"),
+								   rset.getString("REFUND_DATE"),
+								   rset.getString("REFUND_STATUS"),
+								   rset.getString("MEM_ID"),
+								   rset.getInt("PAY_AMOUNT"),
+								   rset.getString("PAY_DATE")));
+								
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+	
+		return list;
+		
+	}
+
+
+public ArrayList<Refund> adNoComfirmRefundList(Connection conn, String start, String end) {
+	
+	ArrayList<Refund> list = new  ArrayList<>();
+	PreparedStatement pstmt = null;
+	ResultSet rset = null;
+	String sql = prop.getProperty("adNoComfirmRefundList");
+	
+	
+	try {
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, start);
+		pstmt.setString(2, end);
+	
+		rset = pstmt.executeQuery();
+		
+		while(rset.next()) {
+			list.add(new Refund(
+							   rset.getInt("REFUND_NO"),
+							   rset.getInt("MEM_NO"),
+							   rset.getInt("ORDER_NO"),
+							   rset.getString("REFUND"),
+							   rset.getString("ADD_WRITING"),
+							   rset.getString("REFUND_DATE"),
+							   rset.getString("REFUND_STATUS"),
+							   rset.getString("MEM_ID"),
+							   rset.getInt("PAY_AMOUNT"),
+							   rset.getString("PAY_DATE")));
+							
+		}
+		
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(rset);
+		close(pstmt);
+	}
+
+	return list;
+	
+}
 	
 	public Refund refundContent(Connection conn, int memNo, int orderNo) {
 		

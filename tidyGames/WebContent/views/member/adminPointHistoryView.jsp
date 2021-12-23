@@ -36,7 +36,7 @@
     /* 포인트조회영역 */
     .area2{
         width: 1000px;
-        height: 200px;
+        height: 100px;
         border: 3px solid red;
         font-weight: bold;
        
@@ -46,27 +46,6 @@
     }
 
 
-    /* 7일 ,한달, 3개월 6개월 조회버튼 */
-    .dateSearch{
-        margin: 8px 30px 0px 120px;
-        display: inline-block;
-        border: 1px solid orange;
-   
-    }
-    .dateSearch>button{
-        border-radius: 5px;
-        font-weight: bold;
-        background: none;
-    }
-    /* 달력 div */
-    .datetable{
-        display: inline-block;
-        margin-right: 20px;
-    }
-    .datetable>input{
-        border-radius: 5px;
-        
-    }
    /* 분류 */
    .search{
        border: 1px;
@@ -78,7 +57,7 @@
         width: 1000px;
         height: 70px;
         
-        margin:30px 0px 10px 90px;
+        margin:30px 0px 10px 120px;
       
       
     }
@@ -162,23 +141,6 @@
                 </div> 
 
             
-                <div class="dateSearch">
-                   
-                   <button name="weekend">일주일</button>
-                   <button name="month">1개월</button>
-                   <button name="threemonth">3개월</button>
-                   <button name="sixmonth">6개월</button>
-                
-                </div>
-
-                <div class="datetable">
-                    <input type="date" name="startdate" class="date">
-                    <span style="color:black">&nbsp;&nbsp; ~ &nbsp;&nbsp;</span>
-                    <input type="date" name="startdate" class="date">
-                </div>
-            
-                
-                <button type="submit" class="btn btn-sm btn-secondary" style="width: 50px; height: 35px;">조회</button>
 
             </form>
         </div>
@@ -209,7 +171,7 @@
                         <td><%=po.getMemId() %></td>
                         <td><%=po.getSum() %>POINT</td>
                         <td><a href="" id="btn" class="btn btn-sm btn-dark" data-toggle="modal" data-target="#pointModal">변경</a>
-                            <a href="<%= request.getContextPath() %>/adPointDe.me" class="btn btn-success btn-sm">상세보기</a></td>
+                            <a href="<%= request.getContextPath() %>/adPointDe.me?mNo=<%=po.getMemNo()%>" class="btn btn-success btn-sm">상세보기</a></td>
                       
                      <%} %>
                    
@@ -232,7 +194,7 @@
 							<!-- Modal body -->
 							<div class="modal-body">
                                 <div class="pointcontent">
-                                    <b style="margin-top: 20px;">회원보유포인트 : <%=po.getSum() %></b>
+                                    <b style="margin-top: 20px;">회원보유포인트 :</b>
                                     <div class="memPoint"></div>
                                 </div>
 

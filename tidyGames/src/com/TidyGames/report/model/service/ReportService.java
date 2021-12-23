@@ -20,12 +20,6 @@ public class ReportService {
 		Connection conn = getConnection();
 		
 		int listCount = new ReportDao().selectBlockCount(conn);
-			
-		if(listCount > 0){
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
 		
 		close(conn);
 		
