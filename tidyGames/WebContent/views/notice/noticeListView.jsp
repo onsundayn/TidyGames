@@ -70,7 +70,7 @@
                 <!--관리자계정에서만보이는 버튼-->
                 <% if(loginUser != null && loginUser.getRoleId().equals("A")) { %>
                     <a href="" class="btn btn-sm btn-danger">삭제</a>
-                    <a href="" class="btn btn-sm btn-info">글작성</a>
+                    <a href="<%= contextPath %>/noticeEnroll.no" class="btn btn-sm btn-info">글작성</a>
                 <% } %>
             </div>
 

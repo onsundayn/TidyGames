@@ -1,10 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.TidyGames.post.model.vo.Post, com.TidyGames.common.model.vo.PageInfo,
-				 com.TidyGames.post.model.vo.PostFile, java.util.ArrayList"
+<%@ 
+	page import="com.TidyGames.notice.model.vo.Notice, com.TidyGames.common.model.vo.PageInfo,
+	com.TidyGames.notice.model.vo.NoticeFile, java.util.ArrayList"
 %>
 <%
-
+	Notice noticeDetail = (Notice)session.getAttribute("noticeDetail");
+	ArrayList<NoticeFile> fileList = (ArrayList<NoticeFile>)request.getAttribute("fileList");
+	int firstNo = (int)request.getAttribute("firstNo");
+	int lastNo = (int)request.getAttribute("lastNo");
+	int currentPage = (int)request.getAttribute("currentPage");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -47,17 +53,16 @@
 	margin: auto;
 	width: 1100px;
 }
-
-#enroll-form input, #enroll-form textarea {
-	width: 100%;
-	box-sizing: border-box;
-}
-
 table {
 	color: black;
 }
-.like {
-	cursor:pointer;
+#imgForm{
+	width: 100%;
+	height: 100%;
+	margin: auto;
+}
+#imgForm>img{
+	margin: auto;
 }
 </style>
 </head>
@@ -70,15 +75,13 @@ table {
 	
 	<div class="outer">
 
-		<h2>
-			TIDY NOTICE</i>
-		</h2>
+		<h2>TIDY NOTICE</h2>
 		
 		<br>
 		<div align="right">
 			<% if(loginUser != null && loginUser.getRoleId().equals("A")) { %>
-				<a href="" class="btn btn-sm btn-info">수정</a> 
-				<a href="" class="btn btn-sm btn-danger">삭제</a>
+				<a href="<%= contextPath %>/noticeUpdatePage.no?num=<%=noticeDetail.getNotiNo()%>" class="btn btn-sm btn-info">수정</a> 
+				<a class="btn btn-sm btn-danger" onclick="deleteNotice();">삭제</a>
 			<% } %>
 		</div>
 		
@@ -88,27 +91,44 @@ table {
 			<div id="read-form">
 
 				<div class="underline">
-					<table>
+					<table style="width: 100%;">
 						<tr>
-							<th width="60"><h5>제목</h5></th>
-							<td width="1000"><h6></h6></td>
+							<th width="10%"><h5><b>제목</b></h5></th>
+							<td width="90%"><h6><b><%= noticeDetail.getNotiTitle() %></b></h6></td>
 						</tr>
-						<tr><td colspan="2" height="20"></td></tr>
 						<tr>
-							<th width="70">작성일</th>
-							<td width="200"></td>
+							<td colspan="2" height="20"></td>
 						</tr>
-						<tr><td colspan="2" height="20"></td></tr>
+						<tr>
+							<th>작성일</th>
+							<td><%= noticeDetail.getNotiDate() %></td>
+						</tr>
+						<tr>
+							<td colspan="2" height="20"></td>
+						</tr>
 					</table>
 				</div>
 
 				<div class="underline">
-					<table>
-						<tr><td colspan="2" height="20"></td></tr>
+					<table style="width: 100%;">
 						<tr>
-							<th width="50" style="display: flow-root"><h5>내용</h5></th>
-							<td>
-								<pre width="1000" height="20000"></pre>
+							<td colspan="2" height="20"></td>
+						</tr>
+						<tr>
+							<th width="10%"><h5>내용</h5></th>
+							<td width="90%">
+								<p>
+									<% if(fileList != null) {%>
+										<div id="imgForm">
+											<% for(int i=0; i<fileList.size(); i++) { %>
+												<img src="<%= contextPath %>/<%= fileList.get(i).getFilePath() + fileList.get(i).getFileChange() %>" width="50%" height="50%">
+											<% } %>
+										</div>
+									<% } %>
+								</p>
+								<pre>
+									<%= noticeDetail.getNotiContent() %>
+								</pre>
 							</td>
 						</tr>
 						<!-- 일단 여기까지 -->
@@ -120,7 +140,9 @@ table {
 							<td colspan="2" height="20"></td>
 						</tr>
 					</table>
-					<!-- 첨부파일 관련 1 -->
+<!-- 첨부파일 -->
+					
+
 				 </div>
 
 				<br>
@@ -128,9 +150,28 @@ table {
 		</div><!-- view-form -->
 	</div><!-- outer -->
 	<br>
-	<!-- 첨부파일 관련 2 -->
+	<div align="center">
+		<% if(noticeDetail.getNotiNo() != firstNo) { %>
+			<a href="<%=contextPath%>/noticeDetail.no?cpage=<%=currentPage%>&num=<%=noticeDetail.getNotiNo() - 1%>" class="btn btn-sm btn-secondary"><i class="fas fa-angle-double-left fa-lg"></i></a> 
+		<% } %>
+		<a href="<%=contextPath%>/notice.no?cpage=<%=currentPage%>" class="btn btn-sm btn-secondary"><i class="fas fa-align-justify fa-lg"></i></a> 
+		<% if(noticeDetail.getNotiNo() != lastNo) { %>
+			<a href="<%=contextPath%>/noticeDetail.no?cpage=<%=currentPage%>&num=<%=noticeDetail.getNotiNo() + 1%>" class="btn btn-sm btn-secondary"><i class="fas fa-angle-double-right fa-lg"></i></a>
+		<% } %>
+	</div>
+
 	<br>
 	<br>
+
+	<script>
+		function deleteNotice(){
+			if(confirm("게시글을 삭제하시겠습니까?")){
+				location.href="<%=contextPath%>/noticeDelete.no?num=<%=noticeDetail.getNotiNo()%>";
+			}
+		}
+
+	</script>
+
 
 </body>
 </html>

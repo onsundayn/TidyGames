@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	#help{color:orange;}
+	#faq{color:orange;}
 	.navi{border-bottom:2px solid rgba(255, 255, 255, 0.333);}
 	.outer{
 		background-color: #0e332c;
@@ -46,55 +46,34 @@
         <h4 style="font-style: oblique; line-height: 2; float: left;">&nbsp;&nbsp;FAQ</h4>
         <h4 style="line-height: 2; color: gray; cursor: pointer;" onclick="location.href=''">&nbsp;&nbsp;1:1문의</h4>
         <br><br>
-        <form action="">
-
-            <div align="right" style="width:1200px;">
-                <!--관리자계정에서만보이는 버튼-->
+        <div id="deletebtn" align="right" style="width:1200px;">
+            <!--관리자계정에서만보이는 버튼-->
+            <% if(loginUser != null && loginUser.getRoleId().equals("A")) { %>
                 <a href="" class="btn btn-sm btn-danger">삭제</a>
-                <a href="" class="btn btn-sm btn-info">글작성</a>
+                <a href="<%= contextPath %>/noticeEnroll.no" class="btn btn-sm btn-info">글작성</a>
+            <% } %>
+            <!--
+            <button type="button" class="btn-category" style="width: 250px;" onclick="category('join');">가입 및 사이트 관련</button>
+            <button type="button" class="btn-category" style="width: 100px;" onclick="category('pay');">결제 관련</button>
+            <button type="button" class="btn-category" style="width: 100px;" onclick="category('etc');">기타</button>
+            -->
+        </div>
 
-                <button type="button" class="btn-category" style="width: 250px;" onclick="category('join');">가입 및 사이트 관련</button>
-                <button type="button" class="btn-category" style="width: 100px;" onclick="category('pay');">결제 관련</button>
-                <button type="button" class="btn-category" style="width: 100px;" onclick="category('etc');">기타</button>
-            </div>
+        <hr style="background-color: white; height: 3px;" >
+        <div class="q">
 
-            <br>
+        </div>
+        <pre class="a">
 
-            <table align="center" style="font-size: 12pt" class="table table-sm" id="table">
+        </pre>
 
-                <thead>
-                    <!--체크박스 ; 관리자만 보이게-->
-                    <th><input type="checkbox" id="check1"></th>
-                    <th width="1100">제목</th>
-                </thead>
-                <tbody>
-                    <!--게시물이 없을 경우-->
-                    <tr>    
-                        <td colspan="2">조회된 게시글이 없습니다.</td>
-                    </tr>
-                    <!--게시물 있을 경우-->
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td width="1100" align="left">Q. 이것은 질문질문?</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td width="1100" align="left">Q. 이것은 질문질문?</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td width="1100" align="left">Q. 이것은 질문질문?</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td width="1100" align="left">Q. 이것은 질문질문?</td>
-                    </tr>
-                </tbody>
-            </table>
-            <hr style="background-color: white;">
-            <br><br>
 
-        </form>
+
+
+        
+        <hr style="background-color: white; height: 3px;" >
+        <br><br>
+
 
     </div>
 
