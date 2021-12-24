@@ -1,4 +1,4 @@
-package com.TidyGames.notice.controller;
+package com.TidyGames.qna.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.TidyGames.notice.model.service.QnaService;
+import com.TidyGames.qna.model.service.QnaService;
 
 /**
  * Servlet implementation class AdminQnaInsertAnswerController

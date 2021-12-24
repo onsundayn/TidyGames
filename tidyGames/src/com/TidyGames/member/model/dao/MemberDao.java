@@ -23,6 +23,7 @@ import javax.mail.internet.MimeMessage;
 import com.TidyGames.common.model.vo.PageInfo;
 import com.TidyGames.member.model.vo.Member;
 import com.TidyGames.notice.model.vo.Notice;
+import com.TidyGames.qna.model.vo.Qna;
 
 public class MemberDao {
 
@@ -637,9 +638,9 @@ public class MemberDao {
 		
 	}
 	
-	public ArrayList<Notice> myQnaList(Connection conn, int memNo, PageInfo pi) {
+	public ArrayList<Qna> myQnaList(Connection conn, int memNo, PageInfo pi) {
 		
-		ArrayList<Notice> list = new ArrayList<>();
+		ArrayList<Qna> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("myQna");
@@ -656,11 +657,11 @@ public class MemberDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(new Notice(
+				list.add(new Qna(
 									rset.getInt("qna_no")
 						          , rset.getString("qna_title")
 						          , rset.getString("qna_content")
-						          , rset.getDate("report_date")
+						          , rset.getString("report_date")
 						          , rset.getString("ans_content")));
 			}
 			

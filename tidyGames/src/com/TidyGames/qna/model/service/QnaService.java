@@ -1,21 +1,18 @@
-package com.TidyGames.notice.model.service;
+package com.TidyGames.qna.model.service;
 
-import static com.TidyGames.common.JDBCTemplate.close;
-import static com.TidyGames.common.JDBCTemplate.commit;
-import static com.TidyGames.common.JDBCTemplate.getConnection;
-import static com.TidyGames.common.JDBCTemplate.rollback;
+import static com.TidyGames.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.TidyGames.common.model.vo.Attachment;
 import com.TidyGames.common.model.vo.PageInfo;
-import com.TidyGames.notice.model.dao.QnaDao;
-import com.TidyGames.notice.model.vo.Notice;
+import com.TidyGames.qna.model.dao.QnaDao;
+import com.TidyGames.qna.model.vo.Qna;
 
 public class QnaService {
 
-	public int insertQna(Notice qna, Attachment at) {
+	public int insertQna(Qna qna, Attachment at) {
 		
 		Connection conn = getConnection();
 
@@ -36,10 +33,10 @@ public class QnaService {
 		return result1 * result2;
 	}
 	
-	public ArrayList<Notice> qnaWaitList(PageInfo pi) {
+	public ArrayList<Qna> qnaWaitList(PageInfo pi) {
 		Connection conn = getConnection();
 		
-		ArrayList<Notice> list = new QnaDao().qnaWaitList(conn, pi);
+		ArrayList<Qna> list = new QnaDao().qnaWaitList(conn, pi);
 		
 		close(conn);
 		
@@ -49,23 +46,23 @@ public class QnaService {
 	public int selectListCount() {
 		Connection conn = getConnection();
 		
-		int result = new QnaDao().selectListCount(conn);
+		int listCount = new QnaDao().selectListCount(conn);
 		
-		if(result > 0) {
+		if(listCount > 0) {
 			commit(conn);
 		}else {
 			rollback(conn);
 		}
 		
 			close(conn);
-		return result;
+		return listCount;
 		
 	}
 	
-	public ArrayList<Notice> qnaDetailView(int notiNo) {
+	public ArrayList<Qna> qnaDetailView(int qnaNo) {
 		Connection conn = getConnection();
 		
-		ArrayList<Notice> list = new QnaDao().qnaDetailView(conn, notiNo);
+		ArrayList<Qna> list = new QnaDao().qnaDetailView(conn, qnaNo);
 		
 		close(conn);
 		return list;

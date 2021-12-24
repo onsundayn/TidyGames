@@ -1,6 +1,7 @@
-package com.TidyGames.notice.controller;
+package com.TidyGames.qna.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,18 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.TidyGames.common.model.vo.Attachment;
+import com.TidyGames.qna.model.service.QnaService;
+import com.TidyGames.qna.model.vo.Qna;
 
 /**
- * Servlet implementation class adminQnaQuestionController
+ * Servlet implementation class adminQnaAnswerController
  */
-@WebServlet("/question.me")
-public class AdminQnaQuestionController extends HttpServlet {
+@WebServlet("/answer.no")
+public class AdminQnaAnswerController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminQnaQuestionController() {
+    public AdminQnaAnswerController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,11 +32,15 @@ public class AdminQnaQuestionController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
-			
-			
-		request.getRequestDispatcher("views/notice/adminQnaQuestion.jsp").forward(request, response);
+	
+		int qnaNo = Integer.parseInt(request.getParameter("qno"));
+																		
+		ArrayList<Qna> list = new QnaService().qnaDetailView(qnaNo);
+		Attachment at = new QnaService().selectAttachment(qnaNo);
 		
+		request.setAttribute("list", list);
+		request.setAttribute("at", at);
+		request.getRequestDispatcher("views/qna/adminQnaAnswer.jsp").forward(request, response);
 	}
 
 	/**

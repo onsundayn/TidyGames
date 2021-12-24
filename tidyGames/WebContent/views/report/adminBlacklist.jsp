@@ -11,7 +11,7 @@
 	int endPage = pi.getEndPage();
 	int maxPage = pi.getMaxPage();
 	int listCount = pi.getListCount();
-	
+	 
 %>
 <html>
 <head>
