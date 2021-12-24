@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.TidyGames.common.model.vo.PageInfo;
+import com.TidyGames.game.model.vo.Review;
 import com.TidyGames.member.model.dao.MemberDao;
 import com.TidyGames.member.model.vo.Member;
 import com.TidyGames.qna.model.vo.Qna;
@@ -280,6 +281,17 @@ public class MemberService {
 		
 		close(conn);
 		return listCount;
+	}
+	
+	public ArrayList<Review> myReviewList(int memNo) {
+		Connection conn = getConnection();
+		
+		ArrayList<Review> list = new MemberDao().myReviewList(conn, memNo);
+		
+		close(conn);
+		return list;
+		
+		
 	}
 	
 }

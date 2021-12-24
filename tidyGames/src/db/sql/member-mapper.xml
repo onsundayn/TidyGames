@@ -299,4 +299,21 @@
 		 WHERE REVIEW_STATUS = 'Y' 
 		   AND R.MEM_NO = ?
 	</entry>
+	<entry key="myReviewList">
+		SELECT
+		          REVIEW_NO
+		        , KOR_NAME
+		        , ENG_NAME
+		        , CONTENTS
+		        , RECOMMEND
+		        , TO_CHAR(R.UPLOAD_DATE, 'YYYY.MM.DD') UPLOAD_DATE
+		        , STAR_NO
+		        , GAME_IMG
+		  FROM REVIEW R
+		  JOIN GAME G USING(GAME_NO)
+		 WHERE REVIEW_STATUS = 'Y'
+		   AND MEM_NO = ?
+		 ORDER
+		    BY 6 DESC
+	</entry>
 </properties>

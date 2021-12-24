@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.game.model.vo.Review"%>
+    
+<%
+	ArrayList<Review> list = (ArrayList<Review>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +12,7 @@
 <style>
     div{
 		box-sizing: border-box;
-		color:white;
+		color:black;
 		/* border: 1px solid rgba(255, 255, 255, 0.555); */
 	}
 	#outer{
@@ -27,24 +31,24 @@
         font-size: 33px;
         font-weight: 900;
         color :white;
-        margin: 30px 0px 0px 110px;
+        margin: 30px 0px 0px 50px;
     }
     #line_3{
         width:210px;
         height:3px;
         background: rgba(255, 255, 255, 0.555);
-        margin: 8px 0px 0px 110px;
+        margin: 8px 0px 0px 50px;
     }
     #box{
-    	/* width:1290px;	 */
+    	 width:1290px;	
     	/* border:1px solid rgba(255, 255, 255, 0.222); */
         /* height: */
         
     }
     .tableBox{
-        width:800px;
-        height:480px;
-        margin: 20px 0px 10px 105px;
+        width:1100px;
+        height:auto;
+        margin: 20px 0px 170px 50px;
         background-color: rgb(197, 197, 197);
         border: 10px solid rgba(255, 255, 255, 0.555);
     }
@@ -79,7 +83,7 @@
     #table{
         margin:auto;
         margin-top:30px;
-        width:700px;
+        width:1000px;
         background:none;
         color:black;
     }
@@ -98,12 +102,11 @@
         background:none;
         border:none;
     }
-    .content{
-        margin:0px;
-        width:100%;
-        background:none;
-        border:none;
-        font-size:16px;
+    #content{
+        width:70%;
+        padding:15px; 
+        font-size:17px;
+        /* border:none; */
     }
     #answerTable{
         background:none;
@@ -133,6 +136,19 @@
     #pagebar{
         margin: 10px 10px 10px 110px;
     }
+    #headerBar{
+        font-size: 19px;
+        font-weight: 700;
+        border: none;
+    }
+    #table td>span{
+        font-size:24px;
+        font-weight:600;
+    }
+    #table td>label{
+        margin-left: 6px;
+        font-size:18px;
+    }
 
 </style>
 </head>
@@ -154,65 +170,53 @@
                 <div id="intro">나의 리뷰</div>
                 <div id="line_3"></div>
             </div>
-            <div id="pTag">
+            <!-- <div id="pTag">
                 <a href="" style="font-size:20px; font-weight: bold;">내가 작성한 리뷰 2개</a>
-            </div>
+            </div> -->
         </div>
         
-            <div class="tableBox">
-                <table id="table" class="table table-dark" align="center">
-                    <tr>
-                        <td rowspan="3" width="200">
-                            <img src="">
-                        </td>
-                        <td style="font-size:20px; font-weight:bold; padding:0px; padding-top:20px;">스타듀밸리</td>
-                    </tr>
-                    <tr>
-                        <td style="border:none; padding:0px;">☆☆☆</td>
-                    </tr>
-                    <tr >
-                        <td colspan="2"  style="border:none" align=right>작성일시 | 21-11-18</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <textarea name="content" class="content" cols="10" rows="8" style="resize:none" readonly>정말 재미있어요 완전 추천합니다아</textarea>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" align=right width="70">추천 16</td>
-                    </tr>
-                </table>
+        
+        
+        <div class="tableBox">
+        
+        <% if(list.isEmpty()) { %>
+        	<div align="center" style="height:100px;">
+        		<span style="font-size:18px; font-weight:800; line-height:100px">작성한 리뷰가 없습니다.</span>
+        	</div>
+        	
+        <% } %>
+        
+			<% for (Review re : list) { %>
+        	<table id="table" class="table table-dark" align="center">
+                <tr>
+                    <td id="headerBar" colspan="2"><%= re.getUploadDate() %></td>
+                </tr>
+                <tr>
+                    <td rowspan="2" id="content"><%= re.getContents() %></td>
+                    <td width="30%" style="height:0px;"><span><%= re.getEngName() %></span>
+                    									<% int i = 0; %>
+                    									<label><% for(i=0; i<re.getStarNo(); i++) { %>
+                    											 	☆				
+                    											<% } %>
+                    									</label></td>
+                </tr>
+                <tr>
+                    <td >
+                        <img width="300px" style="margin-top:10px;" src="<%= re.getGameImg() %>">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">추천수 <span style="color:red; font-size:14px"><%= re.getRecommend() %></span></td>
+                </tr>
+            </table>
+            <% } %>
+            
+            
+            
+            
             </div>
 
-            <div>
-                <div id="gameList" class="tableBox" style="margin-bottom: 20px;">
-                    <table id="table" class="table table-dark" align="center">
-                    <tr align="center">
-                        <th><a style="font-size:15px;">game list name</a></th>
-                    </tr>
-                    <tr align="center">
-                        <th><a style="font-size:15px;">game list name</a></th>
-                    </tr>
-                    <tr align="center">
-                        <th><a style="font-size:15px;">game list name</a></th>
-                    </tr>
-                    
-                </table>
-                
-            </div>
-            <div>
-                <div id="pagebar" align="center">
-                    <button class="btn btn-sm btn-outline-secondary">&lt;</button>   
-                    <button class="btn btn-sm btn-outline-secondary">1</button>
-                    <button class="btn btn-sm btn-outline-secondary">2</button>
-                    <button class="btn btn-sm btn-outline-secondary">3</button>
-                    <button class="btn btn-sm btn-outline-secondary">4</button>
-                    <button class="btn btn-sm btn-outline-secondary">5</button>
-                    <button class="btn btn-sm btn-outline-secondary">&gt;</button>
-                </div>  
-                </div>
-            </div>
-    </div>
+        </div>
 
 
 

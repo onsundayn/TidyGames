@@ -62,9 +62,9 @@ public class AdminQnaWaitingListController extends HttpServlet {
 		if(!list.isEmpty()) {			
 			request.setAttribute("pi", pi);	
 			request.setAttribute("list", list);
-			request.getRequestDispatcher("views/qna/adminQnaWaitingList.jsp").forward(request, response);
 		}
 			
+		request.getRequestDispatcher("views/qna/adminQnaWaitingList.jsp").forward(request, response);
 	}
 
 	/**

@@ -21,8 +21,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import com.TidyGames.common.model.vo.PageInfo;
+import com.TidyGames.game.model.vo.Review;
 import com.TidyGames.member.model.vo.Member;
-import com.TidyGames.notice.model.vo.Notice;
 import com.TidyGames.qna.model.vo.Qna;
 
 public class MemberDao {
@@ -700,6 +700,45 @@ public class MemberDao {
 		}
 		
 		return listCount;
+		
+	}
+	
+	public ArrayList<Review> myReviewList(Connection conn, int memNo) {
+		
+		ArrayList<Review> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("myReviewList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Review(rset.getInt("review_no")
+								  , rset.getString("contents")
+								  , rset.getInt("recommend")
+								  , rset.getString("upload_date")
+								  , rset.getInt("star_no")
+								  , rset.getString("kor_name")
+								  , rset.getString("eng_name")
+								  , rset.getString("game_img")));
+			}
+			
+			System.out.println(list);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+		
 		
 	}
 }
