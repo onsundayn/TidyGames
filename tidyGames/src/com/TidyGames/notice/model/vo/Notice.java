@@ -83,8 +83,7 @@ public class Notice {
 	@Override
 	public String toString() {
 		return "Notice [notiNo=" + notiNo + ", notiTitle=" + notiTitle + ", notiContent=" + notiContent + ", notiDate="
-				+ notiDate + ", notiStatus=" + notiStatus + "]";
+				+ notiDate + ", notiStatus=" + notiStatus + ", notiWriter=" + notiWriter + "]";
 	}
-
 	
 }
