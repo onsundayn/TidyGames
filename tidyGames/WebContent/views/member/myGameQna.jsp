@@ -1,5 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ page
+	import="java.util.ArrayList, com.TidyGames.qna.model.vo.Qna,
+			com.TidyGames.common.model.vo.*"
+ %>
+    
+<% 
+	ArrayList<Qna> list = (ArrayList<Qna>)request.getAttribute("list");
+	Attachment at = (Attachment)request.getAttribute("at");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+	int listCount = pi.getListCount();
+%>   	
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,12 +25,10 @@
 <style>
     div{
 		box-sizing: border-box;
-		color:white;
-		/* border: 1px solid rgba(255, 255, 255, 0.555); */
+		color:black;
 	}
 	#outer{
         width:1500px;
-        /* height:1500px; */
         margin:auto;
     }
     #outer>div{float:left;}
@@ -43,7 +58,7 @@
     }
     #tableBox{
         width:800px;
-        height:650px;
+        height:700px;
         /* margin-left:145px; */
         margin: 20px 0px 100px 105px;
         /* margin:auto; */
@@ -129,8 +144,10 @@
         text-decoration: none;
         color:rgba(255, 166, 0, 0.808);
     }
-
-
+    #table a{
+    	padding:0px;
+    	color:black;
+    }
 </style>
 </head>
 <body style="background:#0e332c;">
@@ -149,70 +166,104 @@
         <div id="top">
             <div>
                 <div id="intro">나의 문의내역</div>
-                <div id="line_3"></div>
             </div>
             <div id="pTag">
-          		
                 <p><a style="font-weight:bolder; color:rgba(255, 166, 0, 0.700)">게임관련 문의</a></p>
                 <p style="margin:0px 5px;">|</p>
-                <p><a href="<%= contextPath %>/myQna.me?cpage=1">1:1문의내역</a></p>
-                
-                
+                <p><a href="<%= contextPath %>/myQna.me?cpage=1">1:1 문의내역</a></p>
             </div>
         </div>
         
+            	
+           	<% if(list.isEmpty()) { %>
+            	   <div id="box">
+            <div></div>
+            <div id="tableBox" style="height:300px">
+            <div id="tableOut1" align="center">
+            		<span style="font-size:20px; font-weight:700">작성한 게임 관련 문의가 없습니다.</span>
+            </div>
+            
+        
+           	<% }else { %>
+
+            	
+
         <div id="box">
             <div></div>
             <div id="tableBox">
             <div id="tableOut1">
                 <table id="table" class="table table-dark" align="center">
-                    <tr>
+               	<% for(Qna qo : list) { %>
+               	    <tr>
+                       <th style="border:none; font-size:17px">게임</th>
+                       <td colspan="4" style="font-size:16px; font-weight:600; border:none; padding-left:0px"><%= qo.getGameName() %></td>
+                    </tr>
+               	
+                    <tr id="titleBar">
                         <th width="60">제목</th>
                         <td width="300" style="padding-left:0px">
-                            <input type="text" value="탈퇴 후 재가입할 수 있나요?" readonly>
+                           <input type="text" style="font-size:16px" value="<%= qo.getQnaTitle() %>" readonly>
                         </td>
                         <th width="70">작성자</th>
-                        <td style="padding-left:0px">호빵</td>
-                        <td align=right>작성일시 | 21-11-18</td>
-                        <!-- <td width="50px"></td> -->
+                        <td style="padding-left:0px"><%= loginUser.getMemNick() %></td>
+                        <td align=right>작성일시 | <%= qo.getQnaDate() %></td>
                     </tr>
                     <tr>
                         <td colspan="5">
-                            <textarea name="content" class="content" cols="10" rows="8" style="resize:none" readonly>아이디를 바꾸고 싶습니다 탈퇴 후에 바로 재가입이 가능한가요?</textarea>
+                            <textarea name="content" class="content" cols="10" rows="8" style="resize:none" readonly><%= qo.getQnaContent() %></textarea>
                         </td>
                     </tr>
                     <tr>
                         <th width="80">첨부파일 </th>
                         <td colspan="4">
-                            <a download="" href="" style="color:black;">upload 파일명.png</a>
-                        </td>
+                       	 <% if(!(at == null)) { %>
+                			<a download="<%= at.getOriginName() %>" href="<%=contextPath%>/<%=at.getFilePath() + at.getChangeName()%>"><%= at.getOriginName() %></a>
+                       <% } %>
+                       </td>
 
                     </tr>
+            
                 </table>
+                
+           
             </div>
             <div id="tableOut2">
                 <table id="answerTable" class="table table-dark" align="center">
                     <tr class="">
                         <th width="55" style="padding-right:0px"> 답변 | </th>
-                        <th>Tidy Games</th>
+                        <th><%= qo.getCompanyName() %></th>
                     </tr>
                     <tr>
                         <td colspan="3">
-                            <textarea name="answer" id="answerArea" class="content" cols="10" rows="3" style="resize:none">등록된 답변은 다음과 같습니다.</textarea>
+                            <textarea name="answer" id="answerArea" class="content" cols="10" rows="3" style="resize:none"><%= qo.getQnaAnswer() %></textarea>
                         </td>
                     </tr>
+           		<% } %>
                 </table>
             </div>
-            
-            <div id="pagebar" align="center">
-                <button class="btn btn-sm btn-outline-secondary">&lt;</button>   
-                <button class="btn btn-sm btn-outline-secondary">1</button>
-                <button class="btn btn-sm btn-outline-secondary">2</button>
-                <button class="btn btn-sm btn-outline-secondary">3</button>
-                <button class="btn btn-sm btn-outline-secondary">4</button>
-                <button class="btn btn-sm btn-outline-secondary">5</button>
-                <button class="btn btn-sm btn-outline-secondary">&gt;</button>
-            </div>  
+           	<% } %>
+          		<% if(!list.isEmpty()) { %>
+	                    <div class="paging-area" align="center">
+	                        <!-- 첫 페이지에서는 이전으로 비활성화 -->
+	 						<% if(currentPage != 1) { %>
+	            				<button onclick="location.href='<%=contextPath%>/myGameQna.me?cpage=<%=currentPage-1%>';"> &lt; </button>
+	           				 <% } %>
+	                        
+	                        <% for(int p=startPage; p<=endPage; p++) { %>
+	                        <!-- 페이징 버튼 활성화 조건 게시물수에 따른 버튼 활성화  -->
+	                            <% if(p == currentPage) { %>
+	                                <button disabled><%= p %></button>
+	                            <% }else { %>
+	                                <button onclick="location.href='<%= contextPath %>/myGameQna.me?cpage=<%= p %>';"><%= p %></button>
+	                            <% } %>
+	                        <% } %>
+	                        
+	                        <% if(currentPage != maxPage) { %>
+	                            	<button onclick="location.href='<%=contextPath%>/myGameQna.me?cpage=<%=currentPage+1%>';"> &gt; </button>
+	                            <!-- 현재 페이지가 마지막 페이지일 땐 다음으로 버튼 비활성화 -->
+	                        <% } %>
+	                    <% } %>
+	                    
         </div>
                 
         </div>
@@ -221,7 +272,6 @@
             <div style="height:100px"></div>
         </footer>
     </div>
-
 
 
 </body>

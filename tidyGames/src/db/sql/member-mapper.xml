@@ -268,7 +268,7 @@
 		                       QNA_NO
 		                     , QNA_TITLE
 		                     , QNA_CONTENT
-		                     , TO_CHAR(REPORT_DATE, 'YY/MM/DD') "REPORT_DATE"
+		                     , TO_CHAR(REPORT_DATE, 'YYYY-MM-DD') "REPORT_DATE"
 		                     , NVL(ANS_CONTENT, ' ') "ANS_CONTENT"
 		                 FROM QNA
 		                WHERE MEM_NO = ?
@@ -282,8 +282,12 @@
 		       COUNT(*) COUNT
 		 FROM QNA
 		WHERE MEM_NO = ?
-		ORDER 
-		   BY 1 DESC
+	</entry>
+	<entry key="gameQnaCount">
+	   SELECT 
+		       COUNT(*) COUNT
+		 FROM GAME_QNA
+		WHERE MEM_NO = ?
 	</entry>
 	<entry key="myReviewList">
 		SELECT 
@@ -298,5 +302,45 @@
 		  JOIN GAME USING(GAME_NO)
 		 WHERE REVIEW_STATUS = 'Y' 
 		   AND R.MEM_NO = ?
+	</entry>
+	<entry key="myReviewList">
+		SELECT
+		          REVIEW_NO
+		        , KOR_NAME
+		        , ENG_NAME
+		        , CONTENTS
+		        , RECOMMEND
+		        , TO_CHAR(R.UPLOAD_DATE, 'YYYY.MM.DD') UPLOAD_DATE
+		        , STAR_NO
+		        , GAME_IMG
+		  FROM REVIEW R
+		  JOIN GAME G USING(GAME_NO)
+		 WHERE REVIEW_STATUS = 'Y'
+		   AND MEM_NO = ?
+		 ORDER
+		    BY 6 DESC
+	</entry>
+	<entry key="myGameQna">    
+		SELECT *
+		FROM (
+		       SELECT ROWNUM RNUM, A.*
+		       FROM (
+		              	SELECT
+						        GQNA_NO
+						      , COMPANY_NAME
+						      , GQNA_TITLE
+						      , GQNA_CONTENT
+						      , TO_CHAR(GQNA_DATE, 'YYYY-MM-DD') "GQNA_DATE"
+						      , NVL(GQNA_ANSWER, ' ') "GQNA_ANSWER"
+						      , ENG_NAME
+						  FROM GAME_QNA
+						  JOIN COMPANY USING(COMPANY_NO)
+                          JOIN GAME USING(GAME_NO)
+						 WHERE GQNA_STATUS = 'Y'
+						   AND MEM_NO = ?
+						 ORDER
+						    BY 1 DESC) A
+		            )
+		WHERE RNUM BETWEEN ? AND ?
 	</entry>
 </properties>

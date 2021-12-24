@@ -9,6 +9,7 @@ public class Qna {
    private int qnaNo;
    private int memNo;
    private int companyNo;
+   private String companyName;
    private String qnaTitle;
    private String qnaContent;
    private String qnaDate;
@@ -107,6 +108,20 @@ public class Qna {
 		this.qnaStatus = qnaStatus;
 		this.memId = memId;
 		this.memNick = memNick;
+	}
+	
+	
+
+	public Qna(int qnaNo, String companyName, String qnaTitle, String qnaContent, String qnaDate, String qnaAnswer,
+			String gameName) {
+		super();
+		this.qnaNo = qnaNo;
+		this.companyName = companyName;
+		this.qnaTitle = qnaTitle;
+		this.qnaContent = qnaContent;
+		this.qnaDate = qnaDate;
+		this.qnaAnswer = qnaAnswer;
+		this.gameName = gameName;
 	}
 
 	public int getQnaNo() {
@@ -221,6 +236,14 @@ public class Qna {
 		this.memNick = memNick;
 	}
 	
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
 	@Override
 	public String toString() {
 		return "Qna [qnaNo=" + qnaNo + ", memNo=" + memNo + ", companyNo=" + companyNo + ", qnaTitle=" + qnaTitle
