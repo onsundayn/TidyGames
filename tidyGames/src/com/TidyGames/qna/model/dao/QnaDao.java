@@ -230,5 +230,72 @@ public class QnaDao {
 			return result;
 			
 		}
+		
+		public ArrayList<Qna> selectGameQnaList(Connection conn, PageInfo pi, int companyNo) {
+			
+			ArrayList<Qna> list = new ArrayList<>();
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			String sql = prop.getProperty("selectGameQnaList");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				int startRow = (pi.getCurrentPage() - 1) * pi.getViewLimit() + 1;
+				int endRow = startRow + pi.getViewLimit() - 1;
+				
+				pstmt.setInt(1, companyNo);
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, endRow);
+				
+				rset = pstmt.executeQuery();
+				
+				while(rset.next()) {
+					list.add(new Qna(rset.getInt("seq"),
+							  		  rset.getString("game_name"),
+							  		  rset.getString("mem_id"),
+							  		  rset.getString("mem_nick"),
+							  		  rset.getString("gqna_title"),				  	
+							  		  rset.getString("gqna_date"),		  	
+							  		  rset.getString("gqna_check")));				  	
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
+			}
+			
+			return list;
+			
+		}
+		
+		public int selectGameQnaListCount(Connection conn, int companyNo) {
+			
+			int listCount = 0;
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			String sql = prop.getProperty("selectGameQnaListCount");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, companyNo);
+				
+				rset = pstmt.executeQuery();
+				
+				if(rset.next()) {
+					listCount = rset.getInt("count");
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			return listCount;
+			
+		}
 	
 }

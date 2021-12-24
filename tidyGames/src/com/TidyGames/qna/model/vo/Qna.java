@@ -108,6 +108,20 @@ public class Qna {
 		this.memId = memId;
 		this.memNick = memNick;
 	}
+	
+	
+
+	public Qna(int qnaNo, String gameName, String memId,String memNick, String qnaTitle, String qnaDate, String qnaCheck  
+			) {
+		super();
+		this.qnaNo = qnaNo;
+		this.gameName = gameName;
+		this.memId = memId;
+		this.memNick = memNick;
+		this.qnaTitle = qnaTitle;
+		this.qnaDate = qnaDate;
+		this.qnaCheck = qnaCheck;
+	}
 
 	public int getQnaNo() {
 		return qnaNo;

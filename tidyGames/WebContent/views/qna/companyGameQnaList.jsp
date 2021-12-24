@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.TidyGames.common.model.vo.PageInfo, java.util.ArrayList, com.TidyGames.game.model.vo.Game" %>	
+<%@ page import="com.TidyGames.common.model.vo.PageInfo, java.util.ArrayList, com.TidyGames.qna.model.vo.Qna" %>
+	
 <%
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
-	ArrayList<Game> list = (ArrayList<Game>)request.getAttribute("list");
+	ArrayList<Qna> list = (ArrayList<Qna>)request.getAttribute("list");
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
@@ -15,11 +16,18 @@
 <head>
 
 <meta charset="UTF-8">
-<title>GameUploadList</title>
+<title>GameCompanyQnaList</title>
 <style>
-#uplistga {
+#qnalistco {
 	color: orange;
 }
+
+#line_1{
+		margin:0 auto;
+        width:1500px;
+        height:2px;
+        background: rgba(255, 255, 255, 0.555);
+    } 
 
 #parent {
 	display: grid;
@@ -30,16 +38,9 @@
 	height: 900px;
 	margin: auto;
 }
-#line1{
-		margin:0 auto;
-        width:1500px;
-        height:2px;
-        background: rgba(255, 255, 255, 0.555);
-    } 
-
 
 #div1 {
-	grid-area: 1/2/5/5;
+	grid-area: 1/2/6/6;
 	margin-top: 20px;
 }
 
@@ -69,10 +70,6 @@
 #pageNav {
 	margin: 30px;
 }
-
-.paging-area button{
-    	border:none;
-    }
 </style>
 
 
@@ -82,14 +79,16 @@
 
 	<%@ include file="../common/topbar.jsp"%>
 	<%@ include file="../common/navibar.jsp"%>
-	
-	<div id="line1"></div>
-	<div id="parent">
 
-		<%@ include file="../common/adminSidebar.jsp"%>
+	<div id="line_1"></div>
+	<div id="parent">
+	
+        
+
+		<%@ include file="../common/companySidebar.jsp"%>
 
 		<div id="div1">
-			<h1>게임 업로드 요청 목록</h1>
+			<h1>게임 문의 내역</h1>
 
 
 
@@ -100,13 +99,15 @@
 						<tbody>
 							<tr>
 								<td><select class="form-control" name="searchField">
-										<option>아이디</option>
 										<option>게임</option>
+										<option>아이디</option>
+										<option>닉네임</option>
+										<option>제목</option>
 										<option>등록일</option>
-										<option>승인</option>
-										<option>미승인</option>
+										<option>답변완료</option>
+										<option>미답변</option>
 								</select></td>
-								
+								<td>
 								<td><input type="text" class="form-control"
 									placeholder="검색어 입력" name="searchText" maxlength="50">
 								</td>
@@ -123,37 +124,41 @@
 				<table class="table table-hover" id=list-area>
 					<thead>
 						<tr>
-							<th width="70px">번호</th>
-							<th width="170px">아이디</th>
-							<th width="300px">게임</th>
-							<th width="110px">등록일</th>
-							<th width="100px">승인상태</th>
+							<th width="60px">번호</th>
+							<th width="230px">게임</th>
+							<th width="130px">아이디</th>
+							<th width="130px">닉네임</th>
+							<th width="400px">문의글</th>
+							<th width="120px">등록일</th>
+							<th width="100px">답변여부</th>
 						</tr>
 					</thead>
+					
 					<tbody>
 						<% if(list.isEmpty()) { %>
 		                    <tr>    
-		                        <td colspan="5">조회된 게시글이 없습니다.</td>
+		                        <td colspan="7">조회된 게시글이 없습니다.</td>
 		                    </tr>
 	                    <% }else { %>
-							<% for (Game g : list) {	%>
+							<% for (Qna q : list) {	%>
 						<tr>
-							<td><%=g.getGameNo() %></td>
-							<td><%=g.getKorName() %></td>
-							<td><%=g.getEngName() %></td>
-							<td><%=g.getUploadDate() %></td>
+							<td><%=q.getQnaNo() %></td>
+							<td><%=q.getGameName() %></td>
+							<td><%=q.getMemId() %></td>
+							<td><%=q.getMemNick() %></td>
+							<td><%=q.getQnaTitle() %></td>
+							<td><%=q.getQnaDate() %></td>
 							
-							<% if(g.getConfirm().equals("Y")) { %>
-							<td><span class="badge bg-info" id="bdg">승인</span></td>
-							<% }else if(g.getConfirm().equals("A")) { %>							
-							<td><span class="badge bg-danger" id="bdg">반려</span></td>
-							<% }else if(g.getConfirm().equals("N")) { %>							
-							<td><span class="badge bg-secondary" id="bdg">미승인</span></td>
+							<% if(q.getQnaCheck().equals("Y")) { %>
+							<td><span class="badge bg-info" id="bdg">답변완료</span></td>
+							<% }else { %>							
+							<td><span class="badge bg-secondary" id="bdg">미답변</span></td>
+							<%} %>
+							
 						</tr>
 							<%} %>
 						<% } %>
-						
-					</tbody>
+					</tbody>					
 				</table>
 			</div>
 
