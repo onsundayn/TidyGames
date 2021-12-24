@@ -149,8 +149,9 @@
 							<td><span class="badge bg-danger" id="bdg">반려</span></td>
 							<% }else if(g.getConfirm().equals("N")) { %>							
 							<td><span class="badge bg-secondary" id="bdg">미승인</span></td>
-						</tr>
 							<%} %>
+						</tr>
+						<% } %>
 						<% } %>
 						
 					</tbody>
