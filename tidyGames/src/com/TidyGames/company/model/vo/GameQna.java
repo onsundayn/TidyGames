@@ -13,15 +13,11 @@ public class GameQna {
 	private String gqnaAnswerDate;
 	private String gqnaStatus;
 	private int gameNo;
-	private String gameName;
-	private String memId;
-	private String memNick;
 	
 	public GameQna() {}
 
 	public GameQna(int gqnaNo, int memNo, int companyNo, String gqnaTitle, String gqnaContent, String gqnaDate,
-			String gqnaAnswer, String gqnaCheck, String gqnaAnswerDate, String gqnaStatus, int gameNo, String gameName,
-			String memId, String memNick) {
+			String gqnaAnswer, String gqnaCheck, String gqnaAnswerDate, String gqnaStatus, int gameNo) {
 		super();
 		this.gqnaNo = gqnaNo;
 		this.memNo = memNo;
@@ -34,9 +30,6 @@ public class GameQna {
 		this.gqnaAnswerDate = gqnaAnswerDate;
 		this.gqnaStatus = gqnaStatus;
 		this.gameNo = gameNo;
-		this.gameName = gameName;
-		this.memId = memId;
-		this.memNick = memNick;
 	}
 
 	public int getGqnaNo() {
@@ -127,38 +120,13 @@ public class GameQna {
 		this.gameNo = gameNo;
 	}
 
-	public String getGameName() {
-		return gameName;
-	}
-
-	public void setGameName(String gameName) {
-		this.gameName = gameName;
-	}
-
-	public String getMemId() {
-		return memId;
-	}
-
-	public void setMemId(String memId) {
-		this.memId = memId;
-	}
-
-	public String getMemNick() {
-		return memNick;
-	}
-
-	public void setMemNick(String memNick) {
-		this.memNick = memNick;
-	}
-
 	@Override
 	public String toString() {
 		return "GameQna [gqnaNo=" + gqnaNo + ", memNo=" + memNo + ", companyNo=" + companyNo + ", gqnaTitle="
 				+ gqnaTitle + ", gqnaContent=" + gqnaContent + ", gqnaDate=" + gqnaDate + ", gqnaAnswer=" + gqnaAnswer
 				+ ", gqnaCheck=" + gqnaCheck + ", gqnaAnswerDate=" + gqnaAnswerDate + ", gqnaStatus=" + gqnaStatus
-				+ ", gameNo=" + gameNo + ", gameName=" + gameName + ", memId=" + memId + ", memNick=" + memNick + "]";
+				+ ", gameNo=" + gameNo + "]";
 	}
-
 	
 	
 	
