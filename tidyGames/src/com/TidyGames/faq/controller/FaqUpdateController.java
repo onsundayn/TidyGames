@@ -1,28 +1,27 @@
 package com.TidyGames.faq.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.TidyGames.faq.model.service.FaqService;
-import com.TidyGames.faq.model.vo.Faq;
 
 /**
- * Servlet implementation class FaqListController
+ * Servlet implementation class FaqUpdateController
  */
-@WebServlet("/faqList.fa")
-public class FaqListController extends HttpServlet {
+@WebServlet("/faqUpdate.fa")
+public class FaqUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FaqListController() {
+    public FaqUpdateController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,11 +31,23 @@ public class FaqListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// faq 리스트 가져오기
-		ArrayList<Faq> list = new FaqService().selectList();
+		request.setCharacterEncoding("UTF-8");
 		
-		request.setAttribute("faqList", list);
-		request.getRequestDispatcher("views/faq/faqListView.jsp").forward(request, response);
+		int faqNo = Integer.parseInt(request.getParameter("faqNo"));
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		
+		int result = new FaqService().updateFaq(faqNo, title, content);
+		
+		if(result > 0) {
+			HttpSession session = request.getSession();
+			session.setAttribute("alertMsg", "성공적으로 수정되었습니다.");
+			response.sendRedirect(request.getContextPath() + "/faqList.fa");
+		} else {
+			HttpSession session = request.getSession();
+			session.setAttribute("alertMsg", "수정에 실패하였습니다.");
+			response.sendRedirect(request.getContextPath() + "/faqList.fa");
+		}
 		
 	}
 

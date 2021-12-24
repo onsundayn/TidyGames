@@ -1,7 +1,6 @@
 package com.TidyGames.faq.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,19 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.TidyGames.faq.model.service.FaqService;
-import com.TidyGames.faq.model.vo.Faq;
 
 /**
- * Servlet implementation class FaqListController
+ * Servlet implementation class FaqInsertController
  */
-@WebServlet("/faqList.fa")
-public class FaqListController extends HttpServlet {
+@WebServlet("/faqInsert.fa")
+public class FaqInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FaqListController() {
+    public FaqInsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,12 +30,22 @@ public class FaqListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// faq 리스트 가져오기
-		ArrayList<Faq> list = new FaqService().selectList();
+		request.setCharacterEncoding("UTF-8");
 		
-		request.setAttribute("faqList", list);
-		request.getRequestDispatcher("views/faq/faqListView.jsp").forward(request, response);
+		String userId = request.getParameter("userId");
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
 		
+		int result = new FaqService().insertFaq(userId, title, content);
+		 
+		if(result > 0) {
+			request.getSession().setAttribute("alertMsg", "성공적으로 글이 등록되었습니다.");
+			response.sendRedirect(request.getContextPath() + "/faqList.fa");
+		} else {
+			request.getSession().setAttribute("alertMsg", "게시글 등록에 실패하였습니다.");
+			response.sendRedirect(request.getContextPath() + "/faqEnrollForm.fa");
+		}
+	
 	}
 
 	/**

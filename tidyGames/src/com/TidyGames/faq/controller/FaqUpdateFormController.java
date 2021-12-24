@@ -1,7 +1,6 @@
 package com.TidyGames.faq.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,16 +12,16 @@ import com.TidyGames.faq.model.service.FaqService;
 import com.TidyGames.faq.model.vo.Faq;
 
 /**
- * Servlet implementation class FaqListController
+ * Servlet implementation class FaqUpdateFormController
  */
-@WebServlet("/faqList.fa")
-public class FaqListController extends HttpServlet {
+@WebServlet("/faqUpdateForm.fa")
+public class FaqUpdateFormController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FaqListController() {
+    public FaqUpdateFormController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,11 +31,12 @@ public class FaqListController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		// faq 리스트 가져오기
-		ArrayList<Faq> list = new FaqService().selectList();
+		int faqNo = Integer.parseInt(request.getParameter("faqNos"));
 		
-		request.setAttribute("faqList", list);
-		request.getRequestDispatcher("views/faq/faqListView.jsp").forward(request, response);
+		Faq f = new FaqService().selectFaq(faqNo);
+		request.setAttribute("f", f);
+		
+		request.getRequestDispatcher("views/faq/faqUpdateForm.jsp").forward(request, response);
 		
 	}
 
