@@ -268,7 +268,7 @@
 		                       QNA_NO
 		                     , QNA_TITLE
 		                     , QNA_CONTENT
-		                     , REPORT_DATE
+		                     , TO_CHAR(REPORT_DATE, 'YY/MM/DD') "REPORT_DATE"
 		                     , NVL(ANS_CONTENT, ' ') "ANS_CONTENT"
 		                 FROM QNA
 		                WHERE MEM_NO = ?

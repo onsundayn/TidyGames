@@ -2,12 +2,12 @@
     pageEncoding="UTF-8"%>
     
 <%@ page
-	import="java.util.ArrayList, com.TidyGames.notice.model.vo.Notice,
+	import="java.util.ArrayList, com.TidyGames.qna.model.vo.Qna,
 			com.TidyGames.common.model.vo.*"
  %>
     
 <% 
-	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+	ArrayList<Qna> list = (ArrayList<Qna>)request.getAttribute("list");
 	Attachment at = (Attachment)request.getAttribute("at");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	int currentPage = pi.getCurrentPage();
@@ -198,19 +198,19 @@
             <div id="tableBox">
             <div id="tableOut1">
                 <table id="table" class="table table-dark" align="center">
-               	<% for(Notice no : list) { %>
+               	<% for(Qna qo : list) { %>
                     <tr id="titleBar">
                         <th width="60">제목</th>
                         <td width="300" style="padding-left:0px">
-                            <input type="text" value="<%= no.getNotiTitle() %>" readonly>
+                            <input type="text" value="<%= qo.getQnaTitle() %>" readonly>
                         </td>
                         <th width="70">작성자</th>
                         <td style="padding-left:0px"><%= loginUser.getMemNick() %></td>
-                        <td align=right>작성일시 | <%= no.getNotiDate() %></td>
+                        <td align=right>작성일시 | <%= qo.getQnaDate() %></td>
                     </tr>
                     <tr>
                         <td colspan="5">
-                            <textarea name="content" class="content" cols="10" rows="8" style="resize:none" readonly><%= no.getNotiContent() %></textarea>
+                            <textarea name="content" class="content" cols="10" rows="8" style="resize:none" readonly><%= qo.getQnaContent() %></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -235,7 +235,7 @@
                     </tr>
                     <tr>
                         <td colspan="3">
-                            <textarea name="answer" id="answerArea" class="content" cols="10" rows="3" style="resize:none"><%= no.getAnswer() %></textarea>
+                            <textarea name="answer" id="answerArea" class="content" cols="10" rows="3" style="resize:none"><%= qo.getQnaAnswer() %></textarea>
                         </td>
                     </tr>
            		<% } %>
