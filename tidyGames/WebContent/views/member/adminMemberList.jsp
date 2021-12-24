@@ -416,14 +416,6 @@
     
     <script>
 		
-    	function allCheck(){
-			if($(":checkbox").prop("checked")) {
-	   			$(":checkbox").prop("checked", false);    			
-			}else{
-				$(":checkbox").prop("checked", true);    			
-		}
-   	}
-    	
     	function done(){
 			 if(confirm("회원을 탈퇴시키겠습니까?")) {
 	            	$("#table>tbody>tr").click(function(){
@@ -480,7 +472,6 @@
 					$(".memInfo").html(table);
 					$("#readMem input").attr('readonly', 'readonly');
 					
-					
 				}, error:function(){
 					console.log("멤버조회 오류");
 				}
@@ -488,12 +479,11 @@
 			});
 			
     	}
-   
-		function updateMember() {
-			
+		
+    	function updateMember() {
+				
     	}
-    	
-    	
+			
     </script>
 
 </body>

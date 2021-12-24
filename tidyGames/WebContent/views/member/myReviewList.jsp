@@ -82,7 +82,8 @@
     }
     #table{
         margin:auto;
-        margin-top:30px;
+        margin-top:15px;
+        margin-bottom:15px;
         width:1000px;
         background:none;
         color:black;
@@ -196,7 +197,7 @@
                     <td width="30%" style="height:0px;"><span><%= re.getEngName() %></span>
                     									<% int i = 0; %>
                     									<label><% for(i=0; i<re.getStarNo(); i++) { %>
-                    											 	☆				
+                    											 	☆		
                     											<% } %>
                     									</label></td>
                 </tr>

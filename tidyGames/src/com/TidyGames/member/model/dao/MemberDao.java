@@ -703,6 +703,74 @@ public class MemberDao {
 		
 	}
 	
+
+	public int gameQnaCount(Connection conn, int memNo) {
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("gameQnaCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt("COUNT");
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+		
+	}
+	
+	public ArrayList<Qna> myGameQna(Connection conn, int memNo, PageInfo pi) {
+		
+		ArrayList<Qna> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("myGameQna");
+		
+		int startRow = (pi.getCurrentPage() - 1) * (pi.getViewLimit()) + 1;
+		int endRow = startRow + pi.getViewLimit() - 1;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Qna(
+									rset.getInt("gqna_no")
+						          , rset.getString("company_name")
+						          , rset.getString("gqna_title")
+						          , rset.getString("gqna_content")
+						          , rset.getString("gqna_date")
+						          , rset.getString("gqna_answer")
+						          , rset.getString("eng_name")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	
 	public ArrayList<Review> myReviewList(Connection conn, int memNo) {
 		
 		ArrayList<Review> list = new ArrayList<>();
@@ -726,8 +794,6 @@ public class MemberDao {
 								  , rset.getString("eng_name")
 								  , rset.getString("game_img")));
 			}
-			
-			System.out.println(list);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

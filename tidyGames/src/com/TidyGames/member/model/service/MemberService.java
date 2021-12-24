@@ -283,6 +283,26 @@ public class MemberService {
 		return listCount;
 	}
 	
+	public int gameQnaCount(int memNo) {
+		Connection conn = getConnection();
+		
+		int listCount = new MemberDao().gameQnaCount(conn, memNo);
+		
+		close(conn);
+		return listCount;
+	}
+	
+	public ArrayList<Qna> myGameQna(int memNo, PageInfo pi) {
+		Connection conn = getConnection();
+		
+		ArrayList<Qna> list = new MemberDao().myGameQna(conn, memNo, pi);
+		
+		
+		close(conn);
+		return list;
+		
+	}
+	
 	public ArrayList<Review> myReviewList(int memNo) {
 		Connection conn = getConnection();
 		

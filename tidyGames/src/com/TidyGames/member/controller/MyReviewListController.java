@@ -34,15 +34,10 @@ public class MyReviewListController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
-		System.out.println(memNo);
+		
 		ArrayList<Review> list = new MemberService().myReviewList(memNo);
 		
-		
-//		if(!list.isEmpty()) {
-			request.setAttribute("list", list);
-			System.out.println(list);
-		
-		
+		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/member/myReviewList.jsp").forward(request, response);
 	}
 
