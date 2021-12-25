@@ -124,11 +124,11 @@ public class Qna {
 		this.qnaAnswer = qnaAnswer;
 		this.gameName = gameName;
 			}
-	public Qna(int qnaNo, String gameName, String memId,String memNick, String qnaTitle, String qnaDate, String qnaCheck  
+	public Qna( String gameName,int qnaNo, String memId,String memNick, String qnaTitle, String qnaDate, String qnaCheck  
 			) {
 		super();
-		this.qnaNo = qnaNo;
 		this.gameName = gameName;
+		this.qnaNo = qnaNo;
 		this.memId = memId;
 		this.memNick = memNick;
 		this.qnaTitle = qnaTitle;

@@ -250,8 +250,8 @@ public class QnaDao {
 				rset = pstmt.executeQuery();
 				
 				while(rset.next()) {
-					list.add(new Qna(rset.getInt("seq"),
-							  		  rset.getString("game_name"),
+					list.add(new Qna( rset.getString("game_name"),
+									  rset.getInt("seq"),
 							  		  rset.getString("mem_id"),
 							  		  rset.getString("mem_nick"),
 							  		  rset.getString("gqna_title"),				  	
