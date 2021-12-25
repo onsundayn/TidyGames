@@ -271,7 +271,7 @@ tbody {
 							사용할 POINT</span> 
 					   <%if(sum.getSum()> 0){ %>
 							<span style="text-align: right;">
-							<input type="text" name="usePoint" id="usePoint" style="text-aglign:right;">
+							<input type="text" name="usePoint" id="usePoint" style="text-aglign:right;" value="0">
 							</span>&nbsp;POINT
 						<%} else {%>
 							<input type="text" name="usePoint" id="usePoint" disabled>&nbsp;POINT
