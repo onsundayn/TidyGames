@@ -150,7 +150,7 @@
                     <tr>
                         <th width="75">제목</th>
                         <td style="padding-left:0px">
-                            <input id="textInput" type="text" value="">
+                            <input type="text" style="font-size:16px" value="" readonly>
                         </td>
                         <td width="300"></td>
                         <!-- <th width="70">작성자</th> -->

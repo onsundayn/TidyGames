@@ -42,9 +42,8 @@
     }
     #tableBox{
         width:800px;
-        height:800px;
-        /* margin-left:145px; */
-        margin: 30px 0px 100px 105px;
+        height:900px;
+        margin: 20px 0px 100px 105px;
         background-color: rgb(197, 197, 197);
         border: 10px solid rgba(255, 255, 255, 0.555);
     }
@@ -156,28 +155,32 @@
 
             <div id="tableOut1">
 
-                <table id="table" class="table table-dark" align="center">
+                 <table id="table" class="table table-dark" align="center">
                     <tr>
-                        <th width="10">제목</th>
-                        <td width="280" style="padding-left:0px">
-                            <input type="text" value="게임 실행이 안 되네요ㅡㅡ 환불해주세요" readonly>
-                        </td>
-                        <th width="70">작성자</th>
-                        <td style="padding-left:0px">한남동불주먹</td>
-                        <td align=right>작성일시 | 2021-12-12</td>
-                        <!-- <td width="50px"></td> -->
+                       <th style="border:none; font-size:17px">게임</th>
+                       <td colspan="5" style="font-size:16px; font-weight:600; border:none; padding-left:0px">Stardew Valley</td>
                     </tr>
                     <tr>
-                        <td colspan="5">
-                            <textarea name="content" class="content" cols="10" rows="6" style="resize:none" readonly>환불 안 해주시면 본사 찾아갑니다</textarea>
+                        <th width="30" style="font-size:17px">제목</th>
+                        <td width="300" style="padding-left:0px">
+                            <input type="text" style="font-size:16px" value="제목입니다" readonly>
+                        </td>
+                        <th width="70">작성자</th>
+                        <td style="padding-left:0px">하나둘</td>
+                        
+                        <th align=right>작성일시 </th>
+                        <td style="padding-left:0px">2021-12-25</td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">
+                            <textarea name="content" class="content" cols="10" rows="11" style="resize:none" readonly>내용입니다</textarea>
                         </td>
                     </tr>
                     <tr>
                         <th width="80">첨부파일 </th>
-                        <td colspan="4">
-                            <a download="" href="" style="color:black;">한남동불주먹게임오류.png</a>
-                        </td>
-
+                        <td colspan="5">
+                          ㅇㄹㄴㅁㅇㄴㅁㅇㄴㅁ
+                       </td>
                     </tr>
                 </table>
 
@@ -187,16 +190,18 @@
             <div id="tableOut2">
                 <table id="answerTable" class="table table-dark" align="center">
                     <tr class="">
-                        <th width="55" style="padding-right:0px">답변 | </th>
-                        <th>Rockstar_Games</th>
+                        <th width="55" style="padding-right:0px">답변</th>
+                        <th width="460">Rockstar_Games</th>
+                        <th align=right>작성일시 </th>
+                        <td style="padding-left:0px">2021-12-25</td>
                     </tr>
                     <tr>
-                        <td colspan="3">
+                        <td colspan="4">
                             <textarea name="answer" id="answerArea" class="content" cols="10" rows="3" style="resize:none"></textarea>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="3" align="center">
+                        <td colspan="4" align="center">
                             <button type="submit" class="btn btn-sm btn-secondary" disabled>수정</button>
                             <button type="submit" class="btn btn-sm btn-primary">등록</button>
                         </td>

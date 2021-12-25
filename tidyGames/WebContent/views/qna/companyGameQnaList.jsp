@@ -70,6 +70,16 @@
 #pageNav {
 	margin: 30px;
 }
+
+.qnaNo{
+	display: none;
+}
+
+ #list-area>tbody>tr:hover{
+    	background:gray;
+    	cursor:pointer;
+    }
+
 </style>
 
 
@@ -121,7 +131,7 @@
 			</div>
 
 			<div>
-				<table class="table table-hover" id=list-area>
+				<table class="table table-hover"  id=list-area>
 					<thead>
 						<tr>
 							<th width="60px">번호</th>
@@ -141,8 +151,13 @@
 		                    </tr>
 	                    <% }else { %>
 							<% for (Qna q : list) {	%>
+
+							
+							
 						<tr>
-							<td><%=q.getQnaNo() %></td>
+							
+							<td class="qnaNo"><%=q.getQnaNo() %></td>
+							<td><%=q.getSeqNo() %></td>
 							<td><%=q.getGameName() %></td>
 							<td><%=q.getMemId() %></td>
 							<td><%=q.getMemNick() %></td>
@@ -188,7 +203,13 @@
 
 	</div>
 
-
+ 		<script>
+        	$(function(){
+        		$("#list-area>tbody>tr").click(function(){
+        			location.href = '<%=contextPath%>/answer.gq?gqno=' + $(this).children().eq(0).text();
+        		})
+        	})
+        </script>
 
 
 </body>

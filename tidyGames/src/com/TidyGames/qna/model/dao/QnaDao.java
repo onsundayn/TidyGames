@@ -250,8 +250,9 @@ public class QnaDao {
 				rset = pstmt.executeQuery();
 				
 				while(rset.next()) {
-					list.add(new Qna( rset.getString("game_name"),
-									  rset.getInt("seq"),
+					list.add(new Qna( rset.getInt("seq_no"),
+									  rset.getString("game_name"),
+									  rset.getInt("gqna_no"),
 							  		  rset.getString("mem_id"),
 							  		  rset.getString("mem_nick"),
 							  		  rset.getString("gqna_title"),				  	
@@ -295,6 +296,74 @@ public class QnaDao {
 			}
 			
 			return listCount;
+			
+		}
+		
+		public Qna gameQnaDetailView(Connection conn, int gqnaNo) {
+			// select문 => ResultSet (한행) => Board
+			Qna gq = null;
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			String sql = prop.getProperty("gameQnaDetailView");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, gqnaNo);
+				
+				rset = pstmt.executeQuery();
+				
+				if(rset.next()) {
+					gq = new Qna(rset.getString("board_no"), //게임제목
+								  rset.getString("category_name"), //문의글제목
+								  rset.getString("board_title"), //작성자닉네임
+								  rset.getString("board_content"), //문의작성일시
+								  rset.getString("board_content"), //문의글내용
+								  rset.getString("board_content"), //게임사명
+								  rset.getString("board_content"), //문의작성일시
+								  rset.getString("user_id")); //문의내용
+								
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
+			}
+			
+			return gq;
+		}
+		
+		public Attachment selectGameQnaAttachment(Connection conn, int gqnaNo) {
+			
+			Attachment at = null;
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			String sql = prop.getProperty("selectGameQnaAttachment");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, gqnaNo);
+				
+				rset = pstmt.executeQuery();
+				
+				if(rset.next()) {
+					at = new Attachment();
+					at.setFileNo(rset.getInt("file_no"));
+					at.setOriginName(rset.getString("origin_name"));
+					at.setChangeName(rset.getString("change_name"));
+					at.setFilePath(rset.getString("file_path"));
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
+			}
+			
+			return at;
+			
 			
 		}
 	

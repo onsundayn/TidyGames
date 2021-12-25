@@ -100,4 +100,22 @@ public class QnaService {
 		close(conn);
 		return listCount;
 	}
+	
+	public Qna gameQnaDetailView(int gqnaNo) {
+		Connection conn = getConnection();
+		
+		Qna gq = new QnaDao().gameQnaDetailView(conn, gqnaNo);
+		
+		close(conn);
+		return gq;
+	}
+	
+	public Attachment selectGameQnaAttachment(int gqnaNo) {
+		Connection conn = getConnection();
+		
+		Attachment at = new QnaDao().selectGameQnaAttachment(conn, gqnaNo);
+		close(conn);
+		
+		return at;
+	}
 }
