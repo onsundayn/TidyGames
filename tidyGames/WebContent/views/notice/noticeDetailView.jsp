@@ -1,105 +1,177 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ 
+	page import="com.TidyGames.notice.model.vo.Notice, com.TidyGames.common.model.vo.PageInfo,
+	com.TidyGames.notice.model.vo.NoticeFile, java.util.ArrayList"
+%>
+<%
+	Notice noticeDetail = (Notice)session.getAttribute("noticeDetail");
+	ArrayList<NoticeFile> fileList = (ArrayList<NoticeFile>)request.getAttribute("fileList");
+	int firstNo = (int)request.getAttribute("firstNo");
+	int lastNo = (int)request.getAttribute("lastNo");
+	int currentPage = (int)request.getAttribute("currentPage");
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	#notice{color:orange;}
-	.outer{
-		size:auto;
-		background-color: #0e332c;
-		color:white;
-		width:1200px;
-		margin:auto;
-		margin-top:50px;
-	}
-	.navi{border-bottom:2px solid rgba(255, 255, 255, 0.333);}
-	.underline{border-bottom:2px solid rgba(83, 79, 79, 0.333);}
-	.view-form{
-		size:auto;
-	    background-color: lightgray;
-	    width:1200px;
-	    margin:auto;
-	}
-	#read-form{
-		margin:auto;
-		width:1100px;
-	}
-	#enroll-form input, #enroll-form textarea{
-		width:100%;
-		box-sizing:border-box;
-	 }
-	 table{
-		 color:black;
-	 }
+#notice {
+	color: orange;
+}
+
+.include-area {
+	width: 1500px;
+	margin: auto;
+	align: center;
+	border-bottom: 2px solid rgba(255, 255, 255, 0.555);
+}
+
+.outer {
+	size: auto;
+	background-color: #0e332c;
+	color: white;
+	width: 1200px;
+	margin: auto;
+	margin-top: 50px;
+}
+
+.underline {
+	border-bottom: 2px solid rgba(83, 79, 79, 0.333);
+}
+
+.view-form {
+	size: auto;
+	background-color: lightgray;
+	width: 1200px;
+	margin: auto;
+}
+
+#read-form {
+	margin: auto;
+	width: 1100px;
+}
+table {
+	color: black;
+}
+#imgForm{
+	width: 100%;
+	height: 100%;
+	margin: auto;
+}
+#imgForm>img{
+	margin: auto;
+}
 </style>
 </head>
 <body style="background-color: #0e332c;">
 
-	<%@ include file="../common/topbar.jsp" %>
-	<div class="navi"><%@ include file="../common/navibar.jsp" %></div>
+	<div class="include-area">
+		<%@ include file="../common/topbar.jsp"%>
+		<%@ include file="../common/navibar.jsp"%>
+	</div>
+	
+	<div class="outer">
 
-    <div class="outer">
-
-        <h2>TIDY NOTICE</h2>
+		<h2>TIDY NOTICE</h2>
+		
 		<br>
 		<div align="right">
-			<!-- 관리자에게만 보이는 버튼 -->
-			<a href="" class="btn btn-sm btn-info">수정</a>
-			<a href="" class="btn btn-sm btn-danger">삭제</a>
+			<% if(loginUser != null && loginUser.getRoleId().equals("A")) { %>
+				<a href="<%= contextPath %>/noticeUpdatePage.no?num=<%=noticeDetail.getNotiNo()%>" class="btn btn-sm btn-info">수정</a> 
+				<a class="btn btn-sm btn-danger" onclick="deleteNotice();">삭제</a>
+			<% } %>
 		</div>
+		
 		<br>
-        <div class="view-form">
+		<div class="view-form">
 			<br><br>
-            <div id="read-form">
-				
+			<div id="read-form">
+
 				<div class="underline">
-					<table>
+					<table style="width: 100%;">
 						<tr>
-							<th width="60"><h5>제목</h5></th>
-							<td width="1000"><h6>이곳은 제목 들어갈 자리</h6></td>
+							<th width="10%"><h5><b>제목</b></h5></th>
+							<td width="90%"><h6><b><%= noticeDetail.getNotiTitle() %></b></h6></td>
 						</tr>
-						<tr><td colspan="2" height="20"></td></tr>
 						<tr>
-							<th width="70">작성일</th>
-							<td width="120">2021-12-12</td>
+							<td colspan="2" height="20"></td>
 						</tr>
-						<tr><td colspan="2" height="20"></td></tr>
+						<tr>
+							<th>작성일</th>
+							<td><%= noticeDetail.getNotiDate() %></td>
+						</tr>
+						<tr>
+							<td colspan="2" height="20"></td>
+						</tr>
 					</table>
 				</div>
 
 				<div class="underline">
-					<table>
-						<tr><td colspan="2" height="20"></td></tr>
+					<table style="width: 100%;">
 						<tr>
-							<th width="50" style="display: flow-root">
-								<h5>내용</h5>
-							</th>
-							<td>
-								<p width="1000" height="20000">
-									내용이 들어갈 자리
-									<br><br><br><br><br><br><br><br>
-									내용자리
-									<br><br><br><br>
-									쓰는중
+							<td colspan="2" height="20"></td>
+						</tr>
+						<tr>
+							<th width="10%"><h5>내용</h5></th>
+							<td width="90%">
+								<p>
+									<% if(fileList != null) {%>
+										<div id="imgForm">
+											<% for(int i=0; i<fileList.size(); i++) { %>
+												<img src="<%= contextPath %>/<%= fileList.get(i).getFilePath() + fileList.get(i).getFileChange() %>" width="50%" height="50%">
+											<% } %>
+										</div>
+									<% } %>
 								</p>
+								<pre>
+									<%= noticeDetail.getNotiContent() %>
+								</pre>
 							</td>
 						</tr>
+						<!-- 일단 여기까지 -->
+						<tr>
+							<th></th>
+							<td colspan="2"></td>
+						</tr>
+						<tr>
+							<td colspan="2" height="20"></td>
+						</tr>
 					</table>
-				</div>
-                <br>
-				
-            </div>		
-        </div>
-    </div>
+<!-- 첨부파일 -->
+					
+
+				 </div>
+
+				<br>
+			</div><!-- read-form -->
+		</div><!-- view-form -->
+	</div><!-- outer -->
 	<br>
 	<div align="center">
-		<a href="" class="btn btn-sm btn-secondary">이전글</a>
-		<a href="noticeListView.jsp" class="btn btn-sm btn-secondary">목록</a>
-		<a href="" class="btn btn-sm btn-secondary">다음글</a>
+		<% if(noticeDetail.getNotiNo() != firstNo) { %>
+			<a href="<%=contextPath%>/noticeDetail.no?cpage=<%=currentPage%>&num=<%=noticeDetail.getNotiNo() - 1%>" class="btn btn-sm btn-secondary"><i class="fas fa-angle-double-left fa-lg"></i></a> 
+		<% } %>
+		<a href="<%=contextPath%>/notice.no?cpage=<%=currentPage%>" class="btn btn-sm btn-secondary"><i class="fas fa-align-justify fa-lg"></i></a> 
+		<% if(noticeDetail.getNotiNo() != lastNo) { %>
+			<a href="<%=contextPath%>/noticeDetail.no?cpage=<%=currentPage%>&num=<%=noticeDetail.getNotiNo() + 1%>" class="btn btn-sm btn-secondary"><i class="fas fa-angle-double-right fa-lg"></i></a>
+		<% } %>
 	</div>
-	<br><br>
+
+	<br>
+	<br>
+
+	<script>
+		function deleteNotice(){
+			if(confirm("게시글을 삭제하시겠습니까?")){
+				location.href="<%=contextPath%>/noticeDelete.no?num=<%=noticeDetail.getNotiNo()%>";
+			}
+		}
+
+	</script>
+
+
 </body>
 </html>

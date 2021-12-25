@@ -2,12 +2,12 @@
     pageEncoding="UTF-8"%>
     
 <%@ page
-	import="java.util.ArrayList, com.TidyGames.notice.model.vo.Notice,
+	import="java.util.ArrayList, com.TidyGames.qna.model.vo.Qna,
 			com.TidyGames.common.model.vo.*"
  %>
     
 <% 
-	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+	ArrayList<Qna> list = (ArrayList<Qna>)request.getAttribute("list");
 	Attachment at = (Attachment)request.getAttribute("at");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	int currentPage = pi.getCurrentPage();
@@ -15,9 +15,7 @@
 	int endPage = pi.getEndPage();
 	int maxPage = pi.getMaxPage();
 	int listCount = pi.getListCount();
-%>    
-<!-- 
- -->	
+%>    	
 
 <!DOCTYPE html>
 <html>
@@ -54,16 +52,11 @@
     }
     #box{
     	width:1290px;	
-    	/* border:1px solid rgba(255, 255, 255, 0.222); */
-        /* height: */
-        
     }
     #tableBox{
         width:800px;
-        height:650px;
-        /* margin-left:145px; */
+        height:610px;
         margin: 20px 0px 100px 105px;
-        /* margin:auto; */
         background-color: rgb(197, 197, 197);
         border: 10px solid rgba(255, 255, 255, 0.555);
     }
@@ -75,7 +68,6 @@
     }
     #leftTop{   
         width:100%;
-        /* margin:20px; */
         margin:30px 20px 50px 0px;
     }
     #leftTop span{
@@ -92,10 +84,7 @@
     #tableOut2{
         width:100%;
         height:34%;
-        /* padding:50px; */
         padding:0px 40px;
-        /* background:rgba(128, 128, 128, 0.705); */
-
     }
     #table{
         margin:auto;
@@ -103,7 +92,6 @@
         background:none;
         color:black;
     }
-   /* 여기까지 */
     .table *{
         font-size:14px;
         padding:20px;
@@ -146,13 +134,11 @@
         text-decoration: none;
         color:rgba(255, 166, 0, 0.808);
     }
-	#titleBar *{
-    	font-size:15px;
-    }
     #table a{
     	padding:0px;
     	color:black;
     }
+
 </style>
 </head>
 <body style="background:#0e332c;">
@@ -173,9 +159,9 @@
                 <div id="intro">나의 문의내역</div>
             </div>
             <div id="pTag">
-                <p><a href="<%= contextPath %>/mygQna.me">게임관련 문의</a></p>
+                <p><a href="<%= contextPath %>/myGameQna.me?cpage=1">게임관련 문의</a></p>
                 <p style="margin:0px 5px;">|</p>
-                <p><a style="font-weight:bolder; color:rgba(255, 166, 0, 0.700)">1:1문의내역</a></p>
+                <p><a style="font-weight:bolder; color:rgba(255, 166, 0, 0.700)">1:1 문의내역</a></p>
             </div>
         </div>
         
@@ -185,7 +171,7 @@
             <div></div>
             <div id="tableBox" style="height:300px">
             <div id="tableOut1" align="center">
-            		<span style="font-size:20px">작성한 1:1 문의가 없습니다.</span>
+            		<span style="font-size:20px; font-weight:700">작성한 1:1 문의가 없습니다.</span>
             </div>
             
         
@@ -198,19 +184,19 @@
             <div id="tableBox">
             <div id="tableOut1">
                 <table id="table" class="table table-dark" align="center">
-               	<% for(Notice no : list) { %>
-                    <tr id="titleBar">
-                        <th width="60">제목</th>
+               	<% for(Qna qo : list) { %>
+                    <tr>
+                        <th width="30" style="font-size:17px">제목</th>
                         <td width="300" style="padding-left:0px">
-                            <input type="text" value="<%= no.getNotiTitle() %>" readonly>
+                            <input type="text" style="font-size:16px" value="<%= qo.getQnaTitle() %>" readonly>
                         </td>
                         <th width="70">작성자</th>
                         <td style="padding-left:0px"><%= loginUser.getMemNick() %></td>
-                        <td align=right>작성일시 | <%= no.getNotiDate() %></td>
+                        <td align=right>작성일시 | <%= qo.getQnaDate() %></td>
                     </tr>
                     <tr>
                         <td colspan="5">
-                            <textarea name="content" class="content" cols="10" rows="8" style="resize:none" readonly><%= no.getNotiContent() %></textarea>
+                            <textarea name="content" class="content" cols="10" rows="8" style="resize:none" readonly><%= qo.getQnaContent() %></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -235,7 +221,7 @@
                     </tr>
                     <tr>
                         <td colspan="3">
-                            <textarea name="answer" id="answerArea" class="content" cols="10" rows="3" style="resize:none"><%= no.getAnswer() %></textarea>
+                            <textarea name="answer" id="answerArea" class="content" cols="10" rows="3" style="resize:none"><%= qo.getQnaAnswer() %></textarea>
                         </td>
                     </tr>
            		<% } %>

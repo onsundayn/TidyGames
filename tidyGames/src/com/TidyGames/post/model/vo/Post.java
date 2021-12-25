@@ -21,14 +21,14 @@ public class Post {
 	public Post() {}
 	
 	public Post(int postNo, String postWriter, String postName, int postView, int postLike,
-			String postModify, String postNotice) {
+			String postEnroll, String postNotice) {
 		super();
 		this.postNo = postNo;
 		this.postWriter = postWriter;
 		this.postName = postName;
 		this.postView = postView;
 		this.postLike = postLike;
-		this.postModify = postModify;
+		this.postEnroll = postEnroll;
 		this.postNotice = postNotice;
 	}
 

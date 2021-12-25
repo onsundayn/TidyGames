@@ -266,5 +266,32 @@ public class PointDao {
 	}
 	
 	
+	public int adInsertPoint(Connection conn, int memNo, int pa, String pc) {
+		
+		int result =0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("adInsertPoint");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memNo);
+			pstmt.setInt(2, pa);
+			pstmt.setString(3, pc);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+		
+	
+	
 
 }

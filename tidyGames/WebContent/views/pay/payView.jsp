@@ -19,7 +19,7 @@
 /* 전체 div */
 .container {
 	width: 1250px;
-	border: 1px solid red;
+	
 	margin: auto;
 }
 
@@ -47,12 +47,12 @@ tbody {
 	width: 1010px;
 	height: 800px;
 	margin: auto;
-	border: 5px solid burlywood;
+
 }
 
 #left, #right {
 	height: 800px;
-	border: 3px solid blue;
+
 	box-sizing: border-box;
 	float: left;
 }
@@ -67,7 +67,7 @@ tbody {
 
 #left-up, #left-down {
 	width: 100%;
-	border: 3px solid violet;
+	
 	box-sizing: border-box;
 	float: left;
 }
@@ -159,13 +159,13 @@ tbody {
 
 .area5 {
 	width: 400px;
-	border: 1px solid orange;
+	
 	margin-left: 80px;
 	text-align: left;
 }
 
 .area6 {
-	border: 1px solid fuchsia;
+	
 	width: 230px;
 	height: 50px;
 	margin: auto;
@@ -271,7 +271,7 @@ tbody {
 							사용할 POINT</span> 
 					   <%if(sum.getSum()> 0){ %>
 							<span style="text-align: right;">
-							<input type="text" name="usePoint" id="usePoint" style="text-aglign:right;">
+							<input type="text" name="usePoint" id="usePoint" style="text-aglign:right;" value="0">
 							</span>&nbsp;POINT
 						<%} else {%>
 							<input type="text" name="usePoint" id="usePoint" disabled>&nbsp;POINT

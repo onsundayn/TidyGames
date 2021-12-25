@@ -36,7 +36,7 @@ public class AdminCompanyDeleteController extends HttpServlet {
 		
 		if(result > 0) {
 			request.getSession().setAttribute("alertMsg", "해당 게임사 정보가 삭제되었습니다");
-			response.sendRedirect(request.getContextPath() + "/list.co");
+			response.sendRedirect(request.getContextPath() + "/list.co?cpage=1");
 		} else {
 			request.setAttribute("errorMsg", "게임사 삭제에 실패하셨습니다");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request,response);

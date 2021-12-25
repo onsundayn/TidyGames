@@ -1,23 +1,26 @@
-package com.TidyGames.company.controller;
+package com.TidyGames.member.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.TidyGames.member.model.service.PointService;
+
 /**
- * Servlet implementation class GameCompanyQnaList
+ * Servlet implementation class AdminPointInsertController
  */
-@WebServlet("/qnalist.co")
-public class GameCompanyQnaList extends HttpServlet {
+@WebServlet("/adPointInsert.me")
+public class AdminPointInsertController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GameCompanyQnaList() {
+    public AdminPointInsertController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,9 +29,20 @@ public class GameCompanyQnaList extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		request.getRequestDispatcher("views/company/gameCompanyQnaList.jsp").forward(request, response);
+		int memNo = Integer.parseInt(request.getParameter("mNo"));
+		int pa = Integer.parseInt(request.getParameter("pointAmount"));
+		String pc = request.getParameter("pointContent");
 		
+		System.out.println(memNo);
+		
+		int result = new PointService().adInsertPoint(memNo, pa, pc );
+		
+		if(result > 0) {
+			request.getSession().setAttribute("alertMsg", "포인트적립에 성공하였습니다");
+			response.sendRedirect(request.getContextPath() + "/adPoint.me");
+			
+		}
+	
 	}
 
 	/**

@@ -13,8 +13,8 @@ import com.TidyGames.common.model.vo.Attachment;
 import com.TidyGames.common.model.vo.PageInfo;
 import com.TidyGames.member.model.service.MemberService;
 import com.TidyGames.member.model.vo.Member;
-import com.TidyGames.notice.model.service.QnaService;
-import com.TidyGames.notice.model.vo.Notice;
+import com.TidyGames.qna.model.service.QnaService;
+import com.TidyGames.qna.model.vo.Qna;
 import com.TidyGames.report.model.service.ReportService;
 /**
  * Servlet implementation class myQnaListController
@@ -61,13 +61,18 @@ public class MyQnaListController extends HttpServlet {
 		}
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, viewLimit, maxPage, startPage, endPage);
-		ArrayList<Notice> list = new MemberService().myQnaList(memNo, pi);
-		int qno = list.get(0).getNotiNo();
-		Attachment at = new QnaService().selectAttachment(qno);
+		ArrayList<Qna> list = new MemberService().myQnaList(memNo, pi);
+		
+		if(!list.isEmpty()) {
+			int qno = list.get(0).getQnaNo();			
+			Attachment at = new QnaService().selectAttachment(qno);
+			
+			request.setAttribute("at", at);
+		}
+
 		
 		request.setAttribute("list", list);
 		request.setAttribute("pi", pi);
-		request.setAttribute("at", at);
 		request.getRequestDispatcher("views/member/myQnaList.jsp").forward(request, response);
 	}
 

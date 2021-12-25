@@ -29,7 +29,6 @@
     .area1{
         width: 1000px;
         height: 100px;
-        border: 3px solid blue;
         font-weight: bold;
         color: white;
         margin-top: 50px;
@@ -39,9 +38,7 @@
     .area2{
         width: 1000px;
         height: 200px;
-        border: 3px solid red;
         font-weight: bold;
-       
         margin-top: 40px;
         margin-left: 100px;
         background: rgb(227, 220, 210);;
@@ -52,7 +49,7 @@
     .dateSearch{
         margin: 8px 30px 0px 120px;
         display: inline-block;
-        border: 1px solid orange;
+
    
     }
     .dateSearch>button{
@@ -93,7 +90,6 @@
 
     /* 테이블 영역 */
     .area3{
-        border: 3px solid rebeccapurple;
         width: 1000px;
         height: 500px;
         margin: 50px 0px 0px 100px;

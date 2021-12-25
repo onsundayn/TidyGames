@@ -99,5 +99,29 @@
 	
 	</entry>
 	
+	
+	
+	<entry key="adInsertPoint">
+			
+			INSERT
+				INTO POINT
+				        (
+				          MEM_NO
+				        , POINT_AMOUNT
+				        , POINT_DATE
+				        , POINT_CONTENT
+				       
+				        )
+					VALUES
+					        (
+					          ?
+					        , ?
+					        , SYSDATE
+					        , ?
+					        )
+		
+	
+	</entry>
+	
 
 </properties>

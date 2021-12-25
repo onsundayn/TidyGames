@@ -21,8 +21,9 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import com.TidyGames.common.model.vo.PageInfo;
+import com.TidyGames.game.model.vo.Review;
 import com.TidyGames.member.model.vo.Member;
-import com.TidyGames.notice.model.vo.Notice;
+import com.TidyGames.qna.model.vo.Qna;
 
 public class MemberDao {
 
@@ -637,9 +638,9 @@ public class MemberDao {
 		
 	}
 	
-	public ArrayList<Notice> myQnaList(Connection conn, int memNo, PageInfo pi) {
+	public ArrayList<Qna> myQnaList(Connection conn, int memNo, PageInfo pi) {
 		
-		ArrayList<Notice> list = new ArrayList<>();
+		ArrayList<Qna> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("myQna");
@@ -656,11 +657,11 @@ public class MemberDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				list.add(new Notice(
+				list.add(new Qna(
 									rset.getInt("qna_no")
 						          , rset.getString("qna_title")
 						          , rset.getString("qna_content")
-						          , rset.getDate("report_date")
+						          , rset.getString("report_date")
 						          , rset.getString("ans_content")));
 			}
 			
@@ -699,6 +700,111 @@ public class MemberDao {
 		}
 		
 		return listCount;
+		
+	}
+	
+
+	public int gameQnaCount(Connection conn, int memNo) {
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("gameQnaCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt("COUNT");
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+		
+	}
+	
+	public ArrayList<Qna> myGameQna(Connection conn, int memNo, PageInfo pi) {
+		
+		ArrayList<Qna> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("myGameQna");
+		
+		int startRow = (pi.getCurrentPage() - 1) * (pi.getViewLimit()) + 1;
+		int endRow = startRow + pi.getViewLimit() - 1;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Qna(
+									rset.getInt("gqna_no")
+						          , rset.getString("company_name")
+						          , rset.getString("gqna_title")
+						          , rset.getString("gqna_content")
+						          , rset.getString("gqna_date")
+						          , rset.getString("gqna_answer")
+						          , rset.getString("eng_name")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	
+	public ArrayList<Review> myReviewList(Connection conn, int memNo) {
+		
+		ArrayList<Review> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("myReviewList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Review(rset.getInt("review_no")
+								  , rset.getString("contents")
+								  , rset.getInt("recommend")
+								  , rset.getString("upload_date")
+								  , rset.getInt("star_no")
+								  , rset.getString("kor_name")
+								  , rset.getString("eng_name")
+								  , rset.getString("game_img")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+		
 		
 	}
 }

@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.TidyGames.common.model.vo.PageInfo, java.util.ArrayList, com.TidyGames.notice.model.vo.Notice" %>
+<%
+    PageInfo pi = (PageInfo)request.getAttribute("pi");
+    ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+    int currentPage = pi.getCurrentPage();
+    int startPage = pi.getStartPage();
+    int endPage = pi.getEndPage();
+    int maxPage = pi.getMaxPage();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +16,12 @@
 <title>Insert title here</title>
 <style>
 	#notice{color:orange;}
-	.navi{border-bottom:2px solid rgba(255, 255, 255, 0.333);}
+    .include-area{
+		width:1500px;
+		margin:auto;
+		align:center;
+		border-bottom:2px solid rgba(255, 255, 255, 0.555);
+	}
 	.outer{
 		background-color: #0e332c;
 		color:white;
@@ -24,186 +38,139 @@
     	cursor:pointer;
     	opacity:0.9;
     }
+    #title:hover{
+    	text-decoration:underline;
+    }
+    .paging-area button{
+    	border:none;
+    }
     #submitbtn{color:white; background:#0e332c; border:none;}
+    #submitbtn:hover{cursor:pointer; color:orange;}
 </style>
 </head>
 <body style="background-color: #0e332c;">
 
-	<%@ include file="../common/topbar.jsp" %>
-	<div class="navi"><%@ include file="../common/navibar.jsp" %></div>
+	<div class="include-area">
+		<%@ include file="../common/topbar.jsp" %>
+		<%@ include file="../common/navibar.jsp" %>
+	</div>
     
     <div class="outer">
 
         <h2>TIDY NOTICE</h2>
         <br><br>
-        <form action="">
 
+        <!--
+        <form role="form" method="post">  
+        	<input type="hidden" name="currentPage" value="<%=currentPage%>">
+		</form>
+        -->
+          
             <div id="deletebtn" align="right" style="width:1200px;">
                 <!--관리자계정에서만보이는 버튼-->
-                <a href="" class="btn btn-sm btn-danger">삭제</a>
-                <a href="" class="btn btn-sm btn-info">글작성</a>
+                <% if(loginUser != null && loginUser.getRoleId().equals("A")) { %>
+                    <a href="" class="btn btn-sm btn-danger">삭제</a>
+                    <a href="<%= contextPath %>/noticeEnroll.no" class="btn btn-sm btn-info">글작성</a>
+                <% } %>
             </div>
 
             <br>
 
             <table align="center" style="font-size: 12pt" class="table table-sm" id="table">
 
-                <thead>
+                <thead style="background:rgb(80, 88, 83)">
                     <!--체크박스 ; 관리자만 보이게-->
-                    <th><input type="checkbox" id="check1"></th>
+                    <% if(loginUser != null && loginUser.getRoleId().equals("A")) { %>
+                    	<th><input type="checkbox" id="check1"></th>
+                    <% } %>
                     <th width="100">글번호</th>
                     <th width="900">제목</th>
                     <th width="150">작성일</th>
                 </thead>
                 <tbody>
-                    <!--게시물이 없을 경우-->
-                    <tr>    
-                        <td colspan="4">조회된 게시글이 없습니다.</td>
-                    </tr>
-                    <!--게시물 있을 경우-->
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>15</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>15</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>15</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>15</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>15</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>15</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>15</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>15</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>15</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>15</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>15</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>15</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>15</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>15</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>2021-12-05</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>15</td>
-                        <td>제목 제목 이것은 제목입니다</td>
-                        <td>2021-12-05</td>
-                    </tr>
+                    <% if(list.isEmpty()) { %>
+                        <!--게시물이 없을 경우-->
+	                    <tr>    
+	                        <td colspan="4">조회된 게시글이 없습니다.</td>
+	                    </tr>
+	                <% }else { %>
+                        <!--게시물 있을 경우-->
+                        <tr>
+	                        <% for(Notice n : list) { %>
+			                    <tr>
+			                    	<% if(loginUser != null && loginUser.getRoleId().equals("A")) { %>
+	                       				<td><input type="checkbox"></td>
+	                       			<% } %>
+                                        <td id="num"><%= n.getNotiNo() %></td>
+                                        <td id="title"><%= n.getNotiTitle() %></td>
+                                        <td><%= n.getNotiDate() %></td>
+			                    </tr>
+	                    	<% } %>
+	                    </tr>
+                    <% } %>
+
                 </tbody>
             </table>
 
             <br><br>
 
             <div class="paging-area" align="center">
-
-                <button> &lt; </button>
-                <button>1</button>
-                <button>2</button>
-                <button>3</button>
-                <button>4</button>
-                <button>5</button>
-                <button>6</button>
-                <button>7</button>
-                <button>8</button>
-                <button>9</button>
-                <button>10</button>
-                <button> &gt; </button>
-    
-            </div>
-
+            
+	        	<% if(currentPage != 1) { %>
+	            	<button style="border-radius:3px;" onclick="location.href='<%=contextPath%>/notice.no?cpage=<%=currentPage-1%>';"> &lt; </button>
+	            <% } %>
+	            
+	            <% for(int p=startPage; p<=endPage; p++){ %>
+	            	
+	            	<% if(p == currentPage) { %>
+	            		<button disabled style="border-radius:3px; background:orange; color:white;"><%= p %></button>
+	            	<% }else { %>
+	            		<button style="border-radius:3px;" onclick="location.href='<%=contextPath%>/notice.no?cpage=<%= p %>';"><%= p %></button>
+	            	<% } %>
+	            	
+	            <% } %>
+	            
+	            <% if(currentPage != maxPage) { %>
+	            	<button onclick="location.href='<%=contextPath%>/notice.no?cpage=<%=currentPage+1%>';"> &gt; </button>
+	            <% } %>
+        	</div>
             <br><br>
-
-            <div class="search-area" align="center">
-				<form>
-	                <select name="" id="" style="height:30px;">
-	                    <option value="">제목</option>
-	                    <option value="">내용</option>
-	                </select>
-	                <input type="text" style="width:500px; height:30px;">
-	                <button type="submit" id="submitbtn"><i class="fas fa-search"></i></button>		
-				</form>
-
-
-            </div>
-
-        </form>
 
     </div>
 
+    <% if(loginUser != null && loginUser.getRoleId().equals("A")) { %>
+		
+		<script>
+			$(function(){
+                // 게시글을 클릭하면 해당 게시글의 글번호를 num으로 넘기면서 이동
+				$("#table>tbody>tr").click(function(){
+					location.href = '<%=contextPath%>/noticeDetail.no?cpage=<%=currentPage%>&num=' + $(this).children().eq(1).text();
+				});
+				
+			
+				$("#check1").click(function(){
+		            if($(this).is(":checked")){
+		                $(":checkbox", $("table")).prop("checked", true);
+		            }else {
+		                $(":checkbox", $("table")).prop("checked", false);
+		            }
+		        })	
+				
+			})
+		</script>
+	
+	<% } else { %>
+	
+		<script>
+			$(function(){
+				$("#table>tbody>tr").click(function(){
+					location.href = '<%=contextPath%>/noticeDetail.no?cpage=<%=currentPage%>&num=' + $(this).children().eq(0).text();
+				});
 
-    <script>
-    	$(function(){
-	        $("#check1").click(function(){
-	            if($(this).is(":checked")){
-	                $(":checkbox", $("table")).prop("checked", true);
-	            }else {
-	                $(":checkbox", $("table")).prop("checked", false);
-	            }
-	        })
-    	})
-    </script>
+			})
+		</script>
+	
+	<% } %>
 
 </body>
 </html>

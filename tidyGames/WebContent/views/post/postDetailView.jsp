@@ -19,7 +19,9 @@
 #community {
 	color: orange;
 }
-
+#likezone:hover {
+	cursor:pointer;
+}
 .include-area {
 	width: 1500px;
 	margin: auto;
@@ -52,7 +54,7 @@
 	width: 1100px;
 }
 
-#enroll-form input, #enroll-form textarea {
+#enroll-form input, textarea {
 	width: 100%;
 	box-sizing: border-box;
 }
@@ -86,7 +88,7 @@ table {
 				<a href="<%= contextPath %>/updateForm.po?cpage=<%=pi.getCurrentPage()%>&num=<%= p.getPostNo() %>" class="btn btn-sm btn-info">수정</a> 
 				<button data-toggle="modal" data-target="#deleteModal" class="btn btn-sm btn-danger">삭제</button>
 			<% } else if(loginUser != null) { %>
-				<button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#myModal">신고</button>
+				<button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#reportPostModal">신고</button>
 			<% } %>
 		</div>
 		<br>
@@ -110,9 +112,7 @@ table {
 							<th width="60">작성일</th>
 							<td width="200"><%=p.getPostEnroll()%></td>
 							<th width="70">조회수</th>
-							<td width="80"><%=p.getPostView()%></td>
-							<th width="70">추천수</th>
-							<td width="80"><%=p.getPostLike()%></td>
+							<td width="80" colspan="3"><%=p.getPostView()%></td>
 						</tr>
 						<tr>
 							<td colspan="8" height="20"></td>
@@ -152,45 +152,54 @@ table {
 								<% } %>
 							<% } %>
 					</table>
-				 </div>
-
-					<table>
-						<tr>
-							<td></td>
-							<td><i class="far fa-comment-dots fa-2x"></i></td>
-							<th>댓글</th>
-							<td width="50">123</td>
-							<% if(loginUser == null || !(loginUser.getMemAccess()).equals("unblock")) { %>
-								<div id="canNotLike" class="like">								
-									<td><i class="far fa-heart fa-2x"></i></td>
+					<br>
+					<table align="center">
+							<tr>
+								<td colspan="7" height="20"></td>
+							</tr>
+							<tr>
+								<% if(loginUser != null) { %>
+									<td colsapn="4"></td>
+									<td id="likezone" onclick="clickHeart();"></td>
 									<th>추천</th>
-									<td><%=p.getPostLike()%></td>
-								</div>
-							<% } else { %>
-								<div id="canLike" class="like">								
-									<td><i class="far fa-heart fa-2x"></i></td>
-									<th>추천</th>
-									<td><%=p.getPostLike()%></td>
-								</div>
-							<% } %>
-						</tr>
-						<tr>
-							<td colspan="7" height="20"></td>
-						</tr>
+									<td id="licount"></td>
+								<% } else { %>
+									<td colsapn="4"></td>
+									<td colspan="3">로그인한 이용자만 추천할 수 있습니다</td>
+								<% } %>
+							</tr>
+							<tr>
+								<td colspan="7" height="20"></td>
+							</tr>
 					</table>
-				
-
+				</div>
+				<br>
 				<div class="comment-view">
-					<table>
-						<tr>
-							<td></td>
-							<th style="display: flow-root" width="70">닉네임</th>
-							<td><p width="500" size="auto">댓글 내용 자리...</p></td>
-							<td><a>수정</a></td>
-							<td><a>삭제</a></td>
-							<td><button type="button" class="btn btn-sm btn-warning"
-									data-toggle="modal" data-target="#myModal">신고</button></td>
-						</tr>
+					<table align="center">
+						<thead>
+							<tr>
+								<% if(loginUser != null) { %>
+									<td colspan="2" width="870">
+										<textarea rows="3" style="resize:none" id="replyZone" placeholder="댓글을 작성해주세요!"></textarea>
+									</td>
+									<td style="text-align:center">
+										<button class="btn btn-dark" onclick="insertReply();"><i class="fas fa-comment-dots fa-lg"></i></button>
+									</td>
+								<% }else { %>
+									<td colspan="2" width="870">
+										<textarea rows="3" style="resize:none" readonly>로그인 후 이용 가능한 서비스입니다</textarea>
+									</td>
+									<td style="text-align:center">
+										<button class="btn btn-dark" disabled><i class="fas fa-comment-dots fa-lg"></i></button>
+									</td>
+								<% } %>
+							</tr>
+							<tr>
+								<td colspan="3" height="20"></td>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
 					</table>
 				</div>
 				<!-- 댓글 -->
@@ -234,8 +243,8 @@ table {
 	</div>
 	
 	
-
-	<div class="modal" id="myModal">
+	<!-- 글 신고 버튼 모달 -->
+	<div class="modal" id="reportPostModal">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -244,63 +253,234 @@ table {
 				</div>
 				<div class="modal-body">
 					<div>
-						<input type="radio" id="r1" name="report" value="1" checked><label
-							for="r1">욕설, 비방, 혐오</label>
+						<input type="radio" id="r1" name="report" value="1" checked>
+						<label for="r1">욕설, 비방, 혐오</label>
 					</div>
 					<div>
-						<input type="radio" id="r2" name="report" value="2"><label
-							for="r2">부적절한 홍보</label>
+						<input type="radio" id="r2" name="report" value="2">
+						<label for="r2">부적절한 홍보</label>
 					</div>
 					<div>
-						<input type="radio" id="r3" name="report" value="3"><label
-							for="r3">루머 유포</label>
+						<input type="radio" id="r3" name="report" value="3">
+						<label for="r3">루머 유포</label>
 					</div>
 					<div>
-						<input type="radio" id="r4" name="report" value="4"><label for="r4">음란, 청소년 유해</label>
+						<input type="radio" id="r4" name="report" value="4">
+						<label for="r4">음란, 청소년 유해</label>
 					</div>
 					<div>
-						<input type="radio" id="r5" name="report" value="5"><label for="r5">개인 정보 유출, 명예훼손</label>
+						<input type="radio" id="r5" name="report" value="5">
+						<label for="r5">개인 정보 유출, 명예훼손</label>
 					</div>
 					<div>
-						<input type="radio" id="r6" name="report" value="6"><label for="r6">도배, 스팸</label>
+						<input type="radio" id="r6" name="report" value="6">
+						<label for="r6">도배, 스팸</label>
 					</div>
 					<div>
 						<input type="radio" id="r7" name="report" value="7">기타(신고사유를 직접 입력해주세요)
 					</div>
 					<br>
 					<div>
-						<label for="r7"><textarea cols="60" rows="4"
-								style="resize: none" placeholder="신고 사유 입력 (최대 160자 이내)"></textarea>
+						<label for="r7"><textarea cols="60" rows="4" style="resize: none" placeholder="신고 사유 입력 (최대 160자 이내)"></textarea>
 					</div>
 					<div class="modal-footer">
-						<input type="hidden" id="reportNo" value="<%=p.getPostNo()%>">
-						<input type="hidden" name="reportedMemNo" value="<%=p.getMemNo()%>">
-						<button id="postReport" class="btn btn-info">신고완료</button>
+						<input type="hidden" id="reportPno" name="reportPno" value="<%=p.getPostNo()%>">
+						<input type="hidden" id="reportMem" name="reportMem" value="<%=p.getMemNo()%>">
+						<button  id="postReport" class="btn btn-info">신고완료</button>
 						<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
 					</div>
 				</div>
 			</div>
 		</div>
 		
+		
 		<script>
 			$(function(){
+				
+				selectLikeStatus();
+				selectLikeCount();
+				selectReplyList(); //모든 요소가 만들어진 뒤 바로 호출하는 메소드
+				
+				// window 객체에서 제공하는 setInterval(주기적으로실행시킬함수, ms단위) < 자스에서 배움
+				// 1초 간격마다 댓글 목록 실행
+				setInterval(selectReplyList, 1000);
+				
+				
 				
 				$("#deletePost").click(function(){
 					var url = "<%= contextPath %>/delete.po?cpage=<%=pi.getCurrentPage()%>&num=<%= p.getPostNo() %>";
 					location.href = url;
 				});
 				
+				
+				//글신고
 				$("#postReport").click(function(){
-					const reportNo = $(".modal-footer").children().eq(0).val();
+					// 신고사유
+					const reportReason = $(':radio[name="report"]:checked').val();
+					console.log(reportReason);
+					
+					// 신고된 글 번호
+					const reportNo = $("#reportPno").val();
 					console.log(reportNo);
-					const reportedMemNo = $(".modal-footer").children().eq(1).val();
+					
+					// 신고된 회원 번호
+					const reportedMemNo = $("#reportMem").val();
 					console.log(reportedMemNo);
 				});
+
 				
-				$("#canNotLike").click(function(){
-					alert('로그인한 회원만 이용할 수 있는 기능입니다');
-				});
-			})
+			}); // 여기까지 제이쿼리
+			
+			// 댓글 신고
+			function reportReply(renum) {
+				if(confirm('해당 댓글을 신고하시겠습니까?')==true){
+					alert('신고 처리가 완료되었습니다!');
+				}else{
+					return false;
+				}
+			};
+
+			// =================== 댓글 =======================
+			function insertReply(){
+				$.ajax({
+					url:"rinsert.po",
+					data:{
+						rcontent:$("#replyZone").val(),
+						pno:<%=p.getPostNo()%>
+					},
+					type:"post",
+					success:function(result){
+						if(result > 0) {
+							selectReplyList();
+							$("#replyZone").val("");
+						}
+					},error:function(){
+						console.log("댓글작성용 ajax 통신 실패");
+					}	
+				})
+			};
+			
+			function deleteReply(renum) {
+				
+				if(confirm('댓글을 삭제하시겠습니까?')==true){
+					alert('댓글이 삭제되었습니다');
+				}else{
+					return false;
+				}
+				
+				$.ajax({
+					url:"rdelete.po",
+					data:{renum:renum},
+					success:function(result){
+						if(result > 0){
+							selectReplyList();
+						}
+					}, error:function(){
+						console.log("댓글작성용 ajax 통신 실패");
+					}
+				})
+			};
+			
+			function selectReplyList(){
+				$.ajax({
+					url:"rlist.po",
+					data:{pno:<%=p.getPostNo()%>},
+					success:function(list){
+						let result = "";
+						
+						for(let i=0; i<list.length; i++) {
+							result += "<input type='hidden' class='reportRmem' value='" + list[i].wrtierNo + "'>"
+				       				+ "<tr>"
+				       				+ "<th width='70'>" + list[i].replyWriter + "</th>"
+				                   	+ "<td width='800' colspan='3'>" + list[i].replyContent + "</td>"
+				                   	+ "</tr>";
+				                   	
+				              if(<%=loginUser.getMemNo()%> == list[i].wrtierNo) {
+				            	result   +=  "<tr>"
+				                   + "<td></td>"
+						           + "<td style='font-size:smaller'>" + list[i].replyEnroll + "</td>"
+						           + "<td width='50' align='right'><button class='btn btn-sm btn-secondary' onclick='deleteReply(" + list[i].replyNo + ");'><i class='fas fa-trash-alt'></i></button></td>"
+						           + "</tr>"
+						           +  "<tr><td colspan='3' height='20'></td></tr>";
+				              } else {
+				            	  result   += "<tr>"
+				                   + "<td></td>"
+						           + "<td style='font-size:smaller'>" + list[i].replyEnroll + "</td>"
+						           + "<td width='50' align='right'><button class='btn btn-sm btn-warning' onclick='reportReply(" + list[i].replyNo + ");'><i class='far fa-angry'></i></button></td>"
+						           + "</tr>"
+						           +  "<tr><td colspan='3' height='20'></td></tr>";
+				              }
+						}
+						$(".comment-view tbody").html(result);
+					},error:function(){
+						console.log("댓글목록조회 ajax통신 실패");
+					}
+				})
+			};
+			
+			// ======================= 좋아요 ========================
+			
+			function selectLikeCount(){
+				$.ajax({
+					url:"lcount.po",
+					data:{pno:<%=p.getPostNo()%>},
+					success:function(result){
+						$("#licount").html(result);
+					}
+				})
+			};
+			
+			function selectLikeStatus(){
+				
+				$.ajax({
+					url:"lstatus.po",
+					data:{pno:<%=p.getPostNo()%>},
+					success:function(result){
+						if(result>0){
+							$("#likezone").html("<i class='fas fa-heart fa-lg' style='color:red' onclick='deleteLike();'></i>");
+						}else{
+							$("#likezone").html("<i class='far fa-heart fa-lg' onclick='insertLike();'></i>");
+						}
+					},error:function(){
+						console.log("좋아요 상태 조회 ajax 통신 실패");
+					}
+				})
+			};
+
+			function insertLike(){
+					$.ajax({
+					url:"insertlike.po",
+					data:{pno:<%=p.getPostNo()%>},
+					success:function(result){
+						if(result>0){
+							selectLikeCount();
+							selectLikeStatus();
+						}else{
+							alert('글 추천 실패 ㅜㅜ')
+						}
+					}, error:function(){
+						console.log("좋아요 클릭 ajax 통신 실패");
+					}
+				})
+			};
+			
+			function deleteLike(){
+					$.ajax({
+					url:"deletelike.po",
+					data:{pno:<%=p.getPostNo()%>},
+					success:function(result){
+						if(result>0){
+							selectLikeCount();
+							selectLikeStatus();
+						}else{
+							alert('글 추천 해제 실패 ㅜㅜ')
+						}
+					}, error:function(){
+						console.log("좋아요 해제 ajax 통신 실패");
+					}
+				})
+			};
+
 		</script>
 </body>
 </html>

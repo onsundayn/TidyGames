@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.notice.model.vo.Notice, com.TidyGames.common.model.vo.PageInfo"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.qna.model.vo.Qna, com.TidyGames.common.model.vo.PageInfo"%>
 
 <%
-	PageInfo pi = (PageInfo)request.getAttribute("pi");
-	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+
+PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ArrayList<Qna> list = (ArrayList<Qna>)request.getAttribute("list");
 	
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
@@ -170,30 +171,31 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
-                       <%  for(Notice n : list) { %>
+                    	
+                    	
+                       <%  for(Qna q : list) { %>
                         <tr align="center">
-                            <td><%= n.getNotiNo() %></td>
-                            <td><%= n.getNotiWriter() %></td>
-                            <td><%= n.getMember() %></td>
-                            <td><%= n.getNotiTitle() %></td>
-                            <td><%= n.getDate() %></td>
+                            <td><%= q.getQnaNo() %></td>
+                            <td><%= q.getMemId() %></td>
+                            <td><%= q.getMemNick() %></td>
+                            <td><%= q.getQnaTitle() %></td>
+                            <td><%= q.getQnaDate() %></td>
                             <td>
-                            	<% if(n.getAnswer().equals(String.valueOf('N'))) { %>
-                                <a href="<%= contextPath %>/answer.no?qno=<%= n.getNotiNo() %>" class="btn btn-sm btn-primary">미답변</a>
+                            	<% if(q.getQnaStatus().equals(String.valueOf('N'))) { %>
+                                <a href="<%= contextPath %>/answer.no?qno=<%= q.getQnaNo() %>" class="btn btn-sm btn-primary">미답변</a>
                                 <% }else { %>
-                                <a href="<%= contextPath %>/answer.no?qno=<%= n.getNotiNo() %>" class="btn btn-sm btn-secondary">답변완료</a>
+                                <a href="<%= contextPath %>/answer.no?qno=<%= q.getQnaNo() %>" class="btn btn-sm btn-secondary">답변완료</a>
                             	<% } %>
                             </td>
                         </tr>
-              		<% } %>	
-              	
+              		<% } %>	              	
                     </tbody>
                     </table>
                   
                 </div>
 
                 	<div id="tableOut2">
+
            		    <% if(!list.isEmpty()) { %>
 	                    <div class="paging-area" align="center">
 	                        <!-- 첫 페이지에서는 이전으로 비활성화 -->
@@ -214,22 +216,17 @@
 	                            <button onclick="loaction.href='<%= contextPath %>/qnaList.no?cpage=<%=currentPage+1%>';"> &gt; </button>
 	                            <!-- 현재 페이지가 마지막 페이지일 땐 다음으로 버튼 비활성화 -->
 	                        <% } %>
-	                     <% } %>
-                    </div>
-                </div>
-                
-                
-          
+                        <% } %>
+                   </div>
+               </div>
           </div>
           
       </div>
       
       
 
-
         <footer>
             <div style="height:100px">
-    
             </div>
         </footer>
     

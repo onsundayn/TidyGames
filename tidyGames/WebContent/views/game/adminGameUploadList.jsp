@@ -145,11 +145,13 @@
 							
 							<% if(g.getConfirm().equals("Y")) { %>
 							<td><span class="badge bg-info" id="bdg">승인</span></td>
-							<% }else { %>							
+							<% }else if(g.getConfirm().equals("A")) { %>							
+							<td><span class="badge bg-danger" id="bdg">반려</span></td>
+							<% }else if(g.getConfirm().equals("N")) { %>							
 							<td><span class="badge bg-secondary" id="bdg">미승인</span></td>
 							<%} %>
 						</tr>
-							<%} %>
+						<% } %>
 						<% } %>
 						
 					</tbody>

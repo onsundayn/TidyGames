@@ -1,4 +1,4 @@
-package com.TidyGames.notice.controller;
+package com.TidyGames.qna.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,8 +13,8 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.TidyGames.common.MyFileRenamePolicy;
 import com.TidyGames.common.model.vo.Attachment;
-import com.TidyGames.notice.model.service.QnaService;
-import com.TidyGames.notice.model.vo.Notice;
+import com.TidyGames.qna.model.service.QnaService;
+import com.TidyGames.qna.model.vo.Qna;
 import com.oreilly.servlet.MultipartRequest;
 
 /**
@@ -45,14 +45,14 @@ public class QnaInsertController extends HttpServlet {
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/board_upfiles/");
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 		
-			Notice qna = new Notice();
-			String Writer = multiRequest.getParameter("user");
+			Qna qna = new Qna();
+			int Writer = Integer.parseInt(multiRequest.getParameter("user"));
 			String Title = multiRequest.getParameter("title");
 			String Content = multiRequest.getParameter("content");
 			
-			qna.setNotiWriter(Writer);
-			qna.setNotiTitle(Title);
-			qna.setNotiContent(Content);
+			qna.setMemNo(Writer);
+			qna.setQnaTitle(Title);
+			qna.setQnaContent(Content);
 			
 			Attachment at = null;
 			

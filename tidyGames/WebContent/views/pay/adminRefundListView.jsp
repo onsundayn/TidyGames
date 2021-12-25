@@ -26,7 +26,7 @@ ArrayList<Refund> list = (ArrayList<Refund>)request.getAttribute("list");
     .area1{
         width: 1000px;
         height: 100px;
-        border: 3px solid blue;
+       
         font-weight: bold;
         color: white;
         margin-top: 50px;
@@ -36,7 +36,7 @@ ArrayList<Refund> list = (ArrayList<Refund>)request.getAttribute("list");
     .area2{
         width: 1000px;
         height: 200px;
-        border: 3px solid red;
+        
         font-weight: bold;
        
         margin-top: 40px;
@@ -49,8 +49,7 @@ ArrayList<Refund> list = (ArrayList<Refund>)request.getAttribute("list");
     .dateSearch{
         margin: 8px 20px 0px 70px;
         display: inline-block;
-        border: 1px solid orange;
-   
+       
     }
     .dateSearch>button{
         border-radius: 5px;
@@ -90,7 +89,7 @@ ArrayList<Refund> list = (ArrayList<Refund>)request.getAttribute("list");
 
     /* 테이블 영역 */
     .area3{
-        border: 3px solid rebeccapurple;
+       
         width: 1000px;
         height: 500px;
         margin: 50px 0px 0px 100px;

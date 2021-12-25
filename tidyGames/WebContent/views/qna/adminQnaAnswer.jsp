@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.notice.model.vo.Notice, com.TidyGames.common.model.vo.Attachment" %>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.qna.model.vo.Qna, com.TidyGames.common.model.vo.Attachment" %>
 
 <%
 	Attachment at = (Attachment)request.getAttribute("at");
-	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("list");
+	ArrayList<Qna> list = (ArrayList<Qna>)request.getAttribute("list");
 	
 %>
 <!DOCTYPE html>
@@ -157,19 +157,19 @@
             <div id="tableOut1">
 				
                 <table id="table" class="table table-dark" align="center">
-                	<% for(Notice no : list) { %>
+                	<% for(Qna qo : list) { %>
                     <tr id="titleBar">
                         <th width="60">제목</th>
                         <th width="300" style="padding-left:0px">
-                            <input type="text" value="<%= no.getNotiTitle() %>" readonly>
+                            <input type="text" value="<%= qo.getQnaTitle() %>" readonly>
                         </th>
                         <th width="70">작성자</th>
-                        <td style="padding-left:0px"><%= no.getNotiWriter() %></td>
-                        <td align=right>작성일시 | <%= no.getNotiDate() %></td>
+                        <td style="padding-left:0px"><%= qo.getMemNick() %></td>
+                        <td align=right>작성일시 | <%= qo.getQnaDate() %></td>
                     </tr>
                     <tr>
                         <td colspan="5">
-                            <textarea name="content" class="content" cols="10" rows="6" style="resize:none" readonly><%= no.getNotiContent() %></textarea>
+                            <textarea name="content" class="content" cols="10" rows="6" style="resize:none" readonly><%= qo.getQnaContent() %></textarea>
                         </td>
                     </tr>
                     <tr>
@@ -186,7 +186,7 @@
 
             </div>
             <form action="<%= contextPath %>/insertAnswer.no" method="post">
-            <input type="hidden" name="qno" value="<%= list.get(0).getNotiNo() %>">
+            <input type="hidden" name="qno" value="<%= list.get(0).getQnaNo() %>">
             <div id="tableOut2">
                 <table id="answerTable" class="table table-dark" align="center">
                     <tr>
@@ -195,16 +195,16 @@
                     </tr>
                     <tr>
                         <td colspan="3">
-                        	<% if(no.getAnswer().equals(" ")) { %>
-                            <textarea name="answerArea" id="answerArea" class="content" cols="10" rows="3" style="resize:none"><%= no.getAnswer() %></textarea>
+                        	<% if(qo.getQnaAnswer().equals(" ")) { %>
+                            <textarea name="answerArea" id="answerArea" class="content" cols="10" rows="3" style="resize:none"><%= qo.getQnaAnswer() %></textarea>
                         	<% }else { %>
-                        	<textarea name="answerArea" id="answerArea" class="content" cols="10" rows="3" style="resize:none; background:none; border:none" readonly><%= no.getAnswer() %></textarea>
+                        	<textarea name="answerArea" id="answerArea" class="content" cols="10" rows="3" style="resize:none; background:none; border:none" readonly><%= qo.getQnaAnswer() %></textarea>
                         	<% } %>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="3" align="center">
-                       		<% if(no.getAnswer().equals(" ")) { %>
+                       		<% if(qo.getQnaAnswer().equals(" ")) { %>
                             <button type="button" class="btn btn-sm btn-secondary" disabled>수정</button>
                             <button type="submit" class="btn btn-sm btn-primary">등록</button>
                        		<% }else { %>

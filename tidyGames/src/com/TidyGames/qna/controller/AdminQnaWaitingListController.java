@@ -1,4 +1,4 @@
-package com.TidyGames.notice.controller;
+package com.TidyGames.qna.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.TidyGames.common.model.vo.PageInfo;
-import com.TidyGames.notice.model.service.QnaService;
-import com.TidyGames.notice.model.vo.Notice;
+import com.TidyGames.qna.model.service.QnaService;
+import com.TidyGames.qna.model.vo.Qna;
 
 /**
  * Servlet implementation class adminQnaWaitingListController
@@ -56,14 +56,15 @@ public class AdminQnaWaitingListController extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, viewLimit, maxPage, startPage, endPage);
 		
-		ArrayList<Notice> list = new QnaService().qnaWaitList(pi);
+		ArrayList<Qna> list = new QnaService().qnaWaitList(pi);
+		
 		
 		if(!list.isEmpty()) {			
 			request.setAttribute("pi", pi);	
 			request.setAttribute("list", list);
-			request.getRequestDispatcher("views/notice/adminQnaWaitingList.jsp").forward(request, response);
 		}
 			
+		request.getRequestDispatcher("views/qna/adminQnaWaitingList.jsp").forward(request, response);
 	}
 
 	/**
