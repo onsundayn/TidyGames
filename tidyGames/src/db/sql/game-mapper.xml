@@ -64,6 +64,7 @@
 		     , MEM_NICK "WRITER"
 		     , CONTENTS
 		     , TO_CHAR(UPLOAD_DATE, 'YY/MM/DD HH:MI') "UPLOAD_DATE"
+		     , STAR_NO
 		  FROM REVIEW
 		  JOIN MEMBER USING (MEM_NO)
 		 WHERE REVIEW_STATUS = 'Y'
@@ -242,6 +243,22 @@
 	
 	</entry>
 	
+	<entry key="selectStarAvg">
+		SELECT
+		      ROUND(CEIL(AVG(STAR_NO)),-1) "STAR_AVG"
+		  FROM REVIEW
+		 WHERE GAME_NO = ?
+	</entry>
+	
+	<entry key="insertCategory">
+		INSERT 
+	      INTO GAME_CATEGORY
+	    VALUES 
+	    (
+	      SEQ_GAME_NO.CURRVAL
+	    , ?
+	    )
+	</entry>
 	
 
 </properties>

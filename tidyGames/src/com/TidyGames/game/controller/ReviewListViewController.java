@@ -42,10 +42,13 @@ public class ReviewListViewController extends HttpServlet {
 		Game g = new GameService().selectGame(memNo, gameNo);
 		Attachment3 at = new GameService().selectAttachment(gameNo);
 		ArrayList<Review> list = new GameService().selectReviewList(gameNo);
+		int starAvg = new GameService().selectStarAvg(gameNo);
+		
 		
 		request.setAttribute("list", list);
 		request.setAttribute("g", g);
 		request.setAttribute("at", at);
+		request.setAttribute("starAvg", starAvg);
 		request.getRequestDispatcher("views/game/reviewListView.jsp").forward(request, response);;
 		
 	}

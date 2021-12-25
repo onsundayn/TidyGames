@@ -159,7 +159,7 @@
                     <p>
                         출시일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=g.getReleaseDate() %> <br>
                         장르 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=gcList.get(0).getCategoryName()%><br>
-                        플레이어 &nbsp;&nbsp;&nbsp; <%=gcList.get(1).getCategoryName()%><br>
+                        
                     </p>
                 </div>
                 <div id="tag">
@@ -266,6 +266,35 @@
     }
 	
   	
+		function wishConfirm(gameNo){
+		    	
+		    	$.ajax({
+		    		url : "wishInsert.me",
+		    		data : {
+		    			
+		    			gameNo:gameNo
+		    		},
+		    		type:"post",
+		    		success:function(result) {
+		    			
+		    			
+		    			if(result == 1) {
+		 
+		    				if(confirm("찜목록에 담겼습니다. 찜목록페이지로 이동하시겠습니까?")){
+		    					
+		    					location.href='<%=contextPath%>/wishList.me';
+		    		    	}
+		    			
+		    			}
+		    			
+		    		},error:function() {
+		    			console.log("찜목록 담기 실패!")
+		    		}
+		    	})
+		    	return false;
+		    	
+		   	
+		    }
     
      function wishConfirm(gameNo, aEl){
      	
@@ -283,7 +312,7 @@
   
      				if(confirm("찜목록에 담겼습니다. 찜목록페이지로 이동하시겠습니까?")){
      					
-     					location.href='<%=contextPath%>/wishList.me?cpage=1';
+     					location.href='<%=contextPath%>/wishList.me';
      					
      		    	}else {
      		    		// 채워진 하트로 바꿔줘야됨 

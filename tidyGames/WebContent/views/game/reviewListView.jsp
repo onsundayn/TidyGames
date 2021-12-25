@@ -3,6 +3,7 @@
 <%
 	Game g = (Game)request.getAttribute("g");
 	Attachment3 at = (Attachment3)request.getAttribute("at");
+	int starAvg = (int)request.getAttribute("starAvg");
 	//ArrayList<Review> list = (ArrayList<Review>)request.getAttribute("list");
 %>
 <!DOCTYPE html>
@@ -27,6 +28,7 @@
         height:100%;
         float: left;
         color: white;
+        margin: auto;
     }
     .title{
         font-size: 25px;
@@ -73,29 +75,6 @@
         margin-top: 20px;
         display: inline-block;
     }
-    .user-info{
-        background: rgba(211, 211, 211, 0.644);
-        float: left;
-        width:25%;
-        height:140px;
-        margin-top: 40px;
-        margin-left: 10px;
-    }
-    #profile-img{
-        width:30%;
-        height: 60%;
-        float: left;
-        margin:6px;
-        margin-top: 25px;
-        border: 1px solid red;
-    }
-    #user-name{
-        width:55%;
-        height: 80%;
-        float: left;
-        margin: 6px;
-        margin-top: 7px;
-    }
     .content{
         width:70%;
         height:170px;
@@ -108,20 +87,80 @@
         height:140px;
         background: rgba(211, 211, 211, 0.644);
     }
-    #user-star{
-        font-size: 21px;
+    .review-area>thead>tr>th{
         color: white;
     }
-    .star-rating a{
-        text-decoration:none;
-        color:white;
-        mouse-cursor:pointer;
+    .review-area>thead>tr>td>textarea{
+        border-radius: 0  0 15px 0;
+        width:700px;
+        border: 1px solid black;
     }
-    .star-rating a:hover{
-        text-decoration: none;
-        color:orange;
+    .star-rating {
+        display: flex;
+        flex-direction: row-reverse;
+        font-size: 2.25rem;
+        line-height: 2.5rem;
+        justify-content: space-around;
+        padding: 0 0.2em;
+        text-align: center;
+        width: 5em;
     }
-
+ 
+    .star-rating input {
+        display: none;
+    }
+    
+    .star-rating label>i{
+        -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+        -webkit-text-stroke-width: 1.3px;
+        -webkit-text-stroke-color: #35624d;
+         cursor: pointer;
+    }
+    
+    .star-rating :checked ~ label>i {
+         -webkit-text-fill-color: gold;
+    }
+    
+    .star-rating label>i:hover,
+    .star-rating label>i:hover ~ label {
+         -webkit-text-fill-color: #fff58c;
+    }
+    .star{
+         font-size: 20px;
+    }
+    .star-ratings {
+        color: #aaa9a9; 
+        position: relative;
+        unicode-bidi: bidi-override;
+        width: max-content;
+        -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+        -webkit-text-stroke-width: 1.3px;
+        -webkit-text-stroke-color: #000000;
+    }
+ 
+    .star-ratings-fill {
+        color: #fff58c;
+        padding: 0;
+        position: absolute;
+        z-index: 1;
+        display: flex;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        -webkit-text-fill-color: gold;
+    }
+ 
+    .star-ratings-base {
+        z-index: 0;
+        padding: 0;
+    }
+    .ratings-area{
+        font-size: 30px;
+    }
+    .trtr{
+        background: rgb(120, 134, 127);
+        color: black;
+    }
 </style>
 </head>
 <body style="background-color: #0e332c;">
@@ -140,15 +179,16 @@
                     <%=g.getEngName()%>
                     <br><br>
                 </div>
-                <div class="star-rating">
-                   <a href="">
-                    	<!-- 별점 띄워줄때 반복문 돌려볼까?-->
-                    	<i class="fas fa-star fa-lg"></i>
-                    	<i class="fas fa-star fa-lg"></i>
-                    	<i class="fas fa-star fa-lg"></i>
-                    	<i class="fas fa-star fa-lg"></i>
-                    	<i class="fas fa-star fa-lg"></i>
-                    </a>
+                <div class="ratings-area" align="center">
+                    <div class="star-ratings">
+                        <div class="star-ratings-fill space-x-2 text-lg" style="width:<%=starAvg%>%"
+                        >
+                          <span><i class="fas fa-star"></i></span><span><i class="fas fa-star"></i></span><span><i class="fas fa-star"></i></span><span><i class="fas fa-star"></i></span><span><i class="fas fa-star"></i></span>
+                        </div>
+                        <div class="star-ratings-base space-x-2 text-lg">
+                          <span><i class="fas fa-star"></i></span><span><i class="fas fa-star"></i></span><span><i class="fas fa-star"></i></span><span><i class="fas fa-star"></i></span><span><i class="fas fa-star"></i></span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="title-img">
@@ -165,40 +205,71 @@
                     <option value="">추천많은순</option>
                 </select>
             </div>
-            <% if(loginUser != null) { %>
-            <div id="btngo">
-                <div align="right" style="width:100px;">
-                    <a href="<%=contextPath %>/enrollForm.ga?gno=<%=g.getGameNo()%>" class="btn btn-sm btn-secondary">리뷰작성</a>
-                </div>
-            </div>
-     		<% } %>
         </div>
         <div class="buttom-area">
         		
 			    <div id="review-area">
-			    	<table>
+			    	<table class="review-area">
 			    		<thead>
-			    			
+                            <% if(loginUser != null) { //로그인 되어있을 경우%>
+			    			<tr>
+                                <td></td>
+                                <td colspan="2">
+                                    <div class="star-rating space-x-4 mx-auto">
+                                        <input type="radio" id="5-stars" name="rating" value="5" v-model="ratings"/>
+                                        <label for="5-stars" class="star pr-4"><i class="fas fa-star"></i></label>
+                                        <input type="radio" id="4-stars" name="rating" value="4" v-model="ratings"/>
+                                        <label for="4-stars" class="star"><i class="fas fa-star"></i></label>
+                                        <input type="radio" id="3-stars" name="rating" value="3" v-model="ratings"/>
+                                        <label for="3-stars" class="star"><i class="fas fa-star"></i></label>
+                                        <input type="radio" id="2-stars" name="rating" value="2" v-model="ratings"/>
+                                        <label for="2-stars" class="star"><i class="fas fa-star"></i></label>
+                                        <input type="radio" id="1-star" name="rating" value="1" v-model="ratings" />
+                                        <label for="1-star" class="star"><i class="fas fa-star"></i></label>
+                                    </div>
+                                </td>
+                            </tr>
 			    			<tr>
 			    				<th>리뷰작성</th>
-			    				<% if(loginUser != null) { //로그인 되어있을 경우%>
 			    				<td>
-			    					<textarea id="reviewContent" rows="3" cols="50" style="resize:none"></textarea>
+			    					<textarea id="reviewContent" rows="4" cols="90" style="resize:none"></textarea>
 			    				</td>
-			    				<td><button onclick="insertReview();">리뷰등록</button></td>
-			    				<% }else { // 로그인 안되어있을 경우 %>
 			    				<td>
-			    					<textarea rows="3" cols="50" style="resize:none" readonly>로그인 후 이용 가능합니다.</textarea>
+			    				<button id="btn" class="btn btn-sm btn-light" onclick="insertReview();">리뷰등록</button>
+			    				</td>
+								
+                            <% }else { // 로그인 안되어있을 경우 %>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <div class="star-rating space-x-4 mx-auto">
+                                        <input type="radio" id="5-stars" name="rating" value="5" v-model="ratings"/>
+                                        <label for="5-stars" class="star pr-4"><i class="fas fa-star"></i></label>
+                                        <input type="radio" id="4-stars" name="rating" value="4" v-model="ratings"/>
+                                        <label for="4-stars" class="star"><i class="fas fa-star"></i></label>
+                                        <input type="radio" id="3-stars" name="rating" value="3" v-model="ratings"/>
+                                        <label for="3-stars" class="star"><i class="fas fa-star"></i></label>
+                                        <input type="radio" id="2-stars" name="rating" value="2" v-model="ratings"/>
+                                        <label for="2-stars" class="star"><i class="fas fa-star"></i></label>
+                                        <input type="radio" id="1-star" name="rating" value="1" v-model="ratings" />
+                                        <label for="1-star" class="star"><i class="fas fa-star"></i></label>
+                                    </div>
+                                </td>
+                                <td colspan="2"></td>
+                            </tr>
+                            <tr>
+                                <th>리뷰작성</th>
+			    				<td>
+			    					<textarea id="reviewContent" rows="4" cols="50" style="resize:none" readonly>로그인 후 이용 가능합니다.</textarea>
 			    				</td>
 			    				<td><button disabled>리뷰등록</button></td>
-			    				<% } %> 
+                            <% } %> 
 			    			</tr>
-			    			
+			    			<tr style="height: 60px;"></tr>
 			    		</thead>
 			    		<tbody>
-			    		
+                            
 
-			    			
 			    		</tbody>
 			    	
 			    	</table>
@@ -210,26 +281,45 @@
 			    			
 			    			selectReviewList();
 			    		
+			    			setInterval(selectReviewList, 1000); // 1초마다 함수호출
+			    		
 			    		})
+			    		
 			    		// ajax로 댓글 작성용
 			    		function insertReview(){
 			    			
+			    		
+		                    //별점 선택 안했으면 메시지 표시
+		                    if($('input[name="rating"]:checked').val() == 0){
+		                        alert("별점을 입력해주세요.")
+		                        return false;
+		                    }
+		                    //리뷰 5자 미만이면 메시지 표시
+		                    if(document.querySelector('#reviewContent').value.length < 5){
+		                        alert("리뷰 내용을 5자 이상 입력해주세요.");
+		                        return false;
+		                    }
+		                    //폼 서밋
 			    			$.ajax({
 			    				url:"rinsert.ga",
 			    				data:{
 			    					contents:$("#reviewContent").val(),
-			    					gno:<%=g.getGameNo()%>
+			    					gno:<%=g.getGameNo()%>,
+			    					star:$('input[name="rating"]:checked').val()
 			    				},
 			    				type:"post",
 			    				success:function(result){
 			    					if(result > 0){//댓글작성 성공 => 갱신된 댓글 리스트 조회
 			    						selectReviewList();
 			    					    $("#reviewContent").val("");
+			    					    $('input[name="rating"]').prop("checked", false);
 			    					}
 			    				},error:function(){
+			    					alert("내용 혹은 별점을 작성 후 다시 시도해주세요.")
 			    					console.log("댓글작성용 ajax 통신 실패")
 			    				}
 			    			})
+		                
 			    			
 			    		}
 			    		// ajax로 해당 게시글에 딸린 댓글 목록 조회용
@@ -244,13 +334,29 @@
 			    					let result = "";
 			    					// 반복문이용해서
 			    					for(let i=0; i<list.length; i++){
-			    						result += "<tr>"
-									    			+ "<td>" + list[i].writer + "</td>"
-									    		 	+ "<td>" + list[i].contents + "</td>"
-									    			+ "<td>" + list[i].uploadDate + "</td>"
-									    		   + "</tr>";
-			    					}
-			    					
+			    						result +=  "<tr class='trtr'>"  
+                                                        + "<td colspan='5'>" 
+                                                            + "<div class='star-ratings'>"
+                                                            + "<div class='star-ratings-fill space-x-2 text-lg' style='width:" + list[i].starNo + "%'" + ">"
+                                                                + "<span>" + "<i class='fas fa-star'>" + "</i>" + "</span>" + "<span>" + "<i class='fas fa-star'>" + "</i>" + "</span>" + "<span>" + "<i class='fas fa-star'>" + "</i>" + "</span>"+ "<span>" + "<i class='fas fa-star'>" + "</i>" + "</span>"+ "<span>" + "<i class='fas fa-star'>" + "</i>" + "</span>"
+                                                            + "</div>"
+                                                            + "<div class='star-ratings-base space-x-2 text-lg'>"
+                                                                + "<span>" + "<i class='fas fa-star'>" + "</i>" + "</span>" + "<span>" + "<i class='fas fa-star'>" + "</i>" + "</span>" + "<span>" + "<i class='fas fa-star'>" + "</i>" + "</span>"+ "<span>" + "<i class='fas fa-star'>" + "</i>" + "</span>"+ "<span>" + "<i class='fas fa-star'>" + "</i>" + "</span>"
+                                                            + "</div>" 
+                                                            + "</div>"
+                                                        + "</td>"
+                                                        + "<td colspan='3'>" + "</td>"
+                                                        + "<td rowspan='3' colspan='2'>" + '추천박스' + "</td>"
+                                                    + "</tr>"
+                                                    + "<tr class='trtr'>"
+                                                        + "<td colspan='7'>" + list[i].writer + '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp' +  list[i].uploadDate + "</td>"
+                                                    + "</tr>"
+                                                    + "<tr class='trtr' style='height:100px;'>"
+                                                        + "<td colspan='7' style='width:600px;'>" + list[i].contents + "</td>"
+                                                    + "</tr>";
+
+                                                
+                                    }
 			    					$("#review-area tbody").html(result);
 			    					
 			    				},error:function(){
@@ -258,12 +364,15 @@
 			    				}
 			    			})
 			    		}
+			    		
+
 			    	</script>
 			    	
 			    </div>
         </div>
     </div>
     
+
 
 
 </body>
