@@ -36,6 +36,18 @@ public class Review {
 		this.contents = contents;
 		this.uploadDate = uploadDate;
 	}
+	
+	
+
+	public Review(int reviewNo, int gameNo, String writer, String contents, String uploadDate, int starNo) {
+		super();
+		this.reviewNo = reviewNo;
+		this.gameNo = gameNo;
+		this.writer = writer;
+		this.contents = contents;
+		this.uploadDate = uploadDate;
+		this.starNo = starNo;
+	}
 
 	public int getReviewNo() {
 		return reviewNo;

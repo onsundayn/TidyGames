@@ -159,7 +159,7 @@
                     <p>
                         출시일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=g.getReleaseDate() %> <br>
                         장르 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=gcList.get(0).getCategoryName()%><br>
-                        플레이어 &nbsp;&nbsp;&nbsp; <%=gcList.get(1).getCategoryName()%><br>
+                        
                     </p>
                 </div>
                 <div id="tag">
