@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.qna.model.vo.Qna, com.TidyGames.common.model.vo.Attachment" %>
+
+<%
+	Qna gq = (Qna)request.getAttribute("gq");
+	Attachment at = (Attachment)request.getAttribute("at");
+%>    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -114,13 +120,19 @@
         background:none;
         color:black;
     }
-    #answerArea{
+    #answer{
         background:rgba(255, 255, 255, 0.383);
         border:1px solid gray;
     }
 
     textarea:focus{
         outline:none;
+    }
+    #in{
+    display: none;
+    }
+    #up{
+    display: inline;
     }
 
 
@@ -142,7 +154,6 @@
         <div id="box">
             <div id="intro">QNA</div>
             <div id="line_3"></div>
-            <form action="">
             <div id="tableBox">
             
             <div id="tableTop">
@@ -158,81 +169,172 @@
                  <table id="table" class="table table-dark" align="center">
                     <tr>
                        <th style="border:none; font-size:17px">게임</th>
-                       <td colspan="5" style="font-size:16px; font-weight:600; border:none; padding-left:0px">Stardew Valley</td>
+                       <td colspan="3" style="font-size:16px; font-weight:600; border:none; padding-left:0px"><%=gq.getGameName() %></td>
+                        <th style="border:none;" align=right>작성일시 </th>
+                        <td style="padding-left:0px; border:none;"><%=gq.getQnaDate() %></td>
                     </tr>
                     <tr>
                         <th width="30" style="font-size:17px">제목</th>
-                        <td width="300" style="padding-left:0px">
-                            <input type="text" style="font-size:16px" value="제목입니다" readonly>
+                        <td colspan="3" width="300" style="padding-left:0px">
+                            <input type="text" style="font-size:16px" value="<%=gq.getQnaTitle() %>" readonly>
                         </td>
-                        <th width="70">작성자</th>
-                        <td style="padding-left:0px">하나둘</td>
+                        <th width="80">작성자</th>
+                        <td style="padding-left:0px"><%=gq.getMemNick() %></td>
                         
-                        <th align=right>작성일시 </th>
-                        <td style="padding-left:0px">2021-12-25</td>
                     </tr>
                     <tr>
                         <td colspan="6">
-                            <textarea name="content" class="content" cols="10" rows="11" style="resize:none" readonly>내용입니다</textarea>
+                            <textarea name="content" class="content" cols="10" rows="11" style="resize:none" readonly><%=gq.getQnaContent() %></textarea>
                         </td>
                     </tr>
                     <tr>
                         <th width="80">첨부파일 </th>
                         <td colspan="5">
-                          ㅇㄹㄴㅁㅇㄴㅁㅇㄴㅁ
-                       </td>
+                	<% if(at == null) { %>
+                    	<!--case1. 첨부파일이 없을 경우-->
+                    	첨부파일이 없습니다.
+                    <% }else{ %>
+	                    <!--case2. 첨부파일이 있을 경우-->
+	                    <a download="<%= at.getOriginName() %>" href="<%=contextPath%>/<%=at.getFilePath() + at.getChangeName()%>"><%= at.getOriginName() %></a>
+	                <% } %>
+                </td>
                     </tr>
                 </table>
 
 
             </div>
-            <form action="">
-            <div id="tableOut2">
+
+            
+            <div id="tableOut2" class="answerarea">
+            <% if(gq.getQnaCheck().equals("Y")) {%>
                 <table id="answerTable" class="table table-dark" align="center">
                     <tr class="">
                         <th width="55" style="padding-right:0px">답변</th>
-                        <th width="460">Rockstar_Games</th>
+                        <th width="400"><%=gq.getCompanyName() %></th>
                         <th align=right>작성일시 </th>
-                        <td style="padding-left:0px">2021-12-25</td>
+                        <td style="padding-left:0px"><%=gq.getQnaAnswerDate() %></td>
                     </tr>
                     <tr>
-                        <td colspan="4">
-                            <textarea name="answer" id="answerArea" class="content" cols="10" rows="3" style="resize:none"></textarea>
+                        <td colspan="6">
+                            <textarea name="answer" id="answer" class="content" cols="10" rows="3" style="resize:none; background: none; border: none;" readonly><%=gq.getQnaAnswer() %></textarea>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="4" align="center">
-                            <button type="submit" class="btn btn-sm btn-secondary" disabled>수정</button>
-                            <button type="submit" class="btn btn-sm btn-primary">등록</button>
+                        <td colspan="6" align="center">
+                        	
+                            <button type="button" id="up" class="btn btn-sm btn-primary">수정</button>                            
+                            <button onclick="updateAnswer();" id="in" class="btn btn-sm btn-primary">등록</button>           
+                            <button onclick="history.back();" class="btn btn-sm btn-secondary">취소</button>
+                            
                         </td>
                     </tr>
                 </table>
+            
+            
+            
+            <%}else{ %>
+            
+            
+                <table id="answerTable" class="table table-dark" align="center">
+                    <tr class="">
+                        <th width="55" style="padding-right:0px">답변</th>
+                        <th width="400"><%=gq.getCompanyName() %></th>
+                    </tr>
+                    <tr>
+                        <td colspan="6">
+                            <textarea name="answer" id="answer" class="content" cols="10" rows="5" style="resize:none"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" align="center">
+                            <button onclick="insertAnswer();" class="btn btn-sm btn-primary">등록</button>
+                            <button onclick="history.back();" class="btn btn-sm btn-secondary">취소</button>
+                        </td>
+                    </tr>
+                </table>
+            
+            <% } %>
+
             </div>
-            </form>
-
-
-                
-
      
                 
-            </div>        
-            </from>
                 
-        </div>
-            
-                
+        </div>            
       
-
-
-
-
-
 
         <footer>
             <div style="height:100px"></div>
         </footer>
     </div>
 
+<script>
+
+$(function() {
+	$("#up").click(function() {
+		$("#in").css("display", "inline");
+		$("#up").css("display", "none");
+		$("#answer").css({"background":"rgba(255, 255, 255, 0.383)",
+        "border":"1px solid gray"});
+		$("#answer").removeAttr("readonly");
+		
+	});
+})
+
+function insertAnswer(){
+	
+	$.ajax({
+		url:"insertAnswer.gq",
+		data:{
+			answer:$("#answer").val(),
+			gqno:<%= gq.getQnaNo() %>
+		},
+		type:"post",
+		success:function(result){
+			if(result > 0){ 
+				swal.fire({
+			        icon: "success",
+			        title: "추가가 완료되었습니다!"
+			}).then((확인) => {
+			    
+                  document.location.reload();
+			    
+			});
+			}
+		},error:function(){
+			console.log("답변 작성용 ajax 통신 실패");
+		}
+	})
+	
+}
+
+function updateAnswer(){
+	
+	$.ajax({
+		url:"insertAnswer.gq",
+		data:{
+			answer:$("#answer").val(),
+			gqno:<%= gq.getQnaNo() %>
+		},
+		type:"post",
+		success:function(result){
+			if(result > 0){ 
+				swal.fire({
+			        icon: "success",
+			        title: "수정이 완료되었습니다!"
+			}).then((확인) => {
+			    
+                  document.location.reload();
+			    
+			});
+			}
+		},error:function(){
+			console.log("답변 작성용 ajax 통신 실패");
+		}
+	})
+	
+}
+
+</script>
 
 
 </body>

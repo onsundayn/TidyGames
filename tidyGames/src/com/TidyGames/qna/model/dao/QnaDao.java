@@ -313,17 +313,19 @@ public class QnaDao {
 				rset = pstmt.executeQuery();
 				
 				if(rset.next()) {
-					gq = new Qna(rset.getString("board_no"), //게임제목
-								  rset.getString("category_name"), //문의글제목
-								  rset.getString("board_title"), //작성자닉네임
-								  rset.getString("board_content"), //문의작성일시
-								  rset.getString("board_content"), //문의글내용
-								  rset.getString("board_content"), //게임사명
-								  rset.getString("board_content"), //문의작성일시
-								  rset.getString("user_id")); //문의내용
-								
+					gq = new Qna(rset.getInt("gqna_no"), //문의번호
+								rset.getString("game_name"), //게임제목
+								rset.getString("gqna_title"), //문의글제목
+								rset.getString("mem_nick"), //작성자닉네임
+								rset.getString("gqna_date"), //문의작성일시
+								rset.getString("gqna_content"), //문의글내용
+								rset.getString("company_name"), //게임사명
+								rset.getString("gqna_answer_date"), //문의작성일시
+								rset.getString("gqna_answer"), //문의내용
+								rset.getString("gqna_check")); //문의체크
+
 				}
-				
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {
@@ -350,8 +352,8 @@ public class QnaDao {
 				if(rset.next()) {
 					at = new Attachment();
 					at.setFileNo(rset.getInt("file_no"));
-					at.setOriginName(rset.getString("origin_name"));
-					at.setChangeName(rset.getString("change_name"));
+					at.setOriginName(rset.getString("file_origin"));
+					at.setChangeName(rset.getString("file_change"));
 					at.setFilePath(rset.getString("file_path"));
 				}
 				
@@ -364,6 +366,28 @@ public class QnaDao {
 			
 			return at;
 			
+			
+		}
+		
+		public int insertCompanyAnswer(Connection conn, Qna gq) {
+			int result = 0;
+			PreparedStatement pstmt = null;
+			String sql = prop.getProperty("insertCompanyAnswer");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, gq.getQnaAnswer());
+				pstmt.setInt(2, gq.getQnaNo());
+				
+				result = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			return result;
 			
 		}
 	

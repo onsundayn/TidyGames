@@ -198,8 +198,15 @@
 				data:{upCate:$upInput.val(),inCate:$inInput},
 				success:function(){
 					console.log("업데이트카테고리 ajax 통신성공!!!");
-					alert("수정이 완료되었습니다.");
-	                location.href="<%=request.getContextPath()%>/catelist.ga";
+					swal.fire({
+				        icon: "success",
+				        title: "수정이 완료되었습니다!"
+				}).then((확인) => {
+				    
+	                  document.location.reload();
+				    
+				});
+
 
 
 
@@ -220,8 +227,14 @@
 				data:{addCate:$addInput.val()},
 				success:function(){
 					console.log("인설트카테고리 ajax 통신성공!!!");
-					alert("추가가 완료되었습니다.");
-	                location.href="<%=request.getContextPath()%>/catelist.ga";
+					swal.fire({
+				        icon: "success",
+				        title: "추가가 완료되었습니다!"
+				}).then((확인) => {
+				    
+	                  document.location.reload();
+				    
+				});
 
 
 
@@ -236,4 +249,6 @@
 
 
 </body>
+
+
 </html>

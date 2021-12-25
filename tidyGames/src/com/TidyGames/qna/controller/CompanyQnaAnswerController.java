@@ -17,13 +17,13 @@ import com.TidyGames.qna.model.vo.Qna;
  * Servlet implementation class CompanyQnaAnswer
  */
 @WebServlet("/answer.gq")
-public class CompanyQnaAnswer extends HttpServlet {
+public class CompanyQnaAnswerController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CompanyQnaAnswer() {
+    public CompanyQnaAnswerController() {
         super();
         // TODO Auto-generated constructor stub
     }

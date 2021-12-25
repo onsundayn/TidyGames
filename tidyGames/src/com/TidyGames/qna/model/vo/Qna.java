@@ -143,8 +143,24 @@ public class Qna {
 		this.qnaCheck = qnaCheck;
 
 	}
+		
 	
-	
+
+	public Qna(int qnaNo, String gameName, String qnaTitle, String memNick, String qnaDate, String qnaContent, String companyName,
+			 String qnaAnswerDate, String qnaAnswer, String qnaCheck) {
+		super();
+		this.qnaNo = qnaNo;
+		this.gameName = gameName;
+		this.qnaTitle = qnaTitle;
+		this.memNick = memNick;
+		this.qnaDate = qnaDate;
+		this.qnaContent = qnaContent;
+		this.companyName = companyName;
+		this.qnaAnswerDate = qnaAnswerDate;
+		this.qnaAnswer = qnaAnswer;
+		this.qnaCheck = qnaCheck;
+	}
+
 
 	public int getQnaNo() {
 		return qnaNo;

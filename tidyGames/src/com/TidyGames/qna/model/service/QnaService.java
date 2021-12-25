@@ -118,4 +118,17 @@ public class QnaService {
 		
 		return at;
 	}
+	
+	public int insertCompanyAnswer(Qna gq) {
+		Connection conn = getConnection();
+		int result = new QnaDao().insertCompanyAnswer(conn, gq);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;		
+	}
 }
