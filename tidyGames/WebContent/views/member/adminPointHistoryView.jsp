@@ -163,13 +163,14 @@
                       </tr>
                     </thead>
                     <tbody>
-                    
+                   <form action="<%=contextPath%>/adPointInsert.me" action="post">
                   <%for(Point po:list ) {%>
+                  			<input type="hidden" name="mNo" value=<%=po.getMemNo() %>>
                       <tr>
-                
+                		
                         <td><%=po.getMemNo() %></td>
                         <td><%=po.getMemId() %></td>
-                        <td><%=po.getSum() %>POINT</td>
+                        <td id="pointsum"><%=po.getSum()%>POINT</td>
                         <td><a href="" id="btn" class="btn btn-sm btn-dark" data-toggle="modal" data-target="#pointModal">변경</a>
                             <a href="<%= request.getContextPath() %>/adPointDe.me?mNo=<%=po.getMemNo()%>" class="btn btn-success btn-sm">상세보기</a></td>
                       
@@ -181,6 +182,7 @@
                 
 
                     <!-- point modal -->
+                  
 				<div class="modal" id="pointModal">
 					<div class="modal-dialog"  style="width: 400px;">
 						<div class="modal-content"> 
@@ -193,21 +195,26 @@
 
 							<!-- Modal body -->
 							<div class="modal-body">
-                                <div class="pointcontent">
-                                    <b style="margin-top: 20px;">회원보유포인트 :</b>
+							  
+								
+                                <div class="pointcontent" ">
+                                    <b style="margin-top: 20px; id="pointsumModal">회원보유포인트 :</b>
                                     <div class="memPoint"></div>
                                 </div>
-
+							 
+             					
+               	
+             				  
                                 <div class="pointcontent">
                                     <button  class="btn btn-secondary btn-sm" style="width: 30px; height: 30px; margin-left: 55px;">╊</button>&nbsp;
                                     <button  class="btn btn-secondary btn-sm" style="width: 30px; height: 30px;">─</button>
-                                    <input type="text" class="memPoint "></input>
+                                    <input type="text" class="memPoint" name="pointAmount"></input>
                                 </div>
                           
                                 <div class="pointcontent">
                                     <b style="margin-top: 20px;">&nbsp;
-                                        적립/차감 내용 :</b> 
-                                    <input type="text" class="memPoint "></input>
+                                      		  적립/차감 내용 :</b> 
+                                    <input type="text" class="memPoint" name="pointContent"></input>
                                 </div>
                             
                             
@@ -222,12 +229,12 @@
                                     <button type="button" class="btn btn-danger"data-dismiss="modal" style="background: rgba(255, 0, 0, 0.815);">취소</button>
                               
 							</div>
-                           
+                           </form>
                     
 						</div>
 					</div>
 				</div>
-                      
+                    
                  
                       <tr><td></td>
                    
@@ -246,6 +253,23 @@
 
 
     </div>
+    
+    <script>
+    
+	$(function(){
+		
+		
+			const tmp = $("#pointsum").html();
+			
+			$("#pointsumModal").html(tmp);
+		})
+		
+		
+		
+	
+    
+    
+    </script>
 
 </body>
 </html>
