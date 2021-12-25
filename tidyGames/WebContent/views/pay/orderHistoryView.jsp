@@ -27,7 +27,7 @@
     }
     /* 닉네임의주문내역 */
     .area1{
-       border: 1px solid red;
+      
        font-size: 30px;
         font-weight: 900;
         color :white;
@@ -35,7 +35,7 @@
     }
     /* 검색영역 */
     .area2{
-        border: 1px solid blue;
+       
         width: 1000px;
         height:150px;
         margin-left: 100px;
@@ -74,13 +74,11 @@
     .area3{
         width: 1200px;
         height: 280px;
-        border: 1px solid violet;
-        
         margin-top: 30px;
     }
 
     .paging-area{
-        border: 1px solid red;
+       
         width: 1000px;
         height: 50px;
         margin-top: 40px;
@@ -122,7 +120,7 @@
         float: right;
       
         height: 50px;
-        border: 1px solid red;
+       
        
         margin: 30px 150px 30px 0px;
     }
@@ -168,7 +166,7 @@
       .area5{
         background: none;
         text-align: center;
-        border: 1px solid blue;
+       
         width: 1000px;
         height: 400px;
         margin-top: 50px;

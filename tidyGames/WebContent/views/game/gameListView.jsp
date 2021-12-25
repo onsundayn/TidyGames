@@ -278,7 +278,7 @@ function wishConfirm(gameNo, aEl){
  
     				if(confirm("찜목록에 담겼습니다. 찜목록페이지로 이동하시겠습니까?")){
     					
-    					location.href='<%=contextPath%>/wishList.me';
+    					location.href='<%=contextPath%>/wishList.me?cpage=1';
     					
     		    	}else {
     		    		// 채워진 하트로 바꿔줘야됨 

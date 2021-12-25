@@ -29,7 +29,7 @@
     .area1{
         width: 1000px;
         height: 100px;
-        border: 3px solid blue;
+      
         font-weight: bold;
         color: white;
         margin-top: 50px;
@@ -39,7 +39,7 @@
     .area2{
         width: 1000px;
         height: 150px;
-        border: 3px solid red;
+      
         font-weight: bold;
         color: white;
         margin-top: 40px;
@@ -88,7 +88,7 @@
     .area3{
         width: 1000px;
         margin-left: 100px;
-        border: 1px solid red;
+       
         
 
     }
@@ -104,7 +104,7 @@
     }
 
     .selectForm{
-        border: 1px solid red;
+      
         width: 650px;
         float: right;
         margin-top: 10px;
@@ -113,7 +113,7 @@
     .area4{
         width: 1000px;
         height: 40px;
-        border: 1px solid blue;
+       
         margin:0px 0px 20px 100px;
     }
 
@@ -128,7 +128,7 @@
     .area5{
         background: none;
         text-align: center;
-        border: 1px solid blue;
+        
         width: 1000px;
         height: 400px;
         margin-top: 50px;
