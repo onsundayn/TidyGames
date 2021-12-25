@@ -112,6 +112,7 @@ public class Qna {
 	
 	
 
+
 	public Qna(int qnaNo, String companyName, String qnaTitle, String qnaContent, String qnaDate, String qnaAnswer,
 			String gameName) {
 		super();
@@ -122,6 +123,18 @@ public class Qna {
 		this.qnaDate = qnaDate;
 		this.qnaAnswer = qnaAnswer;
 		this.gameName = gameName;
+			}
+	public Qna(int qnaNo, String gameName, String memId,String memNick, String qnaTitle, String qnaDate, String qnaCheck  
+			) {
+		super();
+		this.qnaNo = qnaNo;
+		this.gameName = gameName;
+		this.memId = memId;
+		this.memNick = memNick;
+		this.qnaTitle = qnaTitle;
+		this.qnaDate = qnaDate;
+		this.qnaCheck = qnaCheck;
+
 	}
 
 	public int getQnaNo() {

@@ -100,7 +100,7 @@
 				<h1>카테고리 목록</h1>
 			</div>
 			<div id="enbtn" align="right">
-				<button type="button" class="btn btn-secondary" id="add_category">추가</button>
+				<button type="button" class="btn btn-info" id="add_category">추가</button>
 			</div>
 
 			<div id="content">
@@ -128,7 +128,7 @@
 								<button type="button" class="btn btn-primary" onclick="add();">등록</button>
 							</td>
 							<td>
-								<button type="button" class="btn btn-danger" id="add_close">취소</button>
+								<button type="button" class="btn btn-secondary" id="add_close">취소</button>
 							</td>
 						</tr>
 					</table>
@@ -139,14 +139,17 @@
 				<form>
 					<table style="margin: 10px">
 						<tr>
-							<td colspan="2"><input type="text" name="upCateName"></td>
+							<td colspan="3"><input type="text" name="upCateName"></td>
 						</tr>
 						<tr align="center" height="50px">
 							<td>
 								<button type="button" class="btn btn-primary" onclick="up();">수정</button>
 							</td>
 							<td>
-								<button type="button" class="btn btn-danger" id="up_close">취소</button>
+								<button type="button" class="btn btn-danger" onclick="del();">삭제</button>
+							</td>
+							<td>
+								<button type="button" class="btn btn-secondary" id="up_close">취소</button>
 							</td>
 						</tr>
 					</table>

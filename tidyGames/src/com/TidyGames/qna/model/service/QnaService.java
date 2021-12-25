@@ -86,4 +86,18 @@ public class QnaService {
 		return result;
 		
 	}
+	
+	public ArrayList<Qna> selectGameQnaList(PageInfo pi, int companyNo){
+		Connection conn = getConnection();
+		ArrayList<Qna> list = new QnaDao().selectGameQnaList(conn, pi, companyNo);
+		close(conn);
+		return list;
+	}
+	
+	public int selectGameQnaListCount(int companyNo) {
+		Connection conn = getConnection();
+		int listCount = new QnaDao().selectGameQnaListCount(conn, companyNo);
+		close(conn);
+		return listCount;
+	}
 }
