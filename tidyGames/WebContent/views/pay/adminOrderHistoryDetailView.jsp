@@ -29,7 +29,6 @@
     .area1{
         width: 1000px;
         height: 100px;
-        border: 3px solid blue;
         font-weight: bold;
         color: white;
         margin-top: 50px;
@@ -40,8 +39,6 @@
   /* 주문내역 게임 1개 영역 */
   .area2{
         width: 1000px;
-       
-        border: 1px solid violet;
         margin-left: 100px;
        
     }
@@ -74,7 +71,6 @@ tbody>tr>td>span {
     .area3{
         width: 1000px;
         height: 250px;
-        border: 1px solid violet;
         margin-top: 30px;
         margin-left: 100px;
         
@@ -84,15 +80,12 @@ tbody>tr>td>span {
     .area4{
         width: 1000px;
         height: 350px;
-        border: 1px solid violet;
-    
         margin-left: 100px;
     }
 /* 버튼영역 */
     .area5{
         width: 1000px;
         height: 100px;
-        border: 1px solid violet;
         text-align: center;
         margin-left: 310px;
     }

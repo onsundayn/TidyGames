@@ -16,7 +16,7 @@
         width:1500px;
         height: 1500px;
         margin:auto;
-        border: 2px solid orange;
+     
     }
 
 
@@ -36,7 +36,6 @@
    /* 전체 div */
 .container {
 	width: 1250px;
-	border: 1px solid red;
 	margin: auto;
     
 }
@@ -49,7 +48,6 @@
 /* 테이블영역 */
 .tablecontent{
     width: 1135px;
-    border: 1px solid blue;
     margin-left: 178px;
 }
 /* 테이블 제목단 */
@@ -76,7 +74,6 @@ tbody>tr>td>span {
 .area2{
         width: 1135px;
         height: 320px;
-        border: 1px solid rgb(166, 202, 66);
         float: right;
         margin-right: 180px;
        
@@ -120,7 +117,6 @@ tbody>tr>td>span {
         background: rgb(227, 220, 210);
         border-radius: 6px;
         display: inline-block;
-        border: 1px solid blue;
         margin-top: 40px;
        
     }
@@ -136,7 +132,6 @@ tbody>tr>td>span {
 
     /* 환불정보 */
     .area3{
-        border: 1px solid violet;
         width: 1130px;
         height: 400px;
         margin-top: 350px;
@@ -147,7 +142,6 @@ tbody>tr>td>span {
     .area4{
         width: 1200px;
         height: 100px;
-        border: 1px solid violet;
         margin: auto;
         text-align: center;
     }
