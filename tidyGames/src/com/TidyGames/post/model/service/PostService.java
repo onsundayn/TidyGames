@@ -247,5 +247,17 @@ public class PostService {
 		close(conn);
 		return result;
 	}
+	
+	public int blockMember(String memNick) {
+		Connection conn = getConnection();
+		int result = new PostDao().blockMember(conn, memNick);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 
 }

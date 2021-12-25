@@ -385,7 +385,12 @@
 		   AND POST_STATUS = 'Y'
 	</entry>
 	
-	
+	<entry key="blockMember">
+		UPDATE 
+			   MEMBER
+   		   SET MEM_ACCESS = 'BLOCK'
+         WHERE MEM_NICK = ?
+	</entry>
 	
 	
 	

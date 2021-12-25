@@ -149,7 +149,7 @@ tbody>tr:hover {
 									<td><input type="checkbox" name="deleteNum" value="<%=p.getPostNo()%>"></td>
 								<% } %>
 									<td><%=p.getPostNo()%></td>
-									<td><%=p.getPostWriter()%></td>
+									<td class="memwriter"><%=p.getPostWriter()%></td>
 									<td class="title"><%=p.getPostName()%></td>
 									<td><%=p.getPostView()%></td>
 									<td><%=p.getPostLike()%></td>
@@ -205,10 +205,9 @@ tbody>tr:hover {
 				<% } %>
 				</div>
 			<% }  %>
-
 		<br>
 		<br>
-
+		
 		<div class="search-area" align="center">
 			<form action="<%=contextPath%>/list.po" method="get">
 				<input type="hidden" name="cpage" value="1">
@@ -222,18 +221,23 @@ tbody>tr:hover {
 			</form>
 		</div>
 	</div>
-	
-	<script>
-	
-	</script>
-
 
 	<% if(loginUser != null && loginUser.getMemId().equals("admin")) { %>
 
-	<script>
+		<script>
 			$(function(){
 				$(".title").click(function(){
 					location.href = '<%=contextPath%>/detail.po?cpage=<%=currentPage%>&num=' + $(this).prevAll("input").val();
+				});
+				
+				$(".memwriter").click(function(){
+					const nickb = $(this).text();
+					console.log(nickb);
+					if(confirm(nickb + ' 회원을 블락하시겠습니까?')==true){
+						location.href = '<%=contextPath%>/block.po?cpage=<%=currentPage%>&nickb=' + nickb;
+					}else{
+						return false;
+					}
 				});
 				
 			
@@ -253,7 +257,7 @@ tbody>tr:hover {
 
 	<% } else { %>
 
-	<script>
+		<script>
 			$(function(){
 				$("#table>tbody>tr").click(function(){
 					<% if(loginUser.getMemAccess().equals("BLOCK")) {%>
