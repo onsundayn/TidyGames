@@ -100,4 +100,35 @@ public class QnaService {
 		close(conn);
 		return listCount;
 	}
+	
+	public Qna gameQnaDetailView(int gqnaNo) {
+		Connection conn = getConnection();
+		
+		Qna gq = new QnaDao().gameQnaDetailView(conn, gqnaNo);
+		
+		close(conn);
+		return gq;
+	}
+	
+	public Attachment selectGameQnaAttachment(int gqnaNo) {
+		Connection conn = getConnection();
+		
+		Attachment at = new QnaDao().selectGameQnaAttachment(conn, gqnaNo);
+		close(conn);
+		
+		return at;
+	}
+	
+	public int insertCompanyAnswer(Qna gq) {
+		Connection conn = getConnection();
+		int result = new QnaDao().insertCompanyAnswer(conn, gq);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;		
+	}
 }

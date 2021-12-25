@@ -21,16 +21,19 @@ public class Qna {
    private String gameName;
    private String memId;
    private String memNick;
+   private int seqNo;
    
-   public Qna() {}
+   public Qna() {}   
+   
 
-   public Qna(int qnaNo, int memNo, int companyNo, String qnaTitle, String qnaContent, String qnaDate, String qnaAnswer,
-		String qnaCheck, String qnaAnswerDate, String qnaStatus, int gameNo, String gameName, String memId,
-		String memNick) {
+	public Qna(int qnaNo, int memNo, int companyNo, String companyName, String qnaTitle, String qnaContent, String qnaDate,
+		String qnaAnswer, String qnaCheck, String qnaAnswerDate, String qnaStatus, int gameNo, String gameName,
+		String memId, String memNick, int seqNo) {
 	super();
 	this.qnaNo = qnaNo;
 	this.memNo = memNo;
 	this.companyNo = companyNo;
+	this.companyName = companyName;
 	this.qnaTitle = qnaTitle;
 	this.qnaContent = qnaContent;
 	this.qnaDate = qnaDate;
@@ -42,9 +45,12 @@ public class Qna {
 	this.gameName = gameName;
 	this.memId = memId;
 	this.memNick = memNick;
-    }
-   
-   
+	this.seqNo = seqNo;
+}
+
+
+
+
 
 	/**
 	 * dahyun myQnaList
@@ -124,9 +130,10 @@ public class Qna {
 		this.qnaAnswer = qnaAnswer;
 		this.gameName = gameName;
 			}
-	public Qna( String gameName,int qnaNo, String memId,String memNick, String qnaTitle, String qnaDate, String qnaCheck  
+	public Qna( int seqNo,String gameName, int qnaNo, String memId,String memNick, String qnaTitle, String qnaDate, String qnaCheck  
 			) {
 		super();
+		this.seqNo = seqNo;
 		this.gameName = gameName;
 		this.qnaNo = qnaNo;
 		this.memId = memId;
@@ -136,6 +143,24 @@ public class Qna {
 		this.qnaCheck = qnaCheck;
 
 	}
+		
+	
+
+	public Qna(int qnaNo, String gameName, String qnaTitle, String memNick, String qnaDate, String qnaContent, String companyName,
+			 String qnaAnswerDate, String qnaAnswer, String qnaCheck) {
+		super();
+		this.qnaNo = qnaNo;
+		this.gameName = gameName;
+		this.qnaTitle = qnaTitle;
+		this.memNick = memNick;
+		this.qnaDate = qnaDate;
+		this.qnaContent = qnaContent;
+		this.companyName = companyName;
+		this.qnaAnswerDate = qnaAnswerDate;
+		this.qnaAnswer = qnaAnswer;
+		this.qnaCheck = qnaCheck;
+	}
+
 
 	public int getQnaNo() {
 		return qnaNo;
@@ -256,14 +281,27 @@ public class Qna {
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
+	
+	
+
+	public int getSeqNo() {
+		return seqNo;
+	}
+
+	public void setSeqNo(int seqNo) {
+		this.seqNo = seqNo;
+	}
 
 	@Override
 	public String toString() {
-		return "Qna [qnaNo=" + qnaNo + ", memNo=" + memNo + ", companyNo=" + companyNo + ", qnaTitle=" + qnaTitle
-				+ ", qnaContent=" + qnaContent + ", qnaDate=" + qnaDate + ", qnaAnswer=" + qnaAnswer + ", qnaCheck="
-				+ qnaCheck + ", qnaAnswerDate=" + qnaAnswerDate + ", qnaStatus=" + qnaStatus + ", gameNo=" + gameNo
-				+ ", gameName=" + gameName + ", memId=" + memId + ", memNick=" + memNick + "]";
+		return "Qna [qnaNo=" + qnaNo + ", memNo=" + memNo + ", companyNo=" + companyNo + ", companyName=" + companyName
+				+ ", qnaTitle=" + qnaTitle + ", qnaContent=" + qnaContent + ", qnaDate=" + qnaDate + ", qnaAnswer="
+				+ qnaAnswer + ", qnaCheck=" + qnaCheck + ", qnaAnswerDate=" + qnaAnswerDate + ", qnaStatus=" + qnaStatus
+				+ ", gameNo=" + gameNo + ", gameName=" + gameName + ", memId=" + memId + ", memNick=" + memNick
+				+ ", seqNo=" + seqNo + "]";
 	}
+
+	
 	
 	   
    
