@@ -343,4 +343,19 @@
 		            )
 		WHERE RNUM BETWEEN ? AND ?
 	</entry>
+	<entry key="library">
+		SELECT 
+		       KOR_NAME
+		     , ENG_NAME
+		     , GAME_IMG
+             , NVL(STAR_NO, 0) "STAR_NO"
+		FROM PAY P
+		JOIN PAY_GAME USING(ORDER_NO)
+		JOIN GAME USING(GAME_NO)
+		LEFT JOIN REFUND USING(ORDER_NO)
+        LEFT JOIN REVIEW USING(GAME_NO)
+		WHERE PAY_STATUS = 'Y'
+		  AND (REFUND_STATUS IS NULL OR REFUND_STATUS = 'N')
+		  AND P.MEM_NO = ?
+	</entry>
 </properties>

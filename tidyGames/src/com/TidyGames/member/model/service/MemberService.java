@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.TidyGames.common.model.vo.PageInfo;
+import com.TidyGames.game.model.vo.Game;
 import com.TidyGames.game.model.vo.Review;
 import com.TidyGames.member.model.dao.MemberDao;
 import com.TidyGames.member.model.vo.Member;
@@ -312,6 +313,15 @@ public class MemberService {
 		return list;
 		
 		
+	}
+	
+	public ArrayList<Game> library(int memNo) {
+		Connection conn = getConnection();
+		
+		ArrayList<Game> list = new MemberDao().library(conn, memNo);
+		
+		close(conn);
+		return list;
 	}
 	
 }

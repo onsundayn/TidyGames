@@ -1,11 +1,17 @@
 package com.TidyGames.member.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.TidyGames.game.model.vo.Game;
+import com.TidyGames.member.model.service.MemberService;
+import com.TidyGames.member.model.vo.Member;
 
 /**
  * Servlet implementation class LibraryController
@@ -27,6 +33,12 @@ public class LibraryController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
+		
+		ArrayList<Game> list = new MemberService().library(memNo);
+		
+		
+		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/member/library.jsp").forward(request, response);
 	}
 
