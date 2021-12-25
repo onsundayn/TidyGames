@@ -48,11 +48,9 @@
 		    , GAME_NO
 		    , MEM_NO
 		    , CONTENTS
-		    , STAR_NO
 		    ) 
 		    VALUES
 		    ( SEQ_REVIEW_NO.NEXTVAL
-		    , ?
 		    , ?
 		    , ?
 		    , ?
@@ -66,7 +64,6 @@
 		     , MEM_NICK "WRITER"
 		     , CONTENTS
 		     , TO_CHAR(UPLOAD_DATE, 'YY/MM/DD HH:MI') "UPLOAD_DATE"
-		  	 , STAR_NO
 		  FROM REVIEW
 		  JOIN MEMBER USING (MEM_NO)
 		 WHERE REVIEW_STATUS = 'Y'
@@ -243,16 +240,6 @@
 		  , ?
 		  )
 	
-	</entry>
-	
-	<entry key="insertCategory">
-		INSERT 
-	      INTO GAME_CATEGORY
-	    VALUES 
-	    (
-	      SEQ_GAME_NO.CURRVAL
-	    , ?
-	    )
 	</entry>
 	
 	

@@ -202,8 +202,7 @@ public Game selectGameGC(Connection conn, int comNo, int gameNo) {
 									 rset.getInt("game_no"),
 									 rset.getString("writer"),
 									 rset.getString("contents"),
-									 rset.getString("upload_date"),
-									 rset.getInt("star_no")));
+									 rset.getString("upload_date")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -227,7 +226,6 @@ public Game selectGameGC(Connection conn, int comNo, int gameNo) {
 			pstmt.setInt(1, r.getGameNo());
 			pstmt.setInt(2, Integer.parseInt(r.getWriter()));
 			pstmt.setString(3, r.getContents());
-			pstmt.setInt(4, r.getStarNo());
 			
 			result = pstmt.executeUpdate();
 			
@@ -501,25 +499,6 @@ public Game selectGameGC(Connection conn, int comNo, int gameNo) {
 		}
 		return list;
 		
-	}
-	
-	public int insertCategory(Connection conn, Game ga, int categoryNo) {
-		int result = 0;
-		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("insertCategory");
-		
-		try {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, categoryNo);
-				
-				result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}
-		return result;
 	}
 	
 }

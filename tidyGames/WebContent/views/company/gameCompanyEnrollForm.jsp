@@ -181,7 +181,7 @@ ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("list");
                         <th>장르</th>
                         <td>
                             <select name="genre" id="genre">
-                                <option value="none" selected>장르선택</option>
+                                <option value="">장르선택</option>
                         	<% for(Category c : list) {%>
                         		<option value="<%=c.getCategoryNo()%>"><%=c.getCategoryName()%></option>
                         	<% } %>
@@ -203,8 +203,8 @@ ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("list");
                     <tr>
                         <th>관련태그</th>
                         <td>
-                            <select name="tag" id="tag" multiple onChange="tagSelect(this);">
-                                <option value="none">태그선택</option>
+                            <select name="tag" id="tag">
+                                <option value="">태그선택</option>
                         	<% for(Category c : list) {%>
                         		<option value="<%=c.getCategoryNo()%>"><%=c.getCategoryName() %></option>
                         	<% } %>
@@ -268,7 +268,7 @@ ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("list");
         
         function chooseFile(num){
     		$("#file" + num).click();
-    	}
+    	}	
     </script>
 </body>
 </html>

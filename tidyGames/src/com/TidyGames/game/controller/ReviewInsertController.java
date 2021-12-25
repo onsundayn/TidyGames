@@ -36,15 +36,14 @@ public class ReviewInsertController extends HttpServlet {
 		int gameNo = Integer.parseInt(request.getParameter("game"));
 		String contents = request.getParameter("contents");
 		int memNo = Integer.parseInt(request.getParameter("memNo"));
-		
 		// 로그인한 회원정보 얻어내는 방법 
 		// 1. input type="hidden"
 		// 2. session영역에 담겨있는 회원객체로부터 뽑기
-	
+		
 		Review r = new Review();
 		r.setGameNo(gameNo);
 		r.setContents(contents);
-		r.setWriter(String.valueOf(memNo));
+		r.setMemNo(memNo);
 		
 		int result = new GameService().insertReview(r);
 		

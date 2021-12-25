@@ -47,7 +47,7 @@ public class GameDetailViewController extends HttpServlet {
 		GameService gService = new GameService();
 		
 		Game g = gService.selectGame(memNo, gameNo);
-		ArrayList<Category> gcList = new GameService().selectGameCategory(gameNo);
+		ArrayList<Category> gcList = new CategoryService().selectCategoryList();
 		ArrayList<Attachment3> list = gService.selectAttachmentList(gameNo);
 		Attachment3 at = gService.selectAttachment(gameNo);
 		

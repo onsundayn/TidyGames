@@ -35,20 +35,8 @@ public class AjaxReviewInsertController extends HttpServlet {
 		String contents = request.getParameter("contents");
 		int gameNo = Integer.parseInt(request.getParameter("gno"));
 		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
-		int starNo = Integer.parseInt(request.getParameter("star"));
-		
-		System.out.println(starNo);
-		
-		switch(starNo) {
-		case 1: starNo = 20; break;
-		case 2: starNo = 40; break;
-		case 3: starNo = 60; break;
-		case 4: starNo = 80; break;
-		case 5: starNo = 100; break;
-		}
 		
 		Review r = new Review();
-		r.setStarNo(starNo);
 		r.setContents(contents);
 		r.setGameNo(gameNo);
 		r.setWriter(String.valueOf(memNo));
