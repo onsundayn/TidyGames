@@ -25,7 +25,7 @@
     }
     #content{
         width: 600px;
-        height: 600px;
+        height: 550px;
         background-color: rgba(255, 255, 255, 0.5);
         margin: auto;
         margin-top: 50px;
@@ -117,7 +117,7 @@
                 <div id="login_form">
 
                     <span style="color: white; font-size: 30px; font-weight: bold;">HELLO!</span>
-                    <br><br>
+                    <br><br><br>
 
                     <div class="form-group">
                         <br>
@@ -128,7 +128,7 @@
                         <input type="password" name="userPwd" class="form-control" placeholder="비밀번호" id="pwd" required>
                     </div>
 
-                    <div class="login_check">
+                    <div class="login_check" style="margin-top: 50px;">
                         <!--
                         <label for="rememberId">
                             <input type="checkbox" name="rememberId" id="rememberId"> 아이디 기억
@@ -151,8 +151,9 @@
                         <a href="<%=contextPath%>/inputSearchPwd.me">비밀번호 재설정</a> ㅣ
                         <a href="<%=contextPath%>/memberEnrollPage.me">회원가입</a>
                     </div>
+                    
+                    <!--
                     <hr>
-
                     <div class="sns_login">
 
                         <button type="button" style="background-color: #03C75A; color: white;">
@@ -165,6 +166,7 @@
                             <div style="margin-right: 35px;">카카오 아이디로 로그인</div>
                         </button>
                     </div>
+                    -->
 
                 </div>
             </form>
