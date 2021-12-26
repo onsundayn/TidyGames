@@ -127,7 +127,7 @@
 		    
 			<div class="search-area" align="center">
 				<form action="<%=contextPath%>/search.co" method="get">
-					<input name="companyName" type="text" style="width:500px; height:30px;" placeholder="게임사 검색">
+					<input name="companyName" type="text" style="width:500px; height:30px;" placeholder="게임사 검색" value="${param.companyName}">
 				    <button type="submit" id="searchbtn"><i class="fas fa-search"></i></button>			
 				</form>
 			</div>
