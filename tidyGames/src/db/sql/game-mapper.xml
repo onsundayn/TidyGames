@@ -260,5 +260,32 @@
 	    )
 	</entry>
 	
+	<entry key="selectMainGameList">
+		SELECT
+		       GAME_NO
+		     , KOR_NAME
+		     , ENG_NAME
+		     , PRICE
+		     , CONFIRM
+		     , UPGAME
+		     , UPLOAD_DATE
+		     , POINT
+		     , GAME_IMG
+		  FROM (SELECT
+		               GAME_NO
+		             , KOR_NAME
+		             , ENG_NAME
+		             , PRICE
+		             , CONFIRM
+		             , UPGAME
+		             , UPLOAD_DATE
+		             , POINT
+		             , GAME_IMG
+		          FROM GAME
+		         WHERE CONFIRM = 'Y'
+		         ORDER BY DBMS_RANDOM.VALUE)
+		 WHERE ROWNUM &lt;= 3
+	</entry>
+	
 
 </properties>

@@ -151,12 +151,22 @@ public class GameService {
 		return list;
 		
 	}
-	
+	// 게임 평균 별점 조회
 	public int selectStarAvg(int gameNo) {
 		Connection conn = getConnection();
 		int starAvg = new GameDao().selectStarAvg(conn, gameNo);
 		close(conn);
 		return starAvg;
+	}
+	
+	public ArrayList<Game> selectMainGameList() {
+		
+		Connection conn  = getConnection();
+		ArrayList<Game> list = new GameDao().selectMainGameList(conn);
+		
+		close(conn);
+		
+		return list;
 	}
 
 }

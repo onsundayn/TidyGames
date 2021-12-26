@@ -1,3 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.game.model.vo.Game"%>
+<%
+	ArrayList<Game> list = (ArrayList<Game>)request.getAttribute("list");
+	System.out.println(list);
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,8 +43,8 @@
   <!-- The slideshow -->
   <div class="carousel-inner" align="center">
     <div class="carousel-item active">
-		<a href="">
-			<img src="<%=contextPath%>/resources/image/Dead-Cells.jpg" width="1000" height="350">
+		<a href="<%=contextPath%>/detail.ga?gno=<%=list.get(0).getGameNo()%>">
+			<img src="<%=contextPath%>/<%=list.get(0).getGameImg()%>">
 		</a>
     </div>
     <div class="carousel-item">
@@ -51,6 +57,7 @@
 			<img src="ny.jpg" alt="New York" width="1000" height="500">
 		</a>
     </div>
+    
   </div>
   
   <!-- Left and right controls -->

@@ -62,10 +62,10 @@
                 <th>마지막 업데이트 날짜</th>
                 <th>업데이트</th>
             </tr>
+            <% int index = 0; %>
             <% for(Game g : list) { %>
-<
             <tr>
-                <td>1</td>
+                <td><%= index++ %></td>
                 <td><%=g.getKorName()%>(<%=g.getEngName()%>)</td>
                 <td><%=g.getPrice()%></td>
                 <td><%=g.getUploadDate()%></td>

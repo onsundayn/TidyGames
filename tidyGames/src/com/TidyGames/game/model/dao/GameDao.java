@@ -546,4 +546,37 @@ public Game selectGameGC(Connection conn, int comNo, int gameNo) {
 		return starAvg;
 	}
 	
+	public ArrayList<Game> selectMainGameList(Connection conn){
+		ArrayList<Game> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMainGameList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Game(rset.getInt("game_no"),
+								  rset.getString("kor_name"),
+								  rset.getString("eng_name"),
+							      rset.getInt("price"),
+								  rset.getString("confirm"),
+								  rset.getString("upgame"),
+								  rset.getString("upload_date"),
+								  rset.getDouble("point"),
+								  rset.getString("game_img")));
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	
 }
