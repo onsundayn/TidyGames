@@ -18,14 +18,14 @@ import com.TidyGames.qna.model.vo.Qna;
 /**
  * Servlet implementation class GameCompanyQnaList
  */
-@WebServlet("/qnalist.co")
-public class CompanyGameQnaList extends HttpServlet {
+@WebServlet("/qnalist.gq")
+public class CompanyGameQnaListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CompanyGameQnaList() {
+    public CompanyGameQnaListController() {
         super();
         // TODO Auto-generated constructor stub
     }

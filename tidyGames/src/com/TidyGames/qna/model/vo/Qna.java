@@ -160,6 +160,28 @@ public class Qna {
 		this.qnaAnswer = qnaAnswer;
 		this.qnaCheck = qnaCheck;
 	}
+	
+	
+
+
+	public Qna(int companyNo, int gameNo, String gameName) {
+		super();
+		this.companyNo = companyNo;
+		this.gameNo = gameNo;
+		this.gameName = gameName;
+	}
+	
+	
+
+
+	public Qna(int memNo, int gameNo, int companyNo, String qnaTitle, String qnaContent) {
+		super();
+		this.memNo = memNo;
+		this.gameNo = gameNo;
+		this.companyNo = companyNo;
+		this.qnaTitle = qnaTitle;
+		this.qnaContent = qnaContent;
+	}
 
 
 	public int getQnaNo() {

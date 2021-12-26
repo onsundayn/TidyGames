@@ -131,4 +131,33 @@ public class QnaService {
 		close(conn);
 		return result;		
 	}
+	
+	public Qna gameQnaQuestion(int gameNo) {
+		Connection conn = getConnection();
+		
+		Qna gq = new QnaDao().gameQnaQuestion(conn, gameNo);
+		
+		close(conn);
+		return gq;
+	}
+	
+	public int insertGameQna(Qna gq, Attachment at) {
+		Connection conn = getConnection();
+		
+		int result1 = new QnaDao().insertGameQna(conn, gq);
+		int result2 = 1;
+		if(at != null) {
+			result2 = new QnaDao().insertGameQnaAttachment(conn, at);
+		}
+		
+		if(result1 > 0 && result2 > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result1 * result2;
+	}
 }

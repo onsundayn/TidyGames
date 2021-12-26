@@ -78,7 +78,7 @@
             <div id="line"></div>
             <ul>
                 
-                <li><a href="<%=request.getContextPath()%>/qnalist.co?cpage=1" id="qnalistco">게임 문의 내역</a></li>
+                <li><a href="<%=request.getContextPath()%>/qnalist.gq?cpage=1" id="qnalistgq">게임 문의 내역</a></li>
 
             </ul>
             <div id="line_2"></div>

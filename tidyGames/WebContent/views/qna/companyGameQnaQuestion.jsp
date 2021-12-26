@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.qna.model.vo.Qna, com.TidyGames.common.model.vo.Attachment" %>
+<%
+	Qna gq = (Qna)request.getAttribute("gq");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,11 +69,12 @@
     #tableOut1{
         width:100%;
         height:100%;
+        
     }
     #table{
         margin:auto;
         width:700px;
-        height:440px;
+        height:500px;
         background:none;
         color:black;
     }
@@ -103,6 +107,13 @@
         border:1px solid gray;
     }
     .content{
+        margin:0px;
+        width:100%;
+        height:100%;
+        background:rgba(255, 255, 255, 0.383);
+        border:1px solid gray;
+    }
+        .title{
         margin:0px;
         width:100%;
         height:100%;
@@ -143,30 +154,36 @@
                 </div>
             </div>
             
-            <div id="tableOut1">
-                
-            <form action="">
+           <div id="tableOut1">
+        	
+            <form action="<%= contextPath %>/insertQna.gq" method="post" enctype="multipart/form-data">
+            <!--완성되면 지우기  --><input type="hidden" name="memNo" value="2">
+            <%-- 완성되면 적용<input type="hidden" name="memNo" value="<%=loginUser.getMemNo()%>"> --%>
+            <input type="hidden" name="gameNo" value="<%=gq.getGameNo()%>">
+            <input type="hidden" name="companyNo" value="<%=gq.getCompanyNo()%>">
                 <table id="table" class="table table-dark" align="center">
                     <tr>
-                        <th width="75">제목</th>
-                        <td style="padding-left:0px">
-                            <input type="text" style="font-size:16px" value="" readonly>
+                       <th width="100"style="border:none; font-size:20px ">게임</th>
+                       <td colspan="2" name="gameName" style="font-size:20px; font-weight:500; border:none; padding-left:0px;"><%=gq.getGameName()%></td>
+                       
+                    </tr>
+                   
+                    <tr>
+                        <td colspan="3" align="center">
+                            <input id="textInput" type="text" name="gqnaTitle" placeholder="제목을 입력하세요." style="padding-left:10px">
                         </td>
-                        <td width="300"></td>
-                        <!-- <th width="70">작성자</th> -->
-                        <!-- <td style="padding-left:0px">호빵</td> -->
-                        <!-- <td align=right>작성일시 | 21-11-18</td> -->
-                        <!-- <td width="50px"></td> -->
                     </tr>
                     <tr>
-                        <td colspan="3" padding:0px>
-                            <textarea name="content" class="content" cols="10" rows="6" style="resize:none"></textarea>
+                        <td colspan="3">
+                            <textarea class="content" name="gqnaContent" cols="10" rows="6" style="resize:none; padding:10px"></textarea>
                         </td>
                     </tr>
                     <tr>
                         
 
-                        <td colspan="3"><input id="upfile" type="file" name="upfile"></td>
+                        <td colspan="3"><input id="upfile" type="file" name="upfile">
+                        	
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="3" align="center">
@@ -176,12 +193,7 @@
                     </tr>
                 </table>
             </form>
-
-            </div> 
-
-
-
-                
+            </div>                
 
      
                 

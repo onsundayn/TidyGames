@@ -300,7 +300,6 @@ public class QnaDao {
 		}
 		
 		public Qna gameQnaDetailView(Connection conn, int gqnaNo) {
-			// select문 => ResultSet (한행) => Board
 			Qna gq = null;
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
@@ -378,6 +377,83 @@ public class QnaDao {
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, gq.getQnaAnswer());
 				pstmt.setInt(2, gq.getQnaNo());
+				
+				result = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			return result;
+			
+		}
+		
+		public Qna gameQnaQuestion(Connection conn, int gameNo) {
+			Qna gq = null;
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			String sql = prop.getProperty("gameQnaQuestion");
+			
+			try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, gameNo);
+				
+				rset = pstmt.executeQuery();
+				
+				if(rset.next()) {
+					gq = new Qna(rset.getInt("company_no"), //게임사번호
+								rset.getInt("game_no"), //게임번호
+								rset.getString("game_name")); //게임이름
+
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset);
+				close(pstmt);
+			}
+			
+			return gq;
+		}
+		
+		public int insertGameQna(Connection conn, Qna gq) {
+			// insert문 => 처리된행수 => 트랜잭션처리
+			int result = 0;
+			PreparedStatement pstmt = null;
+			String sql = prop.getProperty("insertGameQna");
+			
+			try {
+				pstmt = conn.prepareStatement(sql); // 미완성된 sql
+				pstmt.setInt(1, gq.getMemNo());
+				pstmt.setInt(2, gq.getGameNo());
+				pstmt.setInt(3, gq.getCompanyNo());
+				pstmt.setString(4, gq.getQnaTitle());
+				pstmt.setString(5, gq.getQnaContent());
+				
+				result = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			return result;
+		}
+		
+		public int insertGameQnaAttachment(Connection conn, Attachment at) {
+			int result = 0;
+			PreparedStatement pstmt = null;
+			String sql = prop.getProperty("insertGameQnaAttachment");
+			
+			try {
+				pstmt = conn.prepareStatement(sql); // 미완성된 sql
+				pstmt.setString(1, at.getOriginName());
+				pstmt.setString(2, at.getChangeName());
+				pstmt.setString(3, at.getFilePath());
 				
 				result = pstmt.executeUpdate();
 				

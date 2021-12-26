@@ -162,7 +162,7 @@
 			<div class="paging-area" align="center">
 
         	<% if(currentPage != 1) { %>
-            	<button style="border-radius:3px;" onclick="location.href='<%=contextPath%>/list.ga?cpage=<%=currentPage-1%>';"> &lt; </button>
+            	<button style="border-radius:3px;" onclick="location.href='<%=contextPath%>/uplist.ga?cpage=<%=currentPage-1%>';"> &lt; </button>
             <% } %>
             
             <% for(int p=startPage; p<=endPage; p++){ %>
@@ -170,13 +170,13 @@
             	<% if(p == currentPage) { %>
             		<button disabled style="border-radius:3px; background:orange; color:white;"><%= p %></button>
             	<% }else { %>
-            		<button style="border-radius:3px;" onclick="location.href='<%=contextPath%>/list.ga?cpage=<%= p %>';"><%= p %></button>
+            		<button style="border-radius:3px;" onclick="location.href='<%=contextPath%>/uplist.ga?cpage=<%= p %>';"><%= p %></button>
             	<% } %>
             	
             <% } %>
             
             <% if(currentPage != maxPage) { %>
-            	<button onclick="location.href='<%=contextPath%>/list.ga?cpage=<%=currentPage+1%>';"> &gt; </button>
+            	<button onclick="location.href='<%=contextPath%>/uplist.ga?cpage=<%=currentPage+1%>';"> &gt; </button>
             <% } %>
             	
         </div>
