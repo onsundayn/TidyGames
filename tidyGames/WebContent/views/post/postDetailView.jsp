@@ -281,12 +281,12 @@ table {
 					</div>
 					<br>
 					<div>
-						<label for="r7"><textarea cols="60" rows="4" style="resize: none" placeholder="신고 사유 입력 (최대 160자 이내)"></textarea>
+						<label for="r7"><textarea id="etc" cols="60" rows="4" style="resize: none" maxlength="158" placeholder="신고 사유 입력 (최대 160자 이내)"></textarea>
 					</div>
 					<div class="modal-footer">
 						<input type="hidden" id="reportPno" name="reportPno" value="<%=p.getPostNo()%>">
 						<input type="hidden" id="reportMem" name="reportMem" value="<%=p.getMemNo()%>">
-						<button  id="postReport" class="btn btn-info">신고완료</button>
+						<button id="postReport" class="btn btn-info">신고완료</button>
 						<button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
 					</div>
 				</div>
@@ -313,33 +313,74 @@ table {
 				});
 				
 				
-				//글신고
-				$("#postReport").click(function(){
-					// 신고사유
-					const reportReason = $(':radio[name="report"]:checked').val();
-					console.log(reportReason);
-					
-					// 신고된 글 번호
-					const reportNo = $("#reportPno").val();
-					console.log(reportNo);
-					
-					// 신고된 회원 번호
-					const reportedMemNo = $("#reportMem").val();
-					console.log(reportedMemNo);
-				});
-
 				
-			}); // 여기까지 제이쿼리
-			
-			// 댓글 신고
-			function reportReply(renum) {
-				if(confirm('해당 댓글을 신고하시겠습니까?')==true){
-					alert('신고 처리가 완료되었습니다!');
+			});
+			// =================== 신고하기 ====================				
+				
+				$("#postReport").click(function(){
+				
+					console.log($("input[name=writerReport]").val());
+					console.log($("input[name=replyReport]").val());
+					
+					if(false) {
+						alert("로그인 후 사용 가능합니다.");
+						
+					}else{
+						$.ajax({
+							url:"report.re",
+							data:{
+								pno:$("#reportPno").val(),
+								mno:$("#reportMem").val(),
+								sno:$(':radio[name="report"]:checked').val(),
+								etc:$("#etc").val(),
+								rno:$("input[name=replyReport]").val(),
+								remo:$("input[name=writerReport]").val()
+							},
+							type:"post",
+							success:function(result){
+								if(result > 0) {
+									alert("신고되었습니다.");
+									$(".modal").modal("hide");
+								}else{
+									alert("다시 입력해주세요.")
+								}
+							}, error:function(){
+								alert("오류가 발생했습니다. 다시 시도해주세요.")
+							}
+						});
+				}
+			});
+				
+				
+				
+			// =================== 댓글 신고 ====================
+				
+			function reportReply([renum,remem]) {
+				
+	        	if(confirm('해당 댓글을 신고하시겠습니까?')==true){
+	        		
 				}else{
 					return false;
 				}
+            
+	    		$.ajax({
+					url:"replyReport.re",
+					data:{rno:renum,
+						  remo:remem,
+						  pno:<%=p.getPostNo()%>
+					},
+					success:function(result){
+						if(result > 0){
+							alert('신고 처리가 완료되었습니다!');
+						}
+					}, error:function(){
+						console.log("댓글 신고 실패");
+					}
+				})
 			};
-
+      		  
+				
+				
 			// =================== 댓글 =======================
 			function insertReply(){
 				$.ajax({
@@ -388,6 +429,8 @@ table {
 					success:function(list){
 						let result = "";
 						
+						
+						
 						for(let i=0; i<list.length; i++) {
 							result += "<input type='hidden' class='reportRmem' value='" + list[i].wrtierNo + "'>"
 				       				+ "<tr>"
@@ -405,8 +448,11 @@ table {
 				              } else {
 				            	  result   += "<tr>"
 				                   + "<td></td>"
+				                   //+ "<input type='hidden' class='writerReport' value='" + list[i].wrtierNo + "'>"
+				                   //+ "<input type='hidden' class='replyReport' value='" + list[i].replyNo + "'>"
 						           + "<td style='font-size:smaller'>" + list[i].replyEnroll + "</td>"
-						           + "<td width='50' align='right'><button class='btn btn-sm btn-warning' onclick='reportReply(" + list[i].replyNo + ");'><i class='far fa-angry'></i></button></td>"
+						           + "<td width='50' align='right'><button class='btn btn-sm btn-warning' onclick='reportReply([" + list[i].replyNo + "," + list[i].wrtierNo + "])'><i class='far fa-angry'></i></button></td>"
+						           //+ "<td width='50' align='right'><button class='btn btn-sm btn-warning' data-toggle='modal' data-target='#reportPostModal'><i class='far fa-angry'></i></button></td>"
 						           + "</tr>"
 						           +  "<tr><td colspan='3' height='20'></td></tr>";
 				              }

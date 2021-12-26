@@ -123,7 +123,55 @@
 		  , ?
 		  , DEFAULT
 		  , DEFAULT
-		  , NULL
+		  , ?
+		  )
+	</entry>
+	<entry key="reportAtCommunity">
+		INSERT 
+		  INTO REPORT
+		  ( 
+		    REPORT_NO
+		  , REPORTED_MEM_NO
+		  , REPORTING_MEM_NO
+		  , REF_PNO
+		  , REPORT_SORT
+		  , REPORT_DATE
+		  , DONE
+		  , ETC
+		  )
+		  VALUES 
+		  (
+		  SEQ_RNO_K.NEXTVAL
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , DEFAULT
+		  , DEFAULT
+		  , ?
+		  )
+	</entry>
+	<entry key="reportReply">
+		  INSERT 
+		  INTO REPORT
+		  ( 
+		    REPORT_NO
+		  , REPORTED_MEM_NO
+		  , REPORTING_MEM_NO
+		  , REF_PNO
+		  , REF_RNO
+		  , REPORT_SORT
+		  , ETC
+		  )
+		  VALUES 
+		  (
+		  SEQ_RNO_K.NEXTVAL
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  , ?
 		  )
 	</entry>
 </properties>

@@ -178,8 +178,7 @@
 	                        <tr align="center">
 	                            <td width="30"><%= r.getReportNo() %></td>
 	                            <td><%= r.getReportedName() %></td>
-	                            <!-- 아이디 클릭 시 회원의 상세보기로 넘어가야 함 (아직 구현 전) -->
-	                            <td><a href="<%= contextPath %>/memberSelect.me?mno=<%= r.getReportedNo() %>"><%= r.getReported() %></a></td>
+	                            <td><a><%= r.getReported() %></a></td>
 	                            <td>
 	                            	<% if(r.getEtc() != null) { %>
 	                            		<%= r.getEtc() %>

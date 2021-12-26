@@ -1,7 +1,6 @@
 package com.TidyGames.report.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,16 +13,16 @@ import com.TidyGames.report.model.service.ReportService;
 import com.TidyGames.report.model.vo.Report;
 
 /**
- * Servlet implementation class ReportAtCommunity
+ * Servlet implementation class ReportReplyAtCommunity
  */
-@WebServlet("/report.re")
-public class ReportAtCommunity extends HttpServlet {
+@WebServlet("/replyReport.re")
+public class ReportReplyAtCommunity extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReportAtCommunity() {
+    public ReportReplyAtCommunity() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,25 +32,26 @@ public class ReportAtCommunity extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-			int postNo = Integer.parseInt(request.getParameter("pno"));
-			String memNo = request.getParameter("mno");
-			String sort = request.getParameter("sno");
-			String etc = request.getParameter("etc");
-			
-			int reporting = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
-			
-			Report r = new Report();
-			r.setPostNo(postNo);
-			r.setReported(memNo);
-			r.setReportSort(sort);
-			r.setEtc(etc);
-			r.setReporting(String.valueOf(reporting));
-			
-
-			int result = new ReportService().reportAtCommunity(r);
-			
-			response.getWriter().print(result);
-			
+		int postNo = Integer.parseInt(request.getParameter("pno"));
+		String replyNo = request.getParameter("rno");
+		String replyWriter = request.getParameter("remo");
+		int reporting = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
+		
+		System.out.println(postNo);
+		System.out.println(replyNo);
+		System.out.println(replyWriter);
+		System.out.println(reporting);
+		
+		
+		Report r = new Report();
+		r.setPostNo(postNo);
+		r.setReply(replyNo);
+		r.setReported(replyWriter);
+		r.setReporting(String.valueOf(reporting));
+		
+		int result = new ReportService().reportReplyAtCommunity(r);
+		
+		response.getWriter().print(result);
 	}
 
 	/**
