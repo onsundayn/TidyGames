@@ -46,7 +46,7 @@ public class AdminCompanyInsertControlelr extends HttpServlet {
 		
 		if(result > 0) {
 			request.getSession().setAttribute("alertMsg", "게임사 등록 완료!");
-			response.sendRedirect(request.getContextPath() + "/list.co");
+			response.sendRedirect(request.getContextPath() + "/list.co?cpage=1");
 		}else {
 			request.setAttribute("errorMsg", "게임사 등록에 실패하셨습니다");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request,response);
