@@ -160,7 +160,7 @@
                         <tr align="center">
                             <td><%= r.getReportNo() %></td>
                             <td><%= r.getReported() %></td>
-                            <td><a href="<%= contextPath %>/detail.po?num=<%= r.getPostNo() %>"><%= r.getPost() %></a></td>
+                            <td><a href="<%= contextPath %>/detail.po?cpage=1&num=<%= r.getPostNo() %>"><%= r.getPost() %></a></td>
                             <td>
                             	<% if(r.getEtc() != null) { %>
                             		<%= r.getEtc() %>

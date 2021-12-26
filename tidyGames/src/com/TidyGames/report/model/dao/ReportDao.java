@@ -246,17 +246,47 @@ public class ReportDao {
 			pstmt.setInt(2, Integer.parseInt(r.getReporting()));
 			pstmt.setInt(3, r.getPostNo());
 			pstmt.setString(4, r.getReportSort());
+			pstmt.setString(5, r.getEtc());
 			
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
 		
 		return result;
 		
 		
 		
+	}
+	
+		public int reportReplyAtCommunity(Connection conn, Report r) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("reportReply");
+		
+		System.out.println(r.getReply());
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, Integer.parseInt(r.getReported()));
+			pstmt.setInt(2, Integer.parseInt(r.getReporting()));
+			pstmt.setInt(3, (r.getPostNo()));
+			pstmt.setInt(4, Integer.parseInt(r.getReply()));
+			pstmt.setInt(5, 7);
+			pstmt.setString(6, "댓글 신고");
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 		
 		

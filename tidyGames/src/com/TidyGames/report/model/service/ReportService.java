@@ -119,5 +119,18 @@ public class ReportService {
 		close(conn);
 		return result;
 	}
+	
+	public int reportReplyAtCommunity(Report r) {
+		Connection conn = getConnection();
+		int result = new ReportDao().reportReplyAtCommunity(conn, r);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 
 }
