@@ -221,4 +221,5 @@
 		   SET NOTI_STATUS = 'N'
 		 WHERE NOTI_NO = ?
 	</entry>
+	
 </properties>

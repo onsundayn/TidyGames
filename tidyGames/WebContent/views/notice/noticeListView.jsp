@@ -69,7 +69,7 @@
             <div id="deletebtn" align="right" style="width:1200px;">
                 <!--관리자계정에서만보이는 버튼-->
                 <% if(loginUser != null && loginUser.getRoleId().equals("A")) { %>
-                    <a href="" class="btn btn-sm btn-danger">삭제</a>
+                    <a onclick="delectNotice();" class="btn btn-sm btn-danger">삭제</a>
                     <a href="<%= contextPath %>/noticeEnroll.no" class="btn btn-sm btn-info">글작성</a>
                 <% } %>
             </div>
@@ -96,17 +96,20 @@
 	                <% }else { %>
                         <!--게시물 있을 경우-->
                         <tr>
+							<form method="post" id="noticeForm">
+							<input type="hidden" name="currentPage" value="<%= currentPage %>">
 	                        <% for(Notice n : list) { %>
 			                    <tr>
 			                    	<% if(loginUser != null && loginUser.getRoleId().equals("A")) { %>
-	                       				<td><input type="checkbox"></td>
-	                       			<% } %>
-                                        <td id="num"><%= n.getNotiNo() %></td>
-                                        <td id="title"><%= n.getNotiTitle() %></td>
-                                        <td><%= n.getNotiDate() %></td>
-			                    </tr>
-	                    	<% } %>
-	                    </tr>
+											<td><input type="checkbox" class="deleteNum" name="deleteNum" value="<%= n.getNotiNo() %>"></td>
+											<% } %>
+											<td class="num"><%= n.getNotiNo() %></td>
+											<td class="title"><%= n.getNotiTitle() %></td>
+											<td class="notiDate"><%= n.getNotiDate() %></td>
+										</tr>
+									<% } %>
+								</tr>
+							</form>
                     <% } %>
 
                 </tbody>
@@ -143,10 +146,17 @@
 		<script>
 			$(function(){
                 // 게시글을 클릭하면 해당 게시글의 글번호를 num으로 넘기면서 이동
-				$("#table>tbody>tr").click(function(){
-					location.href = '<%=contextPath%>/noticeDetail.no?cpage=<%=currentPage%>&num=' + $(this).children().eq(1).text();
+				$(".num").click(function(){
+					location.href = '<%=contextPath%>/noticeDetail.no?cpage=<%=currentPage%>&num=' + $(this).text();
 				});
 				
+				$(".title").click(function(){
+					location.href = '<%=contextPath%>/noticeDetail.no?cpage=<%=currentPage%>&num=' + $(this).prev().text();
+				});
+				
+				$(".notiDate").click(function(){
+					location.href = '<%=contextPath%>/noticeDetail.no?cpage=<%=currentPage%>&num=' + $(this).prev().prev().text();
+				});
 			
 				$("#check1").click(function(){
 		            if($(this).is(":checked")){
@@ -157,16 +167,46 @@
 		        })	
 				
 			})
+
+			function delectNotice(){
+
+				const checkboxes = document.getElementsByClassName('deleteNum');
+				var checkNum = 0;
+				var noticeForm = document.getElementById('noticeForm');
+				
+				for(var i=0; i<checkboxes.length; i++) {
+					if(checkboxes[i].checked == true) {
+						checkNum += 1;
+					}
+				}
+
+				if(checkNum == 0) {
+					alert("삭제할 게시글을 선택해주세요.");
+				} else if(checkNum > 0) {
+					if(confirm("정말 삭제하시겠습니까?")){
+					noticeForm.action = "<%= contextPath %>/noticeListDelete.no";
+					noticeForm.submit();
+					}
+				}
+
+			}
 		</script>
 	
 	<% } else { %>
 	
 		<script>
 			$(function(){
-				$("#table>tbody>tr").click(function(){
-					location.href = '<%=contextPath%>/noticeDetail.no?cpage=<%=currentPage%>&num=' + $(this).children().eq(0).text();
+				$(".num").click(function(){
+					location.href = '<%=contextPath%>/noticeDetail.no?cpage=<%=currentPage%>&num=' + $(this).text();
 				});
-
+				
+				$(".title").click(function(){
+					location.href = '<%=contextPath%>/noticeDetail.no?cpage=<%=currentPage%>&num=' + $(this).prev().text();
+				});
+				
+				$(".notiDate").click(function(){
+					location.href = '<%=contextPath%>/noticeDetail.no?cpage=<%=currentPage%>&num=' + $(this).prev().prev().text();
+				});
 			})
 		</script>
 	

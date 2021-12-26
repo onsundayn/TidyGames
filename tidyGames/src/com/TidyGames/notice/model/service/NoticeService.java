@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.TidyGames.common.model.vo.PageInfo;
+import com.TidyGames.faq.model.dao.FaqDao;
 import com.TidyGames.notice.model.dao.NoticeDao;
 import com.TidyGames.notice.model.vo.Notice;
 import com.TidyGames.notice.model.vo.NoticeFile;
@@ -111,6 +112,44 @@ public class NoticeService {
 		close(conn);
 		
 		return result;
+	}
+	
+	public int deleteNotices(String[] notices) {
+		
+		Connection conn = getConnection();
+		
+		// 배열 길이만큼의 빈 int배열 생성 : 값은 안담겨있지만 크기만 정해져있음
+		int[] result = new int[notices.length];
+		
+		// 반복문 돌리면서 dao에서 0번 인덱스부터 한번씩 실행하고 result[1], result[2], ...에 담음
+		for(int i=0; i<result.length; i++) {
+			result[i] = new NoticeDao().deleteNotice(conn, Integer.parseInt(notices[i]));
+		}
+		
+		int check = 0;
+		for(int i=0; i<result.length; i++) {
+			if(result[i] <= 0) {
+				// 한번이라도 dao에서 실행하지 못했다면 check = 1, 모두 성공했다면 check = 0
+				check = 1;
+				
+				break;
+			}
+		}
+		
+		int num = 0;
+		
+		if(check == 0) {
+			commit(conn);
+			num = 1;
+		} else {
+			rollback(conn);
+			num = 0;
+		}
+		
+		close(conn);
+		
+		return num;
+		
 	}
 	
 }

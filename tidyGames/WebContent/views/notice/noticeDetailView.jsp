@@ -127,7 +127,7 @@ table {
 									<% } %>
 								</p>
 								<pre>
-									<%= noticeDetail.getNotiContent() %>
+<%= noticeDetail.getNotiContent() %>
 								</pre>
 							</td>
 						</tr>
