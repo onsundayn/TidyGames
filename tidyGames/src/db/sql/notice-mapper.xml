@@ -222,4 +222,97 @@
 		 WHERE NOTI_NO = ?
 	</entry>
 	
+	<entry key="searchTitleCount">
+		SELECT
+		       COUNT(*) count
+		  FROM NOTICE
+		 WHERE NOTI_STATUS = 'Y'
+		   AND NOTI_TITLE LIKE '%' || ? || '%'
+	</entry>
+	
+	<entry key="searchContentCount">
+		SELECT
+		       COUNT(*) count
+		  FROM NOTICE
+		 WHERE NOTI_STATUS = 'Y'
+		   AND NOTI_CONTENT LIKE '%' || ? || '%'
+	</entry>
+	
+	<entry key="selectTitleList">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                SELECT 
+		                       NOTI_NO
+		                     , NOTI_TITLE
+		                     , TO_CHAR(NOTI_DATE, 'YYYY/MM/DD') "NOTI_DATE"
+		                     , NOTI_CONTENT
+		                     , NOTI_WRITER
+		                  FROM NOTICE
+		                 WHERE NOTI_STATUS = 'Y'
+		                   AND NOTI_TITLE LIKE '%' || ? || '%'
+		                 ORDER
+		                    BY NOTI_NO DESC
+		                ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="selectContentList">
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+		                SELECT 
+		                       NOTI_NO
+		                     , NOTI_TITLE
+		                     , TO_CHAR(NOTI_DATE, 'YYYY/MM/DD') "NOTI_DATE"
+		                     , NOTI_CONTENT
+		                     , NOTI_WRITER
+		                  FROM NOTICE
+		                 WHERE NOTI_STATUS = 'Y'
+		                   AND NOTI_CONTENT LIKE '%' || ? || '%'
+		                 ORDER
+		                    BY NOTI_NO DESC
+		                ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	<entry key="updateNotice">
+		UPDATE NOTICE
+		   SET NOTI_TITLE = ?
+		     , NOTI_CONTENT = ?
+		 WHERE NOTI_NO = ?
+		   AND NOTI_STATUS = 'Y'
+	</entry>
+	
+	<entry key="updateFileStatus">
+		UPDATE NOTICE_FILE
+		   SET FILE_STATUS = 'N'
+		 WHERE FILE_NO = ?
+		   AND FILE_STATUS = 'Y'	 
+	</entry>
+	
+	<entry key="updateFile">
+		INSERT
+		  INTO NOTICE_FILE
+		  (
+		  	FILE_NO
+		  , NOTI_NO
+		  , FILE_ORIGIN
+		  , FILE_CHANGE
+		  , FILE_PATH
+		  )
+		  VALUES
+		  (
+		  	SEQ_NOTICEFILE_NO.NEXTVAL
+		  , ?
+		  , ?
+		  , ?
+		  , ?
+		  )
+	</entry>
+	
 </properties>

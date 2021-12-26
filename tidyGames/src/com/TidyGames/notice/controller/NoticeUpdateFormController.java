@@ -38,8 +38,8 @@ public class NoticeUpdateFormController extends HttpServlet {
 		Notice n = new NoticeService().selectNotice(num); // 글번호 넘겨서 글정보 가져옴
 		ArrayList<NoticeFile> fileList = new NoticeService().selectFileList(num); // 글번호 넘겨서 글 첨부파일 정보 가져옴
 		
-		request.setAttribute("noticeUpdate", n);
-		request.setAttribute("noticeUpdateFileList", fileList);
+		request.setAttribute("noticeUpdate", n); // 해당 클릭한 글에 대한 정보
+		request.setAttribute("noticeUpdateFileList", fileList); // 해당 클릭한 글에 대한 첨부파일
 		
 		request.getRequestDispatcher("views/notice/noticeUpdateForm.jsp").forward(request, response);
 	

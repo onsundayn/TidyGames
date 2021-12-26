@@ -277,4 +277,205 @@ public class NoticeDao {
 		
 	}
 	
+	public int searchTitleCount(Connection conn, String word) {
+		
+		// select문 count
+		int count = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("searchTitleCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, word);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				count = rset.getInt("count");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return count;
+	}
+	
+	public int searchContentCount(Connection conn, String word) {
+		
+		// select문 count
+		int count = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("searchContentCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, word);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				count = rset.getInt("count");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return count;
+	}
+	
+	public ArrayList<Notice> selectTitleList(Connection conn, PageInfo pi, String word) {
+		
+		ArrayList<Notice> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectTitleList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getViewLimit() + 1;
+			int endRow = startRow + pi.getViewLimit() - 1;
+			
+			pstmt.setString(1, word);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Notice(rset.getInt("noti_no"),
+									rset.getString("noti_title"),
+									rset.getString("noti_content"),
+									rset.getString("noti_date"),
+									rset.getString("noti_writer")));
+			}	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	
+	public ArrayList<Notice> selectContentList(Connection conn, PageInfo pi, String word) {
+		
+		ArrayList<Notice> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectContentList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getViewLimit() + 1;
+			int endRow = startRow + pi.getViewLimit() - 1;
+			
+			pstmt.setString(1, word);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Notice(rset.getInt("noti_no"),
+									rset.getString("noti_title"),
+									rset.getString("noti_content"),
+									rset.getString("noti_date"),
+									rset.getString("noti_writer")));
+			}	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	
+	public int updateNotice(Connection conn, Notice n) {
+		
+		// update문
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateNotice");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, n.getNotiTitle());
+			pstmt.setString(2, n.getNotiContent());
+			pstmt.setInt(3, n.getNotiNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int updateFileStatus(Connection conn, int num) {
+		
+		// update
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateFileStatus");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int updateFile(Connection conn, ArrayList<NoticeFile> list, int notiNo) {
+		
+		// NoticeFile 테이블에 list[0], list[1], list[2], ... 값 넣기.
+		int result = 1;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateFile");
+		
+		try {
+			
+			for(NoticeFile f : list) {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, notiNo);
+				pstmt.setString(2, f.getFileOrigin());
+				pstmt.setString(3, f.getFileChange());
+				pstmt.setString(4, f.getFilePath());
+				
+				result = pstmt.executeUpdate();
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
 }

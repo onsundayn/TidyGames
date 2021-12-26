@@ -139,6 +139,17 @@
         	</div>
             <br><br>
 
+			<div class="search-area" align="center">
+				<form action="<%=contextPath%>/notice.no" method="get" onsubmit="return checkSearch();">
+					<input type="hidden" name="cpage" value="1">
+					<select name="search" style="height: 30px;">
+						<option selected value="searchTitle" ${(param.search == "searchTitle")?"selected":""}>제목</option>
+						<option value="searchContent" ${(param.search == "searchContent")?"selected":""}>내용</option>
+					</select> <input type="text" id="searchWord" name="word" value="${param.word}" style="width: 500px; height: 30px;">
+					<button type="submit" id="searchbtn"><i class="fas fa-search"></i></button>
+				</form>
+			</div>
+
     </div>
 
     <% if(loginUser != null && loginUser.getRoleId().equals("A")) { %>
@@ -208,9 +219,25 @@
 					location.href = '<%=contextPath%>/noticeDetail.no?cpage=<%=currentPage%>&num=' + $(this).prev().prev().text();
 				});
 			})
+
 		</script>
 	
 	<% } %>
+
+	<script>
+		function checkSearch() {
+
+			var searchWord = document.getElementById("searchWord");
+
+			if(searchWord.value == null || searchWord.value == "" || searchWord.value == " ") {
+				alert("검색어를 입력해주세요.");
+				return false;
+			} else {
+				return true;
+			}
+
+		}
+	</script>
 
 </body>
 </html>

@@ -152,4 +152,103 @@ public class NoticeService {
 		
 	}
 	
+	public int searchTitleCount(String word) {
+		
+		Connection conn = getConnection();
+		
+		int result = new NoticeDao().searchTitleCount(conn, word);
+		
+		close(conn);
+		return result;
+		
+	}
+	
+	public int searchContentCount(String word) {
+		
+		Connection conn = getConnection();
+		
+		int result = new NoticeDao().searchContentCount(conn, word);
+		
+		close(conn);
+		return result;
+		
+	}
+	
+	public ArrayList<Notice> searchTitleList(PageInfo pi, String word){
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Notice> list = new NoticeDao().selectTitleList(conn, pi, word);
+		
+		close(conn);
+		return list;
+		
+	}
+	
+	public ArrayList<Notice> searchContentList(PageInfo pi, String word){
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Notice> list = new NoticeDao().selectContentList(conn, pi, word);
+		
+		close(conn);
+		return list;
+		
+	}
+	
+	public int updateNotice(Notice n, ArrayList<NoticeFile> list, String check1, String check2, String check3, ArrayList<NoticeFile> fileList) {
+		
+		Connection conn = getConnection();
+		
+		int result1 = new NoticeDao().updateNotice(conn, n);	// notice 테이블 update
+		int result2 = 1;	// 첨부파일이 안넘어왔으면 list 추가 없이 1로  return만 잘 넘어가게 함 (dao 안감)
+
+		// file 상태값 변경 체크용 result
+		// 만약에 실행했는데 실패했다면 0
+		int result3 = 1;
+		int result4 = 1;
+		int result5 = 1;
+		
+		// 변경 혹은 삭제된 배열이 있다면 상태값을 n으로 바꿈
+		if(fileList.isEmpty() == false) {	// fileList에 값이 원래 최소 1개 있었다면
+			if(check1.equals("1")) {	// 1번 사진박스에 사진이 삭제되거나 변경되었을때
+				int num1 = fileList.get(0).getFileNo();	// 원래 있던 첫번째 파일의 번호를 알아낸 뒤 num1에 저장하고 
+				result3 = new NoticeDao().updateFileStatus(conn, num1);	// 해당 파일의 status를 n처리 한다.
+			}
+			if(check2.equals("1")) {	// 2번 사진박스에 사진이 삭제되거나 변경되었을때
+				if(fileList.size() == 1) {	// 만약에 fileList에 파일이 1개밖에 없었다면 그냥 변경(추가)된거라 아무것도 안해도되고
+
+				} else {	// 파일이 2개 이상이였다면 2번째 파일의 status를 n처리 한다. 
+					int num2 = fileList.get(1).getFileNo();
+					result4 = new NoticeDao().updateFileStatus(conn, num2);
+				}
+			}
+			if(check3.equals("1")) {	// 3번 사진박스에 사진이 삭제되거나 변경되었을때
+				if(fileList.size() <= 2) {	// 만약에 fileList에 파일이 2개 이하로 있었다면  그냥 변경(추가)된거라 아무것도 안해도되고
+				
+				} else {
+					int num3 = fileList.get(2).getFileNo();
+					result5 = new NoticeDao().updateFileStatus(conn, num3);
+				}
+			}
+		}
+		
+		if(list != null) {	
+			// 첨부파일이 넘어왔다면 list에 추가 (sql문 실행하러 dao)
+			// 또한 어디가 변경된지 보고 배열에서 
+			result2 = new NoticeDao().updateFile(conn, list, n.getNotiNo());
+		}
+		
+		if(result1 > 0 && result2 > 0 && result3 > 0 && result4 > 0 && result5 > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result1 * result2 * result3 * result4 * result5;
+		
+	}
+	
 }
