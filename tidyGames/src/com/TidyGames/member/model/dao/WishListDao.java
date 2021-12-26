@@ -77,7 +77,55 @@ public class WishListDao {
 	
 	}
 	
+	public ArrayList<WishList> wishSearch(Connection conn, int memNo, String keyword, PageInfo pi) {
+		
+		// select문 => ResultSet (여러행) => WishList
+		ArrayList<WishList> wish = new  ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("wishSearch");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() -1 ) * pi.getViewLimit() + 1;
+			int endRow = startRow +  pi.getViewLimit() - 1;
+			
+			
+			pstmt.setInt(1, memNo);
+			pstmt.setString(2, keyword);
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, endRow);
+		
+			
+			rset = pstmt.executeQuery();
+
+			while(rset.next()) {
+				wish.add(new WishList(
+								  rset.getInt("mem_no"),	
+								  rset.getInt("game_no"),
+								  rset.getString("kor_name"),
+								  rset.getString("eng_name"),
+								  rset.getString("game_intro"),
+								  rset.getInt("price"),
+								  rset.getInt("point"),
+								  rset.getString("CHANGE_NAME"),
+								  rset.getString("FILE_PATH")));
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return wish;
 	
+	
+	}
 	
 		
 		public int insertWish(Connection conn, WishList wish) {

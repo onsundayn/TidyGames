@@ -1,7 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import ="java.util.ArrayList, com.TidyGames.pay.model.vo.*"%>
+    pageEncoding="UTF-8" import ="java.util.ArrayList, com.TidyGames.pay.model.vo.*, com.TidyGames.common.model.vo.*"%>
     
  <%
+ 
+ PageInfo pi = (PageInfo)request.getAttribute("pi");
+
+ int currentPage = pi.getCurrentPage();
+ int startPage = pi.getStartPage();
+ int endPage = pi.getEndPage();
+ int maxPage = pi.getMaxPage();
+
  ArrayList<PayGame> order = (ArrayList<PayGame>)request.getAttribute("order");
  %>
 <!DOCTYPE html>
@@ -50,7 +58,7 @@
     }   
     #searchtext{
        border-radius: 3px;
-       width: 600px; 
+       width: 700px; 
         height:40px;
         border: 1px solid white;
         margin-left: 150px;
@@ -122,7 +130,7 @@
         height: 50px;
        
        
-        margin: 30px 150px 30px 0px;
+        margin: 30px 110px 30px 0px;
     }
 
     /* 주문영역 */
@@ -201,7 +209,8 @@
                 <div class="dateSearch">
                    
                   
-                    
+                    <form action="<%=contextPath%>/orderSearch.pa" method="post">
+                    <input type="hidden" name="cpage" value="1">
                     
                     <div class="searchname" >
                         <div id="game_search">
@@ -212,15 +221,17 @@
                             <button type="submit" id="icon_btn"><i class="fas fa-search"></i></button>
                            
                         </div>
-                
+               		
                     </div>
+                     </form>
                 </div>
                 
                 
                 
                 
                 
-                
+                <form action="<%=contextPath%>/orderDate.pa" method="post">
+                <input type="hidden" name="cpage" value="1">
                 <div class="area4">
                     <div class="datetable">
                         <input type="date" name="startDate" class="date">
@@ -228,15 +239,15 @@
                         <input type="date" name="endDate" class="date">
                     </div>
                             
-                    <select class="btn btn-outline-secondary" style="color: white; margin: 0px 50px 0px 50px; height: 30px; font-size: 13px;">
-                        <option selected value="uptodate">최신순</option>
-                        <option value="olddae" >오래된순</option>
+                    <select name="orderDate"class="btn btn-outline-secondary" style="color: white; margin: 0px 50px 0px 50px; height: 30px; font-size: 13px;">
+                        <option selected value="uptodate" name="uptodate">최신순</option>
+                        <option value="olddate" name="olddate" >오래된순</option>
     
                     </select>
     
                     <button type="submit" class="btn btn-sm btn-secondary" style="width: 50px; height: 35px;">조회</button>   
                  </div>
-
+				</form>
              </div>
              <div id="line1" style="width: 1150px; height: 2px; background: rgba(255, 255, 255, 0.555); margin-left: 50px;"></div>
                 <br><br><br><br>
@@ -337,20 +348,24 @@
 
                 <br><br>
              <div class="paging-area" style="float: right;">
-	
-                <button> &lt; </button>
-                <button>1</button>
-                <button>2</button>
-                <button>3</button>
-                <button>4</button>
-                <button>5</button>
-                <button>6</button>
-                <button>7</button>
-                <button>8</button>
-                <button>9</button>
-                <button>10</button>
-                <button> &gt; </button>
-        
+	 <%if(currentPage != 1){ %>
+            <button onclick="location.href='<%=contextPath%>/orderHistory.pa?cpage=<%=currentPage-1%>';"> &lt; </button>
+          <%} %>  
+            
+            <%for(int p=startPage; p<=endPage; p++){ %>
+            
+            	<!-- 현재페이지이면 클릭안되게 -->
+            	<%if(p== currentPage) { %>
+            		<button disabled><%= p %></button>
+            	<%}else { %>
+            	<!-- 클릭이벤트 부여해서 url 요청-->
+            		<button onclick="location.href='<%=contextPath%>/orderHistory.pa?cpage=<%=p%>';"><%= p %></button>
+            	<%} %>
+            <% } %>
+            <% if(currentPage != maxPage) { %>
+            <button onclick="location.href='<%=contextPath%>/orderHistory.pa?cpage=<%=currentPage+1%>';"> &gt; </button>
+      		 <%} %>
+
             </div>
             
             <% } %>

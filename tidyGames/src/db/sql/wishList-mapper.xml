@@ -32,7 +32,39 @@
 		 WHERE RNUM BETWEEN ? AND ?	
 	
 
+	</entry> 
+	
+	<entry key ="wishSearch">
+	
+		SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+                                SELECT    
+                                  MEM_NO   
+                                , GAME_NO
+                                , KOR_NAME
+                                , ENG_NAME
+                                , GAME_INTRO
+                                , PRICE
+                                , POINT
+                                , CHANGE_NAME
+                                , FILE_PATH
+                          FROM WISHLIST W
+                          LEFT JOIN UPLOAD_FILE UP USING(GAME_NO)
+                          LEFT JOIN GAME G USING(GAME_NO)
+                          WHERE MEM_NO = ?
+                           AND FILE_TYPE = 1
+                           	 AND UPPER(KOR_NAME || ENG_NAME) LIKE UPPER('%' || ? || '%')
+                             ORDER BY GAME_NO DESC
+
+		                ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?	
+	
+
 	</entry>
+	
 	
 	<entry key="insertWish">
 	

@@ -8,23 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.TidyGames.member.model.vo.Member;
 import com.TidyGames.pay.model.service.PayService;
-import com.TidyGames.pay.model.vo.Cart;
+import com.TidyGames.pay.model.vo.Refund;
 
 /**
- * Servlet implementation class PayController
+ * Servlet implementation class AdminRefundSearchController
  */
-@WebServlet("/pay.pa")
-public class PayController extends HttpServlet {
+@WebServlet("/adRefundSearch.pa")
+public class AdminRefundSearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PayController() {
+    public AdminRefundSearchController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,38 +31,26 @@ public class PayController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		request.setCharacterEncoding("UTF-8");
 		
-		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
-		int payAmount = Integer.parseInt(request.getParameter("total"));
-		String payMethod = request.getParameter("payment");
-		String usePoint = request.getParameter("usePoint");
-		int savePoint = Integer.parseInt(request.getParameter("savePoint"));
-		int totalPrice = payAmount-Integer.parseInt(usePoint);
-		String[] gameNo = request.getParameterValues("gameNo");
-	
-		
-		int result = new PayService().insertPay(memNo, totalPrice, payMethod, gameNo, usePoint, savePoint);
+		String refundSearch = request.getParameter("refundSearch");
+		String keyword = request.getParameter("keyword");
 		
 		
-		if(result > 0) {
-		
-			request.getSession().setAttribute("alertMsg", "결제가 성공적으로 완료되었습니다.");
-			response.sendRedirect(request.getContextPath() + "/orderHistory.pa?cpage=1");
+		if(refundSearch.equals("memId")) {
+			ArrayList<Refund> list = new PayService().adRefundMemIdSearch(keyword);
+			request.setAttribute("list", list);
 			
-			
+			request.getRequestDispatcher("views/pay/adminRefundListView.jsp").forward(request, response);
 		}else {
+			ArrayList<Refund> list = new PayService().adRefundorderNoSearch(keyword);
+			request.setAttribute("list", list);
 			
-			//pay테이블에 insert 실패
+			request.getRequestDispatcher("views/pay/adminRefundListView.jsp").forward(request, response);
+			
 		}
-		
-		
-		
-		
-		
-	}
 	
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

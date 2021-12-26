@@ -1,6 +1,7 @@
 package com.TidyGames.member.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,18 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.TidyGames.member.model.service.PointService;
+import com.TidyGames.member.model.vo.Point;
 
 /**
- * Servlet implementation class AdminPointInsertController
+ * Servlet implementation class AdminPointSearchController
  */
-@WebServlet("/adPointInsert.me")
-public class AdminPointInsertController extends HttpServlet {
+@WebServlet("/adPointSearch.me")
+public class AdminPointSearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminPointInsertController() {
+    public AdminPointSearchController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,28 +31,19 @@ public class AdminPointInsertController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//int memNo = Integer.parseInt(request.getParameter("mNo"));
+		request.setCharacterEncoding("UTF-8");
 		
-		String memNo = request.getParameter("memNo");
-		int pa = Integer.parseInt(request.getParameter("pointAmount"));
-		String pc = request.getParameter("pointContent");
+		String memId = request.getParameter("keyword");
 		
-		System.out.println(memNo);
-		System.out.println(pa);
-		System.out.println(pc);
+		ArrayList<Point> list = new PointService().adPointSearch(memId); 
 		
-		int result = new PointService().adInsertPoint(memNo, pa, pc );
+		request.setAttribute("list", list);
 		
-		if(result > 0) {
-			
-			response.getWriter().print(result);
-			
-			
-			request.getSession().setAttribute("alertMsg", "포인트적립에 성공하였습니다");
-			response.sendRedirect(request.getContextPath() + "/adPoint.me");
-			
-		}
-	
+		
+		
+		
+		request.getRequestDispatcher("views/member/adminPointHistoryView.jsp").forward(request, response);
+		
 	}
 
 	/**

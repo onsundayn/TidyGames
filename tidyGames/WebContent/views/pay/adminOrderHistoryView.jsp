@@ -47,6 +47,7 @@
 
     /* 7일 ,한달, 3개월 6개월 조회버튼 */
     .dateSearch{
+        width: 250px;
         margin: 8px 30px 0px 120px;
         display: inline-block;
 
@@ -128,13 +129,12 @@
            
           
 
-            
-
+            <form action="<%=contextPath%>/adOrderSearch.pa" method="post">
                 <div class="searcharea">
                         <div class="search">
-                            <select class="btn btn-outline-secondary" >
-                                <option selected value="uptodate">회원ID</option>
-                                <option value="olddae" >주문번호</option>
+                            <select class="btn btn-outline-secondary" name="orderSearch">
+                                <option selected value="memId" name="memId">회원ID</option>
+                                <option value="orderNo" name="orderNo" >주문번호</option>
                 
                             </select>
                         
@@ -149,21 +149,24 @@
                             <button type="submit" id="icon_btn" style="background: none;"><i class="fas fa-search"></i></button>
                         </div>
                 </div> 
-
+				</form>
+				
              
                <%for(Pay al : list){ %>
              <form action="<%=contextPath%>/adOrderDate.pa" action="post">
                	
                <%} %>
+               
+              
                 <div class="dateSearch">
-                   
+                   <!-- 
                    <button name="weekend">일주일</button>
                    <button name="month">1개월</button>
                    <button name="threemonth">3개월</button>
                    <button name="sixmonth">6개월</button>
-                
+                -->
                 </div>
- 			
+ 				
                <div class="datetable">
                     <input type="date" name="startDate" class="date">
                     <span style="color:black">&nbsp;&nbsp; ~ &nbsp;&nbsp;</span>

@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.TidyGames.common.model.vo.PageInfo;
 import com.TidyGames.member.model.vo.Member;
 import com.TidyGames.pay.model.vo.Cart;
 import com.TidyGames.pay.model.vo.Pay;
@@ -162,8 +163,37 @@ public class PayDao {
 		return result;
 	}
 	
+	public int orderListCount(Connection conn, int memNo) {
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("orderListCount");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			
+			if(rset.next()) {
+//				count(*) 컬럼의 별칭인 count임
+				listCount = rset.getInt("count");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return listCount;
+	}
 	
-	public ArrayList<PayGame> orderList(Connection conn , int memNo) {
+	public ArrayList<PayGame> orderList(Connection conn , int memNo, PageInfo pi) {
 		
 		ArrayList<PayGame> order = new  ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -174,7 +204,117 @@ public class PayDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
+
+			int startRow = (pi.getCurrentPage() -1 ) * pi.getViewLimit() + 1;
+			int endRow = startRow +  pi.getViewLimit() - 1;
+			
 			pstmt.setInt(1, memNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				order.add(new PayGame(
+								   rset.getInt("order_no"),
+								   rset.getInt("game_no"),
+								   rset.getInt("mem_no"),
+								   rset.getInt("pay_amount"),
+								   rset.getString("pay_status"),
+								   rset.getString("pay_date"),
+								   rset.getString("pay_method"),
+								   rset.getString("kor_name"),
+								   rset.getString("eng_name"),
+								   rset.getString("game_img"),
+								   rset.getInt("discountprice"),
+								   rset.getInt("price")));
+								
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return order;
+	
+	}
+	
+	
+public ArrayList<PayGame> orderSearch(Connection conn , int memNo, String keyword, PageInfo pi) {
+		
+		ArrayList<PayGame> order = new  ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("orderSearch");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+
+			int startRow = (pi.getCurrentPage() -1 ) * pi.getViewLimit() + 1;
+			int endRow = startRow +  pi.getViewLimit() - 1;
+			
+			pstmt.setInt(1, memNo);
+			pstmt.setString(2, keyword);
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, endRow);
+		
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				order.add(new PayGame(
+								   rset.getInt("order_no"),
+								   rset.getInt("game_no"),
+								   rset.getInt("mem_no"),
+								   rset.getInt("pay_amount"),
+								   rset.getString("pay_status"),
+								   rset.getString("pay_date"),
+								   rset.getString("pay_method"),
+								   rset.getString("kor_name"),
+								   rset.getString("eng_name"),
+								   rset.getString("game_img"),
+								   rset.getInt("discountprice"),
+								   rset.getInt("price")));
+								
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return order;
+	
+	}
+	
+
+
+	public ArrayList<PayGame> orderDescDate(Connection conn , int memNo, String start, String end, PageInfo pi) {
+		
+		ArrayList<PayGame> order = new  ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("orderDescDate");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			int startRow = (pi.getCurrentPage() -1 ) * pi.getViewLimit() + 1;
+			int endRow = startRow +  pi.getViewLimit() - 1;
+			pstmt.setInt(1, memNo);
+			pstmt.setString(2, start);
+			pstmt.setString(3, end);
+			pstmt.setInt(4, startRow);
+			pstmt.setInt(5, endRow);
 		
 			
 			rset = pstmt.executeQuery();
@@ -209,6 +349,55 @@ public class PayDao {
 	}
 	
 	
+
+	public ArrayList<PayGame> orderAscDate(Connection conn , int memNo, String start, String end, PageInfo pi) {
+		
+		ArrayList<PayGame> order = new  ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("orderAscDate");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			int startRow = (pi.getCurrentPage() -1 ) * pi.getViewLimit() + 1;
+			int endRow = startRow +  pi.getViewLimit() - 1;
+			pstmt.setInt(1, memNo);
+			pstmt.setString(2, start);
+			pstmt.setString(3, end);
+			pstmt.setInt(4, startRow);
+			pstmt.setInt(5, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				order.add(new PayGame(
+								   rset.getInt("order_no"),
+								   rset.getInt("game_no"),
+								   rset.getInt("mem_no"),
+								   rset.getInt("pay_amount"),
+								   rset.getString("pay_status"),
+								   rset.getString("pay_date"),
+								   rset.getString("pay_method"),
+								   rset.getString("kor_name"),
+								   rset.getString("eng_name"),
+								   rset.getString("game_img"),
+								   rset.getInt("discountprice"),
+								   rset.getInt("price")));
+								
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return order;
+	
+	}
 	public ArrayList<Pay> adOrderList(Connection conn) {
 		ArrayList<Pay> list = new  ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -219,6 +408,83 @@ public class PayDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Pay(
+								   rset.getInt("order_no"),
+								   rset.getInt("mem_no"),
+								   rset.getInt("pay_amount"),
+								   rset.getString("pay_status"),
+								   rset.getString("pay_date"),
+								   rset.getString("mem_id")));
+								
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	
+	
+		
+	}
+	
+	
+	public ArrayList<Pay> adOrderMemIdSearch(Connection conn, String keyword) {
+		ArrayList<Pay> list = new  ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adOrderMemIdSearch");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, keyword);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Pay(
+								   rset.getInt("order_no"),
+								   rset.getInt("mem_no"),
+								   rset.getInt("pay_amount"),
+								   rset.getString("pay_status"),
+								   rset.getString("pay_date"),
+								   rset.getString("mem_id")));
+								
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	
+	
+		
+	}
+	
+	
+
+	public ArrayList<Pay> adOrderorderNoSearch(Connection conn, String keyword) {
+		ArrayList<Pay> list = new  ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adOrderorderNoSearch");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, keyword);
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
@@ -454,6 +720,89 @@ public class PayDao {
 		
 	}
 	
+	
+	public ArrayList<Refund> adRefundMemIdSearch(Connection conn, String keyword) {
+		
+		ArrayList<Refund> list = new  ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adRefundMemIdSearch");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, keyword);
+		
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Refund(
+								   rset.getInt("REFUND_NO"),
+								   rset.getInt("MEM_NO"),
+								   rset.getInt("ORDER_NO"),
+								   rset.getString("REFUND"),
+								   rset.getString("ADD_WRITING"),
+								   rset.getString("REFUND_DATE"),
+								   rset.getString("REFUND_STATUS"),
+								   rset.getString("MEM_ID"),
+								   rset.getInt("PAY_AMOUNT"),
+								   rset.getString("PAY_DATE")));
+								
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+	
+		return list;
+		
+	}
+	
+	
+public ArrayList<Refund> adRefundorderNoSearch(Connection conn, String keyword) {
+		
+		ArrayList<Refund> list = new  ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adRefundorderNoSearch");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, keyword);
+		
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Refund(
+								   rset.getInt("REFUND_NO"),
+								   rset.getInt("MEM_NO"),
+								   rset.getInt("ORDER_NO"),
+								   rset.getString("REFUND"),
+								   rset.getString("ADD_WRITING"),
+								   rset.getString("REFUND_DATE"),
+								   rset.getString("REFUND_STATUS"),
+								   rset.getString("MEM_ID"),
+								   rset.getInt("PAY_AMOUNT"),
+								   rset.getString("PAY_DATE")));
+								
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+	
+		return list;
+		
+	}
 	
 	public ArrayList<Refund> adAllRefundList(Connection conn, String start, String end) {
 		

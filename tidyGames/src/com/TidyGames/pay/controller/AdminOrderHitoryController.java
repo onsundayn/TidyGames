@@ -39,6 +39,8 @@ public class AdminOrderHitoryController extends HttpServlet {
 		request.setAttribute("list", list);
 	
 		request.getRequestDispatcher("views/pay/adminOrderHistoryView.jsp").forward(request, response);
+	
+	
 	}
 
 	/**

@@ -1,4 +1,4 @@
-package com.TidyGames.member.controller;
+package com.TidyGames.pay.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,22 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.TidyGames.common.model.vo.PageInfo;
-import com.TidyGames.member.model.service.PointService;
 import com.TidyGames.member.model.vo.Member;
-import com.TidyGames.member.model.vo.Point;
 import com.TidyGames.pay.model.service.PayService;
+import com.TidyGames.pay.model.vo.PayGame;
 
 /**
- * Servlet implementation class PointHistoryController
+ * Servlet implementation class OrderSearchController
  */
-@WebServlet("/pointHistory.me")
-public class PointHistoryController extends HttpServlet {
+@WebServlet("/orderSearch.pa")
+public class OrderSearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PointHistoryController() {
+    public OrderSearchController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,12 +33,10 @@ public class PointHistoryController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		request.setCharacterEncoding("UTF-8");
 		
 		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
-		
-		
+		String keyword = request.getParameter("keyword");
 		// ----------페이징 처리-------------
 		int listCount; // 현재 총 게시글 갯수
 		int currentPage; // 현재 페이지(즉, 사용자가 요청한 페이지 cpage=""에 들어갈 숫자)
@@ -52,7 +49,7 @@ public class PointHistoryController extends HttpServlet {
 		int startPage; // 페이징바의 시작수
 		int endPage; // 페이징바의 끝수
 		
-		listCount = new PointService().pointListCount(memNo);
+		listCount = new PayService().orderListCount(memNo);
 		
 		// membersidebar, payviewController에 작성해놓음
 		currentPage = Integer.parseInt(request.getParameter("cpage"));
@@ -78,23 +75,19 @@ public class PointHistoryController extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit,viewLimit, maxPage, startPage, endPage);
 		
+		ArrayList<PayGame> order = new PayService().orderSearch(memNo, keyword, pi);  
 		
-		
-		
-		ArrayList<Point> point = new PointService().selectPoint(memNo, pi);  
 		
 		request.setAttribute("pi", pi);
-		
-		request.setAttribute("point", point);
+		request.setAttribute("order", order);
 	
-		Point sum = new PointService().sumPoint(memNo);
 		
-		request.setAttribute("sum", sum);
-		
-		
-		
-		
-		request.getRequestDispatcher("views/member/pointHistoryView.jsp").forward(request, response);
+		request.getRequestDispatcher("views/pay/orderHistoryView.jsp").forward(request, response);
+	
+	
+	
+	
+	
 	}
 
 	/**

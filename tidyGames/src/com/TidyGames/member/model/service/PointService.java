@@ -8,16 +8,30 @@ import static com.TidyGames.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.TidyGames.common.model.vo.PageInfo;
 import com.TidyGames.member.model.dao.PointDao;
+import com.TidyGames.member.model.dao.WishListDao;
 import com.TidyGames.member.model.vo.Point;
 
 public class PointService {
+	
+	public int pointListCount(int memNo) {
+		Connection conn = getConnection();
+		int listCount = new PointDao().pointListCount(conn, memNo);
+		
+		close(conn);
+		
+		return listCount;
+	
+	
+	
+	}
 
-	public ArrayList<Point> selectPoint(int memNo) {
+	public ArrayList<Point> selectPoint(int memNo, PageInfo pi) {
 
 		Connection conn = getConnection();
 
-		ArrayList<Point> point = new PointDao().selectPoint(conn, memNo);
+		ArrayList<Point> point = new PointDao().selectPoint(conn, memNo, pi);
 
 		close(conn);
 
@@ -25,11 +39,11 @@ public class PointService {
 
 	}
 	
-	public ArrayList<Point> selectAllPoint(int memNo, String start, String end) {
+	public ArrayList<Point> selectAllPoint(int memNo, String start, String end, PageInfo pi) {
 
 		Connection conn = getConnection();
 
-		ArrayList<Point> point = new PointDao().selectAllPoint(conn, memNo, start, end);
+		ArrayList<Point> point = new PointDao().selectAllPoint(conn, memNo, start, end, pi);
 
 		close(conn);
 
@@ -37,11 +51,11 @@ public class PointService {
 
 	}
 
-	public ArrayList<Point> selectSave(int memNo, String start, String end) {
+	public ArrayList<Point> selectSave(int memNo, String start, String end, PageInfo pi) {
 
 		Connection conn = getConnection();
 
-		ArrayList<Point> point = new PointDao().selectSave(conn, memNo, start, end);
+		ArrayList<Point> point = new PointDao().selectSave(conn, memNo, start, end, pi);
 
 		close(conn);
 
@@ -49,11 +63,11 @@ public class PointService {
 
 	}
 
-	public ArrayList<Point> selectUse(int memNo, String start, String end) {
+	public ArrayList<Point> selectUse(int memNo, String start, String end, PageInfo pi) {
 
 		Connection conn = getConnection();
 
-		ArrayList<Point> point = new PointDao().selectUse(conn, memNo, start, end);
+		ArrayList<Point> point = new PointDao().selectUse(conn, memNo, start, end, pi);
 
 		close(conn);
 
@@ -95,12 +109,13 @@ public class PointService {
 		
 	}
 	
-	public int adInsertPoint(int memNo, int pa , String pc) {
+	public int adInsertPoint(String memNo, int pa , String pc) {
 		
 		Connection conn = getConnection();
 		
 		int result = new PointDao().adInsertPoint(conn, memNo, pa, pc);
 		
+	
 		if(result > 0) {
 			commit(conn);
 		} else {
@@ -112,7 +127,16 @@ public class PointService {
 		return result;
 	}
 		
-	
+	public ArrayList<Point> adPointSearch(String memId) {
+		Connection conn = getConnection();
+
+		ArrayList<Point> list = new PointDao().adPointSearch(conn, memId);
+
+		close(conn);
+
+		return list;
+		
+	}
 	
 	
 }

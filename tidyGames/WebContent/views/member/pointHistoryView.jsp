@@ -1,8 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.member.model.vo.*"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList,com.TidyGames.common.model.vo.*, com.TidyGames.member.model.vo.*"%>
     
     
  <% 
+ 
+
+PageInfo pi = (PageInfo)request.getAttribute("pi");
+
+int currentPage = pi.getCurrentPage();
+int startPage = pi.getStartPage();
+int endPage = pi.getEndPage();
+int maxPage = pi.getMaxPage();
+
  ArrayList<Point> point = (ArrayList<Point>)request.getAttribute("point");
  Point sum = (Point)request.getAttribute("sum");
  
@@ -139,6 +148,27 @@
     .area4>h4 {
         font-size: 18px;
     }
+    
+     .paging-area{
+    
+       width: 1000px;
+       height: 200px;
+       margin-top: 50px;
+    }
+    
+     .paging-area>button {
+        border-radius: 5px;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 20px;
+       
+        
+    }
+    .paging-area>button:hover {
+        cursor:pointer;
+        color:orange
+    }
 </style>
 </head>
 <body>
@@ -168,7 +198,7 @@
 
             <span class="selectForm">
            <form action="<%=request.getContextPath() %>/pointDate.me" method="post">
-                
+                <input type="hidden" value="1" name="cpage">
                 <!-- <div class="dateSearch">
 
                    <button name="weekend">일주일</button>
@@ -208,6 +238,8 @@
         <br><br>
         <div style="width: 1000px; height: 2px; background: gray; margin:30px 0px 20px 100px;" ></div>
         <br><br>
+
+            <!--
 			<form action="" method="post"></form>
             <div class="area4">
                 <select class="btn btn-outline-secondary" style="color: white;"">
@@ -216,7 +248,7 @@
     
                 </select>
              </div>
-
+            -->
         
 		
         <div class="area3">
@@ -251,8 +283,38 @@
               </table>
         </div>
 	
+		      <% if(!point.isEmpty()) { %>
+            <div class="paging-area" style="float: right; margin-top: 100px; margin-right: 150px; text-align: center;">
+					
+  		<%if(currentPage != 1){ %>
+            <button onclick="location.href='<%=contextPath%>/pointHistory.me?cpage=<%=currentPage-1%>';"> &lt; </button>
+          <%} %>  
+            
+            <%for(int p=startPage; p<=endPage; p++){ %>
+            
+            	<!-- 현재페이지이면 클릭안되게 -->
+            	<%if(p== currentPage) { %>
+            		<button disabled><%= p %></button>
+            	<%}else { %>
+            	<!-- 클릭이벤트 부여해서 url 요청-->
+            		<button onclick="location.href='<%=contextPath%>/pointHistory.me?cpage=<%=p%>';"><%= p %></button>
+            	<%} %>
+            <% } %>
+            <% if(currentPage != maxPage) { %>
+            <button onclick="location.href='<%=contextPath%>/pointHistory.me?cpage=<%=currentPage+1%>';"> &gt; </button>
+      		 <%} %>
+
+ 			<%} %>
+		
+			</div>
+            
+
+
 
     </div>
+
+	
+
 
 
 		<script>
