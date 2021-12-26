@@ -154,11 +154,23 @@ A.
 
         function delectFaq(){
 
+            const checkboxes = document.getElementsByClassName('faqNos');
+            var checkNum = 0;
             var faqForm = document.getElementById('faqForm');
+
+            for(var i=0; i<checkboxes.length; i++) {
+                if(checkboxes[i].checked == true) {
+                    checkNum += 1;
+                }
+            }
             
-            if(confirm("정말 삭제하시겠습니까?")){
-                faqForm.action = "<%= contextPath %>/faqDelete.fa";
-                faqForm.submit();
+            if(checkNum == 0) {
+                alert("삭제할 게시글을 선택해주세요.");
+            } else if(checkNum >= 1) {
+                if(confirm("정말 삭제하시겠습니까?")){
+                    faqForm.action = "<%= contextPath %>/faqDelete.fa";
+                    faqForm.submit();
+                }
             }
 
         }
