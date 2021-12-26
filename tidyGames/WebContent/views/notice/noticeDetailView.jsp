@@ -117,16 +117,16 @@ table {
 						<tr>
 							<th width="10%"><h5>내용</h5></th>
 							<td width="90%">
-								<p>
+								<p style="width: 80%;">
 									<% if(fileList != null) {%>
 										<div id="imgForm">
 											<% for(int i=0; i<fileList.size(); i++) { %>
-												<img src="<%= contextPath %>/<%= fileList.get(i).getFilePath() + fileList.get(i).getFileChange() %>" width="50%" height="50%">
+												<img src="<%= contextPath %>/<%= fileList.get(i).getFilePath() + fileList.get(i).getFileChange() %>" width="90%;">
 											<% } %>
 										</div>
 									<% } %>
 								</p>
-								<pre>
+								<pre style="width: 1000px;">
 <%= noticeDetail.getNotiContent() %>
 								</pre>
 							</td>
