@@ -21,6 +21,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import com.TidyGames.common.model.vo.PageInfo;
+import com.TidyGames.game.model.vo.Game;
 import com.TidyGames.game.model.vo.Review;
 import com.TidyGames.member.model.vo.Member;
 import com.TidyGames.qna.model.vo.Qna;
@@ -804,7 +805,46 @@ public class MemberDao {
 		
 		return list;
 		
+	}
+	
+	public ArrayList<Game> library(Connection conn, int memNo) {
+		
+		Game g;
+		ArrayList<Game> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("library");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+
+				g = new Game();
+				g.setKorName(rset.getString("kor_name"));
+				g.setEngName(rset.getString("eng_name"));
+				g.setGameImg(rset.getString("game_img"));
+				g.setCount(rset.getInt("star_no"));
+				g.setUploadDate(rset.getString("pay_date"));
+				g.setGameNo(rset.getInt("game_no"));
+				
+				list.add(g);			
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 		
 		
 	}
+		
+		
 }

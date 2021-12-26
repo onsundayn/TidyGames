@@ -1,15 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.game.model.vo.Game"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Tidy Games</title>
 <style>
 	div{
 		box-sizing: border-box;
 		color:white;
-		/* border: 1px solid rgba(255, 255, 255, 0.555); */
 	}
 	#outer{
         width:1500px;
@@ -47,7 +46,6 @@
 	#sortLb{
 		width:100%;
 		height:100px;
-		/* border: 2px solid rgba(255, 255, 255, 0.555); */
 
 	}
 	#sortLb label{
@@ -57,8 +55,7 @@
 	
 	#sortLb>div{
 		float:left;
-		width:230px;
-		/* border: 2px solid rgba(255, 255, 255, 0.555); */
+		width:240px;
 		padding: 15px 25px;
 	}
 	#btn{
@@ -68,14 +65,14 @@
 		padding:0px;
 	}
 
-	.game{
+	#game{
 		width:570px;
 		height:120px;
 		background: rgba(0, 0, 0, 0.333);
 		margin:auto;
 		margin-bottom: 10px;
 	}
-	.game>div{
+	#game>div{
 		float:left;
 		height:100%;
 		/* border: 15px solid rgba(255, 255, 255, 0.555); */
@@ -88,8 +85,8 @@
 		}
 	#gameText{width:45%;}
 	#gameText>p{
-		line-height: 90px;
-		font-size:28px;
+		padding-top:20px;
+		font-size:23px;
 		
 	}
 	#advice{width:20%;}
@@ -121,169 +118,145 @@
 </style>
 </head>
 <body style="background:#0e332c;">
-		
+	
 		<%@ include file="../common/topbar.jsp" %>
 		<%@ include file="../common/navibar.jsp" %>
-		
+
 		
 		<div id="outer">
 			<div id="line_1"></div>
 			<div id="box">
 				<div id="intro">라이브러리</div>
 				<div id="line_3"></div>
+				
 					<div id="lbBox">
 						<div id="sortLb">
 					<div>
 						<div class="btn-group">
 								<label>정렬 기준 :</label>
-								<!-- if 이름순/과거구매순/최신구매순 -->
-								<label>이름순</label>
-							<!-- <button type="button" class="btn" style="color:white;">이름순</button> -->
+								<label id="sort"></label>
 							<button type="button" id="btn" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
 								<span class="caret"></span>
 							</button>
 							<div class="dropdown-menu">
-								<!-- if 이름순 // 과거구매순, 최신구매순 -->
-								<a class="dropdown-item" href="#">최신구매</a>
-								<a class="dropdown-item" href="#">과거구매</a>
+								<a id="name" class="dropdown-item" href="#">이름순</a>
+								<a id="newBuy" class="dropdown-item" href="#">최신구매</a>
+								<a id="oldBuy" class="dropdown-item" href="#">과거구매</a>
 							</div>
 						</div>
 					</div>
 						</div>
 
-						<!-- for() -->
-						<div id="games">
-							<div class="game">
-								<div id="gameImg">
-									<img src="<%= contextPath %>/resources/image/Dead-Cells.jpg">
-								</div>
-								<div id="gameText">
-									<p>
-										Dead-Cells
-									</p>
-								</div>
-								<div id="advice">
-									<div id="ad1">
-										<a href="">게임 문의</a>
-									</div>
-									<!-- if 리뷰작성|별점 -->
-									<div id="ad2">
-										<a href="">리뷰 작성</a>
-										<!-- else { 별점 } -->
-									</div>
-								</div>
-							</div>
-<!-- 반복 시작 -->
-<div id="games">
-	<div class="game">
-		<div id="gameImg">
-			<img src="<%= contextPath %>/resources/image/Dead-Cells.jpg">
-		</div>
-		<div id="gameText">
-			<p>
-				Dead-Cells
-			</p>
-		</div>
-		<div id="advice">
-			<div id="ad1">
-				<a href="">게임 문의</a>
-			</div>
-			<!-- if 리뷰작성|별점 -->
-			<div id="ad2">
-				<a href="">리뷰 작성</a>
-				<!-- else { 별점 } -->
-			</div>
-		</div>
-	</div>
-	<div id="games">
-		<div class="game">
-			<div id="gameImg">
-				<img src="<%= contextPath %>/resources/image/Dead-Cells.jpg">
-			</div>
-			<div id="gameText">
-				<p>
-					Dead-Cells
-				</p>
-			</div>
-			<div id="advice">
-				<div id="ad1">
-					<a href="">게임 문의</a>
-				</div>
-				<!-- if 리뷰작성|별점 -->
-				<div id="ad2">
-					<a href="">리뷰 작성</a>
-					<!-- else { 별점 } -->
-				</div>
-			</div>
-		</div>
-		<div id="games">
-			<div class="game">
-				<div id="gameImg">
-					<img src="<%= contextPath %>/resources/image/Dead-Cells.jpg">
-				</div>
-				<div id="gameText">
-					<p>
-						Dead-Cells
-					</p>
-				</div>
-				<div id="advice">
-					<div id="ad1">
-						<a href="">게임 문의</a>
-					</div>
-					<!-- if 리뷰작성|별점 -->
-					<div id="ad2">
-						<a href="">리뷰 작성</a>
-						<!-- else { 별점 } -->
-					</div>
-				</div>
-			</div>
-			<div id="games">
-				<div class="game">
-					<div id="gameImg">
-						<img src="<%= contextPath %>/resources/image/Dead-Cells.jpg">
-					</div>
-					<div id="gameText">
-						<p>
-							Dead-Cells
-						</p>
-					</div>
-					<div id="advice">
-						<div id="ad1">
-							<a href="">게임 문의</a>
-						</div>
-						<!-- if 리뷰작성|별점 -->
-						<div id="ad2">
-							<a href="">리뷰 작성</a>
-							<!-- else { 별점 } -->
-						</div>
-					</div>
-				</div>
-<!-- 반복 끝 -->
-							
-
+						<div id="gameBox">
 						</div>
 
-						
-
-					
+						</div>
 					</div>
-				
-				
-				
 				</div> 
-					
-
-			</div>
-
-				</div>
-			</div>
-			
-		</div>
 		<footer>
 			<div style="height:200px">
-
 			</div>
 		</footer>
+			     
+		<script>
+	
+		
+			$(function(){
+			var value = "";
+				
+				ajax();
+				
+			$(".dropdown-item").click(function(){
+				// 정렬 기준 클릭 시 ajax 호출
+				$("#game").load(location.href + "#game");		
+					$("#sort").text($(this).text());
+					ajax();	
+			}) 
+			
+				
+				function ajax() {
+					
+					$.ajax({
+						url:"libSort",
+						success:function(list){
+							
+							if($("#sort").text() == "이름순") {
+									
+								list.sort(function(a, b){
+									// 이름순
+								   return a.engName < b.engName ? -1 : a.engName > b.engName ? 1 : 0;	
+								});
+							
+							} else if($("#sort").text() == "과거구매") {
+								
+								list.sort(function(a, b){
+									// 과거구매순
+								   return a.uploadDate < b.uploadDate ? -1 : a.uploadDate > b.uploadDate ? 1 : 0;	
+								
+								});
+								
+								
+							} else if($("#sort").text() == "최신구매") {
+									
+								list.sort(function(a, b){
+									// 최신구매순
+								   return a.uploadDate > b.uploadDate ? -1 : a.uploadDate < b.uploadDate ? 1 : 0;	
+								
+								});	
+							}	
+
+							$(list).each(function(index, obj) {
+								const starNo = $.trim(obj.count);
+								const gameNo = obj.gameNo;
+								
+								
+								// 넘어온 값을 조건문에 돌리기
+								var star = "";
+								var j = 0;
+								if(starNo == 0) {
+										star = '<a href="<%= contextPath%>/reviewList.ga?gno=' + obj.gameNo + '">리뷰작성</a>';
+									}else {
+	     							 	for(j=0; j<starNo; j++) {
+	     										 	star += "☆";
+	     							 	}
+								}
+								
+								
+								value +=
+								'<div id="games">' +
+									'<div id="game">' +
+										'<div id="gameImg">' +
+											'<img src="' + obj.gameImg + '">' +
+											'</div>' +
+												'<div id="gameText"> <p>' + obj.engName + '</p>' + '</div>' +
+										'<div id="advice">' + 
+											'<div id="ad1">' +
+												'<a href="<%= contextPath%>/question.gq?gameno=' + obj.gameNo + '">게임 문의</a>' +
+											'</div>' +
+											'<div id="ad2">' + star +
+											
+											'</div>' + 
+											'</div>' +
+											'</div>' +
+										'</div>' + 
+									'</div>'
+							
+ 							 		star = "";
+									
+							// 반복
+							$("#gameBox").html(value);
+							})
+						
+						}, error:function(){
+							console.log("ajax 통신 실패");
+						}
+					});	
+				}
+	
+			})
+			
+				
+		</script>
 		
 </body>
 </html>
