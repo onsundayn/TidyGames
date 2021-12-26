@@ -319,9 +319,6 @@ table {
 				
 				$("#postReport").click(function(){
 				
-					console.log($("input[name=writerReport]").val());
-					console.log($("input[name=replyReport]").val());
-					
 					if(false) {
 						alert("로그인 후 사용 가능합니다.");
 						
@@ -448,10 +445,10 @@ table {
 				              } else {
 				            	  result   += "<tr>"
 				                   + "<td></td>"
-				                   //+ "<input type='hidden' class='writerReport' value='" + list[i].wrtierNo + "'>"
+				                   //+ "<input type='hidden' class='writerReport' value='" + list[i].writerNo + "'>"
 				                   //+ "<input type='hidden' class='replyReport' value='" + list[i].replyNo + "'>"
 						           + "<td style='font-size:smaller'>" + list[i].replyEnroll + "</td>"
-						           + "<td width='50' align='right'><button class='btn btn-sm btn-warning' onclick='reportReply([" + list[i].replyNo + "," + list[i].wrtierNo + "])'><i class='far fa-angry'></i></button></td>"
+						           + "<td width='50' align='right'><button class='btn btn-sm btn-warning' onclick='reportReply([" + list[i].replyNo + "," + list[i].writerNo + "])'><i class='far fa-angry'></i></button></td>"
 						           //+ "<td width='50' align='right'><button class='btn btn-sm btn-warning' data-toggle='modal' data-target='#reportPostModal'><i class='far fa-angry'></i></button></td>"
 						           + "</tr>"
 						           +  "<tr><td colspan='3' height='20'></td></tr>";
