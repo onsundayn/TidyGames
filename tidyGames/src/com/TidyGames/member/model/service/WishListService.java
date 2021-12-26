@@ -30,6 +30,20 @@ public class WishListService {
 
 	}
 	
+	public  ArrayList<WishList> wishSearch( int memNo, String keyword, PageInfo pi ) {
+			
+			
+			Connection conn = getConnection();
+			
+			ArrayList<WishList> wish = new WishListDao().wishSearch(conn, memNo, keyword,pi);
+			 
+			 close(conn);
+			 
+			return wish;
+			 
+	
+		}
+	
 
 	
 	public int insertWish(WishList wish) {

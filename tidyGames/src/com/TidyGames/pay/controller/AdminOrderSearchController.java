@@ -8,23 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.TidyGames.member.model.vo.Member;
 import com.TidyGames.pay.model.service.PayService;
-import com.TidyGames.pay.model.vo.Cart;
+import com.TidyGames.pay.model.vo.Pay;
 
 /**
- * Servlet implementation class PayController
+ * Servlet implementation class AdminOrderSearchController
  */
-@WebServlet("/pay.pa")
-public class PayController extends HttpServlet {
+@WebServlet("/adOrderSearch.pa")
+public class AdminOrderSearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PayController() {
+    public AdminOrderSearchController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,38 +31,32 @@ public class PayController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		request.setCharacterEncoding("UTF-8");
+		String orderSearch = request.getParameter("orderSearch");
+		String keyword = request.getParameter("keyword");
 		
-		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
-		int payAmount = Integer.parseInt(request.getParameter("total"));
-		String payMethod = request.getParameter("payment");
-		String usePoint = request.getParameter("usePoint");
-		int savePoint = Integer.parseInt(request.getParameter("savePoint"));
-		int totalPrice = payAmount-Integer.parseInt(usePoint);
-		String[] gameNo = request.getParameterValues("gameNo");
 	
 		
-		int result = new PayService().insertPay(memNo, totalPrice, payMethod, gameNo, usePoint, savePoint);
+		if(orderSearch.equals("memId")) {
 		
+		ArrayList<Pay> list = new PayService().adOrderMemIdSearch(keyword);  
 		
-		if(result > 0) {
+		request.setAttribute("list", list);
+	
+		request.getRequestDispatcher("views/pay/adminOrderHistoryView.jsp").forward(request, response);
+		}else if(orderSearch.equals("orderNo")) {
 		
-			request.getSession().setAttribute("alertMsg", "결제가 성공적으로 완료되었습니다.");
-			response.sendRedirect(request.getContextPath() + "/orderHistory.pa?cpage=1");
 			
 			
-		}else {
+			ArrayList<Pay> list = new PayService().adOrderorderNoSearch(keyword);  
 			
-			//pay테이블에 insert 실패
+			request.setAttribute("list", list);
+		
+			request.getRequestDispatcher("views/pay/adminOrderHistoryView.jsp").forward(request, response);	
+			
+			
 		}
-		
-		
-		
-		
-		
 	}
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

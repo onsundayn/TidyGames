@@ -29,7 +29,7 @@ Game g = (Game)session.getAttribute("g");
         width:1500px;
         height: 1300px;
         margin:auto;
-        border: 1px solid orange;
+        
     }
     #outer>div{
         float:left;
@@ -191,23 +191,15 @@ Game g = (Game)session.getAttribute("g");
         <div id="intro"><h1>닉네임 님의 찜 목록</h1></div>
         <br><br><br><br><br>
 
-        <% if(wish.isEmpty()) { %>
-
-        
-            <div class="area1" style="float: right; margin-right: 150px;">
-                <div class="col-sm-12 empty-cart-cls text-center"> <img src="https://i.imgur.com/dCdflKN.png" width="200" height="130" class="img-fluid mb-4 mr-3" style="margin-top: 50px;">
-                <h3 style="color:white"><strongy> 찜목록이 비어있습니다.</strongy></h3>
-                <a href="<%=contextPath%>" class="btn btn-primary cart-btn-transform m-3" data-abc="true">쇼핑계속하기</a>
-            </div>
-          
-            <%}else { %>   
+      
 
         <div class="search-game">
             
-            <form action="" id="wishList-search">
-
+            <form action="<%=contextPath%>/wishSearch.me" id="wishList-search">
+			<input type="hidden" value="1" name="cpage">
+			
                 <div id="game_search">
-                    <input type="text" name="keyword" style="border-radius: 3px; width: 800px; height:30px; background:#ffffff; border: 1px solid white;" placeholder="이름 또는 태그로 검색">
+                    <input type="text" name="keyword" style="border-radius: 3px; width: 900px; height:30px; background:#ffffff; border: 1px solid white;" placeholder="게임명을 입력해주세요">
                 </div>
                 
                 <div id="search_btn">
@@ -216,8 +208,8 @@ Game g = (Game)session.getAttribute("g");
             </form>
 
            
-            <form action="">
-                
+            
+                <!-- 
                 <select name ="wishList-array" id="wishList-array">
                     <option selected >정렬기준</option>
                     <option value="releaseDate" >출시날짜</option>
@@ -227,8 +219,8 @@ Game g = (Game)session.getAttribute("g");
                     <option value="priceDesc">가격순:내림차순</option>
         
                 </select>
-
-            </form>
+				 -->
+            
 
         </div>
         <br>
@@ -237,7 +229,16 @@ Game g = (Game)session.getAttribute("g");
         <br>
         <br><br>
 
-     
+     	  <% if(wish.isEmpty()) { %>
+
+        
+            <div class="area1" style="float: right; margin-right: 150px;">
+                <div class="col-sm-12 empty-cart-cls text-center"> <img src="https://i.imgur.com/dCdflKN.png" width="200" height="130" class="img-fluid mb-4 mr-3" style="margin-top: 50px;">
+                <h3 style="color:white"><strongy> 찜목록이 비어있습니다.</strongy></h3>
+                <a href="<%=contextPath%>" class="btn btn-primary cart-btn-transform m-3" data-abc="true">쇼핑계속하기</a>
+            </div>
+          
+            <%}else { %>   
        
         <button id="allDelete_btn" onclick="fnClear();">전체삭제</button>
         	 <script>

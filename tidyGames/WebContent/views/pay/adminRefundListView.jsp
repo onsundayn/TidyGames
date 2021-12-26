@@ -49,6 +49,7 @@ ArrayList<Refund> list = (ArrayList<Refund>)request.getAttribute("list");
     .dateSearch{
         margin: 8px 20px 0px 70px;
         display: inline-block;
+        width: 150px;
        
     }
     .dateSearch>button{
@@ -110,13 +111,13 @@ ArrayList<Refund> list = (ArrayList<Refund>)request.getAttribute("list");
     .pointstatus{
         display: inline-block;
         margin-left: 30px;
-        margin-right: 10px;
+        margin-right: 30px;
     }
 
     .pointstatus>select{
         border-radius: 5px;
         background: white;
-        width: 90px;
+        width: 120px;
         height: 30px;
         text-align: center;
         font-weight: bold;
@@ -148,13 +149,12 @@ ArrayList<Refund> list = (ArrayList<Refund>)request.getAttribute("list");
            
           
 
-            
-
+            	<form action="<%=contextPath%>/adRefundSearch.pa" method="post">
                 <div class="searcharea">
                         <div class="search">
-                            <select class="btn btn-outline-secondary" >
-                                <option selected value="uptodate">회원ID</option>
-                                <option value="olddae" >주문번호</option>
+                            <select class="btn btn-outline-secondary" name="refundSearch" >
+                                <option selected value="memId" name="memID">회원ID</option>
+                                <option value="OrderNo" name="orderNo" >주문번호</option>
                 
                             </select>
                         
@@ -168,19 +168,21 @@ ArrayList<Refund> list = (ArrayList<Refund>)request.getAttribute("list");
                         <div id="search_btn">
                             <button type="submit" id="icon_btn" style="background: none;"><i class="fas fa-search"></i></button>
                         </div>
+               
+               
                 </div> 
-
+					</form>
                <%for(Refund rf : list){ %>
              <form action="<%=contextPath%>/adRefundDate.pa?mNo="<%=rf.getMemNo()%>" action="post">
                	
                <%} %>
                 <div class="dateSearch">
-                   
+                   <!--
                    <button name="weekend">일주일</button>
                    <button name="month">1개월</button>
                    <button name="threemonth">3개월</button>
                    <button name="sixmonth">6개월</button>
-                
+                    -->
                 </div>
  			
                <div class="datetable">

@@ -10,22 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.TidyGames.common.model.vo.PageInfo;
-import com.TidyGames.member.model.service.PointService;
+import com.TidyGames.member.model.service.WishListService;
 import com.TidyGames.member.model.vo.Member;
-import com.TidyGames.member.model.vo.Point;
-import com.TidyGames.pay.model.service.PayService;
+import com.TidyGames.member.model.vo.WishList;
 
 /**
- * Servlet implementation class PointHistoryController
+ * Servlet implementation class WishListSearchController
  */
-@WebServlet("/pointHistory.me")
-public class PointHistoryController extends HttpServlet {
+@WebServlet("/wishSearch.me")
+public class WishListSearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PointHistoryController() {
+    public WishListSearchController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,12 +33,9 @@ public class PointHistoryController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.setCharacterEncoding("UTF-8");
-		
+		String keyword = request.getParameter("keyword");
 		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
-		
-		
+	
 		// ----------페이징 처리-------------
 		int listCount; // 현재 총 게시글 갯수
 		int currentPage; // 현재 페이지(즉, 사용자가 요청한 페이지 cpage=""에 들어갈 숫자)
@@ -52,16 +48,18 @@ public class PointHistoryController extends HttpServlet {
 		int startPage; // 페이징바의 시작수
 		int endPage; // 페이징바의 끝수
 		
-		listCount = new PointService().pointListCount(memNo);
+		listCount = new WishListService().selectListCount(memNo);
+
 		
-		// membersidebar, payviewController에 작성해놓음
+		// * currentPage : 현재 페이지(즉, 사용자가 요청한 페이지)
+		// menubar에 일반게시판 url넘길때 cpage=1 이 key값
 		currentPage = Integer.parseInt(request.getParameter("cpage"));
 		
 		// * pageLimit : 페이징바의 페이지 최대 갯수(단위)
 		pageLimit = 10;
 		
 		// * boardLimit : 게시글 최대 갯수(단위)
-		viewLimit = 10;
+		viewLimit = 5;
 		
 		//maxPage : 제일 마지막 페이지수(총페이지수)
 		maxPage = (int)(Math.ceil((double)listCount/viewLimit));
@@ -78,23 +76,19 @@ public class PointHistoryController extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit,viewLimit, maxPage, startPage, endPage);
 		
+	
 		
+		ArrayList<WishList> wish = new WishListService().wishSearch(memNo,  keyword, pi);  
 		
-		
-		ArrayList<Point> point = new PointService().selectPoint(memNo, pi);  
 		
 		request.setAttribute("pi", pi);
-		
-		request.setAttribute("point", point);
+		request.setAttribute("wish", wish);
 	
-		Point sum = new PointService().sumPoint(memNo);
-		
-		request.setAttribute("sum", sum);
+		request.getRequestDispatcher("views/member/wishList.jsp").forward(request, response);
 		
 		
 		
-		
-		request.getRequestDispatcher("views/member/pointHistoryView.jsp").forward(request, response);
+	
 	}
 
 	/**

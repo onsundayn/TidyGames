@@ -113,15 +113,15 @@
         <!-- 조회div -->
         <div class="area2">
            
-            <form action="">
+            <form action="<%=contextPath%>/adPointSearch.me" method="post">
 
             
 
                 <div class="searcharea">
-                        <div class="search">
+                        <div class="search" name="memId">
                             <select class="btn btn-outline-secondary" >
-                                <option selected value="uptodate">회원ID</option>
-                                <option value="olddae" >회원번호</option>
+                                <option selected value="memId"  >회원ID</option>
+                               <!--<option value="">회원번호</option>  -->
                 
                             </select>
                         
@@ -160,16 +160,16 @@
                       </tr>
                     </thead>
                     <tbody>
-                   <form action="<%=contextPath%>/adPointInsert.me" action="post">
-                  <%for(Point po:list ) {%>
-                  			<input type="hidden" name="mNo" value=<%=po.getMemNo() %>>
+                  
+                  	<%for(Point po:list ) {%>
+                  			
                       <tr>
                 		
-                        <td><%=po.getMemNo() %></td>
+                        <td class="memNo"><%=po.getMemNo()%></td>
                         <td><%=po.getMemId() %></td>
                         <td id="pointsum"><%=po.getSum()%>POINT</td>
                         <td><a href="" id="btn" class="btn btn-sm btn-dark" data-toggle="modal" data-target="#pointModal">변경</a>
-                            <a href="<%= request.getContextPath() %>/adPointDe.me?mNo=<%=po.getMemNo()%>" class="btn btn-success btn-sm">상세보기</a></td>
+                            <a href="<%= request.getContextPath() %>/adPointDe.me?mNo=<%=po.getMemNo()%>&cpage=1" class="btn btn-success btn-sm">상세보기</a></td>
                       
                      <%} %>
                    
@@ -205,13 +205,13 @@
                                 <div class="pointcontent">
                                     <button  class="btn btn-secondary btn-sm" style="width: 30px; height: 30px; margin-left: 55px;">╊</button>&nbsp;
                                     <button  class="btn btn-secondary btn-sm" style="width: 30px; height: 30px;">─</button>
-                                    <input type="text" class="memPoint" name="pointAmount"></input>
+                                    <input type="text" class="memPoint" name="pointAmount" id="pointA">
                                 </div>
                           
                                 <div class="pointcontent">
                                     <b style="margin-top: 20px;">&nbsp;
                                       		  적립/차감 내용 :</b> 
-                                    <input type="text" class="memPoint" name="pointContent"></input>
+                                    <input type="text" class="memPoint" name="pointContent" id="pointC">
                                 </div>
                             
                             
@@ -221,12 +221,12 @@
 							<!-- Modal footer -->
 							<div class="modal-footer" >
                                 
-                                    <button type="submit" class="btn " style="background: #31665c; color: white;" >적립</button>
+                                    <button onclick="pointConfirm();" class="btn " style="background: #31665c; color: white;" >적립</button>
                                 
                                     <button type="button" class="btn btn-danger"data-dismiss="modal" style="background: rgba(255, 0, 0, 0.815);">취소</button>
                               
 							</div>
-                           </form>
+                          
                     
 						</div>
 					</div>
@@ -262,7 +262,48 @@
 		})
 		
 		
+	function pointConfirm(){
 		
+		
+		$.ajax({
+			
+			url : "adPointInsert.me",
+			data : {
+				
+				memNo:$(".table-hover>tbody>tr").children().eq(0).text()
+				pointAmount: $("#pointA").val()
+				pointContent : $("pointC").val()
+			},
+			type:"post",
+			success:function(result) {
+				if(result > 0 ) {
+					
+						if(confirm("포인트변경이 완료되었습니다.")){
+    					
+    					location.href='<%=contextPath%>/adPoint.me';
+    					
+    		    		}
+					
+					
+				}else{
+					console.log("실패");
+				}
+				
+				
+				
+			}
+			
+			
+			
+			
+			
+			
+		});
+		
+		
+		
+		
+	}
 	
     
     

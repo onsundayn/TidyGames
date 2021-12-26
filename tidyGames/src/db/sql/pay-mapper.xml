@@ -61,9 +61,28 @@
 	</entry>
 	
 	
+	<entry key="orderListCount">
+		SELECT
+      			COUNT(*) count
+  		  FROM PAY_GAME
+          JOIN PAY P USING(ORDER_NO)
+         WHERE MEM_NO = ?
+	
+	
+	
+	</entry>
+	
+	
+	
+	
 	
 	<entry key = "orderList">
-			SELECT
+		            
+        SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+                              SELECT
 			          ORDER_NO
 			        , GAME_NO
 			        , MEM_NO
@@ -80,9 +99,114 @@
 			JOIN PAY P USING(ORDER_NO)
 			JOIN GAME G USING(GAME_NO)
 			WHERE MEM_NO = ?
+
+		                ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
 			
 	
 	</entry>
+	
+	<entry key="orderSearch">
+         
+        SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+                  SELECT
+			          ORDER_NO
+			        , GAME_NO
+			        , MEM_NO
+			        , PAY_AMOUNT
+			        , PAY_STATUS
+			        , TO_CHAR(PAY_DATE, 'YYYY-MM-DD') "PAY_DATE"
+			        , PAY_METHOD
+			        , KOR_NAME
+			        , ENG_NAME
+			        , GAME_IMG
+			        , G.PRICE - G.PRICE*G.POINT  "DISCOUNTPRICE"
+					, PRICE
+			FROM PAY_GAME PG
+			JOIN PAY P USING(ORDER_NO)
+			JOIN GAME G USING(GAME_NO)
+			WHERE MEM_NO = ?
+            AND UPPER(KOR_NAME || ENG_NAME) LIKE UPPER('%' || ? || '%')
+
+		                ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	
+	
+	</entry>
+	
+	<entry key="orderDescDate">
+		            
+        SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+                SELECT
+			          ORDER_NO
+			        , GAME_NO
+			        , MEM_NO
+			        , PAY_AMOUNT
+			        , PAY_STATUS
+			        , TO_CHAR(PAY_DATE, 'YYYY-MM-DD') "PAY_DATE"
+			        , PAY_METHOD
+			        , KOR_NAME
+			        , ENG_NAME
+			        , GAME_IMG
+			        , G.PRICE - G.PRICE*G.POINT  "DISCOUNTPRICE"
+					, PRICE
+			FROM PAY_GAME PG
+			JOIN PAY P USING(ORDER_NO)
+			JOIN GAME G USING(GAME_NO)
+			WHERE MEM_NO = ?
+            AND PAY_DATE BETWEEN TO_DATE(?) AND TO_DATE(?)
+            ORDER BY PAY_DATE DESC
+		                ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	
+	
+	
+	</entry>
+	
+	
+	<entry key="orderAscDate">
+	            
+        SELECT *
+		  FROM (
+		        SELECT ROWNUM RNUM, A.*
+		          FROM (
+              	SELECT
+			          ORDER_NO
+			        , GAME_NO
+			        , MEM_NO
+			        , PAY_AMOUNT
+			        , PAY_STATUS
+			        , TO_CHAR(PAY_DATE, 'YYYY-MM-DD') "PAY_DATE"
+			        , PAY_METHOD
+			        , KOR_NAME
+			        , ENG_NAME
+			        , GAME_IMG
+			        , G.PRICE - G.PRICE*G.POINT  "DISCOUNTPRICE"
+					, PRICE
+			FROM PAY_GAME PG
+			JOIN PAY P USING(ORDER_NO)
+			JOIN GAME G USING(GAME_NO)
+			WHERE MEM_NO = ?
+            AND PAY_DATE BETWEEN TO_DATE(?) AND TO_DATE(?)
+            ORDER BY PAY_DATE ASC
+		                ) A
+		        )
+		 WHERE RNUM BETWEEN ? AND ?
+	
+	
+	
+	
+	</entry>
+	
 	
 	<entry key="adOrderList">
 	
@@ -98,6 +222,40 @@
 		
 	
 	</entry>
+	
+	
+		<entry key="adOrderMemIdSearch">
+	
+			SELECT
+			          ORDER_NO
+			        , MEM_NO
+			        , PAY_AMOUNT
+			        , PAY_STATUS
+			        , TO_CHAR(PAY_DATE, 'YYYY-MM-DD') "PAY_DATE"
+					, MEM_ID
+			FROM PAY P
+            JOIN MEMBER USING(MEM_NO)
+            WHERE MEM_ID = ?
+		
+	
+	</entry>
+	
+		<entry key="adOrderorderNoSearch">
+	
+			SELECT
+			          ORDER_NO
+			        , MEM_NO
+			        , PAY_AMOUNT
+			        , PAY_STATUS
+			        , TO_CHAR(PAY_DATE, 'YYYY-MM-DD') "PAY_DATE"
+					, MEM_ID
+			FROM PAY P
+            JOIN MEMBER USING(MEM_NO)
+            WHERE ORDER_NO = ?
+		
+	
+	</entry>
+	
 	
 	<entry key="adDateOrderList">
 	
@@ -185,6 +343,51 @@
 		JOIN PAY USING(ORDER_NO)
 		
 	</entry>
+	
+	<entry key="adRefundMemIdSearch">
+			SELECT
+			  REFUND_NO
+			 , PAY.MEM_NO
+			 , ORDER_NO
+			 , REFUND
+			 , ADD_WRITING
+			 , TO_CHAR(REFUND_DATE, 'YYYY-MM-DD HH:MI:SS') AS "REFUND_DATE"
+			 , REFUND_STATUS
+			 , MEM_ID
+			 , PAY_AMOUNT
+			 , TO_CHAR(PAY_DATE, 'YYYY-MM-DD') AS "PAY_DATE"
+		FROM REFUND
+		JOIN MEMBER USING(MEM_NO)
+		JOIN PAY USING(ORDER_NO)
+        WHERE MEM_ID = ?
+	
+	
+	</entry>
+	
+		<entry key="adRefundorderNoSearch">
+			SELECT
+			  REFUND_NO
+			 , PAY.MEM_NO
+			 , ORDER_NO
+			 , REFUND
+			 , ADD_WRITING
+			 , TO_CHAR(REFUND_DATE, 'YYYY-MM-DD HH:MI:SS') AS "REFUND_DATE"
+			 , REFUND_STATUS
+			 , MEM_ID
+			 , PAY_AMOUNT
+			 , TO_CHAR(PAY_DATE, 'YYYY-MM-DD') AS "PAY_DATE"
+		FROM REFUND
+		JOIN MEMBER USING(MEM_NO)
+		JOIN PAY USING(ORDER_NO)
+        WHERE ORDER_NO = ?
+	
+	
+	</entry>
+	
+	
+	
+	
+	
 	<entry key="adAllRefundList">
 		SELECT
 			  REFUND_NO

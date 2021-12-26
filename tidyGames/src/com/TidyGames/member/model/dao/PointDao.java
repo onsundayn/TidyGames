@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.TidyGames.common.model.vo.PageInfo;
 import com.TidyGames.member.model.vo.Point;
 import com.TidyGames.member.model.vo.WishList;
 
@@ -28,7 +29,41 @@ public class PointDao {
 
 	}
 
-	public ArrayList<Point> selectPoint(Connection conn, int memNo) {
+	public int pointListCount(Connection conn, int memNo) {
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("pointListCount");
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			
+			if(rset.next()) {
+//				count(*) 컬럼의 별칭인 count임
+				listCount = rset.getInt("count");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return listCount;
+	}
+	
+	
+	
+	
+	
+	public ArrayList<Point> selectPoint(Connection conn, int memNo, PageInfo pi) {
 
 		ArrayList<Point> point = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -38,8 +73,14 @@ public class PointDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 
+			int startRow = (pi.getCurrentPage() -1 ) * pi.getViewLimit() + 1;
+			int endRow = startRow +  pi.getViewLimit() - 1;
+			
 			pstmt.setInt(1, memNo);
-
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			
 			rset = pstmt.executeQuery();
 
 			while (rset.next()) {
@@ -61,7 +102,7 @@ public class PointDao {
 		return point;
 	}
 	
-	public ArrayList<Point> selectAllPoint(Connection conn, int memNo, String start, String end) {
+	public ArrayList<Point> selectAllPoint(Connection conn, int memNo, String start, String end, PageInfo pi) {
 
 		ArrayList<Point> point = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -70,10 +111,13 @@ public class PointDao {
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-
+			int startRow = (pi.getCurrentPage() -1 ) * pi.getViewLimit() + 1;
+			int endRow = startRow +  pi.getViewLimit() - 1;
 			pstmt.setInt(1, memNo);
 			pstmt.setString(2, start);
 			pstmt.setString(3, end);
+			pstmt.setInt(4, startRow);
+			pstmt.setInt(5, endRow);
 
 			rset = pstmt.executeQuery();
 
@@ -97,7 +141,7 @@ public class PointDao {
 	}
 
 
-	public ArrayList<Point> selectSave(Connection conn, int memNo, String start, String end) {
+	public ArrayList<Point> selectSave(Connection conn, int memNo, String start, String end, PageInfo pi) {
 
 		ArrayList<Point> point = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -107,10 +151,16 @@ public class PointDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 
+			int startRow = (pi.getCurrentPage() -1 ) * pi.getViewLimit() + 1;
+			int endRow = startRow +  pi.getViewLimit() - 1;
+			
 			pstmt.setInt(1, memNo);
 			pstmt.setString(2, start);
 			pstmt.setString(3, end);
-
+			pstmt.setInt(4, startRow);
+			pstmt.setInt(5, endRow);
+			
+			
 			rset = pstmt.executeQuery();
 
 			while (rset.next()) {
@@ -132,7 +182,7 @@ public class PointDao {
 		return point;
 	}
 
-	public ArrayList<Point> selectUse(Connection conn, int memNo, String start, String end) {
+	public ArrayList<Point> selectUse(Connection conn, int memNo, String start, String end, PageInfo pi) {
 
 		ArrayList<Point> point = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -142,9 +192,16 @@ public class PointDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 
+			
+			int startRow = (pi.getCurrentPage() -1 ) * pi.getViewLimit() + 1;
+			int endRow = startRow +  pi.getViewLimit() - 1;
+			
+			
 			pstmt.setInt(1, memNo);
 			pstmt.setString(2, start);
 			pstmt.setString(3, end);
+			pstmt.setInt(4, startRow);
+			pstmt.setInt(5, endRow);
 
 			rset = pstmt.executeQuery();
 
@@ -266,7 +323,7 @@ public class PointDao {
 	}
 	
 	
-	public int adInsertPoint(Connection conn, int memNo, int pa, String pc) {
+	public int adInsertPoint(Connection conn, String memNo, int pa, String pc) {
 		
 		int result =0;
 		PreparedStatement pstmt = null;
@@ -275,7 +332,7 @@ public class PointDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, memNo);
+			pstmt.setString(1, memNo);
 			pstmt.setInt(2, pa);
 			pstmt.setString(3, pc);
 			
@@ -288,6 +345,38 @@ public class PointDao {
 			close(pstmt);
 		}
 		return result;
+	}
+public ArrayList<Point> adPointSearch(Connection conn, String memId) {
+		
+
+		ArrayList<Point> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adPointSearch");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, memId);
+			
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				list.add(new Point(rset.getInt("mem_no"),
+								   rset.getString("mem_id"),
+								   rset.getInt("sum")));
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
+		
 	}
 	
 		

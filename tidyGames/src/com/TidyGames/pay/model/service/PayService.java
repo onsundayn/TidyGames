@@ -8,6 +8,7 @@ import static com.TidyGames.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.TidyGames.common.model.vo.PageInfo;
 import com.TidyGames.member.model.vo.Member;
 import com.TidyGames.pay.model.dao.PayDao;
 import com.TidyGames.pay.model.vo.Cart;
@@ -77,16 +78,65 @@ public class PayService {
 		return result;
 	}
 	
-	public ArrayList<PayGame> orderList(int memNo) {
+	public int orderListCount(int memNo) {
+		Connection conn = getConnection();
+		int listCount = new PayDao().orderListCount(conn, memNo);
+		
+		close(conn);
+		
+		return listCount;
+		
+	}
+	
+	public ArrayList<PayGame> orderList(int memNo, PageInfo pi) {
 
 		Connection conn = getConnection();
 		
-		 ArrayList<PayGame> order = new PayDao().orderList(conn, memNo);
+		 ArrayList<PayGame> order = new PayDao().orderList(conn, memNo, pi);
 		 
 		 close(conn);
 		 
 		return order;
 	}
+	
+	
+	public ArrayList<PayGame> orderSearch(int memNo, String keyword , PageInfo pi) {
+
+		Connection conn = getConnection();
+		
+		 ArrayList<PayGame> order = new PayDao().orderSearch(conn, memNo, keyword, pi);
+		 
+		 close(conn);
+		 
+		return order;
+	}
+
+	
+
+	public ArrayList<PayGame> orderDescDate(int memNo, String start, String end,PageInfo pi ) {
+
+		Connection conn = getConnection();
+		
+		 ArrayList<PayGame> order = new PayDao(). orderDescDate(conn, memNo, start, end,pi);
+		 
+		 close(conn);
+		 
+		return order;
+	}
+	
+
+	public ArrayList<PayGame> orderAscDate(int memNo, String start, String end, PageInfo pi) {
+
+		Connection conn = getConnection();
+		
+		 ArrayList<PayGame> order = new PayDao().orderAscDate(conn, memNo, start, end,pi);
+		 
+		 close(conn);
+		 
+		return order;
+	}
+	
+	
 	
 	//관리자 주문관리 and 환불관리
 	public ArrayList<Pay> adOrderList() {
@@ -99,6 +149,32 @@ public class PayService {
 		 
 		return list;
 	}
+	
+	public ArrayList<Pay> adOrderMemIdSearch(String keyword) {
+
+		Connection conn = getConnection();
+		
+		 ArrayList<Pay> list = new PayDao().adOrderMemIdSearch(conn, keyword);
+		 
+		 close(conn);
+		 
+		return list;
+	}
+	
+	
+	public ArrayList<Pay> adOrderorderNoSearch(String keyword) {
+
+		Connection conn = getConnection();
+		
+		 ArrayList<Pay> list = new PayDao().adOrderorderNoSearch(conn, keyword);
+		 
+		 close(conn);
+		 
+		return list;
+	}
+	
+	
+	
 	
 	public ArrayList<Pay> adDateOrderList(String start, String end) {
 
@@ -157,6 +233,33 @@ public class PayService {
 		 
 		return list;
 	}
+	
+	
+	public ArrayList<Refund> adRefundMemIdSearch(String keyword) {
+		
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Refund> list = new PayDao().adRefundMemIdSearch(conn, keyword);
+		
+		 close(conn);
+		 
+		return list;
+	}
+	
+public ArrayList<Refund> adRefundorderNoSearch(String keyword) {
+		
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Refund> list = new PayDao().adRefundorderNoSearch(conn, keyword);
+		
+		 close(conn);
+		 
+		return list;
+	}
+	
+	
 	
 	//관리자 환불 날짜 전체상태조회
 	

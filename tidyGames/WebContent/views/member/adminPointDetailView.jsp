@@ -1,8 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.member.model.vo.*"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.common.model.vo.*,com.TidyGames.member.model.vo.*"%>
     
     
  <% 
+ 
+ PageInfo pi = (PageInfo)request.getAttribute("pi");
+
+ int currentPage = pi.getCurrentPage();
+ int startPage = pi.getStartPage();
+ int endPage = pi.getEndPage();
+ int maxPage = pi.getMaxPage();
+ 
  ArrayList<Point> point = (ArrayList<Point>)request.getAttribute("point");
  Point sum = (Point)request.getAttribute("sum");
  
@@ -139,6 +147,27 @@
     .area4>h4 {
         font-size: 18px;
     }
+    
+     .paging-area{
+    
+       width: 1000px;
+       height: 200px;
+       margin-top: 50px;
+    }
+    
+     .paging-area>button {
+        border-radius: 5px;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 20px;
+       
+        
+    }
+    .paging-area>button:hover {
+        cursor:pointer;
+        color:orange
+    }
 </style>
 </head>
 <body>
@@ -172,7 +201,9 @@
             <span class="selectForm">
             <% for(Point pm : point) { %>
            <form action="<%=contextPath%>/adPointDate.me?mNo=<%=pm.getMemNo()%>" method="post">
+         
                 <%} %>
+                 
                 <!-- <div class="dateSearch">
 
                    <button name="weekend">일주일</button>
@@ -197,8 +228,8 @@
 
                     </select>
                 </div>
+				  <input type="hidden" name="cpage" value="1">
                 <button type="submit" class="btn btn-sm btn-secondary" style="width: 50px; height: 35px;">조회</button>
-
             </form>
 
             </span>
@@ -214,11 +245,14 @@
         <br><br>
 
             <div class="area4">
+          	  <!--  
                 <select class="btn btn-outline-secondary" style="color: white;"">
                     <option selected value="uptodate">최신순</option>
                     <option class="olddate" ><button onclick="olddate();">오래된순</button></option>
     
                 </select>
+                
+                -->
              </div>
 
         
@@ -242,6 +276,7 @@
                 
                   	<%for(Point p : point){ %>
                 <tbody>
+                
                   <tr class="usecol">
                     <td><%=p.getPointDate() %></td>
                     <td><%=p.getPointCotent() %></td>
@@ -253,12 +288,41 @@
 	                    <td style="color:red;">사용</td>
                		 <% }  %>	
                     	
-                  </tr>
-                </tbody>
+                  </tr>    
+        
+              </tbody>
+                
                  	<% } %>
                  <%} %>
               </table>
+             
         </div>
+        
+                <% if(!point.isEmpty()) { %>
+            <div class="paging-area" style="float: right; margin-top: 100px; margin-right: 150px; text-align: center;">
+					
+  		<%if(currentPage != 1){ %>
+            <button onclick="location.href='<%=contextPath%>/adPointDe.me?cpage=<%=currentPage-1%>';"> &lt; </button>
+          <%} %>  
+            
+            <%for(int p=startPage; p<=endPage; p++){ %>
+            
+            	<!-- 현재페이지이면 클릭안되게 -->
+            	<%if(p== currentPage) { %>
+            		<button disabled><%= p %></button>
+            	<%}else { %>
+            	<!-- 클릭이벤트 부여해서 url 요청-->
+            		<button onclick="location.href='<%=contextPath%>/adPointDe.me?cpage=<%=p%>';"><%= p %></button>
+            	<%} %>
+            <% } %>
+            <% if(currentPage != maxPage) { %>
+            <button onclick="location.href='<%=contextPath%>/adPointDe.me?cpage=<%=currentPage+1%>';"> &gt; </button>
+      		 <%} %>
+
+ 			<%} %>
+		
+			</div>
+        
 	
 
     </div>
