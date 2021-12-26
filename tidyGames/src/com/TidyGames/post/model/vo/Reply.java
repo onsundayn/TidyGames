@@ -9,24 +9,24 @@ public class Reply {
 	private String replyEnroll;
 	private String replyModify;
 	private String replyStatus;
-	private int wrtierNo;
+	private int writerNo;
 	
 	public Reply() {}
 	
 
-	public Reply(int replyNo, String replyWriter, String replyContent, String replyEnroll, int wrtierNo) {
+	public Reply(int replyNo, String replyWriter, String replyContent, String replyEnroll, int writerNo) {
 		super();
 		this.replyNo = replyNo;
 		this.replyWriter = replyWriter;
 		this.replyContent = replyContent;
 		this.replyEnroll = replyEnroll;
-		this.wrtierNo = wrtierNo;
+		this.writerNo = writerNo;
 	}
 
 
 
 	public Reply(int replyNo, String replyWriter, int refPostNo, String replyContent, String replyEnroll,
-			String replyModify, String replyStatus, int wrtierNo) {
+			String replyModify, String replyStatus, int writerNo) {
 		super();
 		this.replyNo = replyNo;
 		this.replyWriter = replyWriter;
@@ -35,7 +35,7 @@ public class Reply {
 		this.replyEnroll = replyEnroll;
 		this.replyModify = replyModify;
 		this.replyStatus = replyStatus;
-		this.wrtierNo = wrtierNo;
+		this.writerNo = writerNo;
 	}
 
 	public int getReplyNo() {
@@ -94,19 +94,19 @@ public class Reply {
 		this.replyStatus = replyStatus;
 	}
 
-	public int getWrtierNo() {
-		return wrtierNo;
+	public int getWriterNo() {
+		return writerNo;
 	}
 
-	public void setWrtierNo(int wrtierNo) {
-		this.wrtierNo = wrtierNo;
+	public void setWriterNo(int writerNo) {
+		this.writerNo = writerNo;
 	}
 
 	@Override
 	public String toString() {
 		return "Reply [replyNo=" + replyNo + ", replyWriter=" + replyWriter + ", refPostNo=" + refPostNo
 				+ ", replyContent=" + replyContent + ", replyEnroll=" + replyEnroll + ", replyModify=" + replyModify
-				+ ", replyStatus=" + replyStatus + ", wrtierNo=" + wrtierNo + "]";
+				+ ", replyStatus=" + replyStatus + ", writerNo=" + writerNo + "]";
 	}
 
 	

@@ -389,13 +389,13 @@ table {
 						let result = "";
 						
 						for(let i=0; i<list.length; i++) {
-							result += "<input type='hidden' class='reportRmem' value='" + list[i].wrtierNo + "'>"
+							result += "<input type='hidden' class='reportRmem' value='" + list[i].writerNo + "'>"
 				       				+ "<tr>"
 				       				+ "<th width='70'>" + list[i].replyWriter + "</th>"
 				                   	+ "<td width='800' colspan='3'>" + list[i].replyContent + "</td>"
 				                   	+ "</tr>";
 				                   	
-				              if(<%=loginUser.getMemNo()%> == list[i].wrtierNo) {
+				              if(<%=loginUser.getMemNo()%> == list[i].writerNo) {
 				            	result   +=  "<tr>"
 				                   + "<td></td>"
 						           + "<td style='font-size:smaller'>" + list[i].replyEnroll + "</td>"
