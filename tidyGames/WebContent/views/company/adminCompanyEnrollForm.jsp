@@ -49,7 +49,7 @@
         	<h2>게임사 등록</h2>
 	        <br><br><br>
 	
-	        <form action="<%=contextPath%>/insert.co?" method="post" id="enroll-form">
+	        <form action="<%=contextPath%>/insert.co" method="post" id="enroll-form">
 	
 	            <table>
 	                <tr>
