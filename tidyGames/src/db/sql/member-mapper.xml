@@ -345,7 +345,8 @@
 	</entry>
 	<entry key="library">
 		SELECT 
-		       KOR_NAME
+			   GAME_NO
+		     , KOR_NAME
 		     , ENG_NAME
 		     , GAME_IMG
              , NVL(STAR_NO, 0) "STAR_NO"

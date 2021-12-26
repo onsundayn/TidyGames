@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.game.model.vo.Game"%>
 <!DOCTYPE html>
-
-<%
- 	ArrayList<Game> list = (ArrayList<Game>)request.getAttribute("list");
-%>
-<html class="no-js">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>Tidy Games</title>
@@ -13,7 +9,6 @@
 	div{
 		box-sizing: border-box;
 		color:white;
-		/* border: 1px solid rgba(255, 255, 255, 0.555); */
 	}
 	#outer{
         width:1500px;
@@ -51,7 +46,6 @@
 	#sortLb{
 		width:100%;
 		height:100px;
-		/* border: 2px solid rgba(255, 255, 255, 0.555); */
 
 	}
 	#sortLb label{
@@ -62,7 +56,6 @@
 	#sortLb>div{
 		float:left;
 		width:240px;
-		/* border: 2px solid rgba(255, 255, 255, 0.555); */
 		padding: 15px 25px;
 	}
 	#btn{
@@ -169,7 +162,7 @@
 	
 		
 			$(function(){
-				var value = "";
+			var value = "";
 				
 				ajax();
 				
@@ -214,13 +207,14 @@
 
 							$(list).each(function(index, obj) {
 								const starNo = $.trim(obj.count);
+								const gameNo = obj.gameNo;
 								
 								
 								// 넘어온 값을 조건문에 돌리기
 								var star = "";
 								var j = 0;
 								if(starNo == 0) {
-										star = '<a id="review">리뷰 작성</a>';
+										star = '<a href="<%= contextPath%>/reviewList.ga?gno=' + obj.gameNo + '">리뷰작성</a>';
 									}else {
 	     							 	for(j=0; j<starNo; j++) {
 	     										 	star += "☆";
@@ -228,7 +222,7 @@
 								}
 								
 								
-								value += 
+								value +=
 								'<div id="games">' +
 									'<div id="game">' +
 										'<div id="gameImg">' +
@@ -237,7 +231,7 @@
 												'<div id="gameText"> <p>' + obj.engName + '</p>' + '</div>' +
 										'<div id="advice">' + 
 											'<div id="ad1">' +
-												'<a href="">게임 문의</a>' +
+												'<a href="<%= contextPath%>/question.gq?gameno=' + obj.gameNo + '">게임 문의</a>' +
 											'</div>' +
 											'<div id="ad2">' + star +
 											
@@ -248,21 +242,20 @@
 									'</div>'
 							
  							 		star = "";
-
+									
+							// 반복
 							$("#gameBox").html(value);
-							console.log("출력");
 							})
-							
-							$("#review").click(function(){
-								location.href="<%= contextPath%>";		
-							})
+						
 						}, error:function(){
 							console.log("ajax 통신 실패");
 						}
 					});	
 				}
-					
+	
 			})
+			
+				
 		</script>
 		
 </body>

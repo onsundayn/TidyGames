@@ -829,6 +829,7 @@ public class MemberDao {
 				g.setGameImg(rset.getString("game_img"));
 				g.setCount(rset.getInt("star_no"));
 				g.setUploadDate(rset.getString("pay_date"));
+				g.setGameNo(rset.getInt("game_no"));
 				
 				list.add(g);			
 			}
