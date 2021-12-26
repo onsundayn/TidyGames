@@ -62,7 +62,7 @@
                     <tr><td colspan="4" height="20"></td></tr>
                     <tr>
                         <td colspan="4" style="background:white">
-                            <textarea rows="20" name="content" required style="resize:none"></textarea>
+                            <textarea rows="20" name="content" required style="resize:none; text-align: left;" align="left""></textarea>
                         </td>
                     </tr>
                     <tr>
