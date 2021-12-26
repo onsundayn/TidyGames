@@ -646,5 +646,23 @@ public class PostDao {
 		}
 		return result;
 	}
+	
+	
+	public int blockMember(Connection conn, String memNick) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("blockMember");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, memNick);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			close(pstmt);
+		}
+		return result;
+	}
+	
 
 }
