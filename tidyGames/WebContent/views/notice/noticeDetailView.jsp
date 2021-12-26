@@ -127,11 +127,10 @@ table {
 									<% } %>
 								</p>
 								<pre>
-									<%= noticeDetail.getNotiContent() %>
+<%= noticeDetail.getNotiContent() %>
 								</pre>
 							</td>
 						</tr>
-						<!-- 일단 여기까지 -->
 						<tr>
 							<th></th>
 							<td colspan="2"></td>

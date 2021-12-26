@@ -1,7 +1,6 @@
 package com.TidyGames.notice.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,20 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.TidyGames.notice.model.service.NoticeService;
-import com.TidyGames.notice.model.vo.Notice;
-import com.TidyGames.notice.model.vo.NoticeFile;
 
 /**
- * Servlet implementation class NoticeUpdateFormController
+ * Servlet implementation class NoticeListDeleteController
  */
-@WebServlet("/noticeUpdatePage.no")
-public class NoticeUpdateFormController extends HttpServlet {
+@WebServlet("/noticeListDelete.no")
+public class NoticeListDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeUpdateFormController() {
+    public NoticeListDeleteController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,16 +29,20 @@ public class NoticeUpdateFormController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		int num = Integer.parseInt(request.getParameter("num"));
 		
-		Notice n = new NoticeService().selectNotice(num); // 글번호 넘겨서 글정보 가져옴
-		ArrayList<NoticeFile> fileList = new NoticeService().selectFileList(num); // 글번호 넘겨서 글 첨부파일 정보 가져옴
+		// 삭제할 noticeNo들이 담겨있는 배열
+		String[] notices = request.getParameterValues("deleteNum");
+		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
-		request.setAttribute("noticeUpdate", n); // 해당 클릭한 글에 대한 정보
-		request.setAttribute("noticeUpdateFileList", fileList); // 해당 클릭한 글에 대한 첨부파일
+		int result = new NoticeService().deleteNotices(notices);
 		
-		request.getRequestDispatcher("views/notice/noticeUpdateForm.jsp").forward(request, response);
+		if(result > 0) {
+			request.getSession().setAttribute("alertMsg", "성공적으로 삭제되었습니다.");
+			response.sendRedirect(request.getContextPath() + "/notice.no?cpage=" + currentPage);
+		} else {
+			request.getSession().setAttribute("alertMsg", "삭제에 실패하였습니다.");
+			response.sendRedirect(request.getContextPath() + "/notice.no?cpage=" + currentPage);
+		}
 	
 	}
 
