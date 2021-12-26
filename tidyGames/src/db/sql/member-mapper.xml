@@ -349,6 +349,7 @@
 		     , ENG_NAME
 		     , GAME_IMG
              , NVL(STAR_NO, 0) "STAR_NO"
+             , TO_CHAR(PAY_DATE, 'YY/MM/DD') "PAY_DATE"
 		FROM PAY P
 		JOIN PAY_GAME USING(ORDER_NO)
 		JOIN GAME USING(GAME_NO)

@@ -15,16 +15,16 @@ import com.TidyGames.member.model.vo.Member;
 import com.google.gson.Gson;
 
 /**
- * Servlet implementation class LibraryController
+ * Servlet implementation class AjaxLibraryController
  */
-@WebServlet("/library.me")
-public class LibraryController extends HttpServlet {
+@WebServlet("/libSort")
+public class AjaxLibraryController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LibraryController() {
+    public AjaxLibraryController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,17 +34,13 @@ public class LibraryController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
+		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
 		
-		//ArrayList<Game> aa = new MemberService().library(memNo);
+		ArrayList<Game> aa = new MemberService().library(memNo);
 		
-		//response.setContentType("application/json; charset=UTF-8");
-		//new Gson().toJson(aa, response.getWriter());
+		response.setContentType("application/json; charset=UTF-8");
+		new Gson().toJson(aa, response.getWriter());
 		
-		
-//		request.setAttribute("list", list);
-		request.getRequestDispatcher("views/member/library.jsp").forward(request, response);
-	
 	}
 
 	/**
