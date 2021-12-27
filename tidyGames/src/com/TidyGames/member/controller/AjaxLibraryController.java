@@ -36,8 +36,7 @@ public class AjaxLibraryController extends HttpServlet {
 		
 		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
 		
-		String search = request.getParameter("search");
-		ArrayList<Game> aa = new MemberService().library(memNo, search);
+		ArrayList<Game> aa = new MemberService().library(memNo);
 		
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(aa, response.getWriter());

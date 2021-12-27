@@ -42,14 +42,6 @@ public class AdminMemberListController extends HttpServlet {
 		int startPage;
 		int endPage;
 		
-		String word = request.getParameter("word");
-		
-		System.out.println(word);
-		
-//		if(word==null) {
-//			word = "";
-//		}
-		
 		listCount = new MemberService().selectMemberCount();
 		// 현재 총 게시물이 몇 개인지 알아올 메소드
 		currentPage = Integer.parseInt(request.getParameter("cpage"));
@@ -66,14 +58,7 @@ public class AdminMemberListController extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, viewLimit, maxPage, startPage, endPage);
 		
-		ArrayList<Member> list = new ArrayList<>();
-		
-		if(word==null) {
-			list = new MemberService().selectMemberList(pi);
-		}else {
-			list = new MemberService().searchMemId(pi, word);
-		}
-			
+		ArrayList<Member> list = new MemberService().selectMemberList(pi);
 		
 
 		request.setAttribute("pi", pi);	
