@@ -12,6 +12,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+
+	#qnalistgq {
+		color: orange;
+	}
     div{
 		box-sizing: border-box;
 		color:white;
@@ -134,7 +138,7 @@
     #up{
     display: inline;
     }
-
+	a.file { color:black; text-decoration:underline; }
 
 </style>
 </head>
@@ -145,11 +149,11 @@
     
     
     <div id="outer">
-        <div id="line_1"></div>
         
-        <div>
+        
+        <div id="line_1"></div>
             <%@ include file="../common/companySidebar.jsp"%>
-        </div>
+        
         
         <div id="box">
             <div id="intro">QNA</div>
@@ -195,7 +199,7 @@
                     	첨부파일이 없습니다.
                     <% }else{ %>
 	                    <!--case2. 첨부파일이 있을 경우-->
-	                    <a download="<%= at.getOriginName() %>" href="<%=contextPath%>/<%=at.getFilePath() + at.getChangeName()%>"><%= at.getOriginName() %></a>
+	                    <a download="<%= at.getOriginName() %>" href="<%=contextPath%>/<%=at.getFilePath() + at.getChangeName()%>" class="file"><%= at.getOriginName() %></a>
 	                <% } %>
                 </td>
                     </tr>
@@ -266,6 +270,7 @@
             <div style="height:100px"></div>
         </footer>
     </div>
+</div>
 
 <script>
 
@@ -293,7 +298,7 @@ function insertAnswer(){
 			if(result > 0){ 
 				swal.fire({
 			        icon: "success",
-			        title: "추가가 완료되었습니다!"
+			        title: "등록이 완료되었습니다!"
 			}).then((확인) => {
 			    
                   document.location.reload();
