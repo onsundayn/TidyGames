@@ -93,11 +93,9 @@ tbody>tr:hover {
 		<br>
 		<br>
 		
-		<form action="<%= contextPath %>/deleteAll.po" method="post">
-			<input type="hidden" name="currentPage" value="<%=currentPage%>">
 			<div id="deletebtn" align="right" style="width: 1200px;">
 				<% if(loginUser != null && loginUser.getMemId().equals("admin")) { %>
-					<input type="submit" class="btn btn-sm btn-danger" value="삭제">
+					<a onclick="adminDelete();" class="btn btn-sm btn-danger">삭제</a>
 				<% } %>
 				<% if(loginUser != null && loginUser.getMemAccess().equals("UNBLOCK")) { %>
 					<a href="<%= contextPath %>/enroll.po?memId=<%= loginUser.getMemId() %>" class="btn btn-sm btn-info">글작성</a>
@@ -106,6 +104,9 @@ tbody>tr:hover {
 	
 			<br>
 	
+			
+			<form id="delForm" method="post">
+			<input type="hidden" name="currentPage" value="<%=currentPage%>">
 			<table align="center" style="font-size: 12pt" class="table table-sm" id="table">
 	
 				<thead style="background: rgb(80, 88, 83)">
@@ -130,7 +131,7 @@ tbody>tr:hover {
 								<% if(p.getPostNotice().equals("Y")) { %>
 									<input type="hidden" value="<%=p.getPostNo()%>">
 								<% if(loginUser != null && loginUser.getMemId().equals("admin")) { %>
-									<td><input type="checkbox" name="deleteNum" value="<%=p.getPostNo()%>"></td>
+									<td><input type="checkbox" class="deleteNum" name="deleteNum" value="<%=p.getPostNo()%>"></td>
 								<% } %>
 									<td><input type="button" value="공지" id="noticebtn" disabled></td>
 									<td><%=p.getPostWriter()%></td>
@@ -146,7 +147,7 @@ tbody>tr:hover {
 								<% if(p.getPostNotice().equals("N")) { %>
 									<input type="hidden" value="<%=p.getPostNo()%>">
 								<% if(loginUser != null && loginUser.getMemId().equals("admin")) { %>
-									<td><input type="checkbox" name="deleteNum" value="<%=p.getPostNo()%>"></td>
+									<td><input type="checkbox" class="deleteNum" name="deleteNum" value="<%=p.getPostNo()%>"></td>
 								<% } %>
 									<td><%=p.getPostNo()%></td>
 									<td class="memwriter"><%=p.getPostWriter()%></td>
@@ -240,7 +241,7 @@ tbody>tr:hover {
 					}
 				});
 				
-			
+				// 여긴 내부분
 				$("#check1").click(function(){
 		            if($(this).is(":checked")){
 		                $(":checkbox", $("#table")).prop("checked", true);
@@ -249,9 +250,31 @@ tbody>tr:hover {
 		            }
 		        });	
 				
-				
-				
 			})
+			
+			// 이 함수는 수민님 코드를 참고! 완전 짱이당
+			function adminDelete(){
+
+				const checkboxes = document.getElementsByClassName('deleteNum');
+				var checkNum = 0;
+				var delForm = document.getElementById('delForm');
+				
+				for(var i=0; i<checkboxes.length; i++) {
+					if(checkboxes[i].checked == true) {
+						checkNum += 1;
+					}
+				}
+
+				if(checkNum == 0) {
+					alert("삭제할 게시글을 선택해주세요.");
+				} else if(checkNum > 0) {
+					if(confirm("정말 삭제하시겠습니까?")){
+						delForm.action = "<%= contextPath %>/deleteAll.po";
+						delForm.submit();
+					}
+				}
+
+			}
 			
 		</script>
 
