@@ -134,14 +134,14 @@
 					<div>
 						<div class="btn-group">
 								<label>정렬 기준 :</label>
-								<label id="sort"></label>
+								<label id="sort">이름순</label>
 							<button type="button" id="btn" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
 								<span class="caret"></span>
 							</button>
 							<div class="dropdown-menu">
-								<a id="name" class="dropdown-item" href="#">이름순</a>
-								<a id="newBuy" class="dropdown-item" href="#">최신구매</a>
-								<a id="oldBuy" class="dropdown-item" href="#">과거구매</a>
+								<a id="name" class="dropdown-item">이름순</a>
+								<a id="newBuy" class="dropdown-item">최신구매</a>
+								<a id="oldBuy" class="dropdown-item">과거구매</a>
 							</div>
 						</div>
 					</div>
@@ -162,19 +162,18 @@
 	
 		
 			$(function(){
-			var value = "";
 				
-				ajax();
+				ajax("이름순");
 				
-			$(".dropdown-item").click(function(){
-				// 정렬 기준 클릭 시 ajax 호출
-				$("#game").load(location.href + "#game");		
-					$("#sort").text($(this).text());
-					ajax();	
+				$(".dropdown-item").click(function(){
+					ajax($(this).text());	
+				}) 
+				
 			}) 
-			
-				
+		
+	
 				function ajax() {
+					var value = "";
 					
 					$.ajax({
 						url:"libSort",
@@ -252,8 +251,6 @@
 						}
 					});	
 				}
-	
-			})
 			
 				
 		</script>
