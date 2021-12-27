@@ -44,15 +44,15 @@ public class RefundEnrollController extends HttpServlet {
 		re.setRefund(refund);
 		re.setAddWriting(addWriting);
 		
-		System.out.println(re);
+		
 		int result = new PayService().enrollRefund(re);
 		
-		System.out.println(result);
+		
 		
 		if(result > 0) {
 			
 			request.getSession().setAttribute("alertMsg", "환불요청이 완료되었습니다.");
-			response.sendRedirect(request.getContextPath() + "/orderHistory.pa");
+			response.sendRedirect(request.getContextPath() + "/orderHistory.pa?cpage=1");
 		
 		}
 		

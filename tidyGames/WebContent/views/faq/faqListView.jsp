@@ -71,7 +71,7 @@
 
         <h2 style="float: left;">TIDY HELP |</h2>
         <h4 style="font-style: oblique; line-height: 2; float: left;">&nbsp;&nbsp;FAQ</h4>
-        <h4 style="line-height: 2; color: gray; cursor: pointer;" onclick="location.href=''">&nbsp;&nbsp;1:1문의</h4>
+        <h4 style="line-height: 2; color: gray; cursor: pointer;" onclick="location.href=''">&nbsp;&nbasp;1:1문의</h4>
         <br><br>
 
         <div id="deletebtn" align="right" style="width:1200px;">

@@ -344,6 +344,7 @@ tbody>tr>td>span {
                 
                 <div class="area4">
                     <a href="" class="btn btn-dark"><i class="fa fa-shopping-cart"></i> 취소</a>
+                    <input type="hidden" name="cpage" value="1">
                     <button type="submit" class="btn btn-danger">환불신청하기</button>
                 </div>
 
