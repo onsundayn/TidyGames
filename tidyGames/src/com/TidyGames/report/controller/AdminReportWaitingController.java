@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.TidyGames.common.model.vo.PageInfo;
 import com.TidyGames.report.model.service.ReportService;
 import com.TidyGames.report.model.vo.Report;
 
@@ -32,9 +33,35 @@ public class AdminReportWaitingController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<Report> list = new ReportService().reportWaiting();
+		int listCount;
+		int currentPage;
+		int pageLimit;
+		int viewLimit;
+		int maxPage;
+		int startPage;
+		int endPage;
+		
+		listCount = new ReportService().selectBlockCount();
+		currentPage = Integer.parseInt(request.getParameter("cpage"));
+		pageLimit = 10;
+		viewLimit = 10;
+		
+		maxPage = (int)Math.ceil((double)listCount / viewLimit);
+		startPage = (currentPage-1) / pageLimit * pageLimit + 1;
+		endPage = startPage + pageLimit - 1;
+		
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, viewLimit, maxPage, startPage, endPage);
 		
 		
+		
+		ArrayList<Report> list = new ReportService().reportWaiting(pi);
+		
+		
+		request.setAttribute("pi", pi);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("views/report/adminReportWaitingList.jsp").forward(request, response);
 	}

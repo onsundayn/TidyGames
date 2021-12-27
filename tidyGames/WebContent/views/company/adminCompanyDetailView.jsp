@@ -52,6 +52,7 @@ div {
 #gametable>tbody>tr:hover {
 	background: lightgrey;
 	color: black;
+	cursor:pointer;
 }
 </style>
 </head>
@@ -153,6 +154,13 @@ div {
 						<% } %>
 					</tbody>
 				</table>
+				<script>
+		        	$(function(){
+		        		$("#gametable>tbody>tr").click(function(){
+		        			location.href = '<%=contextPath%>/detail.ga?gno=' + $(this).children().eq(0).text();
+		        		})
+		        	})
+	        </script>
 			</div>
 		</div>
 	</div>
