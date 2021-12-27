@@ -104,7 +104,7 @@ public class ForSaleUpdateController extends HttpServlet {
 			int result = new GameService().updateGame(ga, list);
 			
 				if(result > 0) { //성공메세지
-					request.getSession().setAttribute("alertMsg", "성공적으로 업데이트 되었습니다.");
+					request.getSession().setAttribute("alertMsg", "성공적으로 수정되었습니다.");
 					response.sendRedirect(request.getContextPath() + "/forsaledetail.ga?gno="+gameNo);
 
 				}else { // 실패시 에러페이지 포워딩, 파일 삭제
@@ -114,7 +114,7 @@ public class ForSaleUpdateController extends HttpServlet {
 							new File(savePath + at.getChangeName()).delete();
 						}
 					}
-					request.setAttribute("errorMsg", "게임 업데이트 실패");
+					request.setAttribute("errorMsg", "게임 수정 실패");
 					request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 				}
 				

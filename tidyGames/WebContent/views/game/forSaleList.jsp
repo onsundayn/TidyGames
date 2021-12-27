@@ -136,7 +136,7 @@
 	                    <% }else { %>
 	                    
 							<% for (Game g : list) {	%>
-							<% if(g.getGameStatus().equals("Y")) { %>
+							<% if(g.getGameStatus().equals("Y")&&g.getConfirm().equals("Y")) { %>
 						<tr>
 							<td><%=g.getGameNo() %></td>
 							<td><%=g.getKorName() %></td>
