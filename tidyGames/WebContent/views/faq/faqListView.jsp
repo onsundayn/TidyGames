@@ -71,7 +71,12 @@
 
         <h2 style="float: left;">TIDY HELP |</h2>
         <h4 style="font-style: oblique; line-height: 2; float: left;">&nbsp;&nbsp;FAQ</h4>
-        <h4 style="line-height: 2; color: gray; cursor: pointer;" onclick="location.href=''">&nbsp;&nbsp;1:1문의</h4>
+        
+        <% if(loginUser != null) { %>
+        <h4 style="line-height: 2; color: gray; cursor: pointer;" onclick="insertQna(1);">&nbsp;&nbsp;1:1문의</h4>
+        <% }else { %>
+        <h4 style="line-height: 2; color: gray; cursor: pointer;" onclick="insertQna(2);">&nbsp;&nbsp;1:1문의</h4>
+		<% } %>
         <br><br>
 
         <div id="deletebtn" align="right" style="width:1200px;">
@@ -142,6 +147,7 @@ A.
             })
         })
 
+        
         function checkAll(checkAll){
  
             const checkboxes 
@@ -196,8 +202,18 @@ A.
                 faqForm.submit();
             }
             
-
         }
+            
+
+        function insertQna(num){
+        
+    		if(num == 1){
+    			location.href="<%=contextPath%>/question.me";
+    		}else{
+    			alert("로그인 시 문의할 수 있습니다.");
+    		}
+	}	
+      
     </script>
 
 </body>
