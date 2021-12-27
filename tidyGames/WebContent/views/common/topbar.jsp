@@ -135,7 +135,7 @@
         <div id="top3">
         
            
-            <% if(loginUser != null ) { %>
+            <% if(loginUser != null && loginUser.getMemNo() != 1) { %>
             <a href="<%= request.getContextPath()%>/cart.pa?memNo=<%=loginUser.getMemNo()%>"><i class="fas fa-shopping-cart fa-lg"></i></a>
                
             <% } %>
