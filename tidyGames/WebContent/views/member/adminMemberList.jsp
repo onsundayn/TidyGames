@@ -196,11 +196,10 @@
                             <span>전체 회원 <label style="color:black"><%= listCount %></label></span>
                         </div>
                     </div>
-                        <form action="<%=contextPath%>/memberList.me?cpage=1" mathod="get">
                     <div id="rightTop">
                         <div class="btn-group">
                                 <button type="button" class="btn btn-sm btn-dark" disabled>회원 ID</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" disabled>
+                                <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
                                 <span class="caret"></span>
                                 </button>
                                 <div class="dropdown-menu">
@@ -208,14 +207,12 @@
                                 <a class="dropdown-item" href="#">이 름</a>
                                 </div>
                         </div>
-                        	<input type="hidden" name="cpage" value="1">
                         <div>
-                            <input type="text" id="selectKeyword" name="word" placeholder="조회를 위한 입력">
+                            <input type="text" id="selectKeyword" name="keyword" placeholder="조회를 위한 입력">
                         </div>
-                        <button type="submit" class="btn btn-sm btn-dark">조회</button>
+                        <button class="btn btn-sm btn-dark" onclick="" >조회</button>
                     </div>
                 </div>
-                        </form>
                 <div id="tableOut1">
                 <table id="table" class="table table-hover">
                     <thead>
@@ -236,7 +233,7 @@
                     <% for(Member m : list) {%>
                         <tr align="center" id="memberData">
                             <!-- <td><input type="checkbox" id="checkBox" name="checkBox" value="<%= m.getMemNo() %>" ></td>  -->
-                        <td><%= m.getMemNo() %></td>
+                            <td><%= m.getMemNo() %></td>
                             <td><a id="btnA" onclick="selectMember(<%= m.getMemNo() %>);" data-toggle="modal" data-target="#selectModal">
                                 <%= m.getMemId() %></a></td>
                             <td><%= m.getMemName() %></td>
@@ -248,8 +245,8 @@
                             	<!-- contextPath로 point의 현재보유포인트를 불러올 자리 -->
                                 <a href="" id="btn" class="btn btn-sm btn-dark" data-toggle="modal" data-target="#pointModal">변경</a>
 
-   								</td>
-                          		<td>
+                            </td>
+                            <td>
                             	<a href="" id="btn"  onclick="updateMember(selectMember(<%= m.getMemNo() %>));" class="btn btn-sm btn-basic" data-toggle="modal" data-target="#updateModal">수정</a>
                             	<a href="" id="btn" onclick="done();" class="btn btn-sm btn-basic">탈퇴</a>
 	                        </td>
