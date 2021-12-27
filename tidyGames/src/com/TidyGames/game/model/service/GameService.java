@@ -150,5 +150,32 @@ public class GameService {
 		return list;
 		
 	}
-
+	
+	public Game forSaleGame(int gameNo) {
+		Connection conn = getConnection();
+		Game g = new GameDao().forSaleGame(conn, gameNo);
+		close(conn);
+		return g;
+	}
+	
+	
+	public int uploadUpdate(Game g) {
+		Connection conn =  getConnection();
+		int result = 0;
+		
+		if(g.getConfirm().equals("del")) {
+		result = new GameDao().uploadDelete(conn, g);
+		}else {
+		result = new GameDao().uploadUpdate(conn, g);
+		}
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
 }

@@ -140,13 +140,14 @@ public class Game {
 		this.count = count;
 	}
 	
-	public Game(int gameNo, String korName, String engName, String uploadDate, String confirm) {
+	public Game(int gameNo, String korName, String engName, String uploadDate, String confirm, String gameStatus) {
 		super();
 		this.gameNo = gameNo;
 		this.korName = korName;
 		this.engName = engName;
 		this.uploadDate = uploadDate;
 		this.confirm = confirm;
+		this.gameStatus = gameStatus;
 	}
 
 	

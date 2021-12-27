@@ -82,6 +82,7 @@
 	, G.ENG_NAME "ENG_NAME"
 	, TO_CHAR(G.UPLOAD_DATE, '""YYYY"-"MM"-"DD""') "UPLOAD_DATE"
 	, G.CONFIRM "CONFIRM"
+	, G.GAME_STATUS "GAME_STATUS"
 	FROM GAME G
 	INNER JOIN COMPANY C
 	ON G.COMPANY_NO = C.COMPANY_NO
@@ -239,6 +240,40 @@
 		  , ?
 		  , ?
 		  )
+	
+	</entry>
+	
+		<entry key="forSaleGame">
+		SELECT
+			   GAME_NO
+		     , COMPANY_NO
+		     , KOR_NAME
+		     , ENG_NAME
+		     , TO_CHAR(RELEASE_DATE, '""YYYY"년 "MM"월 "DD"일"') "RELEASE_DATE"
+		     , PRICE
+		     , GAME_INTRO
+		     , CONFIRM
+		     , UPGAME
+		     , UPLOAD_DATE
+		     , POINT
+		     , GAME_STATUS
+		     , (SELECT COUNT(*) FROM WISHLIST W WHERE G.GAME_NO =W.GAME_NO ) AS count
+		  FROM GAME G
+		 WHERE GAME_NO = ?
+	</entry>
+	
+	<entry key="uploadUpdate">
+	UPDATE
+		       GAME
+		   SET CONFIRM =?		     
+		WHERE GAME_NO = ?
+	</entry>
+	
+	<entry key="gameDelete">
+	UPDATE
+		       GAME
+		   SET GAME_STATUS = 'N'		     
+		WHERE GAME_NO = ?
 	
 	</entry>
 	
