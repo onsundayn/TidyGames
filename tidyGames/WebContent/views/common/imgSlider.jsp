@@ -73,17 +73,17 @@ function selectGameImgList(){
                // 반복문이용해서
                   result += "<div class='carousel-item active'>"
                      + "<a href='<%=contextPath%>/detail.ga?gno=" + list[0].gameNo + "'>" 
-                     + "<img width='1000' height='500' src='<%=contextPath%>/" + list[0].gameImg + "'>"
+                     + "<img width='900' height='330' src='<%=contextPath%>/" + list[0].gameImg + "'>"
                               + "</a>"
                            + "</div>"
                            + "<div class='carousel-item'>"
                            + "<a href='<%=contextPath%>/detail.ga?gno=" + list[1].gameNo + "'>" 
-                           + "<img width='1000' height='500' src='<%=contextPath%>/" + list[1].gameImg + "'>"
+                           + "<img width='900' height='330' src='<%=contextPath%>/" + list[1].gameImg + "'>"
                                     + "</a>"
                                  + "</div>"
                                  + "<div class='carousel-item'>"
                                  + "<a href='<%=contextPath%>/detail.ga?gno=" + list[2].gameNo + "'>" 
-                                 + "<img width='1000' height='500' src='<%=contextPath%>/" + list[2].gameImg + "'>"
+                                 + "<img width='900' height='330' src='<%=contextPath%>/" + list[2].gameImg + "'>"
                                           + "</a>"
                                        + "</div>";
                $(".carousel-inner").html(result);
