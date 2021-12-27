@@ -183,7 +183,7 @@ int maxPage = pi.getMaxPage();
         </div>
         <!-- 닉네임 불러와지게 -->
         <div class="area1">
-            <h3>닉네임님의</h3><h2>TIDY POINT 내역</h2>
+            <h3><%=loginUser.getMemNick() %>님의</h3><h2>TIDY POINT 내역</h2>
             <div style="background: grey; width: 1000px; height: 2px;"></div>
         </div>
         <br><br><br>

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 import com.TidyGames.common.model.vo.PageInfo;
 import com.TidyGames.member.model.dao.PointDao;
-import com.TidyGames.member.model.dao.WishListDao;
+import com.TidyGames.member.model.vo.Member;
 import com.TidyGames.member.model.vo.Point;
 
 public class PointService {
@@ -137,6 +137,25 @@ public class PointService {
 		return list;
 		
 	}
+	
+	
+	//관리자 포인트상세내역 닉네임알아오기
+	
+	public Member memNick(int memNo) {
+		Connection conn = getConnection();
+
+		Member mNic = new PointDao().memNick(conn, memNo);
+
+		close(conn);
+
+		return  mNic;
+		
+		
+		
+		
+		
+	}
+	
 	
 	
 }

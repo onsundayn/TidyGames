@@ -242,7 +242,7 @@ tbody>tr>td>span {
                  </div>
                 
                  <div class="area2">
-                     <form action="<%=contextPath%>/reEnroll.pa" method="post">
+                     <form action="<%=contextPath%>/reEnroll.pa" method="post" onsubmit="return addCheck();">
             			<input type="hidden" name="orderNo" value="<%=pi.getOrderNo()%>">
                          <div class="resonse">
                         
@@ -273,7 +273,7 @@ tbody>tr>td>span {
                                 <br>
                                 <div style="font-weight:bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;추가글</div><br>
                                 
-                                <textarea id="addtext" name="addtext"></textarea>
+                                <textarea id="addtext" name="addtext" class="addtext" placeholder="추가글을 작성해주세요"></textarea>
     
                             </div>
             
@@ -354,6 +354,22 @@ tbody>tr>td>span {
         
         </div>
         
+        <script>
+        
+        var addtext = document.getElementById("addtext");
+        
+        function addCheck(){
+        	  if(addtext.value.length==0) {
+                  // 추가글이 작성되어있지 않을때
+                  alert("추가글을 작성해주세요");
+                  return false;
+              } 
+        	
+        
+        }
+        
+        
+        </script>
        
        
         

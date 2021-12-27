@@ -188,7 +188,7 @@ Game g = (Game)session.getAttribute("g");
             <%@ include file="../common/memberSidebar.jsp" %>
         </div>
         <!-- 닉네임 불러와지게 -->
-        <div id="intro"><h1>닉네임 님의 찜 목록</h1></div>
+        <div id="intro"><h1><%=loginUser.getMemNick() %>님의 찜 목록</h1></div>
         <br><br><br><br><br>
 
       
@@ -287,8 +287,8 @@ Game g = (Game)session.getAttribute("g");
 
                                         <!-- 할인가격이면 이렇게 표시 -->
                                         <td style="color:white" width="100"> 
-                                            <span> <%=w.getPrice()%>원</span>
-                                            <s class="small text-muted"> <span>1000000원</span></s>
+                                            <span> <%=w.getPrice()-w.getPoint()*w.getPrice()%>원</span><br>
+                                            <s class="small text-muted"> <span><%=w.getPrice()%>원</span></s>
                                         </td>
                                         
                                         <td width="50">

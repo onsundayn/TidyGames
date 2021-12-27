@@ -187,5 +187,17 @@
 	
 	</entry>
 	
+	<entry key="memNick">
+	SELECT MEM_NICK
+		FROM MEMBER
+		JOIN POINT USING(MEM_NO)
+		WHERE MEM_NO =?
+		GROUP BY MEM_NICK
+	
+	
+	
+	
+	</entry>
+	
 
 </properties>
