@@ -31,6 +31,7 @@
     #big{
         width:700px;
         height:300px;
+        background: rgba(169, 169, 169, 0.178);
     }
     .img11 img{
         width:100%;
@@ -38,14 +39,14 @@
         object-fit: cover;
     }
     #small{
-        background: darkgrey;
+        background: rgba(169, 169, 169, 0.178);
         width:700px;
         height:120px;
     }
     #small img{
         width:140px;
-        height:90px;
-        margin:15px;
+        height:100px;
+        margin:5px;
     }
     .right-area{
         width:500px;
