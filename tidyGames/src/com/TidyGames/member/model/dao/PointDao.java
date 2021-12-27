@@ -12,8 +12,9 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.TidyGames.common.model.vo.PageInfo;
+import com.TidyGames.member.model.vo.Member;
 import com.TidyGames.member.model.vo.Point;
-import com.TidyGames.member.model.vo.WishList;
+import com.TidyGames.pay.model.vo.Pay;
 
 public class PointDao {
 
@@ -346,7 +347,7 @@ public class PointDao {
 		}
 		return result;
 	}
-public ArrayList<Point> adPointSearch(Connection conn, String memId) {
+	public ArrayList<Point> adPointSearch(Connection conn, String memId) {
 		
 
 		ArrayList<Point> list = new ArrayList<>();
@@ -380,7 +381,38 @@ public ArrayList<Point> adPointSearch(Connection conn, String memId) {
 	}
 	
 		
+	public Member memNick(Connection conn, int memNo) {
+		
+		Member mNic = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("memNick");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				mNic = new Member(rset.getString("MEM_NICK")
+								 );
+			}
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return mNic;
 	
+	
+	}
 	
 
 }

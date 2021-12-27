@@ -65,6 +65,14 @@ table {
 .like {
 	cursor:pointer;
 }
+#imgForm{
+	width: 100%;
+	height: 100%;
+	margin: auto;
+}
+#imgForm>img{
+	margin: auto;
+}
 </style>
 </head>
 <body style="background-color: #0e332c;">
@@ -123,19 +131,21 @@ table {
 				<div class="underline">
 					<table>
 						<tr>
-							<td colspan="7" height="20"></td>
+							<td colspan="7" height="10"></td>
 						</tr>
 						<tr>
-							<th width="50" style="display: flow-root"><h5>내용</h5></th>
-							<td colspan="6"><pre><%=p.getPostContent()%></pre></td>
+							<td width="90%" colspan="7">
+								<p style="width: 80%;">
+									<div id="imgForm">
+										<% for(int i=0; i<flist.size(); i++) { %>
+											<img src="<%= contextPath %>/<%= flist.get(i).getFilePath() + flist.get(i).getFileChange() %>" onerror="this.style.display='none'" width="90%;">
+										<% } %>
+									</div>
+								</p>
+							</td>
 						</tr>
 						<tr>
-							<th></th>
-							<% for(int i=0; i<flist.size(); i++) { %>
-								<td colspan="2">
-                        			<img src="<%=contextPath%>/<%=flist.get(i).getFilePath() + flist.get(i).getFileChange()%>" width="300" height="200" onerror="this.style.display='none'">
-                        		</td>
-                        	<% } %>
+							<td colspan="7"><pre><%=p.getPostContent()%></pre></td>
 						</tr>
 						<tr>
 							<td colspan="7" height="20"></td>

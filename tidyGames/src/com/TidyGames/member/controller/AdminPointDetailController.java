@@ -38,6 +38,10 @@ public class AdminPointDetailController extends HttpServlet {
 		
 		int memNo = Integer.parseInt(request.getParameter("mNo"));
 		
+		//멤버 닉네임 알아오기
+		Member mNic = new PointService().memNick(memNo);
+		request.setAttribute("mNic", mNic);
+		
 		
 		// ----------페이징 처리-------------
 		int listCount; // 현재 총 게시글 갯수

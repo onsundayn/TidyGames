@@ -2,8 +2,8 @@
     pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.report.model.vo.Report, com.TidyGames.common.model.vo.PageInfo"%>
     
 <%
-	ArrayList<Report> list = (ArrayList<Report>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ArrayList<Report> list = (ArrayList<Report>)request.getAttribute("list");
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
@@ -196,12 +196,13 @@
                     </table>
                 </div>
 
+
                   <div id="tableOut2">
 	                <% if(!list.isEmpty()) { %>
 	                    <div class="paging-area" align="center">
 	                        <!-- 첫 페이지에서는 이전으로 비활성화 -->
 	 						<% if(currentPage != 1) { %>
-	            				<button onclick="location.href='<%=contextPath%>/blacklist.re?cpage=<%=currentPage-1%>';"> &lt; </button>
+	            				<button onclick="location.href='<%=contextPath%>/reportList.re?cpage=<%=currentPage-1%>';"> &lt; </button>
 	           				 <% } %>
 	                        
 	                        <% for(int p=startPage; p<=endPage; p++) { %>
@@ -209,12 +210,12 @@
 	                            <% if(p == currentPage) { %>
 	                                <button disabled><%= p %></button>
 	                            <% }else { %>
-	                                <button onclick="location.href='<%= contextPath %>/blacklist.re?cpage=<%= p %>';"><%= p %></button>
+	                                <button onclick="location.href='<%= contextPath %>/reportList.re?cpage=<%= p %>';"><%= p %></button>
 	                            <% } %>
 	                        <% } %>
 	                        
 	                        <% if(currentPage != maxPage) { %>
-	                            <button onclick="loaction.href='<%= contextPath %>/blacklist.re?cpage<%=currentPage+1%>';"> &gt; </button>
+	                            <button onclick="loaction.href='<%= contextPath %>/reportList.re?cpage=<%=currentPage+1%>';"> &gt; </button>
 	                            <!-- 현재 페이지가 마지막 페이지일 땐 다음으로 버튼 비활성화 -->
 	                        <% } %>
 	                    <% } %>

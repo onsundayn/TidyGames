@@ -37,7 +37,7 @@ public class AdminAccessDone extends HttpServlet {
 			if(result > 0) {
 
 				request.getSession().setAttribute("alertMsg", "처리되었습니다.");
-				response.sendRedirect(request.getContextPath() + "/reportWait.re");
+				response.sendRedirect(request.getContextPath() + "/reportWait.re?cpage=1");
 			}
 		
 	}	

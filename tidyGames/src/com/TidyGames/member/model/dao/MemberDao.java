@@ -260,26 +260,6 @@ public class MemberDao {
 			
 		}
 
-		public int deleteMember(Connection conn, int memNo) {
-			
-			int result = 0;
-			PreparedStatement pstmt = null;
-			String sql = prop.getProperty("deleteMember");
-			
-			try {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, memNo);
-				
-				result = pstmt.executeUpdate();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				close(pstmt);
-			}
-			
-			return result;
-			
-		}
 	
 	public Member searchUserId(Connection conn, String searchName, String searchEmail) {
 		
@@ -345,8 +325,8 @@ public class MemberDao {
 	public int checkNum(String searchEmail) {
 		
 		int num = (int)(Math.random() * 999999 + 100000);
-		String user = "qng582@gmail.com";
-		String password = "iwtbemjusxzzcfbl";
+		final String user = "qng582@gmail.com";
+		final String password = "iwtbemjusxzzcfbl";
 		
 		Properties propNum = new Properties();
 		propNum.put("mail.smtp.host", "smtp.gmail.com");
@@ -807,13 +787,23 @@ public class MemberDao {
 		
 	}
 	
-	public ArrayList<Game> library(Connection conn, int memNo) {
+	public ArrayList<Game> library(Connection conn, int memNo, String search) {
 		
 		Game g;
 		ArrayList<Game> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("library");
+		
+		System.out.println(search);
+		
+		if(search.equals("이름순")) {
+			sql += "ORDER BY ENG_NAME";
+		}else if(search.equals("과거구매")) {
+			sql += "ORDER BY PAY_DATE ASC";
+		}else {
+			sql += "ORDER BY PAY_DATE DESC";
+		}
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -843,8 +833,48 @@ public class MemberDao {
 		
 		return list;
 		
+	}
+	
+	public ArrayList<Member> searchMemId(Connection conn, PageInfo pi, String word) {
+
+		ArrayList<Member> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("searchMemId");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			int startRow = (pi.getCurrentPage() - 1) * pi.getViewLimit() + 1;
+			int endRow = startRow + pi.getViewLimit() - 1;
+
+			pstmt.setString(1, word);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				list.add(new Member(rset.getInt("mem_no")
+						  , rset.getString("mem_id")
+						  , rset.getString("mem_nick")
+						  , rset.getString("mem_name")
+						  , rset.getString("mem_phone")
+						  , rset.getString("mem_email")
+						  , rset.getString("mem_gender")
+						  , rset.getString("mem_address")
+						  , rset.getDate("mem_indate")
+						  , rset.getString("mem_status")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 		
 	}
-		
 		
 }

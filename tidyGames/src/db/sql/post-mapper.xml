@@ -389,6 +389,7 @@
 		UPDATE 
 			   MEMBER
    		   SET MEM_ACCESS = 'BLOCK'
+   		     , BLOCK_DATE = SYSDATE
          WHERE MEM_NICK = ?
 	</entry>
 	
