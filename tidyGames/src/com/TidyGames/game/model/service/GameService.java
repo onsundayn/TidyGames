@@ -196,5 +196,21 @@ public class GameService {
 		
 		return list;
 	}
+	
+	public int deleteCancel(Game g) {
+		Connection conn =  getConnection();
+		int result = 0;
+		
+		result = new GameDao().deleteCancle(conn, g);
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
 
 }

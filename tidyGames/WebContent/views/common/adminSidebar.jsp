@@ -100,6 +100,7 @@
                 <li><a href="<%=request.getContextPath()%>/catelist.ga" id="catelistga">카테고리 관리</a></li>
                 <li><a href="<%=request.getContextPath()%>/uplist.ga?cpage=1" id="uplistga">게임 업로드 요청 목록</a></li>
                 <li><a href="<%=request.getContextPath()%>/list.ga?cpage=1" id="listga">판매중인 게임 목록</a></li>
+                <li><a href="<%=request.getContextPath()%>/deletelist.ga?cpage=1" id="deletelistga">삭제된 게임 목록</a></li>
             </ul>
             <div id="line_2"></div>
             <ul>

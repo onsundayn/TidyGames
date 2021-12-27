@@ -323,5 +323,13 @@
 		 WHERE ROWNUM &lt;= 3
 	</entry>
 	
+		<entry key="deleteCancle">
+	UPDATE
+		       GAME
+		   SET GAME_STATUS = 'Y'		     
+		WHERE GAME_NO = ?
+	
+	</entry>
+	
 
 </properties>

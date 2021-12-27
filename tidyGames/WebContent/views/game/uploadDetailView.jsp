@@ -171,14 +171,14 @@
         	
         	<div align="right" id="btn">
         	<% if(g.getConfirm().equals("Y")) { %>
-        	<button type="button" class="btn btn-primary" id="yn">승인취소</button>
+        	<button onclick="n();" class="btn btn-primary" id="yn">승인취소</button>
         	<%} else if(g.getConfirm().equals("N")) { %>
-        	<button type="button" class="btn btn-primary" id="y">승인</button>
-        	<button type="button" class="btn btn-secondary" id="a">반려</button>        	
+        	<button onclick="y();" class="btn btn-primary" id="y">승인</button>
+        	<button onclick="a();" class="btn btn-secondary" id="a">반려</button>        	
         	<%} else if(g.getConfirm().equals("A")) { %>
-        	<button type="button" class="btn btn-info" id="an">반려취소</button>
+        	<button onclick="n();" class="btn btn-info" id="an">반려취소</button>
         	<%} %>
-        	<button type="button" class="btn btn-danger" id="del">삭제</button>
+        	<button onclick="del();" class="btn btn-danger" id="del">삭제</button>
         	</div>
                
             <div class="info-area">
@@ -220,29 +220,172 @@
     
     
    <script>
-        	$(function(){        	
+        	
+        	
+        	function del(){
         		
-        		$("#del").click(function(){
-        			location.href = '<%=contextPath%>/uploadupdate.ga?gno='+<%=g.getGameNo()%>+'&&confirm=del';
-        		});
+        		$.ajax({
+        			url:"uploadupdate.ga",
+        			data:{
+        				confirm:"del",
+        				gno:<%= g.getGameNo() %>
+        			},
+        			type:"post",
+        			success:function(){
+        				console.log("삭제용 ajax 통신 성공");
+        				
+
+        				 Swal.fire({
+        	                    title: '정말로 삭제하시겠습니까?',
+        	                    
+        	                    icon: 'warning',
+        	                    showCancelButton: true,
+        	                    confirmButtonColor: '#3085d6',
+        	                    cancelButtonColor: '#d33',
+        	                    confirmButtonText: '승인',
+        	                    cancelButtonText: '취소'
+        	                }).then((result) => {
+        	                    if (result.isConfirmed) {
+        	                    	swal.fire({
+                				        icon: "success",
+                				        title: "삭제가 완료되었습니다!"
+                				}).then((확인) => {
+                				    
+                					document.location.href = "<%=request.getContextPath()%>/uplist.ga?cpage=1";
+                				    
+                				});
+        	                    }
+        	                });
+        				
+        			},
+        			error:function(){
+        				console.log("삭제용 ajax 통신 실패");
+        			}
+        		})
         		
-        		$("#yn").click(function(){
-        			location.href = '<%=contextPath%>/uploadupdate.ga?gno='+<%=g.getGameNo()%>+'&&confirm=N';
-        		});
-        		
-        		$("#an").click(function(){
-        			location.href = '<%=contextPath%>/uploadupdate.ga?gno='+<%=g.getGameNo()%>+'&&confirm=N';
-        		});
-        		
-        		$("#a").click(function(){
-        			location.href = '<%=contextPath%>/uploadupdate.ga?gno='+<%=g.getGameNo()%>+'&&confirm=A';
-        		});
-        		
-        		$("#y").click(function(){
-        			location.href = '<%=contextPath%>/uploadupdate.ga?gno='+<%=g.getGameNo()%>+'&&confirm=Y';
-        		});
-        		
-        	});
+        	}
+        	
+        	function a(){
+    			
+    			$.ajax({
+    				url:"uploadupdate.ga",
+    				data:{
+        				confirm:"A",
+        				gno:<%= g.getGameNo() %>
+        			},
+    				success:function(){
+    					console.log("반려용 ajax 통신성공!!!");
+    					 Swal.fire({
+     	                    title: '정말로 반려하시겠습니까?',
+     	                    
+     	                    icon: 'warning',
+     	                    showCancelButton: true,
+     	                    confirmButtonColor: '#3085d6',
+     	                    cancelButtonColor: '#d33',
+     	                    confirmButtonText: '승인',
+     	                    cancelButtonText: '취소'
+     	                }).then((result) => {
+     	                    if (result.isConfirmed) {
+     	                    	swal.fire({
+             				        icon: "success",
+             				        title: "반려가 완료되었습니다!"
+             				}).then((확인) => {
+             				    
+             					document.location.reload();
+             				    
+             				});
+     	                    }
+     	                });
+
+
+
+    				},
+    				error:function(){
+    					console.log("반려용 ajax 통신실패");
+    				}
+    			});
+    		}
+        	function n(){
+    			
+    			$.ajax({
+    				url:"uploadupdate.ga",
+    				data:{
+        				confirm:"N",
+        				gno:<%= g.getGameNo() %>
+        			},
+    				success:function(){
+    					console.log("미승인용 ajax 통신성공!!!");
+    					 Swal.fire({
+      	                    title: '미승인 처리하시겠습니까?',
+      	                    
+      	                    icon: 'warning',
+      	                    showCancelButton: true,
+      	                    confirmButtonColor: '#3085d6',
+      	                    cancelButtonColor: '#d33',
+      	                    confirmButtonText: '승인',
+      	                    cancelButtonText: '취소'
+      	                }).then((result) => {
+      	                    if (result.isConfirmed) {
+      	                    	swal.fire({
+              				        icon: "success",
+              				        title: "미승인 처리가 완료되었습니다!"
+              				}).then((확인) => {
+              				    
+              					document.location.reload();
+              				    
+              				});
+      	                    }
+      	                });
+
+
+
+    				},
+    				error:function(){
+    					console.log("미승인용 ajax 통신실패");
+    				}
+    			});
+    		}
+        	
+        	function y(){
+    			
+    			$.ajax({
+    				url:"uploadupdate.ga",
+    				data:{
+        				confirm:"Y",
+        				gno:<%= g.getGameNo() %>
+        			},
+    				success:function(){
+    					console.log("승인용 ajax 통신성공!!!");
+    					 Swal.fire({
+      	                    title: '승인하시겠습니까?',
+      	                    
+      	                    icon: 'warning',
+      	                    showCancelButton: true,
+      	                    confirmButtonColor: '#3085d6',
+      	                    cancelButtonColor: '#d33',
+      	                    confirmButtonText: '승인',
+      	                    cancelButtonText: '취소'
+      	                }).then((result) => {
+      	                    if (result.isConfirmed) {
+      	                    	swal.fire({
+              				        icon: "success",
+              				        title: "승인이 완료되었습니다!"
+              				}).then((확인) => {
+              				    
+              					document.location.reload();
+              				    
+              				});
+      	                    }
+      	                });
+
+
+
+    				},
+    				error:function(){
+    					console.log("승인용 ajax 통신실패");
+    				}
+    			});
+    		}
    </script>
     
     

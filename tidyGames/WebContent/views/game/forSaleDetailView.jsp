@@ -157,7 +157,7 @@
         	
         	<div align="right" id="btn">
         	<button type="button" class="btn btn-primary" id="up">수정</button>
-        	<button type="button" class="btn btn-danger" id="del">삭제</button>
+        	<button onclick="del();" class="btn btn-danger" id="del">삭제</button>
         	
         	</div>
                
@@ -205,11 +205,48 @@
         			location.href = '<%=contextPath%>/forsaleupdateform.ga?gno=' + <%=g.getGameNo()%>;
         		})
         	});
-        	$(function(){
-        		$("#del").click(function(){
-        			location.href = '<%=contextPath%>/forsaleupdate.ga?gno=' + <%=g.getGameNo()%>;
+function del(){
+        		
+        		$.ajax({
+        			url:"uploadupdate.ga",
+        			data:{
+        				confirm:"del",
+        				gno:<%= g.getGameNo() %>
+        			},
+        			type:"post",
+        			success:function(){
+        				console.log("삭제용 ajax 통신 성공");
+        				
+
+        				 Swal.fire({
+        	                    title: '정말로 삭제하시겠습니까?',
+        	                    
+        	                    icon: 'warning',
+        	                    showCancelButton: true,
+        	                    confirmButtonColor: '#3085d6',
+        	                    cancelButtonColor: '#d33',
+        	                    confirmButtonText: '승인',
+        	                    cancelButtonText: '취소'
+        	                }).then((result) => {
+        	                    if (result.isConfirmed) {
+        	                    	swal.fire({
+                				        icon: "success",
+                				        title: "삭제가 완료되었습니다!"
+                				}).then((확인) => {
+                				    
+                					document.location.href = "<%=request.getContextPath()%>/list.ga?cpage=1";
+                				    
+                				});
+        	                    }
+        	                });
+        				
+        			},
+        			error:function(){
+        				console.log("삭제용 ajax 통신 실패");
+        			}
         		})
-        	});
+        		
+        	}
    </script>
     
     

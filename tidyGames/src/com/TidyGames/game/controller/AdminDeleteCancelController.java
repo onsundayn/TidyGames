@@ -16,14 +16,14 @@ import com.TidyGames.game.model.vo.Game;
 /**
  * Servlet implementation class ConfirmUpdateController
  */
-@WebServlet("/uploadupdate.ga")
-public class UploadUpdateController extends HttpServlet {
+@WebServlet("/deletecancel.ga")
+public class AdminDeleteCancelController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UploadUpdateController() {
+    public AdminDeleteCancelController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,26 +36,14 @@ public class UploadUpdateController extends HttpServlet {
 		
 		
 		int gameNo = Integer.parseInt(request.getParameter("gno"));
-		String confirm = request.getParameter("confirm");
 		Game g = new Game();
 		g.setGameNo(gameNo);
-		g.setConfirm(confirm);
+		System.out.println(g.getGameNo());
 		
-		
-		int result = new GameService().uploadUpdate(g);
+		int result = new GameService().deleteCancel(g);
 		
 		if(result > 0) {
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			if(g.getConfirm().equals("del")) {
-				/*
-				 * out.println("<script>alert('삭제되었습니다.'); location.href='" +
-				 * request.getContextPath() + "/uplist.ga?cpage=1';</script>"); out.flush();
-				 */
-			}else {
-			out.println("<script>alert('수정되었습니다.'); location.href='" + request.getContextPath() + "/uploaddetail.ga?gno=" + gameNo + "';</script>");			
-			out.flush();
-			}
+			
 		  
 		}else {
 			System.out.println("오류");
