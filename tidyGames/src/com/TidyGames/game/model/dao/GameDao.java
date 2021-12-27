@@ -203,7 +203,8 @@ public Game selectGameGC(Connection conn, int comNo, int gameNo) {
 									 rset.getInt("game_no"),
 									 rset.getString("writer"),
 									 rset.getString("contents"),
-									 rset.getString("upload_date")));
+									 rset.getString("upload_date"),
+									 rset.getInt("star_no")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -227,6 +228,7 @@ public Game selectGameGC(Connection conn, int comNo, int gameNo) {
 			pstmt.setInt(1, r.getGameNo());
 			pstmt.setInt(2, Integer.parseInt(r.getWriter()));
 			pstmt.setString(3, r.getContents());
+			pstmt.setInt(4, r.getStarNo());
 			
 			result = pstmt.executeUpdate();
 			
@@ -629,5 +631,81 @@ public int uploadDelete(Connection conn, Game g) {
 	}
 	return result;
 }
+	
+	public int insertCategory(Connection conn, Game ga, int categoryNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertCategory");
+		
+		try {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, categoryNo);
+				
+				result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int selectStarAvg(Connection conn, int gameNo) {
+		int starAvg = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectStarAvg");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, gameNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				starAvg = rset.getInt("star_avg");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return starAvg;
+	}
+	
+	public ArrayList<Game> selectMainGameList(Connection conn){
+		ArrayList<Game> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectMainGameList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Game(rset.getInt("game_no"),
+								  rset.getString("kor_name"),
+								  rset.getString("eng_name"),
+							      rset.getInt("price"),
+								  rset.getString("confirm"),
+								  rset.getString("upgame"),
+								  rset.getString("upload_date"),
+								  rset.getDouble("point"),
+								  rset.getString("game_img")));
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
 	
 }

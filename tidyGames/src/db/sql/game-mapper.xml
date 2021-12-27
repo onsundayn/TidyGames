@@ -64,6 +64,7 @@
 		     , MEM_NICK "WRITER"
 		     , CONTENTS
 		     , TO_CHAR(UPLOAD_DATE, 'YY/MM/DD HH:MI') "UPLOAD_DATE"
+		     , STAR_NO
 		  FROM REVIEW
 		  JOIN MEMBER USING (MEM_NO)
 		 WHERE REVIEW_STATUS = 'Y'
@@ -243,23 +244,40 @@
 	
 	</entry>
 	
-		<entry key="forSaleGame">
+      <entry key="forSaleGame">
+      SELECT
+            GAME_NO
+           , COMPANY_NO
+           , KOR_NAME
+           , ENG_NAME
+           , TO_CHAR(RELEASE_DATE, '""YYYY"년 "MM"월 "DD"일"') "RELEASE_DATE"
+           , PRICE
+           , GAME_INTRO
+           , CONFIRM
+           , UPGAME
+           , UPLOAD_DATE
+           , POINT
+           , GAME_STATUS
+           , (SELECT COUNT(*) FROM WISHLIST W WHERE G.GAME_NO =W.GAME_NO ) AS count
+        FROM GAME G
+       WHERE GAME_NO = ?
+   </entry>
+   
+	<entry key="selectStarAvg">
 		SELECT
-			   GAME_NO
-		     , COMPANY_NO
-		     , KOR_NAME
-		     , ENG_NAME
-		     , TO_CHAR(RELEASE_DATE, '""YYYY"년 "MM"월 "DD"일"') "RELEASE_DATE"
-		     , PRICE
-		     , GAME_INTRO
-		     , CONFIRM
-		     , UPGAME
-		     , UPLOAD_DATE
-		     , POINT
-		     , GAME_STATUS
-		     , (SELECT COUNT(*) FROM WISHLIST W WHERE G.GAME_NO =W.GAME_NO ) AS count
-		  FROM GAME G
+		      ROUND(CEIL(AVG(STAR_NO)),-1) "STAR_AVG"
+		  FROM REVIEW
 		 WHERE GAME_NO = ?
+	</entry>
+	
+	<entry key="insertCategory">
+		INSERT 
+	      INTO GAME_CATEGORY
+	    VALUES 
+	    (
+	      SEQ_GAME_NO.CURRVAL
+	    , ?
+	    )
 	</entry>
 	
 	<entry key="uploadUpdate">
@@ -276,7 +294,32 @@
 		WHERE GAME_NO = ?
 	
 	</entry>
-	
+	<entry key="selectMainGameList">
+		SELECT
+		       GAME_NO
+		     , KOR_NAME
+		     , ENG_NAME
+		     , PRICE
+		     , CONFIRM
+		     , UPGAME
+		     , UPLOAD_DATE
+		     , POINT
+		     , GAME_IMG
+		  FROM (SELECT
+		               GAME_NO
+		             , KOR_NAME
+		             , ENG_NAME
+		             , PRICE
+		             , CONFIRM
+		             , UPGAME
+		             , UPLOAD_DATE
+		             , POINT
+		             , GAME_IMG
+		          FROM GAME
+		         WHERE CONFIRM = 'Y'
+		         ORDER BY DBMS_RANDOM.VALUE)
+		 WHERE ROWNUM &lt;= 3
+	</entry>
 	
 
 </properties>

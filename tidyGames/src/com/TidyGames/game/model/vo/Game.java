@@ -151,6 +151,24 @@ public class Game {
 	}
 
 	
+	
+	public Game(int gameNo, String korName, String engName, int price, String confirm, String upgame, String uploadDate,
+			double point, String gameImg) {
+		super();
+		this.gameNo = gameNo;
+		this.korName = korName;
+		this.engName = engName;
+		this.price = price;
+		this.confirm = confirm;
+		this.upgame = upgame;
+		this.uploadDate = uploadDate;
+		this.point = point;
+		this.gameImg = gameImg;
+	}
+
+
+
+
 	public int getGameNo() {
 		return gameNo;
 	}

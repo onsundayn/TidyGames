@@ -13,9 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.TidyGames.common.MyFileRenamePolicy;
-import com.TidyGames.common.model.vo.Attachment;
 import com.TidyGames.game.model.service.GameService;
 import com.TidyGames.game.model.vo.Attachment3;
+import com.TidyGames.game.model.vo.Category;
 import com.TidyGames.game.model.vo.Game;
 import com.oreilly.servlet.MultipartRequest;
 
@@ -53,7 +53,7 @@ public class CompanyGameInsertController extends HttpServlet {
 			// DB에 기록할 데이터 vo에 담기
 			// GAME에 insert
 			// 넘어온 파일 있을때만 UPLOAD_FILE에 insert
-			String genre = multiRequest.getParameter("genre");
+			int categoryNo = Integer.parseInt(multiRequest.getParameter("genre"));
 			String player = multiRequest.getParameter("player");
 			String tag = multiRequest.getParameter("tag");
 			String korName = multiRequest.getParameter("korName");
@@ -98,7 +98,7 @@ public class CompanyGameInsertController extends HttpServlet {
 			
 			ga.setGameImg("resources/game_upfiles/" + multiRequest.getFilesystemName("file6"));
 			// 서비스요청
-			int result = new GameService().insertGame(ga, list, companyNo);
+			int result = new GameService().insertGame(ga, list, companyNo, categoryNo);
 			// 응답뷰 지정
 			if(result > 0) { // 성공 => 성공완료 메세지, 작성한 폼 그대로두고 페이지이동x
 				
@@ -117,7 +117,6 @@ public class CompanyGameInsertController extends HttpServlet {
 				// ex)setAttribute로 값 전달하고  jsp에서는 그 값이 들어오면  페이지 이동없이 ajax로 폼 초기화 
 			}
 			
-			
 		}
 	}
 
@@ -130,3 +129,4 @@ public class CompanyGameInsertController extends HttpServlet {
 	}
 
 }
+

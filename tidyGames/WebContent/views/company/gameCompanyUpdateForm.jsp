@@ -5,8 +5,6 @@
 	ArrayList<Attachment3> alist = (ArrayList<Attachment3>)request.getAttribute("alist");
 	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("list");
 	
-	//System.out.println("보람출력:" + alist);
-	
 %>
 <!DOCTYPE html>
 <html>
