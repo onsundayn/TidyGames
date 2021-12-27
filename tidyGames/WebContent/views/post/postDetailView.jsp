@@ -144,7 +144,7 @@ table {
 					<table>
 							<% if(flist.isEmpty()) { %>
 								<th width="80">첨부파일</th>
-								<td>첨부파일이 없습니다</td>
+								<td style='font-size:smaller'>첨부파일이 없습니다</td>
 							<% } else { %>
 									<th width="1000">첨부파일</th>
 								<% for(int i=0; i<flist.size(); i++) { %>
