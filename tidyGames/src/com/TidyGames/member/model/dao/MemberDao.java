@@ -795,6 +795,8 @@ public class MemberDao {
 		ResultSet rset = null;
 		String sql = prop.getProperty("library");
 		
+		System.out.println(search);
+		
 		if(search.equals("이름순")) {
 			sql += "ORDER BY ENG_NAME";
 		}else if(search.equals("과거구매")) {

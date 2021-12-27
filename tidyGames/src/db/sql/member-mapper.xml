@@ -344,7 +344,7 @@
 		WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	<entry key="library">
-		SELECT 
+		SELECT DISTINCT 
 			   GAME_NO
 		     , KOR_NAME
 		     , ENG_NAME

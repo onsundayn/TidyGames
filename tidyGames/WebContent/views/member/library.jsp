@@ -164,48 +164,25 @@
 			$(function(){
 				
 				ajax("이름순");
-				
 				$(".dropdown-item").click(function(){
+					$("#sort").text($(this).text());
 					ajax($(this).text());	
 				}) 
 				
 			}) 
 		
 	
-				function ajax() {
-					var value = "";
+			function ajax(search) {
+				
 					
 					$.ajax({
 						url:"libSort",
+						data:{search:search},
 						success:function(list){
-							
-							if($("#sort").text() == "이름순") {
-									
-								list.sort(function(a, b){
-									// 이름순
-								   return a.engName < b.engName ? -1 : a.engName > b.engName ? 1 : 0;	
-								});
-							
-							} else if($("#sort").text() == "과거구매") {
-								
-								list.sort(function(a, b){
-									// 과거구매순
-								   return a.uploadDate < b.uploadDate ? -1 : a.uploadDate > b.uploadDate ? 1 : 0;	
-								
-								});
-								
-								
-							} else if($("#sort").text() == "최신구매") {
-									
-								list.sort(function(a, b){
-									// 최신구매순
-								   return a.uploadDate > b.uploadDate ? -1 : a.uploadDate < b.uploadDate ? 1 : 0;	
-								
-								});	
-							}	
+						var value = "";
 
 							$(list).each(function(index, obj) {
-								const starNo = $.trim(obj.count);
+								const starNo = $.trim(obj.count)/20;
 								const gameNo = obj.gameNo;
 								
 								
@@ -225,9 +202,9 @@
 								'<div id="games">' +
 									'<div id="game">' +
 										'<div id="gameImg">' +
-											'<img src="' + obj.gameImg + '">' +
+											'<img onclick="move();" src="' + obj.gameImg + '">' +			
 											'</div>' +
-												'<div id="gameText"> <p>' + obj.engName + '</p>' + '</div>' +
+												'<div id="gameText"> <p class="move">' + obj.engName + '</p>' + '</div>' +
 										'<div id="advice">' + 
 											'<div id="ad1">' +
 												'<a href="<%= contextPath%>/question.gq?gameno=' + obj.gameNo + '">게임 문의</a>' +
@@ -242,10 +219,11 @@
 							
  							 		star = "";
 									
-							// 반복
+							// 반복ㅋ
 							$("#gameBox").html(value);
 							})
 						
+			
 						}, error:function(){
 							console.log("ajax 통신 실패");
 						}
