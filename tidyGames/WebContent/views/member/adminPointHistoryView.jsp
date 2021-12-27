@@ -168,7 +168,7 @@
                         <td class="memNo"><%=po.getMemNo()%></td>
                         <td><%=po.getMemId() %></td>
                         <td id="pointsum"><%=po.getSum()%>POINT</td>
-                        <td><!--  <a href="" id="btn" class="btn btn-sm btn-dark" data-toggle="modal" data-target="#pointModal">변경</a>-->
+                        <td><a href="" id="btn" class="btn btn-sm btn-dark" data-toggle="modal" data-target="#pointModal">변경</a>
                             <a href="<%= request.getContextPath() %>/adPointDe.me?mNo=<%=po.getMemNo()%>&cpage=1" class="btn btn-success btn-sm">상세보기</a></td>
                       
                      <%} %>
