@@ -81,7 +81,7 @@
             <ul>
                 <li><a href="<%=request.getContextPath()%>/enrollForm.gc" id=enrollform>게임 업로드</a></li>
                 <li><a href="<%=request.getContextPath()%>/gameList.gc" id=gamelistgc>업로드 게임 목록</a></li>
-                <li><a href="<%=request.getContextPath()%>/updateForm.gc" id=updateformgc>게임 정보 업데이트</a></li>
+
             </ul>
             <div id="line"></div>
             <ul>

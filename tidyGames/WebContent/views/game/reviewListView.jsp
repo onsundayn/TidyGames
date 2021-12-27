@@ -4,7 +4,7 @@
 	Game g = (Game)request.getAttribute("g");
 	Attachment3 at = (Attachment3)request.getAttribute("at");
 	int starAvg = (int)request.getAttribute("starAvg");
-	//ArrayList<Review> list = (ArrayList<Review>)request.getAttribute("list");
+	ArrayList<Review> list = (ArrayList<Review>)request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html>
@@ -199,10 +199,10 @@
             <div id="dropdown">
                 <select name="sort" id="sort" class="form-control" style="width:160px;">
                     <option value="">==정렬기준==</option>
-                    <option value="">최신순</option>
-                    <option value="">별점높은순</option>
-                    <option value="">별점낮은순</option>
-                    <option value="">추천많은순</option>
+                    <option value="1">최신순</option>
+                    <option value="2">별점높은순</option>
+                    <option value="3">별점낮은순</option>
+                    <option value="4">추천많은순</option>
                 </select>
             </div>
         </div>
@@ -232,7 +232,7 @@
 			    			<tr>
 			    				<th>리뷰작성</th>
 			    				<td>
-			    					<textarea id="reviewContent" rows="4" cols="90" style="resize:none"></textarea>
+			    					<textarea id="reviewContent" rows="4" cols="120" style="resize:none"></textarea>
 			    				</td>
 			    				<td>
 			    				<button id="btn" class="btn btn-sm btn-light" onclick="insertReview();">리뷰등록</button>
@@ -260,7 +260,7 @@
                             <tr>
                                 <th>리뷰작성</th>
 			    				<td>
-			    					<textarea id="reviewContent" rows="4" cols="50" style="resize:none" readonly>로그인 후 이용 가능합니다.</textarea>
+			    					<textarea id="reviewContent" rows="4" cols="120" style="resize:none" readonly>로그인 후 이용 가능합니다.</textarea>
 			    				</td>
 			    				<td><button disabled>리뷰등록</button></td>
                             <% } %> 
@@ -268,6 +268,7 @@
 			    			<tr style="height: 60px;"></tr>
 			    		</thead>
 			    		<tbody>
+                            
                             
 
 			    		</tbody>
@@ -280,9 +281,9 @@
 			    		$(function(){ //페이지로딩되고 곧바로 호출
 			    			
 			    			selectReviewList();
-			    		
+			    			
 			    			setInterval(selectReviewList, 1000); // 1초마다 함수호출
-			    		
+			    			
 			    		})
 			    		
 			    		// ajax로 댓글 작성용
@@ -290,7 +291,7 @@
 			    			
 			    		
 		                    //별점 선택 안했으면 메시지 표시
-		                    if($('input[name="rating"]:checked').val() == 0){
+		                    if($('input[name="rating"]:checked').val() == null){
 		                        alert("별점을 입력해주세요.")
 		                        return false;
 		                    }
@@ -315,7 +316,7 @@
 			    					    $('input[name="rating"]').prop("checked", false);
 			    					}
 			    				},error:function(){
-			    					alert("내용 혹은 별점을 작성 후 다시 시도해주세요.")
+			    					//alert("내용 혹은 별점을 작성 후 다시 시도해주세요.")
 			    					console.log("댓글작성용 ajax 통신 실패")
 			    				}
 			    			})
@@ -346,7 +347,7 @@
                                                             + "</div>"
                                                         + "</td>"
                                                         + "<td colspan='3'>" + "</td>"
-                                                        + "<td rowspan='3' colspan='2'>" + '추천박스' + "</td>"
+                                                        + "<td rowspan='3' colspan='2'>" + list[i].recommend + '&nbsp&nbsp' +"<a href=''>"+ "<i style='color:beige;' class='far fa-thumbs-up fa-2x'></i>"+"</a>" + '&nbsp&nbsp&nbsp' + "</td>"
                                                     + "</tr>"
                                                     + "<tr class='trtr'>"
                                                         + "<td colspan='7'>" + list[i].writer + '&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp' +  list[i].uploadDate + "</td>"
@@ -354,8 +355,7 @@
                                                     + "<tr class='trtr' style='height:100px;'>"
                                                         + "<td colspan='7' style='width:600px;'>" + list[i].contents + "</td>"
                                                     + "</tr>";
-
-                                                
+                                                        
                                     }
 			    					$("#review-area tbody").html(result);
 			    					

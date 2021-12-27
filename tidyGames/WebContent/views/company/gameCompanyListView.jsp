@@ -54,10 +54,11 @@
         width:100%;
         height:2px;
         background: rgba(255, 255, 255, 0.555);
-    }
+
 </style>
 </head>
 <body style="background-color: #0e332c;">
+
 	<%@ include file="../common/topbar.jsp"%>
     <%@ include file="../common/navibar.jsp"%>
     
@@ -79,18 +80,19 @@
                 <th>승인상태</th>
                 <th>업데이트</th>
             </tr>
+            <% int index = 1; %>
             <% for(Game g : list) { %>
             <tr>
-                <td>1</td>
+                <td><%=index++ %></td>
                 <td><%=g.getKorName()%>(<%=g.getEngName()%>)</td>
                 <td><%=g.getPrice()%></td>
                 <td><%=g.getUploadDate()%></td>
                 	<% if((g.getConfirm()).equals("Y")) { %>
-                <td><a href="gameCompanyEnrollForm.jsp" class="btn btn-sm btn-primary">승인</a></td>
+                <td><a href="gameCompanyEnrollForm.jsp" class="btn1 btn-sm btn-primary">승인</a></td>
                 	<% }else if((g.getConfirm()).equals("A")){ %>
-                <td><a href="gameCompanyEnrollForm.jsp" class="btn btn-sm btn-danger">반려</a></td>	
+                <td><a href="gameCompanyEnrollForm.jsp" class="btn1 btn-sm btn-danger">반려</a></td>	
                 	<% }else if((g.getConfirm()).equals("N")) { %>
-                <td><a href="gameCompanyEnrollForm.jsp" class="btn btn-sm btn-warning">미승인</a></td>
+                <td><a href="gameCompanyEnrollForm.jsp" class="btn1 btn-sm btn-warning">미승인</a></td>
                 	<% } %>
                 	
                 	<% if ((g.getConfirm()).equals("Y")) { %>
@@ -104,6 +106,10 @@
 
         </table>
     </div>
+    
+    <script>
+    	$('.btn1').click(function () {return false;});
+    </script>
 
 	
 

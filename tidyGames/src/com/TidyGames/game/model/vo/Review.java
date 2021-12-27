@@ -15,7 +15,23 @@ public class Review {
 	private String engName;
 	private String gameImg;
 	
+	private int memNo;
+	
+
 	public Review () {}
+	
+	public Review(int reviewNo, int gameNo, String writer, String contents, int recommend, String uploadDate,
+			int starNo, int memNo) {
+		super();
+		this.reviewNo = reviewNo;
+		this.gameNo = gameNo;
+		this.writer = writer;
+		this.contents = contents;
+		this.recommend = recommend;
+		this.uploadDate = uploadDate;
+		this.starNo = starNo;
+		this.memNo = memNo;
+	}
 	
 	public Review(int reviewNo, int gameNo, String writer, String contents, int recommend, String uploadDate,
 			int starNo, String reviewStatus) {
@@ -153,6 +169,14 @@ public class Review {
 
 	public void setGameImg(String gameImg) {
 		this.gameImg = gameImg;
+	}
+
+	public int getMemNo() {
+		return memNo;
+	}
+
+	public void setMemNo(int memNo) {
+		this.memNo = memNo;
 	}
 
 	@Override

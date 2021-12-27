@@ -203,8 +203,10 @@ public Game selectGameGC(Connection conn, int comNo, int gameNo) {
 									 rset.getInt("game_no"),
 									 rset.getString("writer"),
 									 rset.getString("contents"),
+									 rset.getInt("recommend"),
 									 rset.getString("upload_date"),
-									 rset.getInt("star_no")));
+									 rset.getInt("star_no"),
+									 rset.getInt("mem_no")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
