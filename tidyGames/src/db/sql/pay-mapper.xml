@@ -463,12 +463,14 @@
 	<entry key="refundUpdate">
 		 UPDATE REFUND
       SET REFUND_STATUS = 'Y'
+      WHERE ORDER_NO = ?
 	
 	</entry>
 	
 	<entry key="refundUpdate2">
 		UPDATE PAY
 		   SET PAY_STATUS = '환불완료'
+		WHERE ORDER_NO = ?   
 	</entry>
 	
 	

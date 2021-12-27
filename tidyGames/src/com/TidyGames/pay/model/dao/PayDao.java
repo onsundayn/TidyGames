@@ -970,13 +970,14 @@ public ArrayList<Refund> adNoComfirmRefundList(Connection conn, String start, St
 	
 	}
 	
-	public int refundUpdate(Connection conn ) {
+	public int refundUpdate(Connection conn , int orderNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("refundUpdate");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, orderNo);
 			
 			result = pstmt.executeUpdate();
 			
@@ -991,14 +992,14 @@ public ArrayList<Refund> adNoComfirmRefundList(Connection conn, String start, St
 	}
 	
 	
-	public int refundUpdate2(Connection conn ) {
+	public int refundUpdate2(Connection conn, int orderNo ) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("refundUpdate2");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
+			pstmt.setInt(1, orderNo);
 			result = pstmt.executeUpdate();
 			
 			

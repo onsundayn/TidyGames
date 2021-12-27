@@ -314,10 +314,10 @@ public ArrayList<Refund> adNoComfirmRefundList(String start, String end) {
 		
 	}
 	
-	public int refundUpdate() {
+	public int refundUpdate(int orderNo) {
 		Connection conn = getConnection();
 		
-		int result = new PayDao().refundUpdate(conn);
+		int result = new PayDao().refundUpdate(conn, orderNo);
 		
 		if(result >0 ) {
 			commit(conn);
@@ -330,10 +330,10 @@ public ArrayList<Refund> adNoComfirmRefundList(String start, String end) {
 		return result;
 	}
 	
-	public int refundUpdate2() {
+	public int refundUpdate2(int orderNo) {
 		Connection conn = getConnection();
 		
-		int result = new PayDao().refundUpdate2(conn);
+		int result = new PayDao().refundUpdate2(conn, orderNo);
 		
 		if(result >0 ) {
 			commit(conn);

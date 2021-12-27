@@ -29,9 +29,12 @@ public class AdminRefundUpdateController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int result1 = new PayService().refundUpdate();
+		int orderNo = Integer.parseInt(request.getParameter("oNo"));
 		
-		int result2 =  new PayService().refundUpdate2();
+		
+		int result1 = new PayService().refundUpdate(orderNo);
+		
+		int result2 =  new PayService().refundUpdate2(orderNo);
 		if(result1 > 0  && result2 >0) {
 			request.getSession().setAttribute("alertMsg", "환불처리가 완료되었습니다.");
 			response.sendRedirect(request.getContextPath() + "/adrefund.pa");

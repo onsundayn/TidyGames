@@ -342,7 +342,7 @@ tbody>tr>td>span {
     
     <div class="area4">
         <a href="" class="btn btn-dark"><i class="fa fa-shopping-cart"></i> 취소</a>
-        <a href="<%=request.getContextPath()%>/reupdate.pa" class="btn btn-danger">환불신청하기</a>
+        <a href="<%=request.getContextPath()%>/reupdate.pa?oNo=<%=pi.getOrderNo()%>" class="btn btn-danger">환불신청하기</a>
     </div>
 
 
