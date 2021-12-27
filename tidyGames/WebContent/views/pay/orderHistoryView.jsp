@@ -199,7 +199,7 @@
         </div>
 
         <!-- 닉네임 불러와지게 -->
-        <div class="area1"><span>닉네임</span>님의 주문내역</div>
+        <div class="area1"><span><%=loginUser.getMemNick() %></span>님의 주문내역</div>
         <br><br><br><br><br>
         
 

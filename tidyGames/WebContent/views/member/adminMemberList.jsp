@@ -20,11 +20,9 @@
     div{
 		box-sizing: border-box;
 		color:black;
-		/* border: 1px solid rgba(255, 255, 255, 0.555); */
 	}
 	#outer{
         width:1500px;
-        /* height:1500px; */
         margin:auto;
     }
     #outer>div{float:left;}
@@ -47,28 +45,21 @@
     }
     #box{
     	width:1290px;	
-    	/* border:1px solid rgba(255, 255, 255, 0.222); */
-        /* height: */
         
     }
     #tableBox{
         width:1250px;
         height:790px;
-        /* margin-left:145px; */
         margin: 30px 0px 100px 35px;
         background-color: rgb(197, 197, 197);
         border: 10px solid rgba(255, 255, 255, 0.555);
     }
     #tableTop div{
         float:left;
-        /* width:400px; */
-        /* border:1px solid white; */
     }
     #leftTop{   
         width:1%;
-        /* margin:20px; */
         margin: 50px 20px 20px 20px;
-        /* margin-left:80px; */
     }
     #midTop{
         width:57%;
@@ -86,7 +77,6 @@
     #table{
         margin:auto;
         width:1200px;
-        /* background-color: gray; */
     }
     #table *{
         height:15px;
@@ -196,23 +186,27 @@
                             <span>전체 회원 <label style="color:black"><%= listCount %></label></span>
                         </div>
                     </div>
+                     <form action="<%=contextPath%>/memberList.me?cpage=1" mathod="get">
                     <div id="rightTop">
                         <div class="btn-group">
                                 <button type="button" class="btn btn-sm btn-dark" disabled>회원 ID</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+                                <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" disabled>
                                 <span class="caret"></span>
                                 </button>
+                                
                                 <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">닉네임</a>
                                 <a class="dropdown-item" href="#">이 름</a>
                                 </div>
                         </div>
                         <div>
-                            <input type="text" id="selectKeyword" name="keyword" placeholder="조회를 위한 입력">
+	                        <input type="hidden" name="cpage" value="1">
+                            <input type="text" id="selectKeyword" name="word" placeholder="조회를 위한 입력">
                         </div>
-                        <button class="btn btn-sm btn-dark" onclick="" >조회</button>
+                        <button type="submit" class="btn btn-sm btn-dark">조회</button>
                     </div>
                 </div>
+                </form>
                 <div id="tableOut1">
                 <table id="table" class="table table-hover">
                     <thead>
@@ -247,8 +241,8 @@
 
                             </td>
                             <td>
-                            	<a href="" id="btn"  onclick="updateMember(selectMember(<%= m.getMemNo() %>));" class="btn btn-sm btn-basic" data-toggle="modal" data-target="#updateModal">수정</a>
-                            	<a href="" id="btn" onclick="done();" class="btn btn-sm btn-basic">탈퇴</a>
+                            	<a id="btn" onclick="selectMember(<%= m.getMemNo() %>);" class="btn btn-sm btn-basic" data-toggle="modal" data-target="#updateModal">수정</a>
+                            	<button id="btn" onclick='blockMember("<%= m.getMemId() %>");' class="btn btn-sm btn-basic">탈퇴</button>
 	                        </td>
                         </tr>
                         <% } %>
@@ -415,16 +409,13 @@
     </div>
     
     <script>
-		
-    	function done(){
+	
+    	function blockMember(x){
 			 if(confirm("회원을 탈퇴시키겠습니까?")) {
-	            	$("#table>tbody>tr").click(function(){
-	    	         location.href ='<%= contextPath %>/deleteMember.me?mno=' 	    	      	
-	    	     			  	+ $(this).children().eq(1).text();
-	            	})
+	    	         location.href ='<%=contextPath%>/deleteMember.me?mid='+ x;
 			 }
+			 
 		}
-    	
     	
     	function selectMember(result) {
     	

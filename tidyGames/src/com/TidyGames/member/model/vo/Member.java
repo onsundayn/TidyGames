@@ -1,7 +1,6 @@
 package com.TidyGames.member.model.vo;
 
 import java.sql.Date;
-import java.util.Arrays;
 
 public class Member {
 	
@@ -37,6 +36,11 @@ public class Member {
 	
 	public Member() {}
 	
+	public Member(String memNick) {
+		super();
+		this.memNick = memNick;
+	}
+
 	public Member(int memNo, String memId, String memPwd, String memNick, String memName, String memBirth,
 			String memPhone, String memEmail, String memGender, String memAddress, Date indate, String memAgr,
 			String memPic, String memStatus, Date memOutdate, String roleId, String memAccess, Date blockDate,
