@@ -11,7 +11,6 @@
         width:210px;
         height:800px;
         float: left;
-        margin-top: 50px;
 
     }
     #sideBox{
@@ -50,7 +49,16 @@
     #sideBox a:hover{
         text-decoration: none;
         color: rgba(255, 166, 0, 0.777); 
+        
+        
     }
+    
+    #line1{
+		margin:0 auto;
+        width:1500px;
+        height:2px;
+        background: rgba(255, 255, 255, 0.555);
+    } 
 
 
     
@@ -65,15 +73,15 @@
             <ul>
                 
                 <li id="companyPageBtn" style="font-weight: bolder; ">게임사 페이지</li>
-                <li><a href="<%=request.getContextPath()%>/myPage.gc">내 정보 조회</a></li>
+                <li><a href="<%=request.getContextPath()%>/myPage.gc" id=mypagegc>내 정보 조회</a></li>
                
             
             </ul>
             <div id="line"></div>
             <ul>
-                <li><a href="<%=request.getContextPath()%>/enrollForm.gc">게임 업로드</a></li>
-                <li><a href="<%=request.getContextPath()%>/gameList.gc">업로드 게임 목록</a></li>
-                <li><a href="<%=request.getContextPath()%>/updateForm.gc">게임 정보 업데이트</a></li>
+                <li><a href="<%=request.getContextPath()%>/enrollForm.gc" id=enrollform>게임 업로드</a></li>
+                <li><a href="<%=request.getContextPath()%>/gameList.gc" id=gamelistgc>업로드 게임 목록</a></li>
+                <li><a href="<%=request.getContextPath()%>/updateForm.gc" id=updateformgc>게임 정보 업데이트</a></li>
             </ul>
             <div id="line"></div>
             <ul>
