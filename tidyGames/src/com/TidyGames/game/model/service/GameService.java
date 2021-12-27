@@ -87,13 +87,14 @@ public class GameService {
 		return list;
 	}
 	// 게임업로드(게임사)
-	public int insertGame(Game ga, ArrayList<Attachment3> list, int companyNo) {
+	public int insertGame(Game ga, ArrayList<Attachment3> list, int companyNo, int categoryNo) {
 		Connection conn = getConnection();
 		
 		int result1 = new GameDao().insertGame(conn, ga, companyNo);
 		int result2 = new GameDao().insertAttachment(conn, list);
+		int result3 = new GameDao().insertCategory(conn, ga, categoryNo);
 		
-		if(result1 > 0 && result2 >0) {
+		if(result1 > 0 && result2 > 0 && result3 > 0) {
 			commit(conn);
 		}else {
 			rollback(conn);
@@ -101,7 +102,7 @@ public class GameService {
 		
 		close(conn);
 		
-		return result1 * result2;
+		return result1 * result2 * result3;
 	}
 	// 첨부파일 1개 조회
 	public Attachment3 selectAttachment(int gameNo) {
@@ -149,6 +150,23 @@ public class GameService {
 		close(conn);
 		return list;
 		
+	}
+	// 게임 평균 별점 조회
+	public int selectStarAvg(int gameNo) {
+		Connection conn = getConnection();
+		int starAvg = new GameDao().selectStarAvg(conn, gameNo);
+		close(conn);
+		return starAvg;
+	}
+	
+	public ArrayList<Game> selectMainGameList() {
+		
+		Connection conn  = getConnection();
+		ArrayList<Game> list = new GameDao().selectMainGameList(conn);
+		
+		close(conn);
+		
+		return list;
 	}
 
 }

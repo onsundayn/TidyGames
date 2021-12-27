@@ -2,6 +2,7 @@
     pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.game.model.vo.*"%>
 <%
 	ArrayList<Game> list = (ArrayList<Game>)request.getAttribute("list");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -77,6 +78,32 @@
     }
     #review-btn:hover{
     	background-color:orange;
+    }
+    .star-ratings {
+        color: #aaa9a9; 
+        position: relative;
+        unicode-bidi: bidi-override;
+        width: max-content;
+        -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+        -webkit-text-stroke-width: 1.3px;
+        -webkit-text-stroke-color: #000000;
+    }
+ 
+    .star-ratings-fill {
+        color: #fff58c;
+        padding: 0;
+        position: absolute;
+        z-index: 1;
+        display: flex;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        -webkit-text-fill-color: gold;
+    }
+ 
+    .star-ratings-base {
+        z-index: 0;
+        padding: 0;
     }
 </style>
 
@@ -169,13 +196,15 @@
                 </div>
                 <div class="star-rating" align="center">
                     <br>
-                    <a href="">
-                    	<i class="fas fa-star fa-lg"></i>
-                    	<i class="fas fa-star fa-lg"></i>
-                    	<i class="fas fa-star fa-lg"></i>
-                    	<i class="fas fa-star fa-lg"></i>
-                    	<i class="fas fa-star fa-lg"></i>
-                    </a>
+                    <div class="star-ratings">
+                        <div class="star-ratings-fill space-x-2 text-lg" style="width:100%"
+                        >
+                          <span><i class="fas fa-star"></i></span><span><i class="fas fa-star"></i></span><span><i class="fas fa-star"></i></span><span><i class="fas fa-star"></i></span><span><i class="fas fa-star"></i></span>
+                        </div>
+                        <div class="star-ratings-base space-x-2 text-lg">
+                          <span><i class="fas fa-star"></i></span><span><i class="fas fa-star"></i></span><span><i class="fas fa-star"></i></span><span><i class="fas fa-star"></i></span><span><i class="fas fa-star"></i></span>
+                        </div>
+                    </div>
                     <br><br><br>
                     <a href="<%=contextPath%>/reviewList.ga?gno=<%=g.getGameNo()%>" class="btn btn-sm btn-light" id="review-btn">이 게임의 리뷰</a>
                 </div>

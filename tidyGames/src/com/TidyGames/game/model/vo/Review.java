@@ -11,10 +11,6 @@ public class Review {
 	private int starNo;
 	private String reviewStatus;
 	
-	private String korName;
-	private String engName;
-	private String gameImg;
-	
 	public Review () {}
 	
 	public Review(int reviewNo, int gameNo, String writer, String contents, int recommend, String uploadDate,
@@ -30,6 +26,8 @@ public class Review {
 		this.reviewStatus = reviewStatus;
 	}
 	
+	
+
 	public Review(int reviewNo, int gameNo, String writer, String contents, String uploadDate) {
 		super();
 		this.reviewNo = reviewNo;
@@ -41,28 +39,14 @@ public class Review {
 	
 	
 
-	/**
-	 * dahyun (MemberDao) myReviewList
-	 * @param reviewNo
-	 * @param contents
-	 * @param recommend
-	 * @param uploadDate
-	 * @param starNo
-	 * @param korName
-	 * @param engName
-	 * @param gameImg
-	 */
-	public Review(int reviewNo, String contents, int recommend, String uploadDate, int starNo, String korName,
-			String engName, String gameImg) {
+	public Review(int reviewNo, int gameNo, String writer, String contents, String uploadDate, int starNo) {
 		super();
 		this.reviewNo = reviewNo;
+		this.gameNo = gameNo;
+		this.writer = writer;
 		this.contents = contents;
-		this.recommend = recommend;
 		this.uploadDate = uploadDate;
 		this.starNo = starNo;
-		this.korName = korName;
-		this.engName = engName;
-		this.gameImg = gameImg;
 	}
 
 	public int getReviewNo() {
@@ -127,30 +111,6 @@ public class Review {
 
 	public void setReviewStatus(String reviewStatus) {
 		this.reviewStatus = reviewStatus;
-	}
-
-	public String getKorName() {
-		return korName;
-	}
-
-	public void setKorName(String korName) {
-		this.korName = korName;
-	}
-
-	public String getEngName() {
-		return engName;
-	}
-
-	public void setEngName(String engName) {
-		this.engName = engName;
-	}
-
-	public String getGameImg() {
-		return gameImg;
-	}
-
-	public void setGameImg(String gameImg) {
-		this.gameImg = gameImg;
 	}
 
 	@Override
