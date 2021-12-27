@@ -31,6 +31,7 @@
     #big{
         width:700px;
         height:300px;
+        background: rgba(169, 169, 169, 0.178);
     }
     .img11 img{
         width:100%;
@@ -38,14 +39,14 @@
         object-fit: cover;
     }
     #small{
-        background: darkgrey;
+        background: rgba(169, 169, 169, 0.178);
         width:700px;
         height:120px;
     }
     #small img{
         width:140px;
-        height:90px;
-        margin:15px;
+        height:100px;
+        margin:5px;
     }
     .right-area{
         width:500px;
@@ -176,7 +177,14 @@
                     <p>
                         출시일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=g.getReleaseDate() %> <br>
                         장르 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=gcList.get(0).getCategoryName()%><br>
+                        
                     </p>
+                </div>
+                <div id="tag">
+                    관련태그&nbsp;&nbsp;&nbsp; 
+                          <% for(int i=0; i<gcList.size(); i++) {%>
+                            <a href="" class="category-btn"><%=gcList.get(i).getCategoryName()%></a>
+                            <% } %>
                 </div>
                 
             </div>
