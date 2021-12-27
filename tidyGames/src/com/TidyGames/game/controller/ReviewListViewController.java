@@ -49,7 +49,7 @@ public class ReviewListViewController extends HttpServlet {
 		request.setAttribute("g", g);
 		request.setAttribute("at", at);
 		request.setAttribute("starAvg", starAvg);
-		request.getRequestDispatcher("views/game/reviewListView.jsp").forward(request, response);;
+		request.getRequestDispatcher("views/game/reviewListView.jsp").forward(request, response);
 		
 	}
 

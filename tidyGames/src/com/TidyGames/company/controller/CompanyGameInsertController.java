@@ -107,7 +107,6 @@ public class CompanyGameInsertController extends HttpServlet {
 				
 			}else { // 실패 => 실패메세지, 폼초기화 후 다시 그 페이지  + 첨부파일 업도르된거 삭제후 에러페이지
 				
-				
 					for(Attachment3 at : list) {
 						new File(savePath + at.getChangeName()).delete();
 					}

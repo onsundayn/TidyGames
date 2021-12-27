@@ -65,8 +65,10 @@
 		     , GAME_NO
 		     , MEM_NICK "WRITER"
 		     , CONTENTS
+		     , RECOMMEND
 		     , TO_CHAR(UPLOAD_DATE, 'YY/MM/DD HH:MI') "UPLOAD_DATE"
 		     , STAR_NO
+		     , MEM_NO
 		  FROM REVIEW
 		  JOIN MEMBER USING (MEM_NO)
 		 WHERE REVIEW_STATUS = 'Y'

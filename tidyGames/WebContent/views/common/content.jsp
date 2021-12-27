@@ -72,31 +72,31 @@
 				<div id="content_new">
 					<div id="content_new_1">
 						<div>
-							<a href=""><img src="" class="imageSize"></a>
-							<a href=""><p class="whiteText">new게임명</p></a>
+							<a href=""><img src="resources/game_upfiles/2021122802212888478.jpg" class="imageSize"></a>
+							<a href=""><p class="whiteText">Astroneer</p></a>
 						</div>
 						<div>
-							<a href=""><img src="" class="imageSize"></a>
-							<a href=""><p class="whiteText">new게임명</p></a>
+							<a href=""><img src="resources/game_upfiles/2021122802195271823.jpg" class="imageSize"></a>
+							<a href=""><p class="whiteText">Sid Meiers Civilization Vl</p></a>
 						</div>
 						<div>
-							<a href=""><img src="" class="imageSize"></a>
-							<a href=""><p class="whiteText">new게임명</p></a>
+							<a href=""><img src="resources/game_upfiles/2021122802183463509.jpg" class="imageSize"></a>
+							<a href=""><p class="whiteText">Among Us</p></a>
 						</div>
 					</div>
 
 					<div id="content_new_2">
 						<div>
-							<a href=""><img src="" class="imageSize"></a>
-							<a href=""><p class="whiteText">new게임명</p></a>
+							<a href=""><img src="resources/game_upfiles/2021122802152219308.jpg" class="imageSize"></a>
+							<a href=""><p class="whiteText">Turmoil</p></a>
 						</div>
 						<div>
-							<a href=""><img src="" class="imageSize"></a>
-							<a href=""><p class="whiteText">new게임명</p></a>
+							<a href=""><img src="resources/game_upfiles/2021122802132766215.jpg" class="imageSize"></a>
+							<a href=""><p class="whiteText">60 Seconds</p></a>
 						</div>
 						<div>
-							<a href=""><img src="" class="imageSize"></a>
-							<a href=""><p class="whiteText">new게임명</p></a>
+							<a href=""><img src="resources/game_upfiles/2021122801590671451.jpg" class="imageSize"></a>
+							<a href=""><p class="whiteText">Green Hell</p></a>
 						</div>
 					</div>
 
