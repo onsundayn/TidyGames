@@ -117,15 +117,20 @@ public class ReportDao {
 		
 	}
 	
-	public ArrayList<Report> reportWaiting(Connection conn) {
+	public ArrayList<Report> reportWaiting(Connection conn, PageInfo pi) {
 		
 		ArrayList<Report> list = new ArrayList<Report>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("reportWaiting");
 		
+		int startRow = (pi.getCurrentPage() - 1) * (pi.getViewLimit()) + 1;
+		int endRow = startRow + pi.getViewLimit() - 1;
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2,  endRow);
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {

@@ -43,7 +43,7 @@ public class ForSaleDetailViewController extends HttpServlet {
 		GameService gService = new GameService();
 		
 		Game g = gService.forSaleGame(gameNo);
-		ArrayList<Category> gcList = new CategoryService().selectCategoryList();
+		ArrayList<Category> gcList = gService.selectGameCategory(gameNo);
 		ArrayList<Attachment3> list = gService.selectAttachmentList(gameNo);
 		Attachment3 at = gService.selectAttachment(gameNo);
 		

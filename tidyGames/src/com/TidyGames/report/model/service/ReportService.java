@@ -55,10 +55,10 @@ public class ReportService {
 	}
 	
 	
-	public ArrayList<Report> reportWaiting() {
+	public ArrayList<Report> reportWaiting(PageInfo pi) {
 		Connection conn = getConnection();
 		
-		ArrayList<Report> list = new ReportDao().reportWaiting(conn);
+		ArrayList<Report> list = new ReportDao().reportWaiting(conn, pi);
 		
 		close(conn);
 		return list;
