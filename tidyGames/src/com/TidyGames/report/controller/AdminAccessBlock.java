@@ -39,7 +39,7 @@ public class AdminAccessBlock extends HttpServlet {
 			
 			if(result > 0) {
 				request.getSession().setAttribute("alertMsg", user + "를 차단했습니다.");
-				response.sendRedirect(request.getContextPath() + "/reportWait.re");
+				response.sendRedirect(request.getContextPath() + "/reportWait.re?cpage=1");
 				
 			}else {
 				request.getSession().setAttribute("alertMsg", "오류가 발생했습니다. 다시 확인해주세요.");

@@ -87,21 +87,7 @@ public class MemberService {
 	
 	}
 	
-	public int deleteMember(int memNo) {
-		Connection conn = getConnection();
-		
-		int result = new MemberDao().deleteMember(conn, memNo);
-		
-		if(result > 0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
-		
-		close(conn);
-		return result;
-	}
-	
+
 	public Member searchUserId(String searchName, String searchEmail) {
 		
 		Connection conn = getConnection();
@@ -315,12 +301,22 @@ public class MemberService {
 		
 	}
 	
-	public ArrayList<Game> library(int memNo) {
+	public ArrayList<Game> library(int memNo, String search) {
 		Connection conn = getConnection();
 		
-		ArrayList<Game> list = new MemberDao().library(conn, memNo);
+		ArrayList<Game> list = new MemberDao().library(conn, memNo, search);
 		
 		close(conn);
+		return list;
+	}
+	
+	public ArrayList<Member> searchMemId(PageInfo pi, String word) {
+		Connection conn = getConnection();
+		
+		ArrayList<Member> list = new MemberDao().searchMemId(conn, pi, word);
+		
+		close(conn);
+		
 		return list;
 	}
 	

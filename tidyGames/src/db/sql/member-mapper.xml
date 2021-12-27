@@ -344,7 +344,7 @@
 		WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	<entry key="library">
-		SELECT 
+		SELECT DISTINCT 
 			   GAME_NO
 		     , KOR_NAME
 		     , ENG_NAME
@@ -359,5 +359,30 @@
 		WHERE PAY_STATUS = '결제완료'
 		  AND (REFUND_STATUS IS NULL OR REFUND_STATUS = 'N')
 		  AND P.MEM_NO = ?
+	</entry>
+	<entry key="searchMemId">
+	SELECT *
+	      FROM (
+	            SELECT ROWNUM RNUM, A.*
+	              FROM (
+	                    SELECT
+	                          MEM_NO
+	                        , MEM_ID
+	                        , MEM_NAME
+	                        , MEM_NICK
+	                        , MEM_GENDER
+	                        , MEM_EMAIL
+	                        , MEM_PHONE
+	                        , MEM_ADDRESS
+	                        , MEM_INDATE
+	                        , MEM_STATUS
+	                        FROM MEMBER
+	                        WHERE UPPER(MEM_ID)
+	                        LIKE UPPER('%' || ? || '%')
+	                       ORDER
+	                          BY MEM_NO DESC
+	                    ) A
+	            )
+	     WHERE RNUM BETWEEN ? AND ?
 	</entry>
 </properties>
