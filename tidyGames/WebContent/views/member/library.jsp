@@ -134,14 +134,14 @@
 					<div>
 						<div class="btn-group">
 								<label>정렬 기준 :</label>
-								<label id="sort"></label>
+								<label id="sort">이름순</label>
 							<button type="button" id="btn" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
 								<span class="caret"></span>
 							</button>
 							<div class="dropdown-menu">
-								<a id="name" class="dropdown-item" href="#">이름순</a>
-								<a id="newBuy" class="dropdown-item" href="#">최신구매</a>
-								<a id="oldBuy" class="dropdown-item" href="#">과거구매</a>
+								<a id="name" class="dropdown-item">이름순</a>
+								<a id="newBuy" class="dropdown-item">최신구매</a>
+								<a id="oldBuy" class="dropdown-item">과거구매</a>
 							</div>
 						</div>
 					</div>
@@ -162,49 +162,30 @@
 	
 		
 			$(function(){
-			var value = "";
 				
-				ajax();
 				
-			$(".dropdown-item").click(function(){
-				// 정렬 기준 클릭 시 ajax 호출
-				$("#game").load(location.href + "#game");		
+				ajax("이름순");
+				
+				$(".dropdown-item").click(function(){
 					$("#sort").text($(this).text());
-					ajax();	
-			}) 
+					ajax($(this).text());	
+				}) 
 			
 				
-				function ajax() {
-					
+	
+			})
+			
+				function ajax(search) {
+				
+					console.log(search);
+				
 					$.ajax({
 						url:"libSort",
+						data:{search:search},
 						success:function(list){
 							
-							if($("#sort").text() == "이름순") {
-									
-								list.sort(function(a, b){
-									// 이름순
-								   return a.engName < b.engName ? -1 : a.engName > b.engName ? 1 : 0;	
-								});
+							var value = "";
 							
-							} else if($("#sort").text() == "과거구매") {
-								
-								list.sort(function(a, b){
-									// 과거구매순
-								   return a.uploadDate < b.uploadDate ? -1 : a.uploadDate > b.uploadDate ? 1 : 0;	
-								
-								});
-								
-								
-							} else if($("#sort").text() == "최신구매") {
-									
-								list.sort(function(a, b){
-									// 최신구매순
-								   return a.uploadDate > b.uploadDate ? -1 : a.uploadDate < b.uploadDate ? 1 : 0;	
-								
-								});	
-							}	
-
 							$(list).each(function(index, obj) {
 								const starNo = $.trim(obj.count);
 								const gameNo = obj.gameNo;
@@ -214,7 +195,7 @@
 								var star = "";
 								var j = 0;
 								if(starNo == 0) {
-										star = '<a href="<%= contextPath%>/reviewList.ga?gno=' + obj.gameNo + '">리뷰작성</a>';
+										star = '<a href="<%=contextPath%>/reviewList.ga?gno=' + obj.gameNo + '">리뷰작성</a>';
 									}else {
 	     							 	for(j=0; j<starNo; j++) {
 	     										 	star += "☆";
@@ -231,7 +212,7 @@
 												'<div id="gameText"> <p>' + obj.engName + '</p>' + '</div>' +
 										'<div id="advice">' + 
 											'<div id="ad1">' +
-												'<a href="<%= contextPath%>/question.gq?gameno=' + obj.gameNo + '">게임 문의</a>' +
+												'<a href="<%=contextPath%>/question.gq?gameno=' + obj.gameNo + '">게임 문의</a>' +
 											'</div>' +
 											'<div id="ad2">' + star +
 											
@@ -251,10 +232,8 @@
 							console.log("ajax 통신 실패");
 						}
 					});	
+					
 				}
-	
-			})
-			
 				
 		</script>
 		
