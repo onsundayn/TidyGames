@@ -332,7 +332,7 @@ body {
                                     <div class="m-t-sm">
                                         <div class="btn-group">
                                         <a href="<%= request.getContextPath() %>/order.pa" class="btn btn-primary btn-sm" style="margin-right: 10px;"><i class="fa fa-shopping-cart"></i> 주문하기</a>
-                                        <a href="#"class="btn btn-secondary btn-sm" > 쇼핑계속하기</a>
+                                        <a href="<%= request.getContextPath() %>"class="btn btn-secondary btn-sm" > 쇼핑계속하기</a>
                                         </div>
                                     </div>
                                 </div>

@@ -175,6 +175,15 @@ tbody {
 	font-size: 18px;
 	margin-top: 30px;
 }
+
+ #agreeForm>label{
+        color:white;
+        margin-left: 5px;
+    }
+ #agreeForm>input{
+     width: 15px;
+     height: 15px;
+ }
 </style>
 </head>
 <body style="background: #0e332c;">
@@ -184,7 +193,7 @@ tbody {
 	</div>
 
 
-	<form action="<%=contextPath%>/pay.pa" method="post">
+	<form action="<%=contextPath%>/pay.pa" method="post" onsubmit="return enrollCheck();">
 		<div class="container">
 			<span style="color: white; font-size: 25px; font-weight: bold;">구매/결제</span>
 			<span style="color: grey; font-size: 18px;"> >결제완료</span> <br> <br>
@@ -370,19 +379,20 @@ tbody {
 				</div>
 				<br> <br>
 
-				<div class="area5">
-					<p id="check">
-						<input type="checkbox" checked>&nbsp;구매하실 상품의 상품정보 및 가격을
-						확인하였으며, <br> 이에 동의합니다(전자상거래법 제 8조 제 2항)
-					</p>
-					<p id="check">
-						<input type="checkbox" checked>&nbsp;상품 구매시 환불요청은 결제완료 후
-						2일간 가능하며, <br>포인트는 환불승인이되면 반환됩니다.
-					</p>
-					<p id="check">
-						<input type="checkbox" checked>&nbsp;TIDY GAMES의 약관에
-						동의합니다.
-					</p>
+				<div class="area5" id="agreeForm">
+				
+					 <input type="checkbox" id="allAgree" onclick="checkAll(this);">
+                     <label for="allAgree">모두 동의합니다.</label> <br>
+
+                     <input type="checkbox" id="agree1" class="agrees">
+                     <label for="agree1">(필수) 구매하실 상품의 상품정보 및 가격을
+						확인하였으며,  이에 동의합니다(전자상거래법 제 8조 제 2항)</label> <br>
+
+                     <input type="checkbox" id="agree2" class="agrees"> 
+                     <label for="agree2" style="margin-bottom: 0px;">(필수) 상품 구매시 환불요청은 결제완료 후
+						2일간 가능하며, <br>포인트는 환불승인이되면 반환됩니다..</label> <br>
+                     
+
 				</div>
 
 
@@ -397,7 +407,7 @@ tbody {
 		</div>
 
 		<div class="area6">
-			<button type="submit" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> 결제하기</button> 
+			<button type="submit" class="btn btn-primary"><i class="fa fa-shopping-cart" ></i> 결제하기</button> 
 			<a href="<%=request.getContextPath()%>/cart.pa" class="btn btn btn-secondary"> 장바구니로</a>
 		</div>
 	</form>
@@ -456,9 +466,45 @@ tbody {
 			
 		})
 		
+		function checkAll(checkAll){
+ 
+                        const checkboxes 
+                            = document.getElementsByClassName('agrees');
+                        
+                        for(var i=0; i<checkboxes.length; i++) {
+                            checkboxes[i].checked = checkAll.checked;
+                        }
+                    }
+
+	
 		
 
-	</script>
+        function enrollCheck(){
+        	 // 필수동의용 객체
+            var agree1 = document.getElementById("agree1");
+            var agree2 = document.getElementById("agree2");
+        	
+            
+            if(agree1.checked == false) {
+                // 필수동의1 체크되어있지 않다면
+                alert("필수약관에 모두 동의해주셔야 가입이 가능합니다.");
+                return false;
+            } else if(agree2.checked == false) {
+                // 필수동의2 체크되어있지 않다면
+                alert("필수약관에 모두 동의해주셔야 가입이 가능합니다.");
+                return false;
+            }
+
+
+            return true;
+        	
+        	
+        	
+        }
+		
+		
+		
+		</script>
 
 
 	
