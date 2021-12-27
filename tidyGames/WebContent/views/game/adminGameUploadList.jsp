@@ -73,6 +73,11 @@
 .paging-area button{
     	border:none;
     }
+    
+ #list-area>tbody>tr:hover{
+    	background:gray;
+    	cursor:pointer;
+    }    
 </style>
 
 
@@ -135,8 +140,9 @@
 		                    <tr>    
 		                        <td colspan="5">조회된 게시글이 없습니다.</td>
 		                    </tr>
-	                    <% }else { %>
+	                    <% }else { %>	          
 							<% for (Game g : list) {	%>
+							<% if(g.getGameStatus().equals("Y")) { %>
 						<tr>
 							<td><%=g.getGameNo() %></td>
 							<td><%=g.getKorName() %></td>
@@ -151,6 +157,7 @@
 							<td><span class="badge bg-secondary" id="bdg">미승인</span></td>
 							<%} %>
 						</tr>
+						<%} %>
 						<% } %>
 						<% } %>
 						
@@ -184,7 +191,13 @@
 
 	</div>
 
-
+<script>
+        	$(function(){
+        		$("#list-area>tbody>tr").click(function(){
+        			location.href = '<%=contextPath%>/uploaddetail.ga?gno=' + $(this).children().eq(0).text();
+        		})
+        	})
+        </script>
 
 
 </body>

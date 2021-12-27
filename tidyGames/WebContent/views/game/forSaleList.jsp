@@ -68,6 +68,11 @@
 .paging-area button{
     	border:none;
     }
+    
+     #list-area>tbody>tr:hover{
+    	background:gray;
+    	cursor:pointer;
+    }
 </style>
 
 
@@ -129,13 +134,17 @@
 		                        <td colspan="4">조회된 게시글이 없습니다.</td>
 		                    </tr>
 	                    <% }else { %>
+	                    
 							<% for (Game g : list) {	%>
+							<% if(g.getGameStatus().equals("Y")) { %>
 						<tr>
 							<td><%=g.getGameNo() %></td>
 							<td><%=g.getKorName() %></td>
 							<td><%=g.getEngName() %></td>
 							<td><%=g.getUploadDate() %></td>
 						</tr>
+						
+							<%} %>
 							<%} %>
 						<% } %>
 					</tbody>
@@ -169,7 +178,13 @@
 
 	</div>
 
-
+<script>
+        	$(function(){
+        		$("#list-area>tbody>tr").click(function(){
+        			location.href = '<%=contextPath%>/forsaledetail.ga?gno=' + $(this).children().eq(0).text();
+        		})
+        	})
+        </script>
 
 
 

@@ -157,8 +157,8 @@
            <div id="tableOut1">
         	
             <form action="<%= contextPath %>/insertQna.gq" method="post" enctype="multipart/form-data">
-            <!--완성되면 지우기  --><input type="hidden" name="memNo" value="2">
-            <%-- 완성되면 적용<input type="hidden" name="memNo" value="<%=loginUser.getMemNo()%>"> --%>
+            <!--완성되면 지우기  <input type="hidden" name="memNo" value="2"> -->
+            <!-- 완성되면 적용--><input type="hidden" name="memNo" value="<%=loginUser.getMemNo()%>">
             <input type="hidden" name="gameNo" value="<%=gq.getGameNo()%>">
             <input type="hidden" name="companyNo" value="<%=gq.getCompanyNo()%>">
                 <table id="table" class="table table-dark" align="center">

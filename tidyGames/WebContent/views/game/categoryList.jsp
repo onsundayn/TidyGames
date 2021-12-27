@@ -144,10 +144,7 @@
 						<tr align="center" height="50px">
 							<td>
 								<button type="button" class="btn btn-primary" onclick="up();">수정</button>
-							</td>
-							<td>
-								<button type="button" class="btn btn-danger" onclick="del();">삭제</button>
-							</td>
+							</td>							
 							<td>
 								<button type="button" class="btn btn-secondary" id="up_close">취소</button>
 							</td>

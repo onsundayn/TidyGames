@@ -170,7 +170,8 @@ public Game selectGameGC(Connection conn, int comNo, int gameNo) {
 						  		  rset.getString("company_name"),
 						  		  rset.getString("eng_name"),
 						  		  rset.getString("upload_date"),
-						  		  rset.getString("confirm")));				  	
+						  		  rset.getString("confirm"),				  	
+						  		  rset.getString("game_status")));				  	
 			}
 			
 		} catch (SQLException e) {
@@ -500,5 +501,133 @@ public Game selectGameGC(Connection conn, int comNo, int gameNo) {
 		return list;
 		
 	}
+public Game forSaleGame(Connection conn, int gameNo) {
+		
+		Game g = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("forSaleGame");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, gameNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				g = new Game(rset.getInt("game_no"),
+							 rset.getInt("company_no"),
+							 rset.getString("kor_name"),
+							 rset.getString("eng_name"),
+							 rset.getString("release_date"),
+							 rset.getInt("price"),
+							 rset.getString("game_intro"),
+							 rset.getString("confirm"),
+							 rset.getString("upgame"),
+							 rset.getString("upload_date"),
+							 rset.getDouble("point"),
+							 rset.getString("game_status"),
+							 rset.getInt("count"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return g;
+		
+	}
+
+public Game uploadGame(Connection conn, int gameNo) {
+	
+	Game g = null;
+	PreparedStatement pstmt = null;
+	ResultSet rset = null;
+	String sql = prop.getProperty("forSaleGame");
+	
+	try {
+		pstmt = conn.prepareStatement(sql);//미완성
+		pstmt.setInt(1, gameNo);
+		
+		rset = pstmt.executeQuery();
+		
+		if(rset.next()) {
+			g = new Game(rset.getInt("game_no"),
+						 rset.getInt("company_no"),
+						 rset.getString("kor_name"),
+						 rset.getString("eng_name"),
+						 rset.getString("release_date"),
+						 rset.getInt("price"),
+						 rset.getString("game_intro"),
+						 rset.getString("confirm"),
+						 rset.getString("upgame"),
+						 rset.getString("upload_date"),
+						 rset.getDouble("point"),
+						 rset.getString("game_status"),
+						 rset.getInt("count"));
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(rset);
+		close(pstmt);
+	}
+	return g;
+	
+}
+public int gameDelete(Connection conn, Game g) {
+	int result = 0;
+	PreparedStatement pstmt = null;
+	String sql = prop.getProperty("gameDelete");
+	
+	try {
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, g.getGameNo());
+		
+		result = pstmt.executeUpdate();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(pstmt);
+	}
+	return result;
+}
+
+public int uploadUpdate(Connection conn, Game g) {
+	int result = 0;
+	PreparedStatement pstmt = null;
+	String sql = prop.getProperty("uploadUpdate");
+	
+	try {
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setString(1, g.getConfirm());
+		pstmt.setInt(2, g.getGameNo());
+		
+		result = pstmt.executeUpdate();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(pstmt);
+	}
+	return result;
+}
+public int uploadDelete(Connection conn, Game g) {
+	int result = 0;
+	PreparedStatement pstmt = null;
+	String sql = prop.getProperty("gameDelete");
+	
+	try {
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, g.getGameNo());
+		
+		result = pstmt.executeUpdate();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}finally {
+		close(pstmt);
+	}
+	return result;
+}
 	
 }
