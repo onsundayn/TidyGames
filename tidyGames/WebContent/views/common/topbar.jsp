@@ -141,11 +141,14 @@
             <% } %>
             
             
-            <% if(loginUser != null ) { %>
+            
+            <% if(loginUser != null && loginUser.getMemNo() != 1) { %>
             	<a href="<%=request.getContextPath()%>/myPage.me" id="usericon"><i class="far fa-user fa-lg"></i></a>
             <% } else if(loginCompany != null) { %>
                 <a href="<%=request.getContextPath()%>/myPage.gc" id="usericon"><i class="far fa-user fa-lg"></i></a>
-            <% } else {%>
+            <% } else if (loginUser != null){ %>
+	            <a href="<%=request.getContextPath()%>/memberList.me?cpage=1" id="usericon"><i class="far fa-user fa-lg"></i></a>
+    		<% } else {%>        
                 <a href="<%=request.getContextPath()%>/login.me" id="usericon"><i class="far fa-user fa-lg"></i></a>
             <% } %>
         </div>

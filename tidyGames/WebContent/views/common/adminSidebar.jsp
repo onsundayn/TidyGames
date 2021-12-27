@@ -55,14 +55,18 @@
     }
     #empty{
         /* 사이드바 하단 영역의 여백 조절 */
-        height:160px;
+        height:120px;
     }
     #tidy{
         font-size:20px;
         color:white;
         /* background: rgba(82, 48, 34, 0.438); */
     }
-    
+    #logout{
+    	padding-bottom:20px;
+    	color:gray;
+    	cursor: pointer;
+    }
 
     
 
@@ -112,8 +116,17 @@
 
             <!-- <div id="line_2"></div> -->
             <div id="empty"></div>
+            <div onclick="logout();" align="center" id="logout">로그아웃</div>
         </div>
 
     </div>
+    
+    <script>
+    function logout(){
+    	if(confirm("로그아웃 하시겠습니까?")) {
+   	 		location.href = "<%=request.getContextPath()%>/logout.me";
+    	} 
+    }
+    </script>
 </body>
 </html>
