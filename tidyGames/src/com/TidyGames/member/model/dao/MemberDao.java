@@ -24,7 +24,6 @@ import com.TidyGames.common.model.vo.PageInfo;
 import com.TidyGames.game.model.vo.Game;
 import com.TidyGames.game.model.vo.Review;
 import com.TidyGames.member.model.vo.Member;
-import com.TidyGames.post.model.vo.Post;
 import com.TidyGames.qna.model.vo.Qna;
 
 public class MemberDao {
@@ -808,21 +807,13 @@ public class MemberDao {
 		
 	}
 	
-	public ArrayList<Game> library(Connection conn, int memNo, String search) {
+	public ArrayList<Game> library(Connection conn, int memNo) {
 		
 		Game g;
 		ArrayList<Game> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("library");
-		
-		if(search.equals("이름순")) {
-			sql += "ORDER BY ENG_NAME";
-		}else if(search.equals("과거구매")) {
-			sql += "ORDER BY PAY_DATE ASC";
-		}else {
-			sql += "ORDER BY PAY_DATE DESC";
-		}
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -851,47 +842,8 @@ public class MemberDao {
 		}
 		
 		return list;
-			
-	}
-	
-	public ArrayList<Member> searchMemId(Connection conn, PageInfo pi, String word) {
-
-		ArrayList<Member> list = new ArrayList<>();
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String sql = prop.getProperty("searchMemId");
-
-		try {
-			pstmt = conn.prepareStatement(sql);
-
-			int startRow = (pi.getCurrentPage() - 1) * pi.getViewLimit() + 1;
-			int endRow = startRow + pi.getViewLimit() - 1;
-
-			pstmt.setString(1, word);
-			pstmt.setInt(2, startRow);
-			pstmt.setInt(3, endRow);
-
-			rset = pstmt.executeQuery();
-
-			while (rset.next()) {
-				list.add(new Member(rset.getInt("mem_no")
-						  , rset.getString("mem_id")
-						  , rset.getString("mem_nick")
-						  , rset.getString("mem_name")
-						  , rset.getString("mem_phone")
-						  , rset.getString("mem_email")
-						  , rset.getString("mem_gender")
-						  , rset.getString("mem_address")
-						  , rset.getDate("mem_indate")
-						  , rset.getString("mem_status")));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		return list;
+		
+		
 	}
 		
 		
