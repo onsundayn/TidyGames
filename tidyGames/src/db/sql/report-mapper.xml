@@ -37,26 +37,33 @@
 		 WHERE MEM_ID = ?
 	</entry>
 	<entry key="reportWaiting">
-		SELECT 
-		       REPORT_NO
-		     , A.MEM_NO
-		     , A.MEM_ID "REPORTED"
-		     , POST_NAME
-		     , REF_PNO
-		     , REPLY_CONTENT
-		     , C.RCATEGORY_NAME
-		     , R.ETC
-		     , B.MEM_ID "REPORTING"
-		     , REPORT_DATE
-		FROM REPORT R
-		JOIN REPORT_CATEGORY C ON (R.REPORT_SORT = C.RCATEGORY_NO)
-   LEFT JOIN MEMBER A ON (R.REPORTED_MEM_NO = A.MEM_NO)
-		JOIN MEMBER B ON (R.REPORTING_MEM_NO = B.MEM_NO)
-		JOIN POST P ON (R.REF_PNO = P.POST_NO)
-   LEFT JOIN REPLY RP ON (R.REF_RNO = RP.REPLY_NO)
-		WHERE DONE = 'N'
-	    ORDER
-	       BY REPORT_NO
+		 SELECT *
+		   FROM
+				(SELECT 
+				       ROWNUM RNUM, B.*
+				  FROM
+					   (SELECT 
+                               REPORT_NO
+                             , A.MEM_NO
+                             , A.MEM_ID "REPORTED"
+                             , POST_NAME
+                             , REF_PNO
+                             , REPLY_CONTENT
+                             , C.RCATEGORY_NAME
+                             , R.ETC
+                             , B.MEM_ID "REPORTING"
+                             , REPORT_DATE
+                        FROM REPORT R
+                        JOIN REPORT_CATEGORY C ON (R.REPORT_SORT = C.RCATEGORY_NO)
+                   LEFT JOIN MEMBER A ON (R.REPORTED_MEM_NO = A.MEM_NO)
+                        JOIN MEMBER B ON (R.REPORTING_MEM_NO = B.MEM_NO)
+                        JOIN POST P ON (R.REF_PNO = P.POST_NO)
+                   LEFT JOIN REPLY RP ON (R.REF_RNO = RP.REPLY_NO)
+                        WHERE DONE = 'N'
+                        ) B
+				 ORDER
+                     BY REPORT_NO)
+		  WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	<entry key="accessBlock">
 		UPDATE 
