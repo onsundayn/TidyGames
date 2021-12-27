@@ -72,9 +72,8 @@ public class CompanyQnaInsertController extends HttpServlet {
 			int result = new QnaService().insertGameQna(gq, at);
 			
 			if(result > 0) {
-				/* 완성되면 지우기 request.getSession().setAttribute("alertMsg", "게임 문의가 작성되었습니다.");*/
-				/*완성되면적용*/ response.sendRedirect(request.getContextPath() + "/myQna.me"); 
-				response.sendRedirect(request.getContextPath());
+				request.getSession().setAttribute("alertMsg", "게임 문의가 작성되었습니다.");
+				response.sendRedirect(request.getContextPath() + "/myGameQna.me?cpage=1"); 
 			}else {
 				if(at != null) {
 					new File(savePath + at.getChangeName()).delete();
