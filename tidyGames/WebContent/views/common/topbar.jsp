@@ -138,9 +138,6 @@
             <% if(loginUser != null ) { %>
             <a href="<%= request.getContextPath()%>/cart.pa?memNo=<%=loginUser.getMemNo()%>"><i class="fas fa-shopping-cart fa-lg"></i></a>
                
-            <% } else { %>
-             <a href="<%= request.getContextPath()%>/login.me"><i class="fas fa-shopping-cart fa-lg"></i></a>
-            
             <% } %>
             
             
