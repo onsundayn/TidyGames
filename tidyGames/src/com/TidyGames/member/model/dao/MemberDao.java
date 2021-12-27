@@ -345,8 +345,8 @@ public class MemberDao {
 	public int checkNum(String searchEmail) {
 		
 		int num = (int)(Math.random() * 999999 + 100000);
-		String user = "qng582@gmail.com";
-		String password = "iwtbemjusxzzcfbl";
+		final String user = "qng582@gmail.com";
+		final String password = "iwtbemjusxzzcfbl";
 		
 		Properties propNum = new Properties();
 		propNum.put("mail.smtp.host", "smtp.gmail.com");
