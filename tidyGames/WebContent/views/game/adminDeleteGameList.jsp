@@ -8,6 +8,7 @@
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
 	int maxPage = pi.getMaxPage();
+	int count = 0; 
 %>
 
 <!DOCTYPE html>
@@ -126,7 +127,7 @@
 				<table class="table table-hover" id=list-area>
 					<thead>
 						<tr>
-							<th width="70px">게임번호</th>
+							<th width="70px">번호</th>
 							<th width="170px">아이디</th>
 							<th width="300px">게임</th>
 							<th width="110px">등록일</th>
@@ -134,11 +135,22 @@
 						</tr>
 					</thead>
 					<tbody>
-						<% if(list.isEmpty()) { %>
+					
+					<% for (Game g : list) {	%>
+						<% if(g.getGameStatus().equals("N")) { %>
+						<% count ++; %>
+						<%} %>
+						<% } %>
+						
+						
+					
+					
+					
+						<% if(count==0) { %>
 		                    <tr>    
-		                        <td colspan="5">조회된 게시글이 없습니다.</td>
+		                        <td colspan="5">조회된 게임이 없습니다.</td>
 		                    </tr>
-	                    <% }else { %>	          
+	                    <% }else{ %>	          
 							<% for (Game g : list) {	%>
 							<% if(g.getGameStatus().equals("N")) { %>
 						<tr>
@@ -148,7 +160,7 @@
 							<td><%=g.getUploadDate() %></td>							
 							<td><button onclick="delcan(this.value);" class="btn btn-danger btn-sm" value="<%=g.getGameNo() %>">삭제취소</button></td>
 						</tr>
-							<%} %>
+							<%}%>
 						<%} %>
 						<% } %>
 						
