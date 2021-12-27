@@ -42,21 +42,7 @@
 
   <!-- The slideshow -->
   <div class="carousel-inner" align="center">
-    <div class="carousel-item active">
-		<a href="<%=contextPath%>/detail.ga?gno=<%=list.get(0).getGameNo()%>">
-			<img src="<%=contextPath%>/<%=list.get(0).getGameImg()%>">
-		</a>
-    </div>
-    <div class="carousel-item">
-		<a href="">
-			<img src="chicago.jpg" width="1000" height="500">
-		</a>
-    </div>
-    <div class="carousel-item">
-		<a href="">
-			<img src="ny.jpg" alt="New York" width="1000" height="500">
-		</a>
-    </div>
+    
     
   </div>
   
@@ -68,6 +54,46 @@
     <span class="carousel-control-next-icon"></span>
   </a>
 </div>
+
+<script type="text/javascript">
+	$(function(){ //페이지로딩되고 곧바로 호출
+		
+		selectGameImgList();
+	
+	})
+	
+function selectGameImgList(){
+         $.ajax({
+            url:"imgSlider.ma",
+            success:function(list){
+               
+               //console.log(list);
+               
+               let result = "";
+               // 반복문이용해서
+                  result += "<div class='carousel-item active'>"
+                     + "<a href='<%=contextPath%>/detail.ga?gno=" + list[0].gameNo + "'>" 
+                     + "<img width='1000' height='500' src='<%=contextPath%>/" + list[0].gameImg + "'>"
+                              + "</a>"
+                           + "</div>"
+                           + "<div class='carousel-item'>"
+                           + "<a href='<%=contextPath%>/detail.ga?gno=" + list[1].gameNo + "'>" 
+                           + "<img width='1000' height='500' src='<%=contextPath%>/" + list[1].gameImg + "'>"
+                                    + "</a>"
+                                 + "</div>"
+                                 + "<div class='carousel-item'>"
+                                 + "<a href='<%=contextPath%>/detail.ga?gno=" + list[2].gameNo + "'>" 
+                                 + "<img width='1000' height='500' src='<%=contextPath%>/" + list[2].gameImg + "'>"
+                                          + "</a>"
+                                       + "</div>";
+               $(".carousel-inner").html(result);
+               
+            },error:function(){
+               console.log("댓글목록조회용 ajax 통신실패");
+            }
+         })
+      }
+</script>
 
 </body>
 </html>

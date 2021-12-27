@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.TidyGames.game.model.service.GameService;
 import com.TidyGames.game.model.vo.Game;
+import com.google.gson.Gson;
 
 /**
  * Servlet implementation class MainImgSliderController
@@ -35,8 +36,8 @@ public class MainImgSliderController extends HttpServlet {
 		
 		ArrayList<Game> list = new GameService().selectMainGameList();
 		
-		request.setAttribute("list", list);
-		request.getRequestDispatcher("views/common/imgSlider.jsp").forward(request, response);
+		response.setContentType("application/json; charset=utf-8");
+		new Gson().toJson(list, response.getWriter());
 	}
 
 	/**
