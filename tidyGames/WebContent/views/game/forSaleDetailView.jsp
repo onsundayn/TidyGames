@@ -176,7 +176,14 @@
                     <p>
                         출시일 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=g.getReleaseDate() %> <br>
                         장르 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=gcList.get(0).getCategoryName()%><br>
+                        
                     </p>
+                </div>
+                <div id="tag">
+                    관련태그&nbsp;&nbsp;&nbsp; 
+                          <% for(int i=0; i<gcList.size(); i++) {%>
+                            <a href="" class="category-btn"><%=gcList.get(i).getCategoryName()%></a>
+                            <% } %>
                 </div>
                 
             </div>
