@@ -1,30 +1,23 @@
 package com.TidyGames.member.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.TidyGames.game.model.vo.Game;
-import com.TidyGames.member.model.service.MemberService;
-import com.TidyGames.member.model.vo.Member;
-import com.google.gson.Gson;
-
 /**
- * Servlet implementation class AjaxLibraryController
+ * Servlet implementation class AdminMemberSelectKeword
  */
-@WebServlet("/libSort")
-public class AjaxLibraryController extends HttpServlet {
+@WebServlet("/selectMemID.me")
+public class AdminMemberSelectKeword extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxLibraryController() {
+    public AdminMemberSelectKeword() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,15 +26,8 @@ public class AjaxLibraryController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		int memNo = ((Member)request.getSession().getAttribute("loginUser")).getMemNo();
-		
-		String search = request.getParameter("search");
-		ArrayList<Game> aa = new MemberService().library(memNo, search);
-		
-		response.setContentType("application/json; charset=UTF-8");
-		new Gson().toJson(aa, response.getWriter());
-		
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

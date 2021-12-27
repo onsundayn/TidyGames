@@ -144,12 +144,12 @@
                     </div>
                     <div id="rightTop">
                         <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-dark" disabled>회원 ID</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+                                <button type="button" name="memID" class="btn btn-sm btn-dark" disabled>회원 ID</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" disabled>
                                 <span class="caret"></span>
                                 </button>
                                 <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">닉네임</a>
+                                <!--  <a class="dropdown-item" href="#">닉네임</a>  -->
                                 </div>
                         </div>
 

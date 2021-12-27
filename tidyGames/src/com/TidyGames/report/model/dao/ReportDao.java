@@ -75,7 +75,7 @@ public class ReportDao {
 				rset = pstmt.executeQuery();
 				
 				while(rset.next()) {
-					list.add(new Report(rset.getInt("rownum")
+					list.add(new Report(rset.getInt("RNUM")
 									  , rset.getInt("mem_no")
 									  ,	rset.getString("mem_id")
 									  , rset.getString("mem_nick")
