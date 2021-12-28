@@ -302,6 +302,8 @@
 		  JOIN GAME USING(GAME_NO)
 		 WHERE REVIEW_STATUS = 'Y' 
 		   AND R.MEM_NO = ?
+		 ORDER
+		    BY R.UPLOAD_DATE DESC
 	</entry>
 	<entry key="myReviewList">
 		SELECT
