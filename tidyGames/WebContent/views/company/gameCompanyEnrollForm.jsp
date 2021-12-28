@@ -1,7 +1,7 @@
  <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.ArrayList, com.TidyGames.game.model.vo.*"%>
 <%
-ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("list");
+	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html>
@@ -9,6 +9,11 @@ ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("list");
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+	
+	#enrollform{
+	color: orange;
+	}
+	
      .outer{
         width: 1200px;
         height:1100px;
@@ -17,6 +22,12 @@ ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("list");
         margin-top: 70px;
         background: lightgray;
         flex-wrap: wrap;
+    }
+    
+    #outer2{
+        width:1500px;
+        /* height:1500px; */
+        margin:auto;
     }
     .form-area{
         width: 1200px;
@@ -109,7 +120,12 @@ ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("list");
         font-weight: bold;
         font-size: 30px;
         margin-top: 50px;
-        margin-left:450px;
+        margin-left:255px;
+    }
+     #line_1{
+        width:100%;
+        height:2px;
+        background: rgba(255, 255, 255, 0.555);
     }
 </style>
 </head>
@@ -117,7 +133,13 @@ ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("list");
 
 	<%@ include file="../common/topbar.jsp"%>
     <%@ include file="../common/navibar.jsp"%>
+    
+    
+    <div id="outer2">
+    <div id="line_1"></div>
+    <div>
     <%@ include file="../common/companySidebar.jsp"%>
+    </div>
 
 
     <div class="menu-name">
@@ -228,6 +250,7 @@ ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("list");
             </div>
         </form>
                 
+    </div>
     </div>
 
     <script>

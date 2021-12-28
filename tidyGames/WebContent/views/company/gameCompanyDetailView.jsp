@@ -7,8 +7,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+
+	#mypagegc{
+	color: orange;
+	}
+		
     .outer{
-        width:1200px;
+        width:1500px;
         height:800px;
         margin: auto;
     }
@@ -18,15 +23,15 @@
         height: 400px;
         font-weight: bold;
         border-radius: 7px;
-        margin-top: 100px;
+        margin-top: 80px;
         padding-top: 30px;
     }
     .menu-name{
         color: rgba(255, 255, 255, 0.712);
         font-weight: bold;
         font-size: 30px;
-        margin-top: 50px;
-        margin-left:90px;
+        margin-top: 70px;
+        margin-left:390px;
     }
     .tbl{
         width:100%;
@@ -43,18 +48,27 @@
     table>tbody>tr>th{
         width: 140px;
     }
+    
+    #line_1{
+        width:100%;
+        height:2px;
+        background: rgba(255, 255, 255, 0.555);
+    }
+    
 </style>
 </head>
 <body style="background-color: #0e332c;">
     
 	<%@ include file="../common/topbar.jsp"%>
     <%@ include file="../common/navibar.jsp"%>
-    <%@ include file="../common/companySidebar.jsp"%>
     
     
     
     <div class="outer" align="center">
-
+    <div id="line_1"></div>
+    <div>
+    <%@ include file="../common/companySidebar.jsp"%>
+	</div>
         
         <div class="menu-name" align="left">
             <h2>게임사 정보 조회</h2>

@@ -48,8 +48,10 @@ public class UploadUpdateController extends HttpServlet {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			if(g.getConfirm().equals("del")) {
-				out.println("<script>alert('삭제되었습니다.'); location.href='" + request.getContextPath() + "/uplist.ga?cpage=1';</script>");		
-				out.flush();
+				/*
+				 * out.println("<script>alert('삭제되었습니다.'); location.href='" +
+				 * request.getContextPath() + "/uplist.ga?cpage=1';</script>"); out.flush();
+				 */
 			}else {
 			out.println("<script>alert('수정되었습니다.'); location.href='" + request.getContextPath() + "/uploaddetail.ga?gno=" + gameNo + "';</script>");			
 			out.flush();

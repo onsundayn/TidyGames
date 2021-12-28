@@ -35,7 +35,7 @@
 
     <div class="navi-area" align="center">
         <div class="menu"><a href="<%=request.getContextPath()%>/notice.no?cpage=1" id="notice">NOTICE</a></div>
-        <div class="menu"><div id="library">LIBRARY</div>></div>
+        <div class="menu"><div id="library">LIBRARY</div></div>
         <div class="menu"><div id="community">COMMUNITY</div></div>
         <div class="menu"><a href="<%=request.getContextPath()%>/faqList.fa" id="faq">HELP</a></div>
     </div>

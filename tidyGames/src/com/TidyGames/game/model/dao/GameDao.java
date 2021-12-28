@@ -203,8 +203,10 @@ public Game selectGameGC(Connection conn, int comNo, int gameNo) {
 									 rset.getInt("game_no"),
 									 rset.getString("writer"),
 									 rset.getString("contents"),
+									 rset.getInt("recommend"),
 									 rset.getString("upload_date"),
-									 rset.getInt("star_no")));
+									 rset.getInt("star_no"),
+									 rset.getInt("mem_no")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -706,6 +708,24 @@ public int uploadDelete(Connection conn, Game g) {
 		}
 		
 		return list;
+	}
+	
+	public int deleteCancle(Connection conn, Game g) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteCancle");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, g.getGameNo());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
 }

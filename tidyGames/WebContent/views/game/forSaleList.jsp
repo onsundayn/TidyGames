@@ -134,9 +134,9 @@
 		                        <td colspan="4">조회된 게시글이 없습니다.</td>
 		                    </tr>
 	                    <% }else { %>
+					<% for (Game g : list) {	%>
 	                    
-							<% for (Game g : list) {	%>
-							<% if(g.getGameStatus().equals("Y")) { %>
+							<% if(g.getGameStatus().equals("Y")&&g.getConfirm().equals("Y")) { %>
 						<tr>
 							<td><%=g.getGameNo() %></td>
 							<td><%=g.getKorName() %></td>

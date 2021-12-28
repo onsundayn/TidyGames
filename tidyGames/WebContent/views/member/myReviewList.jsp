@@ -196,7 +196,7 @@
                     <td rowspan="2" id="content"><%= re.getContents() %></td>
                     <td width="30%" style="height:0px;"><span><%= re.getEngName() %></span>
                     									<% int i = 0; %>
-                    									<label><% for(i=0; i<re.getStarNo(); i++) { %>
+                    									<label><% for(i=0; i<re.getStarNo()/20; i++) { %>
                     											 	☆		
                     											<% } %>
                     									</label></td>

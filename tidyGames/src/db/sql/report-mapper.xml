@@ -13,7 +13,7 @@
 				(SELECT 
 				       ROWNUM RNUM, B.*
 				  FROM
-					   (SELECT 
+					   (SELECT DISTINCT
 					   		   MEM_NO
 					         , MEM_ID
 					         , MEM_NICK

@@ -30,10 +30,10 @@ public class AdminDeleteMember extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
-		int memNo = Integer.parseInt(request.getParameter("mno"));
-		int result = new MemberService().deleteMember(memNo);
+		String userId = request.getParameter("mid");
+		int result = new MemberService().deleteMember(userId);
 		if(result > 0) {
-			request.getSession().setAttribute("alertMsg", "회원탈퇴 되었습니다.");
+			request.getSession().setAttribute("alertMsg", "아이디 " + userId + "님이 탈퇴 되었습니다.");
 			response.sendRedirect(request.getContextPath() + "/memberList.me?cpage=1");
 		}else {
 			request.getSession().setAttribute("alertMsg", "회원탈퇴 중 오류가 발생했습니다.");

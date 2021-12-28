@@ -10,8 +10,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+
+	#updateformgc{
+	color: orange;
+	}
     .outer{
-        width:1200px;
+        width:1500px;
         height:800px;
         margin: auto;
     }
@@ -40,15 +44,25 @@
         margin-top: 50px;
         margin-left: 90px;
     }
+    
+    #line_1{
+        width:100%;
+        height:2px;
+        background: rgba(255, 255, 255, 0.555);
+    }
 </style>
 </head>
 <body style="background-color: #0e332c;">
 	<%@ include file="../common/topbar.jsp"%>
     <%@ include file="../common/navibar.jsp"%>
-    <%@ include file="../common/companySidebar.jsp"%>
     
     <div class="outer">
-
+	<div id="line_1"></div>
+	
+	<div>
+    <%@ include file="../common/companySidebar.jsp"%>
+	
+	</div>
         <div class="menu-name">
             <h2>보유 게임 목록</h2>
         </div>

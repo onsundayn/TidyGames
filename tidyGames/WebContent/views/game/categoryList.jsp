@@ -195,14 +195,27 @@
 				data:{upCate:$upInput.val(),inCate:$inInput},
 				success:function(){
 					console.log("업데이트카테고리 ajax 통신성공!!!");
-					swal.fire({
-				        icon: "success",
-				        title: "수정이 완료되었습니다!"
-				}).then((확인) => {
-				    
-	                  document.location.reload();
-				    
-				});
+   				 Swal.fire({
+	                    title: '수정하시겠습니까?',
+	                    
+	                    icon: 'warning',
+	                    showCancelButton: true,
+	                    confirmButtonColor: '#3085d6',
+	                    cancelButtonColor: '#d33',
+	                    confirmButtonText: '승인',
+	                    cancelButtonText: '취소'
+	                }).then((result) => {
+	                    if (result.isConfirmed) {
+	                    	swal.fire({
+     				        icon: "success",
+     				        title: "수정이 완료되었습니다!"
+     				}).then((확인) => {
+     				    
+     					document.location.reload();
+     				    
+     				});
+	                    }
+	                });
 
 
 
@@ -224,14 +237,27 @@
 				data:{addCate:$addInput.val()},
 				success:function(){
 					console.log("인설트카테고리 ajax 통신성공!!!");
-					swal.fire({
-				        icon: "success",
-				        title: "추가가 완료되었습니다!"
-				}).then((확인) => {
-				    
-	                  document.location.reload();
-				    
-				});
+   				 Swal.fire({
+	                    title: '추가하시겠습니까?',
+	                    
+	                    icon: 'warning',
+	                    showCancelButton: true,
+	                    confirmButtonColor: '#3085d6',
+	                    cancelButtonColor: '#d33',
+	                    confirmButtonText: '승인',
+	                    cancelButtonText: '취소'
+	                }).then((result) => {
+	                    if (result.isConfirmed) {
+	                    	swal.fire({
+     				        icon: "success",
+     				        title: "추가가 완료되었습니다!"
+     				}).then((확인) => {
+     				    
+     					document.location.reload();
+     				    
+     				});
+	                    }
+	                });
 
 
 

@@ -11,7 +11,27 @@ public class Review {
 	private int starNo;
 	private String reviewStatus;
 	
+	private String korName;
+	private String engName;
+	private String gameImg;
+	
+	private int memNo;
+	
+
 	public Review () {}
+	
+	public Review(int reviewNo, int gameNo, String writer, String contents, int recommend, String uploadDate,
+			int starNo, int memNo) {
+		super();
+		this.reviewNo = reviewNo;
+		this.gameNo = gameNo;
+		this.writer = writer;
+		this.contents = contents;
+		this.recommend = recommend;
+		this.uploadDate = uploadDate;
+		this.starNo = starNo;
+		this.memNo = memNo;
+	}
 	
 	public Review(int reviewNo, int gameNo, String writer, String contents, int recommend, String uploadDate,
 			int starNo, String reviewStatus) {
@@ -47,6 +67,20 @@ public class Review {
 		this.contents = contents;
 		this.uploadDate = uploadDate;
 		this.starNo = starNo;
+	}
+
+	
+	public Review(int reviewNo, String contents, int recommend, String uploadDate, int starNo, String korName,
+			String engName, String gameImg) {
+		super();
+		this.reviewNo = reviewNo;
+		this.contents = contents;
+		this.recommend = recommend;
+		this.uploadDate = uploadDate;
+		this.starNo = starNo;
+		this.korName = korName;
+		this.engName = engName;
+		this.gameImg = gameImg;
 	}
 
 	public int getReviewNo() {
@@ -111,6 +145,38 @@ public class Review {
 
 	public void setReviewStatus(String reviewStatus) {
 		this.reviewStatus = reviewStatus;
+	}
+	
+	public String getKorName() {
+		return korName;
+	}
+
+	public void setKorName(String korName) {
+		this.korName = korName;
+	}
+
+	public String getEngName() {
+		return engName;
+	}
+
+	public void setEngName(String engName) {
+		this.engName = engName;
+	}
+
+	public String getGameImg() {
+		return gameImg;
+	}
+
+	public void setGameImg(String gameImg) {
+		this.gameImg = gameImg;
+	}
+
+	public int getMemNo() {
+		return memNo;
+	}
+
+	public void setMemNo(int memNo) {
+		this.memNo = memNo;
 	}
 
 	@Override

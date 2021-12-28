@@ -65,8 +65,10 @@
 		     , GAME_NO
 		     , MEM_NICK "WRITER"
 		     , CONTENTS
+		     , RECOMMEND
 		     , TO_CHAR(UPLOAD_DATE, 'YY/MM/DD HH:MI') "UPLOAD_DATE"
 		     , STAR_NO
+		     , MEM_NO
 		  FROM REVIEW
 		  JOIN MEMBER USING (MEM_NO)
 		 WHERE REVIEW_STATUS = 'Y'
@@ -321,6 +323,14 @@
 		         WHERE CONFIRM = 'Y'
 		         ORDER BY DBMS_RANDOM.VALUE)
 		 WHERE ROWNUM &lt;= 3
+	</entry>
+	
+		<entry key="deleteCancle">
+	UPDATE
+		       GAME
+		   SET GAME_STATUS = 'Y'		     
+		WHERE GAME_NO = ?
+	
 	</entry>
 	
 
