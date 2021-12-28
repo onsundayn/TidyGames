@@ -11,6 +11,22 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap')
+	;
+	
+.outer button {
+	font-weight: bold;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+#list a{
+margin-top:60px;
+margin-left: 400px;
+font-weight: bold;
+font-family: 'Noto Sans KR', sans-serif;
+}
 	
     .outer{
         width: 1200px;
@@ -206,8 +222,11 @@
                             <a href="" class="category-btn"><%=gcList.get(i).getCategoryName()%></a>
                             <% } %>
                 </div>
+                <div id="list">
                 
+                <a href="<%=contextPath %>/uplist.ga?cpage=1" class="btn btn-light text-dark">목록</a>
             </div>
+                
             
 
         </div>

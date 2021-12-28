@@ -18,6 +18,20 @@
 <meta charset="UTF-8">
 <title>GameUploadList</title>
 <style>
+@import
+	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap')
+	;
+	
+#parent button {
+	font-weight: bold;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+#parent span {
+	margin-top:4px;
+	
+}
+
 #deletelistga {
 	color: orange;
 }
@@ -75,10 +89,7 @@
     	border:none;
     }
     
-/*  #list-area>tbody>tr:hover{
-    	background:gray;
-    	cursor:pointer;
-    }   */  
+ 
 </style>
 
 
@@ -131,6 +142,7 @@
 							<th width="170px">아이디</th>
 							<th width="300px">게임</th>
 							<th width="110px">등록일</th>
+							<th width="100px">승인상태</th>
 							<th width="100px">삭제취소</th>
 						</tr>
 					</thead>
@@ -148,7 +160,7 @@
 					
 						<% if(count==0) { %>
 		                    <tr>    
-		                        <td colspan="5">조회된 게임이 없습니다.</td>
+		                        <td colspan="6">조회된 게임이 없습니다.</td>
 		                    </tr>
 	                    <% }else{ %>	          
 							<% for (Game g : list) {	%>
@@ -157,7 +169,14 @@
 							<td><%=g.getGameNo() %></td>
 							<td><%=g.getKorName() %></td>
 							<td><%=g.getEngName() %></td>
-							<td><%=g.getUploadDate() %></td>							
+							<td><%=g.getUploadDate() %></td>	
+							<% if(g.getConfirm().equals("Y")) { %>
+							<td><span class="badge bg-info" id="bdg">승인</span></td>
+							<% }else if(g.getConfirm().equals("A")) { %>							
+							<td><span class="badge bg-danger" id="bdg">반려</span></td>
+							<% }else if(g.getConfirm().equals("N")) { %>							
+							<td><span class="badge bg-secondary" id="bdg">미승인</span></td>
+							<%} %>						
 							<td><button onclick="delcan(this.value);" class="btn btn-danger btn-sm" value="<%=g.getGameNo() %>">삭제취소</button></td>
 						</tr>
 							<%}%>
