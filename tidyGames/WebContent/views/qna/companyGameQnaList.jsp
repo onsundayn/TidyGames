@@ -134,7 +134,6 @@
 				<table class="table table-hover"  id=list-area>
 					<thead>
 						<tr>
-							<th width="60px">번호</th>
 							<th width="230px">게임</th>
 							<th width="130px">아이디</th>
 							<th width="130px">닉네임</th>
@@ -147,7 +146,7 @@
 					<tbody>
 						<% if(list.isEmpty()) { %>
 		                    <tr>    
-		                        <td colspan="7">조회된 게시글이 없습니다.</td>
+		                        <td colspan="6">조회된 게시글이 없습니다.</td>
 		                    </tr>
 	                    <% }else { %>
 							<% for (Qna q : list) {	%>
@@ -157,7 +156,6 @@
 						<tr>
 							
 							<td class="qnaNo"><%=q.getQnaNo() %></td>
-							<td><%=q.getSeqNo() %></td>
 							<td><%=q.getGameName() %></td>
 							<td><%=q.getMemId() %></td>
 							<td><%=q.getMemNick() %></td>

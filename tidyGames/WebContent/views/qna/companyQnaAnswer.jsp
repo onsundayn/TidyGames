@@ -228,7 +228,7 @@
                         	
                             <button type="button" id="up" class="btn btn-sm btn-primary">수정</button>                            
                             <button onclick="updateAnswer();" id="in" class="btn btn-sm btn-primary">등록</button>           
-                            <button onclick="history.back();" class="btn btn-sm btn-secondary">취소</button>
+                            <a href="<%=contextPath %>/qnalist.gq?cpage=1" class="btn btn-secondary btn-sm">취소</a>
                             
                         </td>
                     </tr>
@@ -252,7 +252,8 @@
                     <tr>
                         <td colspan="6" align="center">
                             <button onclick="insertAnswer();" class="btn btn-sm btn-primary">등록</button>
-                            <button onclick="history.back();" class="btn btn-sm btn-secondary">취소</button>
+                           <a href="<%=contextPath %>/qnalist.gq?cpage=1" class="btn btn-secondary btn-sm">취소</a>
+                        
                         </td>
                     </tr>
                 </table>
